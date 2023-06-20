@@ -1,5 +1,5 @@
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
-import { IPlaceCategory } from "@/services/places-service/place-category.interface";
+import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { ILatLngCoordinate } from "@/components/Map/Map";
 
 export interface ISearchPlace {

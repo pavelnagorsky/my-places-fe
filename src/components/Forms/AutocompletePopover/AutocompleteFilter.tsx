@@ -1,23 +1,21 @@
 import {
   Box,
   Button,
-  Dialog,
   IconButton,
   InputAdornment,
   OutlinedInput,
   Popover,
   Stack,
   SxProps,
-  Typography,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { CheckboxButtonGroup } from "react-hook-form-mui";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ISelect } from "@/shared/interfaces";
+import usePopover from "@/hooks/usePopover";
 
-interface ICustomPopoverFilterProps {
+interface IAutocompleteFilterProps {
   fieldName: string;
   options: ISelect[];
   placeholder: string;
@@ -25,36 +23,24 @@ interface ICustomPopoverFilterProps {
   startText: string;
 }
 
-export function AutocompleteFilter({
+function AutocompleteFilter({
   fieldName,
   options,
   inputSx,
   startText,
   placeholder,
-}: ICustomPopoverFilterProps) {
+}: IAutocompleteFilterProps) {
   const { t, i18n } = useTranslation();
+  const popover = usePopover("more-filters-popover");
   const [search, setSearch] = useState("");
 
-  const [filterAnchor, setFilterAnchor] = useState<HTMLButtonElement | null>(
-    null
-  );
-
-  const filterOpen = Boolean(filterAnchor);
-  const filterId = filterOpen ? "select-autocomplete" : undefined;
-  const handleFilterClick = (e: any) => {
-    setFilterAnchor(e.target);
-  };
-
-  const handleFilterClose = () => {
-    setFilterAnchor(null);
-  };
   const handleReset = () => {
     setSearch("");
     // onSetFormValue(fieldName, []);
   };
   const handleApply = () => {
     // onSubmit();
-    handleFilterClose();
+    popover.handleClose();
   };
   const preventIconClick = (e: any) => {
     e.preventDefault();
@@ -118,8 +104,8 @@ export function AutocompleteFilter({
         type={"text"}
         onFocus={(event) => event.preventDefault()}
         // placeholder={small ? "Properties" : undefined}
-        aria-describedby={filterId}
-        onClick={handleFilterClick}
+        aria-describedby={popover.id}
+        onClick={popover.handleOpen}
         inputProps={{
           onFocus: (event) => event.preventDefault(),
         }}
@@ -159,10 +145,10 @@ export function AutocompleteFilter({
         }
       />
       <Popover
-        id={filterId}
-        open={filterOpen}
-        anchorEl={filterAnchor}
-        onClose={handleFilterClose}
+        id={popover.id}
+        open={popover.open}
+        anchorEl={popover.anchor}
+        onClose={popover.handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
@@ -178,3 +164,5 @@ export function AutocompleteFilter({
     </Box>
   );
 }
+
+export default AutocompleteFilter;

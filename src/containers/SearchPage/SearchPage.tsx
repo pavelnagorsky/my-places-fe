@@ -6,6 +6,7 @@ import { useTheme } from "@mui/material";
 import { PlaceType } from "@/containers/SearchPage/LocationAutocomplete/LocationAutocomplete";
 import { usePolygons } from "@/hooks/usePolygons";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
+import FormContainer from "@/containers/SearchPage/Filters/FormContainer";
 
 interface ISearchPageProps {
   places: ISearchPlace[];
@@ -29,6 +30,7 @@ export function SearchPage({ places }: ISearchPageProps) {
 
   return (
     <Fragment>
+      <FormContainer />
       <Map containerStyle={{ height: "600px" }} fitCoordinates={fitCoordinates}>
         {circle ? (
           <Circle

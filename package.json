@@ -16,6 +16,7 @@
     "@fontsource/inter": "^4.5.15",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.16",
+    "@mui/x-date-pickers": "^6.8.0",
     "@react-google-maps/api": "^2.18.1",
     "@types/autosuggest-highlight": "^3.2.0",
     "@types/i18next": "^13.0.0",
