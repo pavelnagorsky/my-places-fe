@@ -9,10 +9,14 @@ const Search: NextPage<{ places: ISearchPlace[] }> = ({ places }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const places = await placesService.getAllPlaces(1);
+  let placesData: ISearchPlace[] = [];
+  try {
+    const { data } = await placesService.getAllPlaces(1);
+    placesData = data;
+  } catch (e) {}
   return {
     props: {
-      places: places.data,
+      places: placesData,
       ...(await serverSideTranslations(locale ?? "ru", [
         "searchPage",
         "common",

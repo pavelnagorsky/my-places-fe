@@ -7,6 +7,8 @@ import { PlaceType } from "@/containers/SearchPage/LocationAutocomplete/Location
 import { usePolygons } from "@/hooks/usePolygons";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import FormContainer from "@/containers/SearchPage/Filters/FormContainer";
+import { fakePlaces } from "@/components/PlaceCard/fakeData";
+import PlaceCard from "@/components/PlaceCard/PlaceCard";
 
 interface ISearchPageProps {
   places: ISearchPlace[];
@@ -79,8 +81,8 @@ export function SearchPage({ places }: ISearchPageProps) {
         setCircle={setCircle}
         setFitCoordinates={setFitCoordinates}
       />
-      {cardResults.map((place) => (
-        <div key={place.id}>{place.title}</div>
+      {fakePlaces.map((place) => (
+        <PlaceCard place={place} key={place.id} />
       ))}
     </Fragment>
   );
