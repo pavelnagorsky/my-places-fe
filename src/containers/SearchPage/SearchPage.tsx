@@ -2,7 +2,7 @@ import Map, { ILatLngCoordinate } from "../../components/Map/Map";
 import { Circle, Marker, Polygon, Polyline } from "@react-google-maps/api";
 import { Fragment, useState } from "react";
 import SearchForm from "./SearchForm";
-import { useTheme } from "@mui/material";
+import { Grid, useTheme } from "@mui/material";
 import { PlaceType } from "@/containers/SearchPage/LocationAutocomplete/LocationAutocomplete";
 import { usePolygons } from "@/hooks/usePolygons";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
@@ -81,9 +81,13 @@ export function SearchPage({ places }: ISearchPageProps) {
         setCircle={setCircle}
         setFitCoordinates={setFitCoordinates}
       />
-      {fakePlaces.map((place) => (
-        <PlaceCard place={place} key={place.id} />
-      ))}
+      <Grid container spacing={"1.1em"}>
+        {fakePlaces.map((place, index) => (
+          <Grid item xs={12} md={6} xl={4} key={index}>
+            <PlaceCard place={place} />
+          </Grid>
+        ))}
+      </Grid>
     </Fragment>
   );
 }

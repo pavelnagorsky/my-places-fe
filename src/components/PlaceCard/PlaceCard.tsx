@@ -3,10 +3,12 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  Divider,
   Typography,
 } from "@mui/material";
-import RoomIcon from "@mui/icons-material/Room";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
+import Image from "next/image";
 
 interface IPlaceCardProps {
   place: ISearchPlace;
@@ -17,29 +19,51 @@ function PlaceCard({ place }: IPlaceCardProps) {
     <Card sx={{ width: "374px", borderRadius: "10px" }}>
       <CardActionArea>
         <CardMedia
-          component="img"
-          height="250"
-          image={place.image}
-          alt={place.title}
-        />
-        <CardContent>
+        // component={Image}
+        // height="250"
+        // src={place.image}
+        // alt={place.title}
+        >
+          <Image height={250} src={place.image} alt={place.title} width={374} />
+        </CardMedia>
+        <CardContent sx={{ px: "1.5em" }}>
           <Typography
+            textTransform={"uppercase"}
             textAlign={"center"}
             gutterBottom
-            variant="h3"
-            component="p"
+            mb={"1em"}
+            fontSize={"18px"}
+            fontWeight={700}
           >
             {place.title}
           </Typography>
           <Typography
+            mb="1em"
+            fontWeight={300}
             variant="body2"
-            fontSize={"12px"}
+            fontSize={"14px"}
             display={"flex"}
             alignItems={"flex-start"}
+            gap={"0.5em"}
+            align={"justify"}
           >
-            <RoomIcon />
+            <PlaceOutlinedIcon sx={{ ml: "-0.2em", color: "#727272" }} />
             {place.address}
           </Typography>
+          <Typography variant="body2" fontSize={"14px"} align={"justify"}>
+            {place.description}
+          </Typography>
+          <Typography
+            mb="1em"
+            mt={"1.5em"}
+            fontWeight={300}
+            variant="body1"
+            fontSize={"14px"}
+            textAlign={"center"}
+          >
+            {place.categories.map((c) => c.title).join(" | ")}
+          </Typography>
+          <Divider variant={"middle"} />
         </CardContent>
       </CardActionArea>
     </Card>

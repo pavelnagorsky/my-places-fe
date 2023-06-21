@@ -12,6 +12,9 @@ export interface ISearchPlace {
   // Place title
   title: string;
 
+  // Place description
+  description: string;
+
   // Likes count
   likesCount: number;
 

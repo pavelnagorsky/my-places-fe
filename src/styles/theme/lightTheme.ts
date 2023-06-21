@@ -32,6 +32,10 @@ const lightTheme = createTheme({
     error: {
       main: "#FD6B0C",
     },
+    text: {
+      primary: "#303030",
+      secondary: "#565656",
+    },
   },
   typography: {
     allVariants: {
