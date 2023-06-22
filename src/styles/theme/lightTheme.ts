@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 
-const primaryColor = "#FF7A00";
+export const primaryColor = "#FF7A00";
+export const secondaryLightColor = "#727272";
 
 const lightTheme = createTheme({
   breakpoints: {

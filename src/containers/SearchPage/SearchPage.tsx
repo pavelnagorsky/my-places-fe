@@ -81,7 +81,7 @@ export function SearchPage({ places }: ISearchPageProps) {
         setCircle={setCircle}
         setFitCoordinates={setFitCoordinates}
       />
-      <Grid container spacing={"1.1em"}>
+      <Grid container spacing={"1.1em"} my={"3em"}>
         {fakePlaces.map((place, index) => (
           <Grid item xs={12} md={6} xl={4} key={index}>
             <PlaceCard place={place} />
