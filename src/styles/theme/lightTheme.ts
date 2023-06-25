@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 
 export const primaryColor = "#FF7A00";
+export const primaryBackground = "#FFE9D6";
 export const secondaryLightColor = "#727272";
 
 const lightTheme = createTheme({
@@ -96,6 +97,13 @@ const lightTheme = createTheme({
     fontFamily: ["Inter"].join(","),
   },
   components: {
+    MuiFormControl: {
+      defaultProps: {
+        sx: {
+          borderRadius: "10px",
+        },
+      },
+    },
     MuiOutlinedInput: {
       defaultProps: {
         sx: {

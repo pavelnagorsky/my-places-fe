@@ -24,6 +24,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
     <Card
       sx={{
         width: "374px",
+        height: "570px",
         borderRadius: "10px",
         boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
       }}
@@ -63,6 +64,9 @@ function PlaceCard({ place }: IPlaceCardProps) {
             lineHeight={"135%"}
             fontSize={"14px"}
             align={"justify"}
+            height={"95px"}
+            textOverflow={"ellipsis"}
+            overflow={"hidden"}
           >
             {place.description}
           </Typography>

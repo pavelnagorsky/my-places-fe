@@ -6,11 +6,11 @@ import {
 } from "./LocationAutocomplete/LocationAutocomplete";
 import { ILatLngCoordinate } from "@/components/Map/Map";
 import googlePlacesAutocompleteService from "@/services/google-places-service/google-places.service";
-import { RadiusSelect } from "@/components/Forms/RadiusSelect/RadiusSelect";
 import { Button } from "@/components/UI/Button/Button";
 import { useTranslation } from "next-i18next";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import usePlacesSearch from "@/containers/SearchPage/usePlacesSearch";
+import { RadiusPopover } from "@/containers/SearchPage/Filters/RadiusPopover";
 
 // const data: IPlace[] = [
 //   {
@@ -167,13 +167,13 @@ function SearchForm({
           value={selectedPlace}
           onSetPlaceId={handleSetPlaceId}
         />
-        <RadiusSelect
-          enabled={radiusEnabled}
-          setEnabled={setRadiusEnabled}
-          setValue={setRadius}
-          value={radius}
-          maxValue={500}
-        />
+        {/*<RadiusPopover*/}
+        {/*  enabled={radiusEnabled}*/}
+        {/*  setEnabled={setRadiusEnabled}*/}
+        {/*  setValue={setRadius}*/}
+        {/*  value={radius}*/}
+        {/*  maxValue={500}*/}
+        {/*/>*/}
         <Button type={"submit"} variant={"contained"} onClick={handleSearch}>
           {t("filters.button")}
         </Button>

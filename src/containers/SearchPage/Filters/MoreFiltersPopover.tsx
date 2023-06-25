@@ -4,10 +4,10 @@ import {
   Divider,
   IconButton,
   InputAdornment,
-  OutlinedInput,
   Popover,
   Stack,
   SxProps,
+  TextField,
   Typography,
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -149,32 +149,36 @@ function MoreFiltersPopover({
 
   return (
     <Box>
-      <OutlinedInput
+      <TextField
         type={"text"}
         onFocus={(event) => event.preventDefault()}
         // placeholder
         aria-describedby={popover.id}
         onClick={popover.handleOpen}
         inputProps={{
+          "aria-readonly": true,
           onFocus: (event) => event.preventDefault(),
         }}
         sx={{
           "& input": { cursor: "pointer" },
+          bgcolor: "white",
           ...inputSx,
         }}
-        readOnly
         value={formatSelectedOptions()}
-        endAdornment={
-          <InputAdornment
-            position="end"
-            disablePointerEvents={true}
-            sx={{ marginInlineStart: "0px" }}
-          >
-            <IconButton edge="end" onMouseDown={preventIconClick}>
-              <KeyboardArrowDownIcon fontSize="small" />
-            </IconButton>
-          </InputAdornment>
-        }
+        InputProps={{
+          readOnly: true,
+          endAdornment: (
+            <InputAdornment
+              position="end"
+              disablePointerEvents={true}
+              sx={{ marginInlineStart: "0px" }}
+            >
+              <IconButton edge="end" onMouseDown={preventIconClick}>
+                <KeyboardArrowDownIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
       <Popover
         id={popover.id}

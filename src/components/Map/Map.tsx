@@ -8,6 +8,7 @@ import {
 } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { Environment } from "@/shared/Environment";
+import { defaultMapStyle } from "@/components/UI/mapStyles/default";
 // import {greyStyle} from "../UI/mapStyling/mapStyling";
 
 export interface ILatLngCoordinate {

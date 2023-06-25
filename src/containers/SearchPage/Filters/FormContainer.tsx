@@ -7,11 +7,16 @@ import { IPlaceType } from "@/services/place-types-service/place-type.interface"
 import { useTranslation } from "next-i18next";
 import placeTypesService from "@/services/place-types-service/place-types.service";
 import placeCategoriesService from "@/services/place-categories-service/place-categories.service";
+import { RadiusPopover } from "@/containers/SearchPage/Filters/RadiusPopover";
+import { Stack } from "@mui/material";
+import { primaryBackground } from "@/styles/theme/lightTheme";
 
 export interface ISearchForm {
   categories: number[];
   types: number[];
   title: string;
+  radius: number;
+  searchByMe: boolean;
 }
 
 function FormContainer() {
@@ -23,6 +28,10 @@ function FormContainer() {
     mode: "onChange",
     defaultValues: {
       title: "",
+      radius: 20,
+      searchByMe: false,
+      types: [],
+      categories: [],
     },
   });
 
@@ -42,13 +51,16 @@ function FormContainer() {
   }, [i18n.language]);
 
   return (
-    <Box>
+    <Box py={"2em"}>
       <FormProvider {...formContext}>
-        <MoreFiltersPopover
-          types={types}
-          categories={categories}
-          startText={"Фильтры"}
-        />
+        <Stack direction={"row"} gap={"3em"} justifyContent={"space-between"}>
+          <RadiusPopover maxValue={100} startText={"Радиус поиска"} />
+          <MoreFiltersPopover
+            types={types}
+            categories={categories}
+            startText={"Фильтры"}
+          />
+        </Stack>
       </FormProvider>
     </Box>
   );
