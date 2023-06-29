@@ -162,11 +162,11 @@ function SearchForm({
         my="2em"
         alignItems={"center"}
       >
-        <LocationAutocomplete
-          setValue={setSelectedPlace}
-          value={selectedPlace}
-          onSetPlaceId={handleSetPlaceId}
-        />
+        {/*<LocationAutocomplete*/}
+        {/*  setValue={setSelectedPlace}*/}
+        {/*  value={selectedPlace}*/}
+        {/*  onSetPlaceId={handleSetPlaceId}*/}
+        {/*/>*/}
         {/*<RadiusPopover*/}
         {/*  enabled={radiusEnabled}*/}
         {/*  setEnabled={setRadiusEnabled}*/}

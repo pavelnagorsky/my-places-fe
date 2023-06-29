@@ -12,6 +12,7 @@ import PrimaryDivider from "@/components/UI/PrimaryDivider/PrimaryDivider";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
 import SearchForm from "@/containers/SearchPage/SearchForm";
+import PlaceCardSkeleton from "@/components/PlaceCard/PlaceCardSkeleton";
 
 interface ISearchPageProps {
   places: ISearchPlace[];
@@ -40,14 +41,20 @@ export function SearchPage({ places }: ISearchPageProps) {
           <FormContainer />
         </WrappedContainer>
       </Box>
-      <Box bgcolor={primaryBackground}>
-        <WrappedContainer
-          bgColor={primaryBackground}
-          wrapperSx={{ px: { xs: 0, md: "3em", lg: "7.5em" } }}
-        >
-          <PrimaryDivider />
+      {/*<SearchForm*/}
+      {/*  places={places}*/}
+      {/*  setPolygonsEnabled={setPolygonsEnabled}*/}
+      {/*  setCardResults={setCardResults}*/}
+      {/*  setMapResults={setMapResults}*/}
+      {/*  selectedPlace={selectedPlace}*/}
+      {/*  setSelectedPlace={setSelectedPlace}*/}
+      {/*  setCircle={setCircle}*/}
+      {/*  setFitCoordinates={setFitCoordinates}*/}
+      {/*/>*/}
+      <WrappedContainer>
+        <Box my={"2.5em"}>
           <Map
-            containerStyle={{ height: "700px" }}
+            containerStyle={{ height: "600px" }}
             fitCoordinates={fitCoordinates}
           >
             {circle ? (
@@ -87,46 +94,30 @@ export function SearchPage({ places }: ISearchPageProps) {
               <Marker key={i} position={res.coordinates} />
             ))}
           </Map>
-          <PrimaryDivider reverse />
-        </WrappedContainer>
-      </Box>
-      <SearchForm
-        places={places}
-        setPolygonsEnabled={setPolygonsEnabled}
-        setCardResults={setCardResults}
-        setMapResults={setMapResults}
-        selectedPlace={selectedPlace}
-        setSelectedPlace={setSelectedPlace}
-        setCircle={setCircle}
-        setFitCoordinates={setFitCoordinates}
-      />
-      <Box bgcolor={primaryBackground}>
-        <WrappedContainer bgColor={primaryBackground}>
-          <Typography
-            fontSize={"20px"}
-            pt={"1.5em"}
-            fontWeight={700}
-            component={"h1"}
-          >
-            Найдено 26 мест:
-          </Typography>
-          <Grid
-            container
-            mt={0}
-            spacing={"1.1em"}
-            mb={"2em"}
-            pt={"1em"}
-            pb={"3em"}
-            bgcolor={primaryBackground}
-          >
-            {fakePlaces.map((place, index) => (
-              <Grid item xs={12} md={6} xl={4} key={index}>
-                <PlaceCard place={place} />
-              </Grid>
-            ))}
-          </Grid>
-        </WrappedContainer>
-      </Box>
+        </Box>
+        <Typography fontSize={"20px"} fontWeight={700} component={"h1"}>
+          Найдено 26 мест:
+        </Typography>
+        <Grid
+          container
+          mt={0}
+          spacing={"1.1em"}
+          mb={"2em"}
+          pt={"1em"}
+          pb={"3em"}
+        >
+          {fakePlaces.map((place, index) => (
+            <Grid item xs={12} md={6} xl={4} key={index}>
+              <PlaceCard place={place} />
+            </Grid>
+          ))}
+          {fakePlaces.map((place, index) => (
+            <Grid item xs={12} md={6} xl={4} key={index}>
+              <PlaceCardSkeleton />
+            </Grid>
+          ))}
+        </Grid>
+      </WrappedContainer>
     </Fragment>
   );
 }

@@ -19,6 +19,7 @@ import {
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button } from "@/components/UI/Button/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { LocationAutocomplete } from "@/containers/SearchPage/LocationAutocomplete/LocationAutocomplete";
 
 interface ILocationPopoverProps {
   inputSx?: SxProps;
@@ -59,6 +60,8 @@ function LocationPopover({ inputSx, startText }: ILocationPopoverProps) {
           <ClearIcon />
         </IconButton>
       </Stack>
+
+      <LocationAutocomplete />
 
       <Stack
         direction={"row"}

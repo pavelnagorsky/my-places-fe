@@ -9,6 +9,7 @@ import {
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { Environment } from "@/shared/Environment";
 import { defaultMapStyle } from "@/components/UI/mapStyles/default";
+import { Box } from "@mui/material";
 // import {greyStyle} from "../UI/mapStyling/mapStyling";
 
 export interface ILatLngCoordinate {
@@ -32,6 +33,7 @@ export const defaultBounds = {
   north: 56.1718719,
   east: 32.7768202,
 };
+
 export const defaultCountrySign = "By";
 const libraries = ["places", "geometry"];
 
@@ -52,21 +54,21 @@ function Map({
   });
 
   // focus map to cover all set of coordinates
-  useEffect(() => {
-    if (fitCoordinates && map) {
-      if (fitCoordinates.length > 0) {
-        const bounds = new google.maps.LatLngBounds();
-        fitCoordinates.forEach((c) => {
-          bounds.extend(c);
-        });
-        map.fitBounds(bounds);
-        // double call because we use map restriction (google maps bug)
-        map.fitBounds(bounds);
-      } else {
-        map.fitBounds(defaultBounds);
-      }
-    }
-  }, [fitCoordinates, map]);
+  // useEffect(() => {
+  //   if (fitCoordinates && map) {
+  //     if (fitCoordinates.length > 0) {
+  //       const bounds = new google.maps.LatLngBounds();
+  //       fitCoordinates.forEach((c) => {
+  //         bounds.extend(c);
+  //       });
+  //       map.fitBounds(bounds);
+  //       // double call because we use map restriction (google maps bug)
+  //       map.fitBounds(bounds);
+  //     } else {
+  //       map.fitBounds(defaultBounds);
+  //     }
+  //   }
+  // }, [fitCoordinates, map]);
 
   const onLoad = useCallback(function callback(map: google.maps.Map) {
     map.fitBounds(defaultBounds);
@@ -77,26 +79,37 @@ function Map({
     setMap(null);
   }, []);
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle ? containerStyle : { height: "400px" }}
-      options={{
-        // styles: defaultMapStyle,
-        maxZoom: 13,
-        restriction: {
-          latLngBounds: defaultBounds,
-        },
-        mapTypeControl: false,
-        fullscreenControl: fullscreenControlEnabled,
-        zoomControlOptions: {
-          position: google.maps.ControlPosition.RIGHT_TOP,
-        },
+    <Box
+      sx={{
+        borderImage:
+          "linear-gradient(45deg, rgba(255, 122, 0, 1), rgba(255, 184, 0, 1)) 1",
+        borderStyle: "solid",
+        borderWidth: "3px",
       }}
-      mapTypeId="ROADMAP"
-      onLoad={onLoad}
-      onUnmount={onUnmount}
     >
-      {children}
-    </GoogleMap>
+      <GoogleMap
+        mapContainerStyle={
+          containerStyle ? containerStyle : { height: "400px" }
+        }
+        options={{
+          // styles: defaultMapStyle,
+          maxZoom: 13,
+          restriction: {
+            latLngBounds: defaultBounds,
+          },
+          mapTypeControl: false,
+          fullscreenControl: fullscreenControlEnabled,
+          zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_TOP,
+          },
+        }}
+        mapTypeId="ROADMAP"
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        {children}
+      </GoogleMap>
+    </Box>
   ) : null;
 }
 

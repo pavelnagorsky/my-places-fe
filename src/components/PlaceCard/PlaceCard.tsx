@@ -33,7 +33,13 @@ function PlaceCard({ place }: IPlaceCardProps) {
         <CardMedia>
           <Image height={250} src={place.image} alt={place.title} width={374} />
         </CardMedia>
-        <CardContent sx={{ px: "1.6em" }}>
+        <CardContent
+          sx={{
+            px: "1.6em",
+            background: "linear-gradient(180deg, #FFF 0%, #FFF2E6 100%)",
+            //background: "linear-gradient(180deg, #FFF 0%, #FFF2E6 100%)",
+          }}
+        >
           <Typography
             textTransform={"uppercase"}
             textAlign={"center"}

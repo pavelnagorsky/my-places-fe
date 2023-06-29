@@ -10,6 +10,7 @@ import placeCategoriesService from "@/services/place-categories-service/place-ca
 import { RadiusPopover } from "@/containers/SearchPage/Filters/RadiusPopover";
 import { Stack } from "@mui/material";
 import { primaryBackground } from "@/styles/theme/lightTheme";
+import LocationPopover from "@/containers/SearchPage/Filters/LocationPopover";
 
 export interface ISearchForm {
   categories: number[];
@@ -17,6 +18,7 @@ export interface ISearchForm {
   title: string;
   radius: number;
   searchByMe: boolean;
+  search: string | null;
 }
 
 function FormContainer() {
@@ -32,6 +34,7 @@ function FormContainer() {
       searchByMe: false,
       types: [],
       categories: [],
+      search: null,
     },
   });
 
@@ -54,6 +57,7 @@ function FormContainer() {
     <Box py={"2em"}>
       <FormProvider {...formContext}>
         <Stack direction={"row"} gap={"3em"} justifyContent={"space-between"}>
+          <LocationPopover startText={"Локация"} />
           <RadiusPopover maxValue={100} startText={"Радиус поиска"} />
           <MoreFiltersPopover
             types={types}

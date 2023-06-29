@@ -107,6 +107,9 @@ const lightTheme = createTheme({
     MuiOutlinedInput: {
       defaultProps: {
         sx: {
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "primary.main",
+          },
           "& fieldset": {
             borderColor: "primary.light",
           },
