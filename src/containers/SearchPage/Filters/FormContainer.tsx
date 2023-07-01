@@ -54,7 +54,7 @@ function FormContainer() {
   }, [i18n.language]);
 
   return (
-    <Box py={"2em"}>
+    <Box py={"1.6em"}>
       <FormProvider {...formContext}>
         <Stack direction={"row"} gap={"3em"} justifyContent={"space-between"}>
           <LocationPopover startText={"Локация"} />

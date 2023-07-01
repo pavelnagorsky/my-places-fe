@@ -6,21 +6,14 @@ import {
   CardContent,
   CardMedia,
   Divider,
-  Typography,
 } from "@mui/material";
-import Image from "next/image";
-import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
-import { secondaryLightColor } from "@/styles/theme/lightTheme";
-import CastleOutlinedIcon from "@mui/icons-material/CastleOutlined";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 function PlaceCardSkeleton() {
   return (
     <Card
       sx={{
-        width: "374px",
-        height: "570px",
+        width: { xs: "345px", md: "374px" },
+        height: { xs: "517px", md: "568px" },
         borderRadius: "10px",
         boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
         "& .MuiSkeleton-root": {
@@ -28,34 +21,56 @@ function PlaceCardSkeleton() {
         },
       }}
     >
-      <CardActionArea>
-        <CardMedia>
-          <Skeleton variant={"rectangular"} height={250} />
+      <CardActionArea sx={{ height: "100%" }}>
+        <CardMedia
+          sx={{
+            height: {
+              xs: 217,
+              md: 250,
+            },
+          }}
+        >
+          <Skeleton variant={"rectangular"} height={"100%"} />
         </CardMedia>
         <CardContent
           sx={{
+            height: "100%",
             px: "1.6em",
           }}
         >
           <Stack direction={"row"} justifyContent={"center"}>
-            <Skeleton variant={"rectangular"} height={18} width={178} />
+            <Skeleton variant={"text"} height={32} width={178} />
           </Stack>
-          <Skeleton variant={"text"} />
-          <Skeleton variant={"text"} />
-          <Skeleton variant={"text"} />
-          <Skeleton variant={"text"} />
-          <Divider variant={"middle"} />
           <Stack
             direction={"row"}
-            mt="1.4em"
-            mb="0.2em"
+            gap={"1em"}
+            my={"0.8em"}
             alignItems={"center"}
-            gap={"0.5em"}
           >
-            <Skeleton variant={"text"} />
+            <Skeleton variant={"circular"} height={28} width={28} />
+            <Stack flexGrow={1}>
+              <Skeleton height={20} />
+              <Skeleton height={20} />
+            </Stack>
+          </Stack>
+          <Skeleton height={20} sx={{ display: { xs: "none", md: "block" } }} />
+          <Skeleton height={20} />
+          <Skeleton height={20} />
+          <Skeleton height={20} />
+          <Skeleton height={20} width={"50%"} />
+          <Skeleton height={20} sx={{ mt: "0.8em" }} />
+          <Divider
+            variant={"middle"}
+            color={"red"}
+            sx={{ mt: "1em", mb: "0.8em" }}
+          />
+          <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
+            <Stack flexGrow={1}>
+              <Skeleton height={40} width={96} />
+            </Stack>
             <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
-              <Skeleton variant={"text"} />
-              <Skeleton variant={"text"} />
+              <Skeleton width={44} height={40} />
+              <Skeleton width={50} height={40} />
             </Stack>
           </Stack>
         </CardContent>

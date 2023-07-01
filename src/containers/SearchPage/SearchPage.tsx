@@ -1,7 +1,16 @@
 import Map, { ILatLngCoordinate } from "../../components/Map/Map";
 import { Circle, Marker, Polygon, Polyline } from "@react-google-maps/api";
 import { Fragment, useState } from "react";
-import { Box, Divider, Grid, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Grid,
+  Pagination,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { PlaceType } from "@/containers/SearchPage/LocationAutocomplete/LocationAutocomplete";
 import { usePolygons } from "@/hooks/usePolygons";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
@@ -20,6 +29,7 @@ interface ISearchPageProps {
 
 export function SearchPage({ places }: ISearchPageProps) {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   // info about place name from autocomplete
   const [selectedPlace, setSelectedPlace] = useState<PlaceType | null>(null);
 
@@ -37,7 +47,10 @@ export function SearchPage({ places }: ISearchPageProps) {
   return (
     <Fragment>
       <Box bgcolor={primaryBackground}>
-        <WrappedContainer bgColor={primaryBackground}>
+        <WrappedContainer
+          wrapperSx={{ px: { xs: "1em", md: "3em", lg: "7.5em" } }}
+          bgColor={primaryBackground}
+        >
           <FormContainer />
         </WrappedContainer>
       </Box>
@@ -51,10 +64,12 @@ export function SearchPage({ places }: ISearchPageProps) {
       {/*  setCircle={setCircle}*/}
       {/*  setFitCoordinates={setFitCoordinates}*/}
       {/*/>*/}
-      <WrappedContainer>
-        <Box my={"2.5em"}>
+      <WrappedContainer
+        wrapperSx={{ px: { xs: "1em", md: "3em", lg: "7.5em" } }}
+      >
+        <Box mt={"2.5em"}>
           <Map
-            containerStyle={{ height: "600px" }}
+            containerStyle={{ height: isMobile ? "323px" : "600px" }}
             fitCoordinates={fitCoordinates}
           >
             {circle ? (
@@ -95,28 +110,52 @@ export function SearchPage({ places }: ISearchPageProps) {
             ))}
           </Map>
         </Box>
-        <Typography fontSize={"20px"} fontWeight={700} component={"h1"}>
+        <Typography
+          fontSize={"20px"}
+          my={{ xs: "1.5em", md: "2em" }}
+          fontWeight={700}
+          component={"h1"}
+        >
           Найдено 26 мест:
         </Typography>
-        <Grid
-          container
-          mt={0}
-          spacing={"1.1em"}
-          mb={"2em"}
-          pt={"1em"}
-          pb={"3em"}
+        <Stack alignItems={"center"} justifyContent={"center"}>
+          <Stack
+            width={{
+              xs: "345px",
+              sm: "730px",
+              md: "790px",
+              xl: "100%",
+            }}
+            flexWrap={"wrap"}
+            direction={{ xs: "column", sm: "row" }}
+            rowGap={{ xs: "2em", md: "3em" }}
+            columnGap={{ xs: "1em", sm: "2em", md: "2.5em", xl: "2.3em" }}
+          >
+            {fakePlaces.map((place, index) => (
+              <PlaceCard place={place} key={index} />
+            ))}
+            {[1, 2, 3, 4].map((place, index) => (
+              <PlaceCardSkeleton key={index} />
+            ))}
+          </Stack>
+        </Stack>
+        <Stack
+          direction={"row"}
+          justifyContent={"center"}
+          mt={"3em"}
+          mb={"6em"}
         >
-          {fakePlaces.map((place, index) => (
-            <Grid item xs={12} md={6} xl={4} key={index}>
-              <PlaceCard place={place} />
-            </Grid>
-          ))}
-          {fakePlaces.map((place, index) => (
-            <Grid item xs={12} md={6} xl={4} key={index}>
-              <PlaceCardSkeleton />
-            </Grid>
-          ))}
-        </Grid>
+          <Pagination
+            sx={{
+              borderColor: "black",
+            }}
+            // page={1}
+            count={3}
+            color="primary"
+            variant="outlined"
+            shape="rounded"
+          />
+        </Stack>
       </WrappedContainer>
     </Fragment>
   );

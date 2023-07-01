@@ -6,6 +6,7 @@ import {
   Divider,
   Stack,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -20,55 +21,76 @@ interface IPlaceCardProps {
 }
 
 function PlaceCard({ place }: IPlaceCardProps) {
+  //const isMobile = useMediaQuery();
+
   return (
     <Card
       sx={{
-        width: "374px",
-        height: "570px",
+        width: { xs: "345px", md: "374px" },
+        height: { xs: "517px", md: "568px" },
         borderRadius: "10px",
         boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
       }}
     >
       <CardActionArea>
-        <CardMedia>
-          <Image height={250} src={place.image} alt={place.title} width={374} />
+        <CardMedia
+          sx={{
+            position: "relative",
+            height: {
+              xs: 217,
+              md: 250,
+            },
+          }}
+        >
+          <Image
+            style={{ objectFit: "cover" }}
+            fill
+            src={place.image}
+            alt={place.title}
+          />
         </CardMedia>
         <CardContent
           sx={{
             px: "1.6em",
             background: "linear-gradient(180deg, #FFF 0%, #FFF2E6 100%)",
-            //background: "linear-gradient(180deg, #FFF 0%, #FFF2E6 100%)",
           }}
         >
           <Typography
             textTransform={"uppercase"}
             textAlign={"center"}
             gutterBottom
-            mb={"1em"}
-            fontSize={"18px"}
+            mb={{ xs: "0.6em", md: "1em" }}
+            fontSize={{ xs: "16px", md: "18px" }}
             fontWeight={700}
+            height={"23.4px"}
+            overflow={"hidden"}
+            whiteSpace={"nowrap"}
+            textOverflow={"ellipsis"}
           >
             {place.title}
           </Typography>
           <Typography
             mb="1em"
             fontWeight={300}
+            height={"37px"}
+            overflow={"hidden"}
+            textOverflow={"ellipsis"}
             variant="body2"
-            fontSize={"14px"}
+            fontSize={{ xs: "13px", md: "14px" }}
             display={"flex"}
             alignItems={"flex-start"}
             gap={"0.5em"}
             align={"justify"}
           >
             <PlaceOutlinedIcon
-              sx={{ ml: "-0.2em", color: secondaryLightColor }}
+              sx={{ ml: "-0.1em", color: secondaryLightColor }}
             />
             {place.address}
           </Typography>
           <Typography
             variant="body2"
             lineHeight={"135%"}
-            fontSize={"14px"}
+            fontSize={{ xs: "13px", md: "14px" }}
             align={"justify"}
             height={"95px"}
             textOverflow={"ellipsis"}
@@ -78,11 +100,14 @@ function PlaceCard({ place }: IPlaceCardProps) {
           </Typography>
           <Typography
             mb="1.2em"
-            mt={"1.2em"}
+            mt={{ xs: "0.8em", md: "1.2em" }}
             fontWeight={300}
             variant="body1"
-            fontSize={"14px"}
+            fontSize={{ xs: "13px", md: "14px" }}
             textAlign={"center"}
+            height={{ xs: "18px", md: "19px" }}
+            textOverflow={"ellipsis"}
+            overflow={"hidden"}
           >
             {place.categories.map((c) => c.title).join(" | ")}
           </Typography>
