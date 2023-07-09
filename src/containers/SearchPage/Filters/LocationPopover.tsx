@@ -4,9 +4,9 @@ import {
   TextFieldElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { ISearchForm } from "@/containers/SearchPage/Filters/FormContainer";
 import {
   Box,
+  Divider,
   IconButton,
   InputAdornment,
   Popover,
@@ -19,14 +19,21 @@ import {
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button } from "@/components/UI/Button/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { LocationAutocomplete } from "@/containers/SearchPage/LocationAutocomplete/LocationAutocomplete";
+import { LocationAutocomplete } from "@/containers/SearchPage/Filters/LocationAutocomplete";
+import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
+import { ISearchForm } from "@/hoc/WithSearch";
 
 interface ILocationPopoverProps {
   inputSx?: SxProps;
   startText: string;
+  triggerSubmit: () => void;
 }
 
-function LocationPopover({ inputSx, startText }: ILocationPopoverProps) {
+function LocationPopover({
+  inputSx,
+  startText,
+  triggerSubmit,
+}: ILocationPopoverProps) {
   const popover = usePopover("location-popover");
   const preventIconClick = (e: any) => {
     e.preventDefault();
@@ -36,13 +43,19 @@ function LocationPopover({ inputSx, startText }: ILocationPopoverProps) {
   const form = useFormContext<ISearchForm>();
 
   const onSubmit = () => {
-    form.handleSubmit((data) => {
-      console.log(data);
-    })();
+    triggerSubmit();
+    popover.handleClose();
+  };
+
+  const onClear = () => {
+    form.resetField("search");
+    form.setValue("locationTitle", "");
+    form.setValue("locationInputValue", "");
   };
 
   const formatSelectedOptions = () => {
-    return startText;
+    const value = form.getValues("locationTitle");
+    return value || startText;
   };
 
   const containerContent = (
@@ -50,7 +63,8 @@ function LocationPopover({ inputSx, startText }: ILocationPopoverProps) {
       <Stack
         direction={"row"}
         justifyContent={"space-between"}
-        alignItems={"center"}
+        alignItems={"baseline"}
+        mt={"-0.5em"}
         mb={"0.8em"}
       >
         <Typography fontSize={"18px"} component={"p"}>
@@ -63,14 +77,27 @@ function LocationPopover({ inputSx, startText }: ILocationPopoverProps) {
 
       <LocationAutocomplete />
 
+      <Divider
+        variant={"middle"}
+        sx={{ borderColor: primaryBackground, height: "0.5px" }}
+      />
+
       <Stack
         direction={"row"}
-        gap={"1em"}
+        gap={"0.5em"}
         mt={"1em"}
+        px={"1em"}
         justifyContent={"space-between"}
       >
-        <Button sx={{ fontWeight: 400 }}>Очистить</Button>
-        <Button sx={{ fontWeight: 400 }} type={"submit"} onClick={onSubmit}>
+        <Button sx={{ fontWeight: 400, color: primaryColor }} onClick={onClear}>
+          Очистить
+        </Button>
+        <Button
+          sx={{ fontWeight: 400, color: "white" }}
+          variant={"contained"}
+          type={"submit"}
+          onClick={onSubmit}
+        >
           Применить
         </Button>
       </Stack>

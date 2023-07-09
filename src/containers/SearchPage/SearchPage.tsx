@@ -1,37 +1,44 @@
 import Map, { ILatLngCoordinate } from "../../components/Map/Map";
-import { Circle, Marker, Polygon, Polyline } from "@react-google-maps/api";
-import { Fragment, useState } from "react";
+import { Circle, Marker, Polyline } from "@react-google-maps/api";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import {
   Box,
-  Divider,
-  Grid,
   Pagination,
   Stack,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { PlaceType } from "@/containers/SearchPage/LocationAutocomplete/LocationAutocomplete";
+import { PlaceType } from "@/containers/SearchPage/Filters/LocationAutocomplete";
 import { usePolygons } from "@/hooks/usePolygons";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
-import FormContainer from "@/containers/SearchPage/Filters/FormContainer";
+import FormContainer from "@/containers/SearchPage/FormContainer";
 import { fakePlaces } from "@/components/PlaceCard/fakeData";
 import PlaceCard from "@/components/PlaceCard/PlaceCard";
-import PrimaryDivider from "@/components/UI/PrimaryDivider/PrimaryDivider";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
-import SearchForm from "@/containers/SearchPage/SearchForm";
 import PlaceCardSkeleton from "@/components/PlaceCard/PlaceCardSkeleton";
+import { useFormContext } from "react-hook-form-mui";
+import { ISearchForm } from "@/hoc/WithSearch";
+import utils from "@/shared/utils";
+import ScrollToTopButton from "@/components/ScrollToTopButton/ScrollToTopButton";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  selectLoading,
+  selectPagination,
+  selectPlaces,
+} from "@/store/search-results-slice/search-results.slice";
+import { useTranslation } from "next-i18next";
 
-interface ISearchPageProps {
-  places: ISearchPlace[];
-}
-
-export function SearchPage({ places }: ISearchPageProps) {
+function SearchPage() {
+  const { i18n } = useTranslation();
+  // responsive design tools
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  // info about place name from autocomplete
-  const [selectedPlace, setSelectedPlace] = useState<PlaceType | null>(null);
+  // info about search request
+  const places = useAppSelector(selectPlaces);
+  const pagination = useAppSelector(selectPagination);
+  const loading = useAppSelector(selectLoading);
 
   // coordinates to zoom map
   const [fitCoordinates, setFitCoordinates] = useState<ILatLngCoordinate[]>([]);
@@ -41,11 +48,25 @@ export function SearchPage({ places }: ISearchPageProps) {
   const [mapResults, setMapResults] = useState<ISearchPlace[]>([]);
 
   const [polygonsEnabled, setPolygonsEnabled] = useState(true);
-  const polygons = usePolygons({ address: selectedPlace });
-  const [circle, setCircle] = useState<google.maps.Circle | null>(null);
+  //const polygons = usePolygons({ address: selectedPlace });
+
+  const form = useFormContext<ISearchForm>();
+  const searchRadius = form.getValues("radius");
+  const searchCoordinates = form.watch("search");
+
+  const mapCircle = useMemo(() => {
+    if (!searchCoordinates) return;
+    const latLng = utils.stringToLatLng(searchCoordinates);
+    if (!latLng) return;
+    return new google.maps.Circle({
+      center: latLng,
+      radius: utils.kmToMeters(searchRadius),
+    });
+  }, [searchRadius, searchCoordinates]);
 
   return (
     <Fragment>
+      <ScrollToTopButton />
       <Box bgcolor={primaryBackground}>
         <WrappedContainer
           wrapperSx={{ px: { xs: "1em", md: "3em", lg: "7.5em" } }}
@@ -54,16 +75,6 @@ export function SearchPage({ places }: ISearchPageProps) {
           <FormContainer />
         </WrappedContainer>
       </Box>
-      {/*<SearchForm*/}
-      {/*  places={places}*/}
-      {/*  setPolygonsEnabled={setPolygonsEnabled}*/}
-      {/*  setCardResults={setCardResults}*/}
-      {/*  setMapResults={setMapResults}*/}
-      {/*  selectedPlace={selectedPlace}*/}
-      {/*  setSelectedPlace={setSelectedPlace}*/}
-      {/*  setCircle={setCircle}*/}
-      {/*  setFitCoordinates={setFitCoordinates}*/}
-      {/*/>*/}
       <WrappedContainer
         wrapperSx={{ px: { xs: "1em", md: "3em", lg: "7.5em" } }}
       >
@@ -72,10 +83,10 @@ export function SearchPage({ places }: ISearchPageProps) {
             containerStyle={{ height: isMobile ? "323px" : "600px" }}
             fitCoordinates={fitCoordinates}
           >
-            {circle ? (
+            {mapCircle ? (
               <Circle
-                radius={circle.getRadius()}
-                center={circle.getCenter() ?? undefined}
+                radius={mapCircle.getRadius()}
+                center={mapCircle.getCenter() ?? undefined}
                 options={{
                   strokeColor: theme.palette.primary.main,
                   fillOpacity: 0.15,
@@ -84,27 +95,15 @@ export function SearchPage({ places }: ISearchPageProps) {
             ) : null}
             {/*{polygonsEnabled*/}
             {/*  ? polygons.map((p, i) => (*/}
-            {/*      <Polygon*/}
-            {/*        paths={p.getPaths()}*/}
+            {/*      <Polyline*/}
+            {/*        path={p.getPath()}*/}
             {/*        key={i}*/}
             {/*        options={{*/}
             {/*          strokeColor: theme.palette.primary.main,*/}
-            {/*          fillOpacity: 0.15,*/}
             {/*        }}*/}
             {/*      />*/}
             {/*    ))*/}
             {/*  : null}*/}
-            {polygonsEnabled
-              ? polygons.map((p, i) => (
-                  <Polyline
-                    path={p.getPath()}
-                    key={i}
-                    options={{
-                      strokeColor: theme.palette.primary.main,
-                    }}
-                  />
-                ))
-              : null}
             {mapResults.map((res, i) => (
               <Marker key={i} position={res.coordinates} />
             ))}
@@ -116,7 +115,7 @@ export function SearchPage({ places }: ISearchPageProps) {
           fontWeight={700}
           component={"h1"}
         >
-          Найдено 26 мест:
+          Найдено мест: {pagination.totalResults}
         </Typography>
         <Stack alignItems={"center"} justifyContent={"center"}>
           <Stack
@@ -149,8 +148,8 @@ export function SearchPage({ places }: ISearchPageProps) {
             sx={{
               borderColor: "black",
             }}
-            // page={1}
-            count={3}
+            page={pagination.currentPage}
+            count={pagination.totalPages}
             color="primary"
             variant="outlined"
             shape="rounded"
@@ -160,3 +159,5 @@ export function SearchPage({ places }: ISearchPageProps) {
     </Fragment>
   );
 }
+
+export default SearchPage;

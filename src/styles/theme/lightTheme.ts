@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import { interFont } from "@/styles/fonts/fonts";
 
 export const primaryColor = "#FF7A00";
 export const primaryBackground = "#FFE9D6";
@@ -94,7 +95,7 @@ const lightTheme = createTheme({
       fontWeight: 400,
       color: "#565656",
     },
-    fontFamily: ["Inter"].join(","),
+    fontFamily: [interFont.style.fontFamily].join(","),
   },
   components: {
     MuiFormControl: {
@@ -109,6 +110,9 @@ const lightTheme = createTheme({
         sx: {
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: "primary.main",
+          },
+          "& input": {
+            textOverflow: "ellipsis",
           },
           "& fieldset": {
             borderColor: "primary.light",

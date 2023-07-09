@@ -1,23 +1,21 @@
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { SearchPage } from "@/containers/SearchPage/SearchPage";
-import placesService from "@/services/places-service/places.service";
-import { ISearchPlace } from "@/services/places-service/search-place.interface";
+import SearchPage from "@/containers/SearchPage/SearchPage";
+import WithSearch from "@/hoc/WithSearch";
+import I18nLanguages from "@/shared/I18nLanguages";
 
-const Search: NextPage<{ places: ISearchPlace[] }> = ({ places }) => {
-  return <SearchPage places={places} />;
+const Search: NextPage = () => {
+  return (
+    <WithSearch>
+      <SearchPage />
+    </WithSearch>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  let placesData: ISearchPlace[] = [];
-  try {
-    const { data } = await placesService.getAllPlaces(1);
-    placesData = data;
-  } catch (e) {}
   return {
     props: {
-      places: placesData,
-      ...(await serverSideTranslations(locale ?? "ru", [
+      ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
         "searchPage",
         "common",
       ])),

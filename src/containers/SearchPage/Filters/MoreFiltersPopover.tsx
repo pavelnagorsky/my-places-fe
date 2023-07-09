@@ -20,24 +20,26 @@ import {
   useFormContext,
 } from "react-hook-form-mui";
 import { Button } from "@/components/UI/Button/Button";
-import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
-import { ISearchForm } from "@/containers/SearchPage/Filters/FormContainer";
+import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
+import { ISearchForm } from "@/hoc/WithSearch";
 
 interface IMoreFiltersPopoverProps {
   inputSx?: SxProps;
   startText: string;
-  readonly categories: IPlaceCategory[];
+  readonly typesCommercial: IPlaceType[];
   readonly types: IPlaceType[];
+  triggerSubmit: () => void;
 }
 
 function MoreFiltersPopover({
   inputSx,
   startText,
   types,
-  categories,
+  typesCommercial,
+  triggerSubmit,
 }: IMoreFiltersPopoverProps) {
-  const { resetField } = useFormContext<ISearchForm>();
+  const form = useFormContext<ISearchForm>();
 
   const popover = usePopover("more-filters-popover");
   const preventIconClick = (e: any) => {
@@ -46,7 +48,22 @@ function MoreFiltersPopover({
   };
 
   const formatSelectedOptions = () => {
-    return startText;
+    const value =
+      form.getValues("types").length +
+      form.getValues("typesCommercial").length +
+      (form.getValues("title").length > 0 ? 1 : 0);
+    return `${startText} ${value > 0 ? `(${value})` : ""}`;
+  };
+
+  const onSubmit = () => {
+    triggerSubmit();
+    popover.handleClose();
+  };
+
+  const onClear = () => {
+    form.resetField("title");
+    form.resetField("typesCommercial");
+    form.resetField("types");
   };
 
   const containerContent = (
@@ -54,7 +71,8 @@ function MoreFiltersPopover({
       <Stack
         direction={"row"}
         justifyContent={"space-between"}
-        alignItems={"center"}
+        alignItems={"baseline"}
+        mt={"-0.5em"}
         mb={"0.8em"}
       >
         <Typography fontSize={"18px"} component={"p"}>
@@ -75,7 +93,7 @@ function MoreFiltersPopover({
           endAdornment: (
             <InputAdornment position={"end"}>
               <IconButton>
-                <SearchIcon />
+                <SearchIcon color={"disabled"} />
               </IconButton>
             </InputAdornment>
           ),
@@ -109,9 +127,9 @@ function MoreFiltersPopover({
       </Box>
       <Divider variant={"middle"} />
       <Typography fontSize={"18px"} component={"p"} mb={"0.8em"}>
-        Категории
+        Коммерческие типы
       </Typography>
-      <Box width={"100%"}>
+      <Box width={"100%"} mb={"1em"}>
         <CheckboxButtonGroup
           row
           labelProps={{
@@ -127,22 +145,38 @@ function MoreFiltersPopover({
               },
             },
           }}
-          options={categories.map((category) => ({
-            id: category.id,
-            label: category.title,
+          options={typesCommercial.map((typeC) => ({
+            id: typeC.id,
+            label: typeC.title,
           }))}
-          name={"categories"}
+          name={"typesCommercial"}
         />
       </Box>
-      <Divider variant={"middle"} />
+      <Divider
+        variant={"middle"}
+        sx={{ borderColor: primaryBackground, height: "0.5px" }}
+      />
+
       <Stack
+        bottom={"-0.5em"}
+        position={"sticky"}
+        bgcolor={"white"}
         direction={"row"}
-        gap={"1em"}
-        mt={"1.5em"}
+        gap={"0.5em"}
+        p={"1em"}
         justifyContent={"space-between"}
       >
-        <Button sx={{ fontWeight: 400 }}>Очистить</Button>
-        <Button sx={{ fontWeight: 400 }}>Применить</Button>
+        <Button sx={{ fontWeight: 400, color: primaryColor }} onClick={onClear}>
+          Очистить
+        </Button>
+        <Button
+          sx={{ fontWeight: 400, color: "white" }}
+          variant={"contained"}
+          type={"submit"}
+          onClick={onSubmit}
+        >
+          Применить
+        </Button>
       </Stack>
     </Fragment>
   );
@@ -192,7 +226,8 @@ function MoreFiltersPopover({
         PaperProps={{
           sx: {
             px: "1em",
-            py: "1.5em",
+            pt: "1.5em",
+            pb: "0.5em",
             borderRadius: "10px",
             maxWidth: "350px",
           },

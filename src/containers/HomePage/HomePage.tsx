@@ -3,11 +3,11 @@ import { Box } from "@mui/material";
 import TextAndMainImage from "@/components/TextAndImage/TextAndMainImage";
 import mainImageMd from "public/images/home-page/main-image-md.jpg";
 import mainImageXs from "public/images/home-page/main-image-xs.jpg";
-import { TextAndImage } from "@/components/TextAndImage/TextAndImage";
+import TextAndImage from "@/components/TextAndImage/TextAndImage";
 import card1Image from "public/images/home-page/card1.jpg";
 import card2Image from "public/images/home-page/card2.jpg";
 import BoxWithCircles from "@/components/UI/BoxWithCircles/BoxWithCircles";
-import { TextWithBubbles } from "@/components/TextAndImage/TextWithBubbles";
+import TextWithBubbles from "@/components/TextAndImage/TextWithBubbles";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
 
 const HomePage = () => {

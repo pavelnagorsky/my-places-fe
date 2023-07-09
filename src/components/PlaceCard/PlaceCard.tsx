@@ -45,6 +45,8 @@ function PlaceCard({ place }: IPlaceCardProps) {
           <Image
             style={{ objectFit: "cover" }}
             fill
+            priority
+            sizes="(max-width: 900px) 345px, 374px"
             src={place.image}
             alt={place.title}
           />

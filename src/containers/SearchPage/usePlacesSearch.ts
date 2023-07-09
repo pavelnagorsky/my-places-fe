@@ -1,5 +1,5 @@
-import { kmToMeters } from "@/shared/metersToKm";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
+import utils from "@/shared/utils";
 
 interface ISearchByRadiusPayload {
   circleCenter: google.maps.LatLng;
@@ -24,7 +24,7 @@ const usePlacesSearch = () => {
   }: ISearchByRadiusPayload) => {
     const searchCircle = new google.maps.Circle({
       center: circleCenter,
-      radius: kmToMeters(radius),
+      radius: utils.kmToMeters(radius),
     });
     const filteredResults = results.filter((pos) => {
       const distance = google.maps.geometry.spherical.computeDistanceBetween(

@@ -59,11 +59,7 @@ function PlaceCardSkeleton() {
           <Skeleton height={20} />
           <Skeleton height={20} width={"50%"} />
           <Skeleton height={20} sx={{ mt: "0.8em" }} />
-          <Divider
-            variant={"middle"}
-            color={"red"}
-            sx={{ mt: "1em", mb: "0.8em" }}
-          />
+          <Divider variant={"middle"} sx={{ mt: "1em", mb: "0.8em" }} />
           <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
             <Stack flexGrow={1}>
               <Skeleton height={40} width={96} />

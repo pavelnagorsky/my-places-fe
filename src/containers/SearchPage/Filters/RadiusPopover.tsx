@@ -1,12 +1,8 @@
 import {
   Box,
-  Checkbox,
   Divider,
-  FormControlLabel,
-  FormGroup,
   IconButton,
   InputAdornment,
-  OutlinedInput,
   Popover,
   Slider,
   Stack,
@@ -14,32 +10,30 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { ChangeEvent, Fragment } from "react";
-import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
-import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import usePopover from "@/hooks/usePopover";
 import ClearIcon from "@mui/icons-material/Clear";
 import {
-  CheckboxButtonGroup,
   CheckboxElement,
   TextFieldElement,
   useFormContext,
 } from "react-hook-form-mui";
-import SearchIcon from "@mui/icons-material/Search";
 import { Button } from "@/components/UI/Button/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { ISearchForm } from "@/containers/SearchPage/Filters/FormContainer";
+import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
+import { ISearchForm } from "@/hoc/WithSearch";
 
 interface IRadiusSelectProps {
   readonly maxValue: number;
   inputSx?: SxProps;
   startText: string;
+  triggerSubmit: () => void;
 }
 
 export function RadiusPopover({
   maxValue,
   inputSx,
   startText,
+  triggerSubmit,
 }: IRadiusSelectProps) {
   const popover = usePopover("radius-popover");
   const preventIconClick = (e: any) => {
@@ -52,13 +46,13 @@ export function RadiusPopover({
   const radius = form.watch("radius");
 
   const onSubmit = () => {
-    form.handleSubmit((data) => {
-      console.log(data);
-    })();
+    triggerSubmit();
+    popover.handleClose();
   };
 
   const formatSelectedOptions = () => {
-    return startText;
+    const value = form.getValues("radius");
+    return `${startText} (${value} км)`;
   };
 
   function valueText(value: number) {
@@ -69,12 +63,18 @@ export function RadiusPopover({
     if (typeof newValue === "number") form.setValue("radius", newValue);
   };
 
+  const onClear = () => {
+    form.resetField("radius");
+    form.resetField("searchByMe");
+  };
+
   const containerContent = (
     <Box width={"100%"}>
       <Stack
         direction={"row"}
         justifyContent={"space-between"}
-        alignItems={"center"}
+        alignItems={"baseline"}
+        mt={"-0.5em"}
         mb={"0.8em"}
       >
         <Typography fontSize={"18px"} component={"p"}>
@@ -96,7 +96,7 @@ export function RadiusPopover({
             onChange={handleSliderChange}
             aria-label="search-distance"
             getAriaValueText={valueText}
-            step={5}
+            step={10}
             max={maxValue}
             valueLabelDisplay="auto"
           />
@@ -113,11 +113,9 @@ export function RadiusPopover({
             endAdornment: <InputAdornment position="end">км</InputAdornment>,
           }}
           onChange={(event) => {
-            console.log("e", event.target.value);
             const isNumber =
               event.target.value.length > 0 &&
               typeof +event.target.value === "number";
-            console.log(isNumber);
             form.setValue("radius", isNumber ? +event.target.value : 1);
           }}
           inputProps={{
@@ -134,19 +132,32 @@ export function RadiusPopover({
         sx={{ "& label": { ml: 0 } }}
       >
         <CheckboxElement
+          sx={{ color: "primary.light" }}
           inputProps={{ "aria-label": "Search by me enabled" }}
           name={"searchByMe"}
-          label={"Поиск от мокего местоположения"}
+          label={"Поиск от моего местоположения"}
         />
       </Stack>
+      <Divider
+        variant={"middle"}
+        sx={{ borderColor: primaryBackground, height: "0.5px" }}
+      />
       <Stack
         direction={"row"}
-        gap={"1em"}
+        gap={"0.5em"}
         mt={"1em"}
+        px={"1em"}
         justifyContent={"space-between"}
       >
-        <Button sx={{ fontWeight: 400 }}>Очистить</Button>
-        <Button sx={{ fontWeight: 400 }} type={"submit"} onClick={onSubmit}>
+        <Button sx={{ fontWeight: 400, color: primaryColor }} onClick={onClear}>
+          Очистить
+        </Button>
+        <Button
+          sx={{ fontWeight: 400, color: "white" }}
+          variant={"contained"}
+          type={"submit"}
+          onClick={onSubmit}
+        >
           Применить
         </Button>
       </Stack>

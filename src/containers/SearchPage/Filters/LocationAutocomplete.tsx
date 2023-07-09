@@ -12,17 +12,14 @@ import {
 import parse from "autosuggest-highlight/parse";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import {
-  defaultCountrySign,
-  ILatLngCoordinate,
-} from "../../../components/Map/Map";
+import { defaultCountrySign } from "../../../components/Map/Map";
 import { useGoogleAutocompleteService } from "@/hooks/useGoogleAutocompleteService";
 import { useTranslation } from "next-i18next";
 import { useCoordinatesByPlaceId } from "@/hooks/useCoordinatesByPlaceId";
 import SearchIcon from "@mui/icons-material/Search";
-import { useFormContext } from "react-hook-form-mui";
-import { ISearchForm } from "@/containers/SearchPage/Filters/FormContainer";
+import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import utils from "@/shared/utils";
+import { ISearchForm } from "@/hoc/WithSearch";
 
 interface MainTextMatchedSubstrings {
   offset: number;
@@ -41,12 +38,17 @@ export interface PlaceType {
 
 export function LocationAutocomplete() {
   const { t } = useTranslation("searchPage");
-  const [inputValue, setInputValue] = useState("");
-  //const [value, setValue] = useState<PlaceType | null>(null);
   const [selected, setSelected] = useState(false);
   const autocompleteService = useGoogleAutocompleteService();
   const searchCoordinates = useCoordinatesByPlaceId();
   const form = useFormContext<ISearchForm>();
+  const formInput = form.watch("locationTitle");
+  const inputValue = form.watch("locationInputValue");
+  const setInputValue = (v: string) => form.setValue("locationInputValue", v);
+
+  useEffect(() => {
+    setInputValue(formInput);
+  }, [formInput]);
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -55,6 +57,7 @@ export function LocationAutocomplete() {
 
   const onSelect = (option: PlaceType) => {
     setInputValue(option.structured_formatting.main_text);
+    form.setValue("locationTitle", option.structured_formatting.main_text);
     setSelected(true);
     searchCoordinates(option.place_id)
       .then((latLng) => {
@@ -62,6 +65,7 @@ export function LocationAutocomplete() {
       })
       .catch(() => {
         setInputValue("");
+        form.setValue("locationTitle", "");
         form.setValue("search", null);
       });
   };
@@ -130,7 +134,7 @@ export function LocationAutocomplete() {
         InputProps={{
           endAdornment: (
             <InputAdornment position={"end"}>
-              <SearchIcon color={"primary"} />
+              <SearchIcon color={"disabled"} />
             </InputAdornment>
           ),
         }}
@@ -138,7 +142,7 @@ export function LocationAutocomplete() {
         aria-haspopup={true}
         aria-autocomplete={"list"}
         aria-controls="place-predictions"
-        type={"search"}
+        // type={"search"}
         role={"combobox"}
         aria-expanded={options.length > 0}
         id="google-map-autocomplete"

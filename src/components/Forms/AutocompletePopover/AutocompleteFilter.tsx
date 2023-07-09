@@ -8,7 +8,7 @@ import {
   Stack,
   SxProps,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { CheckboxButtonGroup } from "react-hook-form-mui";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";

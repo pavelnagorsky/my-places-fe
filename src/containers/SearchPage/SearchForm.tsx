@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   LocationAutocomplete,
   PlaceType,
-} from "./LocationAutocomplete/LocationAutocomplete";
+} from "./Filters/LocationAutocomplete";
 import { ILatLngCoordinate } from "@/components/Map/Map";
 import googlePlacesAutocompleteService from "@/services/google-places-service/google-places.service";
 import { Button } from "@/components/UI/Button/Button";
