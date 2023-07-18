@@ -54,21 +54,21 @@ function Map({
   });
 
   // focus map to cover all set of coordinates
-  // useEffect(() => {
-  //   if (fitCoordinates && map) {
-  //     if (fitCoordinates.length > 0) {
-  //       const bounds = new google.maps.LatLngBounds();
-  //       fitCoordinates.forEach((c) => {
-  //         bounds.extend(c);
-  //       });
-  //       map.fitBounds(bounds);
-  //       // double call because we use map restriction (google maps bug)
-  //       map.fitBounds(bounds);
-  //     } else {
-  //       map.fitBounds(defaultBounds);
-  //     }
-  //   }
-  // }, [fitCoordinates, map]);
+  useEffect(() => {
+    if (fitCoordinates && map) {
+      if (fitCoordinates.length > 0) {
+        const bounds = new google.maps.LatLngBounds();
+        fitCoordinates.forEach((c) => {
+          bounds.extend(c);
+        });
+        map.fitBounds(bounds);
+        // double call because we use map restriction (google maps bug)
+        map.fitBounds(bounds);
+      } else {
+        map.fitBounds(defaultBounds);
+      }
+    }
+  }, [fitCoordinates, map]);
 
   const onLoad = useCallback(function callback(map: google.maps.Map) {
     map.fitBounds(defaultBounds);

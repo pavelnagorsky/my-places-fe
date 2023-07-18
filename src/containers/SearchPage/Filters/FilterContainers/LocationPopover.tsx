@@ -1,16 +1,11 @@
 import usePopover from "@/hooks/usePopover";
-import {
-  CheckboxElement,
-  TextFieldElement,
-  useFormContext,
-} from "react-hook-form-mui";
+import { useFormContext } from "react-hook-form-mui";
 import {
   Box,
   Divider,
   IconButton,
   InputAdornment,
   Popover,
-  Slider,
   Stack,
   SxProps,
   TextField,
@@ -19,9 +14,10 @@ import {
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button } from "@/components/UI/Button/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { LocationAutocomplete } from "@/containers/SearchPage/Filters/LocationAutocomplete";
+import LocationAutocomplete from "@/containers/SearchPage/Filters/LocationAutocomplete";
 import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
 import { ISearchForm } from "@/hoc/WithSearch";
+import { useTranslation } from "next-i18next";
 
 interface ILocationPopoverProps {
   inputSx?: SxProps;
@@ -34,6 +30,7 @@ function LocationPopover({
   startText,
   triggerSubmit,
 }: ILocationPopoverProps) {
+  const { t } = useTranslation("searchPage");
   const popover = usePopover("location-popover");
   const preventIconClick = (e: any) => {
     e.preventDefault();
@@ -43,8 +40,8 @@ function LocationPopover({
   const form = useFormContext<ISearchForm>();
 
   const onSubmit = () => {
-    triggerSubmit();
     popover.handleClose();
+    triggerSubmit();
   };
 
   const onClear = () => {
@@ -68,14 +65,14 @@ function LocationPopover({
         mb={"0.8em"}
       >
         <Typography fontSize={"18px"} component={"p"}>
-          Выберите место
+          {t("filters.selectPlace")}
         </Typography>
         <IconButton onClick={popover.handleClose}>
           <ClearIcon />
         </IconButton>
       </Stack>
 
-      <LocationAutocomplete />
+      <LocationAutocomplete autoFocus />
 
       <Divider
         variant={"middle"}
@@ -90,7 +87,7 @@ function LocationPopover({
         justifyContent={"space-between"}
       >
         <Button sx={{ fontWeight: 400, color: primaryColor }} onClick={onClear}>
-          Очистить
+          {t("filters.clear")}
         </Button>
         <Button
           sx={{ fontWeight: 400, color: "white" }}
@@ -98,7 +95,7 @@ function LocationPopover({
           type={"submit"}
           onClick={onSubmit}
         >
-          Применить
+          {t("filters.apply")}
         </Button>
       </Stack>
     </Box>

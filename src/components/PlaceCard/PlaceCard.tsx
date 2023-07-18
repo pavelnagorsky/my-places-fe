@@ -143,7 +143,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
                 gap={"0.5em"}
               >
                 <FavoriteBorderIcon sx={{ color: secondaryLightColor }} />
-                {place.viewsCount}
+                {place.likesCount}
               </Typography>
               <Typography
                 fontWeight={300}
@@ -154,7 +154,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
                 gap={"0.2em"}
               >
                 <VisibilityOutlinedIcon sx={{ color: secondaryLightColor }} />
-                {place.likesCount}
+                {place.viewsCount}
               </Typography>
             </Stack>
           </Stack>

@@ -25,7 +25,10 @@ const ScrollToTopButton = () => {
       >
         <Fab
           onClick={scrollToTop}
-          sx={{ opacity: 0.7 }}
+          sx={{
+            opacity: 0.7,
+            boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
+          }}
           color="primary"
           size="small"
           aria-label="scroll back to top"

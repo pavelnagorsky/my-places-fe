@@ -60,9 +60,10 @@ const Footer = () => {
   return (
     <WrappedContainer>
       <Stack
+        gap={isMobile ? "1.5em" : undefined}
         direction={"row"}
         alignItems={"center"}
-        justifyContent={"space-between"}
+        justifyContent={{ xs: "start", md: "space-between" }}
         mb={"2em"}
       >
         {isMobile ? null : linksSection}

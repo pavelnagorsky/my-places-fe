@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import parse from "autosuggest-highlight/parse";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { defaultCountrySign } from "../../../components/Map/Map";
 import { useGoogleAutocompleteService } from "@/hooks/useGoogleAutocompleteService";
@@ -36,7 +36,7 @@ export interface PlaceType {
   structured_formatting: StructuredFormatting;
 }
 
-export function LocationAutocomplete() {
+function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
   const { t } = useTranslation("searchPage");
   const [selected, setSelected] = useState(false);
   const autocompleteService = useGoogleAutocompleteService();
@@ -100,6 +100,7 @@ export function LocationAutocomplete() {
 
     if (inputValue === "") {
       form.setValue("search", null);
+      form.setValue("locationTitle", "");
       setOptions([]);
       return;
     }
@@ -129,8 +130,8 @@ export function LocationAutocomplete() {
     <Box>
       <TextField
         fullWidth
-        placeholder={t("filters.autocomplete")}
-        autoFocus
+        placeholder={t("filters.enterLocation")}
+        autoFocus={autoFocus}
         InputProps={{
           endAdornment: (
             <InputAdornment position={"end"}>
@@ -198,3 +199,5 @@ export function LocationAutocomplete() {
     </Box>
   );
 }
+
+export default memo(LocationAutocomplete);

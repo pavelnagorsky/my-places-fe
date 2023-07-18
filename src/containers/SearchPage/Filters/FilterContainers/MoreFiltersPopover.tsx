@@ -23,6 +23,7 @@ import { Button } from "@/components/UI/Button/Button";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
 import { ISearchForm } from "@/hoc/WithSearch";
+import { useTranslation } from "next-i18next";
 
 interface IMoreFiltersPopoverProps {
   inputSx?: SxProps;
@@ -39,6 +40,7 @@ function MoreFiltersPopover({
   typesCommercial,
   triggerSubmit,
 }: IMoreFiltersPopoverProps) {
+  const { t } = useTranslation("searchPage");
   const form = useFormContext<ISearchForm>();
 
   const popover = usePopover("more-filters-popover");
@@ -56,8 +58,8 @@ function MoreFiltersPopover({
   };
 
   const onSubmit = () => {
-    triggerSubmit();
     popover.handleClose();
+    triggerSubmit();
   };
 
   const onClear = () => {
@@ -76,7 +78,7 @@ function MoreFiltersPopover({
         mb={"0.8em"}
       >
         <Typography fontSize={"18px"} component={"p"}>
-          Искать по названию
+          {t("filters.searchByTitle")}
         </Typography>
         <IconButton onClick={popover.handleClose}>
           <ClearIcon />
@@ -88,7 +90,7 @@ function MoreFiltersPopover({
           mb: "1em",
         }}
         name={"title"}
-        placeholder={"Введите название"}
+        placeholder={t("filters.enterTitle")}
         InputProps={{
           endAdornment: (
             <InputAdornment position={"end"}>
@@ -100,7 +102,7 @@ function MoreFiltersPopover({
         }}
       />
       <Typography fontSize={"18px"} component={"p"} mb={"0.8em"} mt={"0.5em"}>
-        Типы достопримечательностей
+        {t("filters.types")}
       </Typography>
       <Box width={"100%"}>
         <CheckboxButtonGroup
@@ -127,7 +129,7 @@ function MoreFiltersPopover({
       </Box>
       <Divider variant={"middle"} />
       <Typography fontSize={"18px"} component={"p"} mb={"0.8em"}>
-        Коммерческие типы
+        {t("filters.typesCommercial")}
       </Typography>
       <Box width={"100%"} mb={"1em"}>
         <CheckboxButtonGroup
@@ -164,10 +166,11 @@ function MoreFiltersPopover({
         direction={"row"}
         gap={"0.5em"}
         p={"1em"}
+        zIndex={10}
         justifyContent={"space-between"}
       >
         <Button sx={{ fontWeight: 400, color: primaryColor }} onClick={onClear}>
-          Очистить
+          {t("filters.clear")}
         </Button>
         <Button
           sx={{ fontWeight: 400, color: "white" }}
@@ -175,7 +178,7 @@ function MoreFiltersPopover({
           type={"submit"}
           onClick={onSubmit}
         >
-          Применить
+          {t("filters.apply")}
         </Button>
       </Stack>
     </Fragment>

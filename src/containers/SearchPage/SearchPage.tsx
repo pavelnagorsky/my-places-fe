@@ -1,6 +1,6 @@
 import Map, { ILatLngCoordinate } from "../../components/Map/Map";
-import { Circle, Marker, Polyline } from "@react-google-maps/api";
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Circle, InfoWindow, Marker } from "@react-google-maps/api";
+import { Fragment, useMemo, useState } from "react";
 import {
   Box,
   Pagination,
@@ -9,11 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { PlaceType } from "@/containers/SearchPage/Filters/LocationAutocomplete";
-import { usePolygons } from "@/hooks/usePolygons";
-import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import FormContainer from "@/containers/SearchPage/FormContainer";
-import { fakePlaces } from "@/components/PlaceCard/fakeData";
 import PlaceCard from "@/components/PlaceCard/PlaceCard";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
@@ -22,16 +18,17 @@ import { useFormContext } from "react-hook-form-mui";
 import { ISearchForm } from "@/hoc/WithSearch";
 import utils from "@/shared/utils";
 import ScrollToTopButton from "@/components/ScrollToTopButton/ScrollToTopButton";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import {
   selectLoading,
   selectPagination,
   selectPlaces,
 } from "@/store/search-results-slice/search-results.slice";
 import { useTranslation } from "next-i18next";
+import { ISearchPlace } from "@/services/places-service/search-place.interface";
 
 function SearchPage() {
-  const { i18n } = useTranslation();
+  const { t } = useTranslation("searchPage");
   // responsive design tools
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -39,20 +36,23 @@ function SearchPage() {
   const places = useAppSelector(selectPlaces);
   const pagination = useAppSelector(selectPagination);
   const loading = useAppSelector(selectLoading);
-
-  // coordinates to zoom map
-  const [fitCoordinates, setFitCoordinates] = useState<ILatLngCoordinate[]>([]);
-  // found card results
-  const [cardResults, setCardResults] = useState<ISearchPlace[]>([]);
-  // found map results
-  const [mapResults, setMapResults] = useState<ISearchPlace[]>([]);
-
-  const [polygonsEnabled, setPolygonsEnabled] = useState(true);
+  const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
   //const polygons = usePolygons({ address: selectedPlace });
+
+  const handleClickMarker = (placeId: number) => {
+    const place = places.find((p) => p.id === placeId);
+    if (!place) return;
+    setSelectedPlace(place);
+  };
 
   const form = useFormContext<ISearchForm>();
   const searchRadius = form.getValues("radius");
   const searchCoordinates = form.watch("search");
+  const showMap = form.watch("showMap");
+
+  const placesCoordinates = useMemo(() => {
+    return places.map((p) => ({ ...p.coordinates, id: p.id }));
+  }, [places]);
 
   const mapCircle = useMemo(() => {
     if (!searchCoordinates) return;
@@ -63,6 +63,17 @@ function SearchPage() {
       radius: utils.kmToMeters(searchRadius),
     });
   }, [searchRadius, searchCoordinates]);
+
+  const mapFitBounds: ILatLngCoordinate[] = useMemo(() => {
+    if (mapCircle) {
+      const bounds = mapCircle.getBounds();
+      return [
+        bounds?.getNorthEast().toJSON(),
+        bounds?.getSouthWest().toJSON(),
+      ] as ILatLngCoordinate[];
+    }
+    return placesCoordinates;
+  }, [mapCircle, placesCoordinates]);
 
   return (
     <Fragment>
@@ -78,10 +89,10 @@ function SearchPage() {
       <WrappedContainer
         wrapperSx={{ px: { xs: "1em", md: "3em", lg: "7.5em" } }}
       >
-        <Box mt={"2.5em"}>
+        <Box mt={"2.5em"} display={!showMap && isMobile ? "none" : "block"}>
           <Map
             containerStyle={{ height: isMobile ? "323px" : "600px" }}
-            fitCoordinates={fitCoordinates}
+            fitCoordinates={mapFitBounds}
           >
             {mapCircle ? (
               <Circle
@@ -93,19 +104,23 @@ function SearchPage() {
                 }}
               />
             ) : null}
-            {/*{polygonsEnabled*/}
-            {/*  ? polygons.map((p, i) => (*/}
-            {/*      <Polyline*/}
-            {/*        path={p.getPath()}*/}
-            {/*        key={i}*/}
-            {/*        options={{*/}
-            {/*          strokeColor: theme.palette.primary.main,*/}
-            {/*        }}*/}
-            {/*      />*/}
-            {/*    ))*/}
-            {/*  : null}*/}
-            {mapResults.map((res, i) => (
-              <Marker key={i} position={res.coordinates} />
+            {selectedPlace && (
+              <InfoWindow
+                position={selectedPlace.coordinates}
+                options={{
+                  pixelOffset: new window.google.maps.Size(0, -30),
+                }}
+                onCloseClick={() => setSelectedPlace(null)}
+              >
+                <div>{selectedPlace.title}</div>
+              </InfoWindow>
+            )}
+            {placesCoordinates.map((res, i) => (
+              <Marker
+                key={i}
+                position={res}
+                onClick={() => handleClickMarker(res.id)}
+              />
             ))}
           </Map>
         </Box>
@@ -115,7 +130,7 @@ function SearchPage() {
           fontWeight={700}
           component={"h1"}
         >
-          Найдено мест: {pagination.totalResults}
+          {t("placesFound")}: {pagination.totalResults}
         </Typography>
         <Stack alignItems={"center"} justifyContent={"center"}>
           <Stack
@@ -130,31 +145,36 @@ function SearchPage() {
             rowGap={{ xs: "2em", md: "3em" }}
             columnGap={{ xs: "1em", sm: "2em", md: "2.5em", xl: "2.3em" }}
           >
-            {fakePlaces.map((place, index) => (
+            {loading &&
+              [1, 2, 3, 4].map((place, index) => (
+                <PlaceCardSkeleton key={index} />
+              ))}
+            {places.map((place, index) => (
               <PlaceCard place={place} key={index} />
-            ))}
-            {[1, 2, 3, 4].map((place, index) => (
-              <PlaceCardSkeleton key={index} />
             ))}
           </Stack>
         </Stack>
-        <Stack
-          direction={"row"}
-          justifyContent={"center"}
-          mt={"3em"}
-          mb={"6em"}
-        >
-          <Pagination
-            sx={{
-              borderColor: "black",
-            }}
-            page={pagination.currentPage}
-            count={pagination.totalPages}
-            color="primary"
-            variant="outlined"
-            shape="rounded"
-          />
-        </Stack>
+        {pagination.totalResults > 0 ? (
+          <Stack
+            direction={"row"}
+            justifyContent={"center"}
+            mt={"3em"}
+            mb={"6em"}
+          >
+            <Pagination
+              sx={{
+                borderColor: "black",
+              }}
+              page={pagination.currentPage}
+              count={pagination.totalPages}
+              color="primary"
+              variant="outlined"
+              shape="rounded"
+            />
+          </Stack>
+        ) : (
+          <Box mb={"6em"} />
+        )}
       </WrappedContainer>
     </Fragment>
   );

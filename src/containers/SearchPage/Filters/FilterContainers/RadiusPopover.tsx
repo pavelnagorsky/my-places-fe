@@ -4,7 +4,6 @@ import {
   IconButton,
   InputAdornment,
   Popover,
-  Slider,
   Stack,
   SxProps,
   TextField,
@@ -12,29 +11,26 @@ import {
 } from "@mui/material";
 import usePopover from "@/hooks/usePopover";
 import ClearIcon from "@mui/icons-material/Clear";
-import {
-  CheckboxElement,
-  TextFieldElement,
-  useFormContext,
-} from "react-hook-form-mui";
+import { useFormContext } from "react-hook-form-mui";
 import { Button } from "@/components/UI/Button/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
 import { ISearchForm } from "@/hoc/WithSearch";
+import RadiusFilter from "@/containers/SearchPage/Filters/RadiusFilter";
+import { useTranslation } from "next-i18next";
 
 interface IRadiusSelectProps {
-  readonly maxValue: number;
   inputSx?: SxProps;
   startText: string;
   triggerSubmit: () => void;
 }
 
 export function RadiusPopover({
-  maxValue,
   inputSx,
   startText,
   triggerSubmit,
 }: IRadiusSelectProps) {
+  const { t } = useTranslation("searchPage");
   const popover = usePopover("radius-popover");
   const preventIconClick = (e: any) => {
     e.preventDefault();
@@ -43,24 +39,14 @@ export function RadiusPopover({
 
   const form = useFormContext<ISearchForm>();
 
-  const radius = form.watch("radius");
-
   const onSubmit = () => {
-    triggerSubmit();
     popover.handleClose();
+    triggerSubmit();
   };
 
   const formatSelectedOptions = () => {
     const value = form.getValues("radius");
-    return `${startText} (${value} км)`;
-  };
-
-  function valueText(value: number) {
-    return `${value} km`;
-  }
-
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    if (typeof newValue === "number") form.setValue("radius", newValue);
+    return `${startText} (${value} ${t("filters.km")})`;
   };
 
   const onClear = () => {
@@ -78,66 +64,13 @@ export function RadiusPopover({
         mb={"0.8em"}
       >
         <Typography fontSize={"18px"} component={"p"}>
-          Радиус поиска локации
+          {t("filters.searchRadiusLocation")}
         </Typography>
         <IconButton onClick={popover.handleClose}>
           <ClearIcon />
         </IconButton>
       </Stack>
-      <Stack
-        direction={"row"}
-        gap={"1em"}
-        mb={"0.5em"}
-        alignItems={"flex-start"}
-      >
-        <Box sx={{ width: "100%" }}>
-          <Slider
-            value={typeof radius === "number" ? radius : 0}
-            onChange={handleSliderChange}
-            aria-label="search-distance"
-            getAriaValueText={valueText}
-            step={10}
-            max={maxValue}
-            valueLabelDisplay="auto"
-          />
-        </Box>
-        <TextFieldElement
-          type={"number"}
-          name={"radius"}
-          variant={"standard"}
-          sx={{
-            maxWidth: "5em",
-          }}
-          InputProps={{
-            size: "small",
-            endAdornment: <InputAdornment position="end">км</InputAdornment>,
-          }}
-          onChange={(event) => {
-            const isNumber =
-              event.target.value.length > 0 &&
-              typeof +event.target.value === "number";
-            form.setValue("radius", isNumber ? +event.target.value : 1);
-          }}
-          inputProps={{
-            inputMode: "numeric",
-            step: 10,
-            max: maxValue,
-            "aria-labelledby": "search-distance",
-          }}
-        />
-      </Stack>
-      <Stack
-        direction={"row"}
-        justifyContent={"center"}
-        sx={{ "& label": { ml: 0 } }}
-      >
-        <CheckboxElement
-          sx={{ color: "primary.light" }}
-          inputProps={{ "aria-label": "Search by me enabled" }}
-          name={"searchByMe"}
-          label={"Поиск от моего местоположения"}
-        />
-      </Stack>
+      <RadiusFilter />
       <Divider
         variant={"middle"}
         sx={{ borderColor: primaryBackground, height: "0.5px" }}
@@ -150,7 +83,7 @@ export function RadiusPopover({
         justifyContent={"space-between"}
       >
         <Button sx={{ fontWeight: 400, color: primaryColor }} onClick={onClear}>
-          Очистить
+          {t("filters.clear")}
         </Button>
         <Button
           sx={{ fontWeight: 400, color: "white" }}
@@ -158,7 +91,7 @@ export function RadiusPopover({
           type={"submit"}
           onClick={onSubmit}
         >
-          Применить
+          {t("filters.apply")}
         </Button>
       </Stack>
     </Box>

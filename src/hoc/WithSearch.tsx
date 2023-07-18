@@ -10,6 +10,7 @@ export interface ISearchForm {
   search: string | null;
   locationTitle: string;
   locationInputValue: string;
+  showMap: boolean;
 }
 
 const WithSearch = ({ children }: PropsWithChildren) => {
@@ -24,6 +25,7 @@ const WithSearch = ({ children }: PropsWithChildren) => {
       search: null,
       locationTitle: "",
       locationInputValue: "",
+      showMap: false,
     },
   });
 
