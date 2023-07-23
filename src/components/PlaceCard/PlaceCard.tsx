@@ -6,7 +6,6 @@ import {
   Divider,
   Stack,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -15,6 +14,7 @@ import CastleOutlinedIcon from "@mui/icons-material/CastleOutlined";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import Image from "next/image";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
+import { memo } from "react";
 
 interface IPlaceCardProps {
   place: ISearchPlace;
@@ -164,4 +164,4 @@ function PlaceCard({ place }: IPlaceCardProps) {
   );
 }
 
-export default PlaceCard;
+export default memo(PlaceCard);

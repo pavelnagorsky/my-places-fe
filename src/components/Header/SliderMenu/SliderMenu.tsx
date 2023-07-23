@@ -19,7 +19,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 
 import NextMuiLink from "@/components/NextMuiLink/NextMuiLink";
 import { routerLinks } from "@/staticData/routerLinks";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import { useRouter } from "next/router";
 
 interface ISliderMenuProps extends PopoverProps {

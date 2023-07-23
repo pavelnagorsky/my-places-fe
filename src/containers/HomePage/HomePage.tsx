@@ -13,7 +13,7 @@ import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
 const HomePage = () => {
   const { t } = useTranslation("homePage");
   return (
-    <Box>
+    <Box display={"block"}>
       <WrappedContainer>
         <TextAndMainImage
           textShadow

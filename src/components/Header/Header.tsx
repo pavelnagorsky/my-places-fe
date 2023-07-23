@@ -44,7 +44,10 @@ const Header = () => {
             direction={"row"}
             sx={{ display: { xs: "none", md: "flex" }, columnGap: "0.5em" }}
           >
-            <HeaderLink to={routerLinks.create} pathname={router.pathname}>
+            <HeaderLink
+              to={routerLinks.createReview}
+              pathname={router.pathname}
+            >
               {t("links.create")}
             </HeaderLink>
             <HeaderLink to={routerLinks.search} pathname={router.pathname}>

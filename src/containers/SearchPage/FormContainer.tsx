@@ -5,7 +5,7 @@ import { IPlaceType } from "@/services/place-types-service/place-type.interface"
 import { useTranslation } from "next-i18next";
 import placeTypesService from "@/services/place-types-service/place-types.service";
 import { RadiusPopover } from "@/containers/SearchPage/Filters/FilterContainers/RadiusPopover";
-import { Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Stack } from "@mui/material";
 import LocationPopover from "@/containers/SearchPage/Filters/FilterContainers/LocationPopover";
 import { SwitchElement, useFormContext } from "react-hook-form-mui";
 import { ISearchForm } from "@/hoc/WithSearch";
@@ -16,13 +16,12 @@ import {
   selectCurrentPage,
 } from "@/store/search-results-slice/search-results.slice";
 import MobileFiltersPopover from "@/containers/SearchPage/Filters/FilterContainers/MobileFiltersPopover";
+import Media from "@/hoc/Media/Media";
 
 const ITEMS_PER_PAGE = 9;
 
 function FormContainer() {
   const { t, i18n } = useTranslation("searchPage");
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [types, setTypes] = useState<IPlaceType[]>([]);
   const form = useFormContext<ISearchForm>();
   const currentPage = useAppSelector(selectCurrentPage);
@@ -68,7 +67,7 @@ function FormContainer() {
 
   return (
     <Box py={"1.6em"}>
-      {isMobile ? (
+      <Media sm={"none"}>
         <Stack
           direction={"row"}
           gap={"1em"}
@@ -89,7 +88,8 @@ function FormContainer() {
             labelPlacement={"top"}
           />
         </Stack>
-      ) : (
+      </Media>
+      <Media xs={"none"} sm={"block"}>
         <Stack direction={"row"} gap={"3em"} justifyContent={"space-between"}>
           <LocationPopover
             triggerSubmit={search}
@@ -106,7 +106,7 @@ function FormContainer() {
             startText={t("filters.filters")}
           />
         </Stack>
-      )}
+      </Media>
     </Box>
   );
 }

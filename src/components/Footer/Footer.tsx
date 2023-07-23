@@ -1,10 +1,4 @@
-import {
-  Stack,
-  SxProps,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Stack, SxProps, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 
@@ -14,6 +8,7 @@ import MyLink from "@/components/NextMuiLink/NextMuiLink";
 import { memo } from "react";
 import { routerLinks } from "@/staticData/routerLinks";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
+import Media from "@/hoc/Media/Media";
 
 const linkSx: SxProps = {
   fontSize: "14px",
@@ -29,18 +24,18 @@ const linkSx: SxProps = {
 
 const Footer = () => {
   const { t } = useTranslation("common");
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const linksSection = (
-    <Stack direction={"row"} gap={"3em"}>
-      <MyLink href={routerLinks.contactUs} sx={linkSx}>
-        {t("links.contactUs")}
-      </MyLink>
-      <MyLink href={routerLinks.aboutUs} sx={linkSx}>
-        {t("links.about")}
-      </MyLink>
-    </Stack>
+    <Media xs={"none"} md={"block"}>
+      <Stack direction={"row"} gap={"3em"}>
+        <MyLink href={routerLinks.contactUs} sx={linkSx}>
+          {t("links.contactUs")}
+        </MyLink>
+        <MyLink href={routerLinks.aboutUs} sx={linkSx}>
+          {t("links.about")}
+        </MyLink>
+      </Stack>
+    </Media>
   );
 
   const footerText = (
@@ -60,14 +55,14 @@ const Footer = () => {
   return (
     <WrappedContainer>
       <Stack
-        gap={isMobile ? "1.5em" : undefined}
+        gap={{ xs: "1.5em", md: 0 }}
         direction={"row"}
         alignItems={"center"}
         justifyContent={{ xs: "start", md: "space-between" }}
         mb={"2em"}
       >
-        {isMobile ? null : linksSection}
-        <Logo small={isMobile} />
+        {linksSection}
+        <Logo small />
         {footerText}
       </Stack>
     </WrappedContainer>

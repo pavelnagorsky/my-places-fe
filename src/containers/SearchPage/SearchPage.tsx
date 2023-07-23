@@ -26,6 +26,7 @@ import {
 } from "@/store/search-results-slice/search-results.slice";
 import { useTranslation } from "next-i18next";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
+import PlaceCardMap from "@/components/PlaceCard/PlaceCardMap";
 
 function SearchPage() {
   const { t } = useTranslation("searchPage");
@@ -42,7 +43,9 @@ function SearchPage() {
   const handleClickMarker = (placeId: number) => {
     const place = places.find((p) => p.id === placeId);
     if (!place) return;
-    setSelectedPlace(place);
+    // close and open again to prevent Google Maps bug of not displaying info window
+    setSelectedPlace(null);
+    setTimeout(() => setSelectedPlace(place), 100);
   };
 
   const form = useFormContext<ISearchForm>();
@@ -108,11 +111,12 @@ function SearchPage() {
               <InfoWindow
                 position={selectedPlace.coordinates}
                 options={{
+                  ariaLabel: "selected place",
                   pixelOffset: new window.google.maps.Size(0, -30),
                 }}
                 onCloseClick={() => setSelectedPlace(null)}
               >
-                <div>{selectedPlace.title}</div>
+                <PlaceCardMap place={selectedPlace} />
               </InfoWindow>
             )}
             {placesCoordinates.map((res, i) => (
@@ -130,7 +134,9 @@ function SearchPage() {
           fontWeight={700}
           component={"h1"}
         >
-          {t("placesFound")}: {pagination.totalResults}
+          {!loading && places.length === 0
+            ? t("noResults")
+            : `${t("placesFound")}: ${pagination.totalResults}`}
         </Typography>
         <Stack alignItems={"center"} justifyContent={"center"}>
           <Stack

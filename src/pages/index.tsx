@@ -12,11 +12,13 @@ import TextAndMainImage from "@/components/TextAndImage/TextAndMainImage";
 import TextAndImage from "@/components/TextAndImage/TextAndImage";
 import TextWithBubbles from "@/components/TextAndImage/TextWithBubbles";
 import BoxWithCircles from "@/components/UI/BoxWithCircles/BoxWithCircles";
-import HomePage from "@/containers/HomePage/HomePage";
 import I18nLanguages from "@/shared/I18nLanguages";
+import dynamic from "next/dynamic";
+
+const HomePageLazy = dynamic(() => import("../containers/HomePage/HomePage"));
 
 const Index: NextPage = () => {
-  return <HomePage />;
+  return <HomePageLazy />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {

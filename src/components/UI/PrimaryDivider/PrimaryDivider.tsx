@@ -1,4 +1,4 @@
-import { Box, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 
 function PrimaryDivider({ reverse }: { reverse?: boolean }) {
   return (

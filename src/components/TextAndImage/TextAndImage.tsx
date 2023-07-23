@@ -63,7 +63,9 @@ function TextAndImage({
       </Grid>
       <Grid item xs={showImageMobile ? 12 : 0} md={6}>
         <Box
-          component={Image}
+          // component={Image}
+          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          position={"relative"}
           sx={{
             display: {
               xs: showImageMobile ? "block" : "none",
@@ -79,9 +81,17 @@ function TextAndImage({
             maxHeight: "320px",
             minHeight: { xs: "220px", md: "320px" },
           }}
-          src={image}
-          alt={title}
-        />
+          // src={image}
+          // alt={title}
+        >
+          <Image
+            src={image}
+            alt={title}
+            style={{ borderRadius: "inherit" }}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </Box>
       </Grid>
     </Grid>
   );
