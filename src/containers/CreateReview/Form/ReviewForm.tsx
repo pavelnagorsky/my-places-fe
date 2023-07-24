@@ -6,6 +6,7 @@ import { Button } from "@/components/UI/Button/Button";
 import MyStepper from "@/components/UI/Stepper/MyStepper";
 import { TextFieldElement } from "react-hook-form-mui";
 import backgroundImage from "/public/images/create-review-page/background.jpg";
+import ImageUploader from "@/components/Forms/ImageUploader/ImageUploader";
 
 const ReviewForm = () => {
   return (
@@ -66,6 +67,7 @@ const ReviewForm = () => {
             Загрузите до 10 фотографий, сделанных на этой локации в формате jpg,
             jpeg, png.
           </Typography>
+          <ImageUploader fieldName={"imagesIds"} />
         </Box>
       </WrappedContainer>
       <Box sx={{ backgroundImage: `url(${backgroundImage.src})` }} mb={"2em"}>

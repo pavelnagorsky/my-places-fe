@@ -4,7 +4,13 @@ import { FormProvider, useForm } from "react-hook-form-mui";
 import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
 
 const CreateReview = () => {
-  const form = useForm<IReviewFormContext>({});
+  const form = useForm<IReviewFormContext>({
+    defaultValues: {
+      imagesIds: [],
+      title: "",
+      description: "",
+    },
+  });
 
   return (
     <Fragment>
