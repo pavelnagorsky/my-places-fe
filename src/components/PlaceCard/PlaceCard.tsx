@@ -26,8 +26,8 @@ function PlaceCard({ place }: IPlaceCardProps) {
   return (
     <Card
       sx={{
-        width: { xs: "345px", md: "374px" },
-        height: { xs: "517px", md: "568px" },
+        width: { xs: "330px", md: "374px" },
+        height: { xs: "510px", md: "565px" },
         borderRadius: "10px",
         boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
       }}
@@ -46,7 +46,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
             style={{ objectFit: "cover" }}
             fill
             priority
-            sizes="(max-width: 900px) 345px, 374px"
+            sizes="(max-width: 900px) 330px, 374px"
             src={place.image}
             alt={place.title}
           />
@@ -74,7 +74,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
           <Typography
             mb="1em"
             fontWeight={300}
-            height={"37px"}
+            height={"34px"}
             overflow={"hidden"}
             textOverflow={"ellipsis"}
             variant="body2"

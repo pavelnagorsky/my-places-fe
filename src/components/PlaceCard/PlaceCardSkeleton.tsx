@@ -12,8 +12,8 @@ function PlaceCardSkeleton() {
   return (
     <Card
       sx={{
-        width: { xs: "345px", md: "374px" },
-        height: { xs: "517px", md: "568px" },
+        width: { xs: "330px", md: "374px" },
+        height: { xs: "510px", md: "565px" },
         borderRadius: "10px",
         boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
         "& .MuiSkeleton-root": {

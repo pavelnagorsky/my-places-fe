@@ -7,6 +7,7 @@ import MyStepper from "@/components/UI/Stepper/MyStepper";
 import { TextFieldElement } from "react-hook-form-mui";
 import backgroundImage from "/public/images/create-review-page/background.jpg";
 import ImageUploader from "@/components/Forms/ImageUploader/ImageUploader";
+import TextEditor from "@/components/Forms/TextEditor/TextEditor";
 
 const ReviewForm = () => {
   return (
@@ -67,12 +68,14 @@ const ReviewForm = () => {
             Загрузите до 10 фотографий, сделанных на этой локации в формате jpg,
             jpeg, png.
           </Typography>
-          <ImageUploader fieldName={"imagesIds"} />
+          <Box my={"2em"}>
+            <ImageUploader fieldName={"imagesIds"} />
+          </Box>
         </Box>
       </WrappedContainer>
       <Box sx={{ backgroundImage: `url(${backgroundImage.src})` }} mb={"2em"}>
         <WrappedContainer bgColor={"transparent"}>
-          <Box py={{ xs: "1.5em", md: "2em" }}>
+          <Box py={{ xs: "1.5em", md: "2em" }} maxWidth={734}>
             <MyStepper totalOptions={3} activeOption={3} />
             <Typography
               component={"h2"}
@@ -89,11 +92,16 @@ const ReviewForm = () => {
               sx={{
                 mt: "1em",
                 bgcolor: "white",
+                width: "100%",
               }}
               name={"title"}
               validation={{ required: true }}
               placeholder={"Введите заголовок..."}
             />
+            <Typography variant={"body2"} my={"1em"}>
+              Текст заметки:
+            </Typography>
+            <TextEditor fieldName={"description"} />
           </Box>
         </WrappedContainer>
       </Box>

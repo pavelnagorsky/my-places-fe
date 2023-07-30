@@ -50,7 +50,7 @@ const ImageUploader = ({ fieldName }: { fieldName: string }) => {
 
   return (
     <SortableList onSortEnd={onSortEnd} draggedItemClassName="dragged">
-      <Stack direction={"row"} flexWrap={"wrap"} gap={"2em"}>
+      <Stack direction={"row"} flexWrap={"wrap"} gap={{ xs: "1em", md: "2em" }}>
         <label htmlFor="file-input">
           <Button
             disabled={loading}
@@ -61,8 +61,8 @@ const ImageUploader = ({ fieldName }: { fieldName: string }) => {
               ":hover": {
                 bgcolor: "primary.light",
               },
-              width: { xs: "160px", md: "170px" },
-              height: { xs: "160px", md: "170px" },
+              width: { xs: "150px", md: "170px" },
+              height: { xs: "150px", md: "170px" },
               bgcolor: primaryBackground,
               borderRadius: "15px",
               boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",

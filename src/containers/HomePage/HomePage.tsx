@@ -9,6 +9,7 @@ import card2Image from "public/images/home-page/card2.jpg";
 import BoxWithCircles from "@/components/UI/BoxWithCircles/BoxWithCircles";
 import TextWithBubbles from "@/components/TextAndImage/TextWithBubbles";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
+import { routerLinks } from "@/staticData/routerLinks";
 
 const HomePage = () => {
   const { t } = useTranslation("homePage");
@@ -27,7 +28,7 @@ const HomePage = () => {
           title={t("card1.title")}
           description={t("card1.description")}
           btnText={t("card1.link")}
-          linkTo={"/search"}
+          linkTo={routerLinks.search}
           showImageMobile
           image={card1Image}
         />
@@ -37,7 +38,7 @@ const HomePage = () => {
           title={t("card2.title")}
           description={t("card2.description")}
           btnText={t("card2.link")}
-          linkTo={"/create"}
+          linkTo={routerLinks.createReview}
           showImageMobile
           image={card2Image}
         />

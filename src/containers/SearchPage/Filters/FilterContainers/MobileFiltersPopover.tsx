@@ -87,7 +87,7 @@ const MobileFiltersPopover = ({
         mb={"0.5em"}
       >
         <Typography fontSize={"18px"} mb={"1em"} component={"p"}>
-          {t("filters.selectPlace")}s
+          {t("filters.selectPlace")}
         </Typography>
         <IconButton onClick={popover.handleClose}>
           <ClearIcon />
@@ -102,7 +102,7 @@ const MobileFiltersPopover = ({
       />
 
       <Typography fontSize={"18px"} mb={"1em"} component={"p"}>
-        {t("filters.searchByRadius")}
+        {t("filters.searchRadius")}
       </Typography>
       <RadiusFilter searchByMeSx={{ justifyContent: "start", mt: "-0.5em" }} />
 

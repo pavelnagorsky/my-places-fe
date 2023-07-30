@@ -27,6 +27,7 @@ import {
 import { useTranslation } from "next-i18next";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import PlaceCardMap from "@/components/PlaceCard/PlaceCardMap";
+import { fakePlaces } from "@/components/PlaceCard/fakeData";
 
 function SearchPage() {
   const { t } = useTranslation("searchPage");
@@ -83,14 +84,14 @@ function SearchPage() {
       <ScrollToTopButton />
       <Box bgcolor={primaryBackground}>
         <WrappedContainer
-          wrapperSx={{ px: { xs: "1em", md: "3em", lg: "7.5em" } }}
+          wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
           bgColor={primaryBackground}
         >
           <FormContainer />
         </WrappedContainer>
       </Box>
       <WrappedContainer
-        wrapperSx={{ px: { xs: "1em", md: "3em", lg: "7.5em" } }}
+        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
       >
         <Box mt={"2.5em"} display={!showMap && isMobile ? "none" : "block"}>
           <Map
@@ -141,8 +142,8 @@ function SearchPage() {
         <Stack alignItems={"center"} justifyContent={"center"}>
           <Stack
             width={{
-              xs: "345px",
-              sm: "730px",
+              xs: "330px",
+              sm: "700px",
               md: "790px",
               xl: "100%",
             }}

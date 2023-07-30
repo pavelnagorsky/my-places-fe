@@ -15,8 +15,8 @@ const ImagePreview = ({
     <Box
       position={"relative"}
       sx={{
-        width: { xs: "160px", md: "170px" },
-        height: { xs: "160px", md: "170px" },
+        width: { xs: "150px", md: "170px" },
+        height: { xs: "150px", md: "170px" },
         borderRadius: "15px",
         boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
         pointerEvents: "none",
