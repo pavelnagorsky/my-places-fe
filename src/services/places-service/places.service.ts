@@ -6,10 +6,19 @@ import {
   ISearchPlacesRequest,
   ISearchPlacesResponse,
 } from "@/services/places-service/interfaces";
+import ISelectPlace from "@/services/places-service/select-place.interface";
 
 const placesService = {
-  getAllPlaces: (langId: number) => {
+  getAllPlaces: (lang: string) => {
+    const langId = parseLanguageToId(lang);
     return axiosInstance.get<ISearchPlace[]>(`/places?lang=${langId}`);
+  },
+
+  getPlacesSelect: (lang: string, search: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.get<ISelectPlace[]>(
+      `/places/select?lang=${langId}&search=${search}`
+    );
   },
 
   search: (payload: ISearchPlacesRequest) => {

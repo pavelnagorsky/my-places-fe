@@ -3,7 +3,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import { memo } from "react";
 import { Controller, useFormContext } from "react-hook-form-mui";
-import { styled } from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 
 const modules = {
   toolbar: [
@@ -33,7 +33,7 @@ const StyledEditor = styled("div")(({ theme }) => ({
   "& .ql-container.ql-snow": {
     fontSize: "16px",
     fontFamily: "inherit",
-    minHeight: "400px",
+    minHeight: "390px",
     borderRadius: "0 0 15px 15px",
     borderColor: theme.palette.primary.main,
     borderWidth: "2px",
@@ -42,29 +42,45 @@ const StyledEditor = styled("div")(({ theme }) => ({
 }));
 
 const TextEditor = ({ fieldName }: { fieldName: string }) => {
-  const { setValue, watch } = useFormContext();
-  const value = watch(fieldName);
-  const onChange = (val: string) => {
-    setValue(fieldName, val);
-  };
+  const { setValue } = useFormContext();
 
-  console.log(value);
   return (
-    <Controller
-      name={fieldName}
-      render={() => (
-        <StyledEditor>
-          <ReactQuill
-            theme="snow"
-            value={value}
-            onChange={onChange}
-            className="editor-input"
-            modules={modules}
-            placeholder="Enter text"
-          />
-        </StyledEditor>
-      )}
-    />
+    <Box>
+      <Controller
+        name={fieldName}
+        render={({ field, fieldState, formState }) => (
+          <StyledEditor>
+            <ReactQuill
+              theme="snow"
+              value={field.value}
+              onChange={(val: string, delta: any, source: any, editor: any) => {
+                field.onChange(val);
+                const contentLength = editor.getLength();
+                setValue("_textEditorContentLength", contentLength - 1);
+              }}
+              className="editor-input"
+              modules={modules}
+              placeholder="Введите текст заметки"
+            />
+          </StyledEditor>
+        )}
+      />
+      <Controller
+        rules={{
+          min: 1,
+          max: 4000,
+          required: true,
+        }}
+        render={({ field, fieldState, formState }) => {
+          return (
+            <Typography variant={"body2"} mt={"0.5em"} sx={{ float: "right" }}>
+              {field.value || 0} / 4000
+            </Typography>
+          );
+        }}
+        name={"_textEditorContentLength"}
+      />
+    </Box>
   );
 };
 

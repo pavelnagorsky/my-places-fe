@@ -5,12 +5,12 @@ import { Box } from "@mui/material";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <Fragment>
-      <Box minHeight={"calc(100vh - 90px)"}>
+    <Box display={"flex"} flexDirection={"column"}>
+      <Box flexGrow={1}>
         <Header />
         <main>{children}</main>
       </Box>
       <Footer />
-    </Fragment>
+    </Box>
   );
 }

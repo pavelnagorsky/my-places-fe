@@ -14,7 +14,7 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { defaultCountrySign } from "../../../components/Map/Map";
 import { useGoogleAutocompleteService } from "@/hooks/useGoogleAutocompleteService";
-import { useTranslation } from "next-i18next";
+import { i18n, useTranslation } from "next-i18next";
 import { useCoordinatesByPlaceId } from "@/hooks/useCoordinatesByPlaceId";
 import SearchIcon from "@mui/icons-material/Search";
 import { TextFieldElement, useFormContext } from "react-hook-form-mui";
@@ -108,6 +108,7 @@ function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
     fetch(
       {
         input: inputValue,
+        language: i18n?.language,
         componentRestrictions: { country: defaultCountrySign },
       },
       (results?: readonly PlaceType[]) => {

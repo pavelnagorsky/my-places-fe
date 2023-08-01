@@ -1,5 +1,5 @@
 import { ChangeEvent, Fragment, memo, useRef, useState } from "react";
-import SortableList, { SortableItem } from "react-easy-sort";
+import { SortableItem } from "react-easy-sort";
 import { useFieldArray, useFormContext } from "react-hook-form-mui";
 import { IImage } from "@/services/file-service/image.interface";
 import { Box, Button, CircularProgress, Input, Stack } from "@mui/material";
@@ -8,6 +8,9 @@ import Image from "next/image";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import fileService from "@/services/file-service/file.service";
 import ImagePreview from "@/components/Forms/ImageUploader/ImagePreview";
+import dynamic from "next/dynamic";
+
+const SortableList = dynamic(() => import("react-easy-sort"), { ssr: false });
 
 const ImageUploader = ({ fieldName }: { fieldName: string }) => {
   const [loading, setLoading] = useState(false);
