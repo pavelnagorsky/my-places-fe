@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <Box display={"flex"} flexDirection={"column"}>
+    <Box height={"100vh"} display={"flex"} flexDirection={"column"}>
       <Box flexGrow={1}>
         <Header />
         <main>{children}</main>

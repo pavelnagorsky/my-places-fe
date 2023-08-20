@@ -1,4 +1,3 @@
-import ReviewForm from "@/containers/CreateReview/Form/ReviewForm";
 import { Fragment } from "react";
 import {
   FormContainer,
@@ -6,22 +5,23 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form-mui";
-import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
+import { IPlaceFormContext } from "@/containers/CreatePlace/Form/interfaces";
+import PlaceForm from "@/containers/CreatePlace/Form/PlaceForm";
 
-const CreateReview = () => {
-  const form = useForm<IReviewFormContext>({
+const CreatePlace = () => {
+  const form = useForm<IPlaceFormContext>({
     defaultValues: {
       imagesIds: [],
       title: "",
       description: "",
-      place: null,
+      categoriesIds: [],
     },
     mode: "onChange",
     shouldFocusError: true,
     shouldUseNativeValidation: false,
   });
 
-  const onSubmit: SubmitHandler<IReviewFormContext> = (data) => {
+  const onSubmit: SubmitHandler<IPlaceFormContext> = (data) => {
     console.log(data);
   };
 
@@ -29,11 +29,11 @@ const CreateReview = () => {
     <Fragment>
       <FormProvider {...form}>
         <FormContainer formContext={form} onSuccess={onSubmit}>
-          <ReviewForm />
+          <PlaceForm />
         </FormContainer>
       </FormProvider>
     </Fragment>
   );
 };
 
-export default CreateReview;
+export default CreatePlace;

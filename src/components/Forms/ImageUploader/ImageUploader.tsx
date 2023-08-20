@@ -9,6 +9,7 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 import fileService from "@/services/file-service/file.service";
 import ImagePreview from "@/components/Forms/ImageUploader/ImagePreview";
 import dynamic from "next/dynamic";
+import { AxiosResponse } from "axios";
 
 const SortableList = dynamic(() => import("react-easy-sort"), { ssr: false });
 
@@ -29,25 +30,22 @@ const ImageUploader = ({ fieldName }: { fieldName: string }) => {
 
   const handleUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || event.target.files?.length === 0) return;
-    const promises: Promise<any>[] = [];
+    const promises: Promise<AxiosResponse<IImage, any>>[] = [];
     for (let i = 0; i <= event.target.files.length; i++) {
       if (!event.target.files[i]) break;
-      promises.push(
-        fileService
-          .uploadImage(event.target.files[i])
-          .then(({ data }) => {
-            append(data);
-          })
-          .catch(() => {})
-      );
-      setLoading(true);
-      Promise.all(promises)
-        .then(() => setLoading(false))
-        .catch(() => setLoading(false));
+      promises.push(fileService.uploadImage(event.target.files[i]));
     }
+    setLoading(true);
+    Promise.all(promises)
+      .then((array) => {
+        append(array.map((res) => res.data));
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   };
 
   const handleDelete = (index: number) => {
+    fileService.deleteImage(fields[index]?.id).catch(() => {});
     remove(index);
   };
 

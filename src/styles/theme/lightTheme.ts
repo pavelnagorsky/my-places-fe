@@ -39,6 +39,7 @@ const lightTheme = createTheme({
       primary: "#303030",
       secondary: "#565656",
     },
+    divider: "rgba(0, 0, 0, 0.12)",
   },
   typography: {
     allVariants: {

@@ -12,6 +12,7 @@ import PlaceSelect from "@/containers/CreateReview/Form/PlaceSelect/PlaceSelect"
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { routerLinks } from "@/staticData/routerLinks";
 
 interface IReviewFormProps {
   // onSubmit: () => void;
@@ -72,6 +73,7 @@ const ReviewForm = ({}: IReviewFormProps) => {
                   py: "1em",
                   fontSize: { xs: "14px", sm: "16px" },
                 }}
+                linkTo={routerLinks.createPlace}
               >
                 Новое место
               </Button>

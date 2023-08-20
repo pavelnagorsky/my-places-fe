@@ -58,7 +58,7 @@ const Footer = () => {
         gap={{ xs: "1.5em", md: 0 }}
         direction={"row"}
         alignItems={"center"}
-        justifyContent={{ xs: "start", md: "space-between" }}
+        justifyContent={"space-between"}
         mb={"2em"}
       >
         {linksSection}

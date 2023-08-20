@@ -11,6 +11,10 @@ const fileService = {
       },
     });
   },
+
+  deleteImage: (id: number) => {
+    return axiosInstance.delete(`/images/${id}`);
+  },
 };
 
 export default fileService;

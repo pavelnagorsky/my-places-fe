@@ -5,4 +5,5 @@ export const routerLinks = {
   aboutCountry: "/country",
   contactUs: "/contact-us",
   createReview: "/create-review",
+  createPlace: "/create-place",
 };

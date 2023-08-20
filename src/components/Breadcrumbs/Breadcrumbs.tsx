@@ -3,7 +3,7 @@ import NextMuiLink from "@/components/NextMuiLink/NextMuiLink";
 import { useRouter } from "next/router";
 import { memo } from "react";
 
-type routesNames = "create-review";
+type routesNames = "create-review" | "create-place";
 
 const Breadcrumbs = () => {
   const router = useRouter();
@@ -12,6 +12,7 @@ const Breadcrumbs = () => {
   // possible pathnames
   const breadcrumbNameMap = {
     ["create-review"]: "Создание заметки",
+    ["create-place"]: "Создание места",
   };
 
   return (
