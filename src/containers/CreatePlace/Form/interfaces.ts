@@ -6,5 +6,6 @@ export interface IPlaceFormContext {
   placeTypeId: number;
   categoriesIds: number[];
   coordinates: string;
+  address: string;
   website?: string;
 }

@@ -1,14 +1,35 @@
 import { Fragment, memo } from "react";
-import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import {
+  IconButton,
+  InputAdornment,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { TextFieldElement } from "react-hook-form-mui";
+import { FieldValues, TextFieldElement, Validate } from "react-hook-form-mui";
+import regExp from "@/shared/regExp";
+import PublicIcon from "@mui/icons-material/Public";
+import placesService from "@/services/places-service/places.service";
 
 const Tab1 = () => {
+  const validateSlug: Validate<string, FieldValues> = (value, formValues) => {
+    return placesService
+      .validateSlug(value)
+      .then((res) => {
+        return true;
+      })
+      .catch(() => {
+        return "Данная ссылка уже занята";
+      });
+  };
+
   return (
     <Fragment>
       <Stack direction={"row"} gap={"0.5em"}>
         <Typography
           component={"h2"}
+          fontWeight={{ xs: 500, md: 400 }}
           fontSize={{ xs: "20px", md: "30px" }}
           my={{ xs: "0.5em", md: "0.4em" }}
         >
@@ -33,8 +54,15 @@ const Tab1 = () => {
           </IconButton>
         </Tooltip>
       </Stack>
-      <Typography variant={"body2"} fontSize={{ md: "20px" }}>
+      <Typography variant={"body2"} fontSize={{ xs: "18px", md: "20px" }}>
         Введите название и опишите место, в котором вы побывали.
+      </Typography>
+      <Typography
+        variant={"body1"}
+        mt="1em"
+        fontSize={{ xs: "18px", md: "20px" }}
+      >
+        Название:
       </Typography>
       <TextFieldElement
         sx={{
@@ -50,7 +78,11 @@ const Tab1 = () => {
         }}
         placeholder={"Введите название..."}
       />
-      <Typography variant={"body2"} mt={"1em"} fontSize={{ md: "20px" }}>
+      <Typography
+        variant={"body1"}
+        mt={"1em"}
+        fontSize={{ xs: "18px", md: "20px" }}
+      >
         Краткое описание:
       </Typography>
       <TextFieldElement
@@ -85,6 +117,92 @@ const Tab1 = () => {
         <InfoOutlinedIcon fontSize={"small"} />
         Максимальная длина - 300 символов
       </Stack>
+      <Typography
+        variant={"body1"}
+        mt={"1.5em"}
+        fontSize={{ xs: "18px", md: "20px" }}
+      >
+        Общедоступная ссылка
+      </Typography>
+      <Typography variant={"body2"} mt={"0.5em"} fontSize={{ md: "16px" }}>
+        Данная ссылка будет отображаться на поисковой странице сайта и видна
+        другим пользователям
+      </Typography>
+      <TextFieldElement
+        sx={{
+          mt: "1em",
+          "& input": { bgcolor: "white", borderRadius: "15px" },
+          width: "100%",
+          fontSize: { md: "20px" },
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position={"end"}>
+              https://my-places.by/
+            </InputAdornment>
+          ),
+        }}
+        name={"slug"}
+        validation={{
+          validate: validateSlug,
+          required: "Это поле обязательно к заполнению",
+          pattern: {
+            value: regExp.slugPattern,
+            message: "Введено некорректное значение",
+          },
+        }}
+        placeholder={"crevo-castle"}
+      />
+      <Stack
+        mt={"0.3em"}
+        color={"secondary.main"}
+        fontSize={14}
+        sx={{
+          fontWeight: 300,
+          opacity: 0.8,
+        }}
+        display={"flex"}
+        direction={"row"}
+        alignItems={"center"}
+        gap={"0.5em"}
+      >
+        <InfoOutlinedIcon fontSize={"small"} />
+        Ссылка должна состоять из символов латинского алфавита и знаков тире
+      </Stack>
+      <Typography
+        variant={"body1"}
+        mt={"1.5em"}
+        fontSize={{ xs: "18px", md: "20px" }}
+      >
+        Сайт достопримечательности
+      </Typography>
+      <Typography variant={"body2"} mt={"0.5em"} fontSize={{ md: "16px" }}>
+        Укажите сайт данного места или достопримечательности (необязательно)
+      </Typography>
+      <TextFieldElement
+        sx={{
+          mt: "1em",
+          mb: "2.5em",
+          "& input": { bgcolor: "white", borderRadius: "15px" },
+          width: "100%",
+          fontSize: { md: "20px" },
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position={"start"}>
+              <PublicIcon />
+            </InputAdornment>
+          ),
+        }}
+        name={"website"}
+        validation={{
+          pattern: {
+            value: regExp.urlPattern,
+            message: "Введено некорректное значение",
+          },
+        }}
+        placeholder={"https://example.com"}
+      />
     </Fragment>
   );
 };

@@ -1,11 +1,9 @@
 import {
-  Box,
   Button,
   Divider,
   MenuItem,
   Popover,
   PopoverProps,
-  Popper,
   Select,
   SelectChangeEvent,
   Stack,
@@ -16,11 +14,9 @@ import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import LanguageIcon from "@mui/icons-material/Language";
-
-import NextMuiLink from "@/components/NextMuiLink/NextMuiLink";
 import { routerLinks } from "@/staticData/routerLinks";
-import { ReactElement } from "react";
 import { useRouter } from "next/router";
+import SliderMenuLink from "@/components/Header/SliderMenu/SliderMenuLink";
 
 interface ISliderMenuProps extends PopoverProps {
   onClose: () => void;
@@ -138,57 +134,6 @@ const SliderMenu = ({
         </Stack>
       </Stack>
     </Popover>
-  );
-};
-
-interface ISliderMenuLinkProps {
-  text: string;
-  href: string;
-  pathname: string;
-  icon: ReactElement;
-  onClick: () => void;
-}
-
-const SliderMenuLink = ({
-  icon,
-  text,
-  href,
-  pathname,
-  onClick,
-}: ISliderMenuLinkProps) => {
-  return (
-    <Stack
-      direction={"row"}
-      width={"100%"}
-      alignItems={"center"}
-      onClick={onClick}
-    >
-      <Box
-        sx={{
-          "& a": {
-            p: "0.5em",
-            color: "secondary.main",
-            "& .active": {
-              color: "primary.main",
-            },
-            "&:hover": {
-              color: "primary.main",
-            },
-          },
-        }}
-      >
-        <NextMuiLink
-          display={"flex"}
-          alignItems={"center"}
-          columnGap={"0.5em"}
-          href={href}
-          className={pathname === href ? "active" : ""}
-        >
-          {icon}
-          <Typography>{text}</Typography>
-        </NextMuiLink>
-      </Box>
-    </Stack>
   );
 };
 

@@ -11,7 +11,9 @@ import { ISearchPlacesRequest } from "@/services/places-service/interfaces";
 import placesService from "@/services/places-service/places.service";
 import { IPagination } from "@/services/interfaces";
 
-interface ISearchResultsState {
+export interface ISearchResultsState {
+  // need to prevent reloading of ssr results
+  canRefresh: boolean;
   error: boolean;
   loading: boolean;
   places: ISearchPlace[];
@@ -25,6 +27,7 @@ const initialPagination: IPagination = {
 };
 
 const initialState: ISearchResultsState = {
+  canRefresh: false,
   error: false,
   loading: true,
   places: [],
@@ -46,11 +49,21 @@ export const searchResultsSlice = createSlice({
     setCurrentPage: (state, { payload }: PayloadAction<number>) => {
       state.pagination.currentPage = payload;
     },
+    setInitialState: (
+      state,
+      { payload }: PayloadAction<ISearchResultsState>
+    ) => {
+      state.places = payload.places;
+      state.loading = payload.loading;
+      state.error = payload.error;
+      state.pagination = payload.pagination;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(performSearchThunk.pending, (state, action) => {
       state.error = false;
       state.loading = true;
+      state.places = [];
     });
     builder.addCase(performSearchThunk.fulfilled, (state, action) => {
       state.places = action.payload.data;
@@ -60,6 +73,7 @@ export const searchResultsSlice = createSlice({
         currentPage: action.payload.currentPage,
       };
       state.loading = false;
+      state.canRefresh = true;
     });
     builder.addCase(performSearchThunk.rejected, (state, action) => {
       state.places = [];
@@ -90,7 +104,11 @@ export const selectCurrentPage = createSelector(
   selectPagination,
   (s) => s.currentPage
 );
+export const selectCanRefresh = createSelector(
+  selectSearchResultsState,
+  (s) => s.canRefresh
+);
 
-export const { setCurrentPage } = searchResultsSlice.actions;
+export const { setCurrentPage, setInitialState } = searchResultsSlice.actions;
 
 export default searchResultsSlice.reducer;

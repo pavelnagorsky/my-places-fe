@@ -16,7 +16,7 @@ const CreateReview = () => {
       description: "",
       place: null,
     },
-    mode: "onChange",
+    mode: "onBlur",
     shouldFocusError: true,
     shouldUseNativeValidation: false,
   });

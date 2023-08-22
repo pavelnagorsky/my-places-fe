@@ -1,4 +1,15 @@
-import { Box, IconButton, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  ClickAwayListener,
+  Grow,
+  IconButton,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+  Stack,
+} from "@mui/material";
 
 import { Logo } from "../Logo/Logo";
 
@@ -6,12 +17,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { HeaderLink } from "./HeaderLink/HeaderLink";
 import { useTranslation } from "next-i18next";
-import { memo } from "react";
+import { memo, useRef, useState } from "react";
 import { routerLinks } from "@/staticData/routerLinks";
 import { useHeaderMenu } from "@/components/Header/SliderMenu/useHeaderMenu";
 import SliderMenu from "@/components/Header/SliderMenu/SliderMenu";
 import { useRouter } from "next/router";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
+import CreateMenu from "@/components/Header/CreateMenu/CreateMenu";
 
 const Header = () => {
   const { t } = useTranslation("common");
@@ -44,12 +56,7 @@ const Header = () => {
             direction={"row"}
             sx={{ display: { xs: "none", md: "flex" }, columnGap: "0.5em" }}
           >
-            <HeaderLink
-              to={routerLinks.createReview}
-              pathname={router.pathname}
-            >
-              {t("links.create")}
-            </HeaderLink>
+            <CreateMenu activePath={router.pathname} />
             <HeaderLink to={routerLinks.search} pathname={router.pathname}>
               {t("links.search")}
             </HeaderLink>

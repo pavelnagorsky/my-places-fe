@@ -13,12 +13,12 @@ import { ISearchPlacesRequest } from "@/services/places-service/interfaces";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   performSearchThunk,
+  selectCanRefresh,
   selectCurrentPage,
 } from "@/store/search-results-slice/search-results.slice";
 import MobileFiltersPopover from "@/containers/SearchPage/Filters/FilterContainers/MobileFiltersPopover";
 import Media from "@/hoc/Media/Media";
-
-const ITEMS_PER_PAGE = 9;
+import placesService from "@/services/places-service/places.service";
 
 function FormContainer() {
   const { t, i18n } = useTranslation("searchPage");
@@ -26,8 +26,10 @@ function FormContainer() {
   const form = useFormContext<ISearchForm>();
   const currentPage = useAppSelector(selectCurrentPage);
   const dispatch = useAppDispatch();
+  const canRefresh = useAppSelector(selectCanRefresh);
 
   useEffect(() => {
+    if (!canRefresh) return;
     search();
   }, [i18n.language, currentPage]);
 
@@ -38,7 +40,7 @@ function FormContainer() {
         searchCoordinates: data.search,
         radius: data.radius,
         language: i18n.language,
-        itemsPerPage: ITEMS_PER_PAGE,
+        itemsPerPage: placesService.ITEMS_PER_PAGE,
         typesIds: data.types.concat(data.typesCommercial),
         title: data.title,
         pageToReturn: currentPage,

@@ -8,6 +8,8 @@ import TabPanel from "@/containers/CreatePlace/Form/Tabs/TabPannel";
 import dynamic from "next/dynamic";
 import Tab1 from "@/containers/CreatePlace/Form/Tabs/Tab1";
 import Tab3 from "@/containers/CreatePlace/Form/Tabs/Tab3";
+import Tab2 from "@/containers/CreatePlace/Form/Tabs/Tab2";
+import useCreatePlaceMeta from "@/containers/CreatePlace/Form/useCreatePlaceMeta";
 
 const Navigation = dynamic(
   () => import("@/containers/CreatePlace/Form/Navigation"),
@@ -16,6 +18,7 @@ const Navigation = dynamic(
 
 const PlaceForm = () => {
   const { formState } = useFormContext<IPlaceFormContext>();
+  const createPlaceMeta = useCreatePlaceMeta();
 
   const [activeTab, setActiveTab] = useState(0);
   const handleChangeTab = (event: SyntheticEvent, newValue: number) => {
@@ -52,7 +55,10 @@ const PlaceForm = () => {
               <Tab1 />
             </TabPanel>
             <TabPanel value={activeTab} index={1}>
-              Item Two
+              <Tab2
+                categories={createPlaceMeta.categories}
+                placeTypes={createPlaceMeta.placeTypes}
+              />
             </TabPanel>
             <TabPanel value={activeTab} index={2}>
               <Tab3 />

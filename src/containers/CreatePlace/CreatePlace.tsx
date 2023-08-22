@@ -16,7 +16,7 @@ const CreatePlace = () => {
       description: "",
       categoriesIds: [],
     },
-    mode: "onChange",
+    mode: "onBlur",
     shouldFocusError: true,
     shouldUseNativeValidation: false,
   });

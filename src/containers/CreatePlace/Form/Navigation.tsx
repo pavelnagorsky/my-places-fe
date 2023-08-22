@@ -10,7 +10,7 @@ function a11yProps(index: number) {
       textAlign: "start",
       fontSize: { xs: "14px", md: "20px" },
       color: "secondary.main",
-      fontWeight: 300,
+      fontWeight: { xs: 500, md: 300 },
       alignItems: "start",
     },
   };
@@ -43,7 +43,6 @@ const Navigation = ({ activeTab, handleChange }: INavigationProps) => {
           ".MuiTabs-scrollButtons.Mui-disabled": {
             opacity: 0.3,
           },
-
           flexDirection: "row",
           justifyContent: "flex-start",
           borderColor: "rgba(0, 0, 0, 0.12) !important",

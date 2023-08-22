@@ -1,16 +1,14 @@
 {
-
-  "logo": "Know your land",
+  "logo": "know your land",
   "links": {
     "contactUs": "Обратная связь",
     "create": "Создать",
+    "create-place": "Создать место",
+    "create-review": "Создать заметку",
     "search": "Поиск",
     "about": "О проекте"
   },
   "footer": {
     "title": "Мы на связи с вами!"
-  },
-  "header": {
-
   }
 }
