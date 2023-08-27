@@ -52,9 +52,9 @@ const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
         }}
         sx={{
           mt: "1em",
+          width: { xs: "100%", md: "50%" },
         }}
         options={placeTypes.map((opt) => ({ id: opt.id, label: opt.title }))}
-        fullWidth
         placeholder={"Выберите тип места..."}
       />
       <Typography
@@ -70,7 +70,7 @@ const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
       <Box
         width={"100%"}
         mt={"1em"}
-        mb="2.5em"
+        mb="3em"
         sx={{
           "& .MuiFormControl-root": {
             width: "100%",

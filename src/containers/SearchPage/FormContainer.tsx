@@ -13,7 +13,6 @@ import { ISearchPlacesRequest } from "@/services/places-service/interfaces";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   performSearchThunk,
-  selectCanRefresh,
   selectCurrentPage,
 } from "@/store/search-results-slice/search-results.slice";
 import MobileFiltersPopover from "@/containers/SearchPage/Filters/FilterContainers/MobileFiltersPopover";
@@ -26,16 +25,13 @@ function FormContainer() {
   const form = useFormContext<ISearchForm>();
   const currentPage = useAppSelector(selectCurrentPage);
   const dispatch = useAppDispatch();
-  const canRefresh = useAppSelector(selectCanRefresh);
 
   useEffect(() => {
-    if (!canRefresh) return;
-    search();
-  }, [i18n.language, currentPage]);
+    search(false);
+  }, [currentPage, i18n.language]);
 
-  const search = () => {
+  const search = (fromStart = true) => {
     form.handleSubmit((data) => {
-      console.log(data);
       const payload: ISearchPlacesRequest = {
         searchCoordinates: data.search,
         radius: data.radius,
@@ -43,7 +39,7 @@ function FormContainer() {
         itemsPerPage: placesService.ITEMS_PER_PAGE,
         typesIds: data.types.concat(data.typesCommercial),
         title: data.title,
-        pageToReturn: currentPage,
+        pageToReturn: fromStart ? 1 : currentPage,
       };
       dispatch(performSearchThunk(payload));
     })();

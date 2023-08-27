@@ -1,15 +1,9 @@
 {
-  "seo": {
-    "metaTitle": "",
-    "metaDescription": "",
-    "metaTags": ""
-  },
   "placesFound": "Найдено мест",
   "noResults": "К сожалению, по вашему запросу ничего не найдено.",
-  "pagination": {
-    "of": "из",
-    "results": "результатов"
-  },
+  "metaTitle": "",
+  "metaDescription": "",
+  "metaTags": "",
   "filters": {
     "filters": "Фильтры",
     "map": "Карта",

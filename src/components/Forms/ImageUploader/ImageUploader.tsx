@@ -1,8 +1,15 @@
-import { ChangeEvent, Fragment, memo, useRef, useState } from "react";
+import { ChangeEvent, memo, useRef, useState } from "react";
 import { SortableItem } from "react-easy-sort";
 import { useFieldArray, useFormContext } from "react-hook-form-mui";
 import { IImage } from "@/services/file-service/image.interface";
-import { Box, Button, CircularProgress, Input, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  FormHelperText,
+  Input,
+  Stack,
+} from "@mui/material";
 import uploadIcon from "/public/images/icons/upload.png";
 import Image from "next/image";
 import { primaryBackground } from "@/styles/theme/lightTheme";
@@ -13,13 +20,33 @@ import { AxiosResponse } from "axios";
 
 const SortableList = dynamic(() => import("react-easy-sort"), { ssr: false });
 
-const ImageUploader = ({ fieldName }: { fieldName: string }) => {
+interface IImageUploaderProps {
+  fieldName: string;
+  required?: boolean;
+  maxLimit?: number;
+}
+
+const ImageUploader = ({
+  fieldName,
+  maxLimit,
+  required,
+}: IImageUploaderProps) => {
   const [loading, setLoading] = useState(false);
-  const { control } = useFormContext<{ [T in typeof fieldName]: IImage[] }>();
+  const { control, formState } =
+    useFormContext<{ [T in typeof fieldName]: IImage[] }>();
   const { fields, move, append, remove } = useFieldArray({
     control: control,
     name: fieldName,
     keyName: "key",
+    rules: {
+      required: required ? "Это поле обязательно к заполнению" : undefined,
+      maxLength: maxLimit
+        ? {
+            value: maxLimit,
+            message: `Превышено максимальное количество изображений`,
+          }
+        : undefined,
+    },
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -113,6 +140,11 @@ const ImageUploader = ({ fieldName }: { fieldName: string }) => {
           </SortableItem>
         ))}
       </Stack>
+      {formState.errors[fieldName] && (
+        <FormHelperText error sx={{ mt: "1.5em" }}>
+          {formState.errors[fieldName]?.root?.message}
+        </FormHelperText>
+      )}
     </SortableList>
   );
 };

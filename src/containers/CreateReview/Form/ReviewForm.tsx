@@ -96,7 +96,7 @@ const ReviewForm = ({}: IReviewFormProps) => {
             jpeg, png.
           </Typography>
           <Box my={"2em"}>
-            <ImageUploader fieldName={"imagesIds"} />
+            <ImageUploader fieldName={"images"} />
           </Box>
         </Box>
       </WrappedContainer>

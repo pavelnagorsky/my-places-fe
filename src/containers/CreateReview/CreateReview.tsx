@@ -11,12 +11,12 @@ import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
 const CreateReview = () => {
   const form = useForm<IReviewFormContext>({
     defaultValues: {
-      imagesIds: [],
+      images: [],
       title: "",
       description: "",
       place: null,
     },
-    mode: "onBlur",
+    mode: "onChange",
     shouldFocusError: true,
     shouldUseNativeValidation: false,
   });

@@ -7,10 +7,10 @@ const place1: ISearchPlace = {
   slug: "krevskiy-zamok",
 
   // Place title
-  title: "Кревский замок",
+  title: "Кревский замок Кревский замок Кревский замок",
 
   description:
-    "Кревский замок - старинный памятник архитектуры Беларуси. Он является одним из первых замков Великого княжества Литовского. На данный момент всё ещё в стадии реставрации.",
+    "Кревский замок - старинный памятник архитектуры Беларуси. им из первых замков Великого княжества Литовского.",
 
   // Likes count
   likesCount: 25,
@@ -20,7 +20,7 @@ const place1: ISearchPlace = {
 
   // Place address
   address:
-    "Гродненская область, Сморгонский район, Кревский сельсовет, агрогородок Крево Гродненская область, Сморгонский район, Кревский сельсовет, агрогородок Крево",
+    "Гродненская область, Сморгонский район, Кревский сельсовет, агрогородок Крево Гродненская область, Сморгонский район, Кревский сельсовет, агрогородок Крево агрогородок Крево",
 
   // Place type
   type: {
@@ -51,7 +51,7 @@ const place1: ISearchPlace = {
 
   // Place image
   image:
-    "https://www.holiday.by/files/sights/thumbnails/sights_gallery_fullsize/krevo_zamok_aed28ba4d0afd1acb9bed4fd343a283e669-orig.jpg",
+    "https://storage.googleapis.com/my-places-bucket-1/images/Acid_terror_keller-1693056164136.png",
 
   // Place coordinates {lat;lng}
   coordinates: {
@@ -91,8 +91,7 @@ const place2: ISearchPlace = {
   viewsCount: 145,
 
   // Place address
-  address:
-    "Гродненская область, Сморгонский район, Кревский сельсовет, агрогородок Крево",
+  address: "Гродненская область, ",
 
   // Place type
   type: {
@@ -123,7 +122,7 @@ const place2: ISearchPlace = {
 
   // Place image
   image:
-    "https://www.holiday.by/files/sights/thumbnails/sights_gallery_fullsize/krevo_zamok_aed28ba4d0afd1acb9bed4fd343a283e669-orig.jpg",
+    "https://storage.googleapis.com/my-places-bucket-1/images/Acid_terror_keller-1693056164136.png",
 
   // Place coordinates {lat;lng}
   coordinates: {
@@ -154,7 +153,7 @@ const place3: ISearchPlace = {
   title: "Кревский замок 3",
 
   description:
-    "Кревский замок - старинный памятник архитектуры Беларуси. Он является одним из первых замков Великого княжества Литовского. На данный момент всё ещё в стадии реставрации.",
+    "Кревский замок - старинный памятник архитектуры Беларуси. Он является одним из первых замков Великого княжества Литовского. На данный момент всё ещё в стадии реставрации. Кревский замок - старинный памятник архитектуры Беларуси. Он является одним из первых замков Великого княжества Литовского.",
 
   // Likes count
   likesCount: 25,
@@ -195,7 +194,7 @@ const place3: ISearchPlace = {
 
   // Place image
   image:
-    "https://www.holiday.by/files/sights/thumbnails/sights_gallery_fullsize/krevo_zamok_aed28ba4d0afd1acb9bed4fd343a283e669-orig.jpg",
+    "https://storage.googleapis.com/my-places-bucket-1/images/Acid_terror_keller-1693056164136.png",
 
   // Place coordinates {lat;lng}
   coordinates: {

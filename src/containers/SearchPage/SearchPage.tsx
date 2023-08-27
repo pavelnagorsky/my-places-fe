@@ -1,14 +1,7 @@
 import Map, { ILatLngCoordinate } from "../../components/Map/Map";
 import { Circle, InfoWindow, Marker } from "@react-google-maps/api";
 import { Fragment, useMemo, useState } from "react";
-import {
-  Box,
-  Pagination,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import FormContainer from "@/containers/SearchPage/FormContainer";
 import PlaceCard from "@/components/PlaceCard/PlaceCard";
 import { primaryBackground } from "@/styles/theme/lightTheme";
@@ -27,7 +20,7 @@ import {
 import { useTranslation } from "next-i18next";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import PlaceCardMap from "@/components/PlaceCard/PlaceCardMap";
-import { fakePlaces } from "@/components/PlaceCard/fakeData";
+import SearchPagination from "@/containers/SearchPage/SearchPagination";
 
 function SearchPage() {
   const { t } = useTranslation("searchPage");
@@ -161,27 +154,7 @@ function SearchPage() {
             ))}
           </Stack>
         </Stack>
-        {pagination.totalResults > 0 ? (
-          <Stack
-            direction={"row"}
-            justifyContent={"center"}
-            mt={"3em"}
-            mb={"6em"}
-          >
-            <Pagination
-              sx={{
-                borderColor: "black",
-              }}
-              page={pagination.currentPage}
-              count={pagination.totalPages}
-              color="primary"
-              variant="outlined"
-              shape="rounded"
-            />
-          </Stack>
-        ) : (
-          <Box mb={"6em"} />
-        )}
+        <SearchPagination {...pagination} currentResultsCount={places.length} />
       </WrappedContainer>
     </Fragment>
   );

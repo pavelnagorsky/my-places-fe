@@ -17,8 +17,8 @@ const Tab3 = () => {
         Загрузите до 10 фотографий, сделанных на этой локации в формате jpg,
         jpeg, png.
       </Typography>
-      <Box my={"2em"}>
-        <ImageUploader fieldName={"imagesIds"} />
+      <Box mt={"2em"} mb={"3em"}>
+        <ImageUploader required maxLimit={10} fieldName={"images"} />
       </Box>
     </Fragment>
   );

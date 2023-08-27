@@ -1,5 +1,12 @@
-import { Fragment, memo } from "react";
-import { Box, InputAdornment, Slider, Stack, SxProps } from "@mui/material";
+import { Fragment, memo, useState } from "react";
+import {
+  Box,
+  CircularProgress,
+  InputAdornment,
+  Slider,
+  Stack,
+  SxProps,
+} from "@mui/material";
 import {
   CheckboxElement,
   TextFieldElement,
@@ -14,6 +21,7 @@ interface IRadiusFilterProps {
 
 const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
   const { t } = useTranslation("searchPage");
+  const [loading, setLoading] = useState(false);
   const form = useFormContext<ISearchForm>();
 
   const radius = form.watch("radius");
@@ -30,14 +38,17 @@ const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
       form.setValue("searchByMe", false);
       return;
     }
+    setLoading(true);
     geolocationAPI.getCurrentPosition(
       ({ coords }) => {
         form.setValue("search", `${coords.latitude};${coords.longitude}`);
         form.setValue("searchByMe", true);
+        setLoading(false);
       },
       (error) => {
         console.log(error.message);
         form.setValue("searchByMe", false);
+        setLoading(false);
       }
     );
   };
@@ -98,7 +109,7 @@ const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
       </Stack>
       <Stack
         direction={"row"}
-        justifyContent={"center"}
+        justifyContent={"start"}
         sx={{ "& label": { ml: 0 }, ...searchByMeSx }}
       >
         <CheckboxElement
@@ -106,7 +117,9 @@ const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
           sx={{ color: "primary.light" }}
           inputProps={{ "aria-label": "Search by me enabled" }}
           name={"searchByMe"}
-          label={t("filters.searchByMe")}
+          label={
+            loading ? <CircularProgress size={30} /> : t("filters.searchByMe")
+          }
         />
       </Stack>
     </Fragment>

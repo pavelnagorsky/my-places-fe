@@ -1,28 +1,41 @@
-import { Fragment, memo } from "react";
+import { Fragment, memo, useMemo } from "react";
 import {
+  debounce,
   IconButton,
   InputAdornment,
   Stack,
   Tooltip,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { FieldValues, TextFieldElement, Validate } from "react-hook-form-mui";
+import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import regExp from "@/shared/regExp";
 import PublicIcon from "@mui/icons-material/Public";
 import placesService from "@/services/places-service/places.service";
+import { Environment } from "@/shared/Environment";
+import { IPlaceFormContext } from "@/containers/CreatePlace/Form/interfaces";
 
 const Tab1 = () => {
-  const validateSlug: Validate<string, FieldValues> = (value, formValues) => {
-    return placesService
-      .validateSlug(value)
-      .then((res) => {
-        return true;
-      })
-      .catch(() => {
-        return "Данная ссылка уже занята";
-      });
-  };
+  const { setError } = useFormContext<IPlaceFormContext>();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const validateSlug = useMemo(
+    () =>
+      debounce((value: string) => {
+        return placesService
+          .validateSlug(value)
+          .then((res) => {
+            return true;
+          })
+          .catch(() => {
+            setError("slug", { message: "Данная ссылка уже занята" });
+          });
+      }, 300),
+    []
+  );
 
   return (
     <Fragment>
@@ -93,7 +106,8 @@ const Tab1 = () => {
           fontSize: { md: "20px" },
         }}
         multiline
-        rows={4}
+        // rows={4}
+        minRows={4}
         name={"description"}
         validation={{
           required: "Это поле обязательно к заполнению",
@@ -138,13 +152,13 @@ const Tab1 = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position={"end"}>
-              https://my-places.by/
+              {isMobile ? "places/" : `https://${Environment.domain}/places/`}
             </InputAdornment>
           ),
         }}
         name={"slug"}
+        onChange={(event) => validateSlug(event.target.value)}
         validation={{
-          validate: validateSlug,
           required: "Это поле обязательно к заполнению",
           pattern: {
             value: regExp.slugPattern,
@@ -182,7 +196,7 @@ const Tab1 = () => {
       <TextFieldElement
         sx={{
           mt: "1em",
-          mb: "2.5em",
+          mb: "3em",
           "& input": { bgcolor: "white", borderRadius: "15px" },
           width: "100%",
           fontSize: { md: "20px" },

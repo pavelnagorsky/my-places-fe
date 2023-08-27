@@ -63,6 +63,7 @@ const CreateMenu = ({ activePath }: { activePath: string }) => {
         sx={{
           zIndex: 1,
         }}
+        placement="auto-end"
         open={menu.createMenuOpen}
         anchorEl={menu.createMenuAnchorRef.current}
         role={undefined}

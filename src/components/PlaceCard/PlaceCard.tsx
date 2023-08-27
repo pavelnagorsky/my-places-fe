@@ -71,30 +71,36 @@ function PlaceCard({ place }: IPlaceCardProps) {
           >
             {place.title}
           </Typography>
-          <Typography
-            mb="1em"
-            fontWeight={300}
-            height={"34px"}
+          <Stack
             overflow={"hidden"}
-            textOverflow={"ellipsis"}
-            variant="body2"
-            fontSize={{ xs: "13px", md: "14px" }}
-            display={"flex"}
-            alignItems={"flex-start"}
+            direction={"row"}
+            alignItems={"center"}
             gap={"0.5em"}
-            align={"justify"}
+            mb="1em"
+            height={{ xs: "33px", md: "35px" }}
           >
             <PlaceOutlinedIcon
               sx={{ ml: "-0.1em", color: secondaryLightColor }}
             />
-            {place.address}
-          </Typography>
+            <Typography
+              fontWeight={300}
+              overflow={"hidden"}
+              maxHeight={{ xs: "33px", md: "35px" }}
+              textOverflow={"ellipsis"}
+              variant="body2"
+              fontSize={{ xs: "13px", md: "14px" }}
+              align={"justify"}
+            >
+              {place.address}
+            </Typography>
+          </Stack>
           <Typography
             variant="body2"
             lineHeight={"135%"}
             fontSize={{ xs: "13px", md: "14px" }}
             align={"justify"}
-            height={"95px"}
+            my={{ xs: "16px", md: 0 }}
+            height={{ xs: "88px", md: "95px" }}
             textOverflow={"ellipsis"}
             overflow={"hidden"}
           >
@@ -116,8 +122,8 @@ function PlaceCard({ place }: IPlaceCardProps) {
           <Divider variant={"middle"} />
           <Stack
             direction={"row"}
-            mt="1.4em"
-            mb="0.2em"
+            mt="1.3em"
+            mb="0.3em"
             alignItems={"center"}
             gap={"0.5em"}
           >

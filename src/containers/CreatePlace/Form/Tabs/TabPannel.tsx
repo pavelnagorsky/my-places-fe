@@ -1,5 +1,5 @@
-import { Box, Typography } from "@mui/material";
 import { Fragment, ReactNode } from "react";
+import { Box } from "@mui/material";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -11,14 +11,15 @@ const TabPanel = (props: TabPanelProps) => {
   const { children, value, index } = props;
 
   return (
-    <div
+    <Box
       role="tabpanel"
       hidden={value !== index}
+      //display={value !== index ? "none" : "block"}
       id={`place-tabpanel-${index}`}
       aria-labelledby={`place-tab-${index}`}
     >
-      {value === index && <Fragment>{children}</Fragment>}
-    </div>
+      <Fragment>{children}</Fragment>
+    </Box>
   );
 };
 
