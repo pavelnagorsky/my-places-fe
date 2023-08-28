@@ -14,11 +14,11 @@ const Tab3 = () => {
         Фотографии
       </Typography>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        Загрузите до 10 фотографий, сделанных на этой локации в формате jpg,
+        Загрузите до 5 фотографий, сделанных на этой локации в формате jpg,
         jpeg, png.
       </Typography>
       <Box mt={"2em"} mb={"3em"}>
-        <ImageUploader required maxLimit={10} fieldName={"images"} />
+        <ImageUploader required maxLimit={5} fieldName={"images"} />
       </Box>
     </Fragment>
   );

@@ -26,7 +26,7 @@ const Tab1 = () => {
     () =>
       debounce((value: string) => {
         return placesService
-          .validateSlug(value)
+          .validateSlug({ slug: value })
           .then((res) => {
             return true;
           })
@@ -111,7 +111,7 @@ const Tab1 = () => {
         name={"description"}
         validation={{
           required: "Это поле обязательно к заполнению",
-          maxLength: { value: 300, message: "Превышен лимит в 300 символов" },
+          maxLength: { value: 600, message: "Превышен лимит в 300 символов" },
         }}
         placeholder={"Введите краткое описание..."}
       />
@@ -129,7 +129,7 @@ const Tab1 = () => {
         gap={"0.5em"}
       >
         <InfoOutlinedIcon fontSize={"small"} />
-        Максимальная длина - 300 символов
+        Максимальная длина - 600 символов
       </Stack>
       <Typography
         variant={"body1"}

@@ -10,7 +10,6 @@ import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import { ISearchPlacesRequest } from "@/services/places-service/interfaces";
 import placesService from "@/services/places-service/places.service";
 import { IPagination } from "@/services/interfaces";
-import { fakePlaces } from "@/components/PlaceCard/fakeData";
 
 export interface ISearchResultsState {
   error: boolean;

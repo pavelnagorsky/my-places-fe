@@ -21,11 +21,9 @@ const Navigation = dynamic(
 
 interface IPlaceFormProps {
   loading: boolean;
-  error: boolean;
-  errorMessage?: string;
 }
 
-const PlaceForm = ({ loading, error, errorMessage }: IPlaceFormProps) => {
+const PlaceForm = ({ loading }: IPlaceFormProps) => {
   const { formState, watch } = useFormContext<IPlaceFormContext>();
   const createPlaceMeta = useCreatePlaceMeta();
   const watchTitle = watch("title");

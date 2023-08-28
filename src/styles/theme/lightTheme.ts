@@ -32,9 +32,6 @@ const lightTheme = createTheme({
       main: "#565656",
       contrastText: "#303030",
     },
-    error: {
-      main: "#FD6B0C",
-    },
     text: {
       primary: "#303030",
       secondary: "#565656",

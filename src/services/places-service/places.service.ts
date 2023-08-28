@@ -8,6 +8,7 @@ import {
 } from "@/services/places-service/interfaces";
 import ISelectPlace from "@/services/places-service/select-place.interface";
 import { ICreatePlace } from "@/services/places-service/create-place.interface";
+import { ICreateSlug } from "@/services/places-service/create-slug.interface";
 
 const placesService = {
   ITEMS_PER_PAGE: 12,
@@ -36,10 +37,8 @@ const placesService = {
     return axiosInstance.get<IPlaceSlug[]>("/places/slugs");
   },
 
-  validateSlug: (slug: string) => {
-    return axiosInstance.post("/places/slugs/validate", {
-      slug: slug,
-    });
+  validateSlug: (slugDto: ICreateSlug) => {
+    return axiosInstance.post("/places/slugs/validate", slugDto);
   },
 
   createPlace: (payload: ICreatePlace, language: string) => {

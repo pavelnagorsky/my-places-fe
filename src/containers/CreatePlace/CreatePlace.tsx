@@ -10,12 +10,16 @@ import PlaceForm from "@/containers/CreatePlace/Form/PlaceForm";
 import { ICreatePlace } from "@/services/places-service/create-place.interface";
 import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
+import { useAppDispatch } from "@/store/hooks";
+import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
+import { useRouter } from "next/router";
+import { routerLinks } from "@/staticData/routerLinks";
 
 const CreatePlace = () => {
+  const router = useRouter();
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>();
+  const dispatch = useAppDispatch();
   const form = useForm<IPlaceFormContext>({
     defaultValues: {
       images: [],
@@ -28,10 +32,40 @@ const CreatePlace = () => {
     shouldUseNativeValidation: false,
   });
 
+  const handleShowError = () => {
+    dispatch(
+      showAlert({
+        alertProps: {
+          title: "Ошибка!",
+          description:
+            "Ошибка при создании места. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          variant: "standard",
+          severity: "error",
+        },
+        snackbarProps: {},
+      })
+    );
+  };
+
+  const handleShowSuccess = () => {
+    dispatch(
+      showAlert({
+        alertProps: {
+          title: "Успех!",
+          description:
+            "Место было создано и отправлено на модерацию. Вы сможете просмотреть его статус в личном кабинете",
+          variant: "standard",
+          severity: "success",
+        },
+        snackbarProps: {},
+      })
+    );
+  };
+
   const onSubmit: SubmitHandler<IPlaceFormContext> = (data) => {
     if (loading) return;
     setLoading(true);
-    setError(false);
+    dispatch(hideAlert());
 
     const createPlaceDto: ICreatePlace = {
       title: data.title,
@@ -49,13 +83,12 @@ const CreatePlace = () => {
       .createPlace(createPlaceDto, i18n.language)
       .then((res) => {
         setLoading(false);
+        handleShowSuccess();
+        router.push(routerLinks.createReview);
       })
       .catch((reason) => {
         setLoading(false);
-        setError(true);
-        setErrorMessage(
-          "Ошибка при создании места! Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки..."
-        );
+        handleShowError();
       });
   };
 
@@ -63,11 +96,7 @@ const CreatePlace = () => {
     <Fragment>
       <FormProvider {...form}>
         <FormContainer formContext={form} onSuccess={onSubmit}>
-          <PlaceForm
-            loading={loading}
-            error={error}
-            errorMessage={errorMessage}
-          />
+          <PlaceForm loading={loading} />
         </FormContainer>
       </FormProvider>
     </Fragment>
