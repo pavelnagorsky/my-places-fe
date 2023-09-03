@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, SxProps, Typography } from "@mui/material";
 import NextMuiLink from "@/components/NextMuiLink/NextMuiLink";
 
 interface ISliderMenuLinkProps {
@@ -8,6 +8,7 @@ interface ISliderMenuLinkProps {
   pathname: string;
   icon: ReactElement;
   onClick: () => void;
+  sx?: SxProps;
 }
 
 const SliderMenuLink = ({
@@ -16,6 +17,7 @@ const SliderMenuLink = ({
   href,
   pathname,
   onClick,
+  sx,
 }: ISliderMenuLinkProps) => {
   return (
     <Stack
@@ -23,8 +25,10 @@ const SliderMenuLink = ({
       width={"100%"}
       alignItems={"center"}
       onClick={onClick}
+      sx={sx}
     >
       <Box
+        width={"100%"}
         sx={{
           "& a": {
             p: "0.5em",
@@ -42,6 +46,7 @@ const SliderMenuLink = ({
           display={"flex"}
           alignItems={"center"}
           columnGap={"0.5em"}
+          width={"100%"}
           href={href}
           className={pathname === href ? "active" : ""}
         >

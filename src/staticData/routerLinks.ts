@@ -2,7 +2,7 @@ export const routerLinks = {
   home: "/",
   search: "/search",
   aboutUs: "/about",
-  aboutCountry: "/country",
+  photos: "/photos",
   contactUs: "/contact-us",
   createReview: "/create-review",
   createPlace: "/create-place",

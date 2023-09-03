@@ -76,7 +76,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
                   utils.isEmptyObject(formState.dirtyFields)
                 }
                 sx={{
-                  color: "white",
+                  fontWeight: 700,
                   py: "1em",
                   px: 0,
                   width: { xs: "230px", md: "210px" },

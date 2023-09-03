@@ -15,10 +15,11 @@ export function Button(props: PropsWithChildren & ButtonProps & IButtonProps) {
       component={props.linkTo !== undefined ? NextLink : "button"}
       href={props.linkTo}
       type={props.type}
+      size={props.size}
       onClick={props.onClick}
       disabled={props.disabled}
       sx={{
-        fontWeight: 700,
+        fontWeight: 500,
         fontSize: {
           xs: "16px",
           md: "16px",
@@ -29,7 +30,8 @@ export function Button(props: PropsWithChildren & ButtonProps & IButtonProps) {
         "&:hover": {
           borderWidth: "2px",
         },
-        color: "secondary.contrastText",
+        color:
+          props.variant !== "contained" ? "secondary.contrastText" : "white",
         py: "0.6em",
         px: "3em",
         ...props.sx,

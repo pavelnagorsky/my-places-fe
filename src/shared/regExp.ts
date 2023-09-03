@@ -4,6 +4,8 @@ const regExp = {
   numbers: /^\d+$/,
   passwordValidation: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
   slugPattern: /^[a-z0-9-]*$/,
+  email: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
 };
 
 export default regExp;

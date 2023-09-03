@@ -55,7 +55,11 @@ function TextAndImage({
         ) : null}
         <Typography variant="body2">{description}</Typography>
         <Button
-          sx={{ mt: 3.5, width: { xs: "100%", md: "initial" } }}
+          sx={{
+            mt: 3.5,
+            width: { xs: "100%", md: "initial" },
+            fontWeight: 700,
+          }}
           linkTo={linkTo}
         >
           {btnText}

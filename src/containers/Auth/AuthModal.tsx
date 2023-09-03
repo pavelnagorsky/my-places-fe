@@ -1,12 +1,62 @@
-import { Button } from "@/components/UI/Button/Button";
 import Dialog from "@mui/material/Dialog/Dialog";
-import DialogActions from "@mui/material/DialogActions/DialogActions";
 import DialogContent from "@mui/material/DialogContent/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle/DialogTitle";
 import Slide from "@mui/material/Slide/Slide";
 import { TransitionProps } from "@mui/material/transitions/transition";
-import { forwardRef, ReactElement, Ref, useState } from "react";
+import { forwardRef, ReactElement, Ref, SyntheticEvent, useState } from "react";
+import {
+  Box,
+  IconButton,
+  Stack,
+  SxProps,
+  Tab,
+  Tabs,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import TabPanel from "@/containers/Auth/Tabs/TabPannel";
+import Login from "@/containers/Auth/Tabs/Login";
+import CloseIcon from "@mui/icons-material/Close";
+import Signup from "@/containers/Auth/Tabs/Signup";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  ActiveAuthScreenEnum,
+  changeAuthScreen,
+  closeAuth,
+  selectAuthActiveScreen,
+  selectAuthOpen,
+} from "@/store/user-slice/user.slice";
+
+function a11yProps(index: number) {
+  return {
+    id: `auth-tab-${index}`,
+    "aria-controls": `auth-tabpanel-${index}`,
+    sx: {
+      fontSize: { xs: "16px", md: "18px" },
+      color: "secondary.main",
+      fontWeight: { xs: 600, md: 600 },
+    },
+  };
+}
+
+const scrollbarSx: SxProps = {
+  scrollbarWidth: "thin !important",
+  scrollbarColor: "#aeaeaeb8 rgba(0, 0, 0, 0.05)",
+  "&::-webkit-scrollbar-track": {
+    background: "rgba(0, 0, 0, 0.1);",
+  },
+  "&::-webkit-scrollbar": {
+    width: "4px",
+  },
+  /* Handle */
+  "&::-webkit-scrollbar-thumb": {
+    background: "#888",
+  },
+
+  /* Handle on hover */
+  "&::-webkit-scrollbar-thumb:hover": {
+    background: "#555",
+  },
+};
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -18,40 +68,94 @@ const Transition = forwardRef(function Transition(
 });
 
 const AuthModal = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const open = useAppSelector(selectAuthOpen);
+  const activeTab = useAppSelector(selectAuthActiveScreen);
+  const dispatch = useAppDispatch();
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch(closeAuth());
+  };
+
+  const handleChangeTab = (
+    event: SyntheticEvent,
+    newValue: ActiveAuthScreenEnum
+  ) => {
+    dispatch(changeAuthScreen(newValue));
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Slide in alert dialog
-      </Button>
       <Dialog
         scroll={"paper"}
         open={open}
+        fullScreen={isMobile}
+        PaperProps={{
+          sx: {
+            px: { sm: "2em" },
+            pb: { sm: "2em" },
+            minWidth: { sm: "520px" },
+            maxWidth: { sm: "520px" },
+            borderRadius: { sm: "15px" },
+            backdropFilter: "blur(15px)",
+            boxShadow:
+              "5px 5px 4px 0px rgba(255, 255, 255, 0.10) inset, -5px -5px 4px 0px rgba(255, 255, 255, 0.10) inset, 20px 30px 100px 0px rgba(0, 0, 0, 0.05)",
+            background:
+              "linear-gradient(135deg, #FFF 0%, rgba(255, 255, 255, 0.00) 100%, rgba(255, 255, 255, 0.20) 100%)",
+          },
+        }}
         TransitionComponent={Transition}
-        keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
+        <Stack
+          direction={"row"}
+          mt={{ xs: "0.5em", sm: "1.5em" }}
+          mb={{ xs: "0.5em", sm: "0.5em" }}
+          mr={{ xs: "1.5em", sm: "-0.5em" }}
+          alignItems={"center"}
+          justifyContent={"end"}
+        >
+          <IconButton
+            size={"small"}
+            onClick={handleClose}
+            sx={{ background: "RGBA(255, 255, 255, 0.47)" }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Stack>
+        <DialogContent
+          sx={{
+            pt: 0,
+            ...scrollbarSx,
+          }}
+        >
+          <Box sx={{ width: "100%", mb: "2em" }}>
+            <Tabs
+              value={activeTab}
+              onChange={handleChangeTab}
+              aria-label="auth tabs"
+              orientation={"horizontal"}
+              sx={{
+                width: "fit-content",
+                borderBottom: 1,
+                borderColor: "divider",
+              }}
+            >
+              <Tab label="Войти" {...a11yProps(0)} />
+              <Tab label="Зарегистрироваться" {...a11yProps(1)} />
+            </Tabs>
+          </Box>
+          <Box>
+            <TabPanel value={activeTab} index={0}>
+              <Login />
+            </TabPanel>
+            <TabPanel value={activeTab} index={1}>
+              <Signup />
+            </TabPanel>
+          </Box>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose}>Agree</Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

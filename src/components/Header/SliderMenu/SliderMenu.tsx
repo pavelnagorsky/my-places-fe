@@ -1,5 +1,4 @@
 import {
-  Button,
   Divider,
   MenuItem,
   Popover,
@@ -7,16 +6,14 @@ import {
   Select,
   SelectChangeEvent,
   Stack,
-  Typography,
 } from "@mui/material";
-import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
-import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
-import LoginIcon from "@mui/icons-material/Login";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import LanguageIcon from "@mui/icons-material/Language";
-import { routerLinks } from "@/staticData/routerLinks";
 import { useRouter } from "next/router";
-import SliderMenuLink from "@/components/Header/SliderMenu/SliderMenuLink";
+import LinksSection from "@/components/Header/SliderMenu/LinksSection";
+import { useAppSelector } from "@/store/hooks";
+import { selectUserData } from "@/store/user-slice/user.slice";
+import LoginSection from "@/components/Header/SliderMenu/LoginSection";
+import UserSection from "@/components/Header/SliderMenu/UserSection";
 
 interface ISliderMenuProps extends PopoverProps {
   onClose: () => void;
@@ -31,6 +28,7 @@ const SliderMenu = ({
   pathname,
 }: ISliderMenuProps) => {
   const router = useRouter();
+  const userData = useAppSelector(selectUserData);
 
   const handleChangeLanguage = (event: SelectChangeEvent<string>) => {
     onClose();
@@ -39,6 +37,7 @@ const SliderMenu = ({
 
   return (
     <Popover
+      keepMounted
       id={id}
       open={open}
       anchorEl={anchorEl}
@@ -53,56 +52,15 @@ const SliderMenu = ({
       }}
     >
       <Stack minWidth={"203px"} px={"1em"} py={"1.5em"}>
-        <SliderMenuLink
-          pathname={pathname}
-          onClick={onClose}
-          text={"О стране"}
-          href={routerLinks.aboutCountry}
-          icon={
-            <CollectionsOutlinedIcon fontSize={"small"} color={"secondary"} />
-          }
-        />
-        <SliderMenuLink
-          pathname={pathname}
-          onClick={onClose}
-          text={"Обратная связь"}
-          href={routerLinks.contactUs}
-          icon={<ForumOutlinedIcon fontSize={"small"} color={"secondary"} />}
-        />
-        <Divider
-          variant={"middle"}
-          sx={{ borderColor: "primary.main", opacity: 0.5, my: "0.3em" }}
-        />
-        <Button
-          sx={{
-            textTransform: "none",
-            justifyContent: "start",
-            columnGap: "0.5em",
-            color: "secondary.main",
-            "&:hover": {
-              color: "primary.main",
-            },
-          }}
-          onClick={onClose}
-        >
-          <LoginIcon fontSize={"small"} color={"secondary"} />
-          <Typography>Войти</Typography>
-        </Button>
-        <Button
-          sx={{
-            textTransform: "none",
-            justifyContent: "start",
-            columnGap: "0.5em",
-            color: "secondary.main",
-            "&:hover": {
-              color: "primary.main",
-            },
-          }}
-          onClick={onClose}
-        >
-          <PersonAddAlt1Icon fontSize={"small"} color={"secondary"} />
-          <Typography>Зарегистрироваться</Typography>
-        </Button>
+        {userData && (
+          <UserSection
+            onClose={onClose}
+            pathname={pathname}
+            firstName={userData.firstName}
+          />
+        )}
+        <LinksSection onClose={onClose} pathname={pathname} />
+        {!userData && <LoginSection onClose={onClose} />}
         <Divider
           variant={"middle"}
           sx={{ borderColor: "primary.main", opacity: 0.5, my: "0.3em" }}

@@ -169,15 +169,10 @@ function MoreFiltersPopover({
         zIndex={10}
         justifyContent={"space-between"}
       >
-        <Button sx={{ fontWeight: 400, color: primaryColor }} onClick={onClear}>
+        <Button sx={{ color: primaryColor }} onClick={onClear}>
           {t("filters.clear")}
         </Button>
-        <Button
-          sx={{ fontWeight: 400, color: "white" }}
-          variant={"contained"}
-          type={"submit"}
-          onClick={onSubmit}
-        >
+        <Button variant={"contained"} type={"submit"} onClick={onSubmit}>
           {t("filters.apply")}
         </Button>
       </Stack>

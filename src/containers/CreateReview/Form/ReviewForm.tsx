@@ -69,7 +69,7 @@ const ReviewForm = ({}: IReviewFormProps) => {
               <Button
                 variant={"contained"}
                 sx={{
-                  color: "white",
+                  fontWeight: 700,
                   py: "1em",
                   fontSize: { xs: "14px", sm: "16px" },
                 }}
@@ -162,7 +162,7 @@ const ReviewForm = ({}: IReviewFormProps) => {
               disabled={!formState.isValid}
               variant={"contained"}
               sx={{
-                color: "white",
+                fontWeight: 700,
                 mt: "2em",
                 py: "1em",
                 width: "100%",
