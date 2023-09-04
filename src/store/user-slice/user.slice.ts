@@ -3,10 +3,12 @@ import { RootState } from "@/store/store";
 import { IUser } from "@/services/auth-service/user.interface";
 import { LoginErrorEnum } from "@/services/auth-service/interfaces";
 import {
+  getUserDataThunk,
   loginThunk,
   logoutThunk,
   signupThunk,
 } from "@/store/user-slice/thunks";
+import localStorageFields from "@/shared/localStorageFields";
 
 export enum ActiveAuthScreenEnum {
   LOGIN = 0,
@@ -21,6 +23,7 @@ interface IUserState {
   open: boolean;
   activeScreen: ActiveAuthScreenEnum;
   userData: IUser | null;
+  logoutAfterExit: boolean;
 }
 
 const initialState: IUserState = {
@@ -31,6 +34,7 @@ const initialState: IUserState = {
   open: false,
   activeScreen: ActiveAuthScreenEnum.LOGIN,
   userData: null,
+  logoutAfterExit: false,
 };
 
 export const userSlice = createSlice({
@@ -40,14 +44,25 @@ export const userSlice = createSlice({
     changeAuthScreen: (state, action: PayloadAction<ActiveAuthScreenEnum>) => {
       state.activeScreen = action.payload;
     },
+    logoutIfNotRememberMe: (state) => {
+      if (state.logoutAfterExit) {
+        localStorage.removeItem(localStorageFields.TOKEN);
+        state.userData = null;
+        state.token = null;
+      }
+    },
     closeAuth: (state) => {
       state.open = false;
       state.activeScreen = ActiveAuthScreenEnum.LOGIN;
       state.loginRedirect = null;
       state.error = false;
     },
-    openAuth: (state, { payload }: PayloadAction<{ signup?: boolean }>) => {
+    openAuth: (
+      state,
+      { payload }: PayloadAction<{ loginRedirect?: string; signup?: boolean }>
+    ) => {
       state.open = true;
+      state.loginRedirect = payload.loginRedirect || null;
       if (payload.signup) {
         state.activeScreen = ActiveAuthScreenEnum.SIGNUP;
       }
@@ -58,14 +73,19 @@ export const userSlice = createSlice({
       state.loading = true;
       state.error = false;
       state.token = null;
+      state.logoutAfterExit = false;
     });
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       state.loading = false;
+      state.open = false;
       state.token = action.payload.token;
+      state.loginRedirect = null;
+      state.logoutAfterExit = !action.payload.rememberMe;
     });
     builder.addCase(loginThunk.rejected, (state, action) => {
       state.loading = false;
       state.token = null;
+      state.loginRedirect = null;
       if (action.payload) {
         state.error = action.payload as LoginErrorEnum;
       } else {
@@ -85,6 +105,16 @@ export const userSlice = createSlice({
       state.error = true;
     });
     builder.addCase(logoutThunk.fulfilled, (state, action) => {
+      state.userData = null;
+      state.token = null;
+    });
+    builder.addCase(getUserDataThunk.pending, (state, action) => {
+      state.userData = null;
+    });
+    builder.addCase(getUserDataThunk.fulfilled, (state, action) => {
+      state.userData = action.payload;
+    });
+    builder.addCase(getUserDataThunk.rejected, (state, action) => {
       state.userData = null;
       state.token = null;
     });
@@ -114,6 +144,7 @@ export const selectAuthActiveScreen = createSelector(
 export const selectAuthOpen = createSelector(selectUserState, (s) => s.open);
 export const selectAuthError = createSelector(selectUserState, (s) => s.error);
 
-export const { changeAuthScreen, closeAuth, openAuth } = userSlice.actions;
+export const { changeAuthScreen, closeAuth, openAuth, logoutIfNotRememberMe } =
+  userSlice.actions;
 
 export default userSlice.reducer;

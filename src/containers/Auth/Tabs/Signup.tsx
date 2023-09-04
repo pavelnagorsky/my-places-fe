@@ -7,14 +7,36 @@ import {
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
-import { ISignupRequest } from "@/services/auth-service/interfaces";
-import { Box, FormLabel } from "@mui/material";
+import {
+  ISignupRequest,
+  LoginErrorEnum,
+} from "@/services/auth-service/interfaces";
+import {
+  Box,
+  CircularProgress,
+  FormLabel,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import regExp from "@/shared/regExp";
 import { Button } from "@/components/UI/Button/Button";
 import NextMuiLink from "@/components/NextMuiLink/NextMuiLink";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  selectAuthError,
+  selectAuthLoading,
+} from "@/store/user-slice/user.slice";
+import { signupThunk } from "@/store/user-slice/thunks";
+import { showAlert } from "@/store/alerts-slice/alerts.slice";
 
 const Signup = () => {
+  const dispatch = useAppDispatch();
+  const loading = useAppSelector(selectAuthLoading);
+  const error = useAppSelector(selectAuthError);
+
   const form = useForm<ISignupRequest>({
     defaultValues: {
       email: "",
@@ -26,9 +48,37 @@ const Signup = () => {
     mode: "onSubmit",
   });
 
-  const onSubmit: SubmitHandler<ISignupRequest> = (data) => {
-    console.log(data);
+  const afterSignup = (email: string) => {
+    dispatch(
+      showAlert({
+        alertProps: {
+          title: "Успех!",
+          description: `Вы успешно прошли регистрацию, на ваш адрес электронной почты ${email} было выслано письмо для активации аккаунта`,
+          variant: "standard",
+          severity: "success",
+        },
+        snackbarProps: {},
+      })
+    );
   };
+
+  const onSubmit: SubmitHandler<ISignupRequest> = (data) => {
+    if (loading) return;
+    dispatch(
+      signupThunk({ ...data, onSuccess: () => afterSignup(data.email) })
+    );
+  };
+
+  useEffect(() => {
+    if (!error) return;
+    form.setError(
+      "email",
+      {
+        message: "Данный адрес электронной почты уже занят",
+      },
+      { shouldFocus: true }
+    );
+  }, [error]);
 
   return (
     <Box
@@ -78,12 +128,19 @@ const Signup = () => {
             name={"firstName"}
             id={"auth-firstname"}
             placeholder={"Ваше имя..."}
+            parseError={(error) => {
+              return error.type === "maxLength"
+                ? "Превышена максимальная длина строки"
+                : "Это поле обязательно к заполнению";
+            }}
             validation={{
-              required: "Это поле обязательно к заполнению",
+              pattern: regExp.noWhiteSpaces,
+              required: true,
+              maxLength: 30,
             }}
           />
         </Box>
-        <Box width={"100%"} mb={"1.2em"}>
+        <Box width={"100%"} mb={"0.8em"}>
           <FormLabel htmlFor={"auth-lastname"}>Фамилия</FormLabel>
           <TextFieldElement
             sx={{
@@ -95,14 +152,46 @@ const Signup = () => {
             name={"lastName"}
             id={"auth-lastname"}
             placeholder={"Ваша фамилия..."}
+            parseError={(error) => {
+              return error.type === "maxLength"
+                ? "Превышена максимальная длина строки"
+                : "Это поле обязательно к заполнению";
+            }}
             validation={{
-              minLength: 1,
-              required: "Это поле обязательно к заполнению",
+              pattern: regExp.noWhiteSpaces,
+              required: true,
+              maxLength: 30,
             }}
           />
         </Box>
         <Box width={"100%"} mb={"1.2em"}>
-          <FormLabel htmlFor={"auth-password"}>Пароль</FormLabel>
+          <FormLabel
+            sx={{
+              display: "flex !important",
+              mb: "0 !important",
+              alignItems: "center",
+            }}
+            htmlFor={"auth-password"}
+          >
+            Пароль
+            <Tooltip
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={6000}
+              sx={{ fontSize: "14px", alignSelf: "start" }}
+              title={
+                <Typography p={"0.5em"}>
+                  Пароль должен содержать символы латинского алфавита, минимум 1
+                  цифру и 1 заглавную букву. Минимальная длина пароля - 8
+                  символов.
+                </Typography>
+              }
+            >
+              <IconButton>
+                <InfoOutlinedIcon fontSize={"medium"} />
+              </IconButton>
+            </Tooltip>
+          </FormLabel>
           <PasswordElement
             sx={{
               "& .MuiInputBase-root": {
@@ -116,6 +205,10 @@ const Signup = () => {
             placeholder={"Введите пароль..."}
             validation={{
               required: "Это поле обязательно к заполнению",
+              pattern: {
+                value: regExp.password,
+                message: "Введено некорректное значение",
+              },
             }}
           />
         </Box>
@@ -135,8 +228,15 @@ const Signup = () => {
             type={"password"}
             id={"auth-password-confirm"}
             placeholder={"Подтвердите пароль..."}
+            parseError={(error) => {
+              if (error.type === "validate") {
+                return "Пароли должны совпадать";
+              } else {
+                return "Это поле обязательно к заполнению";
+              }
+            }}
             validation={{
-              required: "Это поле обязательно к заполнению",
+              required: true,
             }}
           />
         </Box>
@@ -187,7 +287,11 @@ const Signup = () => {
           }}
           variant={"contained"}
         >
-          Зарегистрироваться
+          {loading ? (
+            <CircularProgress color={"inherit"} size={21} />
+          ) : (
+            "Зарегистрироваться"
+          )}
         </Button>
       </FormContainer>
     </Box>

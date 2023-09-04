@@ -9,7 +9,9 @@ const instance = axios.create({
 instance.interceptors.request.use((req) => {
   if (typeof window === "undefined") return req;
   const token = localStorage.getItem(localStorageFields.TOKEN);
-  req.headers.Authorization = token ? `Bearer ${token}` : "";
+  req.headers.Authorization = token
+    ? `Bearer ${token}`
+    : req.headers.Authorization;
   return req;
 });
 

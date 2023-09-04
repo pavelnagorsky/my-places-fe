@@ -1,7 +1,7 @@
 import { Avatar, Stack, Typography, Link, Divider, Box } from "@mui/material";
 import { routerLinks } from "@/staticData/routerLinks";
-import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
 import SliderMenuLink from "@/components/Header/SliderMenu/SliderMenuLink";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const UserSection = ({
   onClose,
@@ -45,9 +45,7 @@ const UserSection = ({
         onClick={onClose}
         text={"Личный кабинет"}
         href={routerLinks.photos}
-        icon={
-          <CollectionsOutlinedIcon fontSize={"small"} color={"secondary"} />
-        }
+        icon={<AccountCircleIcon fontSize={"small"} color={"secondary"} />}
       />
       <Divider
         variant={"middle"}

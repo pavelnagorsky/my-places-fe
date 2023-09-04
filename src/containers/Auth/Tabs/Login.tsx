@@ -6,12 +6,38 @@ import {
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
-import { ILoginRequest } from "@/services/auth-service/interfaces";
-import { Box, Divider, FormLabel, Stack } from "@mui/material";
+import {
+  ILoginRequest,
+  LoginErrorEnum,
+} from "@/services/auth-service/interfaces";
+import {
+  Box,
+  CircularProgress,
+  Divider,
+  FormLabel,
+  Stack,
+} from "@mui/material";
 import regExp from "@/shared/regExp";
 import { Button } from "@/components/UI/Button/Button";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { loginThunk } from "@/store/user-slice/thunks";
+import {
+  selectAuthError,
+  selectAuthLoading,
+} from "@/store/user-slice/user.slice";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const loading = useAppSelector(selectAuthLoading);
+  const error = useAppSelector(selectAuthError);
+  const router = useRouter();
+
+  const loginRedirect = (path: string) => {
+    router.push(path);
+  };
+
   const form = useForm<ILoginRequest>({
     defaultValues: {
       email: "",
@@ -23,8 +49,30 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<ILoginRequest> = (data) => {
-    console.log(data);
+    if (loading) return;
+    dispatch(loginThunk({ ...data, onRedirect: loginRedirect }));
   };
+
+  useEffect(() => {
+    if (!error) return;
+    if (error === LoginErrorEnum.EMAIL_NOT_CONFIRMED) {
+      form.setError(
+        "email",
+        {
+          message: "Электронная почта не подтверждена",
+        },
+        { shouldFocus: true }
+      );
+    } else {
+      form.setError(
+        "email",
+        {
+          message: "Введены неверная почта или пароль",
+        },
+        { shouldFocus: true }
+      );
+    }
+  }, [error]);
 
   return (
     <Box
@@ -93,7 +141,7 @@ const Login = () => {
           sx={{ fontWeight: 700, my: "1.3em", py: "0.8em" }}
           variant={"contained"}
         >
-          Войти
+          {loading ? <CircularProgress color={"inherit"} size={21} /> : "Войти"}
         </Button>
       </FormContainer>
       <Divider sx={{ borderColor: "#D5D3D0", my: "1em" }} />
