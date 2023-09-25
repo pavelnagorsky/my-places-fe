@@ -9,6 +9,7 @@ import {
 import ISelectPlace from "@/services/places-service/select-place.interface";
 import { ICreatePlace } from "@/services/places-service/create-place.interface";
 import { ICreateSlug } from "@/services/places-service/create-slug.interface";
+import { IPlace } from "@/services/places-service/place.interface";
 
 const placesService = {
   ITEMS_PER_PAGE: 12,
@@ -16,6 +17,11 @@ const placesService = {
   getAllPlaces: (lang: string) => {
     const langId = parseLanguageToId(lang);
     return axiosInstance.get<ISearchPlace[]>(`/places?lang=${langId}`);
+  },
+
+  getPlaceBySlug: (slug: string, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.get<IPlace>(`/places/${slug}?lang=${langId}`);
   },
 
   getPlacesSelect: (lang: string, search: string) => {

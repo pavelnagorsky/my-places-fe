@@ -1,6 +1,6 @@
 interface ISelectPlace {
   title: string;
-  description: string;
+  id: number;
 }
 
 export default ISelectPlace;

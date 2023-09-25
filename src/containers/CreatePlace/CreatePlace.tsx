@@ -83,6 +83,7 @@ const CreatePlace = () => {
       .createPlace(createPlaceDto, i18n.language)
       .then((res) => {
         setLoading(false);
+        form.reset();
         handleShowSuccess();
         router.push(routerLinks.createReview);
       })

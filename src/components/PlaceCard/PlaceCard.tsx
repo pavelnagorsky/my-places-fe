@@ -15,6 +15,8 @@ import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import Image from "next/image";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
 import { memo } from "react";
+import Link from "next/link";
+import { routerLinks } from "@/staticData/routerLinks";
 
 interface IPlaceCardProps {
   place: ISearchPlace;
@@ -32,7 +34,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
         boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
       }}
     >
-      <CardActionArea>
+      <CardActionArea component={Link} href={routerLinks.place(place.slug)}>
         <CardMedia
           sx={{
             position: "relative",

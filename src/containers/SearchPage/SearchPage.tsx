@@ -146,7 +146,7 @@ function SearchPage() {
             columnGap={{ xs: "1em", sm: "2em", md: "2.5em", xl: "2.3em" }}
           >
             {loading &&
-              [1, 2, 3, 4].map((place, index) => (
+              [1, 2, 3].map((place, index) => (
                 <PlaceCardSkeleton key={index} />
               ))}
             {places.map((place, index) => (

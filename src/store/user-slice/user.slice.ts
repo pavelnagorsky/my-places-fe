@@ -44,6 +44,9 @@ export const userSlice = createSlice({
     changeAuthScreen: (state, action: PayloadAction<ActiveAuthScreenEnum>) => {
       state.activeScreen = action.payload;
     },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
     logoutIfNotRememberMe: (state) => {
       if (state.logoutAfterExit) {
         localStorage.removeItem(localStorageFields.TOKEN);
@@ -144,7 +147,12 @@ export const selectAuthActiveScreen = createSelector(
 export const selectAuthOpen = createSelector(selectUserState, (s) => s.open);
 export const selectAuthError = createSelector(selectUserState, (s) => s.error);
 
-export const { changeAuthScreen, closeAuth, openAuth, logoutIfNotRememberMe } =
-  userSlice.actions;
+export const {
+  changeAuthScreen,
+  closeAuth,
+  openAuth,
+  logoutIfNotRememberMe,
+  setToken,
+} = userSlice.actions;
 
 export default userSlice.reducer;

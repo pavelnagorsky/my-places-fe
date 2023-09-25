@@ -7,12 +7,30 @@ import {
 import authService from "@/services/auth-service/auth.service";
 import localStorageFields from "@/shared/localStorageFields";
 import { RootState } from "@/store/store";
+import { setToken } from "@/store/user-slice/user.slice";
 
 export const getUserDataThunk = createAsyncThunk(
   "user/get-user-data",
-  async () => {
-    const { data } = await authService.getUserData();
-    return data;
+  async (arg, thunkAPI) => {
+    try {
+      const { data } = await authService.getUserData();
+      return data;
+    } catch (e) {
+      localStorage.removeItem(localStorageFields.TOKEN);
+      return thunkAPI.rejectWithValue(null);
+    }
+  }
+);
+
+export const autoLoginThunk = createAsyncThunk(
+  "auth/auto-login",
+  (arg, thunkAPI) => {
+    const token = localStorage.getItem(localStorageFields.TOKEN);
+    if (token) {
+      thunkAPI.dispatch(setToken(token));
+      thunkAPI.dispatch(getUserDataThunk());
+    }
+    return;
   }
 );
 
@@ -55,5 +73,6 @@ export const signupThunk = createAsyncThunk(
 
 export const logoutThunk = createAsyncThunk("user/logout", async (thunkAPI) => {
   // clear token
+  localStorage.removeItem(localStorageFields.TOKEN);
   return;
 });

@@ -2,6 +2,8 @@ import { Avatar, Stack, Typography, Link, Divider, Box } from "@mui/material";
 import { routerLinks } from "@/staticData/routerLinks";
 import SliderMenuLink from "@/components/Header/SliderMenu/SliderMenuLink";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useAppDispatch } from "@/store/hooks";
+import { logoutThunk } from "@/store/user-slice/thunks";
 
 const UserSection = ({
   onClose,
@@ -12,6 +14,12 @@ const UserSection = ({
   pathname: string;
   firstName: string;
 }) => {
+  const dispatch = useAppDispatch();
+  const onLogout = () => {
+    onClose();
+    dispatch(logoutThunk());
+  };
+
   return (
     <Box>
       <Stack
@@ -33,6 +41,7 @@ const UserSection = ({
           {firstName}
         </Typography>
         <Link
+          onClick={onLogout}
           sx={{
             cursor: "pointer",
           }}

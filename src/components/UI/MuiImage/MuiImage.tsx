@@ -1,6 +1,15 @@
-import {Box, BoxProps} from "@mui/material";
-import Image, {ImageProps} from "next/image";
+import { Box, BoxProps } from "@mui/material";
+import Image, { ImageProps } from "next/image";
 
-export const MuiImage = (props: BoxProps & ImageProps) => {
-    return <Box component={Image} {...props} />
+interface IMuiImageProps {
+  boxProps?: BoxProps;
+  imageProps: ImageProps;
 }
+
+export const MuiImage = (props: IMuiImageProps) => {
+  return (
+    <Box position={"relative"} {...props.boxProps}>
+      <Image {...props.imageProps} />
+    </Box>
+  );
+};

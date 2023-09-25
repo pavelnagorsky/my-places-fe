@@ -13,12 +13,14 @@ import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { routerLinks } from "@/staticData/routerLinks";
+import ButtonWithTooltip from "@/components/UI/Button/ButtonWithTooltip";
+import utils from "@/shared/utils";
 
 interface IReviewFormProps {
-  // onSubmit: () => void;
+  loading: boolean;
 }
 
-const ReviewForm = ({}: IReviewFormProps) => {
+const ReviewForm = ({ loading }: IReviewFormProps) => {
   const { formState } = useFormContext<IReviewFormContext>();
 
   return (
@@ -96,7 +98,7 @@ const ReviewForm = ({}: IReviewFormProps) => {
             jpeg, png.
           </Typography>
           <Box my={"2em"}>
-            <ImageUploader fieldName={"images"} />
+            <ImageUploader required maxLimit={10} fieldName={"images"} />
           </Box>
         </Box>
       </WrappedContainer>
@@ -156,21 +158,40 @@ const ReviewForm = ({}: IReviewFormProps) => {
               Текст заметки:
             </Typography>
             <TextEditor fieldName={"description"} />
-
-            <Button
-              type={"submit"}
-              disabled={!formState.isValid}
-              variant={"contained"}
-              sx={{
-                fontWeight: 700,
-                mt: "2em",
-                py: "1em",
-                width: "100%",
-                maxWidth: { sm: "250px" },
-              }}
-            >
-              Создать
-            </Button>
+            <div>
+              <ButtonWithTooltip
+                loading={loading}
+                buttonText={"Создать"}
+                tooltipText={"Не все обязательные поля формы заполнены!"}
+                variant={"contained"}
+                type={"submit"}
+                disabled={
+                  !formState.isValid ||
+                  utils.isEmptyObject(formState.dirtyFields)
+                }
+                sx={{
+                  fontWeight: 700,
+                  mt: "2em",
+                  py: "1em",
+                  width: "100%",
+                  maxWidth: { sm: "250px" },
+                }}
+              />
+            </div>
+            {/*<Button*/}
+            {/*  type={"submit"}*/}
+            {/*  disabled={!formState.isValid}*/}
+            {/*  variant={"contained"}*/}
+            {/*  sx={{*/}
+            {/*    fontWeight: 700,*/}
+            {/*    mt: "2em",*/}
+            {/*    py: "1em",*/}
+            {/*    width: "100%",*/}
+            {/*    maxWidth: { sm: "250px" },*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  Создать*/}
+            {/*</Button>*/}
           </Box>
         </WrappedContainer>
       </Box>

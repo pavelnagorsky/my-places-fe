@@ -6,4 +6,5 @@ export const routerLinks = {
   contactUs: "/contact-us",
   createReview: "/create-review",
   createPlace: "/create-place",
+  place: (slug: string) => `/places/${slug}`,
 };

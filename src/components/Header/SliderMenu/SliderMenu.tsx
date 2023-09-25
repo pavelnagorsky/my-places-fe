@@ -32,7 +32,9 @@ const SliderMenu = ({
 
   const handleChangeLanguage = (event: SelectChangeEvent<string>) => {
     onClose();
-    router.push("", undefined, { locale: event.target.value });
+    router.push({ pathname: router.pathname, query: router.query }, undefined, {
+      locale: event.target.value,
+    });
   };
 
   return (
