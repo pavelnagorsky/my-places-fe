@@ -15,7 +15,7 @@ import { useFormContext } from "react-hook-form-mui";
 import { Button } from "@/components/UI/Button/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
-import { ISearchForm } from "@/hoc/WithSearch";
+import { ISearchForm } from "@/containers/SearchPage/WithSearch";
 import RadiusFilter from "@/containers/SearchPage/Filters/RadiusFilter";
 import { useTranslation } from "next-i18next";
 

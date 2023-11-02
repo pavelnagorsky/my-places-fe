@@ -8,7 +8,7 @@ import { RadiusPopover } from "@/containers/SearchPage/Filters/FilterContainers/
 import { Stack } from "@mui/material";
 import LocationPopover from "@/containers/SearchPage/Filters/FilterContainers/LocationPopover";
 import { SwitchElement, useFormContext } from "react-hook-form-mui";
-import { ISearchForm } from "@/hoc/WithSearch";
+import { ISearchForm } from "@/containers/SearchPage/WithSearch";
 import { ISearchPlacesRequest } from "@/services/places-service/interfaces";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
@@ -18,10 +18,13 @@ import {
 import MobileFiltersPopover from "@/containers/SearchPage/Filters/FilterContainers/MobileFiltersPopover";
 import Media from "@/hoc/Media/Media";
 import placesService from "@/services/places-service/places.service";
+import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
+import placeCategoriesService from "@/services/place-categories-service/place-categories.service";
 
 function FormContainer() {
   const { t, i18n } = useTranslation("searchPage");
   const [types, setTypes] = useState<IPlaceType[]>([]);
+  const [categories, setCategories] = useState<IPlaceCategory[]>([]);
   const form = useFormContext<ISearchForm>();
   const currentPage = useAppSelector(selectCurrentPage);
   const dispatch = useAppDispatch();
@@ -37,7 +40,7 @@ function FormContainer() {
         radius: data.radius,
         language: i18n.language,
         itemsPerPage: placesService.ITEMS_PER_PAGE,
-        typesIds: data.types.concat(data.typesCommercial),
+        typesIds: data.types,
         title: data.title,
         pageToReturn: fromStart ? 1 : currentPage,
       };
@@ -52,16 +55,13 @@ function FormContainer() {
         setTypes(data);
       })
       .catch(() => {});
+    placeCategoriesService
+      .getAll(i18n.language)
+      .then(({ data }) => {
+        setCategories(data);
+      })
+      .catch(() => {});
   }, [i18n.language]);
-
-  const nonCommercialTypes = useMemo(
-    () => types.filter((t) => !t.commercial),
-    [types]
-  );
-  const commercialTypes = useMemo(
-    () => types.filter((t) => t.commercial),
-    [types]
-  );
 
   return (
     <Box py={"1.6em"}>
@@ -75,8 +75,8 @@ function FormContainer() {
           <Box flexGrow={1}>
             <MobileFiltersPopover
               startText={t("filters.filters")}
-              typesCommercial={commercialTypes}
-              types={nonCommercialTypes}
+              types={types}
+              categories={categories}
               triggerSubmit={search}
             />
           </Box>
@@ -99,8 +99,8 @@ function FormContainer() {
           />
           <MoreFiltersPopover
             triggerSubmit={search}
-            types={nonCommercialTypes}
-            typesCommercial={commercialTypes}
+            types={types}
+            categories={categories}
             startText={t("filters.filters")}
           />
         </Stack>

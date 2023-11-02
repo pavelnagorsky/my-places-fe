@@ -7,7 +7,8 @@ import { Box, styled, Typography } from "@mui/material";
 
 const modules = {
   toolbar: [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    [{ size: ["large", false, "small"] }],
+    //[{ header: [1, 2, 3, 4, 5, 6, false] }],
     ["bold", "italic", "underline", "blockquote"],
     [
       { list: "ordered" },
@@ -21,6 +22,10 @@ const modules = {
 
 const StyledEditor = styled("div")(({ theme }) => ({
   backgroundColor: "white",
+  '& .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="large"]::before, .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="large"]::before':
+    {
+      content: `"Большой"`,
+    },
   borderRadius: "15px",
   "& .ql-toolbar.ql-snow": {
     padding: "0.8em",
@@ -55,6 +60,7 @@ const TextEditor = ({ fieldName }: { fieldName: string }) => {
               value={field.value}
               onChange={(val: string, delta: any, source: any, editor: any) => {
                 field.onChange(val);
+                console.log(val);
                 const contentLength = editor.getLength();
                 setValue("_textEditorContentLength", contentLength - 1);
               }}

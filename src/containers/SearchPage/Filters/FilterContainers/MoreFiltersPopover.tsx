@@ -22,13 +22,14 @@ import {
 import { Button } from "@/components/UI/Button/Button";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
-import { ISearchForm } from "@/hoc/WithSearch";
+import { ISearchForm } from "@/containers/SearchPage/WithSearch";
 import { useTranslation } from "next-i18next";
+import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 
 interface IMoreFiltersPopoverProps {
   inputSx?: SxProps;
   startText: string;
-  readonly typesCommercial: IPlaceType[];
+  readonly categories: IPlaceCategory[];
   readonly types: IPlaceType[];
   triggerSubmit: () => void;
 }
@@ -37,7 +38,7 @@ function MoreFiltersPopover({
   inputSx,
   startText,
   types,
-  typesCommercial,
+  categories,
   triggerSubmit,
 }: IMoreFiltersPopoverProps) {
   const { t } = useTranslation("searchPage");
@@ -52,7 +53,7 @@ function MoreFiltersPopover({
   const formatSelectedOptions = () => {
     const value =
       form.getValues("types").length +
-      form.getValues("typesCommercial").length +
+      form.getValues("categories").length +
       (form.getValues("title").length > 0 ? 1 : 0);
     return `${startText} ${value > 0 ? `(${value})` : ""}`;
   };
@@ -64,7 +65,7 @@ function MoreFiltersPopover({
 
   const onClear = () => {
     form.resetField("title");
-    form.resetField("typesCommercial");
+    form.resetField("categories");
     form.resetField("types");
   };
 
@@ -101,58 +102,60 @@ function MoreFiltersPopover({
           ),
         }}
       />
-      <Typography fontSize={"18px"} component={"p"} mb={"0.8em"} mt={"0.5em"}>
-        {t("filters.types")}
-      </Typography>
-      <Box width={"100%"}>
-        <CheckboxButtonGroup
-          labelProps={{
-            sx: {
-              width: "49%",
-              mx: 0,
-              marginInlineEnd: "0.5px",
-              "& span:first-of-type": {
-                color: "primary.light",
-                "&.Mui-checked": {
-                  color: "primary.main",
+      <Box maxHeight={"400px"} overflow={"auto"} pb={"0.2em"}>
+        <Typography fontSize={"18px"} component={"p"} mb={"0.8em"} mt={"0.5em"}>
+          {t("filters.types")}
+        </Typography>
+        <Box width={"100%"}>
+          <CheckboxButtonGroup
+            labelProps={{
+              sx: {
+                width: "49%",
+                mx: 0,
+                marginInlineEnd: "0.5px",
+                "& span:first-of-type": {
+                  color: "primary.light",
+                  "&.Mui-checked": {
+                    color: "primary.main",
+                  },
                 },
               },
-            },
-          }}
-          row
-          options={types.map((type) => ({
-            id: type.id,
-            label: type.title,
-          }))}
-          name={"types"}
-        />
-      </Box>
-      <Divider variant={"middle"} />
-      <Typography fontSize={"18px"} component={"p"} mb={"0.8em"}>
-        {t("filters.typesCommercial")}
-      </Typography>
-      <Box width={"100%"} mb={"1em"}>
-        <CheckboxButtonGroup
-          row
-          labelProps={{
-            sx: {
-              width: "49%",
-              mx: 0,
-              marginInlineEnd: "0.5px",
-              "& span:first-of-type": {
-                color: "primary.light",
-                "&.Mui-checked": {
-                  color: "primary.main",
+            }}
+            row
+            options={types.map((type) => ({
+              id: type.id,
+              label: type.title,
+            }))}
+            name={"types"}
+          />
+        </Box>
+        <Divider variant={"middle"} />
+        <Typography fontSize={"18px"} component={"p"} mb={"0.8em"}>
+          {t("filters.categories")}
+        </Typography>
+        <Box width={"100%"} mb={"1em"}>
+          <CheckboxButtonGroup
+            row
+            labelProps={{
+              sx: {
+                width: "49%",
+                mx: 0,
+                marginInlineEnd: "0.5px",
+                "& span:first-of-type": {
+                  color: "primary.light",
+                  "&.Mui-checked": {
+                    color: "primary.main",
+                  },
                 },
               },
-            },
-          }}
-          options={typesCommercial.map((typeC) => ({
-            id: typeC.id,
-            label: typeC.title,
-          }))}
-          name={"typesCommercial"}
-        />
+            }}
+            options={categories.map((category) => ({
+              id: category.id,
+              label: category.title,
+            }))}
+            name={"categories"}
+          />
+        </Box>
       </Box>
       <Divider
         variant={"middle"}

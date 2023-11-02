@@ -1,5 +1,6 @@
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
+import { ILatLngCoordinate } from "@/components/Map/Map";
 
 export interface IPlace {
   id: number;
@@ -12,7 +13,7 @@ export interface IPlace {
   viewsCount: number;
   categories: IPlaceCategory[];
   images: string[];
-  coordinates: string;
+  coordinates: ILatLngCoordinate;
   website: string;
   advertisement: boolean;
   advEndDate: string;

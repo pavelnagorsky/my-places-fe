@@ -14,6 +14,9 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openAuth, selectIsAuth } from "@/store/user-slice/user.slice";
 import likesService from "@/services/likes-service/likes.service";
+import { format } from "date-fns";
+import usePopover from "@/hooks/usePopover";
+import ReportForm from "@/containers/Place/Report/ReportForm";
 
 interface IPlaceStatisticsProps {
   views: number;
@@ -28,6 +31,7 @@ const PlaceStatistics = ({
   createdAt,
   placeId,
 }: IPlaceStatisticsProps) => {
+  const reportPopover = usePopover("report-form");
   const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(initialLikesCount);
   const isAuth = useAppSelector(selectIsAuth);
@@ -72,7 +76,7 @@ const PlaceStatistics = ({
       onClick={changeLike}
       sx={({ transitions }) => ({
         color: isLiked ? "red" : "secondary.main",
-        "&:hover": { color: "red", transform: "scale(1.05)" },
+        "&:hover": { color: "red", transform: "scale(1.1)" },
         transition: transitions.create(["color", "transform"], {
           duration: transitions.duration.short,
         }),
@@ -103,7 +107,7 @@ const PlaceStatistics = ({
         onClick={onAuth}
         sx={({ transitions }) => ({
           color: "secondary.main",
-          "&:hover": { color: "red", transform: "scale(1.05)" },
+          "&:hover": { color: "red", transform: "scale(1.1)" },
           transition: transitions.create(["color", "transform"], {
             duration: transitions.duration.short,
           }),
@@ -155,12 +159,22 @@ const PlaceStatistics = ({
       </Stack>
       <Stack direction={"row"} alignItems={"center"} gap={"0.2em"}>
         <Typography variant={"body1"}>
-          {new Date(createdAt).toDateString()}
+          {format(new Date(createdAt), "dd.MM.yyyy")}
         </Typography>
         <Box>
-          <IconButton aria-label="report">
+          <IconButton
+            aria-label="report-form"
+            onClick={reportPopover.handleOpen}
+          >
             <FlagIcon />
           </IconButton>
+          <ReportForm
+            open={reportPopover.open}
+            id={reportPopover.id}
+            onClose={reportPopover.handleClose}
+            anchorEl={reportPopover.anchor}
+            placeId={placeId}
+          />
         </Box>
       </Stack>
     </Stack>

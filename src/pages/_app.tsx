@@ -11,6 +11,7 @@ import Layout from "@/hoc/Layout";
 import { EmotionCache } from "@emotion/cache";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
+import { motion } from "framer-motion";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -18,6 +19,7 @@ function App({
   Component,
   emotionCache = clientSideEmotionCache,
   pageProps,
+  router,
 }: AppProps & { emotionCache: EmotionCache }) {
   return (
     <CacheProvider value={emotionCache}>
@@ -31,7 +33,21 @@ function App({
           </Head>
           <CssBaseline />
           <Layout>
-            <Component {...pageProps} />
+            <motion.div
+              key={router.route}
+              initial="pageInitial"
+              animate="pageAnimate"
+              variants={{
+                pageInitial: {
+                  opacity: 0,
+                },
+                pageAnimate: {
+                  opacity: 1,
+                },
+              }}
+            >
+              <Component {...pageProps} />
+            </motion.div>
           </Layout>
         </ThemeProvider>
       </Provider>

@@ -16,7 +16,7 @@ import {
   TextFieldElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { ISearchForm } from "@/hoc/WithSearch";
+import { ISearchForm } from "@/containers/SearchPage/WithSearch";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { memo } from "react";
 import LocationAutocomplete from "@/containers/SearchPage/Filters/LocationAutocomplete";
@@ -26,10 +26,11 @@ import RadiusFilter from "@/containers/SearchPage/Filters/RadiusFilter";
 import { Button } from "@/components/UI/Button/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "next-i18next";
+import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 
 interface IMoreFiltersPopoverProps {
   startText: string;
-  readonly typesCommercial: IPlaceType[];
+  readonly categories: IPlaceCategory[];
   readonly types: IPlaceType[];
   triggerSubmit: () => void;
   inputSx?: SxProps;
@@ -38,7 +39,7 @@ interface IMoreFiltersPopoverProps {
 const MobileFiltersPopover = ({
   startText,
   types,
-  typesCommercial,
+  categories,
   triggerSubmit,
   inputSx,
 }: IMoreFiltersPopoverProps) => {
@@ -54,7 +55,7 @@ const MobileFiltersPopover = ({
   const formatSelectedOptions = () => {
     const value =
       form.getValues("types").length +
-      form.getValues("typesCommercial").length +
+      form.getValues("categories").length +
       (form.getValues("title").length > 0 ? 1 : 0) +
       (form.getValues("locationTitle")?.length > 0 ? 1 : 0) +
       (form.getValues("searchByMe") === true ? 1 : 0);
@@ -68,7 +69,7 @@ const MobileFiltersPopover = ({
 
   const onClear = () => {
     form.resetField("title");
-    form.resetField("typesCommercial");
+    form.resetField("categories");
     form.resetField("types");
     form.resetField("radius");
     form.resetField("searchByMe");
@@ -186,11 +187,11 @@ const MobileFiltersPopover = ({
               },
             },
           }}
-          options={typesCommercial.map((typeC) => ({
-            id: typeC.id,
-            label: typeC.title,
+          options={categories.map((category) => ({
+            id: category.id,
+            label: category.title,
           }))}
-          name={"typesCommercial"}
+          name={"categories"}
         />
       </Box>
       <Divider

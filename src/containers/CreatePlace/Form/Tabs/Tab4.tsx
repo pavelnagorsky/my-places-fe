@@ -166,6 +166,7 @@ const Tab4 = () => {
           }}
           fullWidth
           name={"lat"}
+          inputProps={{ step: "0.1" }}
           validation={{
             min: {
               value: 1,
@@ -178,6 +179,7 @@ const Tab4 = () => {
         <TextFieldElement
           type={"number"}
           fullWidth
+          inputProps={{ step: "0.1" }}
           sx={{
             "& input": { bgcolor: "white", borderRadius: "5px", py: "0.5em" },
             fontSize: { md: "20px" },

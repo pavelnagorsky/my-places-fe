@@ -3,7 +3,9 @@ import { debounce } from "@mui/material";
 import ISelectPlace from "@/services/places-service/select-place.interface";
 import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
-import { AutocompleteElement } from "react-hook-form-mui";
+import { AutocompleteElement, useFormContext } from "react-hook-form-mui";
+import { useRouter } from "next/router";
+import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
 
 interface IPlaceSelectProps {
   readonly fieldName: string;
@@ -11,12 +13,25 @@ interface IPlaceSelectProps {
 
 const PlaceSelect = ({ fieldName }: IPlaceSelectProps) => {
   const { i18n } = useTranslation();
+  const router = useRouter();
+  const { setValue } = useFormContext<IReviewFormContext>();
   const [options, setOptions] = useState<ISelectPlace[]>([]);
   const [loading, setLoading] = useState(false);
+  const [alreadySelectedPlaceId, setAlreadySelectedPlaceId] = useState(false);
+  const query = router.query as { placeId?: string };
+
+  useEffect(() => {
+    if (!query.placeId || alreadySelectedPlaceId) return;
+    const placeId = +query.placeId;
+    if (options.length === 0) return;
+    const place = options.find((p) => p.id === placeId);
+    setValue("place", place || null);
+    setAlreadySelectedPlaceId(true);
+  }, [query.placeId, options]);
 
   const fetch = (value: string) =>
     placesService
-      .getPlacesSelect(i18n.language, value)
+      .getPlacesSelect(i18n.language, value, query.placeId)
       .then(({ data }) => {
         setOptions(data);
         setLoading(false);
@@ -27,7 +42,7 @@ const PlaceSelect = ({ fieldName }: IPlaceSelectProps) => {
 
   useEffect(() => {
     fetch("");
-  }, [i18n.language]);
+  }, [i18n.language, query.placeId]);
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLoading(true);

@@ -1,8 +1,5 @@
 import Carousel from "react-material-ui-carousel";
-import {
-  CarouselNavProps,
-  CarouselProps,
-} from "react-material-ui-carousel/dist/components/types";
+import { CarouselProps } from "react-material-ui-carousel/dist/components/types";
 import { memo } from "react";
 import { MuiImage } from "@/components/UI/MuiImage/MuiImage";
 import { alpha, Box, useMediaQuery, useTheme } from "@mui/material";

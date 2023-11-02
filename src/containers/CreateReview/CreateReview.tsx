@@ -13,6 +13,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { ICreateReview } from "@/services/reviews-service/create-review.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
+import ProtectedAuth from "@/hoc/ProtectedAuth";
 
 const CreateReview = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const CreateReview = () => {
         alertProps: {
           title: "Успех!",
           description:
-            "Заметка была создано и отправлена на модерацию. Вы сможете просмотреть её статус в личном кабинете",
+            "Заметка была создана и отправлена на модерацию. Вы сможете просмотреть её статус в личном кабинете",
           variant: "standard",
           severity: "success",
         },
@@ -88,13 +89,13 @@ const CreateReview = () => {
   };
 
   return (
-    <Fragment>
+    <ProtectedAuth>
       <FormProvider {...form}>
         <FormContainer formContext={form} onSuccess={onSubmit}>
           <ReviewForm loading={loading} />
         </FormContainer>
       </FormProvider>
-    </Fragment>
+    </ProtectedAuth>
   );
 };
 

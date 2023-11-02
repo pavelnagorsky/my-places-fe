@@ -35,7 +35,7 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
           >
             Создание заметки:{" "}
             <Box display={"inline"} fontWeight={200} color={"secondary.main"}>
-              Моя заметка
+              Новая заметка
             </Box>
           </Typography>
           <Typography variant={"body2"} fontSize={{ md: "20px" }}>

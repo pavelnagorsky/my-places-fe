@@ -7,7 +7,7 @@ type routesNames = "create-review" | "create-place";
 
 const Breadcrumbs = () => {
   const router = useRouter();
-  const pathnames = router.asPath.split("/").filter((x) => x);
+  const pathnames = router.pathname.split("/").filter((x) => x);
 
   // possible pathnames
   const breadcrumbNameMap = {

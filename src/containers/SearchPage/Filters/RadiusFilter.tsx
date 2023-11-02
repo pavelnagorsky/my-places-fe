@@ -12,7 +12,7 @@ import {
   TextFieldElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { ISearchForm } from "@/hoc/WithSearch";
+import { ISearchForm } from "@/containers/SearchPage/WithSearch";
 import { useTranslation } from "next-i18next";
 
 interface IRadiusFilterProps {

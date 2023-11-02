@@ -14,6 +14,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/staticData/routerLinks";
+import ProtectedAuth from "@/hoc/ProtectedAuth";
 
 const CreatePlace = () => {
   const router = useRouter();
@@ -85,7 +86,7 @@ const CreatePlace = () => {
         setLoading(false);
         form.reset();
         handleShowSuccess();
-        router.push(routerLinks.createReview);
+        router.push(routerLinks.createReview + `?placeId=${res.data.id}`);
       })
       .catch((reason) => {
         setLoading(false);
@@ -94,13 +95,13 @@ const CreatePlace = () => {
   };
 
   return (
-    <Fragment>
+    <ProtectedAuth>
       <FormProvider {...form}>
         <FormContainer formContext={form} onSuccess={onSubmit}>
           <PlaceForm loading={loading} />
         </FormContainer>
       </FormProvider>
-    </Fragment>
+    </ProtectedAuth>
   );
 };
 

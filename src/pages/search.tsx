@@ -1,6 +1,6 @@
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import WithSearch from "@/hoc/WithSearch";
+import WithSearch from "@/containers/SearchPage/WithSearch";
 import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
 

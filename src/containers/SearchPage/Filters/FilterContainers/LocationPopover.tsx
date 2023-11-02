@@ -16,7 +16,7 @@ import { Button } from "@/components/UI/Button/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LocationAutocomplete from "@/containers/SearchPage/Filters/LocationAutocomplete";
 import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
-import { ISearchForm } from "@/hoc/WithSearch";
+import { ISearchForm } from "@/containers/SearchPage/WithSearch";
 import { useTranslation } from "next-i18next";
 
 interface ILocationPopoverProps {

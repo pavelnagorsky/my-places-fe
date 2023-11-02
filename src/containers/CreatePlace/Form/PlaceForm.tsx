@@ -24,9 +24,8 @@ interface IPlaceFormProps {
 }
 
 const PlaceForm = ({ loading }: IPlaceFormProps) => {
-  const { formState, watch } = useFormContext<IPlaceFormContext>();
+  const { formState } = useFormContext<IPlaceFormContext>();
   const createPlaceMeta = useCreatePlaceMeta();
-  const watchTitle = watch("title");
 
   const [activeTab, setActiveTab] = useState(0);
   const handleChangeTab = (event: SyntheticEvent, newValue: number) => {
@@ -55,7 +54,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
                   fontWeight={200}
                   color={"secondary.main"}
                 >
-                  {watchTitle || "Моё место"}
+                  {"Новое место"}
                 </Box>
               </Typography>
               <Typography variant={"body2"} fontSize={{ md: "20px" }}>

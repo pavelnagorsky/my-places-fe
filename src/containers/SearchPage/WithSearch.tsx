@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 import { FormProvider, useForm } from "react-hook-form-mui";
 
 export interface ISearchForm {
-  typesCommercial: number[];
+  categories: number[];
   types: number[];
   title: string;
   radius: number;
@@ -21,7 +21,7 @@ const WithSearch = ({ children }: PropsWithChildren) => {
       radius: 100,
       searchByMe: false,
       types: [],
-      typesCommercial: [],
+      categories: [],
       search: null,
       locationTitle: "",
       locationInputValue: "",

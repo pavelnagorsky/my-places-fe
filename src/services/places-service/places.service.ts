@@ -24,10 +24,15 @@ const placesService = {
     return axiosInstance.get<IPlace>(`/places/${slug}?lang=${langId}`);
   },
 
-  getPlacesSelect: (lang: string, search: string) => {
+  getPlacesSelect: (
+    lang: string,
+    search: string,
+    placeId?: number | string
+  ) => {
     const langId = parseLanguageToId(lang);
+    const placeIdQuery = placeId ? `&placeId=${placeId}` : "";
     return axiosInstance.get<ISelectPlace[]>(
-      `/places/select?lang=${langId}&search=${search}`
+      `/places/select?lang=${langId}&search=${search}${placeIdQuery}`
     );
   },
 

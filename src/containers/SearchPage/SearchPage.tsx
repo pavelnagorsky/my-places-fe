@@ -8,7 +8,7 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
 import PlaceCardSkeleton from "@/components/PlaceCard/PlaceCardSkeleton";
 import { useFormContext } from "react-hook-form-mui";
-import { ISearchForm } from "@/hoc/WithSearch";
+import { ISearchForm } from "@/containers/SearchPage/WithSearch";
 import utils from "@/shared/utils";
 import ScrollToTopButton from "@/components/ScrollToTopButton/ScrollToTopButton";
 import { useAppSelector } from "@/store/hooks";
