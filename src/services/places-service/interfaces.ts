@@ -4,6 +4,7 @@ import { IPagination } from "@/services/interfaces";
 export interface ISearchPlacesRequest {
   language?: string;
   typesIds: number[];
+  categoriesIds: number[];
   title: string;
   radius: number;
   searchCoordinates: string | null;

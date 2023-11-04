@@ -40,6 +40,7 @@ function FormContainer() {
         radius: data.radius,
         language: i18n.language,
         itemsPerPage: placesService.ITEMS_PER_PAGE,
+        categoriesIds: data.categories,
         typesIds: data.types,
         title: data.title,
         pageToReturn: fromStart ? 1 : currentPage,

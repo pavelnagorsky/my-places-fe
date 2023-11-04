@@ -51,6 +51,7 @@ export const searchResultsSlice = createSlice({
     builder.addCase(performSearchThunk.pending, (state, action) => {
       state.error = false;
       state.loading = true;
+      state.pagination.totalResults = 0;
       state.places = [];
     });
     builder.addCase(performSearchThunk.fulfilled, (state, action) => {

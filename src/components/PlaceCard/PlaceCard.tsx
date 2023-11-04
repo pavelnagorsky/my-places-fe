@@ -118,6 +118,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
             height={{ xs: "18px", md: "19px" }}
             textOverflow={"ellipsis"}
             overflow={"hidden"}
+            whiteSpace={"nowrap"}
           >
             {place.categories.map((c) => c.title).join(" | ")}
           </Typography>

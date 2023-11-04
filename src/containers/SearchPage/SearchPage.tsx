@@ -130,7 +130,7 @@ function SearchPage() {
         >
           {!loading && places.length === 0
             ? t("noResults")
-            : `${t("placesFound")}: ${pagination.totalResults}`}
+            : `${t("placesFound")}: ${pagination.totalResults || ""}`}
         </Typography>
         <Stack alignItems={"center"} justifyContent={"center"}>
           <Stack
