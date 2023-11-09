@@ -1,5 +1,5 @@
 import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IReview } from "@/services/reviews-service/review.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { useTranslation } from "next-i18next";
@@ -13,6 +13,11 @@ const useReviews = ({ defaultData, placeId }: IUseReviewsProps) => {
   const { i18n } = useTranslation();
   const [reviews, setReviews] = useState<IReview[]>(defaultData.data || []);
   const [hasMore, setHasMore] = useState<boolean>(defaultData.hasMore);
+
+  useEffect(() => {
+    setReviews(defaultData.data);
+    setHasMore(defaultData.hasMore);
+  }, [defaultData]);
 
   const handleSearch = () => {
     reviewsService

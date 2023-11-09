@@ -8,14 +8,14 @@ import {
   Typography,
 } from "@mui/material";
 import { format } from "date-fns";
-import StyledReviewsContainer from "./StyledReviewsContainer";
+import StyledReviewsContainer from "../../../components/UI/ReviewContainers/StyledReviewsContainer";
 
 interface IReviewCardProps {
   review: IReview;
-  // onClick: () => void;
+  onClick: (reviewId: number) => void;
 }
 
-const ReviewCard = ({ review }: IReviewCardProps) => {
+const ReviewCard = ({ review, onClick }: IReviewCardProps) => {
   function createMarkup() {
     return { __html: review.description };
   }
@@ -43,6 +43,7 @@ const ReviewCard = ({ review }: IReviewCardProps) => {
         }}
       >
         <Button
+          onClick={() => onClick(review.id)}
           sx={{
             fontSize: { xs: "18px", md: "20px" },
             py: "1em",

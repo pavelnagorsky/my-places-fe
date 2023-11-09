@@ -125,7 +125,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
           <Divider variant={"middle"} />
           <Stack
             direction={"row"}
-            mt="1.3em"
+            mt={{ xs: "1em", md: "1.2em" }}
             mb="0.3em"
             alignItems={"center"}
             gap={"0.5em"}
@@ -138,6 +138,9 @@ function PlaceCard({ place }: IPlaceCardProps) {
               alignItems={"center"}
               flexGrow={1}
               gap={"0.5em"}
+              textOverflow={"ellipsis"}
+              overflow={"hidden"}
+              sx={{ wordBreak: "break-word" }}
             >
               {place.type.title}
               <CastleOutlinedIcon sx={{ color: secondaryLightColor }} />
@@ -160,7 +163,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
                 fontSize={"14px"}
                 display={"flex"}
                 alignItems={"center"}
-                gap={"0.2em"}
+                gap={"0.5em"}
               >
                 <VisibilityOutlinedIcon sx={{ color: secondaryLightColor }} />
                 {place.viewsCount}

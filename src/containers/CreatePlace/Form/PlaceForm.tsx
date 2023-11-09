@@ -13,11 +13,28 @@ import useCreatePlaceMeta from "@/containers/CreatePlace/Form/useCreatePlaceMeta
 import Tab4 from "@/containers/CreatePlace/Form/Tabs/Tab4";
 import ButtonWithTooltip from "@/components/UI/Button/ButtonWithTooltip";
 import utils from "@/shared/utils";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 const Navigation = dynamic(
   () => import("@/containers/CreatePlace/Form/Navigation"),
   { ssr: false }
 );
+
+const tabContentVariant: Variants = {
+  active: {
+    display: "block",
+    opacity: 1,
+    x: 0,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+  inactive: {
+    display: "none",
+    opacity: 0,
+    x: -20,
+  },
+};
 
 interface IPlaceFormProps {
   loading: boolean;
@@ -89,21 +106,51 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
             <Navigation activeTab={activeTab} handleChange={handleChangeTab} />
           </Grid>
           <Grid item xs={12} md={9} lg={10}>
-            <TabPanel value={activeTab} index={0}>
-              <Tab1 />
-            </TabPanel>
-            <TabPanel value={activeTab} index={1}>
-              <Tab2
-                categories={createPlaceMeta.categories}
-                placeTypes={createPlaceMeta.placeTypes}
-              />
-            </TabPanel>
-            <TabPanel value={activeTab} index={2}>
-              <Tab3 />
-            </TabPanel>
-            <TabPanel value={activeTab} index={3}>
-              <Tab4 />
-            </TabPanel>
+            <AnimatePresence mode={"wait"}>
+              <motion.div
+                key={0}
+                variants={tabContentVariant}
+                animate={activeTab === 0 ? "active" : "inactive"}
+                initial="inactive"
+              >
+                <TabPanel value={activeTab} index={0}>
+                  <Tab1 />
+                </TabPanel>
+              </motion.div>
+              <motion.div
+                key={1}
+                variants={tabContentVariant}
+                animate={activeTab === 1 ? "active" : "inactive"}
+                initial="inactive"
+              >
+                <TabPanel value={activeTab} index={1}>
+                  <Tab2
+                    categories={createPlaceMeta.categories}
+                    placeTypes={createPlaceMeta.placeTypes}
+                  />
+                </TabPanel>
+              </motion.div>
+              <motion.div
+                key={2}
+                variants={tabContentVariant}
+                animate={activeTab === 2 ? "active" : "inactive"}
+                initial="inactive"
+              >
+                <TabPanel value={activeTab} index={2}>
+                  <Tab3 />
+                </TabPanel>
+              </motion.div>
+              <motion.div
+                key={3}
+                variants={tabContentVariant}
+                animate={activeTab === 3 ? "active" : "inactive"}
+                initial="inactive"
+              >
+                <TabPanel value={activeTab} index={3}>
+                  <Tab4 />
+                </TabPanel>
+              </motion.div>
+            </AnimatePresence>
           </Grid>
         </Grid>
       </WrappedContainer>

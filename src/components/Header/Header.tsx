@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   ClickAwayListener,
@@ -17,18 +18,23 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { HeaderLink } from "./HeaderLink/HeaderLink";
 import { useTranslation } from "next-i18next";
-import { memo, useRef, useState } from "react";
+import { memo } from "react";
 import { routerLinks } from "@/staticData/routerLinks";
 import { useHeaderMenu } from "@/components/Header/SliderMenu/useHeaderMenu";
 import SliderMenu from "@/components/Header/SliderMenu/SliderMenu";
 import { useRouter } from "next/router";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
 import CreateMenu from "@/components/Header/CreateMenu/CreateMenu";
+import { useAppSelector } from "@/store/hooks";
+import { selectIsAuth, selectUserData } from "@/store/user-slice/user.slice";
+import PersonIcon from "@mui/icons-material/Person";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Header = () => {
   const { t } = useTranslation("common");
   const menu = useHeaderMenu();
   const router = useRouter();
+  const isAuth = useAppSelector(selectIsAuth);
 
   return (
     <Box
@@ -67,14 +73,21 @@ const Header = () => {
           <IconButton
             onClick={menu.handleClick}
             sx={{
-              p: "0.5em",
-              backgroundColor: "#FF9D42",
+              p: isAuth ? "0.38em" : "0.5em",
+              border: isAuth ? "1px solid #FF9D42" : "none",
+              backgroundColor: isAuth ? "transparent" : "#FF9D42",
               "&:hover": {
-                backgroundColor: "primary.main",
+                backgroundColor: isAuth ? "#FF9D4224" : "primary.main",
               },
             }}
           >
-            {menu.open ? <CloseIcon /> : <MenuIcon />}
+            {isAuth ? (
+              <PersonIcon sx={{ fontSize: "27.8px", fill: "#FF9D42" }} />
+            ) : menu.open ? (
+              <CloseIcon />
+            ) : (
+              <MenuIcon />
+            )}
           </IconButton>
           <SliderMenu
             pathname={router.pathname}

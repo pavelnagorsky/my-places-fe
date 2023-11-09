@@ -178,20 +178,6 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
                 }}
               />
             </div>
-            {/*<Button*/}
-            {/*  type={"submit"}*/}
-            {/*  disabled={!formState.isValid}*/}
-            {/*  variant={"contained"}*/}
-            {/*  sx={{*/}
-            {/*    fontWeight: 700,*/}
-            {/*    mt: "2em",*/}
-            {/*    py: "1em",*/}
-            {/*    width: "100%",*/}
-            {/*    maxWidth: { sm: "250px" },*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  Создать*/}
-            {/*</Button>*/}
           </Box>
         </WrappedContainer>
       </Box>

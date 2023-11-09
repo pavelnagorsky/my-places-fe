@@ -13,9 +13,12 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import useReviews from "@/containers/Place/Reviews/useReviews";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { Button } from "@/components/UI/Button/Button";
 import { routerLinks } from "@/staticData/routerLinks";
 import NoReviews from "@/containers/Place/Reviews/NoReviews";
+import useDialog from "@/hooks/useDialog";
+import ReviewModal from "@/components/ReviewModal/ReviewModal";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 interface IReviewsSectionProps {
   reviews: ISearchReviewsResponse;
@@ -25,6 +28,23 @@ interface IReviewsSectionProps {
 const ReviewsSection = ({ reviews, placeId }: IReviewsSectionProps) => {
   const data = useReviews({ defaultData: reviews, placeId: placeId });
   const newReviewLink = routerLinks.createReview + `?placeId=${placeId}`;
+  const [reviewId, setReviewId] = useState<number | null>(null);
+  const dialog = useDialog();
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(router.query);
+  }, [router.query]);
+
+  const onClickOpenReview = (reviewId: number) => {
+    setReviewId(reviewId);
+    dialog.handleOpen();
+  };
+
+  const onCloseReview = () => {
+    dialog.handleClose();
+    setReviewId(null);
+  };
 
   return (
     <Stack mb={{ xs: "2em", md: 0 }}>
@@ -49,6 +69,11 @@ const ReviewsSection = ({ reviews, placeId }: IReviewsSectionProps) => {
           </Badge>
         </IconButton>
       </Stack>
+      <ReviewModal
+        open={dialog.open}
+        onClose={onCloseReview}
+        reviewId={reviewId}
+      />
       <Stack
         id="scrollableDiv"
         maxHeight={{ xs: "765px", md: "1530px" }}
@@ -84,7 +109,7 @@ const ReviewsSection = ({ reviews, placeId }: IReviewsSectionProps) => {
           hasMore={data.hasMore}
           loader={
             <Typography textAlign={"center"} variant={"body2"} fontWeight={700}>
-              Loading...
+              Загрузка...
             </Typography>
           }
           style={{
@@ -115,7 +140,7 @@ const ReviewsSection = ({ reviews, placeId }: IReviewsSectionProps) => {
                     delay: recalculatedDelay,
                   }}
                 >
-                  <ReviewCard review={r} />
+                  <ReviewCard onClick={onClickOpenReview} review={r} />
                 </motion.div>
               );
             })}

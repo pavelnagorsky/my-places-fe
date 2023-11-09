@@ -28,12 +28,22 @@ const Footer = () => {
   const linksSection = (
     <Media xs={"none"} md={"block"}>
       <Stack direction={"row"} gap={"3em"}>
-        <MyLink href={routerLinks.contactUs} sx={linkSx}>
-          {t("links.contactUs")}
-        </MyLink>
-        <MyLink href={routerLinks.aboutUs} sx={linkSx}>
-          {t("links.about")}
-        </MyLink>
+        <Stack gap={"0.5em"}>
+          <MyLink href={routerLinks.contactUs} sx={linkSx}>
+            {t("links.contactUs")}
+          </MyLink>
+          <MyLink href={routerLinks.aboutUs} sx={linkSx}>
+            {t("links.about")}
+          </MyLink>
+        </Stack>
+        <Stack gap={"0.5em"}>
+          <MyLink href={routerLinks.privacyPolicy} sx={linkSx}>
+            Политика конфиденциальности
+          </MyLink>
+          <MyLink href={routerLinks.termsOfUse} sx={linkSx}>
+            Пользовательское соглашение
+          </MyLink>
+        </Stack>
       </Stack>
     </Media>
   );
@@ -45,8 +55,14 @@ const Footer = () => {
       </Typography>
       <Stack direction={"row"} alignItems={"center"}>
         <Image src={mailImage} alt={"Email"} />
-        <Typography color={"secondary.main"} ml={"0.3em"} fontSize={"14px"}>
-          pavelnagorsky@mail.ru
+        <Typography
+          component={"a"}
+          href="mailto:my-places@gmail.com"
+          color={"secondary.main"}
+          ml={"0.3em"}
+          fontSize={"14px"}
+        >
+          my-places@gmail.com
         </Typography>
       </Stack>
     </Stack>

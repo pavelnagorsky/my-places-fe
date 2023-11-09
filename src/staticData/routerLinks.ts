@@ -7,4 +7,6 @@ export const routerLinks = {
   createReview: "/create-review",
   createPlace: "/create-place",
   place: (slug: string) => `/places/${slug}`,
+  privacyPolicy: "/privacy-policy",
+  termsOfUse: "/terms-of-use",
 };

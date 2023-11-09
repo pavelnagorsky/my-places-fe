@@ -88,7 +88,10 @@ function SearchPage() {
       >
         <Box mt={"2.5em"} display={!showMap && isMobile ? "none" : "block"}>
           <Map
-            containerStyle={{ height: isMobile ? "323px" : "600px" }}
+            containerStyle={{
+              height: isMobile ? "323px" : "500px",
+              transition: "height 0.5s ease-in",
+            }}
             fitCoordinates={mapFitBounds}
           >
             {mapCircle ? (

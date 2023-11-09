@@ -272,6 +272,18 @@ const Signup = () => {
                 >
                   Политикой конфиденциальности
                 </NextMuiLink>
+                {" и "}
+                <NextMuiLink
+                  target={"_blank"}
+                  href={"/terms-of-use"}
+                  sx={{
+                    ml: "5px",
+                    color: "unset",
+                    textDecoration: "underline",
+                  }}
+                >
+                  Условиями пользования
+                </NextMuiLink>
               </Fragment>
             }
           />

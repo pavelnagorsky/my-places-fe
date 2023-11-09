@@ -13,6 +13,8 @@ const Breadcrumbs = () => {
   const breadcrumbNameMap = {
     ["create-review"]: "Создание заметки",
     ["create-place"]: "Создание места",
+    ["privacy-policy"]: "Политика Конфиденциальности",
+    ["terms-of-use"]: "Пользовательское Соглашение",
   };
 
   return (

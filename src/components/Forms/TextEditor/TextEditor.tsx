@@ -60,7 +60,6 @@ const TextEditor = ({ fieldName }: { fieldName: string }) => {
               value={field.value}
               onChange={(val: string, delta: any, source: any, editor: any) => {
                 field.onChange(val);
-                console.log(val);
                 const contentLength = editor.getLength();
                 setValue("_textEditorContentLength", contentLength - 1);
               }}

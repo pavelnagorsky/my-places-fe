@@ -37,6 +37,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
           alignSelf: "normal",
           display: "flex",
           p: { xs: "0.5em", sm: "1em" },
+          paddingRight: { xs: "0.5em", sm: "0.5em" },
           gap: "0.5em",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -56,6 +57,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
         </Typography>
         <Stack
           direction={"row"}
+          flexWrap={"wrap"}
           alignItems={"center"}
           justifyContent={"space-between"}
           gap={"0.5em"}
@@ -67,6 +69,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
             display={"flex"}
             alignItems={"center"}
             flexGrow={1}
+            sx={{ wordBreak: "break-word" }}
             gap={{ xs: "0.3em", sm: "0.5em" }}
           >
             {place.type.title}
