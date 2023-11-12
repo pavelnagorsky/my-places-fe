@@ -1,12 +1,24 @@
-import { Fragment, memo, useEffect, useState } from "react";
-import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import { Fragment, memo, useMemo } from "react";
+import {
+  Box,
+  FormControlLabel,
+  IconButton,
+  Stack,
+  Switch,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { CheckboxButtonGroup, SelectElement } from "react-hook-form-mui";
+import {
+  CheckboxButtonGroup,
+  Controller,
+  SelectElement,
+  SwitchElement,
+  useFormContext,
+} from "react-hook-form-mui";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
-import { useTranslation } from "next-i18next";
-import placeTypesService from "@/services/place-types-service/place-types.service";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
-import placeCategoriesService from "@/services/place-categories-service/place-categories.service";
+import { IPlaceFormContext } from "@/containers/CreatePlace/Form/interfaces";
 
 interface ITab2Props {
   placeTypes: IPlaceType[];
@@ -14,6 +26,21 @@ interface ITab2Props {
 }
 
 const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
+  const { watch, getValues, resetField } = useFormContext<IPlaceFormContext>();
+  const isCommercial = watch("isCommercial");
+
+  const filteredPlaceTypes = useMemo(() => {
+    return placeTypes
+      .filter((t) => {
+        if (isCommercial) {
+          return t.commercial;
+        } else {
+          return !t.commercial;
+        }
+      })
+      .map((opt) => ({ id: opt.id, label: opt.title }));
+  }, [isCommercial, placeTypes]);
+
   return (
     <Fragment>
       <Stack direction={"row"} gap={"0.5em"}>
@@ -42,6 +69,47 @@ const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
           </IconButton>
         </Tooltip>
       </Stack>
+      <Stack mb={"1.5em"} mt={"0.5em"} maxWidth={{ lg: "70%" }}>
+        <Stack
+          direction={{ sm: "row" }}
+          alignItems={{ sm: "center" }}
+          gap={{ xs: "0.4em", sm: "1em" }}
+        >
+          <Typography variant={"body1"} fontSize={{ xs: "18px", md: "20px" }}>
+            Публикация на коммерческой основе
+          </Typography>
+          <Controller
+            name={"isCommercial"}
+            render={({ field, fieldState, formState }) => (
+              <FormControlLabel
+                control={
+                  <Switch
+                    {...field}
+                    onChange={(event, checked) => {
+                      resetField("placeTypeId");
+                      field.onChange(checked);
+                    }}
+                  />
+                }
+                label={
+                  <Box component={"span"} display={{ sm: "none" }}>
+                    Рекламная публикация
+                  </Box>
+                }
+              />
+            )}
+          />
+        </Stack>
+        <Typography
+          variant={"body2"}
+          mt={"0.5em"}
+          fontSize={{ xs: "12px", md: "14px" }}
+        >
+          Для публикации на сайте коммерчески ориентированного объекта (усадьба,
+          выставка, музей, гостиница и т.д.) в целях рекламы, выберите данную
+          опцию.
+        </Typography>
+      </Stack>
       <Typography variant={"body1"} fontSize={{ xs: "18px", md: "20px" }}>
         Выберите тип места
       </Typography>
@@ -54,7 +122,7 @@ const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
           mt: "1em",
           width: { xs: "100%", md: "50%" },
         }}
-        options={placeTypes.map((opt) => ({ id: opt.id, label: opt.title }))}
+        options={filteredPlaceTypes}
         placeholder={"Выберите тип места..."}
       />
       <Typography

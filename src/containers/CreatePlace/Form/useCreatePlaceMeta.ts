@@ -14,7 +14,7 @@ const useCreatePlaceMeta = () => {
     placeTypesService
       .getAll(i18n.language)
       .then(({ data }) => {
-        setPlaceTypes(data.filter((t) => !t.commercial));
+        setPlaceTypes(data);
       })
       .catch(() => {});
   }, [i18n.language]);

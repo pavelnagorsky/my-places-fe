@@ -6,6 +6,8 @@ import { useTranslation } from "next-i18next";
 import { AutocompleteElement, useFormContext } from "react-hook-form-mui";
 import { useRouter } from "next/router";
 import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
+import { useAppSelector } from "@/store/hooks";
+import { selectIsAuth } from "@/store/user-slice/user.slice";
 
 interface IPlaceSelectProps {
   readonly fieldName: string;
@@ -19,6 +21,7 @@ const PlaceSelect = ({ fieldName }: IPlaceSelectProps) => {
   const [loading, setLoading] = useState(false);
   const [alreadySelectedPlaceId, setAlreadySelectedPlaceId] = useState(false);
   const query = router.query as { placeId?: string };
+  const isAuth = useAppSelector(selectIsAuth);
 
   useEffect(() => {
     if (!query.placeId || alreadySelectedPlaceId) return;
@@ -41,8 +44,9 @@ const PlaceSelect = ({ fieldName }: IPlaceSelectProps) => {
       });
 
   useEffect(() => {
+    if (!isAuth) return;
     fetch("");
-  }, [i18n.language, query.placeId]);
+  }, [i18n.language, query.placeId, isAuth]);
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLoading(true);

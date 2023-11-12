@@ -1,10 +1,10 @@
 {
-  "logo": "know your land",
+  "logo": "Know your land",
   "links": {
     "contactUs": "Обратная связь",
     "create": "Создать",
-    "create-place": "Создать место",
-    "create-review": "Создать заметку",
+    "create-place": "Создание места",
+    "create-review": "Создание заметки",
     "search": "Поиск",
     "about": "О проекте"
   },

@@ -2,6 +2,7 @@ import { Avatar, Stack, Typography, Link, Divider, Box } from "@mui/material";
 import { routerLinks } from "@/staticData/routerLinks";
 import SliderMenuLink from "@/components/Header/SliderMenu/SliderMenuLink";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useAppDispatch } from "@/store/hooks";
 import { logoutThunk } from "@/store/user-slice/thunks";
 
@@ -55,6 +56,13 @@ const UserSection = ({
         text={"Личный кабинет"}
         href={routerLinks.photos}
         icon={<AccountCircleIcon fontSize={"small"} color={"secondary"} />}
+      />
+      <SliderMenuLink
+        pathname={pathname}
+        onClick={onClose}
+        text={"Администрация"}
+        href={routerLinks.administration}
+        icon={<AdminPanelSettingsIcon fontSize={"small"} color={"secondary"} />}
       />
       <Divider
         variant={"middle"}

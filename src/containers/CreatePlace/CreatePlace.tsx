@@ -27,6 +27,7 @@ const CreatePlace = () => {
       title: "",
       description: "",
       categoriesIds: [],
+      isCommercial: false,
     },
     mode: "onChange",
     shouldFocusError: true,
@@ -78,6 +79,7 @@ const CreatePlace = () => {
       categoriesIds: data.categoriesIds,
       coordinates: `${data.lat};${data.lng}`,
       imagesIds: data.images.map((image) => image.id),
+      isCommercial: data.isCommercial,
     };
 
     placesService
@@ -95,7 +97,7 @@ const CreatePlace = () => {
   };
 
   return (
-    <ProtectedAuth>
+    <ProtectedAuth mode={"redirectAfter"}>
       <FormProvider {...form}>
         <FormContainer formContext={form} onSuccess={onSubmit}>
           <PlaceForm loading={loading} />

@@ -55,8 +55,11 @@ function TextAndImage({
         ) : null}
         <Typography variant="body2">{description}</Typography>
         <Button
+          variant={"contained"}
           sx={{
-            mt: 3.5,
+            //mt: 3.5,
+            mt: "2.5em",
+            py: "1em",
             width: { xs: "100%", md: "initial" },
             fontWeight: 700,
           }}
@@ -76,10 +79,11 @@ function TextAndImage({
               md: "flex",
             },
             borderRadius: {
-              xs: "30px",
+              xs: "0px 180px 180px 0px",
               md: reverse ? "180px 0px 180px 180px" : "180px 180px 180px 0px",
             },
-            my: { xs: showImageMobile ? "2em" : "0em", md: "0em" },
+            mb: { xs: showImageMobile ? "1em" : "0em", md: "0em" },
+            mt: { xs: showImageMobile ? "3em" : "0em", md: "0em" },
             width: "100%",
             height: "100%",
             maxHeight: "320px",

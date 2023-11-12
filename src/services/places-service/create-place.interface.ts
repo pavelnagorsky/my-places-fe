@@ -7,5 +7,6 @@ export interface ICreatePlace {
   categoriesIds: number[];
   coordinates: string;
   address: string;
+  isCommercial: boolean;
   website?: string;
 }

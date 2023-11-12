@@ -23,8 +23,10 @@ import {
   changeAuthScreen,
   closeAuth,
   selectAuthActiveScreen,
+  selectAuthCloseRedirect,
   selectAuthOpen,
 } from "@/store/user-slice/user.slice";
+import { useRouter } from "next/router";
 
 function a11yProps(index: number) {
   return {
@@ -72,9 +74,14 @@ const AuthModal = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const open = useAppSelector(selectAuthOpen);
   const activeTab = useAppSelector(selectAuthActiveScreen);
+  const redirectHomeOnClose = useAppSelector(selectAuthCloseRedirect);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleClose = () => {
+    if (redirectHomeOnClose) {
+      router.push("/");
+    }
     dispatch(closeAuth());
   };
 

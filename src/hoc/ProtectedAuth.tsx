@@ -8,9 +8,10 @@ import localStorageFields from "@/shared/localStorageFields";
 
 interface IProtectedRouteProps extends PropsWithChildren {
   redirectPath?: string;
+  mode: "redirectAfter" | "redirectPermanent";
 }
 
-function ProtectedAuth({ children, redirectPath }: IProtectedRouteProps) {
+function ProtectedAuth({ children, redirectPath, mode }: IProtectedRouteProps) {
   const localStorage = useSSRLocalStorage();
   const lcToken = localStorage.getItem(localStorageFields.TOKEN);
   const router = useRouter();
@@ -22,9 +23,10 @@ function ProtectedAuth({ children, redirectPath }: IProtectedRouteProps) {
       dispatch(
         openAuth({
           loginRedirect: redirectPath ?? router.asPath,
+          redirectHomeOnCancel: mode === "redirectAfter",
         })
       );
-      router.push(routerLinks.home);
+      if (mode === "redirectPermanent") router.push(routerLinks.home);
     }
   }, [lcToken, redirectPath, isAuth]);
 

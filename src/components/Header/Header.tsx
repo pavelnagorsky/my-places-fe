@@ -26,9 +26,8 @@ import { useRouter } from "next/router";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
 import CreateMenu from "@/components/Header/CreateMenu/CreateMenu";
 import { useAppSelector } from "@/store/hooks";
-import { selectIsAuth, selectUserData } from "@/store/user-slice/user.slice";
+import { selectIsAuth } from "@/store/user-slice/user.slice";
 import PersonIcon from "@mui/icons-material/Person";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Header = () => {
   const { t } = useTranslation("common");

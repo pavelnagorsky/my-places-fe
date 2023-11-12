@@ -5,6 +5,7 @@ import CastleOutlinedIcon from "@mui/icons-material/CastleOutlined";
 import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import { Button } from "@/components/UI/Button/Button";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { routerLinks } from "@/staticData/routerLinks";
 
 const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
   return (
@@ -75,7 +76,11 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
             {place.type.title}
             <CastleOutlinedIcon sx={{ color: secondaryLightColor }} />
           </Typography>
-          <Button linkTo={place.slug} variant={"contained"} sx={{ p: 0 }}>
+          <Button
+            linkTo={routerLinks.place(place.slug)}
+            variant={"contained"}
+            sx={{ p: 0 }}
+          >
             <ArrowRightAltIcon sx={{ color: "white" }} />
           </Button>
         </Stack>

@@ -9,4 +9,5 @@ export const routerLinks = {
   place: (slug: string) => `/places/${slug}`,
   privacyPolicy: "/privacy-policy",
   termsOfUse: "/terms-of-use",
+  administration: "/administration/place-categories",
 };

@@ -48,7 +48,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
 
   return (
     <WrappedContainer>
-      <Grid container spacing={{ md: "3em" }} mb={"3em"}>
+      <Grid container spacing={{ md: "3em" }} mb={"5em"}>
         <Grid item xs={12} lg={8}>
           <Typography
             variant={"h1"}
@@ -164,7 +164,13 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
           >
             Категории
           </Typography>
-          <Stack direction={"row"} alignItems={"center"} gap={"2em"} mb={"2em"}>
+          <Stack
+            direction={"row"}
+            flexWrap={"wrap"}
+            alignItems={"center"}
+            gap={"2em"}
+            mb={"2em"}
+          >
             {place.categories.map((c) => (
               <Stack
                 key={c.id}

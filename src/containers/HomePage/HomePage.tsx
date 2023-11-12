@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next";
 import { Box } from "@mui/material";
 import TextAndMainImage from "@/components/TextAndImage/TextAndMainImage";
 import mainImageMd from "public/images/home-page/main-image-md.jpg";
-import mainImageXs from "public/images/home-page/main-image-xs.jpg";
+import mainImageXs from "public/images/home-page/main-image-xs.png";
 import TextAndImage from "@/components/TextAndImage/TextAndImage";
 import card1Image from "public/images/home-page/card1.jpg";
 import card2Image from "public/images/home-page/card2.jpg";
@@ -18,7 +18,6 @@ const HomePage = () => {
     <Box display={"block"}>
       <WrappedContainer>
         <TextAndMainImage
-          textShadow
           title={t("title")}
           description={t("description")}
           showMobile

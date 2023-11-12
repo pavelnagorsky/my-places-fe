@@ -19,7 +19,7 @@ function TextWithBubbles() {
         <DefaultContainer sx={{ background: "transparent" }}>
           <Typography
             px={{ xs: "2.5em", md: "6em" }}
-            pt={"2em"}
+            pt={{ xs: "1.5em", md: "2em" }}
             textAlign={"center"}
             gutterBottom
             fontSize={{
@@ -28,9 +28,9 @@ function TextWithBubbles() {
             }}
             fontWeight={700}
             color={"primary.contrastText"}
-            sx={{
-              textShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
-            }}
+            // sx={{
+            //   textShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
+            // }}
             component={"h2"}
           >
             {t("bottomText")}

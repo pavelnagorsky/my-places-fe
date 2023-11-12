@@ -10,13 +10,11 @@ import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
 import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import { ICreateReview } from "@/services/reviews-service/create-review.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 
 const CreateReview = () => {
-  const router = useRouter();
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
@@ -89,7 +87,7 @@ const CreateReview = () => {
   };
 
   return (
-    <ProtectedAuth>
+    <ProtectedAuth mode={"redirectAfter"}>
       <FormProvider {...form}>
         <FormContainer formContext={form} onSuccess={onSubmit}>
           <ReviewForm loading={loading} />

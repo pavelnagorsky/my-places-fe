@@ -24,6 +24,7 @@ interface IUserState {
   activeScreen: ActiveAuthScreenEnum;
   userData: IUser | null;
   logoutAfterExit: boolean;
+  redirectHomeOnCancelLogin: boolean;
 }
 
 const initialState: IUserState = {
@@ -35,6 +36,7 @@ const initialState: IUserState = {
   activeScreen: ActiveAuthScreenEnum.LOGIN,
   userData: null,
   logoutAfterExit: false,
+  redirectHomeOnCancelLogin: false,
 };
 
 export const userSlice = createSlice({
@@ -57,15 +59,23 @@ export const userSlice = createSlice({
     closeAuth: (state) => {
       state.open = false;
       state.activeScreen = ActiveAuthScreenEnum.LOGIN;
+      state.redirectHomeOnCancelLogin = false;
       state.loginRedirect = null;
       state.error = false;
     },
     openAuth: (
       state,
-      { payload }: PayloadAction<{ loginRedirect?: string; signup?: boolean }>
+      {
+        payload,
+      }: PayloadAction<{
+        loginRedirect?: string;
+        signup?: boolean;
+        redirectHomeOnCancel?: boolean;
+      }>
     ) => {
       state.open = true;
       state.loginRedirect = payload.loginRedirect || null;
+      state.redirectHomeOnCancelLogin = Boolean(payload.redirectHomeOnCancel);
       if (payload.signup) {
         state.activeScreen = ActiveAuthScreenEnum.SIGNUP;
       }
@@ -146,6 +156,10 @@ export const selectAuthActiveScreen = createSelector(
 );
 export const selectAuthOpen = createSelector(selectUserState, (s) => s.open);
 export const selectAuthError = createSelector(selectUserState, (s) => s.error);
+export const selectAuthCloseRedirect = createSelector(
+  selectUserState,
+  (s) => s.redirectHomeOnCancelLogin
+);
 
 export const {
   changeAuthScreen,

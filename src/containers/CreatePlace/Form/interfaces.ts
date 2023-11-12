@@ -10,5 +10,6 @@ export interface IPlaceFormContext {
   lat: number | string;
   lng: number | string;
   address: string;
+  isCommercial: boolean;
   website?: string;
 }
