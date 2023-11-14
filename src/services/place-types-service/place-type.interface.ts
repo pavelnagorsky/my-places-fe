@@ -3,4 +3,5 @@ export interface IPlaceType {
   title: string;
   commercial: boolean;
   image: string | null;
+  image2: string | null;
 }

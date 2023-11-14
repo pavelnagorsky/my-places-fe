@@ -300,7 +300,7 @@ const Signup = () => {
           variant={"contained"}
         >
           {loading ? (
-            <CircularProgress color={"inherit"} size={21} />
+            <CircularProgress color={"inherit"} size={23} />
           ) : (
             "Зарегистрироваться"
           )}

@@ -23,10 +23,13 @@ import { useTranslation } from "next-i18next";
 import placeCategoriesService from "@/services/place-categories-service/place-categories.service";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { useRouter } from "next/router";
+import { IPlaceType } from "@/services/place-types-service/place-type.interface";
+import placeTypesService from "@/services/place-types-service/place-types.service";
+import PlaceTypesTableHead from "@/containers/Admin/PlaceTypes/PlaceTypesTableHead";
 
-const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
+const PlaceTypesTable = ({ searchText }: ITableProps) => {
   const { i18n } = useTranslation();
-  const [items, setItems] = useState<IPlaceCategory[]>([]);
+  const [items, setItems] = useState<IPlaceType[]>([]);
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
@@ -40,7 +43,7 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
 
   useEffect(() => {
     // fetch items
-    placeCategoriesService
+    placeTypesService
       .getAll(i18n.language)
       .then(({ data }) => {
         setItems(data);
@@ -81,8 +84,8 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
     });
   }
 
-  function handleClick(item: IPlaceCategory) {
-    router.push(`/administration/place-categories/${item.id}`);
+  function handleClick(item: IPlaceType) {
+    router.push(`/administration/place-types/${item.id}`);
   }
 
   function handleChangePage(
@@ -126,7 +129,7 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
       >
         <Typography color="text.secondary" variant="h5">
-          Категории не найдены
+          Типы не найдены
         </Typography>
       </Stack>
     );
@@ -136,7 +139,7 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
     <Stack width={"100%"} minHeight={"100%"}>
       <Stack flexGrow={1} sx={{ overflowX: "auto" }}>
         <Table stickyHeader aria-labelledby="tableTitle">
-          <PlaceCategoriesTableHead
+          <PlaceTypesTableHead
             order={order}
             onRequestSort={handleRequestSort}
             rowCount={data.length}
@@ -155,6 +158,11 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
                     return order.direction === "asc"
                       ? Number(a.title < b.title)
                       : Number(a.title > b.title);
+                  }
+                  case "commercial": {
+                    return order.direction === "asc"
+                      ? Number(a.commercial && !b.commercial)
+                      : Number(!a.commercial && b.commercial);
                   }
                   default: {
                     return order.direction === "asc"
@@ -179,6 +187,10 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
 
                     <TableCell component="th" scope="row">
                       {item.title}
+                    </TableCell>
+
+                    <TableCell component="th" scope="row">
+                      {item.commercial ? "Да" : "Нет"}
                     </TableCell>
 
                     <TableCell component="th" scope="row">
@@ -240,4 +252,4 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
   );
 };
 
-export default PlaceCategoriesTable;
+export default PlaceTypesTable;

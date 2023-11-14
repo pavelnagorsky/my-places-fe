@@ -141,7 +141,7 @@ const Login = () => {
           sx={{ fontWeight: 700, my: "1.3em", py: "0.8em" }}
           variant={"contained"}
         >
-          {loading ? <CircularProgress color={"inherit"} size={21} /> : "Войти"}
+          {loading ? <CircularProgress color={"inherit"} size={23} /> : "Войти"}
         </Button>
       </FormContainer>
       <Divider sx={{ borderColor: "#D5D3D0", my: "1em" }} />
