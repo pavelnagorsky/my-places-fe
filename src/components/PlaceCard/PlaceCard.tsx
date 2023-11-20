@@ -50,7 +50,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
             priority
             sizes="(max-width: 900px) 330px, 374px"
             src={place.image}
-            alt={place.title}
+            alt={place.title || "Place image"}
           />
         </CardMedia>
         <CardContent

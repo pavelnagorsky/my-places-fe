@@ -19,6 +19,9 @@ import useDialog from "@/hooks/useDialog";
 import ReviewModal from "@/components/ReviewModal/ReviewModal";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import reviewsService from "@/services/reviews-service/reviews.service";
+import { useTranslation } from "next-i18next";
+import { IReview } from "@/services/reviews-service/review.interface";
 
 interface IReviewsSectionProps {
   reviews: ISearchReviewsResponse;
@@ -26,24 +29,44 @@ interface IReviewsSectionProps {
 }
 
 const ReviewsSection = ({ reviews, placeId }: IReviewsSectionProps) => {
+  const { i18n } = useTranslation();
   const data = useReviews({ defaultData: reviews, placeId: placeId });
   const newReviewLink = routerLinks.createReview + `?placeId=${placeId}`;
-  const [reviewId, setReviewId] = useState<number | null>(null);
+  const [review, setReview] = useState<IReview | null>(null);
   const dialog = useDialog();
   const router = useRouter();
 
+  const handleLoadReview = (reviewId: number) => {
+    dialog.handleOpen();
+    reviewsService
+      .getReviewById(reviewId, i18n.language)
+      .then(({ data }) => {
+        setReview(data);
+      })
+      .catch(() => {
+        setReview(null);
+        dialog.handleClose();
+      });
+  };
+
   useEffect(() => {
-    console.log(router.query);
+    const routerReviewId = router.query.review;
+    if (routerReviewId && !Number.isNaN(+routerReviewId) && !dialog.open) {
+      handleLoadReview(+routerReviewId);
+    }
   }, [router.query]);
 
   const onClickOpenReview = (reviewId: number) => {
-    setReviewId(reviewId);
-    dialog.handleOpen();
+    router.push(router.asPath + `?review=${reviewId}`, undefined, {
+      shallow: true,
+    });
+    handleLoadReview(reviewId);
   };
 
   const onCloseReview = () => {
+    router.push(`/places/${router.query.slug}`, undefined, { shallow: true });
     dialog.handleClose();
-    setReviewId(null);
+    setReview(null);
   };
 
   return (
@@ -69,11 +92,7 @@ const ReviewsSection = ({ reviews, placeId }: IReviewsSectionProps) => {
           </Badge>
         </IconButton>
       </Stack>
-      <ReviewModal
-        open={dialog.open}
-        onClose={onCloseReview}
-        reviewId={reviewId}
-      />
+      <ReviewModal open={dialog.open} onClose={onCloseReview} review={review} />
       <Stack
         id="scrollableDiv"
         maxHeight={{ xs: "765px", md: "1530px" }}

@@ -9,6 +9,7 @@ import { memo } from "react";
 import { routerLinks } from "@/staticData/routerLinks";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
 import Media from "@/hoc/Media/Media";
+import { useRouter } from "next/router";
 
 const linkSx: SxProps = {
   fontSize: "14px",
@@ -24,6 +25,11 @@ const linkSx: SxProps = {
 
 const Footer = () => {
   const { t } = useTranslation("common");
+  const router = useRouter();
+  const bottomMenuPathNames = ["/administration"];
+  const setBottomMargin = bottomMenuPathNames.some((link) =>
+    router.pathname.includes(link)
+  );
 
   const linksSection = (
     <Media xs={"none"} md={"block"}>
@@ -69,7 +75,9 @@ const Footer = () => {
   );
 
   return (
-    <WrappedContainer>
+    <WrappedContainer
+      sx={{ pb: setBottomMargin ? { xs: "4em", md: 0 } : undefined }}
+    >
       <Stack
         gap={{ xs: "1.5em", md: 0 }}
         direction={"row"}

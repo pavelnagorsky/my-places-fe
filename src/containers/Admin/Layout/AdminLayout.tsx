@@ -12,10 +12,10 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
           container
           spacing={{ xs: "1em", md: "2em" }}
           mt={"1em"}
-          mb={"3em"}
+          mb={"5em"}
           position={"relative"}
         >
-          <Grid item xs={12} md={3} lg={2.5}>
+          <Grid item xs={12} md={3} lg={2.5} sx={{ zIndex: 10 }}>
             <AdminSideBar />
           </Grid>
           <Grid item xs={12} md={9} lg={9.5}>

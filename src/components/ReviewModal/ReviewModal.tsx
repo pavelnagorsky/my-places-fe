@@ -14,48 +14,21 @@ import {
 import { IReview } from "@/services/reviews-service/review.interface";
 import { format } from "date-fns";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useEffect, useState } from "react";
-import reviewsService from "@/services/reviews-service/reviews.service";
-import { useTranslation } from "next-i18next";
 import ReviewGallery from "@/components/ReviewModal/ReviewGallery";
 import StyledReviewModalContainer from "@/components/UI/ReviewContainers/StyledReviewModalContainer";
 
 interface IReviewModalProps {
-  readonly reviewId: number | null;
+  readonly review: IReview | null;
   readonly open: boolean;
   readonly onClose: () => void;
 }
 
-const ReviewModal = ({ open, onClose, reviewId }: IReviewModalProps) => {
-  const { i18n } = useTranslation();
+const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [review, setReview] = useState<IReview | null>(null);
   function createMarkup() {
     return { __html: review?.description || "" };
   }
-
-  useEffect(() => {
-    if (!reviewId) {
-      onClose();
-      setTimeout(() => setReview(null), 300);
-      return;
-    }
-    if (!open) {
-      setReview(null);
-      return;
-    } else {
-      reviewsService
-        .getReviewById(reviewId, i18n.language)
-        .then(({ data }) => {
-          setReview(data);
-        })
-        .catch(() => {
-          setReview(null);
-          onClose();
-        });
-    }
-  }, [open, reviewId, i18n.language]);
 
   const heading = review ? (
     <Stack

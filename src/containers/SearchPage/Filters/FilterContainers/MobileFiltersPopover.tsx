@@ -169,7 +169,7 @@ const MobileFiltersPopover = ({
         sx={{ borderColor: primaryBackground, mt: "0.5em", mb: "1em" }}
       />
       <Typography fontSize={"18px"} component={"p"} mb={"0.8em"}>
-        {t("filters.typesCommercial")}
+        {t("filters.categories")}
       </Typography>
       <Box width={"100%"} mb={"1em"}>
         <CheckboxButtonGroup
