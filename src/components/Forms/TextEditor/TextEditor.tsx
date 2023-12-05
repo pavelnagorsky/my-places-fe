@@ -73,13 +73,13 @@ const TextEditor = ({ fieldName }: { fieldName: string }) => {
       <Controller
         rules={{
           min: 1,
-          max: 4000,
+          max: 6000,
           required: true,
         }}
         render={({ field, fieldState, formState }) => {
           return (
             <Typography variant={"body2"} mt={"0.5em"} sx={{ float: "right" }}>
-              {field.value || 0} / 4000
+              {field.value || 0} / 6000
             </Typography>
           );
         }}

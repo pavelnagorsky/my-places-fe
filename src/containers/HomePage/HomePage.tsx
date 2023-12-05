@@ -25,9 +25,9 @@ const HomePage = () => {
           imageUrlXs={mainImageXs}
         />
         <motion.div
-          initial={{ opacity: 0, x: 200, scale: 0.5 }}
+          initial={{ opacity: 0, x: 10, scale: 0.5 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.4, type: "tween", ease: "easeInOut" }}
+          transition={{ duration: 0.3, type: "tween", ease: "easeOut" }}
         >
           <TextAndImage
             title={t("card1.title")}
@@ -39,11 +39,11 @@ const HomePage = () => {
           />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, x: -200, scale: 0.5 }}
+          initial={{ opacity: 0, x: -10, scale: 0.5 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{
-            duration: 0.4,
-            ease: "easeInOut",
+            duration: 0.3,
+            ease: "easeOut",
             type: "tween",
           }}
         >

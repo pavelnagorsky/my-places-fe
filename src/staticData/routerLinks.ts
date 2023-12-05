@@ -10,4 +10,5 @@ export const routerLinks = {
   privacyPolicy: "/privacy-policy",
   termsOfUse: "/terms-of-use",
   administration: "/administration/place-categories",
+  personalArea: "/personal-area",
 };

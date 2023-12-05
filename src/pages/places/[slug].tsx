@@ -41,24 +41,32 @@ export const getStaticProps: GetStaticProps<IPlacePageProps> = async ({
   locale,
   params,
 }) => {
-  const placeRes = await placesService.getPlaceBySlug(
-    params?.slug as string,
-    locale ?? I18nLanguages.ru
-  );
-  const reviewsRes = await reviewsService.getPlaceReviews(
-    placeRes.data.id,
-    locale ?? I18nLanguages.ru,
-    0
-  );
-  return {
-    props: {
-      place: placeRes.data,
-      reviews: reviewsRes.data,
-      ...(await serverSideTranslations(locale ?? I18nLanguages.ru, ["common"])),
-      // Will be passed to the page component as props
-    },
-    revalidate: 60,
-  };
+  try {
+    const placeRes = await placesService.getPlaceBySlug(
+      params?.slug as string,
+      locale ?? I18nLanguages.ru
+    );
+    const reviewsRes = await reviewsService.getPlaceReviews(
+      placeRes.data.id,
+      locale ?? I18nLanguages.ru,
+      0
+    );
+    return {
+      props: {
+        place: placeRes.data,
+        reviews: reviewsRes.data,
+        ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
+          "common",
+        ])),
+        // Will be passed to the page component as props
+      },
+      revalidate: 60,
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+    };
+  }
 };
 
 export default Slug;

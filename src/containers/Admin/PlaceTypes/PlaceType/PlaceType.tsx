@@ -89,7 +89,7 @@ const PlaceType = () => {
   }
 
   /**
-   * Show Message if the requested products is not exists
+   * Show Message if the requested item is not exists
    */
   if (noItem) {
     return (
@@ -108,7 +108,7 @@ const PlaceType = () => {
         <Button
           sx={{ mt: "2em" }}
           variant="outlined"
-          linkTo={"/administration/place-categories"}
+          linkTo={"/administration/place-types"}
           color="inherit"
         >
           Список типов

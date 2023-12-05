@@ -6,6 +6,11 @@ const StyledReviewsContainer = styled(Box)(({ theme }) => ({
   lineHeight: "140%",
   p: "0.5em",
   height: "100%",
+  img: {
+    objectFit: "cover",
+    maxWidth: "100%",
+    maxHeight: "100vh",
+  },
   "h1, h2, h3, h4, h5, h6, .ql-size-large": {
     fontSize: "1.25rem",
   },

@@ -50,6 +50,19 @@ export const alertsSlice = createSlice({
     },
     hideAlert: (state) => {
       state.show = false;
+      state.alertProps = {
+        variant: "filled",
+        severity: "info",
+        description: undefined,
+      };
+      state.snackbarProps = {
+        color: "success",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+        autoHideDuration: 6000,
+      };
     },
   },
 });

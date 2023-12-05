@@ -1,5 +1,4 @@
 import axiosInstance from "@/services/axios.instance";
-import { ISearchPlace } from "@/services/places-service/search-place.interface";
 import { IPlaceSlug } from "@/services/places-service/place-slug.interface";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import {
@@ -14,14 +13,9 @@ import { IPlace } from "@/services/places-service/place.interface";
 const placesService = {
   ITEMS_PER_PAGE: 12,
 
-  getAllPlaces: (lang: string) => {
-    const langId = parseLanguageToId(lang);
-    return axiosInstance.get<ISearchPlace[]>(`/places?lang=${langId}`);
-  },
-
   getPlaceBySlug: (slug: string, lang: string) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.get<IPlace>(`/places/${slug}?lang=${langId}`);
+    return axiosInstance.get<IPlace>(`/places/slug/${slug}?lang=${langId}`);
   },
 
   getPlacesSelect: (

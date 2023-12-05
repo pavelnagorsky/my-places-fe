@@ -5,7 +5,7 @@ export interface ICustomAlertProps
     Pick<AlertProps, "severity">,
     Pick<AlertProps, "variant"> {
   title: string;
-  description: string;
+  description?: string;
 }
 
 export interface ICustomSnackbarProps {

@@ -8,13 +8,13 @@ import {
   Stack,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import useAdminMenu from "@/containers/Admin/Layout/useAdminMenu";
 import NextMuiLink from "@/components/NextMuiLink/NextMuiLink";
 import { Fragment } from "react";
+import usePersonalAreaMenu from "@/containers/PersonalArea/Layout/usePersonalAreaMenu";
 
-const AdminSideBar = () => {
+const PersonalAreaSideBar = () => {
   const router = useRouter();
-  const adminLinks = useAdminMenu();
+  const userLinks = usePersonalAreaMenu();
 
   const customPathname = router.asPath
     .split("/")
@@ -37,12 +37,12 @@ const AdminSideBar = () => {
     >
       <BottomNavigation
         showLabels
-        value={adminLinks.findIndex((l) => l.href === customPathname)}
+        value={userLinks.findIndex((l) => l.href === customPathname)}
         onChange={(event, newValue) => {
-          router.push(adminLinks[newValue]?.href || "/");
+          router.push(userLinks[newValue]?.href || "/");
         }}
       >
-        {adminLinks.map((l) => (
+        {userLinks.map((l) => (
           <BottomNavigationAction key={l.href} label={l.title} icon={l.icon} />
         ))}
       </BottomNavigation>
@@ -59,7 +59,7 @@ const AdminSideBar = () => {
       borderRadius={"10px"}
       width={"100%"}
     >
-      {adminLinks.map((option, i) => (
+      {userLinks.map((option, i) => (
         <Box key={i}>
           <NextMuiLink
             href={option.href}
@@ -79,7 +79,7 @@ const AdminSideBar = () => {
             sx={{
               my: "1em",
               opacity: 0.5,
-              display: i === adminLinks.length - 1 ? "none" : "block",
+              display: i === userLinks.length - 1 ? "none" : "block",
             }}
           />
         </Box>
@@ -95,4 +95,4 @@ const AdminSideBar = () => {
   );
 };
 
-export default AdminSideBar;
+export default PersonalAreaSideBar;

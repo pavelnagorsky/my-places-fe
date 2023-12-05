@@ -32,6 +32,11 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
 
   const heading = review ? (
     <Stack
+      position={{ xs: "sticky", md: "relative" }}
+      top={{ xs: 0, md: "unset" }}
+      zIndex={10}
+      pt={{ xs: "1em", md: 0 }}
+      bgcolor={"white"}
       direction={"row"}
       gap={"1em"}
       justifyContent={"space-between"}
@@ -59,6 +64,7 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
       fullScreen={isMobile}
       PaperProps={{
         sx: {
+          pt: { xs: 0, md: "1em" },
           minHeight: "518px",
           p: "1em",
           border: "2px solid #FF7A00",
@@ -66,6 +72,7 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
         },
       }}
     >
+      <Hidden mdUp>{heading}</Hidden>
       {review ? (
         <Grid
           mb={{ xs: "2em", md: 0 }}
@@ -73,9 +80,6 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
           spacing={{ xs: "1em", md: "2em" }}
         >
           <Grid item xs={12} md={5} lg={4}>
-            <Hidden mdUp implementation="css">
-              {heading}
-            </Hidden>
             <Stack
               mb={"1em"}
               direction={"row"}
@@ -97,7 +101,7 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
                 {format(new Date(review.createdAt), "dd.MM.yyyy")}
               </Typography>
             </Stack>
-            <Hidden mdUp implementation="css">
+            <Hidden mdUp>
               <Divider />
             </Hidden>
             <ReviewGallery images={review.images} alt={review.title} />
@@ -108,7 +112,7 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
             </Hidden>
             <StyledReviewModalContainer
               sx={{
-                maxHeight: { md: "500px" },
+                maxHeight: { md: "630px" },
                 p: 0,
                 paddingInlineEnd: { md: "1em" },
                 height: "auto",

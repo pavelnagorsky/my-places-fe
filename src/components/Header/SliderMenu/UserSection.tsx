@@ -54,7 +54,7 @@ const UserSection = ({
         pathname={pathname}
         onClick={onClose}
         text={"Личный кабинет"}
-        href={routerLinks.photos}
+        href={routerLinks.personalArea}
         icon={<AccountCircleIcon fontSize={"small"} color={"secondary"} />}
       />
       <SliderMenuLink

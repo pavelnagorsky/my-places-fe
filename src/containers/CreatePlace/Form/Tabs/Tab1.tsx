@@ -30,8 +30,10 @@ const Tab1 = () => {
           .then((res) => {
             return true;
           })
-          .catch(() => {
-            setError("slug", { message: "Данная ссылка уже занята" });
+          .catch((reason) => {
+            const existsMessage = "SLUG_EXISTS";
+            if (reason?.response?.data?.message === existsMessage)
+              setError("slug", { message: "Данная ссылка уже занята" });
           });
       }, 300),
     []
@@ -111,7 +113,7 @@ const Tab1 = () => {
         name={"description"}
         validation={{
           required: "Это поле обязательно к заполнению",
-          maxLength: { value: 600, message: "Превышен лимит в 300 символов" },
+          maxLength: { value: 1000, message: "Превышен лимит в 1000 символов" },
         }}
         placeholder={"Введите краткое описание..."}
       />
@@ -129,7 +131,7 @@ const Tab1 = () => {
         gap={"0.5em"}
       >
         <InfoOutlinedIcon fontSize={"small"} />
-        Максимальная длина - 600 символов
+        Максимальная длина - 1000 символов
       </Stack>
       <Typography
         variant={"body1"}
