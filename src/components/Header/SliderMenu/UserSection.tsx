@@ -54,14 +54,14 @@ const UserSection = ({
         pathname={pathname}
         onClick={onClose}
         text={"Личный кабинет"}
-        href={routerLinks.personalArea}
+        href={routerLinks.personalAreaPlaces}
         icon={<AccountCircleIcon fontSize={"small"} color={"secondary"} />}
       />
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}
         text={"Администрация"}
-        href={routerLinks.administration}
+        href={routerLinks.administrationPlaceCategories}
         icon={<AdminPanelSettingsIcon fontSize={"small"} color={"secondary"} />}
       />
       <Divider

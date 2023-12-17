@@ -2,22 +2,29 @@ import PlaceIcon from "@mui/icons-material/Place";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { ReactElement } from "react";
+import { routerLinks } from "@/staticData/routerLinks";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 const usePersonalAreaMenu = () => {
   return [
     {
       title: "Профиль",
-      href: "/personal-area/settings",
+      href: routerLinks.personalAreaSettings,
       icon: <SettingsIcon />,
     },
     {
+      title: "Избранное",
+      href: routerLinks.personalAreaFavourites,
+      icon: <BookmarkBorderIcon />,
+    },
+    {
       title: "Мои места",
-      href: "/personal-area/places",
+      href: routerLinks.personalAreaPlaces,
       icon: <PlaceIcon />,
     },
     {
       title: "Мои заметки",
-      href: "/personal-area/reviews",
+      href: routerLinks.personalAreaReviews,
       icon: <NewspaperIcon />,
     },
   ] as { title: string; href: string; icon: ReactElement }[];

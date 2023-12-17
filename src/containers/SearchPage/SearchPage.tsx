@@ -18,7 +18,7 @@ import {
   selectPlaces,
 } from "@/store/search-results-slice/search-results.slice";
 import { useTranslation } from "next-i18next";
-import { ISearchPlace } from "@/services/places-service/search-place.interface";
+import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
 import PlaceCardMap from "@/components/PlaceCard/PlaceCardMap";
 import SearchPagination from "@/containers/SearchPage/SearchPagination";
 

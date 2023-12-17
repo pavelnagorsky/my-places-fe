@@ -2,7 +2,7 @@ import { Box, Card, CardMedia, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
 import CastleOutlinedIcon from "@mui/icons-material/CastleOutlined";
-import { ISearchPlace } from "@/services/places-service/search-place.interface";
+import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
 import { Button } from "@/components/UI/Button/Button";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { routerLinks } from "@/staticData/routerLinks";

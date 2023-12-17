@@ -9,7 +9,7 @@ import { Stack } from "@mui/material";
 import LocationPopover from "@/containers/SearchPage/Filters/FilterContainers/LocationPopover";
 import { SwitchElement, useFormContext } from "react-hook-form-mui";
 import { ISearchForm } from "@/containers/SearchPage/WithSearch";
-import { ISearchPlacesRequest } from "@/services/places-service/interfaces";
+import { ISearchPlacesRequest } from "@/services/places-service/interfaces/interfaces";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   performSearchThunk,

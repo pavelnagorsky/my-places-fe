@@ -7,7 +7,7 @@ import {
 } from "react-hook-form-mui";
 import { IPlaceFormContext } from "@/containers/CreatePlace/Form/interfaces";
 import PlaceForm from "@/containers/CreatePlace/Form/PlaceForm";
-import { ICreatePlace } from "@/services/places-service/create-place.interface";
+import { ICreatePlace } from "@/services/places-service/interfaces/create-place.interface";
 import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch } from "@/store/hooks";

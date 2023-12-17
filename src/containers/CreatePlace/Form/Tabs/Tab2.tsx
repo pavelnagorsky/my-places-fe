@@ -13,7 +13,6 @@ import {
   CheckboxButtonGroup,
   Controller,
   SelectElement,
-  SwitchElement,
   useFormContext,
 } from "react-hook-form-mui";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
@@ -164,6 +163,8 @@ const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
             id: opt.id,
             label: opt.title,
           }))}
+          required={true}
+          parseError={() => "Это поле обязательно к заполнению"}
           name={"categoriesIds"}
         />
       </Box>

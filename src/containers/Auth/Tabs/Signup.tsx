@@ -95,7 +95,7 @@ const Signup = () => {
     >
       <FormContainer formContext={form} onSuccess={onSubmit}>
         <Box width={"100%"} mb={"1.2em"}>
-          <FormLabel htmlFor={"auth-email"}>Почта</FormLabel>
+          <FormLabel htmlFor={"signup-email"}>Почта</FormLabel>
           <TextFieldElement
             sx={{
               "& .MuiInputBase-root": {
@@ -105,7 +105,7 @@ const Signup = () => {
             fullWidth
             name={"email"}
             type={"email"}
-            id={"auth-email"}
+            id={"signup-email"}
             placeholder={"Введите адрес электронной почты..."}
             validation={{
               required: "Это поле обязательно к заполнению",
@@ -117,7 +117,7 @@ const Signup = () => {
           />
         </Box>
         <Box width={"100%"} mb={"1.2em"}>
-          <FormLabel htmlFor={"auth-firstname"}>Имя</FormLabel>
+          <FormLabel htmlFor={"signup-firstname"}>Имя</FormLabel>
           <TextFieldElement
             sx={{
               "& .MuiInputBase-root": {
@@ -126,7 +126,7 @@ const Signup = () => {
             }}
             fullWidth
             name={"firstName"}
-            id={"auth-firstname"}
+            id={"signup-firstname"}
             placeholder={"Ваше имя..."}
             parseError={(error) => {
               return error.type === "maxLength"
@@ -141,7 +141,7 @@ const Signup = () => {
           />
         </Box>
         <Box width={"100%"} mb={"0.8em"}>
-          <FormLabel htmlFor={"auth-lastname"}>Фамилия</FormLabel>
+          <FormLabel htmlFor={"signup-lastname"}>Фамилия</FormLabel>
           <TextFieldElement
             sx={{
               "& .MuiInputBase-root": {
@@ -150,7 +150,7 @@ const Signup = () => {
             }}
             fullWidth
             name={"lastName"}
-            id={"auth-lastname"}
+            id={"signup-lastname"}
             placeholder={"Ваша фамилия..."}
             parseError={(error) => {
               return error.type === "maxLength"
@@ -171,7 +171,7 @@ const Signup = () => {
               mb: "0 !important",
               alignItems: "center",
             }}
-            htmlFor={"auth-password"}
+            htmlFor={"signup-password"}
           >
             Пароль
             <Tooltip
@@ -201,7 +201,7 @@ const Signup = () => {
             fullWidth
             name={"password"}
             type={"password"}
-            id={"auth-password"}
+            id={"signup-password"}
             placeholder={"Введите пароль..."}
             validation={{
               required: "Это поле обязательно к заполнению",
@@ -213,7 +213,7 @@ const Signup = () => {
           />
         </Box>
         <Box width={"100%"} mb={"1.2em"}>
-          <FormLabel htmlFor={"auth-password-confirm"}>
+          <FormLabel htmlFor={"signup-password-confirm"}>
             Подтверждение пароля
           </FormLabel>
           <PasswordRepeatElement
@@ -226,7 +226,7 @@ const Signup = () => {
             passwordFieldName={"password"}
             name={"passwordConfirm"}
             type={"password"}
-            id={"auth-password-confirm"}
+            id={"signup-password-confirm"}
             placeholder={"Подтвердите пароль..."}
             parseError={(error) => {
               if (error.type === "validate") {

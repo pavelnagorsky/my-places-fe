@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
-import { Box, Grid, Paper } from "@mui/material";
+import { Grid } from "@mui/material";
 import PersonalAreaSideBar from "@/containers/PersonalArea/Layout/PersonalAreaSideBar";
 
 const PersonalAreaLayout = ({ children }: PropsWithChildren) => {
@@ -12,14 +12,20 @@ const PersonalAreaLayout = ({ children }: PropsWithChildren) => {
           container
           spacing={{ xs: "1em", md: "2em" }}
           mt={"1em"}
-          mb={"5em"}
+          mb={"3em"}
           position={"relative"}
         >
-          <Grid item xs={12} md={3} lg={2.5} sx={{ zIndex: 10 }}>
+          <Grid
+            item
+            xs={12}
+            md={3}
+            lg={2.5}
+            sx={{ zIndex: 10, mt: { md: "0.5em" } }}
+          >
             <PersonalAreaSideBar />
           </Grid>
           <Grid item xs={12} md={9} lg={9.5}>
-            <Paper>{children}</Paper>
+            {children}
           </Grid>
         </Grid>
       </WrappedContainer>

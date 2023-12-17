@@ -89,7 +89,7 @@ const Login = () => {
     >
       <FormContainer formContext={form} onSuccess={onSubmit}>
         <Box width={"100%"} mb={"1.7em"}>
-          <FormLabel htmlFor={"auth-email"}>Почта</FormLabel>
+          <FormLabel htmlFor={"login-email"}>Почта</FormLabel>
           <TextFieldElement
             sx={{
               "& .MuiInputBase-root": {
@@ -99,7 +99,7 @@ const Login = () => {
             fullWidth
             name={"email"}
             type={"email"}
-            id={"auth-email"}
+            id={"login-email"}
             placeholder={"Введите адрес электронной почты..."}
             validation={{
               required: "Это поле обязательно к заполнению",
@@ -111,7 +111,7 @@ const Login = () => {
           />
         </Box>
         <Box width={"100%"} mb={"1em"}>
-          <FormLabel htmlFor={"auth-password"}>Пароль</FormLabel>
+          <FormLabel htmlFor={"login-password"}>Пароль</FormLabel>
           <PasswordElement
             sx={{
               "& .MuiInputBase-root": {
@@ -121,7 +121,7 @@ const Login = () => {
             fullWidth
             name={"password"}
             type={"password"}
-            id={"auth-password"}
+            id={"login-password"}
             placeholder={"Введите пароль..."}
             validation={{
               required: "Это поле обязательно к заполнению",

@@ -1,5 +1,5 @@
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
-import { IPlace } from "@/services/places-service/place.interface";
+import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import {
   Box,
   Grid,

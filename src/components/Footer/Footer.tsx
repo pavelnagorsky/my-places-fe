@@ -26,7 +26,10 @@ const linkSx: SxProps = {
 const Footer = () => {
   const { t } = useTranslation("common");
   const router = useRouter();
-  const bottomMenuPathNames = ["/administration"];
+  const bottomMenuPathNames = [
+    routerLinks.administrationBasePath,
+    routerLinks.personalAreaBasePath,
+  ];
   const setBottomMargin = bottomMenuPathNames.some((link) =>
     router.pathname.includes(link)
   );

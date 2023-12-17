@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 import placesService from "@/services/places-service/places.service";
-import { IPlace } from "@/services/places-service/place.interface";
+import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces";
 

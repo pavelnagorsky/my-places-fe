@@ -5,11 +5,12 @@ import {
   ICustomAlertProps,
   ICustomSnackbarProps,
 } from "@/store/alerts-slice/interfaces";
+import { ReactNode } from "react";
 
 interface IAlertsState {
   show: boolean;
   snackbarProps: SnackbarProps;
-  alertProps: AlertProps & { description?: string };
+  alertProps: AlertProps & { description?: string | ReactNode };
 }
 
 const initialState: IAlertsState = {
@@ -50,19 +51,8 @@ export const alertsSlice = createSlice({
     },
     hideAlert: (state) => {
       state.show = false;
-      state.alertProps = {
-        variant: "filled",
-        severity: "info",
-        description: undefined,
-      };
-      state.snackbarProps = {
-        color: "success",
-        anchorOrigin: {
-          vertical: "bottom",
-          horizontal: "center",
-        },
-        autoHideDuration: 6000,
-      };
+      state.alertProps.description = undefined;
+      state.snackbarProps.autoHideDuration = 6000;
     },
   },
 });

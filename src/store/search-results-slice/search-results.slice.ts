@@ -6,8 +6,8 @@ import {
 } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
-import { ISearchPlace } from "@/services/places-service/search-place.interface";
-import { ISearchPlacesRequest } from "@/services/places-service/interfaces";
+import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
+import { ISearchPlacesRequest } from "@/services/places-service/interfaces/interfaces";
 import placesService from "@/services/places-service/places.service";
 import { IPagination } from "@/services/interfaces";
 

@@ -1,4 +1,4 @@
-import ISelectPlace from "@/services/places-service/select-place.interface";
+import ISelectPlace from "@/services/places-service/interfaces/select-place.interface";
 import { IImage } from "@/services/file-service/image.interface";
 
 export interface IReviewFormContext {

@@ -1,14 +1,16 @@
 import axiosInstance from "@/services/axios.instance";
-import { IPlaceSlug } from "@/services/places-service/place-slug.interface";
+import { IPlaceSlug } from "@/services/places-service/interfaces/place-slug.interface";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import {
+  IMyPlacesRequest,
+  IMyPlacesResponse,
   ISearchPlacesRequest,
   ISearchPlacesResponse,
-} from "@/services/places-service/interfaces";
-import ISelectPlace from "@/services/places-service/select-place.interface";
-import { ICreatePlace } from "@/services/places-service/create-place.interface";
-import { ICreateSlug } from "@/services/places-service/create-slug.interface";
-import { IPlace } from "@/services/places-service/place.interface";
+} from "@/services/places-service/interfaces/interfaces";
+import ISelectPlace from "@/services/places-service/interfaces/select-place.interface";
+import { ICreatePlace } from "@/services/places-service/interfaces/create-place.interface";
+import { ICreateSlug } from "@/services/places-service/interfaces/create-slug.interface";
+import { IPlace } from "@/services/places-service/interfaces/place.interface";
 
 const placesService = {
   ITEMS_PER_PAGE: 12,
@@ -50,6 +52,16 @@ const placesService = {
     const langId = parseLanguageToId(language);
     return axiosInstance.post<{ id: number }>(
       `/places?lang=${langId}`,
+      payload
+    );
+  },
+
+  MY_PLACES_ITEMS_PER_PAGE: 6,
+
+  getMyPlaces: (lang: string, payload: IMyPlacesRequest) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IMyPlacesResponse>(
+      `/places/my-places?lang=${langId}`,
       payload
     );
   },

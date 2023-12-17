@@ -1,6 +1,6 @@
 import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
 import { debounce } from "@mui/material";
-import ISelectPlace from "@/services/places-service/select-place.interface";
+import ISelectPlace from "@/services/places-service/interfaces/select-place.interface";
 import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
 import { AutocompleteElement, useFormContext } from "react-hook-form-mui";

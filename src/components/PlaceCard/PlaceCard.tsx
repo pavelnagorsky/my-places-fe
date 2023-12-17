@@ -11,7 +11,7 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import CastleOutlinedIcon from "@mui/icons-material/CastleOutlined";
-import { ISearchPlace } from "@/services/places-service/search-place.interface";
+import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
 import Image from "next/image";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
 import { memo } from "react";
