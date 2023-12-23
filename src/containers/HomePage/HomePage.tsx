@@ -11,24 +11,27 @@ import TextWithBubbles from "@/components/TextAndImage/TextWithBubbles";
 import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
 import { routerLinks } from "@/staticData/routerLinks";
 import { motion } from "framer-motion";
+import animationVariants from "@/shared/animation-variants";
 
 const HomePage = () => {
   const { t } = useTranslation("homePage");
   return (
-    <Box display={"block"}>
+    <motion.div
+      variants={animationVariants.defaultContainerVariant}
+      initial="hidden"
+      animate="show"
+    >
       <WrappedContainer>
-        <TextAndMainImage
-          title={t("title")}
-          description={t("description")}
-          showMobile
-          imageUrlMd={mainImageMd}
-          imageUrlXs={mainImageXs}
-        />
-        <motion.div
-          initial={{ opacity: 0, x: 10, scale: 0.5 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.3, type: "tween", ease: "easeOut" }}
-        >
+        <motion.div variants={animationVariants.defaultItemVariant}>
+          <TextAndMainImage
+            title={t("title")}
+            description={t("description")}
+            showMobile
+            imageUrlMd={mainImageMd}
+            imageUrlXs={mainImageXs}
+          />
+        </motion.div>
+        <motion.div variants={animationVariants.defaultItemVariant}>
           <TextAndImage
             title={t("card1.title")}
             description={t("card1.description")}
@@ -38,15 +41,7 @@ const HomePage = () => {
             image={card1Image}
           />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: -10, scale: 0.5 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{
-            duration: 0.3,
-            ease: "easeOut",
-            type: "tween",
-          }}
-        >
+        <motion.div variants={animationVariants.defaultItemVariant}>
           <TextAndImage
             sx={{ mb: "0 !important" }}
             reverse
@@ -58,10 +53,12 @@ const HomePage = () => {
             image={card2Image}
           />
         </motion.div>
-        <BoxWithCircles />
+        <motion.div variants={animationVariants.defaultItemVariant}>
+          <BoxWithCircles />
+        </motion.div>
       </WrappedContainer>
       <TextWithBubbles />
-    </Box>
+    </motion.div>
   );
 };
 

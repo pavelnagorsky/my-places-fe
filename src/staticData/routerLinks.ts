@@ -15,6 +15,8 @@ export const routerLinks = {
   personalAreaReviews: "/personal-area/my-reviews",
   personalAreaSettings: "/personal-area/settings",
   personalAreaFavourites: "/personal-area/favourites",
+  personalAreaEditPlace: (placeId: number) =>
+    `/personal-area/my-places/edit/${placeId}`,
   administrationBasePath: "/administration",
   personalAreaBasePath: "/personal-area",
 };

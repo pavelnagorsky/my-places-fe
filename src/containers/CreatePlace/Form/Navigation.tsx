@@ -19,11 +19,17 @@ function a11yProps(index: number) {
 interface INavigationProps {
   activeTab: number;
   handleChange: (event: SyntheticEvent, newValue: number) => void;
+  alwaysHorizontal?: boolean;
 }
 
-const Navigation = ({ activeTab, handleChange }: INavigationProps) => {
+const Navigation = ({
+  activeTab,
+  handleChange,
+  alwaysHorizontal,
+}: INavigationProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const _isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = _isMobile || !!alwaysHorizontal;
   return (
     <Box sx={{ width: "100%" }}>
       <Tabs
@@ -46,8 +52,8 @@ const Navigation = ({ activeTab, handleChange }: INavigationProps) => {
           flexDirection: "row",
           justifyContent: "flex-start",
           borderColor: "rgba(0, 0, 0, 0.12) !important",
-          borderBottom: { xs: 1, md: "none" },
-          borderLeft: { md: 1 },
+          borderBottom: { xs: 1, md: alwaysHorizontal ? 1 : "none" },
+          borderLeft: { md: alwaysHorizontal ? undefined : 1 },
         }}
       >
         <Tab label="Описание" {...a11yProps(0)} />

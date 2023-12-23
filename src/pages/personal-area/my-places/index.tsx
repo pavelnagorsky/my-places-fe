@@ -8,7 +8,7 @@ const MyPlacesLazy = dynamic(
   { ssr: false }
 );
 
-const MyPlaces: NextPage = () => {
+const Index: NextPage = () => {
   return <MyPlacesLazy />;
 };
 
@@ -21,4 +21,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default MyPlaces;
+export default Index;

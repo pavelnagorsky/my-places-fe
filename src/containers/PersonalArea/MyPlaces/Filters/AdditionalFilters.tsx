@@ -3,7 +3,7 @@ import {
   DatePickerElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { useMemo, useState } from "react";
+import { forwardRef, ReactElement, Ref, useMemo, useState } from "react";
 import {
   Badge,
   Box,
@@ -11,6 +11,7 @@ import {
   Dialog,
   Divider,
   IconButton,
+  Slide,
   Stack,
   Typography,
   useMediaQuery,
@@ -24,10 +25,20 @@ import { IMyPlacesFormContext } from "@/containers/PersonalArea/MyPlaces/interfa
 import usePlaceStatuses from "@/hooks/usePlaceStatuses";
 import TuneIcon from "@mui/icons-material/Tune";
 import { Button } from "@/components/UI/Button/Button";
+import { TransitionProps } from "@mui/material/transitions/transition";
 
 interface IAdditionalFiltersProps {
   onSubmit: () => void;
 }
+
+const Transition = forwardRef(function Transition(
+  props: TransitionProps & {
+    children: ReactElement<any, any>;
+  },
+  ref: Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
   const { resetField, watch, getValues } =
@@ -82,6 +93,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
       <Dialog
         open={open}
         onClose={onClose}
+        TransitionComponent={Transition}
         fullWidth
         fullScreen={isMobile}
         PaperProps={{

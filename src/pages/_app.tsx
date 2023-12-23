@@ -11,7 +11,6 @@ import Layout from "@/hoc/Layout";
 import { EmotionCache } from "@emotion/cache";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
-import { motion } from "framer-motion";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
@@ -22,7 +21,6 @@ function App({
   Component,
   emotionCache = clientSideEmotionCache,
   pageProps,
-  router,
 }: AppProps & { emotionCache: EmotionCache }) {
   const dateFnsLocale = useDateFnsLocale();
   return (
@@ -41,21 +39,7 @@ function App({
             </Head>
             <CssBaseline />
             <Layout>
-              <motion.div
-                key={router.route}
-                initial="pageInitial"
-                animate="pageAnimate"
-                variants={{
-                  pageInitial: {
-                    opacity: 0,
-                  },
-                  pageAnimate: {
-                    opacity: 1,
-                  },
-                }}
-              >
-                <Component {...pageProps} />
-              </motion.div>
+              <Component {...pageProps} />
             </Layout>
           </LocalizationProvider>
         </ThemeProvider>

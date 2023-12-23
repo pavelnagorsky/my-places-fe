@@ -28,15 +28,16 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 interface IPlaceItemProps {
   place: IMyPlace;
+  onDelete: (placeId: number) => void;
 }
 
-const PlaceItem = ({ place }: IPlaceItemProps) => {
+const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const { t, i18n } = useTranslation();
   const placeStatuses = usePlaceStatuses();
   const dateFnsLocale = useDateFnsLocale();
-  const menu = useMyPlaceMenu({ placeId: place.id });
+  const menu = useMyPlaceMenu({ placeId: place.id, onDelete });
   const [fullOpen, setFullOpen] = useState(false);
 
   const toggleFull = () => {

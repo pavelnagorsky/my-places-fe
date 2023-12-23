@@ -9,9 +9,12 @@ import {
 } from "@/services/places-service/interfaces/interfaces";
 import placesService from "@/services/places-service/places.service";
 import { OrderDirectionsEnum } from "@/shared/interfaces";
+import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { useAppDispatch } from "@/store/hooks";
 
 const useMyPlaces = () => {
   const [places, setPlaces] = useState<IMyPlace[]>([]);
+  const dispatch = useAppDispatch();
   const [lastIndex, setLastIndex] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [noPlaces, setNoPlaces] = useState(false);
@@ -30,6 +33,43 @@ const useMyPlaces = () => {
       dateFrom: null,
     },
   });
+
+  const handleDelete = (placeId: number) => {
+    placesService
+      .deletePlace(placeId)
+      .then(() => {
+        dispatch(
+          showAlert({
+            alertProps: {
+              title: "Успех!",
+              description: "Место было успешно удалено.",
+              variant: "standard",
+              severity: "success",
+            },
+            snackbarProps: {},
+          })
+        );
+        const filteredPlaces = places.filter((p) => p.id !== placeId);
+        setPlaces(filteredPlaces);
+        if (filteredPlaces.length === 0) {
+          setNoPlaces(true);
+        }
+      })
+      .catch(() => {
+        dispatch(
+          showAlert({
+            alertProps: {
+              title: "Ошибка!",
+              description:
+                "Не удалось удалить место. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+              variant: "standard",
+              severity: "error",
+            },
+            snackbarProps: {},
+          })
+        );
+      });
+  };
 
   const toggleOrderDirection = () => {
     if (orderDirection === OrderDirectionsEnum.DESC) {
@@ -86,6 +126,7 @@ const useMyPlaces = () => {
     orderDirection,
     toggleOrderDirection,
     noPlaces,
+    handleDelete,
   };
 };
 

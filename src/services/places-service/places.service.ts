@@ -11,6 +11,8 @@ import ISelectPlace from "@/services/places-service/interfaces/select-place.inte
 import { ICreatePlace } from "@/services/places-service/interfaces/create-place.interface";
 import { ICreateSlug } from "@/services/places-service/interfaces/create-slug.interface";
 import { IPlace } from "@/services/places-service/interfaces/place.interface";
+import { IEditPlace } from "@/services/places-service/interfaces/edit-place.interface";
+import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
 
 const placesService = {
   ITEMS_PER_PAGE: 12,
@@ -64,6 +66,20 @@ const placesService = {
       `/places/my-places?lang=${langId}`,
       payload
     );
+  },
+
+  getPlaceForEdit: (id: number, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.get<IEditPlace>(`/places/edit/${id}?lang=${langId}`);
+  },
+
+  updatePlace: (id: number, payload: IUpdatePlace, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.put(`/places/${id}?lang=${langId}`, payload);
+  },
+
+  deletePlace: (id: number) => {
+    return axiosInstance.delete(`/places/${id}`);
   },
 };
 

@@ -15,6 +15,8 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { routerLinks } from "@/staticData/routerLinks";
 import ButtonWithTooltip from "@/components/UI/Button/ButtonWithTooltip";
 import utils from "@/shared/utils";
+import animationVariants from "@/shared/animation-variants";
+import { motion } from "framer-motion";
 
 interface IReviewFormProps {
   loading: boolean;
@@ -24,164 +26,180 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
   const { formState } = useFormContext<IReviewFormContext>();
 
   return (
-    <Fragment>
-      <WrappedContainer>
-        <Breadcrumbs />
-        <Box pt="1.5em" pb={{ xs: "1.5em", md: "2em" }}>
-          <Typography
-            component={"h1"}
-            fontSize={{ xs: "25px", md: "32px" }}
-            mb={"0.5em"}
-          >
-            Создание заметки:{" "}
-            <Box display={"inline"} fontWeight={200} color={"secondary.main"}>
-              Новая заметка
-            </Box>
-          </Typography>
-          <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-            Заметка - это авторская экскурсия по выбранному месту. Здесь вы
-            можете рассказать другим о посещённой локации, дополнив это
-            описанием и прикрепив фотографии.
-          </Typography>
-        </Box>
-      </WrappedContainer>
-      <Box bgcolor={primaryBackground}>
-        <WrappedContainer bgColor={"transparent"}>
-          <Box py={{ xs: "1.5em", md: "2em" }}>
-            <MyStepper totalOptions={3} activeOption={1} />
+    <motion.div
+      variants={animationVariants.defaultContainerVariant}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={animationVariants.defaultItemVariant}>
+        <WrappedContainer>
+          <Breadcrumbs />
+          <Box pt="1.5em" pb={{ xs: "1.5em", md: "2em" }}>
             <Typography
-              component={"h2"}
-              fontSize={{ xs: "20px", md: "30px" }}
-              my={{ xs: "0.5em", md: "0.4em" }}
+              component={"h1"}
+              fontSize={{ xs: "25px", md: "32px" }}
+              mb={"0.5em"}
             >
-              Достопримечательность
+              Создание заметки:{" "}
+              <Box display={"inline"} fontWeight={200} color={"secondary.main"}>
+                Новая заметка
+              </Box>
             </Typography>
             <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-              На этом этапе вам нужно выбрать достопримечательность из
-              выпадающего списка или создать новую.
+              Заметка - это авторская экскурсия по выбранному месту. Здесь вы
+              можете рассказать другим о посещённой локации, дополнив это
+              описанием и прикрепив фотографии.
             </Typography>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              justifyContent={{ xs: "center", sm: "unset" }}
-              alignItems={{ xs: "unset", sm: "flex-start" }}
-              mt={"2em"}
-              gap={"1.5em"}
-            >
-              <PlaceSelect fieldName={"place"} />
-              <Button
-                variant={"contained"}
-                sx={{
-                  fontWeight: 700,
-                  py: "1em",
-                  fontSize: { xs: "14px", sm: "16px" },
-                }}
-                linkTo={routerLinks.createPlace}
-              >
-                Новое место
-              </Button>
-            </Stack>
           </Box>
         </WrappedContainer>
-      </Box>
-      <WrappedContainer>
-        <Box py={{ xs: "1.5em", md: "2em" }}>
-          <MyStepper totalOptions={3} activeOption={2} />
-          <Typography
-            component={"h2"}
-            fontSize={{ xs: "20px", md: "30px" }}
-            my={{ xs: "0.5em", md: "0.4em" }}
-          >
-            Фотографии
-          </Typography>
-          <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-            Загрузите до 10 фотографий, сделанных на этой локации в формате jpg,
-            jpeg, png.
-          </Typography>
-          <Box my={"2em"}>
-            <ImageUploader required maxLimit={10} fieldName={"images"} />
-          </Box>
-        </Box>
-      </WrappedContainer>
-      <Box
-        sx={{
-          backgroundImage: `url(${backgroundImage.src})`,
-        }}
-        mb={"3em"}
-      >
-        <WrappedContainer bgColor={"transparent"}>
-          <Box py={{ xs: "1.5em", md: "2em" }} maxWidth={734}>
-            <MyStepper totalOptions={3} activeOption={3} />
-            <Stack direction={"row"} gap={"0.5em"}>
+      </motion.div>
+      <motion.div variants={animationVariants.defaultItemVariant}>
+        <Box bgcolor={primaryBackground}>
+          <WrappedContainer bgColor={"transparent"}>
+            <Box py={{ xs: "1.5em", md: "2em" }}>
+              <MyStepper totalOptions={3} activeOption={1} />
               <Typography
                 component={"h2"}
                 fontSize={{ xs: "20px", md: "30px" }}
                 my={{ xs: "0.5em", md: "0.4em" }}
               >
-                Описание
+                Достопримечательность
               </Typography>
-              <Tooltip
-                arrow
-                enterTouchDelay={0}
-                leaveTouchDelay={6000}
-                sx={{ fontSize: "16px", alignSelf: "center" }}
-                title={
-                  <Typography p={"0.5em"}>
-                    Текст заметки требуется вводить в соотвествии с выбранным
-                    языком на сайте. На остальные языки контент будет переведен
-                    автоматически, посредством сервиса Google Translate. При
-                    необходимости, Вы сможете отредактировать переводы в личном
-                    кабинете
-                  </Typography>
-                }
+              <Typography variant={"body2"} fontSize={{ md: "20px" }}>
+                На этом этапе вам нужно выбрать достопримечательность из
+                выпадающего списка или создать новую.
+              </Typography>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                justifyContent={{ xs: "center", sm: "unset" }}
+                alignItems={{ xs: "unset", sm: "flex-start" }}
+                mt={"2em"}
+                gap={"1.5em"}
               >
-                <IconButton>
-                  <InfoOutlinedIcon fontSize={"medium"} />
-                </IconButton>
-              </Tooltip>
-            </Stack>
+                <PlaceSelect fieldName={"place"} />
+                <Button
+                  variant={"contained"}
+                  sx={{
+                    fontWeight: 700,
+                    py: "1em",
+                    fontSize: { xs: "14px", sm: "16px" },
+                  }}
+                  linkTo={routerLinks.createPlace}
+                >
+                  Новое место
+                </Button>
+              </Stack>
+            </Box>
+          </WrappedContainer>
+        </Box>
+      </motion.div>
+      <motion.div variants={animationVariants.defaultItemVariant}>
+        <WrappedContainer>
+          <Box py={{ xs: "1.5em", md: "2em" }}>
+            <MyStepper totalOptions={3} activeOption={2} />
+            <Typography
+              component={"h2"}
+              fontSize={{ xs: "20px", md: "30px" }}
+              my={{ xs: "0.5em", md: "0.4em" }}
+            >
+              Фотографии
+            </Typography>
             <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-              Придумайте заголовок заметки и опишите место, в котором вы
-              побывали.
+              Загрузите до 10 фотографий, сделанных на этой локации в формате
+              jpg, jpeg, png.
             </Typography>
-            <TextFieldElement
-              sx={{
-                mt: "1em",
-                "& input": { bgcolor: "white", borderRadius: "15px" },
-                width: "100%",
-                fontSize: { md: "20px" },
-              }}
-              name={"title"}
-              validation={{ required: "Это поле обязательно к заполнению" }}
-              placeholder={"Введите заголовок..."}
-            />
-            <Typography variant={"body2"} my={"1em"} fontSize={{ md: "20px" }}>
-              Текст заметки:
-            </Typography>
-            <TextEditor fieldName={"description"} />
-            <div>
-              <ButtonWithTooltip
-                loading={loading}
-                buttonText={"Создать"}
-                tooltipText={"Не все обязательные поля формы заполнены!"}
-                variant={"contained"}
-                type={"submit"}
-                disabled={
-                  !formState.isValid ||
-                  utils.isEmptyObject(formState.dirtyFields)
-                }
-                sx={{
-                  fontWeight: 700,
-                  mt: "2em",
-                  py: "1em",
-                  width: "100%",
-                  maxWidth: { sm: "250px" },
-                }}
-              />
-            </div>
+            <Box my={"2em"}>
+              <ImageUploader required maxLimit={10} fieldName={"images"} />
+            </Box>
           </Box>
         </WrappedContainer>
-      </Box>
-    </Fragment>
+      </motion.div>
+      <motion.div variants={animationVariants.defaultItemVariant}>
+        <Box
+          sx={{
+            backgroundImage: `url(${backgroundImage.src})`,
+          }}
+          mb={"3em"}
+        >
+          <WrappedContainer bgColor={"transparent"}>
+            <Box py={{ xs: "1.5em", md: "2em" }} maxWidth={734}>
+              <MyStepper totalOptions={3} activeOption={3} />
+              <Stack direction={"row"} gap={"0.5em"}>
+                <Typography
+                  component={"h2"}
+                  fontSize={{ xs: "20px", md: "30px" }}
+                  my={{ xs: "0.5em", md: "0.4em" }}
+                >
+                  Описание
+                </Typography>
+                <Tooltip
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={6000}
+                  sx={{ fontSize: "16px", alignSelf: "center" }}
+                  title={
+                    <Typography p={"0.5em"}>
+                      Текст заметки требуется вводить в соотвествии с выбранным
+                      языком на сайте. На остальные языки контент будет
+                      переведен автоматически, посредством сервиса Google
+                      Translate. При необходимости, Вы сможете отредактировать
+                      переводы в личном кабинете
+                    </Typography>
+                  }
+                >
+                  <IconButton>
+                    <InfoOutlinedIcon fontSize={"medium"} />
+                  </IconButton>
+                </Tooltip>
+              </Stack>
+              <Typography variant={"body2"} fontSize={{ md: "20px" }}>
+                Придумайте заголовок заметки и опишите место, в котором вы
+                побывали.
+              </Typography>
+              <TextFieldElement
+                sx={{
+                  mt: "1em",
+                  "& input": { bgcolor: "white", borderRadius: "15px" },
+                  width: "100%",
+                  fontSize: { md: "20px" },
+                }}
+                name={"title"}
+                validation={{ required: "Это поле обязательно к заполнению" }}
+                placeholder={"Введите заголовок..."}
+              />
+              <Typography
+                variant={"body2"}
+                my={"1em"}
+                fontSize={{ md: "20px" }}
+              >
+                Текст заметки:
+              </Typography>
+              <TextEditor fieldName={"description"} />
+              <div>
+                <ButtonWithTooltip
+                  loading={loading}
+                  buttonText={"Создать"}
+                  tooltipText={"Не все обязательные поля формы заполнены!"}
+                  variant={"contained"}
+                  type={"submit"}
+                  disabled={
+                    !formState.isValid ||
+                    utils.isEmptyObject(formState.dirtyFields)
+                  }
+                  sx={{
+                    fontWeight: 700,
+                    mt: "2em",
+                    py: "1em",
+                    width: "100%",
+                    maxWidth: { sm: "250px" },
+                  }}
+                />
+              </div>
+            </Box>
+          </WrappedContainer>
+        </Box>
+      </motion.div>
+    </motion.div>
   );
 };
 
