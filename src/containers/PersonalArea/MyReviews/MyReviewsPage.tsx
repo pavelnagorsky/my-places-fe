@@ -9,23 +9,23 @@ import {
 import { useTranslation } from "next-i18next";
 import { FormProvider } from "react-hook-form-mui";
 import InfiniteScroll from "react-infinite-scroll-component";
-import useMyPlaces from "@/containers/PersonalArea/MyPlaces/useMyPlaces";
 import PersonalAreaLayout from "@/containers/PersonalArea/Layout/PersonalAreaLayout";
 import { BoxPlaceholder } from "@/components/UI/Placeholders/BoxPlaceholder";
-import PlaceItem from "@/containers/PersonalArea/MyPlaces/PlaceItem/PlaceItem";
-import PlaceItemsTableHead from "@/containers/PersonalArea/MyPlaces/PlaceItem/PlaceItemsTableHead";
-import Filters from "./Filters/Filters";
 import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@/components/UI/Button/Button";
 import { routerLinks } from "@/staticData/routerLinks";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
+import useMyReviews from "@/containers/PersonalArea/MyReviews/useMyReviews";
+import ReviewItem from "@/containers/PersonalArea/MyReviews/ReviewItem/ReviewItem";
+import ReviewItemsTableHead from "@/containers/PersonalArea/MyReviews/ReviewItem/ReviewItemsTableHead";
+import Filters from "@/containers/PersonalArea/MyPlaces/Filters/Filters";
 
-const MyPlacesPage = () => {
+const MyReviewsPage = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const logic = useMyPlaces();
+  const logic = useMyReviews();
 
   return (
     <PersonalAreaLayout>
@@ -43,11 +43,11 @@ const MyPlacesPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Мои места
+                Мои заметки
               </Typography>
               {isMobile ? (
                 <IconButton
-                  href={routerLinks.createPlace}
+                  href={routerLinks.createReview}
                   size={"small"}
                   color={"primary"}
                   sx={{ border: `1px solid ${theme.palette.primary.main}` }}
@@ -56,34 +56,35 @@ const MyPlacesPage = () => {
                 </IconButton>
               ) : (
                 <Button
-                  linkTo={routerLinks.createPlace}
+                  linkTo={routerLinks.createReview}
                   sx={{ color: "primary" }}
                 >
-                  Новое место
+                  Новая заметка
                 </Button>
               )}
             </Stack>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <FormProvider {...logic.formContext}>
-              <Filters onSubmit={logic.onSubmit} type={"places"} />
+              <Filters type={"reviews"} onSubmit={logic.onSubmit} />
             </FormProvider>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <Box my={{ xs: "1.5em", md: "2.5em" }}>
-              {logic.noPlaces && (
+              {logic.noReviews && (
                 <Typography
                   variant={"body1"}
                   fontWeight={700}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  Пользовательские места не найдены
+                  Пользовательские заметки не найдены
                 </Typography>
               )}
-              <PlaceItemsTableHead
+
+              <ReviewItemsTableHead
                 orderBy={logic.orderBy}
                 orderDirection={logic.orderDirection}
-                show={!logic.noPlaces}
+                show={!logic.noReviews}
                 onChangeOrderBy={logic.setOrderBy}
                 onChangeOrderDirection={logic.toggleOrderDirection}
               />
@@ -92,15 +93,15 @@ const MyPlacesPage = () => {
                   padding: "1em 0.5em 0.5em 0.5em",
                   //overflowX: "hidden",
                 }}
-                dataLength={logic.places.length}
+                dataLength={logic.reviews.length}
                 next={() => logic.onSubmit(false)}
                 hasMore={logic.hasMore}
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.places.map((place, index) => (
+                  {logic.reviews.map((review, index) => (
                     <motion.div
-                      key={place.id}
+                      key={review.id}
                       layout
                       exit={{
                         opacity: 0,
@@ -108,7 +109,11 @@ const MyPlacesPage = () => {
                       }}
                       transition={{ duration: 0.6, type: "spring" }}
                     >
-                      <PlaceItem place={place} onDelete={logic.handleDelete} />
+                      <ReviewItem
+                        key={review.id}
+                        review={review}
+                        onDelete={logic.handleDelete}
+                      />
                     </motion.div>
                   ))}
                 </AnimatePresence>
@@ -121,4 +126,4 @@ const MyPlacesPage = () => {
   );
 };
 
-export default MyPlacesPage;
+export default MyReviewsPage;

@@ -2,12 +2,12 @@ import { useState, MouseEvent } from "react";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/staticData/routerLinks";
 
-interface IUseMyPlaceMenuProps {
-  placeId: number;
-  onDelete: (placeId: number) => void;
+interface IUseMyReviewMenuProps {
+  reviewId: number;
+  onDelete: (reviewId: number) => void;
 }
 
-const useMyPlaceMenu = ({ placeId, onDelete }: IUseMyPlaceMenuProps) => {
+const useMyReviewMenu = ({ reviewId, onDelete }: IUseMyReviewMenuProps) => {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -20,12 +20,12 @@ const useMyPlaceMenu = ({ placeId, onDelete }: IUseMyPlaceMenuProps) => {
 
   const handleEdit = () => {
     handleClose();
-    router.push(routerLinks.personalAreaEditPlace(placeId));
+    router.push(routerLinks.personalAreaEditReview(reviewId));
   };
 
   const handleDelete = () => {
     handleClose();
-    onDelete(placeId);
+    onDelete(reviewId);
   };
 
   return {
@@ -38,4 +38,4 @@ const useMyPlaceMenu = ({ placeId, onDelete }: IUseMyPlaceMenuProps) => {
   };
 };
 
-export default useMyPlaceMenu;
+export default useMyReviewMenu;

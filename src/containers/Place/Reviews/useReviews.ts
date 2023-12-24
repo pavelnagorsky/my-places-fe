@@ -1,6 +1,9 @@
-import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces";
+import {
+  ISearchReview,
+  ISearchReviewsResponse,
+} from "@/services/reviews-service/interfaces/interfaces";
 import { useEffect, useState } from "react";
-import { IReview } from "@/services/reviews-service/review.interface";
+import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { useTranslation } from "next-i18next";
 
@@ -11,7 +14,9 @@ interface IUseReviewsProps {
 
 const useReviews = ({ defaultData, placeId }: IUseReviewsProps) => {
   const { i18n } = useTranslation();
-  const [reviews, setReviews] = useState<IReview[]>(defaultData.data || []);
+  const [reviews, setReviews] = useState<ISearchReview[]>(
+    defaultData.data || []
+  );
   const [hasMore, setHasMore] = useState<boolean>(defaultData.hasMore);
 
   useEffect(() => {

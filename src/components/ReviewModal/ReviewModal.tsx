@@ -11,7 +11,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { IReview } from "@/services/reviews-service/review.interface";
+import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import { format } from "date-fns";
 import ClearIcon from "@mui/icons-material/Clear";
 import ReviewGallery from "@/components/ReviewModal/ReviewGallery";

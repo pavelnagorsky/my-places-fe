@@ -1,4 +1,4 @@
-import { IReview } from "@/services/reviews-service/review.interface";
+import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import {
   Box,
   Button,
@@ -9,9 +9,10 @@ import {
 } from "@mui/material";
 import { format } from "date-fns";
 import StyledReviewsContainer from "../../../components/UI/ReviewContainers/StyledReviewsContainer";
+import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 
 interface IReviewCardProps {
-  review: IReview;
+  review: ISearchReview;
   onClick: (reviewId: number) => void;
 }
 

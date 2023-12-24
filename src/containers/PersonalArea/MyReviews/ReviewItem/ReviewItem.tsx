@@ -1,6 +1,5 @@
 import {
   Box,
-  Collapse,
   Grid,
   IconButton,
   Link,
@@ -12,68 +11,58 @@ import {
 } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
-import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import { routerLinks } from "@/staticData/routerLinks";
-import usePlaceStatuses from "@/hooks/usePlaceStatuses";
-import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { CustomLabel } from "@/components/Forms/CustomFormElements/CustomLabel";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useState } from "react";
-import PlaceFullInfo from "@/containers/PersonalArea/MyPlaces/PlaceItem/PlaceFullInfo";
-import MyPlaceMenu from "@/containers/PersonalArea/MyPlaces/PlaceItem/Menu/MyPlaceMenu";
-import useMyPlaceMenu from "@/containers/PersonalArea/MyPlaces/PlaceItem/Menu/useMyPlaceMenu";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { IMyReview } from "@/services/reviews-service/interfaces/my-review.interface";
+import useMyReviewMenu from "@/containers/PersonalArea/MyReviews/ReviewItem/Menu/useMyReviewMenu";
+import useReviewStatuses from "@/hooks/useReviewStatuses";
+import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
+import MyReviewMenu from "@/containers/PersonalArea/MyReviews/ReviewItem/Menu/MyReviewMenu";
 
-interface IPlaceItemProps {
-  place: IMyPlace;
+interface IReviewItemProps {
+  review: IMyReview;
   onDelete: (placeId: number) => void;
 }
 
-const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
+const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const { t, i18n } = useTranslation();
-  const placeStatuses = usePlaceStatuses();
+  const reviewStatuses = useReviewStatuses();
   const dateFnsLocale = useDateFnsLocale();
-  const menu = useMyPlaceMenu({ placeId: place.id, onDelete });
-  const [fullOpen, setFullOpen] = useState(false);
+  const menu = useMyReviewMenu({ reviewId: review.id, onDelete });
 
-  const toggleFull = () => {
-    setFullOpen(!fullOpen);
+  const showStatusTooltip = review.status === ReviewStatusesEnum.REJECTED;
+
+  const parseStatusColor = (status: ReviewStatusesEnum) => {
+    if (status === ReviewStatusesEnum.MODERATION) return "warning.main";
+    if (status === ReviewStatusesEnum.APPROVED) return "success.main";
+    if (status === ReviewStatusesEnum.REJECTED) return "error.main";
+    return "";
   };
 
-  const showStatusTooltip =
-    place.status === PlaceStatusesEnum.REJECTED ||
-    place.status === PlaceStatusesEnum.COMMERCIAL_EXPIRED ||
-    place.status === PlaceStatusesEnum.NEEDS_PAYMENT;
-
-  const parseStatusColor = (status: PlaceStatusesEnum) => {
-    if (status === PlaceStatusesEnum.MODERATION) return "warning.main";
-    if (status === PlaceStatusesEnum.APPROVED) return "success.main";
-    return "error.main";
-  };
+  const reviewTitleBox = (
+    <Stack gap={"0.2em"}>
+      <Typography variant={"body1"}>{review.title}</Typography>
+    </Stack>
+  );
 
   const placeTitleBox = (
     <Stack gap={"0.2em"}>
-      <Typography variant={"body1"}>{place.title}</Typography>
+      <Typography variant={"body1"}>{review.placeTitle}</Typography>
       <Typography
         variant={"body1"}
         component={Link}
         color={"secondary.main"}
         sx={{ textDecoration: "underline #565656" }}
-        href={routerLinks.place(place.slug)}
+        href={routerLinks.place(review.placeSlug)}
         target={"_blank"}
       >
-        {place.slug}
+        {review.placeSlug}
       </Typography>
-    </Stack>
-  );
-
-  const placeTypeBox = (
-    <Stack gap={"0.2em"}>
-      <Typography variant={"body1"}>{place.type}</Typography>
     </Stack>
   );
 
@@ -83,9 +72,9 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
       enterTouchDelay={0}
       leaveTouchDelay={9000}
       title={
-        place.moderationMessage ? (
+        review.moderationMessage ? (
           <Typography p={"0.5em"} fontSize={"14px"}>
-            {place.moderationMessage}
+            {review.moderationMessage}
           </Typography>
         ) : null
       }
@@ -94,16 +83,16 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
         direction={"row"}
         alignItems={"center"}
         gap={"0.5em"}
-        sx={{ cursor: place.moderationMessage ? "pointer" : undefined }}
+        sx={{ cursor: review.moderationMessage ? "pointer" : undefined }}
       >
         <Box
           borderRadius={"50%"}
           height={"10px"}
           width={"10px"}
-          bgcolor={parseStatusColor(place.status)}
+          bgcolor={parseStatusColor(review.status)}
         />
         <Typography variant={"body1"}>
-          {placeStatuses.find((s) => s.id === place.status)?.label}
+          {reviewStatuses.find((s) => s.id === review.status)?.label}
         </Typography>
         {showStatusTooltip && (
           <InfoOutlinedIcon color={"secondary"} fontSize={"small"} />
@@ -112,27 +101,16 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     </Tooltip>
   );
 
-  const advertisementBox = (
+  const viewsBox = (
     <Box>
-      <Typography variant={"body1"}>
-        {place.advertisement ? "Да" : "Нет"}
-      </Typography>
-      {!!place.advEndDate && (
-        <Typography variant={"body1"} mt={"0.2em"}>{`До ${format(
-          new Date(place.advEndDate),
-          "dd MMM yyyy",
-          {
-            locale: dateFnsLocale,
-          }
-        )}`}</Typography>
-      )}
+      <Typography variant={"body1"}>{review.viewsCount}</Typography>
     </Box>
   );
 
   const dateInfoBox = (
     <Stack gap={"0.2em"}>
       <Typography variant={"body1"}>
-        {format(new Date(place.createdAt), "dd MMM yyyy", {
+        {format(new Date(review.createdAt), "dd MMM yyyy", {
           locale: dateFnsLocale,
         })}
       </Typography>
@@ -155,19 +133,19 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
         <Grid container spacing={"1em"}>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
             <CustomLabel>Название</CustomLabel>
-            {placeTitleBox}
+            {reviewTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Тип</CustomLabel>
-            {placeTypeBox}
+            <CustomLabel>Место</CustomLabel>
+            {placeTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
             <CustomLabel>Статус</CustomLabel>
             {statusInfoBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Коммерция</CustomLabel>
-            {advertisementBox}
+            <CustomLabel>Просмотры</CustomLabel>
+            {viewsBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
             <CustomLabel>Дата создания</CustomLabel>
@@ -182,24 +160,17 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
           >
             <MoreVertIcon />
           </IconButton>
-          <MyPlaceMenu
+          <MyReviewMenu
             anchorEl={menu.anchorEl}
             open={menu.open}
             handleClose={menu.handleClose}
             onDelete={menu.handleDelete}
             onEdit={menu.handleEdit}
-            placeSlug={place.slug}
+            placeSlug={review.placeSlug}
+            reviewId={review.id}
           />
-          <IconButton color={"primary"} size={"small"} onClick={toggleFull}>
-            <ExpandMoreIcon
-              sx={{ transform: fullOpen ? "rotate(180deg)" : undefined }}
-            />
-          </IconButton>
         </Stack>
       </Stack>
-      <Collapse in={fullOpen}>
-        <PlaceFullInfo place={place} />
-      </Collapse>
     </Box>
   );
 
@@ -213,58 +184,45 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
         borderRadius: "20px",
       }}
     >
-      <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid item xs={1}>
-          <IconButton
-            color={"primary"}
-            sx={{ ml: "0.5em" }}
-            onClick={toggleFull}
-          >
-            <ExpandMoreIcon
-              sx={{ transform: fullOpen ? "rotate(180deg)" : undefined }}
-            />
-          </IconButton>
+      <Grid container pl={"1em"} spacing={"1em"} alignItems={"center"}>
+        <Grid item xs={2.5}>
+          {reviewTitleBox}
         </Grid>
         <Grid item xs={2.5}>
           {placeTitleBox}
         </Grid>
-        <Grid item xs={1.6}>
-          {placeTypeBox}
-        </Grid>
-        <Grid item xs={2.4}>
+        <Grid item xs={2.5}>
           {statusInfoBox}
         </Grid>
-        <Grid item xs={1.75}>
-          {advertisementBox}
+        <Grid item xs={1.5}>
+          {viewsBox}
         </Grid>
-        <Grid item xs={1.75}>
+        <Grid item xs={2}>
           {dateInfoBox}
         </Grid>
         <Grid item xs={1}>
           <IconButton
             color={"secondary"}
-            sx={{ mr: "0.5em" }}
+            //sx={{ mr: "0.5em" }}
             onClick={menu.handleClick}
           >
             <MoreVertIcon />
           </IconButton>
-          <MyPlaceMenu
+          <MyReviewMenu
             anchorEl={menu.anchorEl}
             open={menu.open}
             handleClose={menu.handleClose}
             onDelete={menu.handleDelete}
             onEdit={menu.handleEdit}
-            placeSlug={place.slug}
+            placeSlug={review.placeSlug}
+            reviewId={review.id}
           />
         </Grid>
       </Grid>
-      <Collapse in={fullOpen}>
-        <PlaceFullInfo place={place} />
-      </Collapse>
     </Box>
   );
 
   return isMobile ? mobileRequest : desktopRequest;
 };
 
-export default PlaceItem;
+export default ReviewItem;

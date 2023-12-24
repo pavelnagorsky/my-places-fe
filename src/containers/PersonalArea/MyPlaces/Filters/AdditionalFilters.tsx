@@ -26,9 +26,12 @@ import usePlaceStatuses from "@/hooks/usePlaceStatuses";
 import TuneIcon from "@mui/icons-material/Tune";
 import { Button } from "@/components/UI/Button/Button";
 import { TransitionProps } from "@mui/material/transitions/transition";
+import useReviewStatuses from "@/hooks/useReviewStatuses";
+import { IMyReviewsFormContext } from "@/containers/PersonalArea/MyReviews/interfaces";
 
 interface IAdditionalFiltersProps {
   onSubmit: () => void;
+  type: "reviews" | "places";
 }
 
 const Transition = forwardRef(function Transition(
@@ -40,13 +43,16 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
-  const { resetField, watch, getValues } =
-    useFormContext<IMyPlacesFormContext>();
+const AdditionalFilters = ({ onSubmit, type }: IAdditionalFiltersProps) => {
+  const { resetField, watch, getValues } = useFormContext<
+    IMyPlacesFormContext | IMyReviewsFormContext
+  >();
   const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const statuses = usePlaceStatuses();
+  const placeStatuses = usePlaceStatuses();
+  const reviewStatuses = useReviewStatuses();
+  const statuses = type === "places" ? placeStatuses : reviewStatuses;
   const [open, setOpen] = useState(false);
 
   const watchEndDate = watch("dateTo");

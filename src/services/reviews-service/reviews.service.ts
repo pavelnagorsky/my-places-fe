@@ -1,8 +1,12 @@
 import axiosInstance from "@/services/axios.instance";
 import parseLanguageToId from "@/shared/parseLanguageToId";
-import { ICreateReview } from "@/services/reviews-service/create-review.interface";
-import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces";
-import { IReview } from "@/services/reviews-service/review.interface";
+import { ICreateReview } from "@/services/reviews-service/interfaces/create-review.interface";
+import {
+  IMyReviewsRequest,
+  IMyReviewsResponse,
+  ISearchReviewsResponse,
+} from "@/services/reviews-service/interfaces/interfaces";
+import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 
 const reviewsService = {
   creteReview: (payload: ICreateReview, language: string) => {
@@ -25,6 +29,20 @@ const reviewsService = {
   getReviewById: (reviewId: number, language: string) => {
     const langId = parseLanguageToId(language);
     return axiosInstance.get<IReview>(`/Reviews/${reviewId}?lang=${langId}`);
+  },
+
+  MY_REVIEWS_ITEMS_PER_PAGE: 6,
+
+  getMyReviews: (lang: string, payload: IMyReviewsRequest) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IMyReviewsResponse>(
+      `/reviews/my-reviews?lang=${langId}`,
+      payload
+    );
+  },
+
+  deleteReview: (id: number) => {
+    return axiosInstance.delete(`/reviews/${id}`);
   },
 };
 

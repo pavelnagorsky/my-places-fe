@@ -12,7 +12,7 @@ const PlaceFullInfo = ({ place }: IPlaceFullInfoProps) => {
       <Grid
         container
         spacing={{ xs: "1em", md: "2em" }}
-        justifyContent={"center"}
+        justifyContent={{ xs: "start", sm: "center" }}
       >
         <Grid item xs={"auto"} md={"auto"}>
           <Typography variant={"body1"}>

@@ -1,6 +1,5 @@
 import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
 import { IPagination } from "@/services/interfaces";
-import { OrderDirectionsEnum } from "@/shared/interfaces";
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import { PlaceStatusesEnum } from "./place-statuses.enum";
 

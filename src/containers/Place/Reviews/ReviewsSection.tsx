@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import ReviewCard from "@/containers/Place/Reviews/ReviewCard";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces";
+import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces/interfaces";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useReviews from "@/containers/Place/Reviews/useReviews";
 import { AnimatePresence, motion } from "framer-motion";
@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { useTranslation } from "next-i18next";
-import { IReview } from "@/services/reviews-service/review.interface";
+import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 
 interface IReviewsSectionProps {
   reviews: ISearchReviewsResponse;

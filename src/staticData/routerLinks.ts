@@ -7,6 +7,8 @@ export const routerLinks = {
   createReview: "/create-review",
   createPlace: "/create-place",
   place: (slug: string) => `/places/${slug}`,
+  review: (placeSlug: string, reviewId: number) =>
+    `/places/${placeSlug}?review=${reviewId}`,
   privacyPolicy: "/privacy-policy",
   termsOfUse: "/terms-of-use",
   administrationPlaceCategories: "/administration/place-categories",
@@ -17,6 +19,8 @@ export const routerLinks = {
   personalAreaFavourites: "/personal-area/favourites",
   personalAreaEditPlace: (placeId: number) =>
     `/personal-area/my-places/edit/${placeId}`,
+  personalAreaEditReview: (reviewId: number) =>
+    `/personal-area/my-reviews/edit/${reviewId}`,
   administrationBasePath: "/administration",
   personalAreaBasePath: "/personal-area",
 };

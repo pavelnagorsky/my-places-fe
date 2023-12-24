@@ -6,9 +6,10 @@ import AdditionalFilters from "@/containers/PersonalArea/MyPlaces/Filters/Additi
 
 interface IFilterProps {
   onSubmit: () => void;
+  type: "reviews" | "places";
 }
 
-const Filters = ({ onSubmit }: IFilterProps) => {
+const Filters = ({ onSubmit, type }: IFilterProps) => {
   const { t } = useTranslation();
 
   return (
@@ -20,7 +21,7 @@ const Filters = ({ onSubmit }: IFilterProps) => {
     >
       <TextFieldElement
         onChange={debounce(() => onSubmit(), 300)}
-        placeholder={"Название места"}
+        placeholder={type === "places" ? "Название места" : "Название заметки"}
         name={"search"}
         id={"searchText"}
         InputProps={{
@@ -31,7 +32,7 @@ const Filters = ({ onSubmit }: IFilterProps) => {
           ),
         }}
       />
-      <AdditionalFilters onSubmit={onSubmit} />
+      <AdditionalFilters type={type} onSubmit={onSubmit} />
     </Stack>
   );
 };

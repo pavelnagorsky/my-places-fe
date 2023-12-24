@@ -2,22 +2,18 @@ import dynamic from "next/dynamic";
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
-import { routerLinks } from "@/staticData/routerLinks";
 
-const PersonalAreaLazy = dynamic(
-  () => import("@/containers/PersonalArea/Layout/PersonalAreaLayout"),
+const MyReviewsLazy = dynamic(
+  () => import("@/containers/PersonalArea/MyReviews/MyReviewsPage"),
   { ssr: false }
 );
 
-const PersonalArea: NextPage = () => {
-  return <PersonalAreaLazy />;
+const Index: NextPage = () => {
+  return <MyReviewsLazy />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
-    redirect: {
-      destination: routerLinks.personalAreaPlaces,
-    },
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, ["common"])),
       // Will be passed to the page component as props
@@ -25,4 +21,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default PersonalArea;
+export default Index;

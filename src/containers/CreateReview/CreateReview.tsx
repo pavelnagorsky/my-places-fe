@@ -10,7 +10,7 @@ import { IReviewFormContext } from "@/containers/CreateReview/Form/interfaces";
 import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { useTranslation } from "next-i18next";
-import { ICreateReview } from "@/services/reviews-service/create-review.interface";
+import { ICreateReview } from "@/services/reviews-service/interfaces/create-review.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 

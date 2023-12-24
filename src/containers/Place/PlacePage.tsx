@@ -18,7 +18,7 @@ import Image from "next/image";
 import PlaceStatistics from "@/containers/Place/PlaceStatistics";
 import Comments from "@/containers/Place/Comments/Comments";
 import ReviewsSection from "@/containers/Place/Reviews/ReviewsSection";
-import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces";
+import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces/interfaces";
 import Gallery from "@/components/Gallery/Gallery";
 import Map from "@/components/Map/Map";
 import { Marker } from "@react-google-maps/api";

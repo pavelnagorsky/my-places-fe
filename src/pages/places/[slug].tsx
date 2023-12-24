@@ -5,7 +5,7 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import placesService from "@/services/places-service/places.service";
 import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
-import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces";
+import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces/interfaces";
 
 interface IPlacePageProps {
   place: IPlace;
