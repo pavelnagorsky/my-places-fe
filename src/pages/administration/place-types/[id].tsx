@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 
 const PlaceTypeLazy = dynamic(
-  () => import("@/containers/Admin/PlaceTypes/PlaceType/PlaceType"),
+  () => import("@/containers/admin/place-types/place-type/PlaceType"),
   { ssr: false }
 );
 

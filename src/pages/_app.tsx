@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import lightTheme from "@/styles/theme/lightTheme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
-import createEmotionCache from "@/utility/createEmotionCache";
+import createEmotionCache from "@/styles/utility/createEmotionCache";
 import { appWithTranslation } from "next-i18next";
 import Head from "next/head";
 import * as React from "react";

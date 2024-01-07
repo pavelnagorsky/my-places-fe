@@ -7,6 +7,8 @@ import {
   ISearchReviewsResponse,
 } from "@/services/reviews-service/interfaces/interfaces";
 import { IReview } from "@/services/reviews-service/interfaces/review.interface";
+import { IUpdateReview } from "@/services/reviews-service/interfaces/update-review.interface";
+import { IEditReview } from "@/services/reviews-service/interfaces/edit-review.interface";
 
 const reviewsService = {
   creteReview: (payload: ICreateReview, language: string) => {
@@ -31,7 +33,7 @@ const reviewsService = {
     return axiosInstance.get<IReview>(`/Reviews/${reviewId}?lang=${langId}`);
   },
 
-  MY_REVIEWS_ITEMS_PER_PAGE: 6,
+  MY_REVIEWS_ITEMS_PER_PAGE: 10,
 
   getMyReviews: (lang: string, payload: IMyReviewsRequest) => {
     const langId = parseLanguageToId(lang);
@@ -43,6 +45,16 @@ const reviewsService = {
 
   deleteReview: (id: number) => {
     return axiosInstance.delete(`/reviews/${id}`);
+  },
+
+  getReviewForEdit: (id: number, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.get<IEditReview>(`/reviews/edit/${id}?lang=${langId}`);
+  },
+
+  updateReview: (id: number, payload: IUpdateReview, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.put(`/reviews/${id}?lang=${langId}`, payload);
   },
 };
 

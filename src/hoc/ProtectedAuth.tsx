@@ -1,6 +1,6 @@
 import { Fragment, PropsWithChildren, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { routerLinks } from "../staticData/routerLinks";
+import { routerLinks } from "../routing/routerLinks";
 import { useSSRLocalStorage } from "@/hooks/useSSRLocalStorage";
 import { useRouter } from "next/router";
 import { openAuth, selectIsAuth } from "@/store/user-slice/user.slice";

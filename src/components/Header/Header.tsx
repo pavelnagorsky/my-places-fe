@@ -1,33 +1,21 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  ClickAwayListener,
-  Grow,
-  IconButton,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
-  Stack,
-} from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 
-import { Logo } from "../Logo/Logo";
+import { Logo } from "../logo/Logo";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { HeaderLink } from "./HeaderLink/HeaderLink";
 import { useTranslation } from "next-i18next";
 import { memo } from "react";
-import { routerLinks } from "@/staticData/routerLinks";
-import { useHeaderMenu } from "@/components/Header/SliderMenu/useHeaderMenu";
-import SliderMenu from "@/components/Header/SliderMenu/SliderMenu";
+import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
-import WrappedContainer from "@/hoc/Wrappers/WrappedContainer";
-import CreateMenu from "@/components/Header/CreateMenu/CreateMenu";
+import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { useAppSelector } from "@/store/hooks";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
 import PersonIcon from "@mui/icons-material/Person";
+import { HeaderLink } from "./header-link/HeaderLink";
+import CreateMenu from "./create-menu/CreateMenu";
+import SliderMenu from "@/components/header/slider-menu/SliderMenu";
+import { useHeaderMenu } from "@/components/header/slider-menu/useHeaderMenu";
 
 const Header = () => {
   const { t } = useTranslation("common");

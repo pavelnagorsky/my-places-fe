@@ -58,7 +58,7 @@ const placesService = {
     );
   },
 
-  MY_PLACES_ITEMS_PER_PAGE: 6,
+  MY_PLACES_ITEMS_PER_PAGE: 10,
 
   getMyPlaces: (lang: string, payload: IMyPlacesRequest) => {
     const langId = parseLanguageToId(lang);

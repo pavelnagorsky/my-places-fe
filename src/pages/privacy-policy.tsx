@@ -4,7 +4,7 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
 
 const PrivacyPolicyLazy = dynamic(
-  () => import("../containers/PrivacyPolicy/PrivacyPolicy")
+  () => import("../containers/privacy-policy/PrivacyPolicy")
 );
 
 const PrivacyPolicy: NextPage = () => {

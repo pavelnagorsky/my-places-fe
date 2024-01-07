@@ -12,7 +12,7 @@ interface IPlacePageProps {
   reviews: ISearchReviewsResponse;
 }
 
-const PlacePageLazy = dynamic(() => import("@/containers/Place/PlacePage"));
+const PlacePageLazy = dynamic(() => import("@/containers/place/PlacePage"));
 
 const Slug: NextPage<IPlacePageProps> = ({ place, reviews }) => {
   return <PlacePageLazy place={place} reviews={reviews} />;

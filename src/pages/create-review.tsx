@@ -4,7 +4,7 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
 
 const CreateReviewPageLazy = dynamic(
-  () => import("../containers/CreateReview/CreateReview")
+  () => import("../containers/create-review/CreateReview")
 );
 
 const Review: NextPage = () => {

@@ -5,7 +5,7 @@ import I18nLanguages from "@/shared/I18nLanguages";
 
 const PlaceCategoryLazy = dynamic(
   () =>
-    import("@/containers/Admin/PlaceCategories/PlaceCategory/PlaceCategory"),
+    import("@/containers/admin/place-categories/place-category/PlaceCategory"),
   { ssr: false }
 );
 

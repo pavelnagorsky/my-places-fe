@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
-import { IUser } from "@/services/auth-service/user.interface";
+import { IUser } from "@/services/user-service/user.interface";
 import { LoginErrorEnum } from "@/services/auth-service/interfaces";
 import {
   getUserDataThunk,
@@ -25,6 +25,7 @@ interface IUserState {
   userData: IUser | null;
   logoutAfterExit: boolean;
   redirectHomeOnCancelLogin: boolean;
+  wasManuallyLoggedIn: boolean;
 }
 
 const initialState: IUserState = {
@@ -37,6 +38,7 @@ const initialState: IUserState = {
   userData: null,
   logoutAfterExit: false,
   redirectHomeOnCancelLogin: false,
+  wasManuallyLoggedIn: false,
 };
 
 export const userSlice = createSlice({
@@ -94,6 +96,7 @@ export const userSlice = createSlice({
       state.token = action.payload.token;
       state.loginRedirect = null;
       state.logoutAfterExit = !action.payload.rememberMe;
+      state.wasManuallyLoggedIn = true;
     });
     builder.addCase(loginThunk.rejected, (state, action) => {
       state.loading = false;
@@ -159,6 +162,17 @@ export const selectAuthError = createSelector(selectUserState, (s) => s.error);
 export const selectAuthCloseRedirect = createSelector(
   selectUserState,
   (s) => s.redirectHomeOnCancelLogin
+);
+export const selectChangeLanguage = createSelector(selectUserState, (s) => {
+  if (!!s.userData?.preferredLanguage && s.wasManuallyLoggedIn) return true;
+  return false;
+});
+
+export const selectUserPreferredLanguage = createSelector(
+  selectUserData,
+  (s) => {
+    return s?.preferredLanguage ?? null;
+  }
 );
 
 export const {

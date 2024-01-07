@@ -3,7 +3,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
 
-const HomePageLazy = dynamic(() => import("../containers/HomePage/HomePage"));
+const HomePageLazy = dynamic(() => import("../containers/home-page/HomePage"));
 
 const Index: NextPage = () => {
   return <HomePageLazy />;

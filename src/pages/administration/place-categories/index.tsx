@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 
 const PlaceCategoriesLazy = dynamic(
-  () => import("@/containers/Admin/PlaceCategories/PlaceCategories"),
+  () => import("@/containers/admin/place-categories/PlaceCategories"),
   { ssr: false }
 );
 

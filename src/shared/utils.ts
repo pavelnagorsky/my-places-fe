@@ -1,4 +1,6 @@
-import { ILatLngCoordinate } from "@/components/Map/Map";
+import { ILatLngCoordinate } from "@/components/map/Map";
+import { LanguageIdsEnum } from "@/shared/LanguageIdsEnum";
+import I18nLanguages from "@/shared/I18nLanguages";
 
 function isEmpty(obj: Object) {
   for (const prop in obj) {
@@ -16,6 +18,13 @@ const utils = {
 
   latLngToString: (latLng: ILatLngCoordinate) => {
     return `${latLng.lat};${latLng.lng}`;
+  },
+
+  parseLanguageIdToLocale: (langId: LanguageIdsEnum) => {
+    if (langId === LanguageIdsEnum.ru) return I18nLanguages.ru;
+    if (langId === LanguageIdsEnum.be) return I18nLanguages.be;
+    if (langId === LanguageIdsEnum.en) return I18nLanguages.en;
+    return I18nLanguages.ru;
   },
 
   isBrowser: () => typeof window !== "undefined",

@@ -4,7 +4,7 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
 
 const CreatePlacePageLazy = dynamic(
-  () => import("../containers/CreatePlace/CreatePlace")
+  () => import("../containers/create-place/CreatePlace")
 );
 
 const Place: NextPage = () => {

@@ -4,7 +4,6 @@ import {
   ITokenResponse,
 } from "@/services/auth-service/interfaces";
 import axiosInstance from "@/services/axios.instance";
-import { IUser } from "@/services/auth-service/user.interface";
 
 const authService = {
   login: (payload: ILoginRequest) => {
@@ -12,9 +11,6 @@ const authService = {
   },
   signup: (payload: ISignupRequest) => {
     return axiosInstance.post("/auth/register", payload);
-  },
-  getUserData: () => {
-    return axiosInstance.get<IUser>("/users/userData");
   },
 };
 

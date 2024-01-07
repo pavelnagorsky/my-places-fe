@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { PlaceType } from "@/containers/SearchPage/Filters/LocationAutocomplete";
+import { PlaceType } from "@/containers/search-page/filters/LocationAutocomplete";
 import {
   ICoordinate,
   POLYGON_TYPES,
 } from "@/services/open-street-map-service/interfaces";
-import { ILatLngCoordinate } from "@/components/Map/Map";
+import { ILatLngCoordinate } from "@/components/map/Map";
 import openStreetMapService from "@/services/open-street-map-service/open-street-map.service";
 
 interface IUsePolygonsProps {

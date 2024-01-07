@@ -1,4 +1,5 @@
 const { i18n } = require("./next-i18next.config");
+const redirectsList = require("./redirects");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,6 +12,9 @@ const nextConfig = {
   },
   env: {
     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+  },
+  async redirects() {
+    return redirectsList;
   },
   i18n,
   compiler: {

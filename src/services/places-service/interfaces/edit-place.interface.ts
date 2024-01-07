@@ -1,4 +1,4 @@
-import { ILatLngCoordinate } from "@/components/Map/Map";
+import { ILatLngCoordinate } from "@/components/map/Map";
 import { IImage } from "@/services/file-service/image.interface";
 
 export interface IEditPlace {

@@ -4,7 +4,7 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
 
 const TermsOfUseLazy = dynamic(
-  () => import("../containers/TermsOfUse/TermsOfUse")
+  () => import("../containers/terms-of-use/TermsOfUse")
 );
 
 const TermsOfUse: NextPage = () => {

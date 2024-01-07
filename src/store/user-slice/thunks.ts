@@ -8,12 +8,13 @@ import authService from "@/services/auth-service/auth.service";
 import localStorageFields from "@/shared/localStorageFields";
 import { RootState } from "@/store/store";
 import { setToken } from "@/store/user-slice/user.slice";
+import userService from "@/services/user-service/user.service";
 
 export const getUserDataThunk = createAsyncThunk(
   "user/get-user-data",
   async (arg, thunkAPI) => {
     try {
-      const { data } = await authService.getUserData();
+      const { data } = await userService.getUserData();
       return data;
     } catch (e) {
       localStorage.removeItem(localStorageFields.TOKEN);
@@ -37,7 +38,9 @@ export const autoLoginThunk = createAsyncThunk(
 export const loginThunk = createAsyncThunk(
   "user/login",
   async (
-    payload: ILoginRequest & { onRedirect: (path: string) => void },
+    payload: ILoginRequest & {
+      onRedirect: (path: string) => void;
+    },
     thunkAPI
   ) => {
     try {
@@ -50,8 +53,9 @@ export const loginThunk = createAsyncThunk(
 
       thunkAPI.dispatch(getUserDataThunk());
       if (loginRedirect) {
-        payload.onRedirect(loginRedirect);
+        await payload.onRedirect(loginRedirect);
       }
+
       return { ...data, rememberMe: payload.rememberMe };
     } catch (e: any) {
       // parse reason (invalid data | email not confirmed)
