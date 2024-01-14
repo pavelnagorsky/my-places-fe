@@ -2,6 +2,7 @@ import axiosInstance from "@/services/axios.instance";
 import { IPlaceSlug } from "@/services/places-service/interfaces/place-slug.interface";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import {
+  IMyFavouritesRequest,
   IMyPlacesRequest,
   IMyPlacesResponse,
   ISearchPlacesRequest,
@@ -13,6 +14,7 @@ import { ICreateSlug } from "@/services/places-service/interfaces/create-slug.in
 import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import { IEditPlace } from "@/services/places-service/interfaces/edit-place.interface";
 import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
+import { IFavourite } from "@/services/places-service/interfaces/favourite.interface";
 
 const placesService = {
   ITEMS_PER_PAGE: 12,
@@ -80,6 +82,26 @@ const placesService = {
 
   deletePlace: (id: number) => {
     return axiosInstance.delete(`/places/${id}`);
+  },
+
+  addPlaceToFavourites: (placeId: number) => {
+    return axiosInstance.post(`/favourites/places/${placeId}`);
+  },
+
+  getMyFavourites: (payload: IMyFavouritesRequest, language: string) => {
+    const langId = parseLanguageToId(language);
+    return axiosInstance.post<IFavourite[]>(
+      `/favourites?lang=${langId}`,
+      payload
+    );
+  },
+
+  toggleFavouriteIsActual: (id: number) => {
+    return axiosInstance.patch(`/favourites/${id}`);
+  },
+
+  deleteFavourite: (id: number) => {
+    return axiosInstance.delete(`/favourites/${id}`);
   },
 };
 

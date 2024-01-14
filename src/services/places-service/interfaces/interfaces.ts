@@ -43,3 +43,9 @@ export enum MyPlacesOrderByEnum {
   STATUS = 3,
   COMMERCIAL = 4,
 }
+
+export interface IMyFavouritesRequest {
+  dateFrom?: string | null;
+  dateTo?: string | null;
+  search?: string;
+}

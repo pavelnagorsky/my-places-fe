@@ -17,6 +17,9 @@ import likesService from "@/services/likes-service/likes.service";
 import { format } from "date-fns";
 import usePopover from "@/hooks/usePopover";
 import ReportForm from "@/containers/place/report/ReportForm";
+import placesService from "@/services/places-service/places.service";
+import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 
 interface IPlaceStatisticsProps {
   views: number;
@@ -36,6 +39,38 @@ const PlaceStatistics = ({
   const [likesCount, setLikesCount] = useState(initialLikesCount);
   const isAuth = useAppSelector(selectIsAuth);
   const dispatch = useAppDispatch();
+
+  const handleAddPlaceToFavorites = () => {
+    if (!isAuth) return;
+    placesService
+      .addPlaceToFavourites(placeId)
+      .then(() => {
+        dispatch(
+          showAlert({
+            alertProps: {
+              title: "Успех!",
+              description: "Место была успешно добавлено в избранное.",
+              variant: "standard",
+              severity: "success",
+            },
+            snackbarProps: {},
+          })
+        );
+      })
+      .catch(() => {
+        dispatch(
+          showAlert({
+            alertProps: {
+              title: "Ошибка!",
+              description: "Место уже добавлено в избранное.",
+              variant: "standard",
+              severity: "error",
+            },
+            snackbarProps: {},
+          })
+        );
+      });
+  };
 
   useEffect(() => {
     if (!isAuth) {
@@ -161,13 +196,37 @@ const PlaceStatistics = ({
         <Typography variant={"body1"}>
           {format(new Date(createdAt), "dd.MM.yyyy")}
         </Typography>
+        {isAuth && (
+          <Box>
+            <Tooltip
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={6000}
+              sx={{ fontSize: "16px", alignSelf: "center" }}
+              title={<Typography p={"0.5em"}>Сохранить в избранное</Typography>}
+            >
+              <IconButton size={"small"} onClick={handleAddPlaceToFavorites}>
+                <BookmarkAddIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )}
         <Box>
-          <IconButton
-            aria-label="report-form"
-            onClick={reportPopover.handleOpen}
+          <Tooltip
+            arrow
+            enterTouchDelay={0}
+            leaveTouchDelay={6000}
+            sx={{ fontSize: "16px", alignSelf: "center" }}
+            title={<Typography p={"0.5em"}>Пожаловаться</Typography>}
           >
-            <FlagIcon />
-          </IconButton>
+            <IconButton
+              aria-label="report-form"
+              size={"small"}
+              onClick={reportPopover.handleOpen}
+            >
+              <FlagIcon />
+            </IconButton>
+          </Tooltip>
           <ReportForm
             open={reportPopover.open}
             id={reportPopover.id}

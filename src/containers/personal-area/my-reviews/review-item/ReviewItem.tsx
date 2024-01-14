@@ -117,7 +117,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
     </Stack>
   );
 
-  const mobileRequest = (
+  const mobileView = (
     <Box
       sx={{
         mb: "2em",
@@ -174,7 +174,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
     </Box>
   );
 
-  const desktopRequest = (
+  const desktopView = (
     <Box
       py={"1em"}
       px={"0em"}
@@ -222,7 +222,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
     </Box>
   );
 
-  return isMobile ? mobileRequest : desktopRequest;
+  return isMobile ? mobileView : desktopView;
 };
 
 export default ReviewItem;

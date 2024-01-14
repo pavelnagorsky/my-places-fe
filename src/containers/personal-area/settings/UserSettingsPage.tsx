@@ -110,7 +110,9 @@ const UserSettingsPage = () => {
                 />
               </Grid>
               <Grid item xs={12} md={6}>
-                <CustomLabel htmlFor={"preferredLanguageId"}>Язык</CustomLabel>
+                <CustomLabel htmlFor={"preferredLanguageId"}>
+                  Предпочитаемый язык
+                </CustomLabel>
                 <SelectElement
                   name={"preferredLanguageId"}
                   SelectProps={{ id: "preferredLanguageId" }}

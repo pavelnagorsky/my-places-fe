@@ -139,7 +139,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     </Stack>
   );
 
-  const mobileRequest = (
+  const mobileView = (
     <Box
       sx={{
         mb: "2em",
@@ -203,7 +203,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     </Box>
   );
 
-  const desktopRequest = (
+  const desktopView = (
     <Box
       py={"1em"}
       px={"0em"}
@@ -264,7 +264,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     </Box>
   );
 
-  return isMobile ? mobileRequest : desktopRequest;
+  return isMobile ? mobileView : desktopView;
 };
 
 export default PlaceItem;
