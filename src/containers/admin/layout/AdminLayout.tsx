@@ -15,10 +15,10 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
           mb={"5em"}
           position={"relative"}
         >
-          <Grid item xs={12} md={3} lg={2.5} sx={{ zIndex: 10 }}>
+          <Grid item xs={12} lg={2.5} xl={2} sx={{ zIndex: 10 }}>
             <AdminSideBar />
           </Grid>
-          <Grid item xs={12} md={9} lg={9.5}>
+          <Grid item xs={12} lg={9.5} xl={10}>
             <Paper>{children}</Paper>
           </Grid>
         </Grid>

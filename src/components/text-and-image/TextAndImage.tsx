@@ -6,12 +6,13 @@ import Image, { StaticImageData } from "next/image";
 export interface ITextAndImageProps {
   showImageMobile?: boolean;
   reverse?: boolean;
-  title: string;
+  title?: string;
   subtitle?: string;
   description: string;
-  btnText: string;
-  linkTo: string;
+  btnText?: string;
+  linkTo?: string;
   image: StaticImageData;
+  titleComponent?: "h1" | "h2";
   sx?: SxProps;
 }
 
@@ -25,13 +26,14 @@ function TextAndImage({
   description,
   btnText,
   image,
+  titleComponent,
   sx,
 }: ITextAndImageProps) {
   return (
     <Grid
       my={{ xs: "2em", md: "5em" }}
       container
-      columnSpacing={{ xs: "0", md: "8em" }}
+      columnSpacing={{ xs: "0", md: "4em", lg: "7em" }}
       direction={reverse ? "row-reverse" : undefined}
       sx={{
         display: "flex",
@@ -40,33 +42,44 @@ function TextAndImage({
       }}
     >
       <Grid item xs={12} md={6}>
-        <Typography variant="h1" component={"h2"}>
-          {title}
-        </Typography>
-        {subtitle ? (
+        {title && (
+          <Typography
+            variant="h1"
+            component={titleComponent || "h2"}
+            className={"title"}
+          >
+            {title}
+          </Typography>
+        )}
+        {subtitle && (
           <Typography
             variant="body2"
             color="secondary.contrastText"
             fontWeight={700}
             mb="1em"
+            className={"subtitle"}
           >
             {subtitle}
           </Typography>
-        ) : null}
-        <Typography variant="body2">{description}</Typography>
-        <Button
-          variant={"contained"}
-          sx={{
-            //mt: 3.5,
-            mt: "2.5em",
-            py: "1em",
-            width: { xs: "100%", md: "initial" },
-            fontWeight: 700,
-          }}
-          linkTo={linkTo}
-        >
-          {btnText}
-        </Button>
+        )}
+        <Typography variant="body2" className={"description"}>
+          {description}
+        </Typography>
+        {!!btnText && !!linkTo && (
+          <Button
+            variant={"contained"}
+            sx={{
+              //mt: 3.5,
+              mt: "2.5em",
+              py: "1em",
+              width: { xs: "100%", md: "initial" },
+              fontWeight: 700,
+            }}
+            linkTo={linkTo}
+          >
+            {btnText}
+          </Button>
+        )}
       </Grid>
       <Grid item xs={showImageMobile ? 12 : 0} md={6}>
         <Box
@@ -84,7 +97,7 @@ function TextAndImage({
             },
             mb: { xs: showImageMobile ? "1em" : "0em", md: "0em" },
             mt: { xs: showImageMobile ? "3em" : "0em", md: "0em" },
-            width: "100%",
+            width: { xs: "100%", sm: "50%", md: "100%" },
             height: "100%",
             maxHeight: "320px",
             minHeight: { xs: "220px", md: "320px" },
@@ -94,7 +107,8 @@ function TextAndImage({
         >
           <Image
             src={image}
-            alt={title}
+            objectFit={"cover"}
+            alt={title || "Belarus immage"}
             style={{ borderRadius: "inherit" }}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

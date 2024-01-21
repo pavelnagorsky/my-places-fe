@@ -9,10 +9,10 @@ import { useTranslation } from "next-i18next";
 
 interface IUseReviewsProps {
   defaultData: ISearchReviewsResponse;
-  placeId: number;
+  placeSlug: string;
 }
 
-const useReviews = ({ defaultData, placeId }: IUseReviewsProps) => {
+const useReviews = ({ defaultData, placeSlug }: IUseReviewsProps) => {
   const { i18n } = useTranslation();
   const [reviews, setReviews] = useState<ISearchReview[]>(
     defaultData.data || []
@@ -26,7 +26,7 @@ const useReviews = ({ defaultData, placeId }: IUseReviewsProps) => {
 
   const handleSearch = () => {
     reviewsService
-      .getPlaceReviews(placeId, i18n.language, reviews.length)
+      .getPlaceReviews(placeSlug, i18n.language, reviews.length)
       .then(({ data }) => {
         const newReviews = reviews.concat(data.data);
         setReviews(newReviews);

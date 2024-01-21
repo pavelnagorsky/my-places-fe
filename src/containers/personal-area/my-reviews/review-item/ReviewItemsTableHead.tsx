@@ -22,7 +22,7 @@ const ReviewItemsTableHead = ({
     <Box
       mx={"0.5em"}
       mb={"-0.5em"}
-      display={{ xs: "none", lg: show ? "block" : "none" }}
+      display={{ xs: "none", md: show ? "block" : "none" }}
     >
       <Grid
         container

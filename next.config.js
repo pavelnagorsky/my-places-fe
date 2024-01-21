@@ -12,6 +12,7 @@ const nextConfig = {
   },
   env: {
     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+    EMAIL: process.env.EMAIL,
   },
   async redirects() {
     return redirectsList;
@@ -20,6 +21,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  transpilePackages: ["mui-tel-input"],
 };
 
 module.exports = nextConfig;

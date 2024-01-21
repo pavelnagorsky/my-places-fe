@@ -24,6 +24,7 @@
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "i18next": "22.0.3",
+    "mui-tel-input": "^5.0.0",
     "next": "13.3.0",
     "next-i18next": "^12.0.0",
     "react": "18.2.0",

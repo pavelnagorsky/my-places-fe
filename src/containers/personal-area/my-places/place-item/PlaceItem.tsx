@@ -33,7 +33,7 @@ interface IPlaceItemProps {
 
 const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation();
   const placeStatuses = usePlaceStatuses();
   const dateFnsLocale = useDateFnsLocale();

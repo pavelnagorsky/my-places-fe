@@ -18,14 +18,13 @@ const PersonalAreaLayout = ({ children }: PropsWithChildren) => {
           <Grid
             item
             xs={12}
-            md={3}
             lg={2.5}
             xl={2}
             sx={{ zIndex: 10, mt: { md: "0.5em" } }}
           >
             <PersonalAreaSideBar />
           </Grid>
-          <Grid item xs={12} md={9} lg={9.5} xl={10}>
+          <Grid item xs={12} lg={9.5} xl={10}>
             {children}
           </Grid>
         </Grid>

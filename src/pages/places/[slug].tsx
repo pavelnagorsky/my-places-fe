@@ -42,15 +42,19 @@ export const getStaticProps: GetStaticProps<IPlacePageProps> = async ({
   params,
 }) => {
   try {
-    const placeRes = await placesService.getPlaceBySlug(
+    const fetchPlace = placesService.getPlaceBySlug(
       params?.slug as string,
       locale ?? I18nLanguages.ru
     );
-    const reviewsRes = await reviewsService.getPlaceReviews(
-      placeRes.data.id,
+    const fetchReviews = reviewsService.getPlaceReviews(
+      params?.slug as string,
       locale ?? I18nLanguages.ru,
       0
     );
+    const [placeRes, reviewsRes] = await Promise.all([
+      fetchPlace,
+      fetchReviews,
+    ]);
     return {
       props: {
         place: placeRes.data,

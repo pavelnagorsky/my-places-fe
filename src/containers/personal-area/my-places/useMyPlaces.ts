@@ -103,13 +103,16 @@ const useMyPlaces = () => {
       placesService
         .getMyPlaces(i18n.language, payload)
         .then((res) => {
-          setNoPlaces(res.data.data.length === 0);
+          const totalPlaces = fromStart
+            ? res.data.data
+            : places.concat(res.data.data);
+          setNoPlaces(totalPlaces.length === 0);
           setHasMore(res.data.hasMore);
-          setLastIndex(fromStart ? res.data.data.length : res.data.lastIndex);
-          setPlaces(fromStart ? res.data.data : places.concat(res.data.data));
+          setLastIndex(totalPlaces.length);
+          setPlaces(totalPlaces);
         })
         .catch((reason) => {
-          setNoPlaces(true);
+          setNoPlaces(places.length === 0);
           setHasMore(false);
         });
     })();

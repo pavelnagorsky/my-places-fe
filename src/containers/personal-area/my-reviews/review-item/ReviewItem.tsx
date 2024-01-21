@@ -29,7 +29,7 @@ interface IReviewItemProps {
 
 const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation();
   const reviewStatuses = useReviewStatuses();
   const dateFnsLocale = useDateFnsLocale();

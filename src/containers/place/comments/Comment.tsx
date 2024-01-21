@@ -15,6 +15,7 @@ interface ICommentProps {
   index: number;
   locale: any;
   isAuth: boolean;
+  isModerator: boolean;
   onDelete: (id: number) => void;
   onUpdate: (id: number) => void;
 }
@@ -26,7 +27,9 @@ const Comment = ({
   onDelete,
   onUpdate,
   isAuth,
+  isModerator,
 }: ICommentProps) => {
+  const canManage = (isAuth && comment.canManage) || isModerator;
   const bgColor = index % 2 == 0 ? "#FFF6EE" : "#FFEEDE";
   return (
     <Paper
@@ -75,7 +78,7 @@ const Comment = ({
           >
             {comment.text}
           </Typography>
-          {isAuth && comment.canManage && (
+          {canManage && (
             <Stack
               direction={"row"}
               justifyContent={{ xs: "start", md: "end" }}

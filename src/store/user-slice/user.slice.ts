@@ -174,6 +174,10 @@ export const selectUserPreferredLanguage = createSelector(
     return s?.preferredLanguage ?? null;
   }
 );
+export const selectUserRoles = createSelector(
+  selectUserData,
+  (s) => s?.roles || []
+);
 
 export const {
   changeAuthScreen,

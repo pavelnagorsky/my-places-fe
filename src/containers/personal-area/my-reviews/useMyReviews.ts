@@ -104,13 +104,16 @@ const useMyReviews = () => {
       reviewsService
         .getMyReviews(i18n.language, payload)
         .then((res) => {
-          setNoReviews(res.data.data.length === 0);
+          const totalReviews = fromStart
+            ? res.data.data
+            : reviews.concat(res.data.data);
+          setNoReviews(totalReviews.length === 0);
           setHasMore(res.data.hasMore);
-          setLastIndex(fromStart ? res.data.data.length : res.data.lastIndex);
-          setReviews(fromStart ? res.data.data : reviews.concat(res.data.data));
+          setLastIndex(totalReviews.length);
+          setReviews(totalReviews);
         })
         .catch((reason) => {
-          setNoReviews(true);
+          setNoReviews(reviews.length === 0);
           setHasMore(false);
         });
     })();

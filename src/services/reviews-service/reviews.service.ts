@@ -21,10 +21,10 @@ const reviewsService = {
 
   RESULTS_PER_REQUEST: 3,
 
-  getPlaceReviews: (placeId: number, language: string, lastIndex: number) => {
+  getPlaceReviews: (placeSlug: string, language: string, lastIndex: number) => {
     const langId = parseLanguageToId(language);
     return axiosInstance.get<ISearchReviewsResponse>(
-      `/Reviews/place/${placeId}?lang=${langId}&lastIndex=${lastIndex}&itemsPerPage=${reviewsService.RESULTS_PER_REQUEST}`
+      `/Reviews/place/${placeSlug}?lang=${langId}&lastIndex=${lastIndex}&itemsPerPage=${reviewsService.RESULTS_PER_REQUEST}`
     );
   },
 

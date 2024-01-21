@@ -21,15 +21,15 @@ const LinksSection = ({
 
   const desktopLinks = (
     <Fragment>
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={"Фотографии"}
-        href={routerLinks.photos}
-        icon={
-          <CollectionsOutlinedIcon fontSize={"small"} color={"secondary"} />
-        }
-      />
+      {/*<SliderMenuLink*/}
+      {/*  pathname={pathname}*/}
+      {/*  onClick={onClose}*/}
+      {/*  text={"О проекте"}*/}
+      {/*  href={routerLinks.aboutUs}*/}
+      {/*  icon={*/}
+      {/*    <CollectionsOutlinedIcon fontSize={"small"} color={"secondary"} />*/}
+      {/*  }*/}
+      {/*/>*/}
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}

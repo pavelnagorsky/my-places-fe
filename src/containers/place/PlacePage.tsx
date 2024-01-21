@@ -69,7 +69,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
               <Stack
                 direction={"row"}
                 alignItems={"center"}
-                gap={"0.5em"}
+                gap={"0.7em"}
                 mb={"1em"}
               >
                 <Typography
@@ -198,8 +198,11 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                         borderRadius={"5px"}
                         position={"relative"}
                         p={"0.5em"}
+                        height={56}
+                        width={56}
                       >
                         <Image
+                          objectFit={"cover"}
                           src={c.image}
                           alt={c.title}
                           priority

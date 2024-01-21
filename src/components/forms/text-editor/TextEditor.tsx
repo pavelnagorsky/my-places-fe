@@ -4,21 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import { memo, useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form-mui";
 import { Box, styled, Typography } from "@mui/material";
-
-const modules = {
-  toolbar: [
-    [{ size: ["large", false, "small"] }],
-    //[{ header: [1, 2, 3, 4, 5, 6, false] }],
-    ["bold", "italic", "underline", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["link"],
-  ],
-};
+import textEditorConfig from "@/components/forms/text-editor/text-editor.config";
 
 const StyledEditor = styled("div")(({ theme }) => ({
   backgroundColor: "white",
@@ -64,7 +50,8 @@ const TextEditor = ({ fieldName }: { fieldName: string }) => {
                 setValue("_textEditorContentLength", contentLength - 1);
               }}
               className="editor-input"
-              modules={modules}
+              modules={textEditorConfig.modules}
+              formats={textEditorConfig.formats}
               placeholder="Введите текст заметки"
             />
           </StyledEditor>

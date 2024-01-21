@@ -1,19 +1,10 @@
-import {
-  Divider,
-  MenuItem,
-  Popover,
-  PopoverProps,
-  Select,
-  SelectChangeEvent,
-  Stack,
-} from "@mui/material";
-import LanguageIcon from "@mui/icons-material/Language";
-import { useRouter } from "next/router";
+import { Divider, Popover, PopoverProps, Stack } from "@mui/material";
 import { useAppSelector } from "@/store/hooks";
 import { selectUserData } from "@/store/user-slice/user.slice";
 import LinksSection from "@/components/header/slider-menu/LinksSection";
 import LoginSection from "@/components/header/slider-menu/LoginSection";
 import UserSection from "@/components/header/slider-menu/UserSection";
+import LanguageSection from "@/components/header/slider-menu/LanguageSection";
 
 interface ISliderMenuProps extends PopoverProps {
   onClose: () => void;
@@ -27,15 +18,7 @@ const SliderMenu = ({
   anchorEl,
   pathname,
 }: ISliderMenuProps) => {
-  const router = useRouter();
   const userData = useAppSelector(selectUserData);
-
-  const handleChangeLanguage = (event: SelectChangeEvent<string>) => {
-    onClose();
-    router.push({ pathname: router.pathname, query: router.query }, undefined, {
-      locale: event.target.value,
-    });
-  };
 
   return (
     <Popover
@@ -67,31 +50,7 @@ const SliderMenu = ({
           variant={"middle"}
           sx={{ borderColor: "primary.main", opacity: 0.5, my: "0.3em" }}
         />
-        <Stack
-          direction={"row"}
-          columnGap={"0.5em"}
-          alignItems={"center"}
-          p={"6px 8px"}
-        >
-          <LanguageIcon color={"primary"} />
-          <Select
-            sx={{
-              "& svg": {
-                fill: "#FF7A00",
-              },
-              color: "secondary.main",
-            }}
-            color={"primary"}
-            disableUnderline
-            variant={"standard"}
-            id="language-select"
-            value={router.locale}
-            onChange={handleChangeLanguage}
-          >
-            <MenuItem value={"ru"}>Русский</MenuItem>
-            <MenuItem value={"en"}>English</MenuItem>
-          </Select>
-        </Stack>
+        <LanguageSection onClose={onClose} />
       </Stack>
     </Popover>
   );

@@ -9,17 +9,7 @@ interface ITextAndMainImageProps {
   imageUrlMd: StaticImageData;
   imageUrlXs: StaticImageData;
   showMobile: boolean;
-  titleColor?: string;
-  descriptionColor?: string;
-  descriptionFontSizeXs?: string;
-  descriptionFontSizeMd?: string;
-  minHeight?: string;
-  maxHeight?: string;
-  opacity?: number;
   textShadow?: boolean;
-  customTop?: string;
-  customWidth?: string;
-  customFontSize?: string;
 }
 
 function TextAndMainImage(props: ITextAndMainImageProps) {
@@ -27,15 +17,15 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
     width: "100%",
     height: "auto",
     position: "relative",
-    maxHeight: props.maxHeight ? props.maxHeight : "500px",
-    minHeight: props.minHeight ? props.minHeight : "450px",
+    maxHeight: "500px",
+    minHeight: "450px",
     borderRadius: { xs: 0, md: "10px" },
   };
 
   const imageStyle: CSSProperties = {
     objectFit: "cover",
     filter: "blur(0.5px)",
-    opacity: props.opacity ? props.opacity : 1,
+    opacity: 1,
     borderRadius: "inherit",
   };
 
@@ -80,18 +70,17 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
         width: "100%",
         top: "3em",
         bottom: "3em",
-        px: { xs: "1em", md: "3.5em" },
+        px: { xs: "1.5em", md: "3.5em" },
         // left: '10%',
         textShadow: props.textShadow
           ? "0px 4px 6px rgba(0, 0, 0, 0.25)"
           : "none",
-        fontSize: props.customFontSize,
       }}
     >
       <Typography
         variant="h1"
         sx={{
-          color: props.titleColor ? props.titleColor : "primary.contrastText",
+          color: "primary.contrastText",
         }}
       >
         {props.title}
@@ -106,9 +95,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
           }}
           fontWeight={500}
           sx={{
-            color: props.descriptionColor
-              ? props.descriptionColor
-              : "primary.contrastText",
+            color: "primary.contrastText",
             width: {
               xs: "100%",
               md: "80%",
@@ -125,8 +112,8 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
   return (
     <Box
       position={"relative"}
-      maxHeight={props.maxHeight ? props.maxHeight : "500px"}
-      minHeight={props.minHeight ? props.minHeight : "400px"}
+      maxHeight={"500px"}
+      minHeight={"400px"}
       mx={{ xs: "-1.5em", md: "0em" }}
     >
       {mainImage}

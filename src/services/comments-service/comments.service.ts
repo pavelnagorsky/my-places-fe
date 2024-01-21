@@ -21,9 +21,20 @@ const commentsService = {
     return axiosInstance.delete(`/comments/${commentId}`);
   },
 
+  deleteCommentAdministration: (commentId: number) => {
+    return axiosInstance.delete(`/comments/${commentId}/administration`);
+  },
+
   updateComment: (payload: IUpdateCommentPayload) => {
     return axiosInstance.put<IComment>(
       `/comments/${payload.commentId}`,
+      payload
+    );
+  },
+
+  updateCommentAdministration: (payload: IUpdateCommentPayload) => {
+    return axiosInstance.put<IComment>(
+      `/comments/${payload.commentId}/administration`,
       payload
     );
   },

@@ -1,5 +1,4 @@
 import { useTranslation } from "next-i18next";
-import { Box } from "@mui/material";
 import TextAndMainImage from "@/components/text-and-image/TextAndMainImage";
 import mainImageMd from "public/images/home-page/main-image-md.jpg";
 import mainImageXs from "public/images/home-page/main-image-xs.png";
@@ -33,6 +32,11 @@ const HomePage = () => {
         </motion.div>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <TextAndImage
+            // sx={{
+            //   "& .description": {
+            //     fontSize: { xs: "16px", md: "18px" },
+            //   },
+            // }}
             title={t("card1.title")}
             description={t("card1.description")}
             btnText={t("card1.link")}
@@ -43,7 +47,12 @@ const HomePage = () => {
         </motion.div>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <TextAndImage
-            sx={{ mb: "0 !important" }}
+            sx={{
+              mb: "0 !important",
+              // "& .description": {
+              //   fontSize: { xs: "16px", md: "18px" },
+              // },
+            }}
             reverse
             title={t("card2.title")}
             description={t("card2.description")}

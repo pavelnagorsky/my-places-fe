@@ -1,8 +1,6 @@
 import { Stack, SxProps, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import Image from "next/image";
-
-import mailImage from "public/images/icons/mail.png";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { Logo } from "@/components/logo/Logo";
 import MyLink from "@/components/next-mui-link/NextMuiLink";
 import { memo } from "react";
@@ -10,6 +8,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import Media from "@/hoc/media/Media";
 import { useRouter } from "next/router";
+import { Environment } from "@/shared/Environment";
 
 const linkSx: SxProps = {
   fontSize: "14px",
@@ -63,15 +62,22 @@ const Footer = () => {
         {t("footer.title")}
       </Typography>
       <Stack direction={"row"} alignItems={"center"}>
-        <Image src={mailImage} alt={"Email"} />
+        <MailOutlineIcon
+          sx={({ palette }) => ({
+            borderRadius: "50%",
+            color: palette.secondary.main,
+            p: "0.1em",
+            border: `1px solid ${palette.secondary.main}`,
+          })}
+        />
         <Typography
           component={"a"}
-          href="mailto:my-places@gmail.com"
+          href={`mailto:${Environment.email}`}
           color={"secondary.main"}
           ml={"0.3em"}
           fontSize={"14px"}
         >
-          my-places@gmail.com
+          {Environment.email}
         </Typography>
       </Stack>
     </Stack>
@@ -79,7 +85,7 @@ const Footer = () => {
 
   return (
     <WrappedContainer
-      sx={{ pb: setBottomMargin ? { xs: "4em", md: 0 } : undefined }}
+      sx={{ pb: setBottomMargin ? { xs: "4em", lg: 0 } : undefined }}
     >
       <Stack
         gap={{ xs: "1.5em", md: 0 }}

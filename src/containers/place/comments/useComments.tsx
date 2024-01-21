@@ -5,6 +5,8 @@ import { IComment } from "@/services/comments-service/comment.interface";
 import commentsService from "@/services/comments-service/comments.service";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import useRoleAccess from "@/hooks/useRoleAccess";
+import RolesEnum from "@/services/auth-service/roles.enum";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
 
 const useComments = (placeId: number) => {
@@ -14,6 +16,10 @@ const useComments = (placeId: number) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
+  const hasModerationAccess = useRoleAccess([
+    RolesEnum.ADMIN,
+    RolesEnum.MODERATOR,
+  ]);
 
   const form = useForm<ICommentsFormContext>({
     defaultValues: {
@@ -34,8 +40,10 @@ const useComments = (placeId: number) => {
   };
 
   const onDeleteComment = (id: number) => {
-    commentsService
-      .deleteComment(id)
+    const request = hasModerationAccess
+      ? commentsService.deleteCommentAdministration
+      : commentsService.deleteComment;
+    request(id)
       .then(() => {
         setComments(comments.filter((c) => c.id !== id));
       })
@@ -86,11 +94,13 @@ const useComments = (placeId: number) => {
   }, [placeId, isAuth]);
 
   const onUpdateComment = () => {
-    if (!editCommentId) return;
-    setLoading(true);
     form.handleSubmit((data) => {
-      commentsService
-        .updateComment({ commentId: editCommentId, text: data.comment })
+      if (!editCommentId) return;
+      setLoading(true);
+      const request = hasModerationAccess
+        ? commentsService.updateCommentAdministration
+        : commentsService.updateComment;
+      request({ commentId: editCommentId, text: data.comment })
         .then(({ data }) => {
           setEditCommentId(null);
           setLoading(false);
@@ -165,6 +175,7 @@ const useComments = (placeId: number) => {
     onClickUpdateComment,
     editCommentId,
     onCancelEdit,
+    hasModerationAccess,
   };
 };
 

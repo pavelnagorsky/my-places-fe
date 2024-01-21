@@ -28,7 +28,6 @@ import {
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import parseLanguageToId from "@/shared/parseLanguageToId";
 
 const Login = () => {
   const dispatch = useAppDispatch();

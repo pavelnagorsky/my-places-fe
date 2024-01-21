@@ -13,7 +13,7 @@ import {
   useForm,
 } from "react-hook-form-mui";
 import { useState } from "react";
-import reportsService from "@/services/reports/reports.service";
+import reportsService from "@/services/reports-service/reports.service";
 import { useAppDispatch } from "@/store/hooks";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 

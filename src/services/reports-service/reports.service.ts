@@ -1,4 +1,4 @@
-import { ICreateReport } from "@/services/reports/interfaces";
+import { ICreateReport } from "@/services/reports-service/interfaces";
 import axiosInstance from "@/services/axios.instance";
 
 const reportsService = {

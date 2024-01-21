@@ -89,8 +89,8 @@ const PersonalAreaSideBar = () => {
 
   return (
     <Fragment>
-      <Hidden mdUp>{mobileNavigation}</Hidden>
-      <Hidden mdDown>{desktopNavigation}</Hidden>
+      <Hidden lgUp>{mobileNavigation}</Hidden>
+      <Hidden lgDown>{desktopNavigation}</Hidden>
     </Fragment>
   );
 };
