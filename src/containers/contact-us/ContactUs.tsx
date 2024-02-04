@@ -17,20 +17,23 @@ const ContactUs = () => {
         initial="hidden"
         animate="show"
       >
-        <Grid container spacing={"4em"} mb="1em">
-          <Grid item xs={12} md={6}>
-            <Typography
-              variant={"h1"}
-              fontSize={{ xs: "30px", md: "40px" }}
-              mb={"0.5em"}
-            >
-              Обратная связь
-            </Typography>
-            <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-              Здесь мы ответим на все вопросы, запросы, предложения и так далее.
-            </Typography>
+        <motion.div variants={animationVariants.defaultItemVariant}>
+          <Grid container spacing={"4em"} mb="1em">
+            <Grid item xs={12} md={7}>
+              <Typography
+                variant={"h1"}
+                fontSize={{ xs: "30px", md: "40px" }}
+                mb={"0.5em"}
+              >
+                Обратная связь
+              </Typography>
+              <Typography variant={"body2"} fontSize={{ md: "20px" }}>
+                Здесь мы ответим на все вопросы, запросы, предложения и так
+                далее.
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
+        </motion.div>
         <Grid
           container
           spacing={{ xs: "2em", md: "4em", lg: "6em" }}

@@ -74,7 +74,7 @@ const MyPlacesPage = () => {
               {logic.noPlaces && (
                 <Typography
                   variant={"body1"}
-                  fontWeight={700}
+                  fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
                   Пользовательские места не найдены

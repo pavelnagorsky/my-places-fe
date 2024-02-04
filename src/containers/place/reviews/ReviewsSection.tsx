@@ -25,12 +25,17 @@ import { IReview } from "@/services/reviews-service/interfaces/review.interface"
 
 interface IReviewsSectionProps {
   reviews: ISearchReviewsResponse;
+  placeSlug: string;
   placeId: number;
 }
 
-const ReviewsSection = ({ reviews, placeId }: IReviewsSectionProps) => {
+const ReviewsSection = ({
+  reviews,
+  placeSlug,
+  placeId,
+}: IReviewsSectionProps) => {
   const { i18n } = useTranslation();
-  const data = useReviews({ defaultData: reviews, placeId: placeId });
+  const data = useReviews({ defaultData: reviews, placeSlug: placeSlug });
   const newReviewLink = routerLinks.createReview + `?placeId=${placeId}`;
   const [review, setReview] = useState<IReview | null>(null);
   const dialog = useDialog();
@@ -127,7 +132,7 @@ const ReviewsSection = ({ reviews, placeId }: IReviewsSectionProps) => {
           next={data.handleSearch}
           hasMore={data.hasMore}
           loader={
-            <Typography textAlign={"center"} variant={"body2"} fontWeight={700}>
+            <Typography textAlign={"center"} variant={"body2"} fontWeight={600}>
               Загрузка...
             </Typography>
           }

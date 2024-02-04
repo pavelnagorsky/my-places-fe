@@ -44,24 +44,24 @@ const lightTheme = createTheme({
       lineHeight: "130%",
     },
     h1: {
-      fontWeight: 700,
+      fontWeight: 600,
       color: "#303030",
       fontSize: "40px",
       marginBottom: "30px",
     },
     h2: {
-      fontWeight: 700,
+      fontWeight: 600,
       color: "secondary.dark",
       paddingBottom: "0.7em",
     },
     h3: {
-      fontWeight: 700,
+      fontWeight: 600,
       color: "secondary.dark",
       paddingBottom: "0.5em",
       fontSize: "1.625em",
     },
     h4: {
-      fontWeight: 700,
+      fontWeight: 600,
       color: "secondary.dark",
     },
     h5: {
@@ -117,6 +117,11 @@ const lightTheme = createTheme({
           },
           borderRadius: "10px",
         },
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        style: { boxShadow: "none" },
       },
     },
     MuiDivider: {

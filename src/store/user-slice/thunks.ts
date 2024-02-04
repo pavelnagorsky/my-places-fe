@@ -13,8 +13,10 @@ import userService from "@/services/user-service/user.service";
 export const getUserDataThunk = createAsyncThunk(
   "user/get-user-data",
   async (arg, thunkAPI) => {
+    console.log("get user data thunk start");
     try {
       const { data } = await userService.getUserData();
+      console.log("get user data thunk success");
       return data;
     } catch (e) {
       localStorage.removeItem(localStorageFields.TOKEN);
@@ -76,6 +78,12 @@ export const signupThunk = createAsyncThunk(
 );
 
 export const logoutThunk = createAsyncThunk("user/logout", async (thunkAPI) => {
+  authService
+    .logout()
+    .then(() => {})
+    .catch((e) => {
+      console.log("logout error", e);
+    });
   // clear token
   localStorage.removeItem(localStorageFields.TOKEN);
   return;

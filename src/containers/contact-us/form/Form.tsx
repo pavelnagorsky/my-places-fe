@@ -28,22 +28,19 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
         component={"h2"}
         fontWeight={600}
         fontSize={{ xs: "20px", md: "30px" }}
-        my={{ xs: "0.5em", md: "0.4em" }}
+        mt={{ xs: "0.5em", md: "0.4em" }}
+        mb={"0.8em"}
       >
         Контактная информация
       </Typography>
       <Stack gap={"1em"}>
         <Box>
-          <Typography variant={"body2"} fontSize={{ xs: "20px", md: "30px" }}>
-            Полное имя
-          </Typography>
           <Typography
             variant={"body2"}
-            mt={"0.5em"}
-            mb={"1em"}
+            mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Введите в это поле Ваши имя и фамилию.
+            Имя и Фамилия
           </Typography>
           <TextFieldElement
             required
@@ -76,16 +73,12 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
           />
         </Box>
         <Box>
-          <Typography variant={"body2"} fontSize={{ xs: "20px", md: "30px" }}>
-            Электронная почта
-          </Typography>
           <Typography
             variant={"body2"}
-            mt={"0.5em"}
-            mb={"1em"}
+            mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Введите в это поле адрес Вашей электронной почты.
+            Электронная почта
           </Typography>
           <TextFieldElement
             fullWidth
@@ -101,30 +94,22 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
           />
         </Box>
         <Box>
-          <Typography variant={"body2"} fontSize={{ xs: "20px", md: "30px" }}>
-            Телефон
-          </Typography>
           <Typography
             variant={"body2"}
-            mt={"0.5em"}
-            mb={"1em"}
+            mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Введите в это поле Ваш номер телефона.
+            Телефон
           </Typography>
           <PhoneInput fillWidth fieldName={"phone"} disableValidation />
         </Box>
         <Box>
-          <Typography variant={"body2"} fontSize={{ xs: "20px", md: "30px" }}>
-            Сообщение
-          </Typography>
           <Typography
             variant={"body2"}
-            mt={"0.5em"}
-            mb={"1em"}
+            mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Введите в это поле пояснительную записку.
+            Сообщение
           </Typography>
           <TextFieldElement
             required

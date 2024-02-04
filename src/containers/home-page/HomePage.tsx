@@ -32,11 +32,6 @@ const HomePage = () => {
         </motion.div>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <TextAndImage
-            // sx={{
-            //   "& .description": {
-            //     fontSize: { xs: "16px", md: "18px" },
-            //   },
-            // }}
             title={t("card1.title")}
             description={t("card1.description")}
             btnText={t("card1.link")}
@@ -49,9 +44,6 @@ const HomePage = () => {
           <TextAndImage
             sx={{
               mb: "0 !important",
-              // "& .description": {
-              //   fontSize: { xs: "16px", md: "18px" },
-              // },
             }}
             reverse
             title={t("card2.title")}

@@ -148,7 +148,7 @@ const Login = () => {
         <Button
           type={"submit"}
           fullWidth
-          sx={{ fontWeight: 700, my: "1.3em", py: "0.8em" }}
+          sx={{ fontWeight: 600, my: "1.3em", py: "0.8em" }}
           variant={"contained"}
         >
           {loading ? <CircularProgress color={"inherit"} size={23} /> : "Войти"}

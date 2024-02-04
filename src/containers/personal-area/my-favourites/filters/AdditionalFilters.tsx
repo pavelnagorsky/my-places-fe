@@ -113,7 +113,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
           sx={{ backgroundColor: primaryBackground }}
           alignItems={"center"}
         >
-          <Typography mx={"auto"} fontWeight={700} fontSize={"20px"}>
+          <Typography mx={"auto"} fontWeight={600} fontSize={"20px"}>
             Фильтры
           </Typography>
           <IconButton onClick={onClose} sx={{ mr: "0.2em" }}>

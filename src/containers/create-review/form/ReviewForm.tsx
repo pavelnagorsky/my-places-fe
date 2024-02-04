@@ -34,8 +34,8 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
           <Breadcrumbs />
           <Box pt="1.5em" pb={{ xs: "1.5em", md: "2em" }}>
             <Typography
-              component={"h1"}
-              fontSize={{ xs: "25px", md: "32px" }}
+              variant={"h1"}
+              // fontSize={{ xs: "25px", md: "32px" }}
               mb={"0.5em"}
             >
               Создание заметки

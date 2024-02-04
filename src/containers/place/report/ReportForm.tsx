@@ -112,7 +112,7 @@ const ReportForm = ({
     >
       <FormContainer formContext={form} onSuccess={onSubmit}>
         <Box>
-          <Typography fontWeight={700} fontSize={"20px"} mb={"0.5em"}>
+          <Typography fontWeight={600} fontSize={"20px"} mb={"0.5em"}>
             Отправить жалобу
           </Typography>
           <Typography variant={"body2"} mb={"0.5em"}>

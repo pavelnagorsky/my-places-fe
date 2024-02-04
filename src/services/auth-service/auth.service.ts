@@ -12,6 +12,9 @@ const authService = {
   signup: (payload: ISignupRequest) => {
     return axiosInstance.post("/auth/register", payload);
   },
+  logout: () => {
+    return axiosInstance.post("/auth/logout", {}, { withCredentials: true });
+  },
 };
 
 export default authService;

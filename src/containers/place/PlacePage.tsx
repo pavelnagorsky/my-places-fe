@@ -242,7 +242,11 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
           </Grid>
           <Grid item xs={12} lg={4}>
             <motion.div variants={animationVariants.defaultItemVariant}>
-              <ReviewsSection placeId={place.id} reviews={reviews} />
+              <ReviewsSection
+                placeSlug={place.slug}
+                placeId={place.id}
+                reviews={reviews}
+              />
               <Hidden implementation="css" mdUp>
                 {comments}
               </Hidden>

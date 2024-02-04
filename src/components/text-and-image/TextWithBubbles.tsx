@@ -26,7 +26,7 @@ function TextWithBubbles() {
               xs: "16px",
               sm: "20px",
             }}
-            fontWeight={700}
+            fontWeight={600}
             color={"primary.contrastText"}
             // sx={{
             //   textShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",

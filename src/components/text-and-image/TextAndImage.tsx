@@ -55,14 +55,18 @@ function TextAndImage({
           <Typography
             variant="body2"
             color="secondary.contrastText"
-            fontWeight={700}
+            fontWeight={600}
             mb="1em"
             className={"subtitle"}
           >
             {subtitle}
           </Typography>
         )}
-        <Typography variant="body2" className={"description"}>
+        <Typography
+          variant="body2"
+          fontSize={{ xs: "16px", md: "18px" }}
+          className={"description"}
+        >
           {description}
         </Typography>
         {!!btnText && !!linkTo && (

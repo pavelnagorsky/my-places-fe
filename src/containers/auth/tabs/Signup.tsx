@@ -292,7 +292,7 @@ const Signup = () => {
           type={"submit"}
           fullWidth
           sx={{
-            fontWeight: 700,
+            fontWeight: 600,
             mt: { xs: "1.5em", sm: "1.3em" },
             py: "0.8em",
             mb: { xs: "2em", sm: "1.3em" },

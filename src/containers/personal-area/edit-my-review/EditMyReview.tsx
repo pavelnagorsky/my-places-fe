@@ -45,36 +45,63 @@ const EditMyReview = () => {
           <FormContainer formContext={logic.form} onSuccess={logic.onSubmit}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Box pb={{ xs: "1.5em", md: "1.5em" }}>
-                <Box overflow={"hidden"}>
-                  <Stack
-                    direction={{ sm: "row", md: "column", lg: "row" }}
-                    columnGap={"1em"}
-                    rowGap={"0.5em"}
-                    alignItems={{ sm: "center", md: "unset", lg: "center" }}
-                    mb={"0.5em"}
-                  >
-                    <Box order={{ xs: 1, sm: 0, md: 1, lg: 0 }}>
-                      <Btn
-                        onClick={logic.onGoBack}
-                        sx={{ borderRadius: "10px", textTransform: "none" }}
-                        variant={"outlined"}
-                        color={"secondary"}
-                      >
-                        Назад
-                      </Btn>
-                    </Box>
-                    <Typography
-                      component={"h1"}
-                      fontSize={{ xs: "25px", md: "32px" }}
+                <Stack
+                  direction={{ md: "row" }}
+                  gap={{ xs: "1.5em", md: "1em" }}
+                  justifyContent={"space-between"}
+                >
+                  <Box overflow={"hidden"}>
+                    <Stack
+                      direction={{ sm: "row", md: "column", lg: "row" }}
+                      columnGap={"1em"}
+                      rowGap={"0.5em"}
+                      alignItems={{ sm: "center", md: "unset", lg: "center" }}
+                      mb={{ xs: "1em", md: "1.5em" }}
                     >
-                      Редактирование заметки
+                      <Box order={{ xs: 1, sm: 0, md: 1, lg: 0 }}>
+                        <Btn
+                          onClick={logic.onGoBack}
+                          sx={{ borderRadius: "10px", textTransform: "none" }}
+                          variant={"outlined"}
+                          color={"secondary"}
+                        >
+                          Назад
+                        </Btn>
+                      </Box>
+                      <Typography
+                        variant={"h1"}
+                        mb={0}
+                        //fontSize={{ xs: "25px", md: "32px" }}
+                      >
+                        Редактирование заметки
+                      </Typography>
+                    </Stack>
+                    <Typography variant={"body2"} fontSize={{ md: "20px" }}>
+                      После редактирования заметка будет отправлена на
+                      модерацию.
                     </Typography>
-                  </Stack>
-                  <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                    После редактирования заметка будет отправлена на модерацию.
-                  </Typography>
-                  <UpdateTranslations mt={"0.5em"} />
-                </Box>
+                    <UpdateTranslations mt={"0.5em"} />
+                  </Box>
+                  <div>
+                    <ButtonWithTooltip
+                      loading={loading}
+                      buttonText={"Обновить"}
+                      tooltipText={"Не все обязательные поля формы заполнены!"}
+                      variant={"contained"}
+                      type={"submit"}
+                      disabled={
+                        !logic.form.formState.isValid ||
+                        utils.isEmptyObject(logic.form.formState.dirtyFields)
+                      }
+                      sx={{
+                        fontWeight: 700,
+                        py: "1em",
+                        width: "100%",
+                        maxWidth: { sm: "250px" },
+                      }}
+                    />
+                  </div>
+                </Stack>
               </Box>
             </motion.div>
             <motion.div variants={animationVariants.defaultItemVariant}>
@@ -120,26 +147,6 @@ const EditMyReview = () => {
               <Box mb={"3em"}>
                 <Box pb={{ xs: "1.5em", md: "2em" }} maxWidth={734}>
                   <ReviewText />
-                  <div>
-                    <ButtonWithTooltip
-                      loading={loading}
-                      buttonText={"Обновить"}
-                      tooltipText={"Не все обязательные поля формы заполнены!"}
-                      variant={"contained"}
-                      type={"submit"}
-                      disabled={
-                        !logic.form.formState.isValid ||
-                        utils.isEmptyObject(logic.form.formState.dirtyFields)
-                      }
-                      sx={{
-                        fontWeight: 700,
-                        mt: "2em",
-                        py: "1em",
-                        width: "100%",
-                        maxWidth: { sm: "250px" },
-                      }}
-                    />
-                  </div>
                 </Box>
               </Box>
             </motion.div>

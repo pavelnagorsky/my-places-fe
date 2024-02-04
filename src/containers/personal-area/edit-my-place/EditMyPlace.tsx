@@ -87,7 +87,7 @@ const EditMyPlace = () => {
                       columnGap={"1em"}
                       rowGap={"0.5em"}
                       alignItems={{ sm: "center", md: "unset", lg: "center" }}
-                      mb={"0.5em"}
+                      mb={{ xs: "1em", md: "1.5em" }}
                     >
                       <Box order={{ xs: 1, sm: 0, md: 1, lg: 0 }}>
                         <Button
@@ -100,8 +100,9 @@ const EditMyPlace = () => {
                         </Button>
                       </Box>
                       <Typography
-                        component={"h1"}
-                        fontSize={{ xs: "25px", md: "32px" }}
+                        variant={"h1"}
+                        mb={0}
+                        //fontSize={{ xs: "25px", md: "32px" }}
                       >
                         Редактирование места
                       </Typography>

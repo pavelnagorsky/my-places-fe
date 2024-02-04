@@ -16,12 +16,18 @@ import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openAuth, selectIsAuth } from "@/store/user-slice/user.slice";
 import { AnimatePresence, motion } from "framer-motion";
+import useRoleAccess from "@/hooks/useRoleAccess";
+import RolesEnum from "@/services/auth-service/roles.enum";
 
 const Comments = ({ placeId }: { placeId: number }) => {
   const commentsData = useComments(placeId);
   const dateFnsLocale = useDateFnsLocale();
   const isAuth = useAppSelector(selectIsAuth);
   const dispatch = useAppDispatch();
+  const hasModerationAccess = useRoleAccess([
+    RolesEnum.ADMIN,
+    RolesEnum.MODERATOR,
+  ]);
 
   const onAuth = () => {
     dispatch(openAuth({}));
@@ -129,6 +135,7 @@ const Comments = ({ placeId }: { placeId: number }) => {
               transition={{ duration: 0.6, type: "spring" }}
             >
               <Comment
+                isModerator={hasModerationAccess}
                 isAuth={isAuth}
                 onUpdate={commentsData.onClickUpdateComment}
                 onDelete={commentsData.onDeleteComment}

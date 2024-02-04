@@ -58,7 +58,7 @@ const ReviewText = ({ sx }: { sx?: SxProps }) => {
         validation={{ required: "Это поле обязательно к заполнению" }}
         placeholder={"Введите заголовок..."}
       />
-      <Typography variant={"body2"} my={"1em"} fontSize={{ md: "20px" }}>
+      <Typography variant={"body1"} my={"1em"} fontSize={{ md: "20px" }}>
         Текст заметки:
       </Typography>
       <TextEditor fieldName={"description"} />

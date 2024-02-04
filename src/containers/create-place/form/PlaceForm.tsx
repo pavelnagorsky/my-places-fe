@@ -67,8 +67,8 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
             >
               <Box overflow={"hidden"}>
                 <Typography
-                  component={"h1"}
-                  fontSize={{ xs: "25px", md: "32px" }}
+                  variant={"h1"}
+                  //fontSize={{ xs: "25px", md: "32px" }}
                   mb={"0.5em"}
                 >
                   Создание места
