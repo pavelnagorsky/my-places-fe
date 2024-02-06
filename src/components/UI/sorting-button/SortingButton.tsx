@@ -56,7 +56,7 @@ const SortingButton = ({
             display: isActive ? "block" : "none",
           }}
         >
-          {orderDirection === OrderDirectionsEnum.ASC ? (
+          {orderDirection === OrderDirectionsEnum.DESC ? (
             <ArrowDownwardIcon fontSize={"small"} />
           ) : (
             <ArrowUpwardIcon fontSize={"small"} />

@@ -15,16 +15,10 @@ const PersonalAreaLayout = ({ children }: PropsWithChildren) => {
           mb={"3em"}
           position={"relative"}
         >
-          <Grid
-            item
-            xs={12}
-            lg={2.5}
-            xl={2}
-            sx={{ zIndex: 10, mt: { md: "0.5em" } }}
-          >
+          <Grid item xs={12} xl={2} sx={{ zIndex: 10, mt: { md: "0.5em" } }}>
             <PersonalAreaSideBar />
           </Grid>
-          <Grid item xs={12} lg={9.5} xl={10}>
+          <Grid item xs={12} xl={10}>
             {children}
           </Grid>
         </Grid>

@@ -2,6 +2,8 @@ import axiosInstance from "@/services/axios.instance";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { ICreateReview } from "@/services/reviews-service/interfaces/create-review.interface";
 import {
+  IModerationReviewsRequest,
+  IModerationReviewsResponse,
   IMyReviewsRequest,
   IMyReviewsResponse,
   ISearchReviewsResponse,
@@ -55,6 +57,16 @@ const reviewsService = {
   updateReview: (id: number, payload: IUpdateReview, lang: string) => {
     const langId = parseLanguageToId(lang);
     return axiosInstance.put(`/reviews/${id}?lang=${langId}`, payload);
+  },
+
+  MODERATION_REVIEWS_ITEMS_PER_PAGE: 10,
+
+  getModerationReviews: (lang: string, payload: IModerationReviewsRequest) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IModerationReviewsResponse>(
+      `/reviews/moderation-reviews?lang=${langId}`,
+      payload
+    );
   },
 };
 

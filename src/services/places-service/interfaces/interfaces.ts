@@ -2,6 +2,7 @@ import { ISearchPlace } from "@/services/places-service/interfaces/search-place.
 import { IPagination } from "@/services/interfaces";
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import { PlaceStatusesEnum } from "./place-statuses.enum";
+import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 
 export interface ISearchPlacesRequest {
   language?: string;
@@ -48,4 +49,30 @@ export interface IMyFavouritesRequest {
   dateFrom?: string | null;
   dateTo?: string | null;
   search?: string;
+}
+
+export enum ModerationPlacesOrderByEnum {
+  CREATED_AT,
+  UPDATED_AT,
+  TITLE,
+  TYPE,
+  COMMERCIAL,
+  AUTHOR,
+}
+
+export interface IModerationPlacesRequest {
+  lastIndex: number;
+  itemsPerPage: number;
+  authorEmail?: string;
+  dateFrom?: string | null;
+  dateTo?: string | null;
+  search?: string;
+  orderBy?: ModerationPlacesOrderByEnum;
+  orderAsc?: boolean;
+}
+
+export interface IModerationPlacesResponse {
+  data: IModerationPlace[];
+  lastIndex: number;
+  hasMore: boolean;
 }

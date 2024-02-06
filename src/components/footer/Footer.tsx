@@ -25,11 +25,12 @@ const linkSx: SxProps = {
 const Footer = () => {
   const { t } = useTranslation("common");
   const router = useRouter();
-  const bottomMenuPathNames = [
+  const noFooterPathNames = [
     routerLinks.administrationBasePath,
     routerLinks.personalAreaBasePath,
+    routerLinks.moderationBasePath,
   ];
-  const setBottomMargin = bottomMenuPathNames.some((link) =>
+  const hideFooter = noFooterPathNames.some((link) =>
     router.pathname.includes(link)
   );
 
@@ -83,10 +84,8 @@ const Footer = () => {
     </Stack>
   );
 
-  return (
-    <WrappedContainer
-      sx={{ pb: setBottomMargin ? { xs: "4em", lg: 0 } : undefined }}
-    >
+  return hideFooter ? null : (
+    <WrappedContainer>
       <Stack
         gap={{ xs: "1.5em", md: 0 }}
         direction={"row"}

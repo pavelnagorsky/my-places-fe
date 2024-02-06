@@ -13,10 +13,8 @@ import userService from "@/services/user-service/user.service";
 export const getUserDataThunk = createAsyncThunk(
   "user/get-user-data",
   async (arg, thunkAPI) => {
-    console.log("get user data thunk start");
     try {
       const { data } = await userService.getUserData();
-      console.log("get user data thunk success");
       return data;
     } catch (e) {
       localStorage.removeItem(localStorageFields.TOKEN);

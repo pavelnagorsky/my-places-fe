@@ -7,7 +7,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import HomeIcon from "@mui/icons-material/Home";
 import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
-import SliderMenuLink from "./SliderMenuLink";
+import SliderMenuLink from "../SliderMenuLink";
 
 const LinksSection = ({
   onClose,

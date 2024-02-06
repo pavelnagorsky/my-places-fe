@@ -1,10 +1,10 @@
 import { PropsWithChildren } from "react";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { Box, Grid, Paper } from "@mui/material";
-import AdminSideBar from "@/containers/admin/layout/AdminSideBar";
+import { Grid } from "@mui/material";
+import ModerationSideBar from "@/containers/moderation/layout/ModerationSideBar";
 
-const AdminLayout = ({ children }: PropsWithChildren) => {
+const ModerationLayout = ({ children }: PropsWithChildren) => {
   return (
     <ProtectedAuth mode={"redirectPermanent"}>
       <WrappedContainer>
@@ -12,14 +12,14 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
           container
           spacing={{ xs: "1em", md: "2em" }}
           mt={"1em"}
-          mb={"5em"}
+          mb={"3em"}
           position={"relative"}
         >
-          <Grid item xs={12} xl={2} sx={{ zIndex: 10 }}>
-            <AdminSideBar />
+          <Grid item xs={12} xl={2} sx={{ zIndex: 10, mt: { md: "0.5em" } }}>
+            <ModerationSideBar />
           </Grid>
           <Grid item xs={12} xl={10}>
-            <Paper>{children}</Paper>
+            {children}
           </Grid>
         </Grid>
       </WrappedContainer>
@@ -27,4 +27,4 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default AdminLayout;
+export default ModerationLayout;

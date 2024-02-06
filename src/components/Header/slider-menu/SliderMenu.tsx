@@ -1,10 +1,10 @@
 import { Divider, Popover, PopoverProps, Stack } from "@mui/material";
 import { useAppSelector } from "@/store/hooks";
 import { selectUserData } from "@/store/user-slice/user.slice";
-import LinksSection from "@/components/header/slider-menu/LinksSection";
-import LoginSection from "@/components/header/slider-menu/LoginSection";
-import UserSection from "@/components/header/slider-menu/UserSection";
-import LanguageSection from "@/components/header/slider-menu/LanguageSection";
+import LinksSection from "@/components/header/slider-menu/sections/LinksSection";
+import LoginSection from "@/components/header/slider-menu/sections/LoginSection";
+import UserSection from "@/components/header/slider-menu/sections/UserSection";
+import LanguageSection from "@/components/header/slider-menu/sections/LanguageSection";
 
 interface ISliderMenuProps extends PopoverProps {
   onClose: () => void;

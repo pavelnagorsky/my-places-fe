@@ -89,8 +89,8 @@ const AdminSideBar = () => {
 
   return (
     <Fragment>
-      <Hidden lgUp>{mobileNavigation}</Hidden>
-      <Hidden lgDown>{desktopNavigation}</Hidden>
+      <Hidden xlUp>{mobileNavigation}</Hidden>
+      <Hidden xlDown>{desktopNavigation}</Hidden>
     </Fragment>
   );
 };

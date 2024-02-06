@@ -2,6 +2,8 @@ import axiosInstance from "@/services/axios.instance";
 import { IPlaceSlug } from "@/services/places-service/interfaces/place-slug.interface";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import {
+  IModerationPlacesRequest,
+  IModerationPlacesResponse,
   IMyFavouritesRequest,
   IMyPlacesRequest,
   IMyPlacesResponse,
@@ -15,6 +17,7 @@ import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import { IEditPlace } from "@/services/places-service/interfaces/edit-place.interface";
 import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
 import { IFavourite } from "@/services/places-service/interfaces/favourite.interface";
+import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 
 const placesService = {
   ITEMS_PER_PAGE: 12,
@@ -102,6 +105,16 @@ const placesService = {
 
   deleteFavourite: (id: number) => {
     return axiosInstance.delete(`/favourites/${id}`);
+  },
+
+  MODERATION_PLACES_ITEMS_PER_PAGE: 10,
+
+  getModerationPlaces: (lang: string, payload: IModerationPlacesRequest) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IModerationPlacesResponse>(
+      `/places/moderation-places?lang=${langId}`,
+      payload
+    );
   },
 };
 

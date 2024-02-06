@@ -5,6 +5,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useAppDispatch } from "@/store/hooks";
 import { logoutThunk } from "@/store/user-slice/thunks";
 import SliderMenuLink from "@/components/header/slider-menu/SliderMenuLink";
+import BuildIcon from "@mui/icons-material/Build";
 
 const UserSection = ({
   onClose,
@@ -56,6 +57,13 @@ const UserSection = ({
         text={"Личный кабинет"}
         href={routerLinks.personalAreaPlaces}
         icon={<AccountCircleIcon fontSize={"small"} color={"secondary"} />}
+      />
+      <SliderMenuLink
+        pathname={pathname}
+        onClick={onClose}
+        text={"Модерация"}
+        href={routerLinks.moderationPlaces}
+        icon={<BuildIcon fontSize={"small"} color={"secondary"} />}
       />
       <SliderMenuLink
         pathname={pathname}

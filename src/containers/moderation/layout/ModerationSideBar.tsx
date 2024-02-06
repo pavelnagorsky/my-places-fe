@@ -10,11 +10,11 @@ import {
 import { useRouter } from "next/router";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
 import { Fragment } from "react";
-import usePersonalAreaMenu from "@/containers/personal-area/layout/usePersonalAreaMenu";
+import useModerationMenu from "@/containers/moderation/layout/useModerationMenu";
 
-const PersonalAreaSideBar = () => {
+const ModerationSideBar = () => {
   const router = useRouter();
-  const userLinks = usePersonalAreaMenu();
+  const userLinks = useModerationMenu();
 
   const customPathname = router.asPath
     .split("/")
@@ -95,4 +95,4 @@ const PersonalAreaSideBar = () => {
   );
 };
 
-export default PersonalAreaSideBar;
+export default ModerationSideBar;
