@@ -17,7 +17,11 @@ import CreateMenu from "./create-menu/CreateMenu";
 import SliderMenu from "@/components/header/slider-menu/SliderMenu";
 import { useHeaderMenu } from "@/components/header/slider-menu/useHeaderMenu";
 
-const Header = () => {
+interface IHeaderProps {
+  wideMode?: boolean;
+}
+
+const Header = ({ wideMode }: IHeaderProps) => {
   const { t } = useTranslation("common");
   const menu = useHeaderMenu();
   const router = useRouter();
@@ -32,7 +36,9 @@ const Header = () => {
         position: "sticky",
       }}
     >
-      <WrappedContainer>
+      <WrappedContainer
+        wrapperSx={wideMode ? { px: { xs: "1.5em", md: "3em" } } : undefined}
+      >
         <Stack
           justifyContent={"space-between"}
           direction={"row"}

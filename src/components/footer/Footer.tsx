@@ -24,15 +24,6 @@ const linkSx: SxProps = {
 
 const Footer = () => {
   const { t } = useTranslation("common");
-  const router = useRouter();
-  const noFooterPathNames = [
-    routerLinks.administrationBasePath,
-    routerLinks.personalAreaBasePath,
-    routerLinks.moderationBasePath,
-  ];
-  const hideFooter = noFooterPathNames.some((link) =>
-    router.pathname.includes(link)
-  );
 
   const linksSection = (
     <Media xs={"none"} md={"block"}>
@@ -84,7 +75,7 @@ const Footer = () => {
     </Stack>
   );
 
-  return hideFooter ? null : (
+  return (
     <WrappedContainer>
       <Stack
         gap={{ xs: "1.5em", md: 0 }}

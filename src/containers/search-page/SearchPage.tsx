@@ -150,7 +150,7 @@ function SearchPage() {
             <Stack
               width={{
                 xs: "330px",
-                sm: "700px",
+                // sm: "700px",
                 md: "790px",
                 xl: "100%",
               }}

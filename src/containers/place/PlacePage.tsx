@@ -235,7 +235,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                   <Marker position={place.coordinates} />
                 </Map>
               </Box>
-              <Hidden implementation="css" mdDown>
+              <Hidden implementation="css" lgDown>
                 {comments}
               </Hidden>
             </motion.div>
@@ -247,7 +247,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                 placeId={place.id}
                 reviews={reviews}
               />
-              <Hidden implementation="css" mdUp>
+              <Hidden implementation="css" lgUp>
                 {comments}
               </Hidden>
             </motion.div>

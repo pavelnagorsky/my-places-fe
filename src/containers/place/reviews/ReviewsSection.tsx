@@ -75,9 +75,9 @@ const ReviewsSection = ({
   };
 
   return (
-    <Stack mb={{ xs: "2em", md: 0 }}>
+    <Stack mb={{ xs: "2em", lg: 0 }}>
       <Stack
-        mx={{ md: "1em" }}
+        mx={{ lg: "1em" }}
         direction={"row"}
         mb={"0.5em"}
         alignItems={"center"}

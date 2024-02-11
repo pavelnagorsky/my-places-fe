@@ -124,18 +124,23 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             label={"Сообщение"}
           />
         </Box>
-        <Button
-          sx={{ py: "0.8em", mt: "1em" }}
-          variant={"contained"}
-          type={"submit"}
-          onClick={onSubmit}
-        >
-          {loading ? (
-            <CircularProgress color={"inherit"} size={25} />
-          ) : (
-            "Отправить"
-          )}
-        </Button>
+        <Box>
+          <Button
+            sx={{
+              py: "0.8em",
+              mt: "1em",
+            }}
+            variant={"contained"}
+            type={"submit"}
+            onClick={onSubmit}
+          >
+            {loading ? (
+              <CircularProgress color={"inherit"} size={25} />
+            ) : (
+              "Отправить"
+            )}
+          </Button>
+        </Box>
       </Stack>
     </Box>
   );

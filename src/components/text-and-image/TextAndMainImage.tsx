@@ -80,6 +80,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
       <Typography
         variant="h1"
         sx={{
+          wordBreak: { xs: "break-word", md: "unset" },
           color: "primary.contrastText",
         }}
       >

@@ -7,10 +7,10 @@ import PersonalAreaSideBar from "@/containers/personal-area/layout/PersonalAreaS
 const PersonalAreaLayout = ({ children }: PropsWithChildren) => {
   return (
     <ProtectedAuth mode={"redirectPermanent"}>
-      <WrappedContainer>
+      <WrappedContainer wrapperSx={{ px: { xs: "1.5em", md: "3em" } }}>
         <Grid
           container
-          spacing={{ xs: "1em", md: "2em" }}
+          columnSpacing={"2em"}
           mt={"1em"}
           mb={"3em"}
           position={"relative"}

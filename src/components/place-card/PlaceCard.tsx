@@ -31,7 +31,8 @@ function PlaceCard({ place }: IPlaceCardProps) {
         width: { xs: "330px", md: "374px" },
         height: { xs: "510px", md: "565px" },
         borderRadius: "10px",
-        boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
+        boxShadow:
+          "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 1px 0px rgba(0,0,0,0.12)",
       }}
     >
       <CardActionArea component={Link} href={routerLinks.place(place.slug)}>

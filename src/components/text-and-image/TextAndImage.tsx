@@ -76,7 +76,7 @@ function TextAndImage({
               //mt: 3.5,
               mt: "2.5em",
               py: "1em",
-              width: { xs: "100%", md: "initial" },
+              width: { xs: "100%", sm: "initial" },
               fontWeight: 700,
             }}
             linkTo={linkTo}

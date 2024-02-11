@@ -22,11 +22,11 @@ const Gallery = (props: IGalleryProps) => {
         boxProps={{
           //width: "100%",
           height: "100%",
+          sx: {
+            "& img": { objectFit: "cover" },
+          },
         }}
         imageProps={{
-          style: {
-            objectFit: "cover",
-          },
           sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 70vw",
           fill: true,
           priority: index < 1,

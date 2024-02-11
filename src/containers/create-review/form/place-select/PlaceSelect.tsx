@@ -79,7 +79,7 @@ const PlaceSelect = ({ fieldName }: IPlaceSelectProps) => {
         placeholder: "Выберите место",
         fullWidth: true,
         sx: {
-          minWidth: "350px",
+          minWidth: { sm: "300px", md: "350px" },
           "& .MuiInputBase-root": { bgcolor: "white" },
         },
         onChange: debouncedInputChange,

@@ -51,7 +51,7 @@ const UserSettingsPage = () => {
         <motion.div variants={animationVariants.defaultItemVariant}>
           <FormProvider {...logic.form}>
             <Grid container spacing={"2em"} mb={"2em"}>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} sm={6}>
                 <CustomLabel htmlFor={"firstName"}>Имя</CustomLabel>
                 <TextFieldElement
                   name={"firstName"}
@@ -71,7 +71,7 @@ const UserSettingsPage = () => {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} sm={6}>
                 <CustomLabel htmlFor={"lastName"}>Фамилия</CustomLabel>
                 <TextFieldElement
                   name={"lastName"}
@@ -91,7 +91,7 @@ const UserSettingsPage = () => {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} sm={6}>
                 <CustomLabel htmlFor={"email"}>Электронная почта</CustomLabel>
                 <TextFieldElement
                   type={"email"}
@@ -109,7 +109,7 @@ const UserSettingsPage = () => {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} sm={6}>
                 <CustomLabel htmlFor={"preferredLanguageId"}>
                   Предпочитаемый язык
                 </CustomLabel>
@@ -120,28 +120,31 @@ const UserSettingsPage = () => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
-                <Button
-                  disabled={!logic.form.formState.isDirty}
-                  variant={"contained"}
-                  onClick={logic.onSubmit}
-                  startIcon={
-                    logic.loading ? (
-                      <CircularProgress size={23} color={"inherit"} />
-                    ) : (
-                      <SaveIcon />
-                    )
-                  }
-                  size={"large"}
-                  sx={{
-                    borderRadius: "10px",
-                    py: "1em",
-                    width: "100%",
-                    mt: "1em",
-                  }}
-                >
-                  Сохранить
-                </Button>
+              <Grid item xs={12} sm={6}>
+                <Box>
+                  <Button
+                    disabled={!logic.form.formState.isDirty}
+                    variant={"contained"}
+                    onClick={logic.onSubmit}
+                    startIcon={
+                      logic.loading ? (
+                        <CircularProgress size={23} color={"inherit"} />
+                      ) : (
+                        <SaveIcon />
+                      )
+                    }
+                    size={"large"}
+                    sx={{
+                      borderRadius: "10px",
+                      py: "1em",
+                      px: "2em",
+                      mt: "1em",
+                      width: { xs: "100%", sm: "auto" },
+                    }}
+                  >
+                    Сохранить
+                  </Button>
+                </Box>
               </Grid>
             </Grid>
           </FormProvider>

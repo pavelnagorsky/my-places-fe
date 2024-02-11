@@ -25,8 +25,8 @@ const InfoPanel = () => {
           Прочитайте о нашем проекте подробнее:
         </Typography>
         <Button
-          sx={{ py: "0.8em" }}
-          variant={"contained"}
+          sx={{ py: "0.8em", color: "primary.main" }}
+          variant={"outlined"}
           linkTo={routerLinks.aboutUs}
         >
           О проекте

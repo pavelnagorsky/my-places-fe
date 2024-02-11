@@ -67,7 +67,7 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 justifyContent={{ xs: "center", sm: "unset" }}
-                alignItems={{ xs: "unset", sm: "flex-start" }}
+                alignItems={{ xs: "unset", md: "flex-start" }}
                 mt={"2em"}
                 gap={"1.5em"}
               >
@@ -77,7 +77,8 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
                   sx={{
                     fontWeight: 700,
                     py: "1em",
-                    fontSize: { xs: "14px", sm: "16px" },
+                    px: { sm: "1em", md: "2em" },
+                    fontSize: { xs: "14px", md: "16px" },
                   }}
                   linkTo={routerLinks.createPlace}
                 >
