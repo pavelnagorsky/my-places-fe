@@ -24,12 +24,14 @@ interface IImageUploaderProps {
   fieldName: string;
   required?: boolean;
   maxLimit?: number;
+  readonly?: boolean;
 }
 
 const ImageUploader = ({
   fieldName,
   maxLimit,
   required,
+  readonly,
 }: IImageUploaderProps) => {
   const [loading, setLoading] = useState(false);
   const { control, formState } =
@@ -77,11 +79,15 @@ const ImageUploader = ({
   };
 
   return (
-    <SortableList onSortEnd={onSortEnd} draggedItemClassName="dragged">
+    <SortableList
+      allowDrag={!readonly}
+      onSortEnd={onSortEnd}
+      draggedItemClassName="dragged"
+    >
       <Stack direction={"row"} flexWrap={"wrap"} gap={{ xs: "1em", md: "2em" }}>
         <label htmlFor="file-input">
           <Button
-            disabled={loading}
+            disabled={loading || readonly}
             onClick={() => fileInputRef.current && fileInputRef.current.click()}
             variant={"text"}
             sx={{
@@ -100,7 +106,7 @@ const ImageUploader = ({
               onChange={handleUpload}
               ref={fileInputRef}
               hidden
-              disabled={loading}
+              disabled={loading || readonly}
               id={"file-input"}
               type={"file"}
               accept={"image/*"}
@@ -135,7 +141,11 @@ const ImageUploader = ({
                 cursor: "grab",
               }}
             >
-              <ImagePreview image={item} onDelete={() => handleDelete(index)} />
+              <ImagePreview
+                readonly={readonly}
+                image={item}
+                onDelete={() => handleDelete(index)}
+              />
             </Box>
           </SortableItem>
         ))}

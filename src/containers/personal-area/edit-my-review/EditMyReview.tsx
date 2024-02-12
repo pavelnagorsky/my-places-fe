@@ -52,13 +52,13 @@ const EditMyReview = () => {
                 >
                   <Box overflow={"hidden"}>
                     <Stack
-                      direction={{ sm: "row", md: "column", lg: "row" }}
+                      direction={{ sm: "row" }}
                       columnGap={"1em"}
                       rowGap={"0.5em"}
-                      alignItems={{ sm: "center", md: "unset", lg: "center" }}
+                      alignItems={{ sm: "center" }}
                       mb={{ xs: "1em", md: "1.5em" }}
                     >
-                      <Box order={{ xs: 1, sm: 0, md: 1, lg: 0 }}>
+                      <Box order={{ xs: 1, sm: 0 }}>
                         <Btn
                           onClick={logic.onGoBack}
                           sx={{ borderRadius: "10px", textTransform: "none" }}
@@ -71,7 +71,7 @@ const EditMyReview = () => {
                       <Typography
                         variant={"h1"}
                         mb={0}
-                        //fontSize={{ xs: "25px", md: "32px" }}
+                        fontSize={{ xs: "24px", sm: "30px", md: "40px" }}
                       >
                         Редактирование заметки
                       </Typography>

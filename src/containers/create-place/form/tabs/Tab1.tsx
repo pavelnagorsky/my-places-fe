@@ -15,9 +15,12 @@ import regExp from "@/shared/regExp";
 import PublicIcon from "@mui/icons-material/Public";
 import placesService from "@/services/places-service/places.service";
 import { Environment } from "@/shared/Environment";
-import { IPlaceFormContext } from "@/containers/create-place/form/interfaces";
+import {
+  IPlaceFormContext,
+  IPlaceTabProps,
+} from "@/containers/create-place/form/interfaces";
 
-const Tab1 = () => {
+const Tab1 = ({ readonly }: IPlaceTabProps) => {
   const { setError } = useFormContext<IPlaceFormContext>();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -80,6 +83,9 @@ const Tab1 = () => {
         Название:
       </Typography>
       <TextFieldElement
+        InputProps={{
+          readOnly: readonly,
+        }}
         sx={{
           mt: "1em",
           "& input": { bgcolor: "white", borderRadius: "15px" },
@@ -101,6 +107,9 @@ const Tab1 = () => {
         Краткое описание:
       </Typography>
       <TextFieldElement
+        InputProps={{
+          readOnly: readonly,
+        }}
         sx={{
           mt: "1em",
           "& input": { bgcolor: "white", borderRadius: "15px" },
@@ -152,6 +161,7 @@ const Tab1 = () => {
           fontSize: { md: "20px" },
         }}
         InputProps={{
+          readOnly: readonly,
           startAdornment: (
             <InputAdornment position={"end"}>
               {isMobile ? "places/" : `https://${Environment.domain}/places/`}
@@ -204,6 +214,7 @@ const Tab1 = () => {
           fontSize: { md: "20px" },
         }}
         InputProps={{
+          readOnly: readonly,
           startAdornment: (
             <InputAdornment position={"start"}>
               <PublicIcon />

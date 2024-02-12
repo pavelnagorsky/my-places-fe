@@ -17,14 +17,17 @@ import {
 } from "react-hook-form-mui";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
-import { IPlaceFormContext } from "@/containers/create-place/form/interfaces";
+import {
+  IPlaceFormContext,
+  IPlaceTabProps,
+} from "@/containers/create-place/form/interfaces";
 
-interface ITab2Props {
+interface ITab2Props extends IPlaceTabProps {
   placeTypes: IPlaceType[];
   categories: IPlaceCategory[];
 }
 
-const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
+const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
   const { watch, getValues, resetField } = useFormContext<IPlaceFormContext>();
   const isCommercial = watch("isCommercial");
 
@@ -84,6 +87,7 @@ const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
                 control={
                   <Switch
                     {...field}
+                    disabled={readonly}
                     onChange={(event, checked) => {
                       resetField("placeTypeId");
                       field.onChange(checked);
@@ -114,6 +118,9 @@ const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
       </Typography>
       <SelectElement
         name={"placeTypeId"}
+        SelectProps={{
+          readOnly: readonly,
+        }}
         validation={{
           required: "Это поле обязательно к заполнению",
         }}
@@ -146,6 +153,7 @@ const Tab2 = ({ placeTypes, categories }: ITab2Props) => {
       >
         <CheckboxButtonGroup
           labelProps={{
+            disabled: readonly,
             sx: {
               width: { xs: "49%", md: "40%", lg: "35%" },
               mx: 0,

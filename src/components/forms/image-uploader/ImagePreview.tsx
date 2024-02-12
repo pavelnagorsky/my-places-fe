@@ -7,9 +7,11 @@ import IconButton from "@mui/material/IconButton";
 const ImagePreview = ({
   image,
   onDelete,
+  readonly,
 }: {
   image: IImage;
   onDelete: () => void;
+  readonly?: boolean;
 }) => {
   return (
     <Box
@@ -22,20 +24,22 @@ const ImagePreview = ({
         pointerEvents: "none",
       }}
     >
-      <IconButton
-        size={"small"}
-        sx={{
-          bgcolor: "rgba(0, 0, 0, 0.25)",
-          position: "absolute",
-          right: "2px",
-          top: "2px",
-          pointerEvents: "initial",
-          zIndex: 1,
-        }}
-        onClick={onDelete}
-      >
-        <ClearIcon fontSize={"small"} sx={{ color: "white" }} />
-      </IconButton>
+      {!readonly && (
+        <IconButton
+          size={"small"}
+          sx={{
+            bgcolor: "rgba(0, 0, 0, 0.25)",
+            position: "absolute",
+            right: "2px",
+            top: "2px",
+            pointerEvents: "initial",
+            zIndex: 1,
+          }}
+          onClick={onDelete}
+        >
+          <ClearIcon fontSize={"small"} sx={{ color: "white" }} />
+        </IconButton>
+      )}
       <Image
         src={image.url}
         alt={`image ${image.id}`}

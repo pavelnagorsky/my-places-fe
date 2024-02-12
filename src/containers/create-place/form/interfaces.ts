@@ -13,3 +13,7 @@ export interface IPlaceFormContext {
   isCommercial: boolean;
   website?: string;
 }
+
+export interface IPlaceTabProps {
+  readonly?: boolean;
+}

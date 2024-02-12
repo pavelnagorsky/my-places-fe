@@ -116,6 +116,10 @@ const placesService = {
       payload
     );
   },
+
+  getPlaceForModeration: (id: number) => {
+    return axiosInstance.get<IEditPlace>(`/places/moderation/${id}`);
+  },
 };
 
 export default placesService;

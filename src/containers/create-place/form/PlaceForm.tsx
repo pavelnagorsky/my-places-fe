@@ -112,7 +112,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
           </Grid>
           <Grid item xs={12} md={9} lg={10}>
             <motion.div variants={animationVariants.defaultItemVariant}>
-              <AnimatePresence mode={"wait"}>
+              <AnimatePresence mode={"sync"}>
                 <motion.div
                   key={0}
                   variants={tabContentVariant}

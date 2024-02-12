@@ -31,7 +31,7 @@ const useEditMyPlace = () => {
     shouldUseNativeValidation: false,
   });
 
-  const onGoBack = () => router.replace(routerLinks.personalAreaPlaces);
+  const onGoBack = () => router.replace(routerLinks.moderationPlaces);
 
   const handleShowNotFoundError = () => {
     dispatch(
@@ -57,7 +57,7 @@ const useEditMyPlace = () => {
     }
     setLoading(true);
     placesService
-      .getPlaceForEdit(+placeId, i18n.language)
+      .getPlaceForModeration(+placeId)
       .then(({ data }) => {
         // reset form state
         form.reset({
@@ -80,7 +80,7 @@ const useEditMyPlace = () => {
         setLoading(false);
         return handleShowNotFoundError();
       });
-  }, [i18n.language, placeId]);
+  }, [placeId]);
 
   const handleShowError = () => {
     dispatch(
@@ -88,7 +88,7 @@ const useEditMyPlace = () => {
         alertProps: {
           title: "Ошибка!",
           description:
-            "Ошибка при обновлении места. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+            "Ошибка при модерации места. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
           variant: "standard",
           severity: "error",
         },
@@ -102,8 +102,7 @@ const useEditMyPlace = () => {
       showAlert({
         alertProps: {
           title: "Успех!",
-          description:
-            "Место было обновлено и отправлено на модерацию. Вы сможете просмотреть его статус в личном кабинете",
+          description: "Место было успешно одобрено.",
           variant: "standard",
           severity: "success",
         },
@@ -114,34 +113,34 @@ const useEditMyPlace = () => {
 
   const onSubmit: SubmitHandler<IEditPlaceContext> = (data) => {
     if (submitLoading || !placeId) return;
-    setSubmitLoading(true);
+    // setSubmitLoading(true);
     dispatch(hideAlert());
 
-    const updatePlaceDto: IUpdatePlace = {
-      title: data.title,
-      description: data.description,
-      address: data.address,
-      website: data.website,
-      slug: data.slug,
-      placeTypeId: data.placeTypeId,
-      categoriesIds: data.categoriesIds,
-      coordinates: `${data.lat};${data.lng}`,
-      imagesIds: data.images.map((image) => image.id),
-      isCommercial: data.isCommercial,
-      shouldTranslate: data.updateTranslations,
-    };
-
-    placesService
-      .updatePlace(+placeId, updatePlaceDto, i18n.language)
-      .then((res) => {
-        setSubmitLoading(false);
-        handleShowSuccess();
-        router.push(routerLinks.personalAreaPlaces);
-      })
-      .catch((reason) => {
-        setSubmitLoading(false);
-        handleShowError();
-      });
+    // const updatePlaceDto: IUpdatePlace = {
+    //   title: data.title,
+    //   description: data.description,
+    //   address: data.address,
+    //   website: data.website,
+    //   slug: data.slug,
+    //   placeTypeId: data.placeTypeId,
+    //   categoriesIds: data.categoriesIds,
+    //   coordinates: `${data.lat};${data.lng}`,
+    //   imagesIds: data.images.map((image) => image.id),
+    //   isCommercial: data.isCommercial,
+    //   shouldTranslate: data.updateTranslations,
+    // };
+    //
+    // placesService
+    //   .updatePlace(+placeId, updatePlaceDto, i18n.language)
+    //   .then((res) => {
+    //     setLoading(false);
+    //     handleShowSuccess();
+    //     router.push(routerLinks.personalAreaPlaces);
+    //   })
+    //   .catch((reason) => {
+    //     setLoading(false);
+    //     handleShowError();
+    //   });
   };
 
   return {

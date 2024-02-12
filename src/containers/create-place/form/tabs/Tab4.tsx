@@ -13,10 +13,13 @@ import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import Map, { ILatLngCoordinate } from "@/components/map/Map";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Marker } from "@react-google-maps/api";
-import { IPlaceFormContext } from "@/containers/create-place/form/interfaces";
+import {
+  IPlaceFormContext,
+  IPlaceTabProps,
+} from "@/containers/create-place/form/interfaces";
 import { useGeocode } from "@/hooks/useGeocode";
 
-const Tab4 = () => {
+const Tab4 = ({ readonly }: IPlaceTabProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { setValue, watch, trigger, clearErrors } =
@@ -99,6 +102,9 @@ const Tab4 = () => {
         можете найти его на карте и указать точные координаты.
       </Typography>
       <TextFieldElement
+        InputProps={{
+          readOnly: readonly,
+        }}
         sx={{
           my: "1em",
           "& input": { bgcolor: "white", borderRadius: "15px" },
@@ -133,7 +139,7 @@ const Tab4 = () => {
           containerStyle={{ height: isMobile ? "323px" : "500px" }}
         >
           <Marker
-            draggable={true}
+            draggable={!readonly}
             onDragEnd={onDragEnd}
             position={watchPosition}
           />
@@ -166,7 +172,7 @@ const Tab4 = () => {
           }}
           fullWidth
           name={"lat"}
-          inputProps={{ step: "0.1" }}
+          inputProps={{ step: "0.1", readOnly: readonly }}
           validation={{
             min: {
               value: 1,
@@ -179,7 +185,7 @@ const Tab4 = () => {
         <TextFieldElement
           type={"number"}
           fullWidth
-          inputProps={{ step: "0.1" }}
+          inputProps={{ step: "0.1", readOnly: readonly }}
           sx={{
             "& input": { bgcolor: "white", borderRadius: "5px", py: "0.5em" },
             fontSize: { md: "20px" },

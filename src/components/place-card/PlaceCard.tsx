@@ -64,7 +64,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
             textTransform={"uppercase"}
             textAlign={"center"}
             gutterBottom
-            mb={{ xs: "0.6em", md: "1em" }}
+            mb={{ xs: "0.6em", md: "0.7em" }}
             fontSize={{ xs: "16px", md: "18px" }}
             fontWeight={700}
             height={"23.4px"}

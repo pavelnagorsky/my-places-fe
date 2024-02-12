@@ -1,8 +1,9 @@
 import { Fragment, memo } from "react";
 import { Box, Typography } from "@mui/material";
 import ImageUploader from "@/components/forms/image-uploader/ImageUploader";
+import { IPlaceTabProps } from "@/containers/create-place/form/interfaces";
 
-const Tab3 = () => {
+const Tab3 = ({ readonly }: IPlaceTabProps) => {
   return (
     <Fragment>
       <Typography
@@ -18,7 +19,7 @@ const Tab3 = () => {
         jpeg, png.
       </Typography>
       <Box mt={"2em"} mb={"3em"}>
-        <ImageUploader required maxLimit={5} fieldName={"images"} />
+        <ImageUploader readonly required maxLimit={5} fieldName={"images"} />
       </Box>
     </Fragment>
   );

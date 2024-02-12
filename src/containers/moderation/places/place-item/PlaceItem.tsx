@@ -12,6 +12,8 @@ import { format } from "date-fns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
+import { useRouter } from "next/router";
+import { routerLinks } from "@/routing/routerLinks";
 
 interface IPlaceItemProps {
   place: IModerationPlace;
@@ -22,6 +24,11 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation();
   const dateFnsLocale = useDateFnsLocale();
+  const router = useRouter();
+
+  const onClick = () => {
+    router.push(routerLinks.placeModeration(place.id));
+  };
 
   const placeTitleBox = (
     <Stack gap={"0.2em"}>
@@ -81,6 +88,7 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
 
   const mobileView = (
     <Box
+      onClick={onClick}
       sx={{
         cursor: "pointer",
         mb: "2em",
@@ -128,6 +136,7 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
 
   const desktopView = (
     <Box
+      onClick={onClick}
       py={"1em"}
       px={"0em"}
       sx={{

@@ -1,10 +1,4 @@
-import PersonalAreaLayout from "../layout/PersonalAreaLayout";
-import {
-  FormContainer,
-  FormProvider,
-  SwitchElement,
-} from "react-hook-form-mui";
-import useEditMyPlace from "@/containers/personal-area/edit-my-place/useEditMyPlace";
+import { FormContainer, FormProvider } from "react-hook-form-mui";
 import {
   Backdrop,
   Box,
@@ -27,7 +21,8 @@ import useCreatePlaceMeta from "@/containers/create-place/form/useCreatePlaceMet
 import { SyntheticEvent, useState } from "react";
 import Navigation from "@/containers/create-place/form/Navigation";
 import animationVariants from "@/shared/animation-variants";
-import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
+import usePlaceModeration from "@/containers/moderation/place-moderation/usePlaceModeration";
+import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
 
 const tabContentVariant: Variants = {
   active: {
@@ -45,8 +40,8 @@ const tabContentVariant: Variants = {
   },
 };
 
-const EditMyPlace = () => {
-  const logic = useEditMyPlace();
+const PlaceModeration = () => {
+  const logic = usePlaceModeration();
   const createPlaceMeta = useCreatePlaceMeta();
 
   const [activeTab, setActiveTab] = useState(0);
@@ -65,7 +60,7 @@ const EditMyPlace = () => {
   );
 
   return (
-    <PersonalAreaLayout>
+    <ModerationLayout>
       <motion.div
         variants={animationVariants.defaultContainerVariant}
         initial="hidden"
@@ -104,13 +99,12 @@ const EditMyPlace = () => {
                         mb={0}
                         fontSize={{ xs: "24px", sm: "30px", md: "40px" }}
                       >
-                        Редактирование места
+                        Модерация места
                       </Typography>
                     </Stack>
                     <Typography variant={"body2"} fontSize={{ md: "20px" }}>
                       После редактирования место будет отправлено на модерацию.
                     </Typography>
-                    <UpdateTranslations mt={"0.5em"} />
                   </Box>
                   <div>
                     <ButtonWithTooltip
@@ -152,7 +146,7 @@ const EditMyPlace = () => {
                       initial="inactive"
                     >
                       <TabPanel value={activeTab} index={0}>
-                        <Tab1 />
+                        <Tab1 readonly />
                       </TabPanel>
                     </motion.div>
                     <motion.div
@@ -163,6 +157,7 @@ const EditMyPlace = () => {
                     >
                       <TabPanel value={activeTab} index={1}>
                         <Tab2
+                          readonly
                           categories={createPlaceMeta.categories}
                           placeTypes={createPlaceMeta.placeTypes}
                         />
@@ -175,7 +170,7 @@ const EditMyPlace = () => {
                       initial="inactive"
                     >
                       <TabPanel value={activeTab} index={2}>
-                        <Tab3 />
+                        <Tab3 readonly />
                       </TabPanel>
                     </motion.div>
                     <motion.div
@@ -185,7 +180,7 @@ const EditMyPlace = () => {
                       initial="inactive"
                     >
                       <TabPanel value={activeTab} index={3}>
-                        <Tab4 />
+                        <Tab4 readonly />
                       </TabPanel>
                     </motion.div>
                   </AnimatePresence>
@@ -195,8 +190,8 @@ const EditMyPlace = () => {
           </FormContainer>
         </FormProvider>
       </motion.div>
-    </PersonalAreaLayout>
+    </ModerationLayout>
   );
 };
 
-export default EditMyPlace;
+export default PlaceModeration;

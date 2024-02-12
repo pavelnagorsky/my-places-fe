@@ -27,4 +27,5 @@ export const routerLinks = {
   moderationPlaces: "/moderation/places",
   moderationReviews: "/moderation/reviews",
   moderationReports: "/moderation/reports",
+  placeModeration: (placeId: number) => `/moderation/places/${placeId}`,
 };

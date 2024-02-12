@@ -121,12 +121,12 @@ const useEditMyReview = () => {
     reviewsService
       .updateReview(+reviewId, updateReviewDto, i18n.language)
       .then((res) => {
-        setLoading(false);
+        setSubmitLoading(false);
         handleShowSuccess();
         router.push(routerLinks.personalAreaReviews);
       })
       .catch((reason) => {
-        setLoading(false);
+        setSubmitLoading(false);
         handleShowError();
       });
   };
