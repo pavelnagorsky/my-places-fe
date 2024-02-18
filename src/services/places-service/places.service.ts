@@ -18,6 +18,7 @@ import { IEditPlace } from "@/services/places-service/interfaces/edit-place.inte
 import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
 import { IFavourite } from "@/services/places-service/interfaces/favourite.interface";
 import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
+import { IModeration } from "@/services/places-service/interfaces/moderation.interface";
 
 const placesService = {
   ITEMS_PER_PAGE: 12,
@@ -119,6 +120,10 @@ const placesService = {
 
   getPlaceForModeration: (id: number) => {
     return axiosInstance.get<IEditPlace>(`/places/moderation/${id}`);
+  },
+
+  moderatePlace: (id: number, dto: IModeration) => {
+    return axiosInstance.post(`/places/moderation/${id}`, dto);
   },
 };
 

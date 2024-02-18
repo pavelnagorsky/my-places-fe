@@ -19,12 +19,12 @@ import PlaceStatistics from "@/containers/place/PlaceStatistics";
 import Comments from "@/containers/place/comments/Comments";
 import ReviewsSection from "@/containers/place/reviews/ReviewsSection";
 import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces/interfaces";
-import Gallery from "@/components/gallery/Gallery";
 import Map from "@/components/map/Map";
 import { Marker } from "@react-google-maps/api";
 import { Fragment } from "react";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
+import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
 
 interface IPlaceProps {
   place: IPlace;
@@ -103,23 +103,14 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                 </Typography>
               </Stack>
               <Box mt={"2em"} mb={{ xs: "1em", md: "1.5em" }}>
-                <Gallery
-                  mobileHeight={250}
-                  laptopHeight={380}
-                  desktopHeight={480}
-                  sx={{
-                    "& .indicators": {
-                      mt: { md: "1em" },
-                      "& button": {
-                        position: "relative",
-                        zIndex: 3,
-                      },
-                    },
-                  }}
+                <PlaceGallery
                   images={place.images.map((image) => ({
                     src: image,
                     alt: place.title,
                   }))}
+                  mobileHeight={250}
+                  laptopHeight={380}
+                  desktopHeight={480}
                 />
                 <PlaceStatistics
                   views={place.viewsCount}
@@ -200,9 +191,13 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                         p={"0.5em"}
                         height={56}
                         width={56}
+                        sx={{
+                          "& img": {
+                            objectFit: "cover",
+                          },
+                        }}
                       >
                         <Image
-                          objectFit={"cover"}
                           src={c.image}
                           alt={c.title}
                           priority

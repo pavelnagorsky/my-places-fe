@@ -183,6 +183,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
             <MoreVertIcon />
           </IconButton>
           <MyPlaceMenu
+            status={place.status}
             anchorEl={menu.anchorEl}
             open={menu.open}
             handleClose={menu.handleClose}
@@ -249,6 +250,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
             <MoreVertIcon />
           </IconButton>
           <MyPlaceMenu
+            status={place.status}
             anchorEl={menu.anchorEl}
             open={menu.open}
             handleClose={menu.handleClose}

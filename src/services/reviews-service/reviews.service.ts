@@ -11,6 +11,7 @@ import {
 import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import { IUpdateReview } from "@/services/reviews-service/interfaces/update-review.interface";
 import { IEditReview } from "@/services/reviews-service/interfaces/edit-review.interface";
+import { IModeration } from "@/services/places-service/interfaces/moderation.interface";
 
 const reviewsService = {
   creteReview: (payload: ICreateReview, language: string) => {
@@ -67,6 +68,10 @@ const reviewsService = {
       `/reviews/moderation-reviews?lang=${langId}`,
       payload
     );
+  },
+
+  moderateReview: (id: number, dto: IModeration) => {
+    return axiosInstance.post(`/reviews/moderation/${id}`, dto);
   },
 };
 

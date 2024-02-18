@@ -28,7 +28,7 @@ function ProtectedAuth({ children, redirectPath, mode }: IProtectedRouteProps) {
       );
       if (mode === "redirectPermanent") router.push(routerLinks.home);
     }
-  }, [lcToken, redirectPath, isAuth]);
+  }, [lcToken, redirectPath, isAuth, mode]);
 
   return <Fragment>{children}</Fragment>;
 }

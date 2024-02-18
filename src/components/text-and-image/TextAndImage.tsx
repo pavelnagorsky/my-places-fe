@@ -105,13 +105,15 @@ function TextAndImage({
             height: "100%",
             maxHeight: "320px",
             minHeight: { xs: "220px", md: "320px" },
+            "& img": {
+              objectFit: "cover",
+            },
           }}
           // src={image}
           // alt={title}
         >
           <Image
             src={image}
-            objectFit={"cover"}
             alt={title || "Belarus immage"}
             style={{ borderRadius: "inherit" }}
             fill

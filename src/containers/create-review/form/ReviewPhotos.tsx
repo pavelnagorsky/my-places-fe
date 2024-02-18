@@ -3,7 +3,13 @@ import { Box, SxProps, Typography } from "@mui/material";
 import { memo } from "react";
 import ImageUploader from "@/components/forms/image-uploader/ImageUploader";
 
-const ReviewPhotos = ({ sx }: { sx?: SxProps }) => {
+const ReviewPhotos = ({
+  sx,
+  readonly,
+}: {
+  sx?: SxProps;
+  readonly?: boolean;
+}) => {
   return (
     <Box sx={sx}>
       <MyStepper totalOptions={3} activeOption={2} />
@@ -19,7 +25,12 @@ const ReviewPhotos = ({ sx }: { sx?: SxProps }) => {
         jpeg, png.
       </Typography>
       <Box my={"2em"}>
-        <ImageUploader required maxLimit={10} fieldName={"images"} />
+        <ImageUploader
+          readonly={readonly}
+          required
+          maxLimit={10}
+          fieldName={"images"}
+        />
       </Box>
     </Box>
   );

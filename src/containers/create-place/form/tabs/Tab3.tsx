@@ -19,7 +19,12 @@ const Tab3 = ({ readonly }: IPlaceTabProps) => {
         jpeg, png.
       </Typography>
       <Box mt={"2em"} mb={"3em"}>
-        <ImageUploader readonly required maxLimit={5} fieldName={"images"} />
+        <ImageUploader
+          readonly={readonly}
+          required
+          maxLimit={5}
+          fieldName={"images"}
+        />
       </Box>
     </Fragment>
   );

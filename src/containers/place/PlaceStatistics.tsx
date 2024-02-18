@@ -155,9 +155,9 @@ const PlaceStatistics = ({
 
   return (
     <Stack
+      mt={"0.5em"}
       position={"relative"}
       zIndex={2}
-      mt={{ md: "-2em" }}
       sx={{
         "& p": {
           fontSize: { xs: "15px", md: "20px" },
@@ -202,8 +202,8 @@ const PlaceStatistics = ({
               arrow
               enterTouchDelay={0}
               leaveTouchDelay={6000}
-              sx={{ fontSize: "16px", alignSelf: "center" }}
-              title={<Typography p={"0.5em"}>Сохранить в избранное</Typography>}
+              sx={{ fontSize: "14px", alignSelf: "center" }}
+              title={"Сохранить в избранное"}
             >
               <IconButton size={"small"} onClick={handleAddPlaceToFavorites}>
                 <BookmarkAddIcon />
@@ -217,7 +217,7 @@ const PlaceStatistics = ({
             enterTouchDelay={0}
             leaveTouchDelay={6000}
             sx={{ fontSize: "16px", alignSelf: "center" }}
-            title={<Typography p={"0.5em"}>Пожаловаться</Typography>}
+            title={"Пожаловаться"}
           >
             <IconButton
               aria-label="report-form"

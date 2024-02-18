@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint"
   },
   "dependencies": {
@@ -33,10 +33,10 @@
     "react-geocode": "^0.2.3",
     "react-hook-form-mui": "^6.2.0",
     "react-infinite-scroll-component": "^6.1.0",
-    "react-material-ui-carousel": "^3.4.2",
     "react-quill": "^2.0.0",
     "react-redux": "^8.1.1",
     "react-responsive-carousel": "^3.2.23",
+    "sharp": "^0.33.2",
     "typescript": "^4.8.4"
   },
   "eslintConfig": {

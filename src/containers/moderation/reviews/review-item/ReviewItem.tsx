@@ -13,6 +13,7 @@ import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { IModerationReview } from "@/services/reviews-service/interfaces/moderation-review.interface";
 import { routerLinks } from "@/routing/routerLinks";
+import { useRouter } from "next/router";
 
 interface IReviewItemProps {
   review: IModerationReview;
@@ -23,6 +24,11 @@ const ReviewItem = ({ review }: IReviewItemProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation();
   const dateFnsLocale = useDateFnsLocale();
+  const router = useRouter();
+
+  const onClick = () => {
+    router.push(routerLinks.reviewModeration(review.id));
+  };
 
   const reviewTitleBox = (
     <Stack gap={"0.2em"}>
@@ -77,6 +83,7 @@ const ReviewItem = ({ review }: IReviewItemProps) => {
 
   const mobileView = (
     <Box
+      onClick={onClick}
       sx={{
         cursor: "pointer",
         mb: "2em",
@@ -120,6 +127,7 @@ const ReviewItem = ({ review }: IReviewItemProps) => {
 
   const desktopView = (
     <Box
+      onClick={onClick}
       py={"1em"}
       px={"0em"}
       sx={{

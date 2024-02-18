@@ -7,7 +7,6 @@ import {
 import authService from "@/services/auth-service/auth.service";
 import localStorageFields from "@/shared/localStorageFields";
 import { RootState } from "@/store/store";
-import { setToken } from "@/store/user-slice/user.slice";
 import userService from "@/services/user-service/user.service";
 
 export const getUserDataThunk = createAsyncThunk(
@@ -26,11 +25,8 @@ export const getUserDataThunk = createAsyncThunk(
 export const autoLoginThunk = createAsyncThunk(
   "auth/auto-login",
   (arg, thunkAPI) => {
-    const token = localStorage.getItem(localStorageFields.TOKEN);
-    if (token) {
-      thunkAPI.dispatch(setToken(token));
-      thunkAPI.dispatch(getUserDataThunk());
-    }
+    const lcToken = localStorage.getItem(localStorageFields.TOKEN);
+    if (lcToken) thunkAPI.dispatch(getUserDataThunk());
     return;
   }
 );

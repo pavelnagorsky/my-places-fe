@@ -64,17 +64,26 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
           gap={"0.5em"}
         >
           <Typography
-            fontWeight={300}
+            fontWeight={400}
             variant="body2"
             fontSize={"12px"}
             display={"flex"}
             alignItems={"center"}
             flexGrow={1}
             sx={{ wordBreak: "break-word" }}
-            gap={{ xs: "0.3em", sm: "0.5em" }}
+            gap={"0.5em"}
           >
             {place.type.title}
-            <CastleOutlinedIcon sx={{ color: secondaryLightColor }} />
+            <Box
+              component={"img"}
+              src={place.type.image as string}
+              alt={place.type.title}
+              sx={{
+                objectFit: "cover",
+                width: "20px",
+                height: "20px",
+              }}
+            />
           </Typography>
           <Button
             linkTo={routerLinks.place(place.slug)}

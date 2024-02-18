@@ -168,6 +168,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
             onEdit={menu.handleEdit}
             placeSlug={review.placeSlug}
             reviewId={review.id}
+            status={review.status}
           />
         </Stack>
       </Stack>
@@ -216,6 +217,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
             onEdit={menu.handleEdit}
             placeSlug={review.placeSlug}
             reviewId={review.id}
+            status={review.status}
           />
         </Grid>
       </Grid>

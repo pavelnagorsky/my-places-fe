@@ -8,7 +8,7 @@ import {
 } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { Environment } from "@/shared/Environment";
-import { defaultMapStyle } from "@/components/UI/map-styles/default";
+import { defaultMapStyle } from "@/components/map/map-styles/default";
 import { Box } from "@mui/material";
 // import {greyStyle} from "../UI/mapStyling/mapStyling";
 
@@ -92,7 +92,7 @@ function Map({
           containerStyle ? containerStyle : { height: "400px" }
         }
         options={{
-          // styles: defaultMapStyle,
+          styles: defaultMapStyle,
           maxZoom: 13,
           restriction: {
             latLngBounds: defaultBounds,

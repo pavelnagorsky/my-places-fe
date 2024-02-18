@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   CardActionArea,
   CardContent,
@@ -132,7 +133,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
             gap={"0.5em"}
           >
             <Typography
-              fontWeight={300}
+              fontWeight={400}
               variant="body2"
               fontSize={"14px"}
               display={"flex"}
@@ -144,7 +145,16 @@ function PlaceCard({ place }: IPlaceCardProps) {
               sx={{ wordBreak: "break-word" }}
             >
               {place.type.title}
-              <CastleOutlinedIcon sx={{ color: secondaryLightColor }} />
+              <Box
+                component={"img"}
+                src={place.type.image as string}
+                alt={place.type.title}
+                sx={{
+                  objectFit: "cover",
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
             </Typography>
             <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
               <Typography

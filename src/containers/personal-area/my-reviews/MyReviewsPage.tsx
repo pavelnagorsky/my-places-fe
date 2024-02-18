@@ -20,6 +20,7 @@ import useMyReviews from "@/containers/personal-area/my-reviews/useMyReviews";
 import ReviewItem from "@/containers/personal-area/my-reviews/review-item/ReviewItem";
 import ReviewItemsTableHead from "@/containers/personal-area/my-reviews/review-item/ReviewItemsTableHead";
 import Filters from "@/containers/personal-area/my-places/filters/Filters";
+import NextLink from "next/link";
 
 const MyReviewsPage = () => {
   const { t } = useTranslation();
@@ -46,18 +47,26 @@ const MyReviewsPage = () => {
                 Мои заметки
               </Typography>
               {isMobile ? (
-                <IconButton
-                  href={routerLinks.createReview}
-                  size={"small"}
-                  color={"primary"}
-                  sx={{ border: `1px solid ${theme.palette.primary.main}` }}
-                >
-                  <AddIcon color={"primary"} />
-                </IconButton>
+                <NextLink href={routerLinks.createReview}>
+                  <IconButton
+                    size={"small"}
+                    sx={{
+                      border: `1px solid ${theme.palette.primary.main}`,
+                      backgroundColor: "primary.main",
+                      "&:hover": {
+                        backgroundColor: "primary.main",
+                      },
+                      "& svg": { fill: "white" },
+                    }}
+                  >
+                    <AddIcon color={"primary"} />
+                  </IconButton>
+                </NextLink>
               ) : (
                 <Button
+                  variant={"contained"}
                   linkTo={routerLinks.createReview}
-                  sx={{ color: "primary" }}
+                  sx={{ color: "primary", height: "44px" }}
                 >
                   Новая заметка
                 </Button>

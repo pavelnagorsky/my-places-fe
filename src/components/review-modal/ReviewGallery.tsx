@@ -1,5 +1,5 @@
 import { Carousel } from "react-responsive-carousel";
-import { Box } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface IReviewGalleryProps {
@@ -7,40 +7,40 @@ interface IReviewGalleryProps {
   alt: string;
 }
 
+const StyledContainer = styled(Box)({
+  ".thumbs-wrapper": {
+    mx: "13px !important",
+  },
+  // ".carousel .control-prev.control-arrow::before": {
+  //   borderRightColor: "primary.main",
+  // },
+  // ".carousel .control-next.control-arrow::before": {
+  //   borderLeftColor: "primary.main",
+  // },
+  ".thumb": {
+    cursor: "pointer",
+    borderRadius: "5px",
+    "&:hover": {
+      border: `1px solid #FF7A00 !important`,
+    },
+    border: "none !important",
+    "&.selected": {
+      border: `1px solid #FF7A00 !important`,
+      "& img": { opacity: 1 },
+    },
+  },
+  ".thumb img": {
+    height: "100%",
+    objectFit: "cover",
+    // filter: "grayscale(80%)",
+    opacity: 0.5,
+    borderRadius: "5px",
+  },
+});
+
 const ReviewGallery = ({ images, alt }: IReviewGalleryProps) => {
   return (
-    <Box
-      sx={{
-        ".thumbs-wrapper": {
-          mx: "13px !important",
-        },
-        // ".carousel .control-prev.control-arrow::before": {
-        //   borderRightColor: "primary.main",
-        // },
-        // ".carousel .control-next.control-arrow::before": {
-        //   borderLeftColor: "primary.main",
-        // },
-        ".thumb": {
-          cursor: "pointer",
-          borderRadius: "5px",
-          "&:hover": {
-            border: `1px solid #FF7A00 !important`,
-          },
-          border: "none !important",
-          "&.selected": {
-            border: `1px solid #FF7A00 !important`,
-            "& img": { opacity: 1 },
-          },
-        },
-        ".thumb img": {
-          height: "100%",
-          objectFit: "cover",
-          // filter: "grayscale(80%)",
-          opacity: 0.5,
-          borderRadius: "5px",
-        },
-      }}
-    >
+    <StyledContainer>
       <Carousel
         showIndicators={false}
         showArrows
@@ -66,7 +66,7 @@ const ReviewGallery = ({ images, alt }: IReviewGalleryProps) => {
           />
         ))}
       </Carousel>
-    </Box>
+    </StyledContainer>
   );
 };
 

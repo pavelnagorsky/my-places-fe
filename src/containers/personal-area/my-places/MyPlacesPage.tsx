@@ -20,6 +20,7 @@ import { Button } from "@/components/UI/button/Button";
 import { routerLinks } from "@/routing/routerLinks";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
+import NextLink from "next/link";
 
 const MyPlacesPage = () => {
   const { t } = useTranslation();
@@ -46,18 +47,26 @@ const MyPlacesPage = () => {
                 Мои места
               </Typography>
               {isMobile ? (
-                <IconButton
-                  href={routerLinks.createPlace}
-                  size={"small"}
-                  color={"primary"}
-                  sx={{ border: `1px solid ${theme.palette.primary.main}` }}
-                >
-                  <AddIcon color={"primary"} />
-                </IconButton>
+                <NextLink href={routerLinks.createPlace}>
+                  <IconButton
+                    size={"small"}
+                    sx={{
+                      border: `1px solid ${theme.palette.primary.main}`,
+                      backgroundColor: "primary.main",
+                      "&:hover": {
+                        backgroundColor: "primary.main",
+                      },
+                      "& svg": { fill: "white" },
+                    }}
+                  >
+                    <AddIcon color={"primary"} />
+                  </IconButton>
+                </NextLink>
               ) : (
                 <Button
+                  variant={"contained"}
                   linkTo={routerLinks.createPlace}
-                  sx={{ color: "primary" }}
+                  sx={{ color: "primary", height: "44px" }}
                 >
                   Новое место
                 </Button>

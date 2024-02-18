@@ -103,6 +103,14 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiAutocomplete: {
+      defaultProps: {
+        openText: "Открыть",
+        clearText: "Очистить",
+        noOptionsText: "Нет вариантов",
+        loadingText: "Загрузка...",
+      },
+    },
     MuiOutlinedInput: {
       defaultProps: {
         sx: {
@@ -140,7 +148,7 @@ const lightTheme = createTheme({
 
 lightTheme.typography.h1 = {
   ...lightTheme.typography.h1,
-  [lightTheme.breakpoints.down("sm")]: {
+  [lightTheme.breakpoints.down("md")]: {
     fontSize: "24px",
   },
 };

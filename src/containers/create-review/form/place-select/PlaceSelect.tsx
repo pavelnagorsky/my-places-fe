@@ -18,9 +18,10 @@ import { selectIsAuth } from "@/store/user-slice/user.slice";
 
 interface IPlaceSelectProps {
   readonly fieldName: string;
+  readonly?: boolean;
 }
 
-const PlaceSelect = ({ fieldName }: IPlaceSelectProps) => {
+const PlaceSelect = ({ fieldName, readonly }: IPlaceSelectProps) => {
   const { i18n } = useTranslation();
   const router = useRouter();
   const { setValue } = useFormContext<IReviewFormContext>();
@@ -85,6 +86,7 @@ const PlaceSelect = ({ fieldName }: IPlaceSelectProps) => {
         onChange: debouncedInputChange,
       }}
       autocompleteProps={{
+        readOnly: readonly,
         getOptionLabel: (opt) => opt.title,
         filterOptions: (x) => x,
       }}

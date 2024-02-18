@@ -23,6 +23,7 @@ import Navigation from "@/containers/create-place/form/Navigation";
 import animationVariants from "@/shared/animation-variants";
 import usePlaceModeration from "@/containers/moderation/place-moderation/usePlaceModeration";
 import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
+import ModerationForm from "@/containers/moderation/place-moderation/ModerationForm";
 
 const tabContentVariant: Variants = {
   active: {
@@ -48,8 +49,6 @@ const PlaceModeration = () => {
   const handleChangeTab = (event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };
-  const formState = logic.form.formState;
-  const loading = logic.submitLoading;
 
   const loader = (
     <Box>
@@ -68,7 +67,7 @@ const PlaceModeration = () => {
       >
         {loader}
         <FormProvider {...logic.form}>
-          <FormContainer formContext={logic.form} onSuccess={logic.onSubmit}>
+          <FormContainer formContext={logic.form} onSuccess={() => {}}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Box pb={{ xs: "1.5em", md: "1em" }}>
                 <Stack
@@ -102,31 +101,10 @@ const PlaceModeration = () => {
                         Модерация места
                       </Typography>
                     </Stack>
-                    <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                      После редактирования место будет отправлено на модерацию.
-                    </Typography>
                   </Box>
-                  <div>
-                    <ButtonWithTooltip
-                      loading={loading}
-                      buttonText={"Обновить"}
-                      tooltipText={"Не все обязательные поля формы заполнены!"}
-                      variant={"contained"}
-                      type={"submit"}
-                      disabled={
-                        !formState.isValid ||
-                        utils.isEmptyObject(formState.dirtyFields)
-                      }
-                      sx={{
-                        fontWeight: 700,
-                        py: "1em",
-                        px: 0,
-                        width: { xs: "230px", md: "210px" },
-                      }}
-                    />
-                  </div>
                 </Stack>
               </Box>
+              <ModerationForm mode={"place"} id={logic.placeId as number} />
             </motion.div>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Grid container spacing={"1em"} mb={"3em"}>

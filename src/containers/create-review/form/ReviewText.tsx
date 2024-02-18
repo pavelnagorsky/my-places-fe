@@ -12,7 +12,7 @@ import { TextFieldElement } from "react-hook-form-mui";
 import { memo } from "react";
 import TextEditor from "@/components/forms/text-editor/TextEditor";
 
-const ReviewText = ({ sx }: { sx?: SxProps }) => {
+const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
   return (
     <Box sx={sx}>
       <MyStepper totalOptions={3} activeOption={3} />
@@ -55,13 +55,16 @@ const ReviewText = ({ sx }: { sx?: SxProps }) => {
           fontSize: { md: "20px" },
         }}
         name={"title"}
+        InputProps={{
+          readOnly: readonly,
+        }}
         validation={{ required: "Это поле обязательно к заполнению" }}
         placeholder={"Введите заголовок..."}
       />
       <Typography variant={"body1"} my={"1em"} fontSize={{ md: "20px" }}>
         Текст заметки:
       </Typography>
-      <TextEditor fieldName={"description"} />
+      <TextEditor readonly={readonly} fieldName={"description"} />
     </Box>
   );
 };

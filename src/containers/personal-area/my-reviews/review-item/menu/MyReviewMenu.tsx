@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { routerLinks } from "@/routing/routerLinks";
+import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
 
 interface IMyReviewMenuProps {
   anchorEl: null | HTMLElement;
@@ -20,6 +21,7 @@ interface IMyReviewMenuProps {
   onEdit: () => void;
   placeSlug: string;
   reviewId: number;
+  status: ReviewStatusesEnum;
 }
 
 const MyReviewMenu = ({
@@ -30,9 +32,11 @@ const MyReviewMenu = ({
   placeSlug,
   onEdit,
   reviewId,
+  status,
 }: IMyReviewMenuProps) => {
   const { t } = useTranslation();
   const popover = usePopover("confirm-review-delete");
+  const showViewOption = status === ReviewStatusesEnum.APPROVED;
 
   return (
     <Fragment>
@@ -75,14 +79,16 @@ const MyReviewMenu = ({
           "aria-labelledby": "my-review-menu",
         }}
       >
-        <MenuItem
-          onClick={handleClose}
-          component={"a"}
-          href={routerLinks.review(placeSlug, reviewId)}
-          target={"_blank"}
-        >
-          Просмотр
-        </MenuItem>
+        {showViewOption && (
+          <MenuItem
+            onClick={handleClose}
+            component={"a"}
+            href={routerLinks.review(placeSlug, reviewId)}
+            target={"_blank"}
+          >
+            Просмотр
+          </MenuItem>
+        )}
         <MenuItem onClick={onEdit}>Редактировать</MenuItem>
         <MenuItem onClick={popover.handleOpen}>Удалить</MenuItem>
       </Menu>

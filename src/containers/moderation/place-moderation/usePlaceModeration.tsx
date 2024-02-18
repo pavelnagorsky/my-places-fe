@@ -15,7 +15,6 @@ const useEditMyPlace = () => {
   const router = useRouter();
   const placeId = router.query["id"] as string | undefined;
   const [loading, setLoading] = useState(true);
-  const [submitLoading, setSubmitLoading] = useState(false);
 
   const form = useForm<IEditPlaceContext>({
     defaultValues: {
@@ -26,7 +25,6 @@ const useEditMyPlace = () => {
       isCommercial: false,
       updateTranslations: false,
     },
-    mode: "onChange",
     shouldFocusError: true,
     shouldUseNativeValidation: false,
   });
@@ -82,73 +80,11 @@ const useEditMyPlace = () => {
       });
   }, [placeId]);
 
-  const handleShowError = () => {
-    dispatch(
-      showAlert({
-        alertProps: {
-          title: "Ошибка!",
-          description:
-            "Ошибка при модерации места. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
-          variant: "standard",
-          severity: "error",
-        },
-        snackbarProps: {},
-      })
-    );
-  };
-
-  const handleShowSuccess = () => {
-    dispatch(
-      showAlert({
-        alertProps: {
-          title: "Успех!",
-          description: "Место было успешно одобрено.",
-          variant: "standard",
-          severity: "success",
-        },
-        snackbarProps: {},
-      })
-    );
-  };
-
-  const onSubmit: SubmitHandler<IEditPlaceContext> = (data) => {
-    if (submitLoading || !placeId) return;
-    // setSubmitLoading(true);
-    dispatch(hideAlert());
-
-    // const updatePlaceDto: IUpdatePlace = {
-    //   title: data.title,
-    //   description: data.description,
-    //   address: data.address,
-    //   website: data.website,
-    //   slug: data.slug,
-    //   placeTypeId: data.placeTypeId,
-    //   categoriesIds: data.categoriesIds,
-    //   coordinates: `${data.lat};${data.lng}`,
-    //   imagesIds: data.images.map((image) => image.id),
-    //   isCommercial: data.isCommercial,
-    //   shouldTranslate: data.updateTranslations,
-    // };
-    //
-    // placesService
-    //   .updatePlace(+placeId, updatePlaceDto, i18n.language)
-    //   .then((res) => {
-    //     setLoading(false);
-    //     handleShowSuccess();
-    //     router.push(routerLinks.personalAreaPlaces);
-    //   })
-    //   .catch((reason) => {
-    //     setLoading(false);
-    //     handleShowError();
-    //   });
-  };
-
   return {
     form,
-    onSubmit,
     loading,
-    submitLoading,
     onGoBack,
+    placeId: placeId ? +placeId : null,
   };
 };
 

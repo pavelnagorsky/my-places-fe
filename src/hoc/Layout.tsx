@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import dynamic from "next/dynamic";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
-  logoutIfNotRememberMe,
   selectChangeLanguage,
   selectUserPreferredLanguage,
 } from "@/store/user-slice/user.slice";
@@ -55,11 +54,6 @@ export default function Layout({ children }: PropsWithChildren) {
 
   useEffect(() => {
     dispatch(autoLoginThunk());
-
-    // logout if not rememberMe
-    window.onunload = function () {
-      dispatch(logoutIfNotRememberMe());
-    };
   }, []);
 
   return (

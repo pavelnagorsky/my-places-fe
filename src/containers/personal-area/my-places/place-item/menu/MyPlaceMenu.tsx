@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { routerLinks } from "@/routing/routerLinks";
+import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
 
 interface IMyPlaceMenuProps {
   anchorEl: null | HTMLElement;
@@ -19,6 +20,7 @@ interface IMyPlaceMenuProps {
   onDelete: () => void;
   onEdit: () => void;
   placeSlug: string;
+  status: PlaceStatusesEnum;
 }
 
 const MyPlaceMenu = ({
@@ -28,9 +30,11 @@ const MyPlaceMenu = ({
   onDelete,
   placeSlug,
   onEdit,
+  status,
 }: IMyPlaceMenuProps) => {
   const { t } = useTranslation();
   const popover = usePopover("confirm-place-delete");
+  const showViewOption = status === PlaceStatusesEnum.APPROVED;
 
   return (
     <Fragment>
@@ -73,14 +77,16 @@ const MyPlaceMenu = ({
           "aria-labelledby": "my-place-menu",
         }}
       >
-        <MenuItem
-          onClick={handleClose}
-          component={"a"}
-          href={routerLinks.place(placeSlug)}
-          target={"_blank"}
-        >
-          Просмотр
-        </MenuItem>
+        {showViewOption && (
+          <MenuItem
+            onClick={handleClose}
+            component={"a"}
+            href={routerLinks.place(placeSlug)}
+            target={"_blank"}
+          >
+            Просмотр
+          </MenuItem>
+        )}
         <MenuItem onClick={onEdit}>Редактировать</MenuItem>
         <MenuItem onClick={popover.handleOpen}>Удалить</MenuItem>
       </Menu>

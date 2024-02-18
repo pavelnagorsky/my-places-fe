@@ -49,8 +49,13 @@ function SearchPage() {
   const searchCoordinates = form.watch("search");
   const showMap = form.watch("showMap");
 
-  const placesCoordinates = useMemo(() => {
-    return places.map((p) => ({ ...p.coordinates, id: p.id }));
+  const placesOnMap = useMemo(() => {
+    return places.map((p) => ({
+      ...p.coordinates,
+      id: p.id,
+      title: p.title,
+      typeIcon: (p.type.image2 || p.type.image) as string,
+    }));
   }, [places]);
 
   const mapCircle = useMemo(() => {
@@ -71,8 +76,8 @@ function SearchPage() {
         bounds?.getSouthWest().toJSON(),
       ] as ILatLngCoordinate[];
     }
-    return placesCoordinates;
-  }, [mapCircle, placesCoordinates]);
+    return placesOnMap;
+  }, [mapCircle, placesOnMap]);
 
   return (
     <motion.div
@@ -95,7 +100,15 @@ function SearchPage() {
         wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
       >
         <motion.div variants={animationVariants.defaultItemVariant}>
-          <Box mt={"2.5em"} display={!showMap && isMobile ? "none" : "block"}>
+          <Box
+            mt={"2.5em"}
+            sx={{
+              "& .custom-marker": {
+                paddingBottom: "4em",
+              },
+            }}
+            display={!showMap && isMobile ? "none" : "block"}
+          >
             <Map
               containerStyle={{
                 height: isMobile ? "323px" : "500px",
@@ -125,10 +138,21 @@ function SearchPage() {
                   <PlaceCardMap place={selectedPlace} />
                 </InfoWindow>
               )}
-              {placesCoordinates.map((res, i) => (
+              {placesOnMap.map((res, i) => (
                 <Marker
                   key={i}
                   position={res}
+                  //icon={res.typeIcon}
+                  title={res.title}
+                  label={{
+                    text: res.title,
+                    fontWeight: "500",
+                    className: "custom-marker",
+                  }}
+                  icon={{
+                    url: res.typeIcon,
+                    scaledSize: { width: 37, height: 37 } as any,
+                  }}
                   onClick={() => handleClickMarker(res.id)}
                 />
               ))}

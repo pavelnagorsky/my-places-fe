@@ -32,7 +32,13 @@ const StyledEditor = styled("div")(({ theme }) => ({
   },
 }));
 
-const TextEditor = ({ fieldName }: { fieldName: string }) => {
+const TextEditor = ({
+  fieldName,
+  readonly,
+}: {
+  fieldName: string;
+  readonly?: boolean;
+}) => {
   const { setValue } = useFormContext();
 
   return (
@@ -42,6 +48,7 @@ const TextEditor = ({ fieldName }: { fieldName: string }) => {
         render={({ field, fieldState, formState }) => (
           <StyledEditor>
             <ReactQuill
+              readOnly={readonly}
               theme="snow"
               value={field.value}
               onChange={(val: string, delta: any, source: any, editor: any) => {
