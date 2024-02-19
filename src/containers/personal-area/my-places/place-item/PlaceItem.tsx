@@ -40,6 +40,18 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
   const menu = useMyPlaceMenu({ placeId: place.id, onDelete });
   const [fullOpen, setFullOpen] = useState(false);
 
+  const Menu = (
+    <MyPlaceMenu
+      status={place.status}
+      anchorEl={menu.anchorEl}
+      open={menu.open}
+      handleClose={menu.handleClose}
+      onDelete={menu.handleDelete}
+      onEdit={menu.handleEdit}
+      placeSlug={place.slug}
+    />
+  );
+
   const toggleFull = () => {
     setFullOpen(!fullOpen);
   };
@@ -62,7 +74,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
         variant={"body1"}
         component={Link}
         color={"secondary.main"}
-        sx={{ textDecoration: "underline #565656" }}
+        sx={{ textDecoration: "underline #565656", wordBreak: "break-word" }}
         href={routerLinks.place(place.slug)}
         target={"_blank"}
       >
@@ -182,15 +194,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
           >
             <MoreVertIcon />
           </IconButton>
-          <MyPlaceMenu
-            status={place.status}
-            anchorEl={menu.anchorEl}
-            open={menu.open}
-            handleClose={menu.handleClose}
-            onDelete={menu.handleDelete}
-            onEdit={menu.handleEdit}
-            placeSlug={place.slug}
-          />
+          {Menu}
           <IconButton color={"primary"} size={"small"} onClick={toggleFull}>
             <ExpandMoreIcon
               sx={{ transform: fullOpen ? "rotate(180deg)" : undefined }}
@@ -249,15 +253,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
           >
             <MoreVertIcon />
           </IconButton>
-          <MyPlaceMenu
-            status={place.status}
-            anchorEl={menu.anchorEl}
-            open={menu.open}
-            handleClose={menu.handleClose}
-            onDelete={menu.handleDelete}
-            onEdit={menu.handleEdit}
-            placeSlug={place.slug}
-          />
+          {Menu}
         </Grid>
       </Grid>
       <Collapse in={fullOpen}>

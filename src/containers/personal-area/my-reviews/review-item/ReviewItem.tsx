@@ -57,7 +57,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
         variant={"body1"}
         component={Link}
         color={"secondary.main"}
-        sx={{ textDecoration: "underline #565656" }}
+        sx={{ textDecoration: "underline #565656", wordBreak: "break-word" }}
         href={routerLinks.place(review.placeSlug)}
         target={"_blank"}
       >
@@ -117,6 +117,19 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
     </Stack>
   );
 
+  const Menu = (
+    <MyReviewMenu
+      anchorEl={menu.anchorEl}
+      open={menu.open}
+      handleClose={menu.handleClose}
+      onDelete={menu.handleDelete}
+      onEdit={menu.handleEdit}
+      placeSlug={review.placeSlug}
+      reviewId={review.id}
+      status={review.status}
+    />
+  );
+
   const mobileView = (
     <Box
       sx={{
@@ -160,16 +173,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
           >
             <MoreVertIcon />
           </IconButton>
-          <MyReviewMenu
-            anchorEl={menu.anchorEl}
-            open={menu.open}
-            handleClose={menu.handleClose}
-            onDelete={menu.handleDelete}
-            onEdit={menu.handleEdit}
-            placeSlug={review.placeSlug}
-            reviewId={review.id}
-            status={review.status}
-          />
+          {Menu}
         </Stack>
       </Stack>
     </Box>
@@ -209,16 +213,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
           >
             <MoreVertIcon />
           </IconButton>
-          <MyReviewMenu
-            anchorEl={menu.anchorEl}
-            open={menu.open}
-            handleClose={menu.handleClose}
-            onDelete={menu.handleDelete}
-            onEdit={menu.handleEdit}
-            placeSlug={review.placeSlug}
-            reviewId={review.id}
-            status={review.status}
-          />
+          {Menu}
         </Grid>
       </Grid>
     </Box>

@@ -118,7 +118,7 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
         variant={"body1"}
         component={Link}
         color={"secondary.main"}
-        sx={{ textDecoration: "underline #565656" }}
+        sx={{ textDecoration: "underline #565656", wordBreak: "break-word" }}
         href={routerLinks.place(favourite.placeSlug)}
         target={"_blank"}
       >

@@ -43,7 +43,7 @@ const ReviewItem = ({ review }: IReviewItemProps) => {
         variant={"body1"}
         component={Link}
         color={"secondary.main"}
-        sx={{ textDecoration: "underline #565656" }}
+        sx={{ textDecoration: "underline #565656", wordBreak: "break-word" }}
         href={routerLinks.place(review.placeSlug)}
         target={"_blank"}
       >

@@ -36,7 +36,7 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
       <Typography
         variant={"body1"}
         color={"secondary.main"}
-        sx={{ textDecoration: "underline #565656" }}
+        sx={{ textDecoration: "underline #565656", wordBreak: "break-word" }}
       >
         {place.slug}
       </Typography>
