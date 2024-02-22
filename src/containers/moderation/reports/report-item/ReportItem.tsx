@@ -2,6 +2,7 @@ import { IReport } from "@/services/reports-service/interfaces/report.interface"
 import {
   Box,
   Grid,
+  IconButton,
   Link,
   Select,
   Stack,
@@ -15,19 +16,36 @@ import { format } from "date-fns";
 import useCrmStatuses from "@/hooks/useCrmStatuses";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { routerLinks } from "@/routing/routerLinks";
-import { CrmStatusesEnum } from "@/shared/interfaces";
+import ReportMenu from "@/containers/moderation/reports/report-item/menu/Menu";
+import usePopover from "@/hooks/usePopover";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useState } from "react";
 
 interface IReportItemProps {
   report: IReport;
-  onChangeStatus: (id: number, status: CrmStatusesEnum) => void;
 }
 
-const ReportItem = ({ report, onChangeStatus }: IReportItemProps) => {
+const ReportItem = ({ report }: IReportItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation();
   const dateFnsLocale = useDateFnsLocale();
   const { parseStatusColor, statuses } = useCrmStatuses();
+  const [status, setStatus] = useState(report.status);
+  const menu = usePopover("report-menu");
+
+  const Menu = (
+    <ReportMenu
+      onChangeStatus={(newStatus) => setStatus(newStatus)}
+      status={status}
+      anchorEl={menu.anchor}
+      open={menu.open}
+      handleClose={menu.handleClose}
+      id={report.id}
+      placeId={report.placeId}
+      placeSlug={report.placeSlug}
+    />
+  );
 
   const placeSlugBox = (
     <Stack gap={"0.2em"}>
@@ -56,10 +74,10 @@ const ReportItem = ({ report, onChangeStatus }: IReportItemProps) => {
         borderRadius={"50%"}
         height={"10px"}
         width={"10px"}
-        bgcolor={parseStatusColor(report.status)}
+        bgcolor={parseStatusColor(status)}
       />
       <Typography variant={"body1"}>
-        {statuses.find((s) => s.id === report.status)?.label}
+        {statuses.find((s) => s.id === status)?.label}
       </Typography>
     </Stack>
   );
@@ -105,6 +123,16 @@ const ReportItem = ({ report, onChangeStatus }: IReportItemProps) => {
             {createdAtInfoBox}
           </Grid>
         </Grid>
+        <Stack ml={"0.5em"} justifyContent={"space-between"}>
+          <IconButton
+            onClick={menu.handleOpen}
+            color={"secondary"}
+            size={"small"}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          {Menu}
+        </Stack>
       </Stack>
     </Box>
   );
@@ -127,11 +155,21 @@ const ReportItem = ({ report, onChangeStatus }: IReportItemProps) => {
         <Grid item xs={3}>
           {placeSlugBox}
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           {statusBox}
         </Grid>
         <Grid item xs={2}>
           {createdAtInfoBox}
+        </Grid>
+        <Grid item xs={1}>
+          <IconButton
+            color={"secondary"}
+            sx={{ mr: "0.5em" }}
+            onClick={menu.handleOpen}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          {Menu}
         </Grid>
       </Grid>
     </Box>

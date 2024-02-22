@@ -57,7 +57,7 @@ const ReportItemsTableHead = ({
             <Typography>Место</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === ReportsOrderByEnum.STATUS}
@@ -67,7 +67,7 @@ const ReportItemsTableHead = ({
             <Typography>Статус</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={"auto"}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === ReportsOrderByEnum.CREATED_AT}

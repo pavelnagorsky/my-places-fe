@@ -9,5 +9,7 @@ export interface IReport {
 
   status: CrmStatusesEnum;
 
+  placeId: number;
+
   placeSlug: string;
 }

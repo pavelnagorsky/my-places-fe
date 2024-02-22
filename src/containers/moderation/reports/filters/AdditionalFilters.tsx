@@ -3,7 +3,7 @@ import {
   DatePickerElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { useMemo } from "react";
+import { useTranslation } from "next-i18next";
 import {
   Badge,
   Box,
@@ -16,34 +16,28 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useTranslation } from "next-i18next";
-import CloseIcon from "@mui/icons-material/Close";
-import { primaryBackground } from "@/styles/theme/lightTheme";
-import { IMyPlacesFormContext } from "@/containers/personal-area/my-places/interfaces";
-import usePlaceStatuses from "@/hooks/usePlaceStatuses";
+import { useMemo } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
-import { Button } from "@/components/UI/button/Button";
-import useReviewStatuses from "@/hooks/useReviewStatuses";
-import { IMyReviewsFormContext } from "@/containers/personal-area/my-reviews/interfaces";
+import { primaryBackground } from "@/styles/theme/lightTheme";
+import CloseIcon from "@mui/icons-material/Close";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
+import { Button } from "@/components/UI/button/Button";
+import useCrmStatuses from "@/hooks/useCrmStatuses";
+import { IReportsFormContext } from "@/containers/moderation/reports/interfaces";
 import useDialog from "@/hooks/useDialog";
 import FilterTransition from "@/components/UI/transitions/FilterTransition";
 
-interface IAdditionalFiltersProps {
+interface IFilterProps {
   onSubmit: () => void;
-  type: "reviews" | "places";
 }
 
-const AdditionalFilters = ({ onSubmit, type }: IAdditionalFiltersProps) => {
-  const { resetField, watch, getValues } = useFormContext<
-    IMyPlacesFormContext | IMyReviewsFormContext
-  >();
+const AdditionalFilters = ({ onSubmit }: IFilterProps) => {
+  const { resetField, watch, getValues } =
+    useFormContext<IReportsFormContext>();
   const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const placeStatuses = usePlaceStatuses();
-  const reviewStatuses = useReviewStatuses();
-  const statuses = type === "places" ? placeStatuses : reviewStatuses;
+  const { statuses } = useCrmStatuses();
   const dialog = useDialog();
 
   const watchEndDate = watch("dateTo");
@@ -95,8 +89,6 @@ const AdditionalFilters = ({ onSubmit, type }: IAdditionalFiltersProps) => {
         <Stack
           position={"sticky"}
           py={"0.5em"}
-          // pl={"2em"}
-          // pr={"0.2em"}
           top={0}
           zIndex={1}
           direction={"row"}

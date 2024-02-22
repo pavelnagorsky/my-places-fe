@@ -10,7 +10,6 @@ import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { Environment } from "@/shared/Environment";
 import { defaultMapStyle } from "@/components/map/map-styles/default";
 import { Box } from "@mui/material";
-// import {greyStyle} from "../UI/mapStyling/mapStyling";
 
 export interface ILatLngCoordinate {
   lat: number;
@@ -18,11 +17,9 @@ export interface ILatLngCoordinate {
 }
 
 interface IMapProps {
-  center?: ILatLngCoordinate;
   height?: string;
   containerStyle?: CSSProperties;
   width?: string;
-  zoom?: number;
   fullscreenControlEnabled?: boolean;
   fitCoordinates?: ILatLngCoordinate[];
 }
@@ -39,11 +36,9 @@ const libraries = ["places", "geometry"];
 
 function Map({
   children,
-  zoom,
   containerStyle,
   fullscreenControlEnabled,
   fitCoordinates,
-  center,
 }: PropsWithChildren & IMapProps) {
   const [map, setMap] = useState<google.maps.Map | null>(null);
 

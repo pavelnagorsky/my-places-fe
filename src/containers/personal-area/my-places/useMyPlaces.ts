@@ -15,7 +15,6 @@ import { useAppDispatch } from "@/store/hooks";
 const useMyPlaces = () => {
   const [places, setPlaces] = useState<IMyPlace[]>([]);
   const dispatch = useAppDispatch();
-  const [lastIndex, setLastIndex] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [noPlaces, setNoPlaces] = useState(false);
   const [orderBy, setOrderBy] = useState<MyPlacesOrderByEnum>(
@@ -84,11 +83,11 @@ const useMyPlaces = () => {
   }, [i18n.language, orderBy, orderDirection]);
 
   const onSubmit = (fromStart = true) => {
-    setNoPlaces(false);
     formContext.handleSubmit((data) => {
+      setNoPlaces(false);
+      setHasMore(true);
       if (fromStart) {
         setPlaces([]);
-        setLastIndex(0);
       }
       const payload: IMyPlacesRequest = {
         search: data.search,
@@ -96,7 +95,7 @@ const useMyPlaces = () => {
         dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
         dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
         itemsPerPage: placesService.MY_PLACES_ITEMS_PER_PAGE,
-        lastIndex: fromStart ? 0 : lastIndex,
+        lastIndex: fromStart ? 0 : places.length,
         orderBy: orderBy,
         orderAsc: orderDirection === OrderDirectionsEnum.ASC,
       };
@@ -108,7 +107,6 @@ const useMyPlaces = () => {
             : places.concat(res.data.data);
           setNoPlaces(totalPlaces.length === 0);
           setHasMore(res.data.hasMore);
-          setLastIndex(totalPlaces.length);
           setPlaces(totalPlaces);
         })
         .catch((reason) => {
@@ -123,7 +121,6 @@ const useMyPlaces = () => {
     onSubmit,
     places,
     hasMore,
-    lastIndex,
     orderBy,
     setOrderBy,
     orderDirection,

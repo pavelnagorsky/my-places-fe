@@ -1,9 +1,5 @@
-import {
-  CheckboxButtonGroup,
-  DatePickerElement,
-  useFormContext,
-} from "react-hook-form-mui";
-import { forwardRef, ReactElement, Ref, useMemo, useState } from "react";
+import { DatePickerElement, useFormContext } from "react-hook-form-mui";
+import { useMemo } from "react";
 import {
   Badge,
   Box,
@@ -19,28 +15,16 @@ import {
 import { useTranslation } from "next-i18next";
 import CloseIcon from "@mui/icons-material/Close";
 import { primaryBackground } from "@/styles/theme/lightTheme";
-import { IMyPlacesFormContext } from "@/containers/personal-area/my-places/interfaces";
-import usePlaceStatuses from "@/hooks/usePlaceStatuses";
 import TuneIcon from "@mui/icons-material/Tune";
 import { Button } from "@/components/UI/button/Button";
-import { TransitionProps } from "@mui/material/transitions/transition";
-import useReviewStatuses from "@/hooks/useReviewStatuses";
-import { IMyReviewsFormContext } from "@/containers/personal-area/my-reviews/interfaces";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { IMyFavouritesFormContext } from "@/containers/personal-area/my-favourites/interfaces";
+import useDialog from "@/hooks/useDialog";
+import FilterTransition from "@/components/UI/transitions/FilterTransition";
 
 interface IAdditionalFiltersProps {
   onSubmit: () => void;
 }
-
-const Transition = forwardRef(function Transition(
-  props: TransitionProps & {
-    children: ReactElement<any, any>;
-  },
-  ref: Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
   const { resetField, watch, getValues } =
@@ -48,7 +32,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [open, setOpen] = useState(false);
+  const dialog = useDialog();
 
   const watchEndDate = watch("dateTo");
 
@@ -56,17 +40,10 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
     const dateFromCount = getValues("dateFrom") !== null ? 1 : 0;
     const dateEndCount = getValues("dateTo") !== null ? 1 : 0;
     return dateEndCount + dateFromCount;
-  }, [open]);
-
-  const onOpen = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
+  }, [dialog.open]);
 
   const onApply = () => {
-    onClose();
+    dialog.handleClose();
     onSubmit();
   };
 
@@ -79,7 +56,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
     <Box>
       <Badge badgeContent={filtersCount} color={"primary"}>
         <IconButton
-          onClick={onOpen}
+          onClick={dialog.handleOpen}
           sx={{
             p: "0.5em",
             borderRadius: "10px",
@@ -90,9 +67,9 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
         </IconButton>
       </Badge>
       <Dialog
-        open={open}
-        onClose={onClose}
-        TransitionComponent={Transition}
+        open={dialog.open}
+        onClose={dialog.handleClose}
+        TransitionComponent={FilterTransition}
         fullWidth
         fullScreen={isMobile}
         PaperProps={{
@@ -104,8 +81,6 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
         <Stack
           position={"sticky"}
           py={"0.5em"}
-          // pl={"2em"}
-          // pr={"0.2em"}
           top={0}
           zIndex={1}
           direction={"row"}
@@ -116,7 +91,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
           <Typography mx={"auto"} fontWeight={600} fontSize={"20px"}>
             Фильтры
           </Typography>
-          <IconButton onClick={onClose} sx={{ mr: "0.2em" }}>
+          <IconButton onClick={dialog.handleClose} sx={{ mr: "0.2em" }}>
             <CloseIcon />
           </IconButton>
         </Stack>
@@ -141,13 +116,6 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
                   isDate
                   maxDate={watchEndDate || new Date()}
                   format={"dd MMM yyyy"}
-                  localeText={{
-                    previousMonth: "Прошлый месяц",
-                    nextMonth: "Следующий месяц",
-                    toolbarTitle: "Выберите дату",
-                    okButtonLabel: "Выбрать",
-                    cancelButtonLabel: "Отменить",
-                  }}
                 />
               </Box>
               <Box>
@@ -157,13 +125,6 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
                   isDate
                   maxDate={new Date()}
                   format={"dd MMM yyyy"}
-                  localeText={{
-                    previousMonth: "Прошлый месяц",
-                    nextMonth: "Следующий месяц",
-                    toolbarTitle: "Выберите дату",
-                    okButtonLabel: "Выбрать",
-                    cancelButtonLabel: "Отменить",
-                  }}
                 />
               </Box>
             </Stack>

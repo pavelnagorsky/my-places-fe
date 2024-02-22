@@ -1,15 +1,14 @@
-import { debounce, InputAdornment, Stack } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import SearchIcon from "@mui/icons-material/Search";
+import { debounce, InputAdornment, Stack } from "@mui/material";
 import { TextFieldElement } from "react-hook-form-mui";
-import AdditionalFilters from "@/containers/moderation/places/filters/AdditionalFilters";
+import SearchIcon from "@mui/icons-material/Search";
+import AdditionalFilters from "./AdditionalFilters";
 
 interface IFilterProps {
   onSubmit: () => void;
-  type: "reviews" | "places";
 }
 
-const Filters = ({ onSubmit, type }: IFilterProps) => {
+const Filters = ({ onSubmit }: IFilterProps) => {
   const { t } = useTranslation();
 
   return (
@@ -21,7 +20,7 @@ const Filters = ({ onSubmit, type }: IFilterProps) => {
     >
       <TextFieldElement
         onChange={debounce(() => onSubmit(), 300)}
-        placeholder={type === "places" ? "Название места" : "Название заметки"}
+        placeholder={"Жалоба"}
         name={"search"}
         id={"searchText"}
         InputProps={{

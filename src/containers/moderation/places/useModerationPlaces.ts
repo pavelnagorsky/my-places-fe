@@ -12,7 +12,6 @@ import { IModerationPlace } from "@/services/places-service/interfaces/moderatio
 
 const useModerationPlaces = () => {
   const [places, setPlaces] = useState<IModerationPlace[]>([]);
-  const [lastIndex, setLastIndex] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [noPlaces, setNoPlaces] = useState(false);
   const [orderBy, setOrderBy] = useState<ModerationPlacesOrderByEnum>(
@@ -44,11 +43,11 @@ const useModerationPlaces = () => {
   }, [i18n.language, orderBy, orderDirection]);
 
   const onSubmit = (fromStart = true) => {
-    setNoPlaces(false);
     formContext.handleSubmit((data) => {
+      setNoPlaces(false);
+      setHasMore(true);
       if (fromStart) {
         setPlaces([]);
-        setLastIndex(0);
       }
       const payload: IModerationPlacesRequest = {
         search: data.search,
@@ -56,7 +55,7 @@ const useModerationPlaces = () => {
         dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
         dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
         itemsPerPage: placesService.MODERATION_PLACES_ITEMS_PER_PAGE,
-        lastIndex: fromStart ? 0 : lastIndex,
+        lastIndex: fromStart ? 0 : places.length,
         orderBy: orderBy,
         orderAsc: orderDirection === OrderDirectionsEnum.ASC,
       };
@@ -68,7 +67,6 @@ const useModerationPlaces = () => {
             : places.concat(res.data.data);
           setNoPlaces(totalPlaces.length === 0);
           setHasMore(res.data.hasMore);
-          setLastIndex(totalPlaces.length);
           setPlaces(totalPlaces);
         })
         .catch((reason) => {
@@ -83,7 +81,6 @@ const useModerationPlaces = () => {
     onSubmit,
     places,
     hasMore,
-    lastIndex,
     orderBy,
     setOrderBy,
     orderDirection,

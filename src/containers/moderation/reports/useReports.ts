@@ -11,7 +11,6 @@ import reportsService from "@/services/reports-service/reports.service";
 
 const useReports = () => {
   const [reports, setReports] = useState<IReport[]>([]);
-  const [lastIndex, setLastIndex] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [noReports, setNoReports] = useState(false);
   const [orderBy, setOrderBy] = useState<ReportsOrderByEnum>(
@@ -42,19 +41,19 @@ const useReports = () => {
   }, [orderBy, orderDirection]);
 
   const onSubmit = (fromStart = true) => {
-    setNoReports(false);
     formContext.handleSubmit((data) => {
+      setNoReports(false);
+      setHasMore(true);
       if (fromStart) {
         setReports([]);
-        setLastIndex(0);
       }
       const payload: IGetReportsRequest = {
         search: data.search,
-        statuses: data.statuses,
+        statuses: data.statuses.map((s) => +s),
         dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
         dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
         itemsPerPage: reportsService.REPORTS_ITEMS_PER_PAGE,
-        lastIndex: fromStart ? 0 : lastIndex,
+        lastIndex: fromStart ? 0 : reports.length,
         orderBy: orderBy,
         orderAsc: orderDirection === OrderDirectionsEnum.ASC,
       };
@@ -66,7 +65,6 @@ const useReports = () => {
             : reports.concat(res.data.data);
           setNoReports(totalReports.length === 0);
           setHasMore(res.data.hasMore);
-          setLastIndex(totalReports.length);
           setReports(totalReports);
         })
         .catch((reason) => {
@@ -76,24 +74,16 @@ const useReports = () => {
     })();
   };
 
-  const onChangeStatus = (id: number, status: CrmStatusesEnum) => {
-    const report = reports.find((r) => r.id === id);
-    if (!report || report.status === status) return;
-    // update status
-  };
-
   return {
     formContext,
     onSubmit,
     reports,
     hasMore,
-    lastIndex,
     orderBy,
     setOrderBy,
     orderDirection,
     toggleOrderDirection,
     noReports,
-    onChangeStatus,
   };
 };
 

@@ -1,5 +1,5 @@
-import { createTheme } from "@mui/material/styles";
 import { interFont } from "@/styles/fonts/fonts";
+import { createTheme } from "@mui/material";
 
 export const primaryColor = "#FF7A00";
 export const primaryBackground = "#FFE9D6";
@@ -130,6 +130,18 @@ const lightTheme = createTheme({
     MuiButton: {
       defaultProps: {
         style: { boxShadow: "none" },
+      },
+    },
+    // @ts-ignore
+    MuiDatePicker: {
+      defaultProps: {
+        localeText: {
+          previousMonth: "Прошлый месяц",
+          nextMonth: "Следующий месяц",
+          toolbarTitle: "Выберите дату",
+          okButtonLabel: "Выбрать",
+          cancelButtonLabel: "Отменить",
+        },
       },
     },
     MuiDivider: {

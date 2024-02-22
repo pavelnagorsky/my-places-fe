@@ -8,6 +8,7 @@ import { BoxPlaceholder } from "@/components/UI/placeholders/BoxPlaceholder";
 import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
 import ReportItem from "@/containers/moderation/reports/report-item/ReportItem";
 import ReportItemsTableHead from "@/containers/moderation/reports/report-item/ReportItemsTableHead";
+import Filters from "@/containers/moderation/reports/filters/Filters";
 
 const ReportsPage = () => {
   const logic = useReports();
@@ -28,13 +29,13 @@ const ReportsPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Жалобы пользователей
+                Жалобы на места
               </Typography>
             </Stack>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <FormProvider {...logic.formContext}>
-              {/*<Filters onSubmit={logic.onSubmit} type={"places"} />*/}
+              <Filters onSubmit={logic.onSubmit} />
             </FormProvider>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
@@ -76,10 +77,7 @@ const ReportsPage = () => {
                       }}
                       transition={{ duration: 0.6, type: "spring" }}
                     >
-                      <ReportItem
-                        report={report}
-                        onChangeStatus={logic.onChangeStatus}
-                      />
+                      <ReportItem report={report} />
                     </motion.div>
                   ))}
                 </AnimatePresence>

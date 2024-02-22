@@ -14,9 +14,12 @@ import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { routerLinks } from "@/routing/routerLinks";
-const SnackbarAlert = dynamic(() => import("@/components/UI/SnackbarAlert"), {
-  ssr: false,
-});
+const SnackbarAlert = dynamic(
+  () => import("@/components/UI/alert/SnackbarAlert"),
+  {
+    ssr: false,
+  }
+);
 const AuthModal = dynamic(() => import("@/containers/auth/AuthModal"), {
   ssr: false,
 });

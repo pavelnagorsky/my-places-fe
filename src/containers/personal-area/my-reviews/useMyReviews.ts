@@ -16,7 +16,6 @@ import reviewsService from "@/services/reviews-service/reviews.service";
 const useMyReviews = () => {
   const [reviews, setReviews] = useState<IMyReview[]>([]);
   const dispatch = useAppDispatch();
-  const [lastIndex, setLastIndex] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [noReviews, setNoReviews] = useState(false);
   const [orderBy, setOrderBy] = useState<MyReviewsOrderByEnum>(
@@ -85,11 +84,11 @@ const useMyReviews = () => {
   }, [i18n.language, orderBy, orderDirection]);
 
   const onSubmit = (fromStart = true) => {
-    setNoReviews(false);
     formContext.handleSubmit((data) => {
+      setNoReviews(false);
+      setHasMore(true);
       if (fromStart) {
         setReviews([]);
-        setLastIndex(0);
       }
       const payload: IMyReviewsRequest = {
         search: data.search,
@@ -97,7 +96,7 @@ const useMyReviews = () => {
         dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
         dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
         itemsPerPage: placesService.MY_PLACES_ITEMS_PER_PAGE,
-        lastIndex: fromStart ? 0 : lastIndex,
+        lastIndex: fromStart ? 0 : reviews.length,
         orderBy: orderBy,
         orderAsc: orderDirection === OrderDirectionsEnum.ASC,
       };
@@ -109,7 +108,6 @@ const useMyReviews = () => {
             : reviews.concat(res.data.data);
           setNoReviews(totalReviews.length === 0);
           setHasMore(res.data.hasMore);
-          setLastIndex(totalReviews.length);
           setReviews(totalReviews);
         })
         .catch((reason) => {
@@ -124,7 +122,6 @@ const useMyReviews = () => {
     onSubmit,
     reviews,
     hasMore,
-    lastIndex,
     orderBy,
     setOrderBy,
     orderDirection,
