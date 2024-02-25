@@ -4,7 +4,7 @@ import { ICreateReview } from "@/services/reviews-service/interfaces/create-revi
 import {
   IModerationReviewsRequest,
   IMyReviewsRequest,
-  ISearchReviewsResponse,
+  ISearchReview,
 } from "@/services/reviews-service/interfaces/interfaces";
 import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import { IUpdateReview } from "@/services/reviews-service/interfaces/update-review.interface";
@@ -25,10 +25,10 @@ const reviewsService = {
 
   RESULTS_PER_REQUEST: 3,
 
-  getPlaceReviews: (placeSlug: string, language: string, lastIndex: number) => {
+  getPlaceReviews: (placeSlug: string, language: string, page: number) => {
     const langId = parseLanguageToId(language);
-    return axiosInstance.get<ISearchReviewsResponse>(
-      `/Reviews/place/${placeSlug}?lang=${langId}&lastIndex=${lastIndex}&itemsPerPage=${reviewsService.RESULTS_PER_REQUEST}`
+    return axiosInstance.get<IPaginationResponse<ISearchReview>>(
+      `/Reviews/place/${placeSlug}?lang=${langId}&page=${page}&pageSize=${reviewsService.RESULTS_PER_REQUEST}`
     );
   },
 

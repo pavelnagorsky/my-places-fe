@@ -1,36 +1,45 @@
-import {
-  ISearchReview,
-  ISearchReviewsResponse,
-} from "@/services/reviews-service/interfaces/interfaces";
+import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useEffect, useState } from "react";
-import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { useTranslation } from "next-i18next";
+import { IPaginationResponse } from "@/services/interfaces";
+import utils from "@/shared/utils";
 
 interface IUseReviewsProps {
-  defaultData: ISearchReviewsResponse;
+  defaultData: IPaginationResponse<ISearchReview>;
   placeSlug: string;
 }
 
 const useReviews = ({ defaultData, placeSlug }: IUseReviewsProps) => {
   const { i18n } = useTranslation();
   const [reviews, setReviews] = useState<ISearchReview[]>(
-    defaultData.data || []
+    defaultData.items || []
   );
-  const [hasMore, setHasMore] = useState<boolean>(defaultData.hasMore);
+  const [hasMore, setHasMore] = useState<boolean>(
+    defaultData.totalItems > defaultData.items.length
+  );
 
-  useEffect(() => {
-    setReviews(defaultData.data);
-    setHasMore(defaultData.hasMore);
-  }, [defaultData]);
+  //console.log(reviews.length, hasMore);
+
+  // useEffect(() => {
+  //   setReviews(defaultData.items);
+  //   setHasMore(defaultData.totalItems > defaultData.items.length);
+  // }, [defaultData]);
 
   const handleSearch = () => {
     reviewsService
-      .getPlaceReviews(placeSlug, i18n.language, reviews.length)
+      .getPlaceReviews(
+        placeSlug,
+        i18n.language,
+        utils.calculateCurrentScrollPage(
+          reviews.length,
+          reviewsService.RESULTS_PER_REQUEST
+        )
+      )
       .then(({ data }) => {
-        const newReviews = reviews.concat(data.data);
+        const newReviews = reviews.concat(data.items);
         setReviews(newReviews);
-        setHasMore(data.hasMore);
+        setHasMore(data.totalItems > newReviews.length);
       })
       .catch(() => {
         setHasMore(false);

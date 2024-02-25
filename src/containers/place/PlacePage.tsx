@@ -18,17 +18,18 @@ import Image from "next/image";
 import PlaceStatistics from "@/containers/place/PlaceStatistics";
 import Comments from "@/containers/place/comments/Comments";
 import ReviewsSection from "@/containers/place/reviews/ReviewsSection";
-import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces/interfaces";
 import Map from "@/components/map/Map";
 import { Marker } from "@react-google-maps/api";
 import { Fragment } from "react";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
 import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
+import { IPaginationResponse } from "@/services/interfaces";
+import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 
 interface IPlaceProps {
   place: IPlace;
-  reviews: ISearchReviewsResponse;
+  reviews: IPaginationResponse<ISearchReview>;
 }
 
 const PlacePage = ({ place, reviews }: IPlaceProps) => {

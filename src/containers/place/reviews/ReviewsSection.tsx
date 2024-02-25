@@ -1,14 +1,6 @@
-import {
-  Badge,
-  Card,
-  CardHeader,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Badge, IconButton, Stack, Typography } from "@mui/material";
 import ReviewCard from "@/containers/place/reviews/ReviewCard";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces/interfaces";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useReviews from "@/containers/place/reviews/useReviews";
 import { AnimatePresence, motion } from "framer-motion";
@@ -22,9 +14,11 @@ import { useEffect, useState } from "react";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { useTranslation } from "next-i18next";
 import { IReview } from "@/services/reviews-service/interfaces/review.interface";
+import { IPaginationResponse } from "@/services/interfaces";
+import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 
 interface IReviewsSectionProps {
-  reviews: ISearchReviewsResponse;
+  reviews: IPaginationResponse<ISearchReview>;
   placeSlug: string;
   placeId: number;
 }
@@ -92,7 +86,7 @@ const ReviewsSection = ({
           Заметки к месту
         </Typography>
         <IconButton component={Link} href={newReviewLink}>
-          <Badge badgeContent={reviews.totalResults} color="primary">
+          <Badge badgeContent={reviews.totalItems} color="primary">
             <AddCircleOutlineIcon fontSize={"large"} />
           </Badge>
         </IconButton>
@@ -122,7 +116,7 @@ const ReviewsSection = ({
           },
         }}
       >
-        {reviews.totalResults === 0 && (
+        {reviews.totalItems === 0 && (
           <Stack p={"1em"}>
             <NoReviews link={newReviewLink} />
           </Stack>
@@ -147,10 +141,10 @@ const ReviewsSection = ({
           <AnimatePresence mode="popLayout">
             {data.reviews.map((r, i) => {
               // each card will be delayed based on it's index
-              // but we need to subtract the delay from all the previously loaded cards
+              // but, we need to subtract the delay from all the previously loaded cards
               const recalculatedDelay =
-                i >= reviews.totalResults * 2
-                  ? (i - reviews.totalResults * (data.reviews.length - 1)) / 15
+                i >= reviews.totalItems * 2
+                  ? (i - reviews.totalItems * (data.reviews.length - 1)) / 15
                   : i / 15;
               return (
                 <motion.div

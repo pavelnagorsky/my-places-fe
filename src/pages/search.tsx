@@ -36,6 +36,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       ])),
       // Will be passed to the page component as props
     },
+    revalidate: 60,
   };
 };
 

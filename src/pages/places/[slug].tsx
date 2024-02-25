@@ -5,11 +5,12 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import placesService from "@/services/places-service/places.service";
 import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
-import { ISearchReviewsResponse } from "@/services/reviews-service/interfaces/interfaces";
+import { IPaginationResponse } from "@/services/interfaces";
+import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 
 interface IPlacePageProps {
   place: IPlace;
-  reviews: ISearchReviewsResponse;
+  reviews: IPaginationResponse<ISearchReview>;
 }
 
 const PlacePageLazy = dynamic(() => import("@/containers/place/PlacePage"));

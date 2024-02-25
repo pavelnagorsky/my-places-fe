@@ -2,12 +2,6 @@ import { IReview } from "@/services/reviews-service/interfaces/review.interface"
 import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
 import { IPaginationRequest } from "@/services/interfaces";
 
-export interface ISearchReviewsResponse {
-  data: ISearchReview[];
-  hasMore: boolean;
-  totalResults: number;
-}
-
 export interface ISearchReview extends Omit<IReview, "images"> {}
 
 export interface IMyReviewsRequest
