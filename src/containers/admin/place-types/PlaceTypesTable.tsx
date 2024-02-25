@@ -17,11 +17,8 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import PlaceCategoriesTableHead from "@/containers/admin/place-categories/PlaceCategoriesTableHead";
 import { IOrderBy, ITableProps } from "@/containers/admin/interfaces";
 import { useTranslation } from "next-i18next";
-import placeCategoriesService from "@/services/place-categories-service/place-categories.service";
-import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { useRouter } from "next/router";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import placeTypesService from "@/services/place-types-service/place-types.service";

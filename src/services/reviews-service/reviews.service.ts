@@ -3,15 +3,16 @@ import parseLanguageToId from "@/shared/parseLanguageToId";
 import { ICreateReview } from "@/services/reviews-service/interfaces/create-review.interface";
 import {
   IModerationReviewsRequest,
-  IModerationReviewsResponse,
   IMyReviewsRequest,
-  IMyReviewsResponse,
   ISearchReviewsResponse,
 } from "@/services/reviews-service/interfaces/interfaces";
 import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import { IUpdateReview } from "@/services/reviews-service/interfaces/update-review.interface";
 import { IEditReview } from "@/services/reviews-service/interfaces/edit-review.interface";
 import { IModeration } from "@/services/places-service/interfaces/moderation.interface";
+import { IMyReview } from "@/services/reviews-service/interfaces/my-review.interface";
+import { IModerationReview } from "@/services/reviews-service/interfaces/moderation-review.interface";
+import { IPaginationResponse } from "@/services/interfaces";
 
 const reviewsService = {
   creteReview: (payload: ICreateReview, language: string) => {
@@ -40,7 +41,7 @@ const reviewsService = {
 
   getMyReviews: (lang: string, payload: IMyReviewsRequest) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.post<IMyReviewsResponse>(
+    return axiosInstance.post<IPaginationResponse<IMyReview>>(
       `/reviews/my-reviews?lang=${langId}`,
       payload
     );
@@ -64,7 +65,7 @@ const reviewsService = {
 
   getModerationReviews: (lang: string, payload: IModerationReviewsRequest) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.post<IModerationReviewsResponse>(
+    return axiosInstance.post<IPaginationResponse<IModerationReview>>(
       `/reviews/moderation-reviews?lang=${langId}`,
       payload
     );

@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form-mui";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "next-i18next";
-import { OrderDirectionsEnum } from "@/shared/interfaces";
 import {
   IModerationReviewsRequest,
   ModerationReviewsOrderByEnum,
@@ -9,18 +8,12 @@ import {
 import { IModerationReviewsFormContext } from "@/containers/moderation/reviews/interfaces";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { IModerationReview } from "@/services/reviews-service/interfaces/moderation-review.interface";
+import useScrollPagination from "@/hooks/useScrollPagination";
+import { IPaginationRequest } from "@/services/interfaces";
 
 const useModerationReviews = () => {
-  const [reviews, setReviews] = useState<IModerationReview[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [noReviews, setNoReviews] = useState(false);
-  const [orderBy, setOrderBy] = useState<ModerationReviewsOrderByEnum>(
-    ModerationReviewsOrderByEnum.UPDATED_AT
-  );
-  const [orderDirection, setOrderDirection] = useState<OrderDirectionsEnum>(
-    OrderDirectionsEnum.DESC
-  );
   const { i18n } = useTranslation();
+
   const formContext = useForm<IModerationReviewsFormContext>({
     defaultValues: {
       search: "",
@@ -30,62 +23,50 @@ const useModerationReviews = () => {
     },
   });
 
-  const toggleOrderDirection = () => {
-    if (orderDirection === OrderDirectionsEnum.DESC) {
-      setOrderDirection(OrderDirectionsEnum.ASC);
-    } else {
-      setOrderDirection(OrderDirectionsEnum.DESC);
-    }
-  };
-
-  useEffect(() => {
-    onSubmit();
-  }, [i18n.language, orderBy, orderDirection]);
-
-  const onSubmit = (fromStart = true) => {
-    formContext.handleSubmit((data) => {
-      setNoReviews(false);
-      setHasMore(true);
-      if (fromStart) {
-        setReviews([]);
-      }
+  const apiCall = useCallback(
+    (pagination: IPaginationRequest<ModerationReviewsOrderByEnum>) => {
+      const data = formContext.getValues();
       const payload: IModerationReviewsRequest = {
         search: data.search,
         authorEmail: data.authorEmail,
         dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
         dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
-        itemsPerPage: reviewsService.MODERATION_REVIEWS_ITEMS_PER_PAGE,
-        lastIndex: fromStart ? 0 : reviews.length,
-        orderBy: orderBy,
-        orderAsc: orderDirection === OrderDirectionsEnum.ASC,
+        ...pagination,
       };
-      reviewsService
-        .getModerationReviews(i18n.language, payload)
-        .then((res) => {
-          const totalReviews = fromStart
-            ? res.data.data
-            : reviews.concat(res.data.data);
-          setNoReviews(totalReviews.length === 0);
-          setHasMore(res.data.hasMore);
-          setReviews(totalReviews);
-        })
-        .catch((reason) => {
-          setNoReviews(reviews.length === 0);
-          setHasMore(false);
-        });
+      return reviewsService.getModerationReviews(i18n.language, payload);
+    },
+    [i18n.language]
+  );
+
+  const paginator = useScrollPagination<
+    IModerationReview,
+    ModerationReviewsOrderByEnum
+  >({
+    defaultOrderBy: ModerationReviewsOrderByEnum.UPDATED_AT,
+    pageSize: reviewsService.MODERATION_REVIEWS_ITEMS_PER_PAGE,
+    apiCall: apiCall,
+  });
+
+  const onSubmit = (fromStart = true) => {
+    formContext.handleSubmit((data) => {
+      paginator.fetch(fromStart);
     })();
   };
+
+  useEffect(() => {
+    onSubmit();
+  }, [i18n.language, paginator.orderBy, paginator.orderDirection]);
 
   return {
     formContext,
     onSubmit,
-    reviews,
-    hasMore,
-    orderBy,
-    setOrderBy,
-    orderDirection,
-    toggleOrderDirection,
-    noReviews,
+    items: paginator.items,
+    hasMore: paginator.hasMore,
+    orderBy: paginator.orderBy,
+    changeOrderBy: paginator.changeOrderBy,
+    orderDirection: paginator.orderDirection,
+    toggleOrderDirection: paginator.toggleOrderDirection,
+    noItems: paginator.noItems,
   };
 };
 

@@ -80,7 +80,7 @@ const MyPlacesPage = () => {
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <Box my={{ xs: "1.5em", md: "2.5em" }}>
-              {logic.noPlaces && (
+              {logic.noItems && (
                 <Typography
                   variant={"body1"}
                   fontWeight={600}
@@ -92,8 +92,8 @@ const MyPlacesPage = () => {
               <PlaceItemsTableHead
                 orderBy={logic.orderBy}
                 orderDirection={logic.orderDirection}
-                show={!logic.noPlaces}
-                onChangeOrderBy={logic.setOrderBy}
+                show={!logic.noItems}
+                onChangeOrderBy={logic.changeOrderBy}
                 onChangeOrderDirection={logic.toggleOrderDirection}
               />
               <InfiniteScroll
@@ -101,13 +101,13 @@ const MyPlacesPage = () => {
                   padding: "1em 0.5em 0.5em 0.5em",
                   //overflowX: "hidden",
                 }}
-                dataLength={logic.places.length}
+                dataLength={logic.items.length}
                 next={() => logic.onSubmit(false)}
                 hasMore={logic.hasMore}
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.places.map((place, index) => (
+                  {logic.items.map((place, index) => (
                     <motion.div
                       key={place.id}
                       layout

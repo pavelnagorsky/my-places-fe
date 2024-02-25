@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { OrderDirectionsEnum } from "@/shared/interfaces";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { MyReviewsOrderByEnum } from "@/services/reviews-service/interfaces/interfaces";
+import { OrderDirectionsEnum } from "@/services/interfaces";
 
 interface ITableHeadProps {
   show: boolean;

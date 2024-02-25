@@ -1,8 +1,8 @@
-import { OrderDirectionsEnum } from "@/shared/interfaces";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Box, Stack, Tooltip, Typography } from "@mui/material";
 import { PropsWithChildren } from "react";
+import { OrderDirectionsEnum } from "@/services/interfaces";
 
 interface ISortingButtonProps extends PropsWithChildren {
   orderDirection: OrderDirectionsEnum;

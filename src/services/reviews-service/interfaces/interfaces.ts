@@ -1,7 +1,6 @@
 import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
-import { IMyReview } from "@/services/reviews-service/interfaces/my-review.interface";
-import { IModerationReview } from "@/services/reviews-service/interfaces/moderation-review.interface";
+import { IPaginationRequest } from "@/services/interfaces";
 
 export interface ISearchReviewsResponse {
   data: ISearchReview[];
@@ -11,15 +10,12 @@ export interface ISearchReviewsResponse {
 
 export interface ISearchReview extends Omit<IReview, "images"> {}
 
-export interface IMyReviewsRequest {
-  lastIndex: number;
-  itemsPerPage: number;
+export interface IMyReviewsRequest
+  extends IPaginationRequest<MyReviewsOrderByEnum> {
   dateFrom?: string | null;
   dateTo?: string | null;
   search?: string;
   statuses?: ReviewStatusesEnum[];
-  orderBy?: MyReviewsOrderByEnum;
-  orderAsc?: boolean;
 }
 
 export enum MyReviewsOrderByEnum {
@@ -30,12 +26,6 @@ export enum MyReviewsOrderByEnum {
   VIEWS = 4,
 }
 
-export interface IMyReviewsResponse {
-  data: IMyReview[];
-  lastIndex: number;
-  hasMore: boolean;
-}
-
 export enum ModerationReviewsOrderByEnum {
   CREATED_AT,
   UPDATED_AT,
@@ -44,19 +34,10 @@ export enum ModerationReviewsOrderByEnum {
   AUTHOR,
 }
 
-export interface IModerationReviewsResponse {
-  data: IModerationReview[];
-  lastIndex: number;
-  hasMore: boolean;
-}
-
-export interface IModerationReviewsRequest {
-  lastIndex: number;
-  itemsPerPage: number;
+export interface IModerationReviewsRequest
+  extends IPaginationRequest<ModerationReviewsOrderByEnum> {
   dateFrom?: string | null;
   dateTo?: string | null;
   search?: string;
   authorEmail?: string;
-  orderBy?: ModerationReviewsOrderByEnum;
-  orderAsc?: boolean;
 }

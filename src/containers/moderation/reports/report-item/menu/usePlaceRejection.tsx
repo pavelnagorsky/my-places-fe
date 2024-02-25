@@ -4,7 +4,7 @@ import placesService from "@/services/places-service/places.service";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import reportsService from "@/services/reports-service/reports.service";
-import { CrmStatusesEnum } from "@/shared/interfaces";
+import { CrmStatusesEnum } from "@/services/interfaces";
 
 interface IUsePlaceRejectionProps {
   placeId: number;

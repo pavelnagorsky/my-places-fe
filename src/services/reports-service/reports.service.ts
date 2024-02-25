@@ -1,10 +1,10 @@
 import {
   ICreateReport,
   IGetReportsRequest,
-  IGetReportsResponse,
 } from "@/services/reports-service/interfaces/interfaces";
 import axiosInstance from "@/services/axios.instance";
-import { CrmStatusesEnum } from "@/shared/interfaces";
+import { IReport } from "@/services/reports-service/interfaces/report.interface";
+import { CrmStatusesEnum, IPaginationResponse } from "@/services/interfaces";
 
 const reportsService = {
   createReport: (data: ICreateReport) => {
@@ -14,7 +14,10 @@ const reportsService = {
   REPORTS_ITEMS_PER_PAGE: 12,
 
   getReports: (payload: IGetReportsRequest) => {
-    return axiosInstance.post<IGetReportsResponse>("/Reports/List", payload);
+    return axiosInstance.post<IPaginationResponse<IReport>>(
+      "/Reports/List",
+      payload
+    );
   },
 
   changeStatus: (id: number, status: CrmStatusesEnum) => {

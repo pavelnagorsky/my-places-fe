@@ -1,4 +1,4 @@
-import { CrmStatusesEnum } from "@/shared/interfaces";
+import { CrmStatusesEnum } from "@/services/interfaces";
 
 export interface IReport {
   id: number;

@@ -1,5 +1,6 @@
-import { CrmStatusesEnum, ISelect } from "@/shared/interfaces";
+import { ISelect } from "@/shared/interfaces";
 import { Box, Stack, Typography } from "@mui/material";
+import { CrmStatusesEnum } from "@/services/interfaces";
 
 const useCrmStatuses = () => {
   const statuses: ISelect[] = [

@@ -1,5 +1,4 @@
-import { CrmStatusesEnum } from "@/shared/interfaces";
-import { IReport } from "./report.interface";
+import { CrmStatusesEnum, IPaginationRequest } from "@/services/interfaces";
 
 export interface ICreateReport {
   placeId: number;
@@ -13,19 +12,10 @@ export enum ReportsOrderByEnum {
   STATUS,
 }
 
-export interface IGetReportsRequest {
-  lastIndex: number;
-  itemsPerPage: number;
+export interface IGetReportsRequest
+  extends IPaginationRequest<ReportsOrderByEnum> {
   dateFrom?: string | null;
   dateTo?: string | null;
   search?: string;
   statuses?: CrmStatusesEnum[];
-  orderBy?: ReportsOrderByEnum;
-  orderAsc?: boolean;
-}
-
-export interface IGetReportsResponse {
-  data: IReport[];
-  hasMore: boolean;
-  lastIndex: number;
 }

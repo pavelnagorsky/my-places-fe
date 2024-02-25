@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form-mui";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "next-i18next";
-import placesService from "@/services/places-service/places.service";
-import { OrderDirectionsEnum } from "@/shared/interfaces";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { IMyReview } from "@/services/reviews-service/interfaces/my-review.interface";
@@ -12,19 +10,13 @@ import {
 } from "@/services/reviews-service/interfaces/interfaces";
 import { IMyReviewsFormContext } from "@/containers/personal-area/my-reviews/interfaces";
 import reviewsService from "@/services/reviews-service/reviews.service";
+import useScrollPagination from "@/hooks/useScrollPagination";
+import { IPaginationRequest } from "@/services/interfaces";
 
 const useMyReviews = () => {
-  const [reviews, setReviews] = useState<IMyReview[]>([]);
   const dispatch = useAppDispatch();
-  const [hasMore, setHasMore] = useState(true);
-  const [noReviews, setNoReviews] = useState(false);
-  const [orderBy, setOrderBy] = useState<MyReviewsOrderByEnum>(
-    MyReviewsOrderByEnum.CREATED_AT
-  );
-  const [orderDirection, setOrderDirection] = useState<OrderDirectionsEnum>(
-    OrderDirectionsEnum.DESC
-  );
   const { i18n } = useTranslation();
+
   const formContext = useForm<IMyReviewsFormContext>({
     defaultValues: {
       search: "",
@@ -33,6 +25,37 @@ const useMyReviews = () => {
       dateFrom: null,
     },
   });
+
+  const apiCall = useCallback(
+    (pagination: IPaginationRequest<MyReviewsOrderByEnum>) => {
+      const data = formContext.getValues();
+      const payload: IMyReviewsRequest = {
+        search: data.search,
+        statuses: (data.statuses || []).map((sId) => +sId),
+        dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
+        dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
+        ...pagination,
+      };
+      return reviewsService.getMyReviews(i18n.language, payload);
+    },
+    [i18n.language]
+  );
+
+  const paginator = useScrollPagination<IMyReview, MyReviewsOrderByEnum>({
+    defaultOrderBy: MyReviewsOrderByEnum.CREATED_AT,
+    pageSize: reviewsService.MY_REVIEWS_ITEMS_PER_PAGE,
+    apiCall: apiCall,
+  });
+
+  const onSubmit = (fromStart = true) => {
+    formContext.handleSubmit((data) => {
+      paginator.fetch(fromStart);
+    })();
+  };
+
+  useEffect(() => {
+    onSubmit();
+  }, [i18n.language, paginator.orderBy, paginator.orderDirection]);
 
   const handleDelete = (reviewId: number) => {
     reviewsService
@@ -49,11 +72,10 @@ const useMyReviews = () => {
             snackbarProps: {},
           })
         );
-        const filteredReviews = reviews.filter((r) => r.id !== reviewId);
-        setReviews(filteredReviews);
-        if (filteredReviews.length === 0) {
-          setNoReviews(true);
-        }
+        const filteredReviews = paginator.items.filter(
+          (r) => r.id !== reviewId
+        );
+        paginator.setItems(filteredReviews);
       })
       .catch(() => {
         dispatch(
@@ -71,63 +93,17 @@ const useMyReviews = () => {
       });
   };
 
-  const toggleOrderDirection = () => {
-    if (orderDirection === OrderDirectionsEnum.DESC) {
-      setOrderDirection(OrderDirectionsEnum.ASC);
-    } else {
-      setOrderDirection(OrderDirectionsEnum.DESC);
-    }
-  };
-
-  useEffect(() => {
-    onSubmit();
-  }, [i18n.language, orderBy, orderDirection]);
-
-  const onSubmit = (fromStart = true) => {
-    formContext.handleSubmit((data) => {
-      setNoReviews(false);
-      setHasMore(true);
-      if (fromStart) {
-        setReviews([]);
-      }
-      const payload: IMyReviewsRequest = {
-        search: data.search,
-        statuses: (data.statuses || []).map((sId) => +sId),
-        dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
-        dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
-        itemsPerPage: placesService.MY_PLACES_ITEMS_PER_PAGE,
-        lastIndex: fromStart ? 0 : reviews.length,
-        orderBy: orderBy,
-        orderAsc: orderDirection === OrderDirectionsEnum.ASC,
-      };
-      reviewsService
-        .getMyReviews(i18n.language, payload)
-        .then((res) => {
-          const totalReviews = fromStart
-            ? res.data.data
-            : reviews.concat(res.data.data);
-          setNoReviews(totalReviews.length === 0);
-          setHasMore(res.data.hasMore);
-          setReviews(totalReviews);
-        })
-        .catch((reason) => {
-          setNoReviews(reviews.length === 0);
-          setHasMore(false);
-        });
-    })();
-  };
-
   return {
     formContext,
     onSubmit,
-    reviews,
-    hasMore,
-    orderBy,
-    setOrderBy,
-    orderDirection,
-    toggleOrderDirection,
-    noReviews,
     handleDelete,
+    items: paginator.items,
+    hasMore: paginator.hasMore,
+    orderBy: paginator.orderBy,
+    changeOrderBy: paginator.changeOrderBy,
+    orderDirection: paginator.orderDirection,
+    toggleOrderDirection: paginator.toggleOrderDirection,
+    noItems: paginator.noItems,
   };
 };
 

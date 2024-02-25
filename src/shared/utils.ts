@@ -56,6 +56,15 @@ const utils = {
     }
     return isEmpty(value);
   },
+
+  calculateCurrentScrollPage: (total: number, pageSize: number): number => {
+    const currentPage = Math.floor(total / pageSize);
+    return currentPage;
+  },
+
+  calculateTotalPages: (totalItems: number, pageSize: number): number => {
+    return Math.ceil(totalItems / pageSize);
+  },
 };
 
 export default utils;

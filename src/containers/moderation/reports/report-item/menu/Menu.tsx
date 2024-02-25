@@ -11,11 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 import { routerLinks } from "@/routing/routerLinks";
-import { CrmStatusesEnum } from "@/shared/interfaces";
 import { FormProvider, TextFieldElement } from "react-hook-form-mui";
 import { StyledButton } from "@/components/UI/button/StyledButton";
 import usePlaceRejection from "@/containers/moderation/reports/report-item/menu/usePlaceRejection";
 import useReportRejection from "@/containers/moderation/reports/report-item/menu/useReportRejection";
+import { CrmStatusesEnum } from "@/services/interfaces";
 
 interface IReportMenuProps {
   anchorEl: null | Element;

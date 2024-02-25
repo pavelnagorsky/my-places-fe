@@ -1,62 +1,58 @@
 import Map, { ILatLngCoordinate } from "../../components/map/Map";
 import { Circle, InfoWindow, Marker } from "@react-google-maps/api";
-import { Fragment, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import FormContainer from "@/containers/search-page/FormContainer";
 import PlaceCard from "@/components/place-card/PlaceCard";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import PlaceCardSkeleton from "@/components/place-card/PlaceCardSkeleton";
-import { useFormContext } from "react-hook-form-mui";
-import { ISearchForm } from "@/containers/search-page/WithSearch";
+import { FormProvider } from "react-hook-form-mui";
 import utils from "@/shared/utils";
 import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
-import { useAppSelector } from "@/store/hooks";
-import {
-  selectLoading,
-  selectPagination,
-  selectPlaces,
-} from "@/store/search-results-slice/search-results.slice";
 import { useTranslation } from "next-i18next";
 import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
 import PlaceCardMap from "@/components/place-card/PlaceCardMap";
 import SearchPagination from "@/containers/search-page/SearchPagination";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
+import usePlacesSearch from "@/containers/search-page/usePlacesSearch";
+import { IPaginationResponse } from "@/services/interfaces";
 
-function SearchPage() {
+function SearchPage({
+  ssrResults,
+}: {
+  ssrResults?: IPaginationResponse<ISearchPlace>;
+}) {
   const { t } = useTranslation("searchPage");
   // responsive design tools
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   // info about search request
-  const places = useAppSelector(selectPlaces);
-  const pagination = useAppSelector(selectPagination);
-  const loading = useAppSelector(selectLoading);
+  const logic = usePlacesSearch(ssrResults);
+  // selected place on map
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
-  //const polygons = usePolygons({ address: selectedPlace });
 
   const handleClickMarker = (placeId: number) => {
-    const place = places.find((p) => p.id === placeId);
+    const place = logic.items.find((p) => p.id === placeId);
     if (!place) return;
     // close and open again to prevent Google Maps bug of not displaying info window
     setSelectedPlace(null);
     setTimeout(() => setSelectedPlace(place), 100);
   };
 
-  const form = useFormContext<ISearchForm>();
-  const searchRadius = form.getValues("radius");
-  const searchCoordinates = form.watch("search");
-  const showMap = form.watch("showMap");
+  const searchRadius = logic.formContext.getValues("radius");
+  const searchCoordinates = logic.formContext.watch("search");
+  const showMap = logic.formContext.watch("showMap");
 
   const placesOnMap = useMemo(() => {
-    return places.map((p) => ({
+    return logic.items.map((p) => ({
       ...p.coordinates,
       id: p.id,
       title: p.title,
       typeIcon: (p.type.image2 || p.type.image) as string,
     }));
-  }, [places]);
+  }, [logic.items]);
 
   const mapCircle = useMemo(() => {
     if (!searchCoordinates) return;
@@ -92,7 +88,9 @@ function SearchPage() {
             wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
             bgColor={primaryBackground}
           >
-            <FormContainer />
+            <FormProvider {...logic.formContext}>
+              <FormContainer onSubmit={logic.onSubmit} />
+            </FormProvider>
           </WrappedContainer>
         </Box>
       </motion.div>
@@ -142,7 +140,6 @@ function SearchPage() {
                 <Marker
                   key={i}
                   position={res}
-                  //icon={res.typeIcon}
                   title={res.title}
                   label={{
                     text: res.title,
@@ -166,9 +163,9 @@ function SearchPage() {
             fontWeight={700}
             component={"h1"}
           >
-            {!loading && places.length === 0
+            {!logic.loading && logic.items.length === 0
               ? t("noResults")
-              : `${t("placesFound")}: ${pagination.totalResults || ""}`}
+              : `${t("placesFound")}: ${logic.totalItems || ""}`}
           </Typography>
           <Stack alignItems={"center"} justifyContent={"center"}>
             <Stack
@@ -183,18 +180,21 @@ function SearchPage() {
               rowGap={{ xs: "2em", md: "3em" }}
               columnGap={{ xs: "1em", sm: "2em", md: "2.5em", xl: "2.3em" }}
             >
-              {loading &&
+              {logic.loading &&
                 [1, 2, 3].map((place, index) => (
                   <PlaceCardSkeleton key={index} />
                 ))}
-              {places.map((place, index) => (
+              {logic.items.map((place, index) => (
                 <PlaceCard place={place} key={index} />
               ))}
             </Stack>
           </Stack>
           <SearchPagination
-            {...pagination}
-            currentResultsCount={places.length}
+            onChangeCurrentPage={logic.changeCurrentPage}
+            totalResults={logic.totalItems}
+            totalPages={logic.totalPages}
+            currentPage={logic.currentPage}
+            currentResultsCount={logic.items.length}
           />
         </motion.div>
       </WrappedContainer>

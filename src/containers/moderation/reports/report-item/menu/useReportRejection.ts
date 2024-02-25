@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppDispatch } from "@/store/hooks";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import reportsService from "@/services/reports-service/reports.service";
-import { CrmStatusesEnum } from "@/shared/interfaces";
+import { CrmStatusesEnum } from "@/services/interfaces";
 
 interface IUseReportRejectionProps {
   id: number;

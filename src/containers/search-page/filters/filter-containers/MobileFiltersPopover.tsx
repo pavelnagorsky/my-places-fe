@@ -16,7 +16,6 @@ import {
   TextFieldElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { ISearchForm } from "@/containers/search-page/WithSearch";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { memo } from "react";
 import LocationAutocomplete from "@/containers/search-page/filters/LocationAutocomplete";
@@ -27,6 +26,7 @@ import { Button } from "@/components/UI/button/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "next-i18next";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
+import { ISearchForm } from "@/containers/search-page/interfaces";
 
 interface IMoreFiltersPopoverProps {
   startText: string;

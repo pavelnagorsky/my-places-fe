@@ -22,9 +22,9 @@ import {
 import { Button } from "@/components/UI/button/Button";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
-import { ISearchForm } from "@/containers/search-page/WithSearch";
 import { useTranslation } from "next-i18next";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
+import { ISearchForm } from "@/containers/search-page/interfaces";
 
 interface IMoreFiltersPopoverProps {
   inputSx?: SxProps;

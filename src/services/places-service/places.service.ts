@@ -3,12 +3,9 @@ import { IPlaceSlug } from "@/services/places-service/interfaces/place-slug.inte
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import {
   IModerationPlacesRequest,
-  IModerationPlacesResponse,
   IMyFavouritesRequest,
   IMyPlacesRequest,
-  IMyPlacesResponse,
   ISearchPlacesRequest,
-  ISearchPlacesResponse,
 } from "@/services/places-service/interfaces/interfaces";
 import ISelectPlace from "@/services/places-service/interfaces/select-place.interface";
 import { ICreatePlace } from "@/services/places-service/interfaces/create-place.interface";
@@ -17,11 +14,14 @@ import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import { IEditPlace } from "@/services/places-service/interfaces/edit-place.interface";
 import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
 import { IFavourite } from "@/services/places-service/interfaces/favourite.interface";
-import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 import { IModeration } from "@/services/places-service/interfaces/moderation.interface";
+import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
+import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
+import { IPaginationResponse } from "@/services/interfaces";
+import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
 
 const placesService = {
-  ITEMS_PER_PAGE: 12,
+  SEARCH_PLACES_PER_PAGE: 12,
 
   getPlaceBySlug: (slug: string, lang: string) => {
     const langId = parseLanguageToId(lang);
@@ -40,9 +40,9 @@ const placesService = {
     );
   },
 
-  search: (payload: ISearchPlacesRequest) => {
-    const langId = parseLanguageToId(payload.language);
-    return axiosInstance.post<ISearchPlacesResponse>(
+  search: (language: string, payload: ISearchPlacesRequest) => {
+    const langId = parseLanguageToId(language);
+    return axiosInstance.post<IPaginationResponse<ISearchPlace>>(
       `/places/search?lang=${langId}`,
       payload
     );
@@ -68,7 +68,7 @@ const placesService = {
 
   getMyPlaces: (lang: string, payload: IMyPlacesRequest) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.post<IMyPlacesResponse>(
+    return axiosInstance.post<IPaginationResponse<IMyPlace>>(
       `/places/my-places?lang=${langId}`,
       payload
     );
@@ -112,7 +112,7 @@ const placesService = {
 
   getModerationPlaces: (lang: string, payload: IModerationPlacesRequest) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.post<IModerationPlacesResponse>(
+    return axiosInstance.post<IPaginationResponse<IModerationPlace>>(
       `/places/moderation-places?lang=${langId}`,
       payload
     );

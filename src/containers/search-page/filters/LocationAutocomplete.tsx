@@ -19,7 +19,7 @@ import { useCoordinatesByPlaceId } from "@/hooks/useCoordinatesByPlaceId";
 import SearchIcon from "@mui/icons-material/Search";
 import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import utils from "@/shared/utils";
-import { ISearchForm } from "@/containers/search-page/WithSearch";
+import { ISearchForm } from "@/containers/search-page/interfaces";
 
 interface MainTextMatchedSubstrings {
   offset: number;

@@ -12,8 +12,8 @@ import {
   TextFieldElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { ISearchForm } from "@/containers/search-page/WithSearch";
 import { useTranslation } from "next-i18next";
+import { ISearchForm } from "@/containers/search-page/interfaces";
 
 interface IRadiusFilterProps {
   searchByMeSx?: SxProps;
@@ -28,6 +28,7 @@ const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
 
   const onSearchByMe = (event: any, checked: boolean) => {
     if (!checked) {
+      setLoading(false);
       form.setValue("searchByMe", false);
       form.setValue("search", null);
       return;

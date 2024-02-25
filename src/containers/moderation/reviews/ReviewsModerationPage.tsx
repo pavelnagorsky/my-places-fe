@@ -42,7 +42,7 @@ const ReviewsModerationPage = () => {
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <Box my={{ xs: "1.5em", md: "2.5em" }}>
-              {logic.noReviews && (
+              {logic.noItems && (
                 <Typography
                   variant={"body1"}
                   fontWeight={600}
@@ -54,8 +54,8 @@ const ReviewsModerationPage = () => {
               <ReviewItemsTableHead
                 orderBy={logic.orderBy}
                 orderDirection={logic.orderDirection}
-                show={!logic.noReviews}
-                onChangeOrderBy={logic.setOrderBy}
+                show={!logic.noItems}
+                onChangeOrderBy={logic.changeOrderBy}
                 onChangeOrderDirection={logic.toggleOrderDirection}
               />
               <InfiniteScroll
@@ -63,13 +63,13 @@ const ReviewsModerationPage = () => {
                   padding: "1em 0.5em 0.5em 0.5em",
                   //overflowX: "hidden",
                 }}
-                dataLength={logic.reviews.length}
+                dataLength={logic.items.length}
                 next={() => logic.onSubmit(false)}
                 hasMore={logic.hasMore}
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.reviews.map((review, index) => (
+                  {logic.items.map((review, index) => (
                     <motion.div
                       key={review.id}
                       layout

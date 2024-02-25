@@ -1,6 +1,4 @@
 import { Box, Pagination, Stack, Typography } from "@mui/material";
-import { useAppDispatch } from "@/store/hooks";
-import { setCurrentPage } from "@/store/search-results-slice/search-results.slice";
 import { useMemo } from "react";
 import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
@@ -10,6 +8,7 @@ interface ISearchPaginationProps {
   totalResults: number;
   currentPage: number;
   totalPages: number;
+  onChangeCurrentPage: (page: number) => void;
 }
 
 const SearchPagination = ({
@@ -17,18 +16,14 @@ const SearchPagination = ({
   currentPage,
   totalResults,
   currentResultsCount,
+  onChangeCurrentPage,
 }: ISearchPaginationProps) => {
   const { t } = useTranslation("searchPage");
-  const dispatch = useAppDispatch();
   const firstAndLastVisibleResults = useMemo(() => {
-    const first = (currentPage - 1) * placesService.ITEMS_PER_PAGE + 1;
+    const first = currentPage * placesService.SEARCH_PLACES_PER_PAGE + 1;
     const last = first + currentResultsCount - 1;
     return { first, last };
   }, [currentPage, currentResultsCount]);
-
-  const handleChangePage = (page: number) => {
-    dispatch(setCurrentPage(page));
-  };
 
   return totalResults > 0 ? (
     <Stack direction={"row"} justifyContent={"center"} mt={"3em"} mb={"6em"}>
@@ -37,13 +32,19 @@ const SearchPagination = ({
           sx={{
             borderColor: "black",
           }}
-          page={currentPage}
+          page={currentPage + 1}
           count={totalPages}
           color="primary"
           variant="outlined"
           shape="rounded"
           onChange={(event, page) => {
-            handleChangePage(page);
+            if (page - 1 !== currentPage) {
+              onChangeCurrentPage(page - 1);
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }
           }}
         />
         <Typography variant={"body1"} mt={"1em"} fontWeight={500}>

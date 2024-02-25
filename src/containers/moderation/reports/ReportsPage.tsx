@@ -40,7 +40,7 @@ const ReportsPage = () => {
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <Box my={{ xs: "1.5em", md: "2.5em" }}>
-              {logic.noReports && (
+              {logic.noItems && (
                 <Typography
                   variant={"body1"}
                   fontWeight={600}
@@ -52,8 +52,8 @@ const ReportsPage = () => {
               <ReportItemsTableHead
                 orderBy={logic.orderBy}
                 orderDirection={logic.orderDirection}
-                show={!logic.noReports}
-                onChangeOrderBy={logic.setOrderBy}
+                show={!logic.noItems}
+                onChangeOrderBy={logic.changeOrderBy}
                 onChangeOrderDirection={logic.toggleOrderDirection}
               />
               <InfiniteScroll
@@ -61,19 +61,18 @@ const ReportsPage = () => {
                   padding: "1em 0.5em 0.5em 0.5em",
                   //overflowX: "hidden",
                 }}
-                dataLength={logic.reports.length}
+                dataLength={logic.items.length}
                 next={() => logic.onSubmit(false)}
                 hasMore={logic.hasMore}
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.reports.map((report, index) => (
+                  {logic.items.map((report, index) => (
                     <motion.div
                       key={report.id}
                       layout
                       exit={{
                         opacity: 0,
-                        //y: -10,
                       }}
                       transition={{ duration: 0.6, type: "spring" }}
                     >

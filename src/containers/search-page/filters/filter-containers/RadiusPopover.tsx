@@ -15,9 +15,9 @@ import { useFormContext } from "react-hook-form-mui";
 import { Button } from "@/components/UI/button/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
-import { ISearchForm } from "@/containers/search-page/WithSearch";
 import RadiusFilter from "@/containers/search-page/filters/RadiusFilter";
 import { useTranslation } from "next-i18next";
+import { ISearchForm } from "@/containers/search-page/interfaces";
 
 interface IRadiusSelectProps {
   inputSx?: SxProps;
