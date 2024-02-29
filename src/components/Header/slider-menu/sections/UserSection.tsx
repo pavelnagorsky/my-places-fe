@@ -69,7 +69,7 @@ const UserSection = ({
         pathname={pathname}
         onClick={onClose}
         text={"Администрация"}
-        href={routerLinks.administrationPlaceCategories}
+        href={routerLinks.administrationUsers}
         icon={<AdminPanelSettingsIcon fontSize={"small"} color={"secondary"} />}
       />
       <Divider

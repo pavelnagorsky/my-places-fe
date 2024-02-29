@@ -10,7 +10,15 @@ import {
   Typography,
 } from "@mui/material";
 import parse from "autosuggest-highlight/parse";
-import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  memo,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { defaultCountrySign } from "../../../components/map/Map";
 import { useGoogleAutocompleteService } from "@/hooks/useGoogleAutocompleteService";
@@ -45,6 +53,7 @@ function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
   const formInput = form.watch("locationTitle");
   const inputValue = form.watch("locationInputValue");
   const setInputValue = (v: string) => form.setValue("locationInputValue", v);
+  const menuRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     setInputValue(formInput);
@@ -53,6 +62,14 @@ function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     setSelected(false);
+  };
+
+  const onArrowDownPressed = (e: KeyboardEvent) => {
+    if (e.key !== "ArrowDown") return;
+    if (menuRef.current) {
+      const firstLi = menuRef.current.children.item(0) as HTMLLIElement | null;
+      if (firstLi) firstLi.focus();
+    }
   };
 
   const onSelect = (option: PlaceType) => {
@@ -150,10 +167,13 @@ function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
         id="google-map-autocomplete"
         value={inputValue}
         onChange={onInputChange}
+        onKeyDown={onArrowDownPressed}
       />
       <MenuList
         id={"place-predictions"}
         role="listbox"
+        ref={menuRef}
+        aria-expanded={inputValue.length > 0}
         aria-label="Autocomplete suggestions"
       >
         {options.map((option, index) => {

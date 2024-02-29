@@ -9,6 +9,7 @@ import { IReportsFormContext } from "@/containers/moderation/reports/interfaces"
 import useScrollPagination from "@/hooks/useScrollPagination";
 import reportsService from "@/services/reports-service/reports.service";
 import { IPaginationRequest } from "@/services/interfaces";
+import utils from "@/shared/utils";
 
 const useReports = () => {
   const formContext = useForm<IReportsFormContext>({
@@ -26,8 +27,10 @@ const useReports = () => {
       const payload: IGetReportsRequest = {
         search: data.search,
         statuses: data.statuses.map((s) => +s),
-        dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
-        dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
+        dateFrom: data.dateFrom
+          ? utils.parseFilterDate(data.dateFrom, true)
+          : null,
+        dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
         ...pagination,
       };
       return reportsService.getReports(payload);

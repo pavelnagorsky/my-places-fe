@@ -65,6 +65,24 @@ const utils = {
   calculateTotalPages: (totalItems: number, pageSize: number): number => {
     return Math.ceil(totalItems / pageSize);
   },
+
+  // function to parse filter dates with correct start / end time
+  parseFilterDate: (
+    date: string | Date | null | undefined,
+    startRange: boolean
+  ): string | undefined => {
+    if (!date) return undefined;
+    if (typeof date === "string") {
+      date = new Date(date);
+    }
+    const month = date.getMonth() + 1;
+    const monthStr = month > 9 ? `${month}` : `0${month}`;
+    const day = date.getDate();
+    const dayStr = day > 9 ? `${day}` : `0${day}`;
+    const timeStr = startRange ? "00:00:00" : "23:59:00";
+    const str = `${date.getFullYear()}-${monthStr}-${dayStr}T${timeStr}`;
+    return str;
+  },
 };
 
 export default utils;

@@ -12,6 +12,7 @@ import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";
+import utils from "@/shared/utils";
 
 const useMyPlaces = () => {
   const { i18n } = useTranslation();
@@ -32,8 +33,10 @@ const useMyPlaces = () => {
       const payload: IMyPlacesRequest = {
         search: data.search,
         statuses: (data.statuses || []).map((sId) => +sId),
-        dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
-        dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
+        dateFrom: data.dateFrom
+          ? utils.parseFilterDate(data.dateFrom, true)
+          : null,
+        dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
         ...pagination,
       };
       return placesService.getMyPlaces(i18n.language, payload);

@@ -10,6 +10,7 @@ import { IModerationPlacesFormContext } from "@/containers/moderation/places/int
 import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";
+import utils from "@/shared/utils";
 
 const useModerationPlaces = () => {
   const { i18n } = useTranslation();
@@ -29,8 +30,10 @@ const useModerationPlaces = () => {
       const payload: IModerationPlacesRequest = {
         search: data.search,
         authorEmail: data.authorEmail,
-        dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
-        dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
+        dateFrom: data.dateFrom
+          ? utils.parseFilterDate(data.dateFrom, true)
+          : null,
+        dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
         ...pagination,
       };
       return placesService.getModerationPlaces(i18n.language, payload);

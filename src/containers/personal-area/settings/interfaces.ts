@@ -1,4 +1,4 @@
-import { IUpdateUser } from "@/services/user-service/update-user.interface";
+import { IUpdateUser } from "@/services/user-service/interfaces/update-user.interface";
 
 export interface IUpdateUserFormContext
   extends Omit<IUpdateUser, "preferredLanguageId"> {

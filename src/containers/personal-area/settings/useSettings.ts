@@ -61,7 +61,7 @@ const useSettings = () => {
       if (loading || !userData?.id) return;
       setLoading(true);
       userService
-        .updateUser(userData.id, {
+        .updateUser({
           ...data,
           preferredLanguageId:
             typeof data.preferredLanguageId === "number"

@@ -12,6 +12,7 @@ import { IMyReviewsFormContext } from "@/containers/personal-area/my-reviews/int
 import reviewsService from "@/services/reviews-service/reviews.service";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";
+import utils from "@/shared/utils";
 
 const useMyReviews = () => {
   const dispatch = useAppDispatch();
@@ -32,8 +33,10 @@ const useMyReviews = () => {
       const payload: IMyReviewsRequest = {
         search: data.search,
         statuses: (data.statuses || []).map((sId) => +sId),
-        dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
-        dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
+        dateFrom: data.dateFrom
+          ? utils.parseFilterDate(data.dateFrom, true)
+          : null,
+        dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
         ...pagination,
       };
       return reviewsService.getMyReviews(i18n.language, payload);

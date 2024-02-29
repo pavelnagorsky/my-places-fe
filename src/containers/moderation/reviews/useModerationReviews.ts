@@ -10,6 +10,7 @@ import reviewsService from "@/services/reviews-service/reviews.service";
 import { IModerationReview } from "@/services/reviews-service/interfaces/moderation-review.interface";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";
+import utils from "@/shared/utils";
 
 const useModerationReviews = () => {
   const { i18n } = useTranslation();
@@ -29,8 +30,10 @@ const useModerationReviews = () => {
       const payload: IModerationReviewsRequest = {
         search: data.search,
         authorEmail: data.authorEmail,
-        dateFrom: data.dateFrom ? new Date(data.dateFrom).toISOString() : null,
-        dateTo: data.dateTo ? new Date(data.dateTo).toISOString() : null,
+        dateFrom: data.dateFrom
+          ? utils.parseFilterDate(data.dateFrom, true)
+          : null,
+        dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
         ...pagination,
       };
       return reviewsService.getModerationReviews(i18n.language, payload);

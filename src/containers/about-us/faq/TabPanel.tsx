@@ -40,6 +40,9 @@ const TabPanel = (props: TabPanelProps) => {
                 borderBottom: "1px solid rgb(255, 217, 182)",
                 "&::before": { background: "unset" },
                 py: "0.5em",
+                "& br": {
+                  mb: "0.5em",
+                },
               }}
               key={i}
               expanded={expanded === `panel-${i}`}
@@ -50,7 +53,7 @@ const TabPanel = (props: TabPanelProps) => {
                   "& .MuiPaper-root": { boxShadow: "none" },
                   "& .MuiAccordionSummary-content": {
                     fontWeight: 600,
-                    fontSize: { xs: "20px", md: "30px" },
+                    fontSize: { xs: "20px", md: "25px" },
                   },
                 }}
                 expandIcon={<ExpandCircleDownOutlinedIcon color={"primary"} />}

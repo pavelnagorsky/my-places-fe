@@ -13,6 +13,7 @@ export const routerLinks = {
   termsOfUse: "/terms-of-use",
   administrationPlaceCategories: "/administration/place-categories",
   administrationPlaceTypes: "/administration/place-types",
+  administrationUsers: "/administration/users",
   personalAreaPlaces: "/personal-area/my-places",
   personalAreaReviews: "/personal-area/my-reviews",
   personalAreaSettings: "/personal-area/settings",

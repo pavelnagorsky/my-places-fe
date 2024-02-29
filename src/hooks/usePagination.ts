@@ -16,6 +16,7 @@ interface IUsePaginationProps<ItemType, OrderByType> {
   pageSize: number;
   defaultItems?: ItemType[];
   defaultTotalItems?: number;
+  keepItems?: boolean;
 }
 
 const usePagination = <ItemType = any, OrderByType = number>({
@@ -25,6 +26,7 @@ const usePagination = <ItemType = any, OrderByType = number>({
   pageSize,
   defaultItems,
   defaultTotalItems,
+  keepItems,
 }: IUsePaginationProps<ItemType, OrderByType>) => {
   const [loading, setLoading] = useState(
     !(!!defaultItems && defaultItems.length > 0)
@@ -58,7 +60,7 @@ const usePagination = <ItemType = any, OrderByType = number>({
 
   const fetch = (page = 0) => {
     setLoading(true);
-    setItems([]);
+    if (!keepItems) setItems([]);
     apiCall({
       pageSize: pageSize,
       page: page,
@@ -73,6 +75,7 @@ const usePagination = <ItemType = any, OrderByType = number>({
       })
       .catch((reason) => {
         setLoading(false);
+        setItems([]);
       });
   };
 
