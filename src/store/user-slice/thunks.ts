@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  ILoginError,
   ILoginRequest,
   ISignupRequest,
   LoginErrorEnum,
@@ -56,7 +57,7 @@ export const loginThunk = createAsyncThunk(
     } catch (e: any) {
       // parse reason (invalid data | email not confirmed)
       return thunkAPI.rejectWithValue(
-        (e?.response?.data?.loginError as LoginErrorEnum) || null
+        (e?.response?.data as ILoginError) || null
       );
     }
   }

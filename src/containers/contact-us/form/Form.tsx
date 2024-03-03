@@ -101,7 +101,12 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
           >
             Телефон
           </Typography>
-          <PhoneInput fillWidth fieldName={"phone"} disableValidation />
+          <PhoneInput
+            id={"phone"}
+            fillWidth
+            fieldName={"phone"}
+            disableValidation
+          />
         </Box>
         <Box>
           <Typography

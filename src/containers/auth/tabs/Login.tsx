@@ -28,6 +28,7 @@ import {
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { format } from "date-fns";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -65,7 +66,7 @@ const Login = () => {
 
   useEffect(() => {
     if (!error) return;
-    if (error === LoginErrorEnum.EMAIL_NOT_CONFIRMED) {
+    if (error?.loginError === LoginErrorEnum.EMAIL_NOT_CONFIRMED) {
       form.setError(
         "email",
         {
@@ -73,15 +74,27 @@ const Login = () => {
         },
         { shouldFocus: true }
       );
-    } else {
+    }
+    if (error?.loginError === LoginErrorEnum.USER_BLOCKED) {
       form.setError(
         "email",
         {
-          message: "Введены неверная почта или пароль",
+          message: `Пользователь заблокирован до ${
+            error?.blockedUntil
+              ? format(new Date(error.blockedUntil), "dd MM yyyy")
+              : "∞"
+          }`,
         },
         { shouldFocus: true }
       );
     }
+    form.setError(
+      "email",
+      {
+        message: "Введены неверная почта или пароль",
+      },
+      { shouldFocus: true }
+    );
   }, [error]);
 
   return (

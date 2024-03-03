@@ -83,6 +83,11 @@ const utils = {
     const str = `${date.getFullYear()}-${monthStr}-${dayStr}T${timeStr}`;
     return str;
   },
+
+  sanitizePhoneNumber: (phone: string) => {
+    // remove all spaces
+    return phone.replace(/\s/g, "");
+  },
 };
 
 export default utils;

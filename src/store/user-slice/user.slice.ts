@@ -1,7 +1,10 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import { IUser } from "@/services/user-service/interfaces/user.interface";
-import { LoginErrorEnum } from "@/services/auth-service/interfaces";
+import {
+  ILoginError,
+  LoginErrorEnum,
+} from "@/services/auth-service/interfaces";
 import {
   getUserDataThunk,
   loginThunk,
@@ -17,7 +20,7 @@ export enum ActiveAuthScreenEnum {
 interface IUserState {
   loading: boolean;
   loginRedirect: string | null;
-  error: boolean | LoginErrorEnum;
+  error: false | ILoginError;
   open: boolean;
   activeScreen: ActiveAuthScreenEnum;
   userData: IUser | null;
@@ -83,9 +86,11 @@ export const userSlice = createSlice({
       state.loading = false;
       state.loginRedirect = null;
       if (action.payload) {
-        state.error = action.payload as LoginErrorEnum;
+        state.error = action.payload as ILoginError;
       } else {
-        state.error = true;
+        state.error = {
+          message: "Error",
+        };
       }
     });
     builder.addCase(signupThunk.pending, (state, action) => {
@@ -98,7 +103,9 @@ export const userSlice = createSlice({
     });
     builder.addCase(signupThunk.rejected, (state, action) => {
       state.loading = false;
-      state.error = true;
+      state.error = {
+        message: "Error",
+      };
     });
     builder.addCase(logoutThunk.fulfilled, (state, action) => {
       state.userData = null;

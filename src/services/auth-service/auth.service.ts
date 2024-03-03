@@ -15,6 +15,17 @@ const authService = {
   logout: () => {
     return axiosInstance.post("/auth/logout", {}, { withCredentials: true });
   },
+  confirmEmail: (token: string) => {
+    return axiosInstance.post(
+      "/auth/confirm-email",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  },
 };
 
 export default authService;

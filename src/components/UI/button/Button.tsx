@@ -9,6 +9,7 @@ interface IButtonProps {
 export function Button(props: PropsWithChildren & ButtonProps & IButtonProps) {
   return (
     <Btn
+      startIcon={props.startIcon}
       variant={props.variant ?? "outlined"}
       color={props.color}
       fullWidth={props.fullWidth}

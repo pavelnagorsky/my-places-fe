@@ -8,12 +8,14 @@ interface IPhoneInputProps {
   disableValidation?: boolean;
   sx?: SxProps;
   fillWidth?: boolean;
+  id?: string;
 }
 const PhoneInput = ({
   fieldName,
   disableValidation,
   sx,
   fillWidth,
+  id,
 }: IPhoneInputProps) => {
   const { t, i18n } = useTranslation();
   return (
@@ -22,6 +24,7 @@ const PhoneInput = ({
       rules={disableValidation ? undefined : { validate: matchIsValidTel }}
       render={({ field, fieldState }) => (
         <MuiTelInput
+          InputProps={{ id }}
           dir={"ltr"}
           onChange={field.onChange}
           inputRef={field.ref}

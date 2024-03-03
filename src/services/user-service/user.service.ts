@@ -5,6 +5,8 @@ import { IUsersRequest } from "@/services/user-service/interfaces/interfaces";
 import { IPaginationResponse } from "@/services/interfaces";
 import { IUserShortInfo } from "@/services/user-service/interfaces/user-short-info.interface";
 import { IModerator } from "@/services/user-service/interfaces/moderator.interface";
+import { ISaveModerator } from "@/services/user-service/interfaces/save-moderator.interface";
+import { IBlockUser } from "@/services/user-service/interfaces/block-user.interface";
 
 const userService = {
   getUserData: () => {
@@ -28,6 +30,22 @@ const userService = {
 
   getModeratorDataForAdmin: (id: number | string) => {
     return axiosInstance.get<IModerator>(`/users/${id}/moderator`);
+  },
+
+  saveModerator: (id: number | string, payload: ISaveModerator) => {
+    return axiosInstance.put(`/users/${id}/moderator`, payload);
+  },
+
+  deleteModerator: (id: number | string) => {
+    return axiosInstance.delete(`/users/${id}/moderator`);
+  },
+
+  blockUser: (id: string | number, payload: IBlockUser) => {
+    return axiosInstance.post(`/users/${id}/block`, payload);
+  },
+
+  unblockUser: (id: string | number) => {
+    return axiosInstance.post(`/users/${id}/unblock`, {});
   },
 };
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import contactService from "@/services/contact-service/contact.service";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
+import utils from "@/shared/utils";
 
 const useContactUs = () => {
   const [loading, setLoading] = useState(false);
@@ -58,6 +59,7 @@ const useContactUs = () => {
       if (loading) return;
       setLoading(true);
       data.userType = +data.userType;
+      data.phone = utils.sanitizePhoneNumber(data.phone);
       contactService
         .create(data)
         .then(() => {

@@ -8,8 +8,12 @@ import {
   IBlockUserForm,
   IModeratorForm,
 } from "@/containers/admin/users/user/interfaces";
+import utils from "@/shared/utils";
+import { useAppDispatch } from "@/store/hooks";
+import { showAlert } from "@/store/alerts-slice/alerts.slice";
 
-const useUser = (id: number) => {
+const useUser = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const query = router.query as { id: string };
 
@@ -18,6 +22,7 @@ const useUser = (id: number) => {
 
   const [blockLoading, setBlockLoading] = useState(false);
   const [moderatorLoading, setModeratorLoading] = useState(false);
+  const [moderatorDeleteLoading, setModeratorDeleteLoading] = useState(false);
 
   const blockForm = useForm<IBlockUserForm>({
     defaultValues: {
@@ -35,34 +40,10 @@ const useUser = (id: number) => {
     mode: "onChange",
   });
 
-  const handleBlockUser = useCallback(() => {
-    blockForm.handleSubmit((data) => {
-      console.log(data);
-      // if (blockLoading) return
-      // setBlockLoading(true)
-    })();
-  }, [blockLoading]);
-
-  const handleUnblockUser = useCallback(() => {
-    console.log("unblock");
-  }, []);
-
-  const handleSaveModerator = useCallback(() => {
-    moderatorForm.handleSubmit((data) => {
-      console.log(data);
-      // if (moderatorLoading) return
-      // setModeratorLoading(true)
-    })();
-  }, [moderatorLoading]);
-
-  const handleRemoveModerator = useCallback(() => {
-    console.log("remove moderator");
-  }, []);
-
-  useEffect(() => {
+  const fetch = () => {
     // get user
     userService
-      .getUserDataForAdmin(id)
+      .getUserDataForAdmin(query.id)
       .then(({ data }) => {
         setUser(data);
       })
@@ -71,13 +52,191 @@ const useUser = (id: number) => {
       });
     // get moderator
     userService
-      .getModeratorDataForAdmin(id)
+      .getModeratorDataForAdmin(query.id)
       .then(({ data }) => {
         setModerator(data);
+        moderatorForm.reset({
+          phone: data.phone,
+          address: data.address,
+        });
       })
       .catch(() => {
         setModerator(null);
+        moderatorForm.reset({
+          phone: "",
+          address: "",
+        });
       });
+  };
+
+  const handleBlockUser = useCallback(
+    (onSuccess: () => void) => {
+      blockForm.handleSubmit((data) => {
+        if (blockLoading) return;
+        onSuccess();
+        setBlockLoading(true);
+        userService
+          .blockUser(query.id, {
+            blockEnd: new Date(data.blockEndDate).toISOString(),
+            reason: data.reason,
+          })
+          .then(() => {
+            setBlockLoading(false);
+            dispatch(
+              showAlert({
+                alertProps: {
+                  title: "Успех!",
+                  description: "Пользователь успешно заблокирован",
+                  variant: "standard",
+                  severity: "success",
+                },
+                snackbarProps: {
+                  autoHideDuration: 3000,
+                },
+              })
+            );
+            fetch();
+          })
+          .catch(() => {
+            setBlockLoading(false);
+            dispatch(
+              showAlert({
+                alertProps: {
+                  title: "Ошибка!",
+                  description: "Ошибка при блокировке пользователя.",
+                  variant: "standard",
+                  severity: "error",
+                },
+                snackbarProps: {},
+              })
+            );
+          });
+      })();
+    },
+    [blockLoading]
+  );
+
+  const handleUnblockUser = useCallback(() => {
+    if (blockLoading) return;
+    setBlockLoading(true);
+    userService
+      .unblockUser(query.id)
+      .then(() => {
+        setBlockLoading(false);
+        dispatch(
+          showAlert({
+            alertProps: {
+              title: "Успех!",
+              description: "Пользователь успешно разблокирован",
+              variant: "standard",
+              severity: "success",
+            },
+            snackbarProps: {
+              autoHideDuration: 3000,
+            },
+          })
+        );
+        fetch();
+      })
+      .catch(() => {
+        setBlockLoading(false);
+        dispatch(
+          showAlert({
+            alertProps: {
+              title: "Ошибка!",
+              description: "Ошибка при разблокировке пользователя.",
+              variant: "standard",
+              severity: "error",
+            },
+            snackbarProps: {},
+          })
+        );
+      });
+  }, [blockLoading]);
+
+  const handleSaveModerator = useCallback(() => {
+    moderatorForm.handleSubmit((data) => {
+      if (moderatorLoading) return;
+      setModeratorLoading(true);
+      userService
+        .saveModerator(query.id, {
+          phone: utils.sanitizePhoneNumber(data.phone),
+          address: data.address,
+        })
+        .then(() => {
+          fetch();
+          setModeratorLoading(false);
+          dispatch(
+            showAlert({
+              alertProps: {
+                title: "Успех!",
+                description: "Данные модератора были успешно сохранены",
+                variant: "standard",
+                severity: "success",
+              },
+              snackbarProps: {
+                autoHideDuration: 3000,
+              },
+            })
+          );
+        })
+        .catch(() => {
+          setModeratorLoading(false);
+          dispatch(
+            showAlert({
+              alertProps: {
+                title: "Ошибка!",
+                description: "Ошибка при сохранении модератора.",
+                variant: "standard",
+                severity: "error",
+              },
+              snackbarProps: {},
+            })
+          );
+        });
+    })();
+  }, [moderatorLoading]);
+
+  const handleRemoveModerator = useCallback(() => {
+    if (moderatorDeleteLoading) return;
+    setModeratorDeleteLoading(true);
+    userService
+      .deleteModerator(query.id)
+      .then(() => {
+        fetch();
+        setModeratorDeleteLoading(false);
+        dispatch(
+          showAlert({
+            alertProps: {
+              title: "Успех!",
+              description: "Доступ модератора был успешно удален",
+              variant: "standard",
+              severity: "success",
+            },
+            snackbarProps: {
+              autoHideDuration: 3000,
+            },
+          })
+        );
+      })
+      .catch(() => {
+        setModeratorDeleteLoading(false);
+        dispatch(
+          showAlert({
+            alertProps: {
+              title: "Ошибка!",
+              description: "Ошибка при удалении доступа модератора.",
+              variant: "standard",
+              severity: "error",
+            },
+            snackbarProps: {},
+          })
+        );
+      });
+  }, [moderatorDeleteLoading]);
+
+  useEffect(() => {
+    fetch();
   }, [query.id]);
 
   return {
@@ -91,6 +250,7 @@ const useUser = (id: number) => {
     handleRemoveModerator,
     moderatorLoading,
     blockLoading,
+    moderatorDeleteLoading,
   };
 };
 
