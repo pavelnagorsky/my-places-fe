@@ -16,7 +16,7 @@ const PlaceCategoriesHeader = ({ onSearch }: ICMSHeaderProps) => {
       justifyContent={"space-between"}
       bgcolor={primaryBackground}
       px={{ xs: "1em", lg: "2em" }}
-      py={"2em"}
+      py={"1em"}
     >
       <Typography
         component={motion.span}

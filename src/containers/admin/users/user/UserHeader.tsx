@@ -25,6 +25,9 @@ import {
 } from "react-hook-form-mui";
 import { IBlockUserForm } from "@/containers/admin/users/user/interfaces";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
+import { useRouter } from "next/router";
+import { useAppSelector } from "@/store/hooks";
+import { selectUserId } from "@/store/user-slice/user.slice";
 
 interface IUserHeaderProps {
   user: IUserShortInfo;
@@ -41,6 +44,11 @@ const UserHeader = ({
   handleUnblock,
   formContext,
 }: IUserHeaderProps) => {
+  const router = useRouter();
+  const query = router.query as { id: string };
+  const myUserId = useAppSelector(selectUserId);
+  const canBlock = +query.id !== myUserId;
+
   const blockPopover = usePopover("block-form");
   const onClosePopover = () => {
     blockPopover.handleClose();
@@ -56,7 +64,7 @@ const UserHeader = ({
       justifyContent={"space-between"}
       bgcolor={primaryBackground}
       px={{ xs: "1em", lg: "2em" }}
-      py={"2em"}
+      py={"1em"}
     >
       <Stack alignItems={{ xs: "center", sm: "start" }} width={"100%"}>
         <motion.div
@@ -162,7 +170,8 @@ const UserHeader = ({
                 }}
                 variant="outlined"
                 color="error"
-                onClick={blockPopover.handleOpen}
+                disabled={!canBlock}
+                onClick={canBlock ? blockPopover.handleOpen : () => {}}
                 startIcon={
                   loading ? (
                     <CircularProgress color={"inherit"} size={20} />

@@ -1,7 +1,4 @@
-export enum UserTypesEnum {
-  PRIVATE = 1,
-  COMPANY = 2,
-}
+import { UserTypesEnum } from "@/services/contact-service/interfaces/interfaces";
 
 export interface ICreateFeedbackRequest {
   fullName: string;

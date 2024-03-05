@@ -1,4 +1,4 @@
-import { UserTypesEnum } from "@/services/contact-service/interfaces";
+import { UserTypesEnum } from "@/services/contact-service/interfaces/interfaces";
 
 const useUserTypes = () => {
   return [

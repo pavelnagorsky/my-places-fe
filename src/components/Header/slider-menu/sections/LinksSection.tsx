@@ -21,21 +21,19 @@ const LinksSection = ({
 
   const desktopLinks = (
     <Fragment>
-      {/*<SliderMenuLink*/}
-      {/*  pathname={pathname}*/}
-      {/*  onClick={onClose}*/}
-      {/*  text={"О проекте"}*/}
-      {/*  href={routerLinks.aboutUs}*/}
-      {/*  icon={*/}
-      {/*    <CollectionsOutlinedIcon fontSize={"small"} color={"secondary"} />*/}
-      {/*  }*/}
-      {/*/>*/}
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}
         text={"Обратная связь"}
         href={routerLinks.contactUs}
         icon={<ForumOutlinedIcon fontSize={"small"} color={"secondary"} />}
+      />
+      <SliderMenuLink
+        pathname={pathname}
+        onClick={onClose}
+        text={"О проекте"}
+        href={routerLinks.aboutUs}
+        icon={<HomeIcon fontSize={"small"} color={"secondary"} />}
       />
     </Fragment>
   );
@@ -62,13 +60,6 @@ const LinksSection = ({
         text={"Создать место"}
         href={routerLinks.createPlace}
         icon={<AddBoxIcon fontSize={"small"} color={"secondary"} />}
-      />
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={"О проекте"}
-        href={routerLinks.aboutUs}
-        icon={<HomeIcon fontSize={"small"} color={"secondary"} />}
       />
       {desktopLinks}
     </Fragment>

@@ -60,6 +60,8 @@ const UserSettingsPage = () => {
                   fullWidth
                   placeholder={"Ваше имя..."}
                   parseError={(error) => {
+                    if (error.type === "pattern")
+                      return "Поле не должно содержать пробелов";
                     return error.type === "maxLength"
                       ? "Превышена максимальная длина строки"
                       : "Это поле обязательно к заполнению";
@@ -80,6 +82,8 @@ const UserSettingsPage = () => {
                   fullWidth
                   placeholder={"Ваша фамилия..."}
                   parseError={(error) => {
+                    if (error.type === "pattern")
+                      return "Поле не должно содержать пробелов";
                     return error.type === "maxLength"
                       ? "Превышена максимальная длина строки"
                       : "Это поле обязательно к заполнению";

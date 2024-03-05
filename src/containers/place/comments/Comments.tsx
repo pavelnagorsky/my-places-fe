@@ -14,7 +14,7 @@ import useComments from "@/containers/place/comments/useComments";
 import Comment from "@/containers/place/comments/Comment";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { openAuth, selectIsAuth } from "@/store/user-slice/user.slice";
+import { openAuth, selectUserId } from "@/store/user-slice/user.slice";
 import { AnimatePresence, motion } from "framer-motion";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/roles.enum";
@@ -22,7 +22,7 @@ import RolesEnum from "@/services/auth-service/roles.enum";
 const Comments = ({ placeId }: { placeId: number }) => {
   const commentsData = useComments(placeId);
   const dateFnsLocale = useDateFnsLocale();
-  const isAuth = useAppSelector(selectIsAuth);
+  const userId = useAppSelector(selectUserId);
   const dispatch = useAppDispatch();
   const hasModerationAccess = useRoleAccess([
     RolesEnum.ADMIN,
@@ -33,7 +33,7 @@ const Comments = ({ placeId }: { placeId: number }) => {
     dispatch(openAuth({}));
   };
 
-  const sendButton = isAuth ? (
+  const sendButton = userId ? (
     <IconButton
       disabled={!commentsData.canSendComment}
       type={"submit"}
@@ -136,7 +136,7 @@ const Comments = ({ placeId }: { placeId: number }) => {
             >
               <Comment
                 isModerator={hasModerationAccess}
-                isAuth={isAuth}
+                userId={userId}
                 onUpdate={commentsData.onClickUpdateComment}
                 onDelete={commentsData.onDeleteComment}
                 locale={dateFnsLocale}

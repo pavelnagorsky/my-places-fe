@@ -16,6 +16,7 @@ interface IUsePaginationProps<ItemType, OrderByType> {
   pageSize: number;
   defaultItems?: ItemType[];
   defaultTotalItems?: number;
+  // do not set items to 0 when page changes. DEFAULT = false
   keepItems?: boolean;
 }
 

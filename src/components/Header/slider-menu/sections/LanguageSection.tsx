@@ -1,7 +1,7 @@
 import LanguageIcon from "@mui/icons-material/Language";
 import { MenuItem, Select, SelectChangeEvent, Stack } from "@mui/material";
 import { useRouter } from "next/router";
-import I18nLanguages from "@/shared/I18nLanguages";
+import useLanguages from "@/hooks/useLanguages";
 
 interface ILanguageSectionProps {
   onClose: () => void;
@@ -9,6 +9,7 @@ interface ILanguageSectionProps {
 
 const LanguageSection = ({ onClose }: ILanguageSectionProps) => {
   const router = useRouter();
+  const languages = useLanguages();
 
   const handleChangeLanguage = (event: SelectChangeEvent<string>) => {
     onClose();
@@ -39,9 +40,11 @@ const LanguageSection = ({ onClose }: ILanguageSectionProps) => {
         value={router.locale}
         onChange={handleChangeLanguage}
       >
-        <MenuItem value={I18nLanguages.ru}>Русский</MenuItem>
-        <MenuItem value={I18nLanguages.be}>Беларускi</MenuItem>
-        <MenuItem value={I18nLanguages.en}>English</MenuItem>
+        {languages.map((l) => (
+          <MenuItem key={l.locale} value={l.locale}>
+            {l.label}
+          </MenuItem>
+        ))}
       </Select>
     </Stack>
   );

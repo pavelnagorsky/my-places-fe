@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import {
+  Box,
   Stack,
   Table,
   TableBody,
@@ -11,20 +12,22 @@ import {
 import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { IUserShortInfo } from "@/services/user-service/interfaces/user-short-info.interface";
-import useUsers from "@/containers/admin/users/useUsers";
-import UsersTableHead from "@/containers/admin/users/Table/UsersTableHead";
 import { format } from "date-fns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
-import useRolesOptions from "@/hooks/useRolesOptions";
-import UsersHeader from "@/containers/admin/users/Table/UsersHeader";
 import { FormProvider } from "react-hook-form-mui";
+import useFeedbackList from "@/containers/admin/feedback-list/useFeedbackList";
+import useCrmStatuses from "@/hooks/useCrmStatuses";
+import { IFeedback } from "@/services/contact-service/interfaces/feedback.interface";
+import FeedbackHeader from "@/containers/admin/feedback-list/Table/FeedbackHeader";
+import FeedbackTableHead from "@/containers/admin/feedback-list/Table/FeedbackTableHead";
+import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
 
-const PlaceTypesTable = () => {
+const FeedbackTable = () => {
   const { i18n } = useTranslation();
   const router = useRouter();
   const locale = useDateFnsLocale();
-  const roles = useRolesOptions();
+  const { statuses, parseStatusColor } = useCrmStatuses();
+  const userRequestTypes = useUserTypes();
 
   const {
     items,
@@ -36,10 +39,10 @@ const PlaceTypesTable = () => {
     loading,
     onSubmit,
     changeCurrentPage,
-  } = useUsers();
+  } = useFeedbackList();
 
-  function handleClick(item: IUserShortInfo) {
-    router.push(`/administration/users/${item.id}`);
+  function handleClick(item: IFeedback) {
+    router.push(`/administration/feedback-list/${item.id}`);
   }
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,7 +50,7 @@ const PlaceTypesTable = () => {
   };
 
   const noItems =
-    items.length === 0 && loading === false ? (
+    items.length === 0 && !loading ? (
       <Stack
         direction={"row"}
         alignItems={"center"}
@@ -65,13 +68,13 @@ const PlaceTypesTable = () => {
     ) : null;
 
   return (
-    <Stack width={"100%"} minHeight={"100%"}>
+    <Stack width={"100%"}>
       <FormProvider {...formContext}>
-        <UsersHeader onSubmit={onSubmit} />
+        <FeedbackHeader onSubmit={onSubmit} />
       </FormProvider>
       <Stack flexGrow={1} sx={{ overflowX: "auto" }}>
         <Table stickyHeader aria-labelledby="tableTitle">
-          <UsersTableHead
+          <FeedbackTableHead
             order={{
               id: 1,
               direction: "desc",
@@ -94,39 +97,53 @@ const PlaceTypesTable = () => {
                   </TableCell>
 
                   <TableCell component="th" scope="row">
-                    {item.firstName} {item.lastName}
+                    {item.fullName}
                   </TableCell>
 
                   <TableCell component="th" scope="row">
                     {item.email}
                   </TableCell>
 
-                  <TableCell component="th" scope="row">
-                    {item.roles
-                      .map(
-                        (r) =>
-                          roles.find((opt) => opt.id === r.name)?.label ||
-                          r.name
-                      )
-                      .join(", ")}
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{ maxWidth: "300px" }}
+                  >
+                    {item.message}
                   </TableCell>
 
                   <TableCell component="th" scope="row">
-                    {item.isEmailConfirmed ? "Да" : "Нет"}
+                    <Stack
+                      direction={"row"}
+                      gap={"0.5em"}
+                      alignItems={"center"}
+                    >
+                      <Box
+                        borderRadius={"50%"}
+                        height={"10px"}
+                        width={"10px"}
+                        bgcolor={parseStatusColor(item.status)}
+                      />
+                      <Typography>
+                        {statuses.find((s) => s.id === item.status)?.label ||
+                          "-"}
+                      </Typography>
+                    </Stack>
                   </TableCell>
 
                   <TableCell component="th" scope="row">
-                    {item.blockedUntil
-                      ? `До ${format(
-                          new Date(item.blockedUntil),
-                          "dd MM yyyy"
-                        )}`
-                      : "Нет"}
+                    {userRequestTypes.find((t) => t.id === item.userRequestType)
+                      ?.label || "-"}
                   </TableCell>
+
                   <TableCell component="th" scope="row">
                     {format(new Date(item.createdAt), "dd MMM yyyy", {
                       locale,
                     })}
+                  </TableCell>
+
+                  <TableCell component="th" scope="row">
+                    {item.phone || "-"}
                   </TableCell>
                 </TableRow>
               );
@@ -157,4 +174,4 @@ const PlaceTypesTable = () => {
   );
 };
 
-export default PlaceTypesTable;
+export default FeedbackTable;

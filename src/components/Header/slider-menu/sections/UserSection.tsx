@@ -1,4 +1,4 @@
-import { Avatar, Stack, Typography, Link, Divider, Box } from "@mui/material";
+import { Avatar, Box, Divider, Link, Stack, Typography } from "@mui/material";
 import { routerLinks } from "@/routing/routerLinks";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
@@ -6,6 +6,8 @@ import { useAppDispatch } from "@/store/hooks";
 import { logoutThunk } from "@/store/user-slice/thunks";
 import SliderMenuLink from "@/components/header/slider-menu/SliderMenuLink";
 import BuildIcon from "@mui/icons-material/Build";
+import useRoleAccess from "@/hooks/useRoleAccess";
+import RolesEnum from "@/services/auth-service/roles.enum";
 
 const UserSection = ({
   onClose,
@@ -21,6 +23,8 @@ const UserSection = ({
     onClose();
     dispatch(logoutThunk());
   };
+  const isModerator = useRoleAccess([RolesEnum.MODERATOR, RolesEnum.ADMIN]);
+  const isAdmin = useRoleAccess([RolesEnum.ADMIN]);
 
   return (
     <Box>
@@ -58,20 +62,26 @@ const UserSection = ({
         href={routerLinks.personalAreaPlaces}
         icon={<AccountCircleIcon fontSize={"small"} color={"secondary"} />}
       />
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={"Модерация"}
-        href={routerLinks.moderationPlaces}
-        icon={<BuildIcon fontSize={"small"} color={"secondary"} />}
-      />
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={"Администрация"}
-        href={routerLinks.administrationUsers}
-        icon={<AdminPanelSettingsIcon fontSize={"small"} color={"secondary"} />}
-      />
+      {isModerator && (
+        <SliderMenuLink
+          pathname={pathname}
+          onClick={onClose}
+          text={"Модерация"}
+          href={routerLinks.moderationPlaces}
+          icon={<BuildIcon fontSize={"small"} color={"secondary"} />}
+        />
+      )}
+      {isAdmin && (
+        <SliderMenuLink
+          pathname={pathname}
+          onClick={onClose}
+          text={"Администрация"}
+          href={routerLinks.administrationUsers}
+          icon={
+            <AdminPanelSettingsIcon fontSize={"small"} color={"secondary"} />
+          }
+        />
+      )}
       <Divider
         variant={"middle"}
         sx={{ borderColor: "primary.main", opacity: 0.5, my: "0.3em" }}

@@ -74,6 +74,7 @@ const Login = () => {
         },
         { shouldFocus: true }
       );
+      return;
     }
     if (error?.loginError === LoginErrorEnum.USER_BLOCKED) {
       form.setError(
@@ -81,12 +82,13 @@ const Login = () => {
         {
           message: `Пользователь заблокирован до ${
             error?.blockedUntil
-              ? format(new Date(error.blockedUntil), "dd MM yyyy")
+              ? format(new Date(error.blockedUntil), "dd/MM/yyyy")
               : "∞"
           }`,
         },
         { shouldFocus: true }
       );
+      return;
     }
     form.setError(
       "email",

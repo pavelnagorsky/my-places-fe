@@ -48,7 +48,7 @@ instance.interceptors.response.use(
           }
           return instance(originalRequest);
         })
-        .catch((error) => {
+        .catch(() => {
           if (typeof window !== "undefined") {
             localStorage.removeItem(localStorageFields.TOKEN);
           }

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form-mui";
 import { IContactUsForm } from "@/containers/contact-us/interfaces";
-import { UserTypesEnum } from "@/services/contact-service/interfaces";
+import { UserTypesEnum } from "@/services/contact-service/interfaces/interfaces";
 import { useState } from "react";
 import contactService from "@/services/contact-service/contact.service";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
@@ -48,7 +48,7 @@ const useContactUs = () => {
           severity: "success",
         },
         snackbarProps: {
-          autoHideDuration: 5000,
+          autoHideDuration: 6000,
         },
       })
     );

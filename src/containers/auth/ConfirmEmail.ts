@@ -4,6 +4,7 @@ import authService from "@/services/auth-service/auth.service";
 import { useAppDispatch } from "@/store/hooks";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
+import { openAuth } from "@/store/user-slice/user.slice";
 
 const ConfirmEmail = () => {
   const { t } = useTranslation();
@@ -12,7 +13,9 @@ const ConfirmEmail = () => {
   const query = router.query as { token: string };
 
   useEffect(() => {
-    router.replace("/");
+    router.replace("/").then(() => {
+      dispatch(openAuth({}));
+    });
     authService
       .confirmEmail(query.token)
       .then(() => {

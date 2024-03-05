@@ -8,7 +8,7 @@ interface IUsersHeaderProps {
   onSubmit: () => void;
 }
 
-const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
+const FeedbackHeader = ({ onSubmit }: IUsersHeaderProps) => {
   return (
     <Stack
       gap={"1em"}
@@ -27,7 +27,7 @@ const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
         fontWeight={700}
         fontSize={{ xs: "25px", md: "30px" }}
       >
-        Пользователи
+        Обратная связь
       </Typography>
 
       <Stack
@@ -36,7 +36,7 @@ const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
         alignItems={"center"}
         justifyContent={"end"}
       >
-        <AdditionalFilters onSubmit={onSubmit} />
+        {/*<AdditionalFilters onSubmit={onSubmit} />*/}
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
@@ -50,7 +50,7 @@ const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
               },
             }}
             fullWidth
-            name={"email"}
+            name={"authorEmail"}
             onChange={debounce(onSubmit, 300)}
             inputProps={{
               "aria-label": "Search",
@@ -62,4 +62,4 @@ const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
   );
 };
 
-export default UsersHeader;
+export default FeedbackHeader;

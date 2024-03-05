@@ -1,12 +1,18 @@
-import { ISelect } from "@/shared/interfaces";
 import { LanguageIdsEnum } from "@/shared/LanguageIdsEnum";
+import I18nLanguages from "@/shared/I18nLanguages";
+
+interface ILanguageOption {
+  id: LanguageIdsEnum;
+  locale: keyof typeof I18nLanguages;
+  label: string;
+}
 
 const useLanguages = () => {
   return [
-    { id: LanguageIdsEnum.ru, label: "Русский" },
-    { id: LanguageIdsEnum.be, label: "Беларускi" },
-    { id: LanguageIdsEnum.en, label: "English" },
-  ] as ISelect[];
+    { id: LanguageIdsEnum.ru, locale: I18nLanguages.ru, label: "Русский" },
+    { id: LanguageIdsEnum.be, locale: I18nLanguages.be, label: "Беларускi" },
+    { id: LanguageIdsEnum.en, locale: I18nLanguages.en, label: "English" },
+  ] as ILanguageOption[];
 };
 
 export default useLanguages;

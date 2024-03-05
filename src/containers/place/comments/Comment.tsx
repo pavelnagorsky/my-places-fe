@@ -9,12 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
+import { Fragment } from "react";
 
 interface ICommentProps {
   comment: IComment;
   index: number;
   locale: any;
-  isAuth: boolean;
+  userId: number | null;
   isModerator: boolean;
   onDelete: (id: number) => void;
   onUpdate: (id: number) => void;
@@ -26,10 +27,11 @@ const Comment = ({
   locale,
   onDelete,
   onUpdate,
-  isAuth,
+  userId,
   isModerator,
 }: ICommentProps) => {
-  const canManage = (isAuth && comment.canManage) || isModerator;
+  const isMyComment = !!userId && userId === comment.authorId;
+  const canManage = isMyComment || isModerator;
   const bgColor = index % 2 == 0 ? "#FFF6EE" : "#FFEEDE";
   return (
     <Paper
@@ -92,21 +94,26 @@ const Comment = ({
                   "& button, hr": { fontSize: "12px", textTransform: "none" },
                 }}
               >
-                <Button
-                  size={"small"}
-                  variant={"text"}
-                  color={"secondary"}
-                  onClick={() => onUpdate(comment.id)}
-                >
-                  Изменить
-                </Button>
-                <Divider
-                  orientation={"vertical"}
-                  variant={"middle"}
-                  sx={{
-                    color: "divider",
-                  }}
-                />
+                {isMyComment && (
+                  <Fragment>
+                    <Button
+                      size={"small"}
+                      variant={"text"}
+                      color={"secondary"}
+                      onClick={() => onUpdate(comment.id)}
+                    >
+                      Изменить
+                    </Button>
+
+                    <Divider
+                      orientation={"vertical"}
+                      variant={"middle"}
+                      sx={{
+                        color: "divider",
+                      }}
+                    />
+                  </Fragment>
+                )}
                 <Button
                   size={"small"}
                   variant={"text"}

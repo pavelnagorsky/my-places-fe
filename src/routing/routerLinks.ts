@@ -14,6 +14,7 @@ export const routerLinks = {
   administrationPlaceCategories: "/administration/place-categories",
   administrationPlaceTypes: "/administration/place-types",
   administrationUsers: "/administration/users",
+  administrationFeedbackList: "/administration/feedback-list",
   personalAreaPlaces: "/personal-area/my-places",
   personalAreaReviews: "/personal-area/my-reviews",
   personalAreaSettings: "/personal-area/settings",

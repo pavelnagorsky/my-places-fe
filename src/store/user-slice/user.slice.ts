@@ -163,6 +163,10 @@ export const selectUserRoles = createSelector(
   selectUserData,
   (s) => s?.roles || []
 );
+export const selectUserId = createSelector(
+  selectUserData,
+  (s) => s?.id || null
+);
 
 export const { changeAuthScreen, closeAuth, openAuth } = userSlice.actions;
 
