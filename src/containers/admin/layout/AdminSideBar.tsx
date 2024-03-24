@@ -28,6 +28,9 @@ const AdminSideBar = () => {
       sx={{
         position: "fixed",
         py: "0.2em",
+        px: "0.5em",
+        display: { xs: "flex", sm: "block" },
+        justifyContent: { sm: "center" },
         bottom: 0,
         left: 0,
         right: 0,

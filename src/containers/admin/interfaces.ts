@@ -7,7 +7,7 @@ export interface IOrderBy<T = any> {
 
 export interface ITableHeadProps {
   order: IOrderBy;
-  onRequestSort: (event: MouseEventHandler<any>, property: string) => void;
+  onRequestSort: (event: MouseEventHandler<any>, property: any) => void;
   rowCount: number;
 }
 

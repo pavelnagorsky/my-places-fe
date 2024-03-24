@@ -19,9 +19,10 @@ import { selectIsAuth } from "@/store/user-slice/user.slice";
 interface IPlaceSelectProps {
   readonly fieldName: string;
   readonly?: boolean;
+  required?: boolean;
 }
 
-const PlaceSelect = ({ fieldName, readonly }: IPlaceSelectProps) => {
+const PlaceSelect = ({ fieldName, readonly, required }: IPlaceSelectProps) => {
   const { i18n } = useTranslation();
   const router = useRouter();
   const { setValue } = useFormContext<IReviewFormContext>();
@@ -69,8 +70,7 @@ const PlaceSelect = ({ fieldName, readonly }: IPlaceSelectProps) => {
   return (
     <AutocompleteElement
       rules={{
-        required: true,
-        minLength: 15,
+        required: required,
       }}
       parseError={(error) => "Поле обязательно к заполнению"}
       name={fieldName}

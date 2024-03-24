@@ -11,6 +11,7 @@ import {
 import PersonalAreaLayout from "@/containers/personal-area/layout/PersonalAreaLayout";
 import { motion } from "framer-motion";
 import {
+  CheckboxElement,
   FormProvider,
   SelectElement,
   TextFieldElement,
@@ -50,7 +51,7 @@ const UserSettingsPage = () => {
         </Box>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <FormProvider {...logic.form}>
-            <Grid container spacing={"2em"} mb={"2em"}>
+            <Grid container spacing={{ xs: "1em", md: "2em" }} mb={"4em"}>
               <Grid item xs={12} sm={6}>
                 <CustomLabel htmlFor={"firstName"}>Имя</CustomLabel>
                 <TextFieldElement
@@ -112,6 +113,13 @@ const UserSettingsPage = () => {
                     },
                   }}
                 />
+                <Box mt={"0.5em"}>
+                  <CheckboxElement
+                    name={"receiveEmails"}
+                    id={"receiveEmails"}
+                    label={"Получать оповещения на почту"}
+                  />
+                </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <CustomLabel htmlFor={"preferredLanguageId"}>
@@ -124,7 +132,7 @@ const UserSettingsPage = () => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <Box>
                   <Button
                     disabled={!logic.form.formState.isDirty}

@@ -18,11 +18,11 @@ import { FormProvider } from "react-hook-form-mui";
 import useFeedbackList from "@/containers/admin/feedback-list/useFeedbackList";
 import useCrmStatuses from "@/hooks/useCrmStatuses";
 import { IFeedback } from "@/services/contact-service/interfaces/feedback.interface";
-import FeedbackHeader from "@/containers/admin/feedback-list/Table/FeedbackHeader";
-import FeedbackTableHead from "@/containers/admin/feedback-list/Table/FeedbackTableHead";
+import FeedbackListHeader from "@/containers/admin/feedback-list/table/FeedbackListHeader";
+import FeedbackListTableHead from "@/containers/admin/feedback-list/table/FeedbackListTableHead";
 import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
 
-const FeedbackTable = () => {
+const FeedbackListTable = () => {
   const { i18n } = useTranslation();
   const router = useRouter();
   const locale = useDateFnsLocale();
@@ -62,7 +62,7 @@ const FeedbackTable = () => {
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
       >
         <Typography color="text.secondary" variant="h5">
-          Пользователи не найдены
+          Записи не найдены
         </Typography>
       </Stack>
     ) : null;
@@ -70,11 +70,11 @@ const FeedbackTable = () => {
   return (
     <Stack width={"100%"}>
       <FormProvider {...formContext}>
-        <FeedbackHeader onSubmit={onSubmit} />
+        <FeedbackListHeader onSubmit={onSubmit} />
       </FormProvider>
       <Stack flexGrow={1} sx={{ overflowX: "auto" }}>
         <Table stickyHeader aria-labelledby="tableTitle">
-          <FeedbackTableHead
+          <FeedbackListTableHead
             order={{
               id: 1,
               direction: "desc",
@@ -174,4 +174,4 @@ const FeedbackTable = () => {
   );
 };
 
-export default FeedbackTable;
+export default FeedbackListTable;

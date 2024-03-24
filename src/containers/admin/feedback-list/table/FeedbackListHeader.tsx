@@ -1,14 +1,15 @@
-import { debounce, Stack, Typography } from "@mui/material";
+import { debounce, InputAdornment, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { primaryBackground } from "@/styles/theme/lightTheme";
-import AdditionalFilters from "@/containers/admin/users/Table/Filters/AdditionalFilters";
 import { TextFieldElement } from "react-hook-form-mui";
+import SearchIcon from "@mui/icons-material/Search";
+import AdditionalFilters from "./filters/AdditionalFilters";
 
 interface IUsersHeaderProps {
   onSubmit: () => void;
 }
 
-const FeedbackHeader = ({ onSubmit }: IUsersHeaderProps) => {
+const FeedbackListHeader = ({ onSubmit }: IUsersHeaderProps) => {
   return (
     <Stack
       gap={"1em"}
@@ -36,12 +37,24 @@ const FeedbackHeader = ({ onSubmit }: IUsersHeaderProps) => {
         alignItems={"center"}
         justifyContent={"end"}
       >
-        {/*<AdditionalFilters onSubmit={onSubmit} />*/}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+        >
+          <AdditionalFilters onSubmit={onSubmit} />
+        </motion.div>
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
         >
           <TextFieldElement
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position={"start"}>
+                  <SearchIcon color="disabled" />
+                </InputAdornment>
+              ),
+            }}
             placeholder="Поиск по почте"
             sx={{
               backgroundColor: "white",
@@ -62,4 +75,4 @@ const FeedbackHeader = ({ onSubmit }: IUsersHeaderProps) => {
   );
 };
 
-export default FeedbackHeader;
+export default FeedbackListHeader;

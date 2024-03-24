@@ -69,7 +69,7 @@ const rows = [
   },
 ];
 
-const FeedbackTableHead = (props: ITableHeadProps) => {
+const FeedbackListTableHead = (props: ITableHeadProps) => {
   const createSortHandler = (property: any) => (event: any) => {
     props.onRequestSort(event, property);
   };
@@ -121,4 +121,4 @@ const FeedbackTableHead = (props: ITableHeadProps) => {
   );
 };
 
-export default FeedbackTableHead;
+export default FeedbackListTableHead;

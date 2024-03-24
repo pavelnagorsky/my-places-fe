@@ -1,10 +1,10 @@
 import AdminLayout from "@/containers/admin/layout/AdminLayout";
-import FeedbackTable from "@/containers/admin/feedback-list/Table/FeedbackTable";
+import FeedbackListTable from "@/containers/admin/feedback-list/table/FeedbackListTable";
 
 const FeedbackList = () => {
   return (
     <AdminLayout>
-      <FeedbackTable />
+      <FeedbackListTable />
     </AdminLayout>
   );
 };

@@ -1,9 +1,10 @@
-import HouseIcon from "@mui/icons-material/House";
+import CastleIcon from "@mui/icons-material/Castle";
 import InterestsIcon from "@mui/icons-material/Interests";
 import { ReactElement } from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import ChatIcon from "@mui/icons-material/Chat";
+import PlaceIcon from "@mui/icons-material/Place";
 
 const useAdminMenu = () => {
   return [
@@ -18,9 +19,14 @@ const useAdminMenu = () => {
       icon: <ChatIcon />,
     },
     {
+      title: "Места",
+      href: routerLinks.administrationPlaces,
+      icon: <PlaceIcon />,
+    },
+    {
       title: "Типы мест",
       href: routerLinks.administrationPlaceTypes,
-      icon: <HouseIcon />,
+      icon: <CastleIcon />,
     },
     {
       title: "Категории мест",

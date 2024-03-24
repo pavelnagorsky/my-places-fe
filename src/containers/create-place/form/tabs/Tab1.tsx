@@ -95,7 +95,7 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
         name={"title"}
         validation={{
           required: "Это поле обязательно к заполнению",
-          maxLength: { value: 30, message: "Превышен лимит в 30 символов" },
+          maxLength: { value: 60, message: "Превышен лимит в 60 символов" },
         }}
         placeholder={"Введите название..."}
       />

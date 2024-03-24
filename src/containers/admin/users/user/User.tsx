@@ -26,16 +26,14 @@ const User = () => {
 
   return (
     <AdminLayout>
+      <UserHeader
+        formContext={logic.blockForm}
+        user={logic.user}
+        loading={logic.blockLoading}
+        handleBlock={logic.handleBlockUser}
+        handleUnblock={logic.handleUnblockUser}
+      />
       {loader}
-      {logic.user && (
-        <UserHeader
-          formContext={logic.blockForm}
-          user={logic.user}
-          loading={logic.blockLoading}
-          handleBlock={logic.handleBlockUser}
-          handleUnblock={logic.handleUnblockUser}
-        />
-      )}
       <Grid container spacing={"2em"} p={"1em"}>
         <Grid item xs={12} md={6}>
           {logic.user && <BasicInfo user={logic.user} />}

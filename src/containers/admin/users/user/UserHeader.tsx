@@ -30,7 +30,7 @@ import { useAppSelector } from "@/store/hooks";
 import { selectUserId } from "@/store/user-slice/user.slice";
 
 interface IUserHeaderProps {
-  user: IUserShortInfo;
+  user: IUserShortInfo | null;
   loading: boolean;
   handleBlock: (callback: () => void) => void;
   handleUnblock: () => void;
@@ -117,7 +117,7 @@ const UserHeader = ({
               fontSize={{ xs: "20px", md: "25px" }}
               fontWeight={600}
             >
-              {user.firstName} {user.lastName}
+              {user?.firstName || ""} {user?.lastName || ""}
             </Typography>
             <Typography variant="caption" fontSize={"12px"} fontWeight={500}>
               Информация о пользователе
@@ -138,7 +138,7 @@ const UserHeader = ({
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
         >
-          {user.blockedUntil ? (
+          {user?.blockedUntil ? (
             <Button
               sx={{
                 fontWeight: 600,

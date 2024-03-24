@@ -28,6 +28,7 @@ const wideDesignPathNames = [
   routerLinks.administrationBasePath,
   routerLinks.personalAreaBasePath,
   routerLinks.moderationBasePath,
+  "404",
 ];
 
 export default function Layout({ children }: PropsWithChildren) {

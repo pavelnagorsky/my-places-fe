@@ -19,6 +19,7 @@ import { IModerationPlace } from "@/services/places-service/interfaces/moderatio
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
+import { IChangePlaceStatus } from "@/services/places-service/interfaces/change-place-status.interface";
 
 const placesService = {
   SEARCH_PLACES_PER_PAGE: 12,
@@ -74,6 +75,14 @@ const placesService = {
     );
   },
 
+  getAdminPlaces: (lang: string, payload: IMyPlacesRequest) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IPaginationResponse<IMyPlace>>(
+      `/places/administration-places?lang=${langId}`,
+      payload
+    );
+  },
+
   getPlaceForEdit: (id: number, lang: string) => {
     const langId = parseLanguageToId(lang);
     return axiosInstance.get<IEditPlace>(`/places/edit/${id}?lang=${langId}`);
@@ -124,6 +133,20 @@ const placesService = {
 
   moderatePlace: (id: number, dto: IModeration) => {
     return axiosInstance.post(`/places/moderation/${id}`, dto);
+  },
+
+  getPlaceInfoForAdmin: (id: number | string, language: string) => {
+    const langId = parseLanguageToId(language);
+    return axiosInstance.get<IMyPlace>(
+      `/places/administration/${id}?lang=${langId}`
+    );
+  },
+
+  changePlaceStatus: (id: number | string, dto: IChangePlaceStatus) => {
+    return axiosInstance.post(
+      `/places/administration/${id}/change-status`,
+      dto
+    );
   },
 };
 

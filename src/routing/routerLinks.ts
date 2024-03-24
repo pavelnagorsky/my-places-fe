@@ -24,6 +24,7 @@ export const routerLinks = {
   personalAreaEditReview: (reviewId: number) =>
     `/personal-area/my-reviews/edit/${reviewId}`,
   administrationBasePath: "/administration",
+  administrationPlaces: "/administration/places",
   personalAreaBasePath: "/personal-area",
   moderationBasePath: "/moderation",
   moderationPlaces: "/moderation/places",

@@ -1,15 +1,15 @@
 import { debounce, InputAdornment, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { primaryBackground } from "@/styles/theme/lightTheme";
-import AdditionalFilters from "@/containers/admin/users/Table/filters/AdditionalFilters";
 import { TextFieldElement } from "react-hook-form-mui";
 import SearchIcon from "@mui/icons-material/Search";
+import AdditionalFilters from "@/containers/personal-area/my-places/filters/AdditionalFilters";
 
 interface IUsersHeaderProps {
   onSubmit: () => void;
 }
 
-const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
+const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
   return (
     <Stack
       gap={"1em"}
@@ -28,7 +28,7 @@ const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
         fontWeight={700}
         fontSize={{ xs: "25px", md: "30px" }}
       >
-        Пользователи
+        Список мест
       </Typography>
 
       <Stack
@@ -36,12 +36,17 @@ const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
         direction={"row"}
         alignItems={"center"}
         justifyContent={"end"}
+        sx={{
+          "& .MuiIconButton-root": {
+            backgroundColor: "white",
+          },
+        }}
       >
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
         >
-          <AdditionalFilters onSubmit={onSubmit} />
+          <AdditionalFilters onSubmit={onSubmit} type={"places"} />
         </motion.div>
         <motion.div
           initial={{ y: -20, opacity: 0 }}
@@ -55,7 +60,7 @@ const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
                 </InputAdornment>
               ),
             }}
-            placeholder="Поиск по почте"
+            placeholder="Поиск по названию"
             sx={{
               backgroundColor: "white",
               minWidth: {
@@ -75,4 +80,4 @@ const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
   );
 };
 
-export default UsersHeader;
+export default PlacesHeader;

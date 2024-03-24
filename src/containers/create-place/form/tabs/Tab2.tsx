@@ -28,7 +28,7 @@ interface ITab2Props extends IPlaceTabProps {
 }
 
 const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
-  const { watch, getValues, resetField } = useFormContext<IPlaceFormContext>();
+  const { watch, setValue } = useFormContext<IPlaceFormContext>();
   const isCommercial = watch("isCommercial");
 
   const filteredPlaceTypes = useMemo(() => {
@@ -87,9 +87,10 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
                 control={
                   <Switch
                     {...field}
+                    checked={!!field.value}
                     disabled={readonly}
                     onChange={(event, checked) => {
-                      resetField("placeTypeId");
+                      setValue("placeTypeId", "" as any);
                       field.onChange(checked);
                     }}
                   />

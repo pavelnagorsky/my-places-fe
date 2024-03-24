@@ -125,7 +125,7 @@ const EditMyReview = () => {
                   mt={"2em"}
                   gap={"1.5em"}
                 >
-                  <PlaceSelect fieldName={"place"} />
+                  <PlaceSelect fieldName={"place"} required />
                   <Button
                     variant={"contained"}
                     sx={{

@@ -6,6 +6,7 @@ export interface IUser {
   lastName: string;
   email: string;
   isEmailConfirmed: boolean;
+  receiveEmails: boolean;
   createdAt: string;
   roles: IRole[];
   preferredLanguage: number | null;

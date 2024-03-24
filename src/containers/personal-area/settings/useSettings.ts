@@ -24,6 +24,7 @@ const useSettings = () => {
       email: userData.email,
       firstName: userData.firstName,
       lastName: userData.lastName,
+      receiveEmails: userData.receiveEmails,
     });
   }, [userData]);
 

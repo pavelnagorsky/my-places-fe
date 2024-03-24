@@ -119,7 +119,8 @@ const PlaceTypesTable = () => {
                     {item.blockedUntil
                       ? `До ${format(
                           new Date(item.blockedUntil),
-                          "dd MM yyyy"
+                          "dd MMM yyyy",
+                          { locale }
                         )}`
                       : "Нет"}
                   </TableCell>

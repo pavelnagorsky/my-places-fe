@@ -55,7 +55,7 @@ const useUsers = () => {
 
   useEffect(() => {
     onSubmit();
-  }, []);
+  }, [rowsPerPage]);
 
   return {
     formContext,

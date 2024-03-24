@@ -6,6 +6,7 @@ export interface IUserShortInfo {
   lastName: string;
   email: string;
   isEmailConfirmed: boolean;
+  receiveEmails: boolean;
   createdAt: string;
   roles: IRole[];
   language: string | null;

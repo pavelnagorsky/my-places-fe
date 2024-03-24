@@ -29,7 +29,7 @@ const useFeedbackList = () => {
     const data = formContext.getValues();
     const payload: IFeedbackListRequest = {
       authorEmail: data.authorEmail,
-      statuses: data.statuses,
+      statuses: data.statuses.map((s) => +s),
       requestTypes: data.requestTypes,
       dateFrom: data.dateFrom
         ? utils.parseFilterDate(data.dateFrom, true)
@@ -55,7 +55,7 @@ const useFeedbackList = () => {
 
   useEffect(() => {
     onSubmit();
-  }, []);
+  }, [rowsPerPage]);
 
   return {
     formContext,

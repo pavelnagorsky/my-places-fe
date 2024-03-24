@@ -56,13 +56,23 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     setFullOpen(!fullOpen);
   };
 
-  const showStatusTooltip =
-    place.status === PlaceStatusesEnum.REJECTED ||
-    place.status === PlaceStatusesEnum.COMMERCIAL_EXPIRED ||
-    place.status === PlaceStatusesEnum.NEEDS_PAYMENT;
+  const parseTooltipText = (): string | null => {
+    if (place.status === PlaceStatusesEnum.REJECTED)
+      return place.moderationMessage;
+    if (place.status === PlaceStatusesEnum.NEEDS_PAYMENT)
+      return "Cогласно правилам данного сайта, созданное Вами Место признано коммерческим, поэтому для его публикации необходимо провести оплату, согласно тарифу на рекламные услуги.";
+    if (place.status === PlaceStatusesEnum.COMMERCIAL_EXPIRED)
+      return "Срок действия рекламы созданного Вами коммерческого Места истек. Для возобновления публикации на сайте, необходимо провести оплату, согласно тарифу на рекламные услуги.";
+    return null;
+  };
+  const tooltipText = parseTooltipText();
 
   const parseStatusColor = (status: PlaceStatusesEnum) => {
-    if (status === PlaceStatusesEnum.MODERATION) return "warning.main";
+    if (
+      status === PlaceStatusesEnum.MODERATION ||
+      status === PlaceStatusesEnum.NEEDS_PAYMENT
+    )
+      return "warning.main";
     if (status === PlaceStatusesEnum.APPROVED) return "success.main";
     return "error.main";
   };
@@ -95,9 +105,9 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
       enterTouchDelay={0}
       leaveTouchDelay={9000}
       title={
-        place.moderationMessage ? (
+        tooltipText ? (
           <Typography p={"0.5em"} fontSize={"14px"}>
-            {place.moderationMessage}
+            {tooltipText}
           </Typography>
         ) : null
       }
@@ -106,7 +116,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
         direction={"row"}
         alignItems={"center"}
         gap={"0.5em"}
-        sx={{ cursor: place.moderationMessage ? "pointer" : undefined }}
+        sx={{ cursor: tooltipText ? "pointer" : undefined }}
       >
         <Box
           borderRadius={"50%"}
@@ -117,7 +127,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
         <Typography variant={"body1"}>
           {placeStatuses.find((s) => s.id === place.status)?.label}
         </Typography>
-        {showStatusTooltip && (
+        {tooltipText && (
           <InfoOutlinedIcon color={"secondary"} fontSize={"small"} />
         )}
       </Stack>

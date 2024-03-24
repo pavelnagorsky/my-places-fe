@@ -4,8 +4,6 @@ import {
   SwitchElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { IMyPlacesFormContext } from "@/containers/personal-area/my-places/interfaces";
-import { IMyReviewsFormContext } from "@/containers/personal-area/my-reviews/interfaces";
 import { useTranslation } from "next-i18next";
 import {
   Badge,
@@ -18,8 +16,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import usePlaceStatuses from "@/hooks/usePlaceStatuses";
-import useReviewStatuses from "@/hooks/useReviewStatuses";
 import useDialog from "@/hooks/useDialog";
 import { useMemo } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -28,25 +24,30 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 import CloseIcon from "@mui/icons-material/Close";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { Button } from "@/components/UI/button/Button";
-import { IUsersFiltersForm } from "@/containers/admin/users/interfaces";
-import useRolesOptions from "@/hooks/useRolesOptions";
+import { IFeedbackListFiltersForm } from "@/containers/admin/feedback-list/interfaces";
+import useCrmStatuses from "@/hooks/useCrmStatuses";
+import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
 
 const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
-  const { resetField, watch, getValues } = useFormContext<IUsersFiltersForm>();
+  const { resetField, watch, getValues } =
+    useFormContext<IFeedbackListFiltersForm>();
   const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const roles = useRolesOptions();
   const dialog = useDialog();
+  const { statuses } = useCrmStatuses();
+  const requestTypes = useUserTypes();
 
   const watchEndDate = watch("dateTo");
 
   const filtersCount = useMemo(() => {
-    const rolesCount = getValues("roles")?.length || 0;
-    const dateFromCount = getValues("dateFrom") !== null ? 1 : 0;
-    const dateEndCount = getValues("dateTo") !== null ? 1 : 0;
-    const isBlockedCount = getValues("isBlocked") ? 1 : 0;
-    return rolesCount + dateEndCount + dateFromCount + isBlockedCount;
+    const data = getValues();
+    let count = 0;
+    if (data.dateFrom) count += 1;
+    if (data.dateTo) count += 1;
+    if (data.requestTypes.length > 0) count += 1;
+    if (data.statuses.length > 0) count += 1;
+    return count;
   }, [dialog.open]);
 
   const onApply = () => {
@@ -55,10 +56,10 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   };
 
   const onClear = () => {
-    resetField("roles");
+    resetField("requestTypes");
     resetField("dateFrom");
     resetField("dateTo");
-    resetField("isBlocked");
+    resetField("statuses");
   };
 
   return (
@@ -92,8 +93,6 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
         <Stack
           position={"sticky"}
           py={"0.5em"}
-          // pl={"2em"}
-          // pr={"0.2em"}
           top={0}
           zIndex={1}
           direction={"row"}
@@ -109,17 +108,43 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
           </IconButton>
         </Stack>
         <Box p={"2em"} pt={"1.5em"}>
-          <CustomLabel sx={{ fontSize: "18px" }}>По ролям</CustomLabel>
-          <Box
-            sx={{ "& label": { color: "secondary.main", width: "50%", mx: 0 } }}
-            display={"flex"}
-          >
-            <CheckboxButtonGroup options={roles} name={"roles"} row />
-          </Box>
-          <Box>
-            <CustomLabel sx={{ fontSize: "18px" }}>По блокировке</CustomLabel>
-            <SwitchElement label={"Заблокирован"} name={"isBlocked"} />
-          </Box>
+          <Stack gap={"1em"}>
+            <Box>
+              <CustomLabel sx={{ fontSize: "18px" }}>По статусу</CustomLabel>
+              <Box
+                sx={{
+                  "& label": { color: "secondary.main", width: "50%", mx: 0 },
+                }}
+                display={"flex"}
+              >
+                <CheckboxButtonGroup
+                  options={statuses.map((s) => ({
+                    id: `${s.id}`,
+                    label: s.label,
+                  }))}
+                  name={"statuses"}
+                  row
+                />
+              </Box>
+            </Box>
+            <Box>
+              <CustomLabel sx={{ fontSize: "18px" }}>
+                По типу запроса
+              </CustomLabel>
+              <Box
+                sx={{
+                  "& label": { color: "secondary.main", width: "50%", mx: 0 },
+                }}
+                display={"flex"}
+              >
+                <CheckboxButtonGroup
+                  options={requestTypes}
+                  name={"requestTypes"}
+                  row
+                />
+              </Box>
+            </Box>
+          </Stack>
           <Divider sx={{ my: "1.5em" }} />
           <Box>
             <CustomLabel sx={{ fontSize: "18px" }}>
