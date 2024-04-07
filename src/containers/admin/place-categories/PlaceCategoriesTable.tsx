@@ -181,7 +181,7 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
                       {item.title}
                     </TableCell>
 
-                    <TableCell component="th" scope="row">
+                    <TableCell height={"3em"} component="th" scope="row">
                       {item.image ? (
                         <Box
                           maxHeight={"3em"}

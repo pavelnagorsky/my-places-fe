@@ -3,6 +3,7 @@ import AdminLayout from "@/containers/admin/layout/AdminLayout";
 import useFeedback from "@/containers/admin/feedback-list/feedback/useFeedback";
 import FeedbackHeader from "@/containers/admin/feedback-list/feedback/FeedbackHeader";
 import BasicInfo from "./sections/BasicInfo";
+import EmailSection from "@/containers/admin/feedback-list/feedback/sections/EmailSection";
 
 const Feedback = () => {
   const { feedback } = useFeedback();
@@ -30,7 +31,9 @@ const Feedback = () => {
         <Grid item xs={12} md={6}>
           {feedback && <BasicInfo feedback={feedback} />}
         </Grid>
-        <Grid item xs={12} md={6}></Grid>
+        <Grid item xs={12} md={6}>
+          {feedback && <EmailSection feedback={feedback} />}
+        </Grid>
       </Grid>
     </AdminLayout>
   );

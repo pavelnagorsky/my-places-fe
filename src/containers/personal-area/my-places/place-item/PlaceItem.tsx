@@ -84,7 +84,11 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
         variant={"body1"}
         component={Link}
         color={"secondary.main"}
-        sx={{ textDecoration: "underline #565656", wordBreak: "break-word" }}
+        sx={{
+          textDecoration: "underline #565656",
+          wordBreak: "break-word",
+          width: "fit-content",
+        }}
         href={routerLinks.place(place.slug)}
         target={"_blank"}
       >
@@ -95,7 +99,9 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
 
   const placeTypeBox = (
     <Stack gap={"0.2em"}>
-      <Typography variant={"body1"}>{place.type}</Typography>
+      <Typography variant={"body1"} sx={{ wordBreak: "break-word" }}>
+        {place.type}
+      </Typography>
     </Stack>
   );
 

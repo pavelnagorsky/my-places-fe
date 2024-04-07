@@ -51,8 +51,11 @@ const PlaceStatusSection = ({
 
   const watchCommercial = form.watch("isCommercial");
   const watchStatus = form.watch("status");
+  const watchAdvEndDate = form.watch("advertisementEndDate");
   const canUpdate =
-    place.status !== watchStatus || place.advertisement !== watchCommercial;
+    place.status !== watchStatus ||
+    place.advertisement !== watchCommercial ||
+    !!form.formState.dirtyFields.advertisementEndDate;
   const filteredStatuses = placeStatuses.filter((s) => {
     if (!watchCommercial && s.id === PlaceStatusesEnum.NEEDS_PAYMENT)
       return false;

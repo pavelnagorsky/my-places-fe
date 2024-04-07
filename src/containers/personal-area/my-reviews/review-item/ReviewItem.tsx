@@ -57,7 +57,11 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
         variant={"body1"}
         component={Link}
         color={"secondary.main"}
-        sx={{ textDecoration: "underline #565656", wordBreak: "break-word" }}
+        sx={{
+          textDecoration: "underline #565656",
+          wordBreak: "break-word",
+          width: "fit-content",
+        }}
         href={routerLinks.place(review.placeSlug)}
         target={"_blank"}
       >
@@ -119,9 +123,9 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
 
   const Menu = (
     <MyReviewMenu
-      anchorEl={menu.anchorEl}
-      open={menu.open}
-      handleClose={menu.handleClose}
+      anchorEl={menu.popover.anchor}
+      open={menu.popover.open}
+      handleClose={menu.popover.handleClose}
       onDelete={menu.handleDelete}
       onEdit={menu.handleEdit}
       placeSlug={review.placeSlug}
@@ -167,7 +171,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
         </Grid>
         <Stack ml={"0.5em"} justifyContent={"space-between"}>
           <IconButton
-            onClick={menu.handleClick}
+            onClick={menu.popover.handleOpen}
             color={"secondary"}
             size={"small"}
           >
@@ -209,7 +213,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
           <IconButton
             color={"secondary"}
             //sx={{ mr: "0.5em" }}
-            onClick={menu.handleClick}
+            onClick={menu.popover.handleOpen}
           >
             <MoreVertIcon />
           </IconButton>

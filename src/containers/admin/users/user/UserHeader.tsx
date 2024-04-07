@@ -28,6 +28,9 @@ import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/store/hooks";
 import { selectUserId } from "@/store/user-slice/user.slice";
+import RolesEnum from "@/services/auth-service/roles.enum";
+import EmailSection from "@/containers/admin/users/user/sections/EmailSection";
+import { StyledButton } from "@/components/UI/button/StyledButton";
 
 interface IUserHeaderProps {
   user: IUserShortInfo | null;
@@ -47,7 +50,9 @@ const UserHeader = ({
   const router = useRouter();
   const query = router.query as { id: string };
   const myUserId = useAppSelector(selectUserId);
-  const canBlock = +query.id !== myUserId;
+  const canBlock =
+    +query.id !== myUserId &&
+    !((user?.roles || []).findIndex((r) => r.name === RolesEnum.ADMIN) > -1);
 
   const blockPopover = usePopover("block-form");
   const onClosePopover = () => {
@@ -130,8 +135,24 @@ const UserHeader = ({
         gap={"1em"}
         direction={{ md: "row" }}
         alignItems={"center"}
+        width={"100%"}
         justifyContent={"end"}
       >
+        <Box
+          component={motion.div}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
+        >
+          {user && (
+            <EmailSection
+              user={user}
+              sx={{
+                fontWeight: 600,
+                py: "0.6em",
+              }}
+            />
+          )}
+        </Box>
         <Box
           component={motion.div}
           sx={{ display: "flex", gap: "1em" }}
@@ -139,11 +160,9 @@ const UserHeader = ({
           animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
         >
           {user?.blockedUntil ? (
-            <Button
+            <StyledButton
               sx={{
                 fontWeight: 600,
-                boxShadow: "unset",
-                borderRadius: "20px",
                 py: "0.6em",
               }}
               variant="outlined"
@@ -158,14 +177,12 @@ const UserHeader = ({
               }
             >
               Разблокировать
-            </Button>
+            </StyledButton>
           ) : (
             <Fragment>
-              <Button
+              <StyledButton
                 sx={{
                   fontWeight: 600,
-                  boxShadow: "unset",
-                  borderRadius: "20px",
                   py: "0.6em",
                 }}
                 variant="outlined"
@@ -181,7 +198,7 @@ const UserHeader = ({
                 }
               >
                 Заблокировать
-              </Button>
+              </StyledButton>
               <Popover
                 open={blockPopover.open}
                 id={blockPopover.id}

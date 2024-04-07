@@ -7,7 +7,6 @@ import { useAppDispatch } from "@/store/hooks";
 import placesService from "@/services/places-service/places.service";
 import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
-import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
 
 const useEditMyPlace = () => {
   const { i18n } = useTranslation();
@@ -62,7 +61,6 @@ const useEditMyPlace = () => {
           updateTranslations: false,
           title: data.title,
           description: data.description,
-          slug: data.slug,
           address: data.address,
           lat: data.coordinates.lat,
           lng: data.coordinates.lng,

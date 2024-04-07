@@ -145,6 +145,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                     <Typography
                       variant="body1"
                       fontSize={{ xs: "16px", md: "20px" }}
+                      sx={{ whiteSpace: "nowrap" }}
                     >
                       Веб-сайт:
                     </Typography>
@@ -153,8 +154,12 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                       referrerPolicy={"no-referrer"}
                       href={place.website}
                       sx={{
-                        wordWrap: "break-word",
                         fontSize: "16px",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "200px",
+                        whiteSpace: "nowrap",
+                        display: "inline-block",
                       }}
                       color={"#303030"}
                     >

@@ -1,6 +1,6 @@
-import { useState, MouseEvent } from "react";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
+import usePopover from "@/hooks/usePopover";
 
 interface IUseMyReviewMenuProps {
   reviewId: number;
@@ -9,30 +9,20 @@ interface IUseMyReviewMenuProps {
 
 const useMyReviewMenu = ({ reviewId, onDelete }: IUseMyReviewMenuProps) => {
   const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const popover = usePopover("review-menu");
 
   const handleEdit = () => {
-    handleClose();
+    popover.handleClose();
     router.push(routerLinks.personalAreaEditReview(reviewId));
   };
 
   const handleDelete = () => {
-    handleClose();
+    popover.handleClose();
     onDelete(reviewId);
   };
 
   return {
-    anchorEl,
-    open,
-    handleClick,
-    handleClose,
+    popover,
     handleEdit,
     handleDelete,
   };

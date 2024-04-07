@@ -1,19 +1,17 @@
 import { Box, CircularProgress, Paper, Stack, Typography } from "@mui/material";
 import { StyledButton } from "@/components/UI/button/StyledButton";
 import PlaceSelect from "@/containers/create-review/form/place-select/PlaceSelect";
-import {
-  FormContainer,
-  FormProvider,
-  TextFieldElement,
-  useForm,
-} from "react-hook-form-mui";
+import { FormProvider, useForm } from "react-hook-form-mui";
 import { useState } from "react";
 import { ISelect } from "@/shared/interfaces";
 import { useAppDispatch } from "@/store/hooks";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
+import placesService from "@/services/places-service/places.service";
+import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { useRouter } from "next/router";
+import { routerLinks } from "@/routing/routerLinks";
 
 interface IDeletePlaceForm {
-  reason: string;
   place: ISelect | null;
 }
 
@@ -23,6 +21,7 @@ interface IDeletePlaceSectionProps {
 }
 
 const DeletePlaceSection = ({ id, hasReviews }: IDeletePlaceSectionProps) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -30,7 +29,6 @@ const DeletePlaceSection = ({ id, hasReviews }: IDeletePlaceSectionProps) => {
     mode: "onChange",
     defaultValues: {
       place: null,
-      reason: "",
     },
   });
 
@@ -38,6 +36,37 @@ const DeletePlaceSection = ({ id, hasReviews }: IDeletePlaceSectionProps) => {
     form.handleSubmit((data) => {
       if (loading) return;
       setLoading(true);
+      placesService
+        .safelyDeletePlace(id, data.place?.id)
+        .then(() => {
+          setLoading(false);
+          dispatch(
+            showAlert({
+              alertProps: {
+                title: "Успех!",
+                description: "Место успешно удалено",
+                variant: "standard",
+                severity: "success",
+              },
+              snackbarProps: {},
+            })
+          );
+          router.push(routerLinks.administrationPlaces);
+        })
+        .catch(() => {
+          setLoading(false);
+          dispatch(
+            showAlert({
+              alertProps: {
+                title: "Ошибка!",
+                description: "Ошибка при удалении места.",
+                variant: "standard",
+                severity: "error",
+              },
+              snackbarProps: {},
+            })
+          );
+        });
     })();
   };
 
@@ -57,22 +86,12 @@ const DeletePlaceSection = ({ id, hasReviews }: IDeletePlaceSectionProps) => {
           Удалить место
         </Typography>
         <FormProvider {...form}>
-          <Box>
-            <CustomLabel htmlFor={"reason"}>Причина</CustomLabel>
-            <TextFieldElement
-              id={"reason"}
-              fullWidth
-              name={"reason"}
-              required
-              placeholder={"Место является дубликатом"}
-            />
-          </Box>
           {hasReviews && (
             <Box>
               <CustomLabel htmlFor={"place"}>
                 Новое место для заметок
               </CustomLabel>
-              <PlaceSelect fieldName={"place"} />
+              <PlaceSelect excludeId={+id} fieldName={"place"} />
             </Box>
           )}
         </FormProvider>

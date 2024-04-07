@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 
 const FavouriteItemsTableHead = () => {
   return (
-    <Box mx={"0.5em"} mb={"1.5em"}>
+    <Box ml={"1em"} mb={"1.5em"}>
       <Grid
         container
         spacing={"1em"}

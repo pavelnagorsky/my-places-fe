@@ -20,9 +20,15 @@ interface IPlaceSelectProps {
   readonly fieldName: string;
   readonly?: boolean;
   required?: boolean;
+  excludeId?: number;
 }
 
-const PlaceSelect = ({ fieldName, readonly, required }: IPlaceSelectProps) => {
+const PlaceSelect = ({
+  fieldName,
+  readonly,
+  required,
+  excludeId,
+}: IPlaceSelectProps) => {
   const { i18n } = useTranslation();
   const router = useRouter();
   const { setValue } = useFormContext<IReviewFormContext>();
@@ -45,7 +51,7 @@ const PlaceSelect = ({ fieldName, readonly, required }: IPlaceSelectProps) => {
     placesService
       .getPlacesSelect(i18n.language, value, query.placeId)
       .then(({ data }) => {
-        setOptions(data);
+        setOptions(data.filter((p) => p.id !== excludeId));
         setLoading(false);
       })
       .catch(() => {

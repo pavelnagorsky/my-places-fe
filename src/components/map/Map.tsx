@@ -9,7 +9,7 @@ import {
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { Environment } from "@/shared/Environment";
 import { defaultMapStyle } from "@/components/map/map-styles/default";
-import { Box } from "@mui/material";
+import { Box, Grow } from "@mui/material";
 
 export interface ILatLngCoordinate {
   lat: number;
@@ -73,39 +73,46 @@ function Map({
   const onUnmount = useCallback(function callback(map: google.maps.Map) {
     setMap(null);
   }, []);
-  return isLoaded ? (
-    <Box
-      sx={{
-        borderImage:
-          "linear-gradient(45deg, rgba(255, 122, 0, 1), rgba(255, 184, 0, 1)) 1",
-        borderStyle: "solid",
-        borderWidth: "3px",
-      }}
-    >
-      <GoogleMap
-        mapContainerStyle={
-          containerStyle ? containerStyle : { height: "400px" }
-        }
-        options={{
-          styles: defaultMapStyle,
-          maxZoom: 13,
-          restriction: {
-            latLngBounds: defaultBounds,
-          },
-          mapTypeControl: false,
-          fullscreenControl: fullscreenControlEnabled,
-          zoomControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_TOP,
-          },
-        }}
-        mapTypeId="ROADMAP"
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        {children}
-      </GoogleMap>
-    </Box>
-  ) : null;
+
+  return (
+    <Grow in={isLoaded}>
+      {isLoaded ? (
+        <Box
+          sx={{
+            borderImage:
+              "linear-gradient(45deg, rgba(255, 122, 0, 1), rgba(255, 184, 0, 1)) 1",
+            borderStyle: "solid",
+            borderWidth: "3px",
+          }}
+        >
+          <GoogleMap
+            mapContainerStyle={
+              containerStyle ? containerStyle : { height: "400px" }
+            }
+            options={{
+              styles: defaultMapStyle,
+              maxZoom: 13,
+              restriction: {
+                latLngBounds: defaultBounds,
+              },
+              mapTypeControl: false,
+              fullscreenControl: fullscreenControlEnabled,
+              zoomControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_TOP,
+              },
+            }}
+            mapTypeId="ROADMAP"
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          >
+            {children}
+          </GoogleMap>
+        </Box>
+      ) : (
+        <div />
+      )}
+    </Grow>
+  );
 }
 
 export default memo(Map);

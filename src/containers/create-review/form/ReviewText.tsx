@@ -64,7 +64,11 @@ const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
       <Typography variant={"body1"} my={"1em"} fontSize={{ md: "20px" }}>
         Текст заметки:
       </Typography>
-      <TextEditor readonly={readonly} fieldName={"description"} />
+      <TextEditor
+        readonly={readonly}
+        fieldName={"description"}
+        placeholder={"Введите текст заметки"}
+      />
     </Box>
   );
 };

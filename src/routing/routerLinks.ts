@@ -20,11 +20,16 @@ export const routerLinks = {
   personalAreaSettings: "/personal-area/settings",
   personalAreaFavourites: "/personal-area/favourites",
   personalAreaEditPlace: (placeId: number) =>
-    `/personal-area/my-places/edit/${placeId}`,
+    `/personal-area/my-places/${placeId}/edit`,
   personalAreaEditReview: (reviewId: number) =>
-    `/personal-area/my-reviews/edit/${reviewId}`,
+    `/personal-area/my-reviews/${reviewId}/edit`,
   administrationBasePath: "/administration",
   administrationPlaces: "/administration/places",
+  administrationPlace: (placeId: number) => `/administration/places/${placeId}`,
+  administrationEditPlace: (placeId: number) =>
+    `/administration/places/${placeId}/edit`,
+  administrationEditReview: (reviewId: number) =>
+    `/administration/reviews/${reviewId}/edit`,
   personalAreaBasePath: "/personal-area",
   moderationBasePath: "/moderation",
   moderationPlaces: "/moderation/places",

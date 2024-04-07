@@ -3,7 +3,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import { memo, useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form-mui";
-import { Box, styled, Typography } from "@mui/material";
+import { Box, styled, SxProps, Typography } from "@mui/material";
 import textEditorConfig from "@/components/forms/text-editor/text-editor.config";
 
 const StyledEditor = styled("div")(({ theme }) => ({
@@ -35,14 +35,18 @@ const StyledEditor = styled("div")(({ theme }) => ({
 const TextEditor = ({
   fieldName,
   readonly,
+  placeholder,
+  sx,
 }: {
   fieldName: string;
   readonly?: boolean;
+  placeholder?: string;
+  sx?: SxProps;
 }) => {
   const { setValue } = useFormContext();
 
   return (
-    <Box>
+    <Box sx={sx}>
       <Controller
         name={fieldName}
         render={({ field, fieldState, formState }) => (
@@ -59,7 +63,7 @@ const TextEditor = ({
               className="editor-input"
               modules={textEditorConfig.modules}
               formats={textEditorConfig.formats}
-              placeholder="Введите текст заметки"
+              placeholder={placeholder}
             />
           </StyledEditor>
         )}

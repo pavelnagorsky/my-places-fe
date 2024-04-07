@@ -109,7 +109,7 @@ function LocationPopover({
           onFocus: (event) => event.preventDefault(),
         }}
         sx={{
-          "& input": { cursor: "pointer" },
+          "& .MuiInputBase-root, input": { cursor: "pointer" },
           bgcolor: "white",
           ...inputSx,
         }}

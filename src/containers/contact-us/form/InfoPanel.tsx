@@ -27,7 +27,7 @@ const InfoPanel = () => {
         <Button
           sx={{ py: "0.8em", color: "primary.main" }}
           variant={"outlined"}
-          linkTo={routerLinks.aboutUs}
+          linkTo={routerLinks.aboutUs + "#faq"}
         >
           О проекте
         </Button>

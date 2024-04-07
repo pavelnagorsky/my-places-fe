@@ -85,7 +85,7 @@ const placesService = {
 
   getPlaceForEdit: (id: number, lang: string) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.get<IEditPlace>(`/places/edit/${id}?lang=${langId}`);
+    return axiosInstance.get<IEditPlace>(`/places/${id}/edit?lang=${langId}`);
   },
 
   updatePlace: (id: number, payload: IUpdatePlace, lang: string) => {
@@ -93,12 +93,24 @@ const placesService = {
     return axiosInstance.put(`/places/${id}?lang=${langId}`, payload);
   },
 
+  updatePlaceByAdmin: (id: number, payload: IUpdatePlace, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.put(
+      `/places/${id}/administration?lang=${langId}`,
+      payload
+    );
+  },
+
+  updatePlaceSlug: (id: number, slug: string) => {
+    return axiosInstance.put(`/places/${id}/slug`, { slug });
+  },
+
   deletePlace: (id: number) => {
     return axiosInstance.delete(`/places/${id}`);
   },
 
   addPlaceToFavourites: (placeId: number) => {
-    return axiosInstance.post(`/favourites/places/${placeId}`);
+    return axiosInstance.post(`/favourites/${placeId}/add`);
   },
 
   getMyFavourites: (payload: IMyFavouritesRequest, language: string) => {
@@ -128,24 +140,33 @@ const placesService = {
   },
 
   getPlaceForModeration: (id: number) => {
-    return axiosInstance.get<IEditPlace>(`/places/moderation/${id}`);
+    return axiosInstance.get<IEditPlace>(`/places/${id}/moderation`);
   },
 
   moderatePlace: (id: number, dto: IModeration) => {
-    return axiosInstance.post(`/places/moderation/${id}`, dto);
+    return axiosInstance.post(`/places/${id}/moderation`, dto);
   },
 
   getPlaceInfoForAdmin: (id: number | string, language: string) => {
     const langId = parseLanguageToId(language);
     return axiosInstance.get<IMyPlace>(
-      `/places/administration/${id}?lang=${langId}`
+      `/places/${id}/administration?lang=${langId}`
     );
   },
 
   changePlaceStatus: (id: number | string, dto: IChangePlaceStatus) => {
     return axiosInstance.post(
-      `/places/administration/${id}/change-status`,
+      `/places/${id}/administration/change-status`,
       dto
+    );
+  },
+
+  safelyDeletePlace: (id: number | string, newPlaceIdForReviews?: number) => {
+    const query = newPlaceIdForReviews
+      ? `?newPlaceId=${newPlaceIdForReviews}`
+      : "";
+    return axiosInstance.delete(
+      `/places/${id}/administration/safe-delete${query}`
     );
   },
 };

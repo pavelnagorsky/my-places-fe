@@ -14,7 +14,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
 
 interface IMyReviewMenuProps {
-  anchorEl: null | HTMLElement;
+  anchorEl: null | Element;
   open: boolean;
   handleClose: () => void;
   onDelete: () => void;

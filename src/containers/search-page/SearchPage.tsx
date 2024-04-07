@@ -1,7 +1,14 @@
 import Map, { ILatLngCoordinate } from "../../components/map/Map";
 import { Circle, InfoWindow, Marker } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
-import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Grow,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import FormContainer from "@/containers/search-page/FormContainer";
 import PlaceCard from "@/components/place-card/PlaceCard";
 import { primaryBackground } from "@/styles/theme/lightTheme";

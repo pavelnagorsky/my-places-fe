@@ -74,7 +74,6 @@ const CreatePlace = () => {
       description: data.description,
       address: data.address,
       website: data.website,
-      slug: data.slug,
       placeTypeId: data.placeTypeId,
       categoriesIds: data.categoriesIds,
       coordinates: `${data.lat};${data.lng}`,

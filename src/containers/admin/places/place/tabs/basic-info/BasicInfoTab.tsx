@@ -3,6 +3,7 @@ import { IMyPlace } from "@/services/places-service/interfaces/my-place.interfac
 import PlaceInfoSection from "@/containers/admin/places/place/tabs/basic-info/sections/PlaceInfoSection";
 import DeletePlaceSection from "@/containers/admin/places/place/tabs/basic-info/sections/DeletePlaceSection";
 import PlaceStatusSection from "@/containers/admin/places/place/tabs/basic-info/sections/PlaceStatusSection";
+import PlaceSlugSection from "@/containers/admin/places/place/tabs/basic-info/sections/PlaceSlugSection";
 
 interface IBasicInfoTabProps {
   place: IMyPlace;
@@ -13,7 +14,14 @@ const BasicInfoTab = ({ place, fetchPlace }: IBasicInfoTabProps) => {
   return (
     <Grid container spacing={"2em"}>
       <Grid item xs={12} md={6}>
-        <PlaceInfoSection place={place} />
+        <Grid container spacing={"2em"}>
+          <Grid item xs={12}>
+            <PlaceInfoSection place={place} />
+          </Grid>
+          <Grid item xs={12}>
+            <PlaceSlugSection onReloadPlace={fetchPlace} place={place} />
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item xs={12} md={6}>
         <Grid container spacing={"2em"}>

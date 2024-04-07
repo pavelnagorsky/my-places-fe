@@ -35,3 +35,9 @@ export interface IModerationReviewsRequest
   search?: string;
   authorEmail?: string;
 }
+
+export interface IAdministrationReviewsRequest
+  extends IPaginationRequest<MyReviewsOrderByEnum> {
+  placeId: number;
+  search?: string;
+}

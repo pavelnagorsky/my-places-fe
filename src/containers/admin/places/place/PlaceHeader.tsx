@@ -5,8 +5,11 @@ import Link from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import PlaceIcon from "@mui/icons-material/Place";
+import { StyledButton } from "@/components/UI/button/StyledButton";
+import NextLink from "next/link";
+import EditIcon from "@mui/icons-material/Edit";
 
-const PlaceHeader = ({ title }: { title?: string }) => {
+const PlaceHeader = ({ title, id }: { title?: string; id: number }) => {
   return (
     <Stack
       gap={"1em"}
@@ -89,7 +92,17 @@ const PlaceHeader = ({ title }: { title?: string }) => {
           sx={{ display: "flex", gap: "1em" }}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
-        ></Box>
+        >
+          <NextLink href={routerLinks.administrationEditPlace(id)}>
+            <StyledButton
+              startIcon={<EditIcon />}
+              size={"large"}
+              variant={"contained"}
+            >
+              Редактировать
+            </StyledButton>
+          </NextLink>
+        </Box>
       </Stack>
     </Stack>
   );

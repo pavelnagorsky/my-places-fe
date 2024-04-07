@@ -55,7 +55,11 @@ const ReportItem = ({ report }: IReportItemProps) => {
         color={"secondary.main"}
         href={routerLinks.place(report.placeSlug)}
         target={"_blank"}
-        sx={{ textDecoration: "underline #565656", wordBreak: "break-word" }}
+        sx={{
+          textDecoration: "underline #565656",
+          wordBreak: "break-word",
+          width: "fit-content",
+        }}
       >
         {report.placeSlug}
       </Typography>

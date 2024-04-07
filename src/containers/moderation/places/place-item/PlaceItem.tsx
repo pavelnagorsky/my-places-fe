@@ -45,7 +45,9 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
 
   const placeTypeBox = (
     <Stack gap={"0.2em"}>
-      <Typography variant={"body1"}>{place.type}</Typography>
+      <Typography variant={"body1"} sx={{ wordBreak: "break-word" }}>
+        {place.type}
+      </Typography>
     </Stack>
   );
 

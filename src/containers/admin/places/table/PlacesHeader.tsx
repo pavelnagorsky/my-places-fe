@@ -68,7 +68,7 @@ const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
               },
             }}
             fullWidth
-            name={"email"}
+            name={"search"}
             onChange={debounce(onSubmit, 300)}
             inputProps={{
               "aria-label": "Search",

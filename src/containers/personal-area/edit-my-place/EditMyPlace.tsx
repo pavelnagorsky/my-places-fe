@@ -1,16 +1,11 @@
 import PersonalAreaLayout from "../layout/PersonalAreaLayout";
-import {
-  FormContainer,
-  FormProvider,
-  SwitchElement,
-} from "react-hook-form-mui";
+import { FormContainer, FormProvider } from "react-hook-form-mui";
 import useEditMyPlace from "@/containers/personal-area/edit-my-place/useEditMyPlace";
 import {
   Backdrop,
   Box,
   Button,
   CircularProgress,
-  FormHelperText,
   Grid,
   Stack,
   Typography,

@@ -111,6 +111,8 @@ function MoreFiltersPopover({
             labelProps={{
               sx: {
                 width: "49%",
+                wordWrap: "break-word",
+                overflow: "hidden",
                 mx: 0,
                 marginInlineEnd: "0.5px",
                 "& span:first-of-type": {
@@ -140,6 +142,8 @@ function MoreFiltersPopover({
               sx: {
                 width: "49%",
                 mx: 0,
+                wordWrap: "break-word",
+                overflow: "hidden",
                 marginInlineEnd: "0.5px",
                 "& span:first-of-type": {
                   color: "primary.light",
@@ -195,7 +199,7 @@ function MoreFiltersPopover({
           onFocus: (event) => event.preventDefault(),
         }}
         sx={{
-          "& input": { cursor: "pointer" },
+          "& .MuiInputBase-root, input": { cursor: "pointer" },
           bgcolor: "white",
           ...inputSx,
         }}
@@ -230,7 +234,7 @@ function MoreFiltersPopover({
             pt: "1.5em",
             pb: "0.5em",
             borderRadius: "10px",
-            maxWidth: "350px",
+            maxWidth: "450px",
           },
         }}
       >

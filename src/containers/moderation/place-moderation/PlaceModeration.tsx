@@ -9,8 +9,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
-import utils from "@/shared/utils";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
 import Tab1 from "@/containers/create-place/form/tabs/Tab1";

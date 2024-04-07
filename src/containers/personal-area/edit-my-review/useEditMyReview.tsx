@@ -49,7 +49,7 @@ const useEditMyReview = () => {
   };
 
   useEffect(() => {
-    // fetch place data for editing
+    // fetch review data for editing
     if (!reviewId || Number.isNaN(+reviewId)) {
       handleShowNotFoundError();
       return;

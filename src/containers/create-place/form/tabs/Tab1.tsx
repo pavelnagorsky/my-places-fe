@@ -21,27 +21,6 @@ import {
 } from "@/containers/create-place/form/interfaces";
 
 const Tab1 = ({ readonly }: IPlaceTabProps) => {
-  const { setError } = useFormContext<IPlaceFormContext>();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-  const validateSlug = useMemo(
-    () =>
-      debounce((value: string) => {
-        return placesService
-          .validateSlug({ slug: value })
-          .then((res) => {
-            return true;
-          })
-          .catch((reason) => {
-            const existsMessage = "SLUG_EXISTS";
-            if (reason?.response?.data?.message === existsMessage)
-              setError("slug", { message: "Данная ссылка уже занята" });
-          });
-      }, 300),
-    []
-  );
-
   return (
     <Fragment>
       <Stack direction={"row"} gap={"0.5em"}>
@@ -144,60 +123,7 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
       </Stack>
       <Typography
         variant={"body1"}
-        mt={"1.5em"}
-        fontSize={{ xs: "18px", md: "20px" }}
-      >
-        Общедоступная ссылка
-      </Typography>
-      <Typography variant={"body2"} mt={"0.5em"} fontSize={{ md: "16px" }}>
-        Данная ссылка будет отображаться на поисковой странице сайта и видна
-        другим пользователям
-      </Typography>
-      <TextFieldElement
-        sx={{
-          mt: "1em",
-          "& input": { bgcolor: "white", borderRadius: "15px" },
-          width: "100%",
-          fontSize: { md: "20px" },
-        }}
-        InputProps={{
-          readOnly: readonly,
-          startAdornment: (
-            <InputAdornment position={"end"}>
-              {isMobile ? "places/" : `https://${Environment.domain}/places/`}
-            </InputAdornment>
-          ),
-        }}
-        name={"slug"}
-        onChange={(event) => validateSlug(event.target.value)}
-        validation={{
-          required: "Это поле обязательно к заполнению",
-          pattern: {
-            value: regExp.slugPattern,
-            message: "Введено некорректное значение",
-          },
-        }}
-        placeholder={"crevo-castle"}
-      />
-      <Stack
-        mt={"0.3em"}
-        color={"secondary.main"}
-        fontSize={14}
-        sx={{
-          fontWeight: 300,
-          opacity: 0.8,
-        }}
-        display={"flex"}
-        direction={"row"}
-        alignItems={"center"}
-        gap={"0.5em"}
-      >
-        <InfoOutlinedIcon fontSize={"small"} />
-        Ссылка должна состоять из символов латинского алфавита и знаков тире
-      </Stack>
-      <Typography
-        variant={"body1"}
-        mt={"1.5em"}
+        mt={"1em"}
         fontSize={{ xs: "18px", md: "20px" }}
       >
         Сайт достопримечательности

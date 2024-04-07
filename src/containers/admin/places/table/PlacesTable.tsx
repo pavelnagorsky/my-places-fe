@@ -49,7 +49,7 @@ const PlacesTable = () => {
   } = usePlaces();
 
   function handleClick(item: IMyPlace) {
-    router.push(`/administration/places/${item.id}`);
+    router.push(routerLinks.administrationPlace(item.id));
   }
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -132,6 +132,7 @@ const PlacesTable = () => {
                         sx={{
                           textDecoration: "underline #565656",
                           wordBreak: "break-word",
+                          width: "fit-content",
                         }}
                         onClick={(e) => e.stopPropagation()}
                         href={routerLinks.place(item.slug)}

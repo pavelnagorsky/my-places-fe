@@ -7,6 +7,7 @@ import { IUserShortInfo } from "@/services/user-service/interfaces/user-short-in
 import { IModerator } from "@/services/user-service/interfaces/moderator.interface";
 import { ISaveModerator } from "@/services/user-service/interfaces/save-moderator.interface";
 import { IBlockUser } from "@/services/user-service/interfaces/block-user.interface";
+import { IEmail } from "@/services/user-service/interfaces/email.interface";
 
 const userService = {
   getUserData: () => {
@@ -46,6 +47,10 @@ const userService = {
 
   unblockUser: (id: string | number) => {
     return axiosInstance.post(`/users/${id}/unblock`, {});
+  },
+
+  sendEmail: (payload: IEmail) => {
+    return axiosInstance.post("/users/email", payload);
   },
 };
 

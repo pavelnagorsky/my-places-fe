@@ -2,6 +2,7 @@ import axiosInstance from "@/services/axios.instance";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { ICreateReview } from "@/services/reviews-service/interfaces/create-review.interface";
 import {
+  IAdministrationReviewsRequest,
   IModerationReviewsRequest,
   IMyReviewsRequest,
   ISearchReview,
@@ -53,12 +54,20 @@ const reviewsService = {
 
   getReviewForEdit: (id: number, lang: string) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.get<IEditReview>(`/reviews/edit/${id}?lang=${langId}`);
+    return axiosInstance.get<IEditReview>(`/reviews/${id}/edit?lang=${langId}`);
   },
 
   updateReview: (id: number, payload: IUpdateReview, lang: string) => {
     const langId = parseLanguageToId(lang);
     return axiosInstance.put(`/reviews/${id}?lang=${langId}`, payload);
+  },
+
+  updateReviewByAdmin: (id: number, payload: IUpdateReview, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.put(
+      `/reviews/${id}/administration?lang=${langId}`,
+      payload
+    );
   },
 
   MODERATION_REVIEWS_ITEMS_PER_PAGE: 10,
@@ -72,7 +81,18 @@ const reviewsService = {
   },
 
   moderateReview: (id: number, dto: IModeration) => {
-    return axiosInstance.post(`/reviews/moderation/${id}`, dto);
+    return axiosInstance.post(`/reviews/${id}/moderation`, dto);
+  },
+
+  getAdministrationReviews: (
+    lang: string,
+    payload: IAdministrationReviewsRequest
+  ) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IPaginationResponse<IMyReview>>(
+      `/reviews/administration-reviews?lang=${langId}`,
+      payload
+    );
   },
 };
 

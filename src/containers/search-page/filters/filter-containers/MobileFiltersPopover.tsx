@@ -147,6 +147,8 @@ const MobileFiltersPopover = ({
             sx: {
               width: "49%",
               mx: 0,
+              wordWrap: "break-word",
+              overflow: "hidden",
               marginInlineEnd: "0.5px",
               "& span:first-of-type": {
                 color: "primary.light",
@@ -178,6 +180,8 @@ const MobileFiltersPopover = ({
             sx: {
               width: "49%",
               mx: 0,
+              wordWrap: "break-word",
+              overflow: "hidden",
               marginInlineEnd: "0.5px",
               "& span:first-of-type": {
                 color: "primary.light",
@@ -231,7 +235,7 @@ const MobileFiltersPopover = ({
           onFocus: (event) => event.preventDefault(),
         }}
         sx={{
-          "& input": { cursor: "pointer" },
+          "& .MuiInputBase-root, input": { cursor: "pointer" },
           bgcolor: "white",
           ...inputSx,
         }}
