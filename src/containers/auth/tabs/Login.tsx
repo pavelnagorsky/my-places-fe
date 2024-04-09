@@ -29,6 +29,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
+import useDialog from "@/hooks/useDialog";
+import ForgotPassword from "@/containers/auth/tabs/ForgotPassword";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +38,7 @@ const Login = () => {
   const error = useAppSelector(selectAuthError);
   const router = useRouter();
   const { i18n } = useTranslation();
+  const forgotPasswordDialog = useDialog();
 
   const loginRedirect = async (path: string) => {
     await router
@@ -165,13 +168,17 @@ const Login = () => {
           fullWidth
           sx={{ fontWeight: 600, my: "1.3em", py: "0.8em" }}
           variant={"contained"}
+          startIcon={
+            loading ? <CircularProgress color={"inherit"} size={23} /> : null
+          }
         >
-          {loading ? <CircularProgress color={"inherit"} size={23} /> : "Войти"}
+          Войти
         </Button>
       </FormContainer>
       <Divider sx={{ borderColor: "#D5D3D0", my: "1em" }} />
       <Stack justifyContent={"center"} mt="1.2em">
         <Button
+          onClick={forgotPasswordDialog.handleOpen}
           variant={"text"}
           color={"secondary"}
           sx={{
@@ -182,6 +189,10 @@ const Login = () => {
         >
           Забыли пароль?
         </Button>
+        <ForgotPassword
+          open={forgotPasswordDialog.open}
+          onClose={forgotPasswordDialog.handleClose}
+        />
       </Stack>
     </Box>
   );

@@ -35,7 +35,7 @@ function a11yProps(index: number) {
     sx: {
       fontSize: { xs: "16px", md: "18px" },
       color: "secondary.main",
-      fontWeight: { xs: 600, md: 600 },
+      fontWeight: 600,
     },
   };
 }

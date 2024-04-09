@@ -64,6 +64,7 @@ const Signup = () => {
 
   const onSubmit: SubmitHandler<ISignupRequest> = (data) => {
     if (loading) return;
+    data.email = data.email.trim();
     dispatch(
       signupThunk({ ...data, onSuccess: () => afterSignup(data.email) })
     );
@@ -298,12 +299,11 @@ const Signup = () => {
             mb: { xs: "2em", sm: "1.3em" },
           }}
           variant={"contained"}
+          startIcon={
+            loading ? <CircularProgress color={"inherit"} size={23} /> : null
+          }
         >
-          {loading ? (
-            <CircularProgress color={"inherit"} size={23} />
-          ) : (
-            "Зарегистрироваться"
-          )}
+          Зарегистрироваться
         </Button>
       </FormContainer>
     </Box>

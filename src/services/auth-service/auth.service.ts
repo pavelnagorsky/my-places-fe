@@ -26,6 +26,20 @@ const authService = {
       }
     );
   },
+  resetPasswordRequest: (email: string) => {
+    return axiosInstance.post("/auth/reset-password-request", { email });
+  },
+  resetPassword: (password: string, token: string) => {
+    return axiosInstance.post(
+      "/auth/reset-password",
+      { password },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  },
 };
 
 export default authService;

@@ -41,7 +41,7 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
   useEffect(() => {
     // fetch items
     placeCategoriesService
-      .getAll(i18n.language)
+      .getAllAdmin(i18n.language)
       .then(({ data }) => {
         setItems(data);
         setLoading(false);

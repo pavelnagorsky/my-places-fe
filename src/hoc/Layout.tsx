@@ -1,5 +1,5 @@
-import { PropsWithChildren, useEffect, useMemo } from "react";
-import { Box } from "@mui/material";
+import { PropsWithChildren, useEffect, useMemo, useState } from "react";
+import { Box, LinearProgress } from "@mui/material";
 import dynamic from "next/dynamic";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
@@ -37,6 +37,27 @@ export default function Layout({ children }: PropsWithChildren) {
   const preferredLanguageId = useAppSelector(selectUserPreferredLanguage);
   const router = useRouter();
   const { i18n } = useTranslation();
+  const [pageLoading, setPageLoading] = useState(false);
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      setPageLoading(true);
+    };
+
+    const handleRouteChangeComplete = () => {
+      setPageLoading(false);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+    router.events.on("routeChangeError", handleRouteChangeComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
+      router.events.off("routeChangeError", handleRouteChangeComplete);
+    };
+  }, [router.events]);
 
   const wideDesign = useMemo(() => {
     return wideDesignPathNames.some((link) => router.pathname.includes(link));
@@ -62,6 +83,11 @@ export default function Layout({ children }: PropsWithChildren) {
 
   return (
     <Box height={"100vh"} display={"flex"} flexDirection={"column"}>
+      {pageLoading && (
+        <LinearProgress
+          sx={{ zIndex: 5000, position: "fixed", top: 0, width: "100vw" }}
+        />
+      )}
       <SnackbarAlert />
       <AuthModal />
       <Box flexGrow={1}>

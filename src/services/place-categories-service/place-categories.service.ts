@@ -13,9 +13,15 @@ const placeCategoriesService = {
       `/placeCategories?lang=${langId}`
     );
   },
+  getAllAdmin: (lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.get<IPlaceCategory[]>(
+      `/placeCategories/administration?lang=${langId}`
+    );
+  },
   getOneAdmin: (id: number | string) => {
     return axiosInstance.get<IPlaceCategoryAdmin>(
-      `/placeCategories/administration/${id}`
+      `/placeCategories/${id}/administration`
     );
   },
   createAdmin: (dto: ICreatePlaceCategoryAdmin) => {
@@ -26,13 +32,13 @@ const placeCategoriesService = {
   },
   updateAdmin: (id: number | string, dto: ICreatePlaceCategoryAdmin) => {
     return axiosInstance.put<{ id: number }>(
-      `/placeCategories/administration/${id}`,
+      `/placeCategories/${id}/administration`,
       dto
     );
   },
   deleteAdmin: (id: number | string) => {
     return axiosInstance.delete<{ id: number }>(
-      `/placeCategories/administration/${id}`
+      `/placeCategories/${id}/administration`
     );
   },
 };
