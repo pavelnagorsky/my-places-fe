@@ -1,13 +1,12 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Hidden, Stack, Typography } from "@mui/material";
 
 import logoImage from "public/images/logo/logo.png";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Media from "@/hoc/media/Media";
 
 export function Logo({ small }: { small?: boolean }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   const logoText = (
@@ -45,9 +44,9 @@ export function Logo({ small }: { small?: boolean }) {
         />
       </Box>
       {small ? (
-        <Media xs={"none"} md="block">
+        <Hidden mdDown implementation={"css"}>
           {logoText}
-        </Media>
+        </Hidden>
       ) : (
         logoText
       )}

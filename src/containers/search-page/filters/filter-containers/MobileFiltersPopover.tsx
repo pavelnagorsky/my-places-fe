@@ -43,7 +43,7 @@ const MobileFiltersPopover = ({
   triggerSubmit,
   inputSx,
 }: IMoreFiltersPopoverProps) => {
-  const { t } = useTranslation("searchPage");
+  const { t } = useTranslation(["search", "common"]);
   const popover = usePopover("more-filters-mobile-popover");
   const form = useFormContext<ISearchForm>();
 
@@ -121,7 +121,7 @@ const MobileFiltersPopover = ({
           mb: "1em",
         }}
         name={"title"}
-        placeholder={"Введите название"}
+        placeholder={t("filters.enterTitle")}
         InputProps={{
           endAdornment: (
             <InputAdornment position={"end"}>
@@ -213,10 +213,10 @@ const MobileFiltersPopover = ({
         justifyContent={"space-between"}
       >
         <Button sx={{ color: primaryColor }} onClick={onClear}>
-          {t("filters.clear")}
+          {t("buttons.clear", { ns: "common" })}
         </Button>
         <Button variant={"contained"} type={"submit"} onClick={onSubmit}>
-          {t("filters.apply")}
+          {t("buttons.apply", { ns: "common" })}
         </Button>
       </Stack>
     </Box>

@@ -1,9 +1,12 @@
 import { UserTypesEnum } from "@/services/contact-service/interfaces/interfaces";
+import { useTranslation } from "next-i18next";
 
 const useUserTypes = () => {
+  const { t } = useTranslation("contact-us");
+
   return [
-    { id: UserTypesEnum.PRIVATE, label: "Приватный пользователь" },
-    { id: UserTypesEnum.COMPANY, label: "Компания" },
+    { id: UserTypesEnum.PRIVATE, label: t("form.userTypes.private") },
+    { id: UserTypesEnum.COMPANY, label: t("form.userTypes.company") },
   ];
 };
 

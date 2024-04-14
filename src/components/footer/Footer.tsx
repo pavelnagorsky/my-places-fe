@@ -1,4 +1,4 @@
-import { Stack, SxProps, Typography } from "@mui/material";
+import { Hidden, Stack, SxProps, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { Logo } from "@/components/logo/Logo";
@@ -6,8 +6,6 @@ import MyLink from "@/components/next-mui-link/NextMuiLink";
 import { memo } from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import Media from "@/hoc/media/Media";
-import { useRouter } from "next/router";
 import { Environment } from "@/shared/Environment";
 
 const linkSx: SxProps = {
@@ -26,7 +24,7 @@ const Footer = () => {
   const { t } = useTranslation("common");
 
   const linksSection = (
-    <Media xs={"none"} md={"block"}>
+    <Hidden mdDown implementation="css">
       <Stack direction={"row"} gap={"3em"}>
         <Stack gap={"0.5em"}>
           <MyLink href={routerLinks.contactUs} sx={linkSx}>
@@ -38,14 +36,14 @@ const Footer = () => {
         </Stack>
         <Stack gap={"0.5em"}>
           <MyLink href={routerLinks.privacyPolicy} sx={linkSx}>
-            Политика конфиденциальности
+            {t("links.privacyPolicy")}
           </MyLink>
           <MyLink href={routerLinks.termsOfUse} sx={linkSx}>
-            Пользовательское соглашение
+            {t("links.termsOfUse")}
           </MyLink>
         </Stack>
       </Stack>
-    </Media>
+    </Hidden>
   );
 
   const footerText = (

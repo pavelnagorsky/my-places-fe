@@ -14,6 +14,11 @@ import { store } from "@/store/store";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
+import { DefaultSeo } from "next-seo";
+import { Environment } from "@/shared/Environment";
+import I18nLanguages from "@/shared/I18nLanguages";
+import createLightTheme from "@/styles/theme/lightTheme";
+import { useRouter } from "next/router";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -23,10 +28,11 @@ function App({
   pageProps,
 }: AppProps & { emotionCache: EmotionCache }) {
   const dateFnsLocale = useDateFnsLocale();
+  const { locale } = useRouter();
   return (
     <CacheProvider value={emotionCache}>
       <Provider store={store}>
-        <ThemeProvider theme={lightTheme}>
+        <ThemeProvider theme={createLightTheme(locale as any)}>
           <LocalizationProvider
             dateAdapter={AdapterDateFns}
             adapterLocale={dateFnsLocale}
@@ -37,6 +43,16 @@ function App({
                 content="width=device-width, initial-scale=1.0"
               />
             </Head>
+            <DefaultSeo
+              openGraph={{
+                type: "website",
+                locale: I18nLanguages.ru,
+                url: `https://${Environment.domain}/`,
+                siteName: "Знай свой край",
+                title: "Знай свой край",
+              }}
+              titleTemplate={"%s | Знай свой край"}
+            />
             <CssBaseline />
             <Layout>
               <Component {...pageProps} />

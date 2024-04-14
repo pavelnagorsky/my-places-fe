@@ -3,8 +3,10 @@ import { Button } from "@/components/UI/button/Button";
 import { routerLinks } from "@/routing/routerLinks";
 import { Environment } from "@/shared/Environment";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { useTranslation } from "next-i18next";
 
 const InfoPanel = () => {
+  const { t } = useTranslation("contact-us");
   return (
     <Stack gap={{ xs: "2em", md: "2em" }}>
       <Box>
@@ -14,7 +16,7 @@ const InfoPanel = () => {
           fontSize={{ xs: "20px", md: "30px" }}
           my={{ xs: "0.5em", md: "0.4em" }}
         >
-          О проекте
+          {t("info.about")}
         </Typography>
         <Typography
           variant={"body2"}
@@ -22,14 +24,14 @@ const InfoPanel = () => {
           mb={"1em"}
           fontSize={{ xs: "16px", md: "20px" }}
         >
-          Прочитайте о нашем проекте подробнее:
+          {t("info.aboutDescription")}
         </Typography>
         <Button
           sx={{ py: "0.8em", color: "primary.main" }}
           variant={"outlined"}
           linkTo={routerLinks.aboutUs + "#faq"}
         >
-          О проекте
+          {t("info.about")}
         </Button>
       </Box>
       <Box>
@@ -39,7 +41,7 @@ const InfoPanel = () => {
           fontSize={{ xs: "20px", md: "30px" }}
           my={{ xs: "0.5em", md: "0.4em" }}
         >
-          Напишите нам
+          {t("info.contactUs")}
         </Typography>
         <Typography
           variant={"body2"}
@@ -47,7 +49,7 @@ const InfoPanel = () => {
           mb={"1em"}
           fontSize={{ xs: "16px", md: "20px" }}
         >
-          Не нашли ответ на свой вопрос? Задайте его напрямую через почту:
+          {t("info.contactUsEmail")}
         </Typography>
         <Stack direction={"row"} alignItems={"center"}>
           <MailOutlineIcon

@@ -13,6 +13,7 @@ const nextConfig = {
   env: {
     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
     EMAIL: process.env.EMAIL,
+    DOMAIN: process.env.DOMAIN,
   },
   async redirects() {
     return redirectsList;

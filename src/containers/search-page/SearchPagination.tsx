@@ -18,7 +18,7 @@ const SearchPagination = ({
   currentResultsCount,
   onChangeCurrentPage,
 }: ISearchPaginationProps) => {
-  const { t } = useTranslation("searchPage");
+  const { t } = useTranslation("search");
   const firstAndLastVisibleResults = useMemo(() => {
     const first = currentPage * placesService.SEARCH_PLACES_PER_PAGE + 1;
     const last = first + currentResultsCount - 1;

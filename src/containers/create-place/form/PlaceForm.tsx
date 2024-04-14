@@ -15,6 +15,7 @@ import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
 import utils from "@/shared/utils";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
+import { useTranslation } from "next-i18next";
 
 const Navigation = dynamic(
   () => import("@/containers/create-place/form/Navigation"),
@@ -42,6 +43,7 @@ interface IPlaceFormProps {
 }
 
 const PlaceForm = ({ loading }: IPlaceFormProps) => {
+  const { t } = useTranslation(["place-management", "common"]);
   const { formState } = useFormContext<IPlaceFormContext>();
   const createPlaceMeta = useCreatePlaceMeta();
 
@@ -71,19 +73,17 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
                   //fontSize={{ xs: "25px", md: "32px" }}
                   mb={"0.5em"}
                 >
-                  Создание места
+                  {t("creation.title")}
                 </Typography>
                 <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                  Создание нового места - это возможность рассказать о
-                  посещённом объекте. Здесь вы можете добавить описание,
-                  прикрепить фотографии, а также указать тип, локацию и адрес.
+                  {t("creation.description")}
                 </Typography>
               </Box>
               <div>
                 <ButtonWithTooltip
                   loading={loading}
-                  buttonText={"Создать"}
-                  tooltipText={"Не все обязательные поля формы заполнены!"}
+                  buttonText={t("buttons.create", { ns: "common" })}
+                  tooltipText={t("errors.allFieldsRequired", { ns: "common" })}
                   variant={"contained"}
                   type={"submit"}
                   disabled={

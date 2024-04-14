@@ -7,6 +7,7 @@ const regExp = {
   email: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
   password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
   noWhiteSpaces: /^\S*$/,
+  brReplacement: /(?:\r\n|\r|\n)/g,
 };
 
 export default regExp;

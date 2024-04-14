@@ -5,9 +5,9 @@ import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import CommentIcon from "@mui/icons-material/Comment";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import HomeIcon from "@mui/icons-material/Home";
-import CollectionsOutlinedIcon from "@mui/icons-material/CollectionsOutlined";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import SliderMenuLink from "../SliderMenuLink";
+import { useTranslation } from "next-i18next";
 
 const LinksSection = ({
   onClose,
@@ -16,6 +16,7 @@ const LinksSection = ({
   onClose: () => void;
   pathname: string;
 }) => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -24,14 +25,14 @@ const LinksSection = ({
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}
-        text={"Обратная связь"}
+        text={t("links.contactUs")}
         href={routerLinks.contactUs}
         icon={<ForumOutlinedIcon fontSize={"small"} color={"secondary"} />}
       />
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}
-        text={"О проекте"}
+        text={t("links.about")}
         href={routerLinks.aboutUs}
         icon={<HomeIcon fontSize={"small"} color={"secondary"} />}
       />
@@ -43,21 +44,21 @@ const LinksSection = ({
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}
-        text={"Поиск"}
+        text={t("links.search")}
         href={routerLinks.search}
         icon={<TravelExploreIcon fontSize={"small"} color={"secondary"} />}
       />
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}
-        text={"Написать заметку"}
+        text={t("links.createReviewMobile")}
         href={routerLinks.createReview}
         icon={<CommentIcon fontSize={"small"} color={"secondary"} />}
       />
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}
-        text={"Создать место"}
+        text={t("links.createPlaceMobile")}
         href={routerLinks.createPlace}
         icon={<AddBoxIcon fontSize={"small"} color={"secondary"} />}
       />

@@ -8,6 +8,7 @@ import SliderMenuLink from "@/components/header/slider-menu/SliderMenuLink";
 import BuildIcon from "@mui/icons-material/Build";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/roles.enum";
+import { useTranslation } from "next-i18next";
 
 const UserSection = ({
   onClose,
@@ -18,6 +19,7 @@ const UserSection = ({
   pathname: string;
   firstName: string;
 }) => {
+  const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const onLogout = () => {
     onClose();
@@ -52,13 +54,13 @@ const UserSection = ({
             cursor: "pointer",
           }}
         >
-          Выйти
+          {t("links.logout")}
         </Link>
       </Stack>
       <SliderMenuLink
         pathname={pathname}
         onClick={onClose}
-        text={"Личный кабинет"}
+        text={t("links.personalArea")}
         href={routerLinks.personalAreaPlaces}
         icon={<AccountCircleIcon fontSize={"small"} color={"secondary"} />}
       />
@@ -66,7 +68,7 @@ const UserSection = ({
         <SliderMenuLink
           pathname={pathname}
           onClick={onClose}
-          text={"Модерация"}
+          text={t("links.moderation")}
           href={routerLinks.moderationPlaces}
           icon={<BuildIcon fontSize={"small"} color={"secondary"} />}
         />
@@ -75,7 +77,7 @@ const UserSection = ({
         <SliderMenuLink
           pathname={pathname}
           onClick={onClose}
-          text={"Администрация"}
+          text={t("links.administration")}
           href={routerLinks.administrationUsers}
           icon={
             <AdminPanelSettingsIcon fontSize={"small"} color={"secondary"} />

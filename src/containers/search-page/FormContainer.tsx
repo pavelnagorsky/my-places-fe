@@ -5,16 +5,15 @@ import { IPlaceType } from "@/services/place-types-service/place-type.interface"
 import { useTranslation } from "next-i18next";
 import placeTypesService from "@/services/place-types-service/place-types.service";
 import { RadiusPopover } from "@/containers/search-page/filters/filter-containers/RadiusPopover";
-import { Stack } from "@mui/material";
+import { Hidden, Stack } from "@mui/material";
 import LocationPopover from "@/containers/search-page/filters/filter-containers/LocationPopover";
 import { SwitchElement } from "react-hook-form-mui";
 import MobileFiltersPopover from "@/containers/search-page/filters/filter-containers/MobileFiltersPopover";
-import Media from "@/hoc/media/Media";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import placeCategoriesService from "@/services/place-categories-service/place-categories.service";
 
 function FormContainer({ onSubmit }: { onSubmit: () => void }) {
-  const { t, i18n } = useTranslation("searchPage");
+  const { t, i18n } = useTranslation("search");
   const [types, setTypes] = useState<IPlaceType[]>([]);
   const [categories, setCategories] = useState<IPlaceCategory[]>([]);
 
@@ -35,7 +34,7 @@ function FormContainer({ onSubmit }: { onSubmit: () => void }) {
 
   return (
     <Box py={"1.6em"}>
-      <Media sm={"none"}>
+      <Hidden smDown implementation={"css"}>
         <Stack
           direction={"row"}
           gap={"1em"}
@@ -56,8 +55,8 @@ function FormContainer({ onSubmit }: { onSubmit: () => void }) {
             labelPlacement={"top"}
           />
         </Stack>
-      </Media>
-      <Media xs={"none"} sm={"block"}>
+      </Hidden>
+      <Hidden smUp implementation={"css"}>
         <Stack direction={"row"} gap={"3em"} justifyContent={"space-between"}>
           <LocationPopover
             triggerSubmit={onSubmit}
@@ -74,7 +73,7 @@ function FormContainer({ onSubmit }: { onSubmit: () => void }) {
             startText={t("filters.filters")}
           />
         </Stack>
-      </Media>
+      </Hidden>
     </Box>
   );
 }

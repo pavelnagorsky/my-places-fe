@@ -6,8 +6,10 @@ import contactService from "@/services/contact-service/contact.service";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import utils from "@/shared/utils";
+import { useTranslation } from "next-i18next";
 
 const useContactUs = () => {
+  const { t } = useTranslation(["contact-us", "common"]);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -27,9 +29,10 @@ const useContactUs = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
-          description:
-            "Ошибка при отправке обратной связи. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          title: t("feedback.error", { ns: "common" }),
+          description: `${t("feedback.error")} ${t("errors.description", {
+            ns: "common",
+          })}`,
           variant: "standard",
           severity: "error",
         },
@@ -42,8 +45,8 @@ const useContactUs = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Успех!",
-          description: `Сообщение было успешно отправлено. Ваш запрос будет обработан администрацией и Вам придет ответ на электронную почту ${email}`,
+          title: t("feedback.success", { ns: "common" }),
+          description: `${t("feedback.success")} ${email}`,
           variant: "standard",
           severity: "success",
         },

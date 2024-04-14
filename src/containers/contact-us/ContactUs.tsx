@@ -6,9 +6,11 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { motion } from "framer-motion";
 import useContactUs from "@/containers/contact-us/useContactUs";
 import { FormProvider } from "react-hook-form-mui";
+import { useTranslation } from "next-i18next";
 
 const ContactUs = () => {
   const logic = useContactUs();
+  const { t } = useTranslation("contact-us");
 
   return (
     <WrappedContainer>
@@ -25,11 +27,10 @@ const ContactUs = () => {
                 fontSize={{ xs: "30px", md: "40px" }}
                 mb={"0.5em"}
               >
-                Обратная связь
+                {t("title")}
               </Typography>
               <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                Здесь мы ответим на все вопросы, запросы, предложения и так
-                далее.
+                {t("description")}
               </Typography>
             </Grid>
           </Grid>

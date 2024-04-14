@@ -14,7 +14,10 @@ const Place: NextPage = () => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? I18nLanguages.ru, ["common"])),
+      ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
+        "place-management",
+        "common",
+      ])),
       // Will be passed to the page component as props
     },
   };

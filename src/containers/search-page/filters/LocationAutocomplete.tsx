@@ -45,7 +45,7 @@ export interface PlaceType {
 }
 
 function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
-  const { t } = useTranslation("searchPage");
+  const { t } = useTranslation("search");
   const [selected, setSelected] = useState(false);
   const autocompleteService = useGoogleAutocompleteService();
   const searchCoordinates = useCoordinatesByPlaceId();

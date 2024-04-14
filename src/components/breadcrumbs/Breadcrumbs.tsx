@@ -2,26 +2,28 @@ import { Box, Breadcrumbs as Crumbs, Typography } from "@mui/material";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
 import { useRouter } from "next/router";
 import { memo } from "react";
+import { useTranslation } from "next-i18next";
 
 type routesNames = "create-review" | "create-place";
 
 const Breadcrumbs = () => {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const pathnames = router.pathname.split("/").filter((x) => x);
 
   // possible pathnames
   const breadcrumbNameMap = {
-    ["create-review"]: "Создание заметки",
-    ["create-place"]: "Создание места",
-    ["privacy-policy"]: "Политика Конфиденциальности",
-    ["terms-of-use"]: "Пользовательское Соглашение",
+    ["create-review"]: t("links.createReview"),
+    ["create-place"]: t("links.createPlace"),
+    ["privacy-policy"]: t("links.privacyPolicy"),
+    ["terms-of-use"]: t("links.termsOfUse"),
   };
 
   return (
     <Box role="presentation" mt={"1em"}>
       <Crumbs aria-label="breadcrumb">
         <NextMuiLink underline="hover" color="inherit" href="/">
-          Знай свой край
+          {t("logo")}
         </NextMuiLink>
         {pathnames.map((path, i) => {
           if (breadcrumbNameMap.hasOwnProperty(path)) {

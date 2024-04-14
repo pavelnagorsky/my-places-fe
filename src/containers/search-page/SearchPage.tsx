@@ -31,7 +31,7 @@ function SearchPage({
 }: {
   ssrResults?: IPaginationResponse<ISearchPlace>;
 }) {
-  const { t } = useTranslation("searchPage");
+  const { t } = useTranslation("search");
   // responsive design tools
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));

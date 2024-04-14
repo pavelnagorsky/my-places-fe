@@ -1,7 +1,6 @@
-import { Box, SxProps, Typography } from "@mui/material";
+import { Box, Hidden, SxProps, Typography } from "@mui/material";
 import { CSSProperties, memo } from "react";
 import Image, { StaticImageData } from "next/image";
-import Media from "@/hoc/media/Media";
 
 interface ITextAndMainImageProps {
   title: string;
@@ -31,7 +30,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
 
   // main picture
   const mainImage = (
-    <Media xs={"none"} sm={"block"}>
+    <Hidden smDown implementation={"css"}>
       <Box sx={imageContainerSx}>
         <Image
           sizes="(max-width: 768px) 100vw, 80vw"
@@ -42,12 +41,12 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
           style={imageStyle}
         />
       </Box>
-    </Media>
+    </Hidden>
   );
 
   // main picture mobile
   const mainImageMobile = (
-    <Media xs={"block"} sm={"none"}>
+    <Hidden smUp implementation={"css"}>
       <Box sx={imageContainerSx}>
         <Image
           sizes="(max-width: 768px) 100vw, 80vw"
@@ -58,7 +57,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
           priority
         />
       </Box>
-    </Media>
+    </Hidden>
   );
 
   // text for main picture

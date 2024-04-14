@@ -30,7 +30,7 @@ export function RadiusPopover({
   startText,
   triggerSubmit,
 }: IRadiusSelectProps) {
-  const { t } = useTranslation("searchPage");
+  const { t } = useTranslation(["search", "common"]);
   const popover = usePopover("radius-popover");
   const preventIconClick = (e: any) => {
     e.preventDefault();
@@ -83,10 +83,10 @@ export function RadiusPopover({
         justifyContent={"space-between"}
       >
         <Button sx={{ color: primaryColor }} onClick={onClear}>
-          {t("filters.clear")}
+          {t("buttons.clear", { ns: "common" })}
         </Button>
         <Button variant={"contained"} type={"submit"} onClick={onSubmit}>
-          {t("filters.apply")}
+          {t("buttons.apply", { ns: "common" })}
         </Button>
       </Stack>
     </Box>

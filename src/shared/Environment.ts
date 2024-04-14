@@ -6,5 +6,5 @@ export class Environment {
   static readonly backendBaseUrl =
     process.env["BACKEND_BASE_URL"] ?? "http://localhost:3000";
 
-  static readonly email = process.env["EMAIL"] ?? "my-places@gmail.com";
+  static readonly email = process.env["EMAIL"] ?? "support@my-places.by";
 }

@@ -20,7 +20,7 @@ interface IRadiusFilterProps {
 }
 
 const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
-  const { t } = useTranslation("searchPage");
+  const { t } = useTranslation("search");
   const [loading, setLoading] = useState(false);
   const form = useFormContext<ISearchForm>();
 
@@ -35,7 +35,7 @@ const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
     }
     const geolocationAPI = navigator.geolocation;
     if (!geolocationAPI) {
-      console.log("geolocation not available");
+      console.error("geolocation not available");
       form.setValue("searchByMe", false);
       return;
     }

@@ -2,48 +2,42 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import { motion } from "framer-motion";
 import { Box, Stack, Typography } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 const TermsOfUse = () => {
+  const { t } = useTranslation("terms");
   const textLists = {
-    block1: [
-      "Текстовой информации",
-      "Фотоматериалов",
-      "Ссылок на материалы, размещенные на других сайтах",
-    ],
+    block1: [t("block1.item1"), t("block1.item2"), t("block1.item3")],
     block2: [
-      "осуществлять поиск информации на сайте",
-      "получать информацию на сайте",
-      "создавать информацию для сайта",
-      "распространять информацию на сайте",
-      "комментировать контент, выложенный на сайте",
-      "копировать информацию на другие сайты с указанием источника",
-      "использовать информацию сайта в личных некоммерческих целях",
-      "использовать информацию сайта в коммерческих целях с разрешения правообладателей",
+      t("block2.item1"),
+      t("block2.item2"),
+      t("block2.item3"),
+      t("block2.item4"),
+      t("block2.item5"),
+      t("block2.item6"),
+      t("block2.item7"),
+      t("block2.item8"),
     ],
     block3: [
-      "по своему усмотрению и необходимости создавать, изменять, отменять правила",
-      "ограничивать доступ к любой информации на сайте",
-      "создавать, изменять, удалять информацию",
-      "удалять учетные записи",
-      "отказывать в регистрации без объяснения причин",
+      t("block3.item1"),
+      t("block3.item2"),
+      t("block3.item3"),
+      t("block3.item4"),
+      t("block3.item5"),
     ],
     block4: [
-      "обеспечить достоверность предоставляемой информации",
-      "обеспечивать сохранность личных данных от доступа третьих лиц",
-      "обновлять Персональные данные, предоставленные при регистрации, в случае их изменения",
-      "не нарушать работоспособность сайта",
-      "не совершать действия, направленные на введение других Пользователей в заблуждение",
+      t("block4.item1"),
+      t("block4.item2"),
+      t("block4.item3"),
+      t("block4.item4"),
+      t("block4.item5"),
     ],
-    block5: [
-      "поддерживать работоспособность сайта за исключением случаев, когда это невозможно по независящим от Администрации причинам.",
-      "осуществлять разностороннюю защиту учетной записи Пользователя",
-      "защищать информацию, распространение которой ограничено или запрещено законами путем вынесения предупреждения либо удалением учетной записи пользователя, нарушившего правила",
-    ],
-    block6: [
-      "пользователь лично несет полную ответственность за распространяемую им информацию",
-      "администрация не несет никакой ответственности за достоверность информации, скопированной из других источников",
-      "администрация не несет никакой ответственности за услуги, предоставляемые третьими лицами",
-      "в случае возникновения форс-мажорной ситуации (боевые действия, чрезвычайное положение, стихийное бедствие и т. д.) Администрация не гарантирует сохранность информации, размещённой Пользователем, а также бесперебойную работу информационного ресурса",
+    block5: [t("block5.item1"), t("block5.item2"), t("block5.item3")],
+    responsibility: [
+      t("responsibility.item1"),
+      t("responsibility.item2"),
+      t("responsibility.item3"),
+      t("responsibility.item4"),
     ],
   };
 
@@ -73,31 +67,25 @@ const TermsOfUse = () => {
         >
           <Box>
             <Typography variant={"h1"} component={"h1"}>
-              Пользовательское Соглашение
+              {t("title")}
             </Typography>
             <Typography variant={"body1"} fontSize={"18px"}>
-              Настоящее Пользовательское Соглашение (Далее Соглашение)
-              регулирует отношения между владельцем my-places.by (далее Знай
-              свой край или Администрация) с одной стороны и пользователем сайта
-              с другой. Сайт Знай свой край не является средством массовой
-              информации.
+              {t("description")}
             </Typography>
             <br />
             <Typography variant={"body1"} fontSize={"18px"}>
-              Используя сайт, Вы соглашаетесь с условиями данного соглашения.
+              {t("agreement1")}
             </Typography>
             <Typography variant={"body1"} fontWeight={600} fontSize={"18px"}>
-              Если Вы не согласны с условиями данного соглашения, не используйте
-              сайт Знай свой край!
+              {t("agreement2")}
             </Typography>
           </Box>
           <Box>
             <Typography variant={"h3"} fontSize={{ xs: "1.3em", md: "1.5em" }}>
-              Предмет соглашения
+              {t("subject")}
             </Typography>
             <Typography variant={"body1"} fontWeight={600}>
-              Администрация предоставляет пользователю право на размещение на
-              сайте следующей информации:
+              {t("block1.title")}
             </Typography>
             <ul>
               {textLists.block1.map((text, index) => (
@@ -108,11 +96,8 @@ const TermsOfUse = () => {
             </ul>
           </Box>
           <Box>
-            <Typography variant={"h3"} fontSize={{ xs: "1.3em", md: "1.5em" }}>
-              Предмет соглашения
-            </Typography>
             <Typography variant={"body1"} fontWeight={600}>
-              Пользователь имеет право:
+              {t("block2.title")}
             </Typography>
             <ul>
               {textLists.block2.map((text, index) => (
@@ -123,7 +108,7 @@ const TermsOfUse = () => {
             </ul>
             <br />
             <Typography variant={"body1"} fontWeight={600}>
-              Администрация имеет право:
+              {t("block3.title")}
             </Typography>
             <ul>
               {textLists.block3.map((text, index) => (
@@ -134,7 +119,7 @@ const TermsOfUse = () => {
             </ul>
             <br />
             <Typography variant={"body1"} fontWeight={600}>
-              Пользователь обязуется:
+              {t("block4.title")}
             </Typography>
             <ul>
               {textLists.block4.map((text, index) => (
@@ -145,7 +130,7 @@ const TermsOfUse = () => {
             </ul>
             <br />
             <Typography variant={"body1"} fontWeight={600}>
-              Администрация обязуется:
+              {t("block5.title")}
             </Typography>
             <ul>
               {textLists.block5.map((text, index) => (
@@ -157,10 +142,10 @@ const TermsOfUse = () => {
           </Box>
           <Box>
             <Typography variant={"h3"} fontSize={{ xs: "1.3em", md: "1.5em" }}>
-              Ответственность сторон
+              {t("responsibility.title")}
             </Typography>
             <ul>
-              {textLists.block6.map((text, index) => (
+              {textLists.responsibility.map((text, index) => (
                 <li key={index} className={"text-li"}>
                   <Typography variant={"body2"}>{text}</Typography>
                 </li>
@@ -169,18 +154,16 @@ const TermsOfUse = () => {
           </Box>
           <Box>
             <Typography variant={"h3"} fontSize={{ xs: "1.3em", md: "1.5em" }}>
-              Условия действия Соглашения
+              {t("termsOfAgreement.title")}
             </Typography>
             <Typography variant={"body2"}>
-              Данное Соглашение вступает в силу при регистрации на сайте.
+              {t("termsOfAgreement.item1")}
               <br />
-              Соглашение действует бессрочно.
+              {t("termsOfAgreement.item2")}
               <br />
-              Администрация оставляет за собой право в одностороннем порядке
-              изменять данное соглашение по своему усмотрению.
+              {t("termsOfAgreement.item3")}
               <br />
-              При изменении соглашения, в некоторых случаях, администрация может
-              оповестить пользователей удобным для нее способом.
+              {t("termsOfAgreement.item4")}
             </Typography>
           </Box>
         </Stack>

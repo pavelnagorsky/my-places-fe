@@ -18,7 +18,7 @@ import ProtectedAuth from "@/hoc/ProtectedAuth";
 
 const CreatePlace = () => {
   const router = useRouter();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["place-management", "common"]);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const form = useForm<IPlaceFormContext>({
@@ -38,9 +38,15 @@ const CreatePlace = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
-          description:
-            "Ошибка при создании места. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          title: t("feedback.error", {
+            ns: "common",
+          }),
+          description: `${t("feedback.create.error")} ${t(
+            "errors.description",
+            {
+              ns: "common",
+            }
+          )}`,
           variant: "standard",
           severity: "error",
         },
@@ -54,8 +60,9 @@ const CreatePlace = () => {
       showAlert({
         alertProps: {
           title: "Успех!",
-          description:
-            "Место было создано и отправлено на модерацию. Вы сможете просмотреть его статус в личном кабинете",
+          description: t("feedback.success", {
+            ns: "common",
+          }),
           variant: "standard",
           severity: "success",
         },

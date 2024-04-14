@@ -63,10 +63,13 @@ const PlaceSelect = ({
     fetch("");
   }, [i18n.language, query.placeId, isAuth]);
 
-  const onInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    setLoading(true);
-    fetch(event.target.value);
-  }, []);
+  const onInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setLoading(true);
+      fetch(event.target.value);
+    },
+    [i18n.language]
+  );
 
   const debouncedInputChange = useMemo(
     () => debounce(onInputChange, 300),

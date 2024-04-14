@@ -8,6 +8,7 @@ import regExp from "@/shared/regExp";
 import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
 import PhoneInput from "@/components/forms/PhoneInput";
 import { Button } from "@/components/UI/button/Button";
+import { useTranslation } from "next-i18next";
 
 interface IFormProps {
   onSubmit: () => void;
@@ -15,11 +16,11 @@ interface IFormProps {
 }
 
 const Form = ({ onSubmit, loading }: IFormProps) => {
+  const { t } = useTranslation(["contact-us", "common"]);
   const userTypes = useUserTypes();
   const parseError = (e: FieldError): string => {
-    if (e.type === "pattern")
-      return "Введен некорректный адрес электронной почты";
-    return "Это поле обязательно к заполнению";
+    if (e.type === "pattern") return t("errors.email", { ns: "common" });
+    return t("errors.required", { ns: "common" });
   };
 
   return (
@@ -31,7 +32,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
         mt={{ xs: "0.5em", md: "0.4em" }}
         mb={"0.8em"}
       >
-        Контактная информация
+        {t("form.title")}
       </Typography>
       <Stack gap={"1em"}>
         <Box>
@@ -40,7 +41,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Имя и Фамилия
+            {t("form.fullName")}
           </Typography>
           <TextFieldElement
             required
@@ -50,7 +51,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
               required: true,
             }}
             parseError={parseError}
-            label={"Имя и фамилия"}
+            label={t("form.fullName")}
           />
         </Box>
         <Box
@@ -66,7 +67,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             row
             required
             parseError={parseError}
-            label={"Кто вы?"}
+            label={t("form.whoAreYou")}
             type={"number"}
             options={userTypes}
             name={"userType"}
@@ -78,7 +79,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Электронная почта
+            {t("form.email")}
           </Typography>
           <TextFieldElement
             fullWidth
@@ -90,7 +91,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             }}
             required
             parseError={parseError}
-            label={"Электронная почта"}
+            label={t("form.email")}
           />
         </Box>
         <Box>
@@ -99,7 +100,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Телефон
+            {t("form.phone")}
           </Typography>
           <PhoneInput
             id={"phone"}
@@ -114,7 +115,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Сообщение
+            {t("form.message")}
           </Typography>
           <TextFieldElement
             required
@@ -126,7 +127,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
               required: true,
             }}
             parseError={parseError}
-            label={"Сообщение"}
+            label={t("form.message")}
           />
         </Box>
         <Box>
@@ -142,7 +143,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             {loading ? (
               <CircularProgress color={"inherit"} size={25} />
             ) : (
-              "Отправить"
+              t("buttons.send", { ns: "common" })
             )}
           </Button>
         </Box>

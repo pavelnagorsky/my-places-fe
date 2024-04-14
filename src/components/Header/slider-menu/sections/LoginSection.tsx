@@ -4,8 +4,10 @@ import LoginIcon from "@mui/icons-material/Login";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useAppDispatch } from "@/store/hooks";
 import { openAuth } from "@/store/user-slice/user.slice";
+import { useTranslation } from "next-i18next";
 
 const LoginSection = ({ onClose }: { onClose: () => void }) => {
+  const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
 
   const login = () => {
@@ -37,7 +39,7 @@ const LoginSection = ({ onClose }: { onClose: () => void }) => {
         onClick={login}
       >
         <LoginIcon fontSize={"small"} color={"secondary"} />
-        <Typography>Войти</Typography>
+        <Typography>{t("links.login")}</Typography>
       </Button>
       <Button
         sx={{
@@ -52,7 +54,7 @@ const LoginSection = ({ onClose }: { onClose: () => void }) => {
         onClick={signup}
       >
         <PersonAddAlt1Icon fontSize={"small"} color={"secondary"} />
-        <Typography>Зарегистрироваться</Typography>
+        <Typography>{t("links.signup")}</Typography>
       </Button>
     </Fragment>
   );

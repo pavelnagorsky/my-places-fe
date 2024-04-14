@@ -18,11 +18,11 @@ const CreateMenu = ({ activePath }: { activePath: string }) => {
 
   const options = [
     {
-      title: t("links.create-review"),
+      title: t("links.createReview"),
       href: "/create-review",
     },
     {
-      title: t("links.create-place"),
+      title: t("links.createPlace"),
       href: "/create-place",
     },
   ];

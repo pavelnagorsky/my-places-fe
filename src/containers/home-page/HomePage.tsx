@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 
 const HomePage = () => {
-  const { t } = useTranslation("homePage");
+  const { t } = useTranslation("home");
   return (
     <motion.div
       variants={animationVariants.defaultContainerVariant}

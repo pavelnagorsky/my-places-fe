@@ -6,7 +6,7 @@ const GRADIENT =
   "linear-gradient(180deg, #FFA653 37.92%, rgba(255, 166, 84, 0.47) 63.98%, rgba(255, 204, 157, 0.159719) 87.58%, rgba(255, 245, 235, 0.0806913) 96.31%, rgba(255, 255, 255, 0) 100%)";
 
 function TextWithBubbles() {
-  const { t } = useTranslation("homePage");
+  const { t } = useTranslation("home");
 
   return (
     <Box maxWidth={"100vw"}>
