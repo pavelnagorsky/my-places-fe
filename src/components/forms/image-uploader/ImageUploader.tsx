@@ -17,6 +17,7 @@ import fileService from "@/services/file-service/file.service";
 import dynamic from "next/dynamic";
 import { AxiosResponse } from "axios";
 import ImagePreview from "@/components/forms/image-uploader/ImagePreview";
+import { useTranslation } from "next-i18next";
 
 const SortableList = dynamic(() => import("react-easy-sort"), { ssr: false });
 
@@ -33,6 +34,7 @@ const ImageUploader = ({
   required,
   readonly,
 }: IImageUploaderProps) => {
+  const { t } = useTranslation("common");
   const [loading, setLoading] = useState(false);
   const { control, formState } =
     useFormContext<{ [T in typeof fieldName]: IImage[] }>();
@@ -41,11 +43,11 @@ const ImageUploader = ({
     name: fieldName,
     keyName: "key",
     rules: {
-      required: required ? "Это поле обязательно к заполнению" : undefined,
+      required: required ? t("errors.required") : undefined,
       maxLength: maxLimit
         ? {
             value: maxLimit,
-            message: `Превышено максимальное количество изображений`,
+            message: t("errors.imagesLimit"),
           }
         : undefined,
     },

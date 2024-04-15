@@ -11,7 +11,6 @@ import {
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import CastleOutlinedIcon from "@mui/icons-material/CastleOutlined";
 import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
 import Image from "next/image";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
@@ -24,8 +23,6 @@ interface IPlaceCardProps {
 }
 
 function PlaceCard({ place }: IPlaceCardProps) {
-  //const isMobile = useMediaQuery();
-
   return (
     <Card
       sx={{
@@ -132,19 +129,24 @@ function PlaceCard({ place }: IPlaceCardProps) {
             alignItems={"center"}
             gap={"0.5em"}
           >
-            <Typography
-              fontWeight={400}
-              variant="body2"
-              fontSize={"14px"}
-              display={"flex"}
+            <Stack
+              direction={"row"}
               alignItems={"center"}
               flexGrow={1}
-              gap={"0.5em"}
-              textOverflow={"ellipsis"}
               overflow={"hidden"}
-              sx={{ wordBreak: "break-word" }}
+              gap={"0.5em"}
             >
-              {place.type.title}
+              <Typography
+                fontWeight={400}
+                variant="body2"
+                fontSize={"14px"}
+                textOverflow={"ellipsis"}
+                overflow={"hidden"}
+                whiteSpace={"nowrap"}
+                sx={{ wordBreak: "break-word" }}
+              >
+                {place.type.title}
+              </Typography>
               <Box
                 component={"img"}
                 src={place.type.image as string}
@@ -155,7 +157,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
                   height: "20px",
                 }}
               />
-            </Typography>
+            </Stack>
             <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
               <Typography
                 fontWeight={300}

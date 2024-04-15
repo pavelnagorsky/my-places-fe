@@ -1,26 +1,20 @@
-import { Fragment, memo, useMemo } from "react";
+import { Fragment, memo } from "react";
 import {
-  debounce,
   IconButton,
   InputAdornment,
   Stack,
   Tooltip,
   Typography,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { TextFieldElement, useFormContext } from "react-hook-form-mui";
+import { TextFieldElement } from "react-hook-form-mui";
 import regExp from "@/shared/regExp";
 import PublicIcon from "@mui/icons-material/Public";
-import placesService from "@/services/places-service/places.service";
-import { Environment } from "@/shared/Environment";
-import {
-  IPlaceFormContext,
-  IPlaceTabProps,
-} from "@/containers/create-place/form/interfaces";
+import { IPlaceTabProps } from "@/containers/create-place/form/interfaces";
+import { useTranslation } from "next-i18next";
 
 const Tab1 = ({ readonly }: IPlaceTabProps) => {
+  const { t } = useTranslation(["place-management", "common"]);
   return (
     <Fragment>
       <Stack direction={"row"} gap={"0.5em"}>
@@ -30,7 +24,7 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
           fontSize={{ xs: "20px", md: "30px" }}
           my={{ xs: "0.5em", md: "0.4em" }}
         >
-          Описание
+          {t("tabs.1.title")}
         </Typography>
         <Tooltip
           arrow
@@ -38,12 +32,7 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
           leaveTouchDelay={6000}
           sx={{ fontSize: "16px", alignSelf: "center" }}
           title={
-            <Typography p={"0.5em"}>
-              Текст требуется вводить в соотвествии с выбранным языком на сайте.
-              На остальные языки контент будет переведен автоматически,
-              посредством сервиса Google Translate. При необходимости, Вы
-              сможете отредактировать переводы в личном кабинете
-            </Typography>
+            <Typography p={"0.5em"}>{t("translations.tooltip")}</Typography>
           }
         >
           <IconButton>
@@ -52,14 +41,14 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
         </Tooltip>
       </Stack>
       <Typography variant={"body2"} fontSize={{ xs: "18px", md: "20px" }}>
-        Введите название и опишите место, в котором вы побывали.
+        {t("tabs.1.description")}
       </Typography>
       <Typography
         variant={"body1"}
         mt="1em"
         fontSize={{ xs: "18px", md: "20px" }}
       >
-        Название:
+        {t("tabs.1.placeTitle")}
       </Typography>
       <TextFieldElement
         InputProps={{
@@ -73,17 +62,25 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
         }}
         name={"title"}
         validation={{
-          required: "Это поле обязательно к заполнению",
-          maxLength: { value: 60, message: "Превышен лимит в 60 символов" },
+          required: t("errors.required", {
+            ns: "common",
+          }),
+          maxLength: {
+            value: 60,
+            message: t("errors.maxLength", {
+              ns: "common",
+              value: 60,
+            }),
+          },
         }}
-        placeholder={"Введите название..."}
+        placeholder={t("tabs.1.placeTitlePlaceholder")}
       />
       <Typography
         variant={"body1"}
         mt={"1em"}
         fontSize={{ xs: "18px", md: "20px" }}
       >
-        Краткое описание:
+        {t("tabs.1.placeDescription")}
       </Typography>
       <TextFieldElement
         InputProps={{
@@ -100,10 +97,18 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
         minRows={4}
         name={"description"}
         validation={{
-          required: "Это поле обязательно к заполнению",
-          maxLength: { value: 1000, message: "Превышен лимит в 1000 символов" },
+          required: t("errors.required", {
+            ns: "common",
+          }),
+          maxLength: {
+            value: 1000,
+            message: t("errors.maxLength", {
+              ns: "common",
+              value: 1000,
+            }),
+          },
         }}
-        placeholder={"Введите краткое описание..."}
+        placeholder={t("tabs.1.placeDescriptionPlaceholder")}
       />
       <Stack
         mt={"0.3em"}
@@ -119,17 +124,17 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
         gap={"0.5em"}
       >
         <InfoOutlinedIcon fontSize={"small"} />
-        Максимальная длина - 1000 символов
+        {t("tabs.1.placeDescriptionHelper", { value: 1000 })}
       </Stack>
       <Typography
         variant={"body1"}
         mt={"1em"}
         fontSize={{ xs: "18px", md: "20px" }}
       >
-        Сайт достопримечательности
+        {t("tabs.1.placeWebsite")}
       </Typography>
       <Typography variant={"body2"} mt={"0.5em"} fontSize={{ md: "16px" }}>
-        Укажите сайт данного места или достопримечательности (необязательно)
+        {t("tabs.1.placeWebsiteDescription")}
       </Typography>
       <TextFieldElement
         sx={{
@@ -151,7 +156,9 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
         validation={{
           pattern: {
             value: regExp.urlPattern,
-            message: "Введено некорректное значение",
+            message: t("errors.invalid", {
+              ns: "common",
+            }),
           },
         }}
         placeholder={"https://example.com"}

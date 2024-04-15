@@ -7,3 +7,4 @@ Host: https://my-places.by
 
 # Sitemaps
 Sitemap: https://my-places.by/sitemap.xml
+Sitemap: https://my-places.by/server-sitemap-index.xml

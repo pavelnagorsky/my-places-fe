@@ -3,14 +3,13 @@ import {
   Divider,
   IconButton,
   InputAdornment,
-  Popover,
   Stack,
+  SwipeableDrawer,
   SxProps,
   TextField,
   Typography,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import usePopover from "@/hooks/usePopover";
 import {
   CheckboxButtonGroup,
   TextFieldElement,
@@ -27,6 +26,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "next-i18next";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { ISearchForm } from "@/containers/search-page/interfaces";
+import useDialog from "@/hooks/useDialog";
 
 interface IMoreFiltersPopoverProps {
   startText: string;
@@ -44,9 +44,9 @@ const MobileFiltersPopover = ({
   inputSx,
 }: IMoreFiltersPopoverProps) => {
   const { t } = useTranslation(["search", "common"]);
-  const popover = usePopover("more-filters-mobile-popover");
   const form = useFormContext<ISearchForm>();
 
+  const drawer = useDialog();
   const preventIconClick = (e: any) => {
     e.preventDefault();
     return false;
@@ -63,7 +63,7 @@ const MobileFiltersPopover = ({
   };
 
   const onSubmit = () => {
-    popover.handleClose();
+    drawer.handleClose();
     triggerSubmit();
   };
 
@@ -90,7 +90,7 @@ const MobileFiltersPopover = ({
         <Typography fontSize={"18px"} mb={"1em"} component={"p"}>
           {t("filters.selectPlace")}
         </Typography>
-        <IconButton onClick={popover.handleClose}>
+        <IconButton onClick={drawer.handleClose}>
           <ClearIcon />
         </IconButton>
       </Stack>
@@ -147,7 +147,7 @@ const MobileFiltersPopover = ({
             sx: {
               width: "49%",
               mx: 0,
-              wordWrap: "break-word",
+              wordBreak: "break-word",
               overflow: "hidden",
               marginInlineEnd: "0.5px",
               "& span:first-of-type": {
@@ -180,7 +180,7 @@ const MobileFiltersPopover = ({
             sx: {
               width: "49%",
               mx: 0,
-              wordWrap: "break-word",
+              wordBreak: "break-word",
               overflow: "hidden",
               marginInlineEnd: "0.5px",
               "& span:first-of-type": {
@@ -228,8 +228,8 @@ const MobileFiltersPopover = ({
         type={"text"}
         onFocus={(event) => event.preventDefault()}
         // placeholder
-        aria-describedby={popover.id}
-        onClick={popover.handleOpen}
+        aria-describedby={"more-filters-mobile-popover"}
+        onClick={drawer.handleOpen}
         inputProps={{
           "aria-readonly": true,
           onFocus: (event) => event.preventDefault(),
@@ -255,28 +255,27 @@ const MobileFiltersPopover = ({
           ),
         }}
       />
-      <Popover
-        id={popover.id}
-        open={popover.open}
-        anchorEl={popover.anchor}
-        onClose={popover.handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
+      <SwipeableDrawer
+        id={drawer.open ? "more-filters-mobile-popover" : undefined}
+        ModalProps={{
+          keepMounted: false,
         }}
         PaperProps={{
           sx: {
             px: "1em",
             pt: "1.5em",
             pb: "0.5em",
-            borderRadius: "10px",
             width: "100%",
             // maxWidth: "350px",
           },
         }}
+        anchor={"bottom"}
+        open={drawer.open}
+        onClose={drawer.handleClose}
+        onOpen={drawer.handleOpen}
       >
         {content}
-      </Popover>
+      </SwipeableDrawer>
     </Box>
   );
 };

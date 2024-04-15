@@ -2,8 +2,11 @@ import { Fragment, memo } from "react";
 import { Box, Typography } from "@mui/material";
 import ImageUploader from "@/components/forms/image-uploader/ImageUploader";
 import { IPlaceTabProps } from "@/containers/create-place/form/interfaces";
+import { useTranslation } from "next-i18next";
 
 const Tab3 = ({ readonly }: IPlaceTabProps) => {
+  const { t } = useTranslation("place-management");
+
   return (
     <Fragment>
       <Typography
@@ -12,11 +15,10 @@ const Tab3 = ({ readonly }: IPlaceTabProps) => {
         fontWeight={{ xs: 500, md: 400 }}
         my={{ xs: "0.5em", md: "0.4em" }}
       >
-        Фотографии
+        {t("tabs.3.title")}
       </Typography>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        Загрузите до 5 фотографий, сделанных на этой локации в формате jpg,
-        jpeg, png.
+        {t("tabs.3.description", { limit: 5 })}
       </Typography>
       <Box mt={"2em"} mb={"3em"}>
         <ImageUploader

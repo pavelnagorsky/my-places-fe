@@ -1,5 +1,6 @@
 import { Box, Tab, Tabs, useMediaQuery, useTheme } from "@mui/material";
 import { memo, SyntheticEvent } from "react";
+import { useTranslation } from "next-i18next";
 
 function a11yProps(index: number) {
   return {
@@ -27,6 +28,7 @@ const Navigation = ({
   handleChange,
   alwaysHorizontal,
 }: INavigationProps) => {
+  const { t } = useTranslation("place-management");
   const theme = useTheme();
   const _isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isMobile = _isMobile || !!alwaysHorizontal;
@@ -56,10 +58,10 @@ const Navigation = ({
           borderLeft: { md: alwaysHorizontal ? undefined : 1 },
         }}
       >
-        <Tab label="Описание" {...a11yProps(0)} />
-        <Tab label="Категории" {...a11yProps(1)} />
-        <Tab label="Фотографии" {...a11yProps(2)} />
-        <Tab label="Адрес" {...a11yProps(3)} />
+        <Tab label={t("tabs.1.title")} {...a11yProps(0)} />
+        <Tab label={t("tabs.2.title")} {...a11yProps(1)} />
+        <Tab label={t("tabs.3.title")} {...a11yProps(2)} />
+        <Tab label={t("tabs.4.title")} {...a11yProps(3)} />
       </Tabs>
     </Box>
   );

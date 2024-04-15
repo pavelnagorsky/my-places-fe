@@ -21,6 +21,7 @@ import {
   IPlaceFormContext,
   IPlaceTabProps,
 } from "@/containers/create-place/form/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface ITab2Props extends IPlaceTabProps {
   placeTypes: IPlaceType[];
@@ -28,6 +29,7 @@ interface ITab2Props extends IPlaceTabProps {
 }
 
 const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
+  const { t } = useTranslation(["place-management", "common"]);
   const { watch, setValue } = useFormContext<IPlaceFormContext>();
   const isCommercial = watch("isCommercial");
 
@@ -52,19 +54,14 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
           fontWeight={{ xs: 500, md: 400 }}
           my={{ xs: "0.5em", md: "0.4em" }}
         >
-          Тип и категории
+          {t("tabs.2.formTitle")}
         </Typography>
         <Tooltip
           arrow
           enterTouchDelay={0}
           leaveTouchDelay={6000}
           sx={{ fontSize: "16px", alignSelf: "center" }}
-          title={
-            <Typography p={"0.5em"}>
-              Тип и категории нужны для корректного поиска вашего места на нашем
-              сайте, вы всегда сможете изменить их в личном кабинете
-            </Typography>
-          }
+          title={<Typography p={"0.5em"}>{t("tabs.2.tooltip")}</Typography>}
         >
           <IconButton>
             <InfoOutlinedIcon fontSize={"medium"} />
@@ -78,7 +75,7 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
           gap={{ xs: "0.4em", sm: "1em" }}
         >
           <Typography variant={"body1"} fontSize={{ xs: "18px", md: "20px" }}>
-            Публикация на коммерческой основе
+            {t("tabs.2.commercial")}
           </Typography>
           <Controller
             name={"isCommercial"}
@@ -97,7 +94,7 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
                 }
                 label={
                   <Box component={"span"} display={{ sm: "none" }}>
-                    Рекламная публикация
+                    {t("tabs.2.commercialLabel")}
                   </Box>
                 }
               />
@@ -109,13 +106,11 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
           mt={"0.5em"}
           fontSize={{ xs: "12px", md: "14px" }}
         >
-          Для публикации на сайте коммерчески ориентированного объекта (усадьба,
-          выставка, музей, гостиница и т.д.) в целях рекламы, выберите данную
-          опцию.
+          {t("tabs.2.commercialHelper")}
         </Typography>
       </Stack>
       <Typography variant={"body1"} fontSize={{ xs: "18px", md: "20px" }}>
-        Выберите тип места
+        {t("tabs.2.placeType")}
       </Typography>
       <SelectElement
         name={"placeTypeId"}
@@ -123,24 +118,26 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
           readOnly: readonly,
         }}
         validation={{
-          required: "Это поле обязательно к заполнению",
+          required: t("errors.required", {
+            ns: "common",
+          }),
         }}
         sx={{
           mt: "1em",
           width: { xs: "100%", md: "50%" },
         }}
         options={filteredPlaceTypes}
-        placeholder={"Выберите тип места..."}
+        placeholder={t("tabs.2.placeTypePlaceholder")}
       />
       <Typography
         variant={"body1"}
         mt={"1em"}
         fontSize={{ xs: "18px", md: "20px" }}
       >
-        Категории
+        {t("tabs.2.placeCategories")}
       </Typography>
       <Typography variant={"body2"} mt={"0.5em"} fontSize={{ md: "16px" }}>
-        Выберите категории к которым относится место
+        {t("tabs.2.placeCategoriesDescription")}
       </Typography>
       <Box
         width={"100%"}
@@ -156,6 +153,7 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
           labelProps={{
             disabled: readonly,
             sx: {
+              wordBreak: "break-word",
               width: { xs: "49%", md: "40%", lg: "35%" },
               mx: 0,
               marginInlineEnd: "2px",
@@ -173,7 +171,11 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
             label: opt.title,
           }))}
           required={true}
-          parseError={() => "Это поле обязательно к заполнению"}
+          parseError={() =>
+            t("errors.required", {
+              ns: "common",
+            })
+          }
           name={"categoriesIds"}
         />
       </Box>

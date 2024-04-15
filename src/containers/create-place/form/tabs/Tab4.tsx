@@ -18,8 +18,10 @@ import {
   IPlaceTabProps,
 } from "@/containers/create-place/form/interfaces";
 import { useGeocode } from "@/hooks/useGeocode";
+import { useTranslation } from "next-i18next";
 
 const Tab4 = ({ readonly }: IPlaceTabProps) => {
+  const { t } = useTranslation(["place-management", "common"]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { setValue, watch, trigger, clearErrors } =
@@ -76,7 +78,7 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
           fontWeight={{ xs: 500, md: 400 }}
           my={{ xs: "0.5em", md: "0.4em" }}
         >
-          Адрес
+          {t("tabs.4.title")}
         </Typography>
         <Tooltip
           arrow
@@ -84,12 +86,7 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
           leaveTouchDelay={6000}
           sx={{ fontSize: "16px", alignSelf: "center" }}
           title={
-            <Typography p={"0.5em"}>
-              Текст требуется вводить в соотвествии с выбранным языком на сайте.
-              На остальные языки контент будет переведен автоматически,
-              посредством сервиса Google Translate. При необходимости, Вы
-              сможете отредактировать переводы в личном кабинете
-            </Typography>
+            <Typography p={"0.5em"}>{t("translations.tooltip")}</Typography>
           }
         >
           <IconButton>
@@ -98,8 +95,7 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
         </Tooltip>
       </Stack>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        На этом этапе вам нужно ввести адрес заданной локации. Помимо этого, вы
-        можете найти его на карте и указать точные координаты.
+        {t("tabs.4.description")}
       </Typography>
       <TextFieldElement
         InputProps={{
@@ -114,11 +110,11 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
         type={"search"}
         name={"address"}
         validation={{
-          required: "Это поле обязательно к заполнению",
+          required: t("errors.required", {
+            ns: "common",
+          }),
         }}
-        placeholder={
-          "Беларусь, Гродненская обл., Сморгонский район, д. Крево..."
-        }
+        placeholder={t("tabs.4.addressPlaceholder")}
       />
       <Typography
         component={"h2"}
@@ -126,12 +122,10 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
         fontWeight={{ xs: 500, md: 400 }}
         my={{ xs: "0.5em", md: "0.4em" }}
       >
-        Проверьте, верное ли местоположение показывает карта
+        {t("tabs.4.mapTitle")}
       </Typography>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        Координаты места автоматически распознаются в зависимости от введенного
-        адреса. При необходимости, вы можете передвинуть маркер на карте или
-        указать точные координаты.
+        {t("tabs.4.mapDescription")}
       </Typography>
       <Box my={"1.5em"}>
         <Map
@@ -151,11 +145,10 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
         fontWeight={{ xs: 500, md: 400 }}
         my={{ xs: "0.5em", md: "0.4em" }}
       >
-        Координаты
+        {t("tabs.4.coordinates")}
       </Typography>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        Вы можете указать координаты места, если они вам известны. Сначала
-        указывается широта, затем долгота.
+        {t("tabs.4.coordinatesDescription")}
       </Typography>
       <Stack
         direction={"row"}
@@ -176,11 +169,15 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
           validation={{
             min: {
               value: 1,
-              message: "Введено некорректное значение",
+              message: t("errors.invalid", {
+                ns: "common",
+              }),
             },
-            required: "Это поле обязательно к заполнению",
+            required: t("errors.required", {
+              ns: "common",
+            }),
           }}
-          placeholder={"Широта"}
+          placeholder={t("tabs.4.latitude")}
         />
         <TextFieldElement
           type={"number"}
@@ -194,11 +191,15 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
           validation={{
             min: {
               value: 1,
-              message: "Введено некорректное значение",
+              message: t("errors.invalid", {
+                ns: "common",
+              }),
             },
-            required: "Это поле обязательно к заполнению",
+            required: t("errors.required", {
+              ns: "common",
+            }),
           }}
-          placeholder={"Долгота"}
+          placeholder={t("tabs.4.longitude")}
         />
       </Stack>
     </Fragment>
