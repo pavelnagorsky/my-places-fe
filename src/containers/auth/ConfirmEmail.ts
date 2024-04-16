@@ -7,7 +7,7 @@ import { useTranslation } from "next-i18next";
 import { openAuth } from "@/store/user-slice/user.slice";
 
 const ConfirmEmail = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const router = useRouter();
   const query = router.query as { token: string };
@@ -22,8 +22,8 @@ const ConfirmEmail = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Успех!",
-              description: "Электронная почта была успешно подтверждена",
+              title: t("feedback.success"),
+              description: t("auth.confirmEmail.success"),
               variant: "standard",
               severity: "success",
             },
@@ -35,9 +35,8 @@ const ConfirmEmail = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description:
-                "Ошибка при подтверждении электронной почты. Обратитесь в нашу службу поддержки...",
+              title: t("feedback.error"),
+              description: t("auth.confirmEmail.error"),
               variant: "standard",
               severity: "error",
             },

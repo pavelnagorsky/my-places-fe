@@ -27,7 +27,7 @@ import { openAuth } from "@/store/user-slice/user.slice";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 
 const ResetPassword = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const router = useRouter();
   const query = router.query as { token: string };
@@ -49,8 +49,8 @@ const ResetPassword = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Успех!",
-              description: "Пароль успешно обновлен",
+              title: t("feedback.success"),
+              description: t("auth.resetPassword.feedback.success"),
               variant: "standard",
               severity: "success",
             },
@@ -66,9 +66,8 @@ const ResetPassword = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description:
-                "Ошибка при обновлении пароля. Попробуйте отправить запрос на сброс пароля еще раз или обратитесь в нашу службу поддержки...",
+              title: t("feedback.error"),
+              description: t("auth.resetPassword.feedback.error"),
               variant: "standard",
               severity: "error",
             },
@@ -105,7 +104,7 @@ const ResetPassword = () => {
       <FormContainer formContext={form} onSuccess={onSubmit}>
         <Stack gap={"1em"}>
           <Typography fontSize={{ xs: "22px", md: "25px" }} fontWeight={600}>
-            Сброс пароля
+            {t("auth.resetPassword.title")}
           </Typography>
           <Box width={"100%"}>
             <FormLabel
@@ -116,7 +115,7 @@ const ResetPassword = () => {
               }}
               htmlFor={"signup-password"}
             >
-              Пароль
+              {t("auth.login.password")}
               <Tooltip
                 arrow
                 enterTouchDelay={0}
@@ -124,9 +123,7 @@ const ResetPassword = () => {
                 sx={{ fontSize: "14px", alignSelf: "start" }}
                 title={
                   <Typography p={"0.5em"}>
-                    Пароль должен содержать символы латинского алфавита, минимум
-                    1 цифру и 1 заглавную букву. Минимальная длина пароля - 8
-                    символов.
+                    {t("auth.signup.passwordHelper")}
                   </Typography>
                 }
               >
@@ -145,19 +142,19 @@ const ResetPassword = () => {
               name={"password"}
               type={"password"}
               id={"signup-password"}
-              placeholder={"Введите пароль..."}
+              placeholder={t("auth.login.passwordPlaceholder")}
               validation={{
-                required: "Это поле обязательно к заполнению",
+                required: t("errors.required"),
                 pattern: {
                   value: regExp.password,
-                  message: "Введено некорректное значение",
+                  message: t("errors.invalid"),
                 },
               }}
             />
           </Box>
           <Box width={"100%"}>
             <FormLabel htmlFor={"signup-password-confirm"}>
-              Подтверждение пароля
+              {t("auth.signup.confirmPassword")}
             </FormLabel>
             <PasswordRepeatElement
               sx={{
@@ -170,12 +167,12 @@ const ResetPassword = () => {
               name={"passwordConfirm"}
               type={"password"}
               id={"signup-password-confirm"}
-              placeholder={"Подтвердите пароль..."}
+              placeholder={t("auth.signup.confirmPasswordPlaceholder")}
               parseError={(error) => {
                 if (error.type === "validate") {
-                  return "Пароли должны совпадать";
+                  return t("auth.signup.confirmPasswordError");
                 } else {
-                  return "Это поле обязательно к заполнению";
+                  return t("errors.required");
                 }
               }}
               validation={{
@@ -196,7 +193,7 @@ const ResetPassword = () => {
             {loading ? (
               <CircularProgress color={"inherit"} size={23} />
             ) : (
-              "Обновить пароль"
+              t("auth.resetPassword.submit")
             )}
           </Button>
         </Stack>

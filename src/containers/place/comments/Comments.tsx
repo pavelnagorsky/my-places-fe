@@ -18,8 +18,10 @@ import { openAuth, selectUserId } from "@/store/user-slice/user.slice";
 import { AnimatePresence, motion } from "framer-motion";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/roles.enum";
+import { useTranslation } from "next-i18next";
 
 const Comments = ({ placeId }: { placeId: number }) => {
+  const { t } = useTranslation(["place", "common"]);
   const commentsData = useComments(placeId);
   const dateFnsLocale = useDateFnsLocale();
   const userId = useAppSelector(selectUserId);
@@ -55,10 +57,10 @@ const Comments = ({ placeId }: { placeId: number }) => {
       title={
         <Stack p={"0.5em"}>
           <Typography mb={"1em"} variant={"body1"}>
-            Только авторизированные пользователи могут оставлять комментарии
+            {t("comments.authHelper")}
           </Typography>
           <Button onClick={onAuth} variant={"contained"}>
-            Авторизироваться
+            {t("comments.authLink")}
           </Button>
         </Stack>
       }
@@ -85,12 +87,14 @@ const Comments = ({ placeId }: { placeId: number }) => {
         <TextFieldElement
           name={"comment"}
           multiline
-          placeholder={"Напишите комментарий..."}
+          placeholder={t("comments.placeholder")}
           maxRows={5}
           validation={{
-            maxLength: { value: 700, message: "Максимум 700 символов" },
+            maxLength: {
+              value: 700,
+              message: t("errors.maxLength", { value: 500, ns: "common" }),
+            },
           }}
-          parseError={(e) => e.message || "Максимум 700 символов"}
           onChange={commentsData.onChangeInput}
           fullWidth
           InputProps={{
@@ -105,7 +109,7 @@ const Comments = ({ placeId }: { placeId: number }) => {
                   color={"secondary"}
                   onClick={commentsData.onCancelEdit}
                 >
-                  Отменить
+                  {t("buttons.cancel", { ns: "common" })}
                 </Button>
               </InputAdornment>
             ) : undefined,
@@ -118,7 +122,7 @@ const Comments = ({ placeId }: { placeId: number }) => {
           mb={"1.2em"}
           fontSize={{ xs: "18px", md: "20px" }}
         >
-          Всего комментариев: {commentsData.comments.length}
+          {t("comments.totalComments")} {commentsData.comments.length}
         </Typography>
         <AnimatePresence mode="popLayout">
           {commentsData.comments.map((c, i) => (

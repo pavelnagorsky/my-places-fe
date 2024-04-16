@@ -19,13 +19,6 @@ const useReviews = ({ defaultData, placeSlug }: IUseReviewsProps) => {
     defaultData.totalItems > defaultData.items.length
   );
 
-  //console.log(reviews.length, hasMore);
-
-  // useEffect(() => {
-  //   setReviews(defaultData.items);
-  //   setHasMore(defaultData.totalItems > defaultData.items.length);
-  // }, [defaultData]);
-
   const handleSearch = () => {
     reviewsService
       .getPlaceReviews(

@@ -26,6 +26,7 @@ import { motion } from "framer-motion";
 import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
 import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface IPlaceProps {
   place: IPlace;
@@ -33,6 +34,7 @@ interface IPlaceProps {
 }
 
 const PlacePage = ({ place, reviews }: IPlaceProps) => {
+  const { t } = useTranslation("place");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -43,7 +45,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
         component={"h2"}
         fontSize={{ xs: "24px", md: "30px" }}
       >
-        Комментарии
+        {t("comments")}
       </Typography>
       <Comments placeId={place.id} />
     </Fragment>
@@ -126,7 +128,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                 pb={"0.5em"}
                 fontSize={{ xs: "24px", md: "30px" }}
               >
-                Описание
+                {t("description")}
               </Typography>
               <Box mb={"2em"}>
                 <Typography
@@ -147,7 +149,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                       fontSize={{ xs: "16px", md: "20px" }}
                       sx={{ whiteSpace: "nowrap" }}
                     >
-                      Веб-сайт:
+                      {t("website")}
                     </Typography>
                     <Link
                       target={"_blank"}
@@ -173,7 +175,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                 component={"h2"}
                 fontSize={{ xs: "24px", md: "30px" }}
               >
-                Категории
+                {t("categories")}
               </Typography>
               <Stack
                 direction={"row"}
@@ -227,7 +229,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                   component={"h2"}
                   fontSize={{ xs: "24px", md: "30px" }}
                 >
-                  Местоположение
+                  {t("location")}
                 </Typography>
                 <Map
                   containerStyle={{ height: isMobile ? "300px" : "400px" }}

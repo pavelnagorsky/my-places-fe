@@ -10,6 +10,7 @@ import {
 import { format } from "date-fns";
 import StyledReviewsContainer from "../../../components/UI/review-containers/StyledReviewsContainer";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface IReviewCardProps {
   review: ISearchReview;
@@ -17,6 +18,7 @@ interface IReviewCardProps {
 }
 
 const ReviewCard = ({ review, onClick }: IReviewCardProps) => {
+  const { t } = useTranslation("common");
   function createMarkup() {
     return { __html: review.description };
   }
@@ -53,7 +55,7 @@ const ReviewCard = ({ review, onClick }: IReviewCardProps) => {
           fullWidth
           variant={"text"}
         >
-          Открыть
+          {t("buttons.open")}
         </Button>
       </Box>
       <Box px={"1em"} mt={"1em"}>

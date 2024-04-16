@@ -7,10 +7,7 @@ import {
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
-import {
-  ISignupRequest,
-  LoginErrorEnum,
-} from "@/services/auth-service/interfaces";
+import { ISignupRequest } from "@/services/auth-service/interfaces";
 import {
   Box,
   CircularProgress,
@@ -31,8 +28,10 @@ import {
 } from "@/store/user-slice/user.slice";
 import { signupThunk } from "@/store/user-slice/thunks";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { useTranslation } from "next-i18next";
 
 const Signup = () => {
+  const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectAuthLoading);
   const error = useAppSelector(selectAuthError);
@@ -52,8 +51,8 @@ const Signup = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Успех!",
-          description: `Вы успешно прошли регистрацию, на ваш адрес электронной почты ${email} было выслано письмо для активации аккаунта`,
+          title: t("feedback.success"),
+          description: t("auth.signup.feedback.success", { email: email }),
           variant: "standard",
           severity: "success",
         },
@@ -75,7 +74,7 @@ const Signup = () => {
     form.setError(
       "email",
       {
-        message: "Данный адрес электронной почты уже занят",
+        message: t("auth.signup.emailAlreadyInUse"),
       },
       { shouldFocus: true }
     );
@@ -96,7 +95,9 @@ const Signup = () => {
     >
       <FormContainer formContext={form} onSuccess={onSubmit}>
         <Box width={"100%"} mb={"1.2em"}>
-          <FormLabel htmlFor={"signup-email"}>Почта</FormLabel>
+          <FormLabel htmlFor={"signup-email"}>
+            {t("auth.login.emailLabel")}
+          </FormLabel>
           <TextFieldElement
             sx={{
               "& .MuiInputBase-root": {
@@ -107,18 +108,20 @@ const Signup = () => {
             name={"email"}
             type={"email"}
             id={"signup-email"}
-            placeholder={"Введите адрес электронной почты..."}
+            placeholder={t("auth.login.emailPlaceholder")}
             validation={{
-              required: "Это поле обязательно к заполнению",
+              required: t("errors.required"),
               pattern: {
                 value: regExp.email,
-                message: "Введен некорректный адрес электронной почты",
+                message: t("errors.email"),
               },
             }}
           />
         </Box>
         <Box width={"100%"} mb={"1.2em"}>
-          <FormLabel htmlFor={"signup-firstname"}>Имя</FormLabel>
+          <FormLabel htmlFor={"signup-firstname"}>
+            {t("auth.signup.firstName")}
+          </FormLabel>
           <TextFieldElement
             sx={{
               "& .MuiInputBase-root": {
@@ -128,11 +131,11 @@ const Signup = () => {
             fullWidth
             name={"firstName"}
             id={"signup-firstname"}
-            placeholder={"Ваше имя..."}
+            placeholder={t("auth.signup.firstNamePlaceholder")}
             parseError={(error) => {
               return error.type === "maxLength"
-                ? "Превышена максимальная длина строки"
-                : "Это поле обязательно к заполнению";
+                ? t("errors.maxLengthString")
+                : t("errors.required");
             }}
             validation={{
               pattern: regExp.noWhiteSpaces,
@@ -142,7 +145,9 @@ const Signup = () => {
           />
         </Box>
         <Box width={"100%"} mb={"0.8em"}>
-          <FormLabel htmlFor={"signup-lastname"}>Фамилия</FormLabel>
+          <FormLabel htmlFor={"signup-lastname"}>
+            {t("auth.signup.lastName")}
+          </FormLabel>
           <TextFieldElement
             sx={{
               "& .MuiInputBase-root": {
@@ -152,11 +157,11 @@ const Signup = () => {
             fullWidth
             name={"lastName"}
             id={"signup-lastname"}
-            placeholder={"Ваша фамилия..."}
+            placeholder={t("auth.signup.lastNamePlaceholder")}
             parseError={(error) => {
               return error.type === "maxLength"
-                ? "Превышена максимальная длина строки"
-                : "Это поле обязательно к заполнению";
+                ? t("errors.maxLengthString")
+                : t("errors.required");
             }}
             validation={{
               pattern: regExp.noWhiteSpaces,
@@ -174,7 +179,7 @@ const Signup = () => {
             }}
             htmlFor={"signup-password"}
           >
-            Пароль
+            {t("auth.login.password")}
             <Tooltip
               arrow
               enterTouchDelay={0}
@@ -182,9 +187,7 @@ const Signup = () => {
               sx={{ fontSize: "14px", alignSelf: "start" }}
               title={
                 <Typography p={"0.5em"}>
-                  Пароль должен содержать символы латинского алфавита, минимум 1
-                  цифру и 1 заглавную букву. Минимальная длина пароля - 8
-                  символов.
+                  {t("auth.signup.passwordHelper")}
                 </Typography>
               }
             >
@@ -203,19 +206,19 @@ const Signup = () => {
             name={"password"}
             type={"password"}
             id={"signup-password"}
-            placeholder={"Введите пароль..."}
+            placeholder={t("auth.login.passwordPlaceholder")}
             validation={{
-              required: "Это поле обязательно к заполнению",
+              required: t("errors.required"),
               pattern: {
                 value: regExp.password,
-                message: "Введено некорректное значение",
+                message: t("errors.invalid"),
               },
             }}
           />
         </Box>
         <Box width={"100%"} mb={"1.2em"}>
           <FormLabel htmlFor={"signup-password-confirm"}>
-            Подтверждение пароля
+            {t("auth.signup.confirmPassword")}
           </FormLabel>
           <PasswordRepeatElement
             sx={{
@@ -228,12 +231,12 @@ const Signup = () => {
             name={"passwordConfirm"}
             type={"password"}
             id={"signup-password-confirm"}
-            placeholder={"Подтвердите пароль..."}
+            placeholder={t("auth.signup.confirmPasswordPlaceholder")}
             parseError={(error) => {
               if (error.type === "validate") {
-                return "Пароли должны совпадать";
+                return t("auth.signup.confirmPasswordError");
               } else {
-                return "Это поле обязательно к заполнению";
+                return t("errors.required");
               }
             }}
             validation={{
@@ -257,11 +260,11 @@ const Signup = () => {
             name={"privacyPolicy"}
             required
             validation={{
-              required: "Для регистрации необходимо согласие",
+              required: t("auth.signup.policyConfirmError"),
             }}
             label={
               <Fragment>
-                Регистрируясь на сайте, вы соглашаетесь с нашей
+                {t("auth.signup.policyConfirm1")}
                 <NextMuiLink
                   target={"_blank"}
                   href={"/privacy-policy"}
@@ -271,9 +274,9 @@ const Signup = () => {
                     textDecoration: "underline",
                   }}
                 >
-                  Политикой конфиденциальности
+                  {t("auth.signup.policyConfirm2")}
                 </NextMuiLink>
-                {" и "}
+                {` ${t("auth.signup.policyConfirm3")} `}
                 <NextMuiLink
                   target={"_blank"}
                   href={"/terms-of-use"}
@@ -283,7 +286,7 @@ const Signup = () => {
                     textDecoration: "underline",
                   }}
                 >
-                  Условиями пользования
+                  {t("auth.signup.policyConfirm4")}
                 </NextMuiLink>
               </Fragment>
             }
@@ -303,7 +306,7 @@ const Signup = () => {
             loading ? <CircularProgress color={"inherit"} size={23} /> : null
           }
         >
-          Зарегистрироваться
+          {t("auth.signup.submit")}
         </Button>
       </FormContainer>
     </Box>

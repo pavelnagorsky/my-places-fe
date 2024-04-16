@@ -7,6 +7,9 @@ import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
+import { Fragment } from "react";
+import { NextSeo } from "next-seo";
+import useAlternateLinks from "@/hooks/useAlternateLinks";
 
 interface IPlacePageProps {
   place: IPlace;
@@ -16,7 +19,24 @@ interface IPlacePageProps {
 const PlacePageLazy = dynamic(() => import("@/containers/place/PlacePage"));
 
 const Slug: NextPage<IPlacePageProps> = ({ place, reviews }) => {
-  return <PlacePageLazy place={place} reviews={reviews} />;
+  const { canonical, alternateLinks } = useAlternateLinks();
+  return (
+    <Fragment>
+      <NextSeo
+        title={place.title}
+        description={place.description}
+        canonical={canonical}
+        languageAlternates={alternateLinks}
+        openGraph={{
+          url: canonical,
+          title: place.title,
+          description: place.description,
+          images: place.images.map((img) => ({ url: img, alt: place.title })),
+        }}
+      />
+      <PlacePageLazy place={place} reviews={reviews} />
+    </Fragment>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
@@ -61,6 +81,7 @@ export const getStaticProps: GetStaticProps<IPlacePageProps> = async ({
         place: placeRes.data,
         reviews: reviewsRes.data,
         ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
+          "place",
           "common",
         ])),
         // Will be passed to the page component as props

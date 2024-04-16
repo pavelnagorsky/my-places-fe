@@ -3,6 +3,7 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Box, Stack, Tooltip, Typography } from "@mui/material";
 import { PropsWithChildren } from "react";
 import { OrderDirectionsEnum } from "@/services/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface ISortingButtonProps extends PropsWithChildren {
   orderDirection: OrderDirectionsEnum;
@@ -18,6 +19,7 @@ const SortingButton = ({
   onChangeOrderBy,
   children,
 }: ISortingButtonProps) => {
+  const { t } = useTranslation("common");
   const onClick = () => {
     if (!isActive) {
       onChangeOrderBy();
@@ -31,7 +33,7 @@ const SortingButton = ({
       arrow
       enterTouchDelay={0}
       leaveTouchDelay={6000}
-      title={<Typography fontSize={"12px"}>Сортировка</Typography>}
+      title={<Typography fontSize={"12px"}>{t("sorting")}</Typography>}
     >
       <Stack
         direction={"row"}

@@ -1,7 +1,10 @@
 import { Card, Stack, Typography } from "@mui/material";
 import { Button } from "@/components/UI/button/Button";
+import { useTranslation } from "next-i18next";
 
 const NoReviews = ({ link }: { link: string }) => {
+  const { t } = useTranslation("place");
+
   return (
     <Card
       sx={{
@@ -14,11 +17,10 @@ const NoReviews = ({ link }: { link: string }) => {
       }}
     >
       <Typography fontSize={"18px"} mb={"0.5em"} fontWeight={600}>
-        Заметок еще нету, создайте первую!
+        {t("reviews.noReviews")}
       </Typography>
       <Typography variant={"body2"} mb={"1.5em"}>
-        Заметка - рецензия или авторская экскурсия по месту, которая позволяет
-        подробно описать все детали
+        {t("reviews.reviewDescription")}
       </Typography>
       <Stack direction={"row"} justifyContent={"center"}>
         <Button
@@ -31,7 +33,7 @@ const NoReviews = ({ link }: { link: string }) => {
           linkTo={link}
           variant={"contained"}
         >
-          Создать заметку
+          {t("reviews.createReview")}
         </Button>
       </Stack>
     </Card>

@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
 import { Fragment } from "react";
+import { useTranslation } from "next-i18next";
 
 interface ICommentProps {
   comment: IComment;
@@ -30,6 +31,7 @@ const Comment = ({
   userId,
   isModerator,
 }: ICommentProps) => {
+  const { t } = useTranslation("common");
   const isMyComment = !!userId && userId === comment.authorId;
   const canManage = isMyComment || isModerator;
   const bgColor = index % 2 == 0 ? "#FFF6EE" : "#FFEEDE";
@@ -102,7 +104,7 @@ const Comment = ({
                       color={"secondary"}
                       onClick={() => onUpdate(comment.id)}
                     >
-                      Изменить
+                      {t("buttons.edit")}
                     </Button>
 
                     <Divider
@@ -120,7 +122,7 @@ const Comment = ({
                   color={"error"}
                   onClick={() => onDelete(comment.id)}
                 >
-                  Удалить
+                  {t("buttons.delete")}
                 </Button>
               </Stack>
             </Stack>

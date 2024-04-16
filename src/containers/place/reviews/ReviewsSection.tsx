@@ -28,7 +28,7 @@ const ReviewsSection = ({
   placeSlug,
   placeId,
 }: IReviewsSectionProps) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["place", "common"]);
   const data = useReviews({ defaultData: reviews, placeSlug: placeSlug });
   const newReviewLink = routerLinks.createReview + `?placeId=${placeId}`;
   const [review, setReview] = useState<IReview | null>(null);
@@ -83,7 +83,7 @@ const ReviewsSection = ({
           component={"h2"}
           fontSize={{ xs: "24px", md: "30px" }}
         >
-          Заметки к месту
+          {t("reviews.placeReviews")}
         </Typography>
         <IconButton component={Link} href={newReviewLink}>
           <Badge badgeContent={reviews.totalItems} color="primary">
@@ -127,7 +127,7 @@ const ReviewsSection = ({
           hasMore={data.hasMore}
           loader={
             <Typography textAlign={"center"} variant={"body2"} fontWeight={600}>
-              Загрузка...
+              {t("loading", { ns: "common" })}
             </Typography>
           }
           style={{

@@ -1,6 +1,7 @@
 import { Carousel } from "react-responsive-carousel";
 import { Box, styled } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useTranslation } from "next-i18next";
 
 interface IReviewGalleryProps {
   images: string[];
@@ -39,13 +40,16 @@ const StyledContainer = styled(Box)({
 });
 
 const ReviewGallery = ({ images, alt }: IReviewGalleryProps) => {
+  const { t } = useTranslation("place");
   return (
     <StyledContainer>
       <Carousel
         showIndicators={false}
         showArrows
         showThumbs
-        statusFormatter={(currentItem, total) => `${currentItem} из ${total}`}
+        statusFormatter={(currentItem, total) =>
+          `${currentItem} ${t("reviews.from")} ${total}`
+        }
         renderThumbs={(children) =>
           children.map((ch, i) => (
             <Box borderRadius={"5px"} height={72} width={72} key={i}>

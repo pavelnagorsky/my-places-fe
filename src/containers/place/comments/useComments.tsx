@@ -8,8 +8,10 @@ import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/roles.enum";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
+import { useTranslation } from "next-i18next";
 
 const useComments = (placeId: number) => {
+  const { t } = useTranslation(["place", "common"]);
   const [canSendComment, setCanSendComment] = useState(false);
   const [editCommentId, setEditCommentId] = useState<number | null>(null);
   const [comments, setComments] = useState<IComment[]>([]);
@@ -51,9 +53,11 @@ const useComments = (placeId: number) => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description:
-                "Ошибка при удалении комментария. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+              title: t("feedback.error", { ns: "common" }),
+              description: `${t("comments.feedback.deleteError")} ${t(
+                "errors.description",
+                { ns: "common" }
+              )}`,
               variant: "standard",
               severity: "error",
             },
@@ -120,9 +124,11 @@ const useComments = (placeId: number) => {
           dispatch(
             showAlert({
               alertProps: {
-                title: "Ошибка!",
-                description:
-                  "Ошибка при обновлении комментария. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+                title: t("feedback.error", { ns: "common" }),
+                description: `${t("comments.feedback.updateError")} ${t(
+                  "errors.description",
+                  { ns: "common" }
+                )}`,
                 variant: "standard",
                 severity: "error",
               },
@@ -151,9 +157,11 @@ const useComments = (placeId: number) => {
           dispatch(
             showAlert({
               alertProps: {
-                title: "Ошибка!",
-                description:
-                  "Ошибка при создании комментария. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+                title: t("feedback.error", { ns: "common" }),
+                description: `${t("comments.feedback.createError")} ${t(
+                  "errors.description",
+                  { ns: "common" }
+                )}`,
                 variant: "standard",
                 severity: "error",
               },

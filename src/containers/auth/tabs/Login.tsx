@@ -73,7 +73,7 @@ const Login = () => {
       form.setError(
         "email",
         {
-          message: "Электронная почта не подтверждена",
+          message: t("auth.login.emailNotConfirmed"),
         },
         { shouldFocus: true }
       );
@@ -83,7 +83,7 @@ const Login = () => {
       form.setError(
         "email",
         {
-          message: `Пользователь заблокирован до ${
+          message: `${t("auth.login.userBlockedUntil")} ${
             error?.blockedUntil
               ? format(new Date(error.blockedUntil), "dd/MM/yyyy")
               : "∞"
@@ -96,7 +96,7 @@ const Login = () => {
     form.setError(
       "email",
       {
-        message: "Введены неверная почта или пароль",
+        message: t("auth.login.invalidCredentials"),
       },
       { shouldFocus: true }
     );
@@ -117,7 +117,9 @@ const Login = () => {
     >
       <FormContainer formContext={form} onSuccess={onSubmit}>
         <Box width={"100%"} mb={"1.7em"}>
-          <FormLabel htmlFor={"login-email"}>Почта</FormLabel>
+          <FormLabel htmlFor={"login-email"}>
+            {t("auth.login.emailLabel")}
+          </FormLabel>
           <TextFieldElement
             sx={{
               "& .MuiInputBase-root": {
@@ -128,18 +130,20 @@ const Login = () => {
             name={"email"}
             type={"email"}
             id={"login-email"}
-            placeholder={"Введите адрес электронной почты..."}
+            placeholder={t("auth.login.emailPlaceholder")}
             validation={{
-              required: "Это поле обязательно к заполнению",
+              required: t("errors.required"),
               pattern: {
                 value: regExp.email,
-                message: "Введен некорректный адрес электронной почты",
+                message: t("errors.email"),
               },
             }}
           />
         </Box>
         <Box width={"100%"} mb={"1em"}>
-          <FormLabel htmlFor={"login-password"}>Пароль</FormLabel>
+          <FormLabel htmlFor={"login-password"}>
+            {t("auth.login.password")}
+          </FormLabel>
           <PasswordElement
             sx={{
               "& .MuiInputBase-root": {
@@ -150,9 +154,9 @@ const Login = () => {
             name={"password"}
             type={"password"}
             id={"login-password"}
-            placeholder={"Введите пароль..."}
+            placeholder={t("auth.login.passwordPlaceholder")}
             validation={{
-              required: "Это поле обязательно к заполнению",
+              required: t("errors.required"),
             }}
           />
         </Box>
@@ -160,7 +164,7 @@ const Login = () => {
           <CheckboxElement
             color={"secondary"}
             name={"rememberMe"}
-            label={"Запомнить меня"}
+            label={t("auth.login.rememberMe")}
           />
         </Box>
         <Button
@@ -172,7 +176,7 @@ const Login = () => {
             loading ? <CircularProgress color={"inherit"} size={23} /> : null
           }
         >
-          Войти
+          {t("auth.login.submit")}
         </Button>
       </FormContainer>
       <Divider sx={{ borderColor: "#D5D3D0", my: "1em" }} />
@@ -187,7 +191,7 @@ const Login = () => {
             cursor: "pointer",
           }}
         >
-          Забыли пароль?
+          {t("auth.forgotPassword.title")}
         </Button>
         <ForgotPassword
           open={forgotPasswordDialog.open}

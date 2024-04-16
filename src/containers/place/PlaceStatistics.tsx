@@ -20,6 +20,7 @@ import ReportForm from "@/containers/place/report/ReportForm";
 import placesService from "@/services/places-service/places.service";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import { useTranslation } from "next-i18next";
 
 interface IPlaceStatisticsProps {
   views: number;
@@ -34,6 +35,7 @@ const PlaceStatistics = ({
   createdAt,
   placeId,
 }: IPlaceStatisticsProps) => {
+  const { t } = useTranslation(["place", "common"]);
   const reportPopover = usePopover("report-form");
   const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(initialLikesCount);
@@ -48,8 +50,8 @@ const PlaceStatistics = ({
         dispatch(
           showAlert({
             alertProps: {
-              title: "Успех!",
-              description: "Место была успешно добавлено в избранное.",
+              title: t("feedback.success", { ns: "common" }),
+              description: t("favourites.feedback.success"),
               variant: "standard",
               severity: "success",
             },
@@ -61,8 +63,8 @@ const PlaceStatistics = ({
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description: "Место уже добавлено в избранное.",
+              title: t("feedback.error", { ns: "common" }),
+              description: t("favourites.feedback.error"),
               variant: "standard",
               severity: "error",
             },
@@ -130,10 +132,10 @@ const PlaceStatistics = ({
       title={
         <Stack p={"0.5em"}>
           <Typography mb={"1em"} variant={"body1"}>
-            Только авторизированные пользователи могут ставить лайк
+            {t("likesHelper")}
           </Typography>
           <Button onClick={onAuth} variant={"contained"}>
-            Авторизироваться
+            {t("likesAuthLink")}
           </Button>
         </Stack>
       }
@@ -203,7 +205,7 @@ const PlaceStatistics = ({
               enterTouchDelay={0}
               leaveTouchDelay={6000}
               sx={{ fontSize: "14px", alignSelf: "center" }}
-              title={"Сохранить в избранное"}
+              title={t("favourites.tooltip")}
             >
               <IconButton size={"small"} onClick={handleAddPlaceToFavorites}>
                 <BookmarkAddIcon />
@@ -217,7 +219,7 @@ const PlaceStatistics = ({
             enterTouchDelay={0}
             leaveTouchDelay={6000}
             sx={{ fontSize: "16px", alignSelf: "center" }}
-            title={"Пожаловаться"}
+            title={t("report.title")}
           >
             <IconButton
               aria-label="report-form"
