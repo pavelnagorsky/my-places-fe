@@ -26,6 +26,7 @@ import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import CloseIcon from "@mui/icons-material/Close";
 import { TransitionProps } from "@mui/material/transitions/transition";
+import { useTranslation } from "next-i18next";
 
 interface IForgotPasswordProps {
   open: boolean;
@@ -42,6 +43,7 @@ const Transition = forwardRef(function Transition(
 });
 
 const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
+  const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const form = useForm<{ email: string }>({
@@ -67,8 +69,10 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Успех!",
-              description: `Вам отправлено письмо с ссылкой для смены пароля на почту ${email}`,
+              title: t("feedback.success"),
+              description: `${t(
+                "auth.forgotPassword.feedback.success"
+              )} ${email}`,
               variant: "standard",
               severity: "success",
             },
@@ -81,9 +85,10 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description:
-                "Ошибка при обработке запроса на сброс пароля. Попробуйте отправить запрос еще раз или обратитесь в нашу службу поддержки...",
+              title: t("feedback.error"),
+              description: `${t("auth.forgotPassword.feedback.error")} ${t(
+                "errors.description"
+              )}`,
               variant: "standard",
               severity: "error",
             },
@@ -129,18 +134,19 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
             justifyContent={"space-between"}
           >
             <Typography fontSize={{ xs: "22px", md: "25px" }} fontWeight={600}>
-              Забыли пароль?
+              {t("auth.forgotPassword.title")}
             </Typography>
             <IconButton onClick={handleClose}>
               <CloseIcon />
             </IconButton>
           </Stack>
           <Typography variant={"body2"}>
-            Пожалуйста, укажите свой адрес электронной почты, и мы вышлем вам
-            ссылку для сброса пароля.
+            {t("auth.forgotPassword.description")}
           </Typography>
           <Box width={"100%"}>
-            <FormLabel htmlFor={"reset-pw-email"}>Почта</FormLabel>
+            <FormLabel htmlFor={"reset-pw-email"}>
+              {t("auth.login.emailLabel")}
+            </FormLabel>
             <TextFieldElement
               sx={{
                 "& .MuiInputBase-root": {
@@ -151,12 +157,12 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
               name={"email"}
               type={"email"}
               id={"reset-pw-email"}
-              placeholder={"Введите адрес электронной почты..."}
+              placeholder={t("auth.login.emailPlaceholder")}
               validation={{
-                required: "Это поле обязательно к заполнению",
+                required: t("errors.required"),
                 pattern: {
                   value: regExp.email,
-                  message: "Введен некорректный адрес электронной почты",
+                  message: t("errors.email"),
                 },
               }}
             />
@@ -174,7 +180,7 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
             {loading ? (
               <CircularProgress color={"inherit"} size={23} />
             ) : (
-              "Подтвердить"
+              t("buttons.confirm")
             )}
           </Button>
         </Stack>
