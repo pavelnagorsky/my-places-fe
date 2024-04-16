@@ -17,7 +17,7 @@ const PhoneInput = ({
   fillWidth,
   id,
 }: IPhoneInputProps) => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("common");
   return (
     <Controller
       name={fieldName}
@@ -38,9 +38,7 @@ const PhoneInput = ({
           onlyCountries={["BY", "RU", "UA", "PL", "LT", "LV"]}
           preferredCountries={["BY", "RU"]}
           error={fieldState.invalid}
-          helperText={
-            fieldState.invalid ? "Введен неверный номер телефона" : undefined
-          }
+          helperText={fieldState.invalid ? t("errors.phone") : undefined}
         />
       )}
     />

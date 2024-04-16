@@ -2,6 +2,7 @@ import MyStepper from "@/components/UI/stepper/MyStepper";
 import { Box, SxProps, Typography } from "@mui/material";
 import { memo } from "react";
 import ImageUploader from "@/components/forms/image-uploader/ImageUploader";
+import { useTranslation } from "next-i18next";
 
 const ReviewPhotos = ({
   sx,
@@ -10,6 +11,7 @@ const ReviewPhotos = ({
   sx?: SxProps;
   readonly?: boolean;
 }) => {
+  const { t } = useTranslation("review-management");
   return (
     <Box sx={sx}>
       <MyStepper totalOptions={3} activeOption={2} />
@@ -18,11 +20,10 @@ const ReviewPhotos = ({
         fontSize={{ xs: "20px", md: "30px" }}
         my={{ xs: "0.5em", md: "0.4em" }}
       >
-        Фотографии
+        {t("forms.photos")}
       </Typography>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        Загрузите до 10 фотографий, сделанных на этой локации в формате jpg,
-        jpeg, png.
+        {t("forms.photosDescription", { limit: 10 })}
       </Typography>
       <Box my={"2em"}>
         <ImageUploader

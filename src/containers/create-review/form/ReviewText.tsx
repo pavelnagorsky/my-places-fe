@@ -11,8 +11,10 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { TextFieldElement } from "react-hook-form-mui";
 import { memo } from "react";
 import TextEditor from "@/components/forms/text-editor/TextEditor";
+import { useTranslation } from "next-i18next";
 
 const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
+  const { t } = useTranslation(["review-management", "common"]);
   return (
     <Box sx={sx}>
       <MyStepper totalOptions={3} activeOption={3} />
@@ -22,7 +24,7 @@ const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
           fontSize={{ xs: "20px", md: "30px" }}
           my={{ xs: "0.5em", md: "0.4em" }}
         >
-          Описание
+          {t("form.reviewDescription")}
         </Typography>
         <Tooltip
           arrow
@@ -30,13 +32,7 @@ const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
           leaveTouchDelay={6000}
           sx={{ fontSize: "16px", alignSelf: "center" }}
           title={
-            <Typography p={"0.5em"}>
-              Текст заметки требуется вводить в соотвествии с выбранным языком
-              на сайте. На остальные языки контент будет переведен
-              автоматически, посредством сервиса Google Translate. При
-              необходимости, Вы сможете отредактировать переводы в личном
-              кабинете
-            </Typography>
+            <Typography p={"0.5em"}>{t("translations.tooltip")}</Typography>
           }
         >
           <IconButton>
@@ -45,7 +41,7 @@ const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
         </Tooltip>
       </Stack>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        Придумайте заголовок заметки и опишите место, в котором вы побывали.
+        {t("form.reviewTitle")}
       </Typography>
       <TextFieldElement
         sx={{
@@ -58,16 +54,16 @@ const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
         InputProps={{
           readOnly: readonly,
         }}
-        validation={{ required: "Это поле обязательно к заполнению" }}
-        placeholder={"Введите заголовок..."}
+        validation={{ required: t("errors.required", { ns: "common" }) }}
+        placeholder={t("form.reviewTitlePlaceholder")}
       />
       <Typography variant={"body1"} my={"1em"} fontSize={{ md: "20px" }}>
-        Текст заметки:
+        {t("form.reviewText")}
       </Typography>
       <TextEditor
         readonly={readonly}
         fieldName={"description"}
-        placeholder={"Введите текст заметки"}
+        placeholder={t("form.reviewTextPlaceholder")}
       />
     </Box>
   );

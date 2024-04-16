@@ -29,7 +29,7 @@ const PlaceSelect = ({
   required,
   excludeId,
 }: IPlaceSelectProps) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["review-management", "common"]);
   const router = useRouter();
   const { setValue } = useFormContext<IReviewFormContext>();
   const [options, setOptions] = useState<ISelectPlace[]>([]);
@@ -81,12 +81,12 @@ const PlaceSelect = ({
       rules={{
         required: required,
       }}
-      parseError={(error) => "Поле обязательно к заполнению"}
+      parseError={(error) => t("errors.required", { ns: "common" })}
       name={fieldName}
       loading={loading}
       options={options}
       textFieldProps={{
-        placeholder: "Выберите место",
+        placeholder: t("form.selectPlace"),
         fullWidth: true,
         sx: {
           minWidth: { sm: "300px", md: "350px" },
