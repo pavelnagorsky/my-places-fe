@@ -59,10 +59,10 @@ const CreatePlace = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Успех!",
-          description: t("feedback.success", {
+          title: t("feedback.success", {
             ns: "common",
           }),
+          description: t("feedback.create.success"),
           variant: "standard",
           severity: "success",
         },

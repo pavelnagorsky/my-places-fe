@@ -27,6 +27,7 @@ import {
   selectAuthOpen,
 } from "@/store/user-slice/user.slice";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 function a11yProps(index: number) {
   return {
@@ -70,6 +71,7 @@ const Transition = forwardRef(function Transition(
 });
 
 const AuthModal = () => {
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const open = useAppSelector(selectAuthOpen);
@@ -150,8 +152,8 @@ const AuthModal = () => {
                 borderColor: "divider",
               }}
             >
-              <Tab label="Войти" {...a11yProps(0)} />
-              <Tab label="Зарегистрироваться" {...a11yProps(1)} />
+              <Tab label={t("auth.login.title")} {...a11yProps(0)} />
+              <Tab label={t("auth.signup.title")} {...a11yProps(1)} />
             </Tabs>
           </Box>
           <Box>

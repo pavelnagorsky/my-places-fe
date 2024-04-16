@@ -37,7 +37,7 @@ const Login = () => {
   const loading = useAppSelector(selectAuthLoading);
   const error = useAppSelector(selectAuthError);
   const router = useRouter();
-  const { i18n } = useTranslation();
+  const { t } = useTranslation("common");
   const forgotPasswordDialog = useDialog();
 
   const loginRedirect = async (path: string) => {

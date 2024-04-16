@@ -15,7 +15,7 @@ import reviewsService from "@/services/reviews-service/reviews.service";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 
 const CreateReview = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["review-management", "common"]);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const form = useForm<IReviewFormContext>({
@@ -34,9 +34,15 @@ const CreateReview = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
-          description:
-            "Ошибка при создании заметки. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          title: t("feedback.error", {
+            ns: "common",
+          }),
+          description: `${t("feedback.create.error")} ${t(
+            "errors.description",
+            {
+              ns: "common",
+            }
+          )}`,
           variant: "standard",
           severity: "error",
         },
@@ -49,9 +55,10 @@ const CreateReview = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Успех!",
-          description:
-            "Заметка была создана и отправлена на модерацию. Вы сможете просмотреть её статус в личном кабинете",
+          title: t("feedback.success", {
+            ns: "common",
+          }),
+          description: t("feedback.create.success"),
           variant: "standard",
           severity: "success",
         },

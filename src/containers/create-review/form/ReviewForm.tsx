@@ -15,12 +15,14 @@ import { motion } from "framer-motion";
 import ReviewPhotos from "@/containers/create-review/form/ReviewPhotos";
 import ReviewText from "@/containers/create-review/form/ReviewText";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
+import { useTranslation } from "next-i18next";
 
 interface IReviewFormProps {
   loading: boolean;
 }
 
 const ReviewForm = ({ loading }: IReviewFormProps) => {
+  const { t } = useTranslation(["review-management", "common"]);
   const { formState } = useFormContext<IReviewFormContext>();
 
   return (
@@ -38,12 +40,10 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
               // fontSize={{ xs: "25px", md: "32px" }}
               mb={"0.5em"}
             >
-              Создание заметки
+              {t("creation.title")}
             </Typography>
             <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-              Заметка - это авторская экскурсия по выбранному месту. Здесь вы
-              можете рассказать другим о посещённой локации, дополнив это
-              описанием и прикрепив фотографии.
+              {t("creation.description")}
             </Typography>
           </Box>
         </WrappedContainer>
@@ -58,11 +58,10 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
                 fontSize={{ xs: "20px", md: "30px" }}
                 my={{ xs: "0.5em", md: "0.4em" }}
               >
-                Достопримечательность
+                {t("form.place")}
               </Typography>
               <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                На этом этапе вам нужно выбрать достопримечательность из
-                выпадающего списка или создать новую.
+                {t("form.placeDescription")}
               </Typography>
               <Stack
                 direction={{ xs: "column", sm: "row" }}
@@ -82,7 +81,7 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
                   }}
                   linkTo={routerLinks.createPlace}
                 >
-                  Новое место
+                  {t("form.newPlace")}
                 </Button>
               </Stack>
             </Box>
@@ -107,8 +106,8 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
               <div>
                 <ButtonWithTooltip
                   loading={loading}
-                  buttonText={"Создать"}
-                  tooltipText={"Не все обязательные поля формы заполнены!"}
+                  buttonText={t("buttons.create", { ns: "common" })}
+                  tooltipText={t("errors.allFieldsRequired", { ns: "common" })}
                   variant={"contained"}
                   type={"submit"}
                   disabled={
