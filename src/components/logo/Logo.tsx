@@ -1,12 +1,9 @@
 import { Box, Hidden, Stack, Typography } from "@mui/material";
-
 import logoImage from "public/images/logo/logo.png";
-import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
 export function Logo({ small }: { small?: boolean }) {
-  const { t } = useTranslation("common");
   const router = useRouter();
 
   const logoText = (
@@ -18,7 +15,7 @@ export function Logo({ small }: { small?: boolean }) {
       mb={0}
       letterSpacing={0}
     >
-      {t("logo")}
+      Знай свой край
     </Typography>
   );
 
@@ -37,7 +34,7 @@ export function Logo({ small }: { small?: boolean }) {
       >
         <Image
           src={logoImage}
-          alt={t("logo")}
+          alt={"Знай свой край"}
           priority={true}
           width={50}
           height={50}
