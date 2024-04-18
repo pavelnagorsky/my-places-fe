@@ -3,6 +3,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import reportsService from "@/services/reports-service/reports.service";
 import { CrmStatusesEnum } from "@/services/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface IUseReportRejectionProps {
   id: number;
@@ -10,6 +11,7 @@ interface IUseReportRejectionProps {
 }
 
 const useReportRejection = ({ id, onSuccess }: IUseReportRejectionProps) => {
+  const { t } = useTranslation(["moderation", "common"]);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -24,8 +26,8 @@ const useReportRejection = ({ id, onSuccess }: IUseReportRejectionProps) => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Успех!",
-              description: "Жалоба была успешно отклонена модерацией",
+              title: t("feedback.success", { ns: "common" }),
+              description: t("feedback.report.rejectReport.success"),
               variant: "standard",
               severity: "success",
             },
@@ -38,8 +40,13 @@ const useReportRejection = ({ id, onSuccess }: IUseReportRejectionProps) => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description: `Ошибка при отклонении жалобы. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...`,
+              title: t("feedback.error", { ns: "common" }),
+              description: `${t("feedback.report.rejectReport.error")} ${t(
+                "errors.description",
+                {
+                  ns: "common",
+                }
+              )}`,
               variant: "standard",
               severity: "error",
             },

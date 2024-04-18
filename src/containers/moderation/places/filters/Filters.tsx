@@ -10,7 +10,7 @@ interface IFilterProps {
 }
 
 const Filters = ({ onSubmit, type }: IFilterProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("moderation");
 
   return (
     <Stack
@@ -21,7 +21,9 @@ const Filters = ({ onSubmit, type }: IFilterProps) => {
     >
       <TextFieldElement
         onChange={debounce(() => onSubmit(), 300)}
-        placeholder={type === "places" ? "Название места" : "Название заметки"}
+        placeholder={
+          type === "places" ? t("filters.placeTitle") : t("filters.reviewTitle")
+        }
         name={"search"}
         id={"searchText"}
         InputProps={{

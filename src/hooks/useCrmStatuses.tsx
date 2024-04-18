@@ -1,12 +1,14 @@
 import { ISelect } from "@/shared/interfaces";
 import { Box, Stack, Typography } from "@mui/material";
 import { CrmStatusesEnum } from "@/services/interfaces";
+import { useTranslation } from "next-i18next";
 
 const useCrmStatuses = () => {
+  const { t } = useTranslation("common");
   const statuses: ISelect[] = [
-    { id: CrmStatusesEnum.PENDING, label: "Новое" },
-    { id: CrmStatusesEnum.DONE, label: "Выполнено" },
-    { id: CrmStatusesEnum.DECLINED, label: "Закрыто" },
+    { id: CrmStatusesEnum.PENDING, label: t("crmStatuses.new") },
+    { id: CrmStatusesEnum.DONE, label: t("crmStatuses.done") },
+    { id: CrmStatusesEnum.DECLINED, label: t("crmStatuses.declined") },
   ];
 
   const parseStatusColor = (status: CrmStatusesEnum) => {
@@ -26,7 +28,7 @@ const useCrmStatuses = () => {
             width={"10px"}
             bgcolor={parseStatusColor(CrmStatusesEnum.PENDING)}
           />
-          <Typography variant={"body1"}>Новое</Typography>
+          <Typography variant={"body1"}>{t("crmStatuses.new")}</Typography>
         </Stack>
       ),
     },
@@ -40,7 +42,7 @@ const useCrmStatuses = () => {
             width={"10px"}
             bgcolor={parseStatusColor(CrmStatusesEnum.DONE)}
           />
-          <Typography variant={"body1"}>Выполнено</Typography>
+          <Typography variant={"body1"}>{t("crmStatuses.done")}</Typography>
         </Stack>
       ),
     },
@@ -54,7 +56,7 @@ const useCrmStatuses = () => {
             width={"10px"}
             bgcolor={parseStatusColor(CrmStatusesEnum.DECLINED)}
           />
-          <Typography variant={"body1"}>Закрыто</Typography>
+          <Typography variant={"body1"}>{t("crmStatuses.declined")}</Typography>
         </Stack>
       ),
     },

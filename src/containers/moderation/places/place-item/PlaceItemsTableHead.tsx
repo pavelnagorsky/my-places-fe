@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import { ModerationPlacesOrderByEnum } from "@/services/places-service/interfaces/interfaces";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { OrderDirectionsEnum } from "@/services/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface ITableHeadProps {
   show: boolean;
@@ -18,6 +19,7 @@ const PlaceItemsTableHead = ({
   onChangeOrderBy,
   onChangeOrderDirection,
 }: ITableHeadProps) => {
+  const { t } = useTranslation("moderation");
   return (
     <Box
       mx={"0.5em"}
@@ -44,7 +46,7 @@ const PlaceItemsTableHead = ({
               onChangeOrderBy(ModerationPlacesOrderByEnum.TITLE)
             }
           >
-            <Typography>Название</Typography>
+            <Typography>{t("places.headings.title")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={1.5}>
@@ -56,7 +58,7 @@ const PlaceItemsTableHead = ({
               onChangeOrderBy(ModerationPlacesOrderByEnum.TYPE)
             }
           >
-            <Typography>Тип</Typography>
+            <Typography>{t("places.headings.type")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2.5}>
@@ -68,7 +70,7 @@ const PlaceItemsTableHead = ({
               onChangeOrderBy(ModerationPlacesOrderByEnum.AUTHOR)
             }
           >
-            <Typography>Автор</Typography>
+            <Typography>{t("places.headings.author")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={1.5}>
@@ -80,7 +82,7 @@ const PlaceItemsTableHead = ({
               onChangeOrderBy(ModerationPlacesOrderByEnum.COMMERCIAL)
             }
           >
-            <Typography>Коммерция</Typography>
+            <Typography>{t("places.headings.commercial")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2} display={"flex"} alignItems={"center"}>
@@ -92,7 +94,7 @@ const PlaceItemsTableHead = ({
               onChangeOrderBy(ModerationPlacesOrderByEnum.CREATED_AT)
             }
           >
-            <Typography>Дата создания</Typography>
+            <Typography>{t("places.headings.createdAt")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2} display={"flex"} alignItems={"center"}>
@@ -104,7 +106,7 @@ const PlaceItemsTableHead = ({
               onChangeOrderBy(ModerationPlacesOrderByEnum.UPDATED_AT)
             }
           >
-            <Typography>Дата обновления</Typography>
+            <Typography>{t("places.headings.updatedAt")}</Typography>
           </SortingButton>
         </Grid>
       </Grid>

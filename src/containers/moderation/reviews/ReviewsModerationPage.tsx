@@ -12,7 +12,7 @@ import ReviewItemsTableHead from "@/containers/moderation/reviews/review-item/Re
 import ReviewItem from "@/containers/moderation/reviews/review-item/ReviewItem";
 
 const ReviewsModerationPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("moderation");
   const logic = useModerationReviews();
 
   return (
@@ -31,7 +31,7 @@ const ReviewsModerationPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Заметки на модерацию
+                {t("reviews.title")}
               </Typography>
             </Stack>
           </motion.div>
@@ -48,7 +48,7 @@ const ReviewsModerationPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  Заметки, требующие модерации не найдены
+                  {t("reviews.notFound")}
                 </Typography>
               )}
               <ReviewItemsTableHead

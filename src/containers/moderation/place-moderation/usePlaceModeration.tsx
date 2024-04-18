@@ -9,7 +9,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
 
 const useEditMyPlace = () => {
-  const { i18n } = useTranslation();
+  const { t } = useTranslation(["place-management", "common"]);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const placeId = router.query["id"] as string | undefined;
@@ -34,9 +34,10 @@ const useEditMyPlace = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
-          description:
-            "Место не найдено. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          title: t("feedback.error", { ns: "common" }),
+          description: `${t("feedback.notFound")} ${t("errors.description", {
+            ns: "common",
+          })}`,
           variant: "standard",
           severity: "error",
         },

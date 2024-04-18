@@ -20,10 +20,10 @@ const ReviewPhotos = ({
         fontSize={{ xs: "20px", md: "30px" }}
         my={{ xs: "0.5em", md: "0.4em" }}
       >
-        {t("forms.photos")}
+        {t("form.photos")}
       </Typography>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        {t("forms.photosDescription", { limit: 10 })}
+        {t("form.photosDescription", { limit: 10 })}
       </Typography>
       <Box my={"2em"}>
         <ImageUploader

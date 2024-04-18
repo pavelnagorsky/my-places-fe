@@ -22,7 +22,7 @@ interface IReviewItemProps {
 const ReviewItem = ({ review }: IReviewItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation("moderation");
   const dateFnsLocale = useDateFnsLocale();
   const router = useRouter();
 
@@ -105,23 +105,23 @@ const ReviewItem = ({ review }: IReviewItemProps) => {
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Название</CustomLabel>
+            <CustomLabel>{t("reviews.headings.title")}</CustomLabel>
             {reviewTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Место</CustomLabel>
+            <CustomLabel>{t("reviews.headings.place")}</CustomLabel>
             {placeTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Автор</CustomLabel>
+            <CustomLabel>{t("reviews.headings.author")}</CustomLabel>
             {authorInfoBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Дата создания</CustomLabel>
+            <CustomLabel>{t("reviews.headings.createdAt")}</CustomLabel>
             {createdAtInfoBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Дата обновления</CustomLabel>
+            <CustomLabel>{t("reviews.headings.updatedAt")}</CustomLabel>
             {updatedAtInfoBox}
           </Grid>
         </Grid>

@@ -32,7 +32,9 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
           leaveTouchDelay={6000}
           sx={{ fontSize: "16px", alignSelf: "center" }}
           title={
-            <Typography p={"0.5em"}>{t("translations.tooltip")}</Typography>
+            <Typography p={"0.5em"}>
+              {t("translations.tooltip", { ns: "common" })}
+            </Typography>
           }
         >
           <IconButton>

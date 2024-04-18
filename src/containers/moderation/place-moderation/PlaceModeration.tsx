@@ -22,6 +22,7 @@ import animationVariants from "@/shared/animation-variants";
 import usePlaceModeration from "@/containers/moderation/place-moderation/usePlaceModeration";
 import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
 import ModerationForm from "@/containers/moderation/place-moderation/ModerationForm";
+import { useTranslation } from "next-i18next";
 
 const tabContentVariant: Variants = {
   active: {
@@ -40,6 +41,7 @@ const tabContentVariant: Variants = {
 };
 
 const PlaceModeration = () => {
+  const { t } = useTranslation(["moderation", "common"]);
   const logic = usePlaceModeration();
   const createPlaceMeta = useCreatePlaceMeta();
 
@@ -88,7 +90,7 @@ const PlaceModeration = () => {
                           variant={"outlined"}
                           color={"secondary"}
                         >
-                          Назад
+                          {t("buttons.back", { ns: "common" })}
                         </Button>
                       </Box>
                       <Typography
@@ -96,7 +98,7 @@ const PlaceModeration = () => {
                         mb={0}
                         fontSize={{ xs: "24px", sm: "30px", md: "40px" }}
                       >
-                        Модерация места
+                        {t("form.titlePlace")}
                       </Typography>
                     </Stack>
                   </Box>

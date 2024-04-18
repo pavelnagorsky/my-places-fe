@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { ModerationReviewsOrderByEnum } from "@/services/reviews-service/interfaces/interfaces";
 import { OrderDirectionsEnum } from "@/services/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface ITableHeadProps {
   show: boolean;
@@ -18,6 +19,7 @@ const ReviewItemsTableHead = ({
   onChangeOrderBy,
   onChangeOrderDirection,
 }: ITableHeadProps) => {
+  const { t } = useTranslation("moderation");
   return (
     <Box
       mx={"0.5em"}
@@ -44,7 +46,7 @@ const ReviewItemsTableHead = ({
               onChangeOrderBy(ModerationReviewsOrderByEnum.TITLE)
             }
           >
-            <Typography>Название</Typography>
+            <Typography>{t("reviews.headings.title")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={3}>
@@ -56,7 +58,7 @@ const ReviewItemsTableHead = ({
               onChangeOrderBy(ModerationReviewsOrderByEnum.PLACE_TITLE)
             }
           >
-            <Typography>Место</Typography>
+            <Typography>{t("reviews.headings.place")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2.5}>
@@ -68,7 +70,7 @@ const ReviewItemsTableHead = ({
               onChangeOrderBy(ModerationReviewsOrderByEnum.AUTHOR)
             }
           >
-            <Typography>Автор</Typography>
+            <Typography>{t("reviews.headings.author")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2} display={"flex"} alignItems={"center"}>
@@ -80,7 +82,7 @@ const ReviewItemsTableHead = ({
               onChangeOrderBy(ModerationReviewsOrderByEnum.CREATED_AT)
             }
           >
-            <Typography>Дата создания</Typography>
+            <Typography>{t("reviews.headings.createdAt")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2} display={"flex"} alignItems={"center"}>
@@ -92,7 +94,7 @@ const ReviewItemsTableHead = ({
               onChangeOrderBy(ModerationReviewsOrderByEnum.UPDATED_AT)
             }
           >
-            <Typography>Дата обновления</Typography>
+            <Typography>{t("reviews.headings.updatedAt")}</Typography>
           </SortingButton>
         </Grid>
       </Grid>

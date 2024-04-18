@@ -10,6 +10,8 @@ import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces"
 import { Fragment } from "react";
 import { NextSeo } from "next-seo";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
+import placePageJsonld from "@/shared/json-ld/place-page-jsonld";
+import JsonLd from "@/shared/json-ld/JsonLd";
 
 interface IPlacePageProps {
   place: IPlace;
@@ -20,6 +22,7 @@ const PlacePageLazy = dynamic(() => import("@/containers/place/PlacePage"));
 
 const Slug: NextPage<IPlacePageProps> = ({ place, reviews }) => {
   const { canonical, alternateLinks } = useAlternateLinks();
+  const jsonLdData = placePageJsonld(place);
   return (
     <Fragment>
       <NextSeo
@@ -34,6 +37,7 @@ const Slug: NextPage<IPlacePageProps> = ({ place, reviews }) => {
           images: place.images.map((img) => ({ url: img, alt: place.title })),
         }}
       />
+      <JsonLd data={jsonLdData} />
       <PlacePageLazy place={place} reviews={reviews} />
     </Fragment>
   );

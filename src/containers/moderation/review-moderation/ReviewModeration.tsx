@@ -18,8 +18,10 @@ import ReviewPhotos from "@/containers/create-review/form/ReviewPhotos";
 import ReviewText from "@/containers/create-review/form/ReviewText";
 import useReviewModeration from "@/containers/moderation/review-moderation/useReviewModeration";
 import ModerationForm from "@/containers/moderation/place-moderation/ModerationForm";
+import { useTranslation } from "next-i18next";
 
 const ReviewModeration = () => {
+  const { t } = useTranslation(["moderation", "review-management", "common"]);
   const logic = useReviewModeration();
 
   const loader = (
@@ -62,7 +64,7 @@ const ReviewModeration = () => {
                           variant={"outlined"}
                           color={"secondary"}
                         >
-                          Назад
+                          {t("buttons.back", { ns: "common" })}
                         </Btn>
                       </Box>
                       <Typography
@@ -70,7 +72,7 @@ const ReviewModeration = () => {
                         mb={0}
                         fontSize={{ xs: "24px", sm: "30px", md: "40px" }}
                       >
-                        Модерация заметки
+                        {t("form.titleReview")}
                       </Typography>
                     </Stack>
                   </Box>
@@ -86,11 +88,10 @@ const ReviewModeration = () => {
                   fontSize={{ xs: "20px", md: "30px" }}
                   my={{ xs: "0.5em", md: "0.4em" }}
                 >
-                  Достопримечательность
+                  {t("form.place", { ns: "review-management" })}
                 </Typography>
                 <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                  На этом этапе вам нужно выбрать достопримечательность из
-                  выпадающего списка или создать новую.
+                  {t("form.placeDescription", { ns: "review-management" })}
                 </Typography>
                 <Stack
                   direction={{ xs: "column", sm: "row" }}
@@ -111,7 +112,7 @@ const ReviewModeration = () => {
                     }}
                     linkTo={routerLinks.createPlace}
                   >
-                    Новое место
+                    {t("form.newPlace", { ns: "review-management" })}
                   </Button>
                 </Stack>
               </Box>

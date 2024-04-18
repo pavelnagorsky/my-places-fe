@@ -1,16 +1,18 @@
 import { SwitchElement } from "react-hook-form-mui";
 import { Box, BoxProps, FormHelperText } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 const UpdateTranslations = (props: BoxProps) => {
+  const { t } = useTranslation("common");
   return (
     <Box {...props}>
       <SwitchElement
         sx={{ mx: 0 }}
         labelPlacement={"start"}
-        label={"Обновить переводы"}
+        label={t("translations.title")}
         name={"updateTranslations"}
       />
-      <FormHelperText>Обновить переводы на другие языки</FormHelperText>
+      <FormHelperText>{t("translations.helperText")}</FormHelperText>
     </Box>
   );
 };

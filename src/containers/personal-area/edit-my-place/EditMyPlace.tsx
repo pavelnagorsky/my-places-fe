@@ -23,6 +23,7 @@ import { SyntheticEvent, useState } from "react";
 import Navigation from "@/containers/create-place/form/Navigation";
 import animationVariants from "@/shared/animation-variants";
 import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
+import { useTranslation } from "next-i18next";
 
 const tabContentVariant: Variants = {
   active: {
@@ -41,6 +42,7 @@ const tabContentVariant: Variants = {
 };
 
 const EditMyPlace = () => {
+  const { t } = useTranslation(["place-management", "common"]);
   const logic = useEditMyPlace();
   const createPlaceMeta = useCreatePlaceMeta();
 
@@ -91,7 +93,7 @@ const EditMyPlace = () => {
                           variant={"outlined"}
                           color={"secondary"}
                         >
-                          Назад
+                          {t("buttons.back", { ns: "common" })}
                         </Button>
                       </Box>
                       <Typography
@@ -99,19 +101,23 @@ const EditMyPlace = () => {
                         mb={0}
                         fontSize={{ xs: "24px", sm: "30px", md: "40px" }}
                       >
-                        Редактирование места
+                        {t("edit.title")}
                       </Typography>
                     </Stack>
                     <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                      После редактирования место будет отправлено на модерацию.
+                      {t("edit.description")}
                     </Typography>
                     <UpdateTranslations mt={"0.5em"} />
                   </Box>
                   <div>
                     <ButtonWithTooltip
                       loading={loading}
-                      buttonText={"Обновить"}
-                      tooltipText={"Не все обязательные поля формы заполнены!"}
+                      buttonText={t("buttons.update", {
+                        ns: "common",
+                      })}
+                      tooltipText={t("errors.allFieldsRequired", {
+                        ns: "common",
+                      })}
                       variant={"contained"}
                       type={"submit"}
                       disabled={

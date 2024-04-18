@@ -20,8 +20,10 @@ import ReviewText from "@/containers/create-review/form/ReviewText";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
 import utils from "@/shared/utils";
 import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
+import { useTranslation } from "next-i18next";
 
 const EditMyReview = () => {
+  const { t } = useTranslation(["review-management", "common"]);
   const logic = useEditMyReview();
   const loading = logic.submitLoading;
 
@@ -65,7 +67,7 @@ const EditMyReview = () => {
                           variant={"outlined"}
                           color={"secondary"}
                         >
-                          Назад
+                          {t("buttons.back", { ns: "common" })}
                         </Btn>
                       </Box>
                       <Typography
@@ -73,20 +75,23 @@ const EditMyReview = () => {
                         mb={0}
                         fontSize={{ xs: "24px", sm: "30px", md: "40px" }}
                       >
-                        Редактирование заметки
+                        {t("edit.title")}
                       </Typography>
                     </Stack>
                     <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                      После редактирования заметка будет отправлена на
-                      модерацию.
+                      {t("edit.description")}
                     </Typography>
                     <UpdateTranslations mt={"0.5em"} />
                   </Box>
                   <div>
                     <ButtonWithTooltip
                       loading={loading}
-                      buttonText={"Обновить"}
-                      tooltipText={"Не все обязательные поля формы заполнены!"}
+                      buttonText={t("buttons.update", {
+                        ns: "common",
+                      })}
+                      tooltipText={t("errors.allFieldsRequired", {
+                        ns: "common",
+                      })}
                       variant={"contained"}
                       type={"submit"}
                       disabled={
@@ -112,11 +117,10 @@ const EditMyReview = () => {
                   fontSize={{ xs: "20px", md: "30px" }}
                   my={{ xs: "0.5em", md: "0.4em" }}
                 >
-                  Достопримечательность
+                  {t("form.place")}
                 </Typography>
                 <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-                  На этом этапе вам нужно выбрать достопримечательность из
-                  выпадающего списка или создать новую.
+                  {t("form.placeDescription")}
                 </Typography>
                 <Stack
                   direction={{ xs: "column", sm: "row" }}
@@ -136,7 +140,7 @@ const EditMyReview = () => {
                     }}
                     linkTo={routerLinks.createPlace}
                   >
-                    Новое место
+                    {t("form.newPlace")}
                   </Button>
                 </Stack>
               </Box>

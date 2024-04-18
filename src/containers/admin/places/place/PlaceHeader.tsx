@@ -8,8 +8,10 @@ import PlaceIcon from "@mui/icons-material/Place";
 import { StyledButton } from "@/components/UI/button/StyledButton";
 import NextLink from "next/link";
 import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
 
 const PlaceHeader = ({ title, id }: { title?: string; id: number }) => {
+  const newReviewLink = routerLinks.createReview + `?placeId=${id}`;
   return (
     <Stack
       gap={"1em"}
@@ -21,7 +23,7 @@ const PlaceHeader = ({ title, id }: { title?: string; id: number }) => {
       px={{ xs: "1em", lg: "2em" }}
       py={"1em"}
     >
-      <Stack alignItems={{ xs: "center", sm: "start" }} width={"100%"}>
+      <Stack alignItems={{ xs: "center", sm: "start" }} flexGrow={1}>
         <motion.div
           initial={{ x: 20, opacity: 0 }}
           animate={{ x: 0, opacity: 1, transition: { delay: 0.3 } }}
@@ -87,6 +89,22 @@ const PlaceHeader = ({ title, id }: { title?: string; id: number }) => {
         alignItems={"center"}
         justifyContent={"end"}
       >
+        <Box
+          component={motion.div}
+          sx={{ display: "flex", gap: "1em" }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
+        >
+          <NextLink href={newReviewLink}>
+            <StyledButton
+              startIcon={<AddIcon />}
+              size={"large"}
+              variant={"contained"}
+            >
+              Создать заметку
+            </StyledButton>
+          </NextLink>
+        </Box>
         <Box
           component={motion.div}
           sx={{ display: "flex", gap: "1em" }}

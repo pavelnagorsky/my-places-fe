@@ -33,7 +33,7 @@ interface IAdditionalFiltersProps {
 const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
   const { resetField, watch, getValues } =
     useFormContext<IModerationPlacesFormContext>();
-  const { t } = useTranslation();
+  const { t } = useTranslation(["moderation", "common"]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dialog = useDialog();
@@ -95,7 +95,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
           alignItems={"center"}
         >
           <Typography mx={"auto"} fontWeight={600} fontSize={"20px"}>
-            Фильтры
+            {t("filters.title", { ns: "common" })}
           </Typography>
           <IconButton onClick={dialog.handleClose} sx={{ mr: "0.2em" }}>
             <CloseIcon />
@@ -103,7 +103,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
         </Stack>
         <Box p={"2em"} pt={"1.5em"}>
           <CustomLabel sx={{ fontSize: "18px" }}>
-            По электронной почте автора
+            {t("filters.byAuthorEmail")}
           </CustomLabel>
           <Box
             sx={{ "& label": { color: "secondary.main", width: "50%", mx: 0 } }}
@@ -112,16 +112,16 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
             <TextFieldElement
               fullWidth
               name={"authorEmail"}
-              placeholder={"Электронная почта"}
+              placeholder={t("filters.email")}
             />
           </Box>
           <Divider sx={{ my: "1.5em" }} />
           <Box>
             <CustomLabel sx={{ fontSize: "18px" }}>
-              По дате обновления
+              {t("filters.byUpdatedAt")}
             </CustomLabel>
             <Typography color={"secondary.main"}>
-              Выберите промежуток дат
+              {t("filters.dateRange", { ns: "common" })}
             </Typography>
             <Stack
               direction={"row"}
@@ -130,7 +130,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
               justifyContent={"space-between"}
             >
               <Box>
-                <CustomLabel>От</CustomLabel>
+                <CustomLabel>{t("filters.from", { ns: "common" })}</CustomLabel>
                 <DatePickerElement
                   name={"dateFrom"}
                   isDate
@@ -139,7 +139,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
                 />
               </Box>
               <Box>
-                <CustomLabel>До</CustomLabel>
+                <CustomLabel>{t("filters.to", { ns: "common" })}</CustomLabel>
                 <DatePickerElement
                   name={"dateTo"}
                   isDate
@@ -151,9 +151,11 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
           </Box>
           <Divider sx={{ my: "2em" }} />
           <Stack direction={"row"} justifyContent={"space-between"} gap={"1em"}>
-            <Button onClick={onClear}>Очистить</Button>
+            <Button onClick={onClear}>
+              {t("buttons.clear", { ns: "common" })}
+            </Button>
             <Button onClick={onApply} variant={"contained"}>
-              Применить
+              {t("buttons.apply", { ns: "common" })}
             </Button>
           </Stack>
         </Box>

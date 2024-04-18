@@ -38,7 +38,7 @@ const ReportMenu = ({
   placeSlug,
   onChangeStatus,
 }: IReportMenuProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["moderation", "common"]);
   const popover = usePopover("menu-action");
   const [action, setAction] = useState<
     "decline-place" | "decline-report" | null
@@ -85,7 +85,7 @@ const ReportMenu = ({
   const declineReportContent = (
     <Stack gap={"1em"}>
       <Typography fontWeight={500} fontSize={"22px"}>
-        Отклонение жалобы
+        {t("reports.menu.reportRejection")}
       </Typography>
       <Divider sx={{ borderColor: "divider" }} />
       <Stack gap={"1em"} direction={"row"}>
@@ -95,7 +95,7 @@ const ReportMenu = ({
           sx={{ fontSize: "16px" }}
           size="large"
         >
-          Отмена
+          {t("buttons.cancellation", { ns: "common" })}
         </StyledButton>
         <StyledButton
           startIcon={
@@ -108,7 +108,7 @@ const ReportMenu = ({
           size="large"
           sx={{ fontSize: "16px" }}
         >
-          Отклонить
+          {t("buttons.reject", { ns: "common" })}
         </StyledButton>
       </Stack>
     </Stack>
@@ -117,18 +117,18 @@ const ReportMenu = ({
   const declinePlaceContent = (
     <Stack gap={"1em"}>
       <Typography fontWeight={500} fontSize={"22px"}>
-        Отклонение места
+        {t("reports.menu.placeRejection")}
       </Typography>
       <FormProvider {...placeDecline.form}>
         <TextFieldElement
           fullWidth
           name={"feedback"}
           id={"feedback"}
-          placeholder={"Причина"}
+          placeholder={t("reports.menu.reason")}
           required
           multiline
           minRows={1}
-          parseError={() => "Это поле обязательно к заполнению"}
+          parseError={() => t("errors.required", { ns: "common" })}
         />
         <Stack gap={"1em"} mt={"1em"} direction={"row"}>
           <StyledButton
@@ -137,7 +137,7 @@ const ReportMenu = ({
             sx={{ fontSize: "16px" }}
             size="large"
           >
-            Отмена
+            {t("buttons.cancellation", { ns: "common" })}
           </StyledButton>
           <StyledButton
             startIcon={
@@ -150,7 +150,7 @@ const ReportMenu = ({
             size="large"
             sx={{ fontSize: "16px" }}
           >
-            Отклонить
+            {t("buttons.reject", { ns: "common" })}
           </StyledButton>
         </Stack>
       </FormProvider>
@@ -192,13 +192,17 @@ const ReportMenu = ({
           href={routerLinks.place(placeSlug)}
           target={"_blank"}
         >
-          Просмотр места
+          {t("reports.menu.viewPlace")}
         </MenuItem>
         {showActions && (
-          <MenuItem onClick={onClickDeclinePlace}>Отклонить место</MenuItem>
+          <MenuItem onClick={onClickDeclinePlace}>
+            {t("reports.menu.rejectPlace")}
+          </MenuItem>
         )}
         {showActions && (
-          <MenuItem onClick={onClickDeclineReport}>Отклонить жалобу</MenuItem>
+          <MenuItem onClick={onClickDeclineReport}>
+            {t("reports.menu.rejectReport")}
+          </MenuItem>
         )}
       </Menu>
     </Fragment>

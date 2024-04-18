@@ -9,7 +9,7 @@ import reviewsService from "@/services/reviews-service/reviews.service";
 import { IEditReviewFormContext } from "@/containers/personal-area/edit-my-review/interfaces";
 
 const useReviewModeration = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["review-management", "common"]);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const reviewId = router.query["id"] as string | undefined;
@@ -33,9 +33,10 @@ const useReviewModeration = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
-          description:
-            "Заметка не найдена. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          title: t("feedback.error", { ns: "common" }),
+          description: `${t("feedback.notFound")} ${t("errors.description", {
+            ns: "common",
+          })}`,
           variant: "standard",
           severity: "error",
         },

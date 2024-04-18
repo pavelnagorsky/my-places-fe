@@ -1,11 +1,16 @@
 import { ISelect } from "@/shared/interfaces";
 import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
+import { useTranslation } from "next-i18next";
 
 const useReviewStatuses = () => {
+  const { t } = useTranslation("common");
   const statuses: ISelect[] = [
-    { id: ReviewStatusesEnum.MODERATION, label: "На модерации" },
-    { id: ReviewStatusesEnum.APPROVED, label: "Опубликовано" },
-    { id: ReviewStatusesEnum.REJECTED, label: "Отклонено" },
+    {
+      id: ReviewStatusesEnum.MODERATION,
+      label: t("reviewStatuses.moderation"),
+    },
+    { id: ReviewStatusesEnum.APPROVED, label: t("reviewStatuses.approved") },
+    { id: ReviewStatusesEnum.REJECTED, label: t("reviewStatuses.rejected") },
   ];
 
   return statuses;

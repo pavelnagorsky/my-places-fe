@@ -3,18 +3,25 @@ import { ISearchPlace } from "@/services/places-service/interfaces/search-place.
 const searchPageJsonld = (places: ISearchPlace[]) => {
   return {
     "@context": "https://schema.org",
-    "@graph": places.map((p) => {
+    "@graph": places.map((place) => {
       return {
-        "@type": "Place",
-        name: p.title,
-        description: p.description,
-        image: p.image,
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: p.coordinates.lat + "",
-          longitude: p.coordinates.lng + "",
+        "@context": "https://schema.org",
+        "@type": "TouristAttraction",
+        name: place.title,
+        description: place.description,
+        image: place.image,
+        touristType: place.categories.map((c) => c.title).join(", "),
+        additionalType: place.type.title,
+        location: {
+          "@type": "Place",
+          address: place.address,
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: place.coordinates.lat + "",
+            longitude: place.coordinates.lng + "",
+          },
         },
-        address: p.address || "",
+        publicAccess: true,
       };
     }),
   };

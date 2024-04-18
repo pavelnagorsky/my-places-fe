@@ -22,7 +22,7 @@ interface IPlaceItemProps {
 const PlaceItem = ({ place }: IPlaceItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation(["moderation", "common"]);
   const dateFnsLocale = useDateFnsLocale();
   const router = useRouter();
 
@@ -54,7 +54,9 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
   const advertisementBox = (
     <Box>
       <Typography variant={"body1"}>
-        {place.advertisement ? "Да" : "Нет"}
+        {place.advertisement
+          ? t("buttons.yes", { ns: "common" })
+          : t("buttons.no", { ns: "common" })}
       </Typography>
     </Box>
   );
@@ -108,27 +110,27 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Название</CustomLabel>
+            <CustomLabel>{t("places.headings.title")}</CustomLabel>
             {placeTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Тип</CustomLabel>
+            <CustomLabel>{t("places.headings.type")}</CustomLabel>
             {placeTypeBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Автор</CustomLabel>
+            <CustomLabel>{t("places.headings.author")}</CustomLabel>
             {placeAuthorInfoBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Коммерция</CustomLabel>
+            <CustomLabel>{t("places.headings.commercial")}</CustomLabel>
             {advertisementBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Дата создания</CustomLabel>
+            <CustomLabel>{t("places.headings.createdAt")}</CustomLabel>
             {createdAtInfoBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Дата обновления</CustomLabel>
+            <CustomLabel>{t("places.headings.updatedAt")}</CustomLabel>
             {updatedAtInfoBox}
           </Grid>
         </Grid>

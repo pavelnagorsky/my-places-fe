@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { ReportsOrderByEnum } from "@/services/reports-service/interfaces/interfaces";
 import { OrderDirectionsEnum } from "@/services/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface ITableHeadProps {
   show: boolean;
@@ -18,6 +19,7 @@ const ReportItemsTableHead = ({
   onChangeOrderBy,
   onChangeOrderDirection,
 }: ITableHeadProps) => {
+  const { t } = useTranslation("moderation");
   return (
     <Box
       mx={"0.5em"}
@@ -42,7 +44,7 @@ const ReportItemsTableHead = ({
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() => onChangeOrderBy(ReportsOrderByEnum.TEXT)}
           >
-            <Typography>Жалоба</Typography>
+            <Typography>{t("reports.headings.report")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={3}>
@@ -54,7 +56,7 @@ const ReportItemsTableHead = ({
               onChangeOrderBy(ReportsOrderByEnum.PLACE_SLUG)
             }
           >
-            <Typography>Место</Typography>
+            <Typography>{t("reports.headings.place")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2}>
@@ -64,7 +66,7 @@ const ReportItemsTableHead = ({
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() => onChangeOrderBy(ReportsOrderByEnum.STATUS)}
           >
-            <Typography>Статус</Typography>
+            <Typography>{t("reports.headings.status")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={"auto"}>
@@ -76,7 +78,7 @@ const ReportItemsTableHead = ({
               onChangeOrderBy(ReportsOrderByEnum.CREATED_AT)
             }
           >
-            <Typography>Дата создания</Typography>
+            <Typography>{t("reports.headings.createdAt")}</Typography>
           </SortingButton>
         </Grid>
       </Grid>

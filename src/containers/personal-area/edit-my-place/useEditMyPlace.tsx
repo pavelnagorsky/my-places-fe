@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
 
 const useEditMyPlace = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation(["place-management", "common"]);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const placeId = router.query["id"] as string | undefined;
@@ -37,9 +37,10 @@ const useEditMyPlace = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
-          description:
-            "Место не найдено. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          title: t("feedback.error", { ns: "common" }),
+          description: `${t("feedback.notFound")} ${t("errors.description", {
+            ns: "common",
+          })}`,
           variant: "standard",
           severity: "error",
         },
@@ -85,9 +86,11 @@ const useEditMyPlace = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
-          description:
-            "Ошибка при обновлении места. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          title: t("feedback.error", { ns: "common" }),
+          description: `${t("feedback.update.error")} ${t(
+            "errors.description",
+            { ns: "common" }
+          )}`,
           variant: "standard",
           severity: "error",
         },
@@ -100,9 +103,8 @@ const useEditMyPlace = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Успех!",
-          description:
-            "Место было обновлено и отправлено на модерацию. Вы сможете просмотреть его статус в личном кабинете",
+          title: t("feedback.success", { ns: "common" }),
+          description: t("feedback.update.success"),
           variant: "standard",
           severity: "success",
         },

@@ -28,7 +28,7 @@ interface IReportItemProps {
 const ReportItem = ({ report }: IReportItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation("moderation");
   const dateFnsLocale = useDateFnsLocale();
   const { parseStatusColor, statuses } = useCrmStatuses();
   const [status, setStatus] = useState(report.status);
@@ -111,19 +111,19 @@ const ReportItem = ({ report }: IReportItemProps) => {
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Жалоба</CustomLabel>
+            <CustomLabel>{t("reports.headings.report")}</CustomLabel>
             {textBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Место</CustomLabel>
+            <CustomLabel>{t("reports.headings.place")}</CustomLabel>
             {placeSlugBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Статус</CustomLabel>
+            <CustomLabel>{t("reports.headings.status")}</CustomLabel>
             {statusBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Дата создания</CustomLabel>
+            <CustomLabel>{t("reports.headings.createdAt")}</CustomLabel>
             {createdAtInfoBox}
           </Grid>
         </Grid>

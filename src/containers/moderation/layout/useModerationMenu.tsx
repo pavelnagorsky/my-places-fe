@@ -3,21 +3,23 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { ReactElement } from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import FlagCircleIcon from "@mui/icons-material/FlagCircle";
+import { useTranslation } from "next-i18next";
 
 const useModerationMenu = () => {
+  const { t } = useTranslation("moderation");
   return [
     {
-      title: "Места",
+      title: t("links.places"),
       href: routerLinks.moderationPlaces,
       icon: <PlaceIcon />,
     },
     {
-      title: "Заметки",
+      title: t("links.reviews"),
       href: routerLinks.moderationReviews,
       icon: <NewspaperIcon />,
     },
     {
-      title: "Жалобы",
+      title: t("links.reports"),
       href: routerLinks.moderationReports,
       icon: <FlagCircleIcon />,
     },

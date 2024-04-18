@@ -9,8 +9,10 @@ import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
 import ReportItem from "@/containers/moderation/reports/report-item/ReportItem";
 import ReportItemsTableHead from "@/containers/moderation/reports/report-item/ReportItemsTableHead";
 import Filters from "@/containers/moderation/reports/filters/Filters";
+import { useTranslation } from "next-i18next";
 
 const ReportsPage = () => {
+  const { t } = useTranslation("moderation");
   const logic = useReports();
 
   return (
@@ -29,7 +31,7 @@ const ReportsPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Жалобы на места
+                {t("reports.title")}
               </Typography>
             </Stack>
           </motion.div>
@@ -46,7 +48,7 @@ const ReportsPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  Жалобы не найдены
+                  {t("reports.notFound")}
                 </Typography>
               )}
               <ReportItemsTableHead

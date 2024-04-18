@@ -5,6 +5,7 @@ import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import reportsService from "@/services/reports-service/reports.service";
 import { CrmStatusesEnum } from "@/services/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface IUsePlaceRejectionProps {
   placeId: number;
@@ -17,6 +18,7 @@ const usePlaceRejection = ({
   reportId,
   onSuccess,
 }: IUsePlaceRejectionProps) => {
+  const { t } = useTranslation(["moderation", "common"]);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const form = useForm<{ feedback: string }>({
@@ -45,8 +47,8 @@ const usePlaceRejection = ({
           dispatch(
             showAlert({
               alertProps: {
-                title: "Успех!",
-                description: "Место было успешно отклонено модерацией",
+                title: t("feedback.success", { ns: "common" }),
+                description: t("feedback.report.rejectPlace.success"),
                 variant: "standard",
                 severity: "success",
               },
@@ -59,8 +61,13 @@ const usePlaceRejection = ({
           dispatch(
             showAlert({
               alertProps: {
-                title: "Ошибка!",
-                description: `Ошибка при отклонении места. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...`,
+                title: t("feedback.error", { ns: "common" }),
+                description: `${t("feedback.report.rejectPlace.error")} ${t(
+                  "errors.description",
+                  {
+                    ns: "common",
+                  }
+                )}`,
                 variant: "standard",
                 severity: "error",
               },

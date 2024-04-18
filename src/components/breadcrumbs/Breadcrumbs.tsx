@@ -23,7 +23,7 @@ const Breadcrumbs = () => {
     <Box role="presentation" mt={"1em"}>
       <Crumbs aria-label="breadcrumb">
         <NextMuiLink underline="hover" color="inherit" href="/">
-          {t("logo")}
+          Знай свой край
         </NextMuiLink>
         {pathnames.map((path, i) => {
           if (breadcrumbNameMap.hasOwnProperty(path)) {

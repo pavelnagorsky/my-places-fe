@@ -10,7 +10,11 @@ interface ILanguageOption {
 const useLanguages = () => {
   return [
     { id: LanguageIdsEnum.ru, locale: I18nLanguages.ru, label: "Русский" },
-    { id: LanguageIdsEnum.be, locale: I18nLanguages.be, label: "Беларускi" },
+    {
+      id: LanguageIdsEnum.be,
+      locale: I18nLanguages.be,
+      label: "Беларуская мова",
+    },
     { id: LanguageIdsEnum.en, locale: I18nLanguages.en, label: "English" },
   ] as ILanguageOption[];
 };

@@ -1,17 +1,14 @@
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { memo, useEffect } from "react";
+import { memo, useEffect, useMemo } from "react";
 import { Controller, useFormContext } from "react-hook-form-mui";
 import { Box, styled, SxProps, Typography } from "@mui/material";
 import textEditorConfig from "@/components/forms/text-editor/text-editor.config";
+import { useTranslation } from "next-i18next";
 
 const StyledEditor = styled("div")(({ theme }) => ({
   backgroundColor: "white",
-  '& .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="large"]::before, .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="large"]::before':
-    {
-      content: `"Большой"`,
-    },
   borderRadius: "15px",
   "& .ql-toolbar.ql-snow": {
     padding: "0.8em",
@@ -20,6 +17,10 @@ const StyledEditor = styled("div")(({ theme }) => ({
     borderWidth: "2px",
     borderBottomColor: theme.palette.primary.light,
     borderBottomWidth: "1px",
+    fontFamily: "inherit",
+    "& .ql-picker.ql-size": {
+      minWidth: "127px",
+    },
   },
   "& .ql-container.ql-snow": {
     fontSize: "16px",
@@ -43,14 +44,33 @@ const TextEditor = ({
   placeholder?: string;
   sx?: SxProps;
 }) => {
+  const { t, i18n } = useTranslation("common");
   const { setValue } = useFormContext();
+
+  const translationsSx: SxProps = useMemo(
+    () => ({
+      '& .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="large"]::before, .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="large"]::before':
+        {
+          content: `"${t("textEditor.fontSizes.large")}"`,
+        },
+      "& .ql-snow .ql-picker.ql-size .ql-picker-label::before, .ql-snow .ql-picker.ql-size .ql-picker-item::before":
+        {
+          content: `"${t("textEditor.fontSizes.normal")}"`,
+        },
+      '& .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="small"]::before, .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="small"]::before':
+        {
+          content: `"${t("textEditor.fontSizes.small")}"`,
+        },
+    }),
+    [i18n.language]
+  );
 
   return (
     <Box sx={sx}>
       <Controller
         name={fieldName}
-        render={({ field, fieldState, formState }) => (
-          <StyledEditor>
+        render={({ field }) => (
+          <StyledEditor sx={{ ...translationsSx }}>
             <ReactQuill
               readOnly={readonly}
               theme="snow"
@@ -74,7 +94,7 @@ const TextEditor = ({
           max: 6000,
           required: true,
         }}
-        render={({ field, fieldState, formState }) => {
+        render={({ field }) => {
           return (
             <Typography variant={"body2"} mt={"0.5em"} sx={{ float: "right" }}>
               {field.value || 0} / 6000

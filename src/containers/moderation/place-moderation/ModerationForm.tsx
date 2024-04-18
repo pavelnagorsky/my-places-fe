@@ -15,6 +15,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import reviewsService from "@/services/reviews-service/reviews.service";
+import { useTranslation } from "next-i18next";
 
 interface IModerationFormContext {
   feedback?: string;
@@ -27,6 +28,7 @@ const ModerationForm = ({
   id: number;
   mode: "place" | "review";
 }) => {
+  const { t } = useTranslation(["moderation", "common"]);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState<false | "reject" | "accept">(false);
@@ -40,12 +42,14 @@ const ModerationForm = ({
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
+          title: t("feedback.error", { ns: "common" }),
           description: `${
             mode === "place"
-              ? "Ошибка при модерации места."
-              : "Ошибка при модерации заметки."
-          } Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...`,
+              ? t("feedback.place.error")
+              : t("feedback.review.error")
+          } ${t("errors.description", {
+            ns: "common",
+          })}`,
           variant: "standard",
           severity: "error",
         },
@@ -58,18 +62,18 @@ const ModerationForm = ({
     dispatch(
       showAlert({
         alertProps: {
-          title: "Успех!",
+          title: t("feedback.success", { ns: "common" }),
           description:
             action === "accept"
               ? `${
                   mode === "place"
-                    ? "Место было успешно одобрено модерацией"
-                    : "Заметка была успешно одобрена модерацией"
+                    ? t("feedback.place.accept")
+                    : t("feedback.review.accept")
                 }`
               : `${
                   mode === "place"
-                    ? "Место было успешно отклонено модерацией"
-                    : "Заметка была успешно отклонена модерацией"
+                    ? t("feedback.place.reject")
+                    : t("feedback.review.reject")
                 }`,
           variant: "standard",
           severity: "success",
@@ -84,7 +88,7 @@ const ModerationForm = ({
       if (action === "reject") {
         if (!data.feedback || data.feedback.trim().length < 1) {
           form.setError("feedback", {
-            message: "Это поле обязательно к заполнению",
+            message: t("errors.required", { ns: "common" }),
           });
           return;
         }
@@ -132,18 +136,18 @@ const ModerationForm = ({
             mb={"0.5em"}
             fontSize={{ xs: "14px", md: "20px" }}
           >
-            Обратная связь
+            {t("form.feedback")}
           </Typography>
           <TextFieldElement
             fullWidth
             name={"feedback"}
             id={"feedback"}
-            placeholder={"Причина"}
+            placeholder={t("form.feedbackPlaceholder")}
             multiline
             minRows={1}
-            parseError={() => "Это поле обязательно к заполнению"}
+            parseError={() => t("errors.required", { ns: "common" })}
           />
-          <FormHelperText>Обязательна при отклонении</FormHelperText>
+          <FormHelperText>{t("form.feedbackHelper")}</FormHelperText>
         </Box>
         <Stack>
           <Stack gap={"1em"} direction={"row"}>
@@ -154,7 +158,7 @@ const ModerationForm = ({
               sx={{ fontSize: "16px" }}
               size="large"
             >
-              Отклонить
+              {t("buttons.reject", { ns: "common" })}
             </StyledButton>
             <StyledButton
               onClick={() => onSubmit("accept")}
@@ -163,7 +167,7 @@ const ModerationForm = ({
               sx={{ fontSize: "16px" }}
               color={"success"}
             >
-              Принять
+              {t("buttons.accept", { ns: "common" })}
             </StyledButton>
           </Stack>
         </Stack>

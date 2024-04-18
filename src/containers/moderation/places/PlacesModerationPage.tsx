@@ -12,7 +12,7 @@ import PlaceItemsTableHead from "@/containers/moderation/places/place-item/Place
 import PlaceItem from "@/containers/moderation/places/place-item/PlaceItem";
 
 const PlacesModerationPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("moderation");
   const logic = useModerationPlaces();
 
   return (
@@ -31,7 +31,7 @@ const PlacesModerationPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Места на модерацию
+                {t("places.title")}
               </Typography>
             </Stack>
           </motion.div>
@@ -48,7 +48,7 @@ const PlacesModerationPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  Места, требующие модерации не найдены
+                  {t("places.notFound")}
                 </Typography>
               )}
               <PlaceItemsTableHead
