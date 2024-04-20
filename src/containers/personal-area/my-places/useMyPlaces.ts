@@ -15,7 +15,7 @@ import { IPaginationRequest } from "@/services/interfaces";
 import utils from "@/shared/utils";
 
 const useMyPlaces = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["personal-area", "common"]);
   const dispatch = useAppDispatch();
 
   const formContext = useForm<IMyPlacesFormContext>({
@@ -67,8 +67,8 @@ const useMyPlaces = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Успех!",
-              description: "Место было успешно удалено.",
+              title: t("feedback.success", { ns: "common" }),
+              description: t("places.feedback.delete.success"),
               variant: "standard",
               severity: "success",
             },
@@ -82,9 +82,13 @@ const useMyPlaces = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description:
-                "Не удалось удалить место. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+              title: t("feedback.error", { ns: "common" }),
+              description: `${t("places.feedback.delete.error")} ${t(
+                "errors.description",
+                {
+                  ns: "common",
+                }
+              )}`,
               variant: "standard",
               severity: "error",
             },

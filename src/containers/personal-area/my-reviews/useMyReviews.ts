@@ -16,7 +16,7 @@ import utils from "@/shared/utils";
 
 const useMyReviews = () => {
   const dispatch = useAppDispatch();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["personal-area", "common"]);
 
   const formContext = useForm<IMyReviewsFormContext>({
     defaultValues: {
@@ -67,8 +67,8 @@ const useMyReviews = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Успех!",
-              description: "Заметка была успешно удалена.",
+              title: t("feedback.success", { ns: "common" }),
+              description: t("reviews.feedback.delete.success"),
               variant: "standard",
               severity: "success",
             },
@@ -84,9 +84,13 @@ const useMyReviews = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description:
-                "Не удалось удалить заметку. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+              title: t("feedback.error", { ns: "common" }),
+              description: `${t("reviews.feedback.delete.error")} ${t(
+                "errors.description",
+                {
+                  ns: "common",
+                }
+              )}`,
               variant: "standard",
               severity: "error",
             },

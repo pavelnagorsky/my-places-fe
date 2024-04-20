@@ -7,9 +7,11 @@ import { useTranslation } from "next-i18next";
 const ReviewPhotos = ({
   sx,
   readonly,
+  canDeleteByAPI,
 }: {
   sx?: SxProps;
   readonly?: boolean;
+  canDeleteByAPI?: boolean;
 }) => {
   const { t } = useTranslation("review-management");
   return (
@@ -31,6 +33,7 @@ const ReviewPhotos = ({
           required
           maxLimit={10}
           fieldName={"images"}
+          canDeleteByAPI={canDeleteByAPI}
         />
       </Box>
     </Box>

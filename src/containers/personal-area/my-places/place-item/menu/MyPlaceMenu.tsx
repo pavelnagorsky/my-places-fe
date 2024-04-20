@@ -14,7 +14,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
 
 interface IMyPlaceMenuProps {
-  anchorEl: null | HTMLElement;
+  anchorEl: null | Element;
   open: boolean;
   handleClose: () => void;
   onDelete: () => void;
@@ -32,7 +32,7 @@ const MyPlaceMenu = ({
   onEdit,
   status,
 }: IMyPlaceMenuProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["personal-area", "common"]);
   const popover = usePopover("confirm-place-delete");
   const showViewOption = status === PlaceStatusesEnum.APPROVED;
 
@@ -51,7 +51,7 @@ const MyPlaceMenu = ({
         }}
       >
         <Typography fontSize={"16px"} fontWeight={500}>
-          Вы уверены?
+          {t("confirmText")}
         </Typography>
         <Divider sx={{ borderColor: "divider", my: "0.5em" }} />
         <Stack direction={"row"} justifyContent={"center"} mt={1}>
@@ -64,7 +64,7 @@ const MyPlaceMenu = ({
               onDelete();
             }}
           >
-            Удалить
+            {t("buttons.delete", { ns: "common" })}
           </Button>
         </Stack>
       </Popover>
@@ -84,11 +84,13 @@ const MyPlaceMenu = ({
             href={routerLinks.place(placeSlug)}
             target={"_blank"}
           >
-            Просмотр
+            {t("places.menu.view")}
           </MenuItem>
         )}
-        <MenuItem onClick={onEdit}>Редактировать</MenuItem>
-        <MenuItem onClick={popover.handleOpen}>Удалить</MenuItem>
+        <MenuItem onClick={onEdit}>{t("places.menu.edit")}</MenuItem>
+        <MenuItem onClick={popover.handleOpen}>
+          {t("buttons.delete", { ns: "common" })}
+        </MenuItem>
       </Menu>
     </Fragment>
   );

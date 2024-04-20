@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { MyReviewsOrderByEnum } from "@/services/reviews-service/interfaces/interfaces";
 import { OrderDirectionsEnum } from "@/services/interfaces";
+import { useTranslation } from "next-i18next";
 
 interface ITableHeadProps {
   show: boolean;
@@ -18,6 +19,7 @@ const ReviewItemsTableHead = ({
   onChangeOrderBy,
   onChangeOrderDirection,
 }: ITableHeadProps) => {
+  const { t } = useTranslation("personal-area");
   return (
     <Box
       mx={"0.5em"}
@@ -42,7 +44,7 @@ const ReviewItemsTableHead = ({
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() => onChangeOrderBy(MyReviewsOrderByEnum.TITLE)}
           >
-            <Typography>Название</Typography>
+            <Typography>{t("reviews.headings.title")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2.5}>
@@ -54,7 +56,7 @@ const ReviewItemsTableHead = ({
               onChangeOrderBy(MyReviewsOrderByEnum.PLACE_TITLE)
             }
           >
-            <Typography>Место</Typography>
+            <Typography>{t("reviews.headings.place")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={2.2}>
@@ -64,7 +66,7 @@ const ReviewItemsTableHead = ({
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() => onChangeOrderBy(MyReviewsOrderByEnum.STATUS)}
           >
-            <Typography>Статус</Typography>
+            <Typography>{t("reviews.headings.status")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={1.8}>
@@ -74,7 +76,7 @@ const ReviewItemsTableHead = ({
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() => onChangeOrderBy(MyReviewsOrderByEnum.VIEWS)}
           >
-            <Typography>Просмотры</Typography>
+            <Typography>{t("reviews.headings.views")}</Typography>
           </SortingButton>
         </Grid>
         <Grid item xs={"auto"} display={"flex"} alignItems={"center"}>
@@ -86,7 +88,7 @@ const ReviewItemsTableHead = ({
               onChangeOrderBy(MyReviewsOrderByEnum.CREATED_AT)
             }
           >
-            <Typography>Дата создания</Typography>
+            <Typography>{t("reviews.headings.createdAt")}</Typography>
           </SortingButton>
         </Grid>
       </Grid>

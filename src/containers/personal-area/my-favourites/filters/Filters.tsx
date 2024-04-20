@@ -9,7 +9,7 @@ interface IFilterProps {
 }
 
 const Filters = ({ onSubmit }: IFilterProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("personal-area");
 
   return (
     <Stack
@@ -20,7 +20,7 @@ const Filters = ({ onSubmit }: IFilterProps) => {
     >
       <TextFieldElement
         onChange={debounce(() => onSubmit(), 300)}
-        placeholder={"Название места"}
+        placeholder={t("favourites.filters.placeTitle")}
         name={"search"}
         id={"searchText"}
         InputProps={{

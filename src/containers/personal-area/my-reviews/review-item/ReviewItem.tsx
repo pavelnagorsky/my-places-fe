@@ -30,7 +30,7 @@ interface IReviewItemProps {
 const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation("personal-area");
   const reviewStatuses = useReviewStatuses();
   const dateFnsLocale = useDateFnsLocale();
   const menu = useMyReviewMenu({ reviewId: review.id, onDelete });
@@ -149,23 +149,23 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Название</CustomLabel>
+            <CustomLabel>{t("reviews.headings.title")}</CustomLabel>
             {reviewTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Место</CustomLabel>
+            <CustomLabel>{t("reviews.headings.place")}</CustomLabel>
             {placeTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Статус</CustomLabel>
+            <CustomLabel>{t("reviews.headings.status")}</CustomLabel>
             {statusInfoBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Просмотры</CustomLabel>
+            <CustomLabel>{t("reviews.headings.views")}</CustomLabel>
             {viewsBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Дата создания</CustomLabel>
+            <CustomLabel>{t("reviews.headings.createdAt")}</CustomLabel>
             {dateInfoBox}
           </Grid>
         </Grid>

@@ -9,7 +9,7 @@ import { showAlert } from "@/store/alerts-slice/alerts.slice";
 import { IMyFavouritesRequest } from "@/services/places-service/interfaces/interfaces";
 
 const useMyFavourites = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["personal-area", "common"]);
   const [favourites, setFavourites] = useState<IFavourite[]>([]);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
@@ -29,9 +29,8 @@ const useMyFavourites = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Успех!",
-              description:
-                "Место было было успешно удалено из вашего избранного.",
+              title: t("feedback.success", { ns: "common" }),
+              description: t("favourites.feedback.delete.success"),
               variant: "standard",
               severity: "success",
             },
@@ -45,9 +44,13 @@ const useMyFavourites = () => {
         dispatch(
           showAlert({
             alertProps: {
-              title: "Ошибка!",
-              description:
-                "Не удалось удалить место из избранного. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+              title: t("feedback.error", { ns: "common" }),
+              description: `${t("favourites.feedback.delete.error")} ${t(
+                "errors.description",
+                {
+                  ns: "common",
+                }
+              )}`,
               variant: "standard",
               severity: "error",
             },

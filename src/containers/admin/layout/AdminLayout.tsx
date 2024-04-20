@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { Box, Grid, Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import AdminSideBar from "@/containers/admin/layout/AdminSideBar";
 
 const AdminLayout = ({ children }: PropsWithChildren) => {

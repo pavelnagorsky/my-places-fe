@@ -11,7 +11,7 @@ import FavouriteItemsTableHead from "@/containers/personal-area/my-favourites/fa
 import Filters from "./filters/Filters";
 
 const MyFavouritesPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("personal-area");
   const logic = useMyFavourites();
 
   return (
@@ -30,7 +30,7 @@ const MyFavouritesPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Избранные места
+                {t("favourites.title")}
               </Typography>
             </Stack>
           </motion.div>
@@ -47,7 +47,7 @@ const MyFavouritesPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  Избранные места не найдены
+                  {t("favourites.noItems")}
                 </Typography>
               )}
               <Hidden mdDown>

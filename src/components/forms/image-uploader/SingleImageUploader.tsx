@@ -10,6 +10,7 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CancelTwoToneIcon from "@mui/icons-material/CancelTwoTone";
 import fileService from "@/services/file-service/file.service";
 import { useState } from "react";
+import { useTranslation } from "next-i18next";
 
 interface ISingleImageUploaderProps {
   notRequired?: boolean;
@@ -24,7 +25,7 @@ const SingleImageUploader = ({
   onDelete,
   notRequired,
 }: ISingleImageUploaderProps) => {
-  // const {t} = useTranslation()
+  const { t } = useTranslation("common");
   const [loading, setLoading] = useState(false);
 
   return (
@@ -118,13 +119,13 @@ const SingleImageUploader = ({
                   color: "error.main",
                 }}
                 onClick={() => {
-                  const idForDelete = field.value?.id as number | null;
+                  // const idForDelete = field.value?.id as number | null;
                   onDelete(fieldName);
-                  if (!idForDelete) return;
-                  fileService
-                    .deleteImage(idForDelete)
-                    .then(() => {})
-                    .catch(() => {});
+                  // if (!idForDelete) return;
+                  // fileService
+                  //   .deleteImage(idForDelete)
+                  //   .then(() => {})
+                  //   .catch(() => {});
                 }}
               >
                 <CancelTwoToneIcon />
@@ -150,7 +151,7 @@ const SingleImageUploader = ({
                 color: "error.main",
               }}
             >
-              Это поле обязательно к заполнению
+              {t("errors.required")}
             </Typography>
           ) : null}
         </Box>

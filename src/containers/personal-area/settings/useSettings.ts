@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import userService from "@/services/user-service/user.service";
 import { getUserDataThunk } from "@/store/user-slice/thunks";
 import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { useTranslation } from "next-i18next";
 
 const useSettings = () => {
+  const { t } = useTranslation(["personal-area", "common"]);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const userData = useAppSelector(selectUserData);
@@ -32,9 +34,13 @@ const useSettings = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Ошибка!",
-          description:
-            "Ошибка при обновлении профиля. Проверьте введенные данные и сетевое подключение или обратитесь в нашу службу поддержки...",
+          title: t("feedback.error", { ns: "common" }),
+          description: `${t("settings.feedback.error")} ${t(
+            "errors.description",
+            {
+              ns: "common",
+            }
+          )}`,
           variant: "standard",
           severity: "error",
         },
@@ -47,8 +53,8 @@ const useSettings = () => {
     dispatch(
       showAlert({
         alertProps: {
-          title: "Успех!",
-          description: "Профиль был успешно обновлен.",
+          title: t("feedback.success", { ns: "common" }),
+          description: t("settings.feedback.success"),
           variant: "standard",
           severity: "success",
         },
@@ -60,6 +66,7 @@ const useSettings = () => {
   const onSubmit = () => {
     form.handleSubmit((data) => {
       if (loading || !userData?.id) return;
+      data.email = data.email.trim();
       setLoading(true);
       userService
         .updateUser({

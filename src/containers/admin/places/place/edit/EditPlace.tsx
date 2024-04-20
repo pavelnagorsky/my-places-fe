@@ -10,7 +10,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import PersonalAreaLayout from "@/containers/personal-area/layout/PersonalAreaLayout";
 import animationVariants from "@/shared/animation-variants";
 import { FormContainer, FormProvider } from "react-hook-form-mui";
 import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
@@ -23,6 +22,7 @@ import Tab2 from "@/containers/create-place/form/tabs/Tab2";
 import Tab3 from "@/containers/create-place/form/tabs/Tab3";
 import Tab4 from "@/containers/create-place/form/tabs/Tab4";
 import useEditPlace from "@/containers/admin/places/place/edit/useEditPlace";
+import AdminLayout from "@/containers/admin/layout/AdminLayout";
 
 const tabContentVariant: Variants = {
   active: {
@@ -60,10 +60,11 @@ const EditPlace = () => {
   );
 
   return (
-    <PersonalAreaLayout>
+    <AdminLayout>
       <motion.div
         variants={animationVariants.defaultContainerVariant}
         initial="hidden"
+        style={{ padding: "1em" }}
         animate="show"
       >
         {loader}
@@ -187,7 +188,7 @@ const EditPlace = () => {
           </FormContainer>
         </FormProvider>
       </motion.div>
-    </PersonalAreaLayout>
+    </AdminLayout>
   );
 };
 

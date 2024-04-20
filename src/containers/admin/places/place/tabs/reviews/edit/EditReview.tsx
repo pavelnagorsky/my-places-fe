@@ -6,7 +6,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import PersonalAreaLayout from "@/containers/personal-area/layout/PersonalAreaLayout";
 import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import { FormContainer, FormProvider } from "react-hook-form-mui";
@@ -20,6 +19,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import ReviewPhotos from "@/containers/create-review/form/ReviewPhotos";
 import ReviewText from "@/containers/create-review/form/ReviewText";
 import useEditReview from "@/containers/admin/places/place/tabs/reviews/edit/useEditReview";
+import AdminLayout from "@/containers/admin/layout/AdminLayout";
 
 const EditReview = () => {
   const logic = useEditReview();
@@ -34,9 +34,10 @@ const EditReview = () => {
   );
 
   return (
-    <PersonalAreaLayout>
+    <AdminLayout>
       <motion.div
         variants={animationVariants.defaultContainerVariant}
+        style={{ padding: "1em" }}
         initial="hidden"
         animate="show"
       >
@@ -150,7 +151,7 @@ const EditReview = () => {
           </FormContainer>
         </FormProvider>
       </motion.div>
-    </PersonalAreaLayout>
+    </AdminLayout>
   );
 };
 

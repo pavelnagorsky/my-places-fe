@@ -33,7 +33,7 @@ interface IFavouriteItemProps {
 const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation(["personal-area", "common"]);
   const dateFnsLocale = useDateFnsLocale();
   const [isActual, setIsActual] = useState(favourite.actual);
   const popover = usePopover("confirm-favourite-delete");
@@ -60,7 +60,7 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
       }}
     >
       <Typography fontSize={"16px"} fontWeight={500}>
-        Вы уверены?
+        {t("confirmText")}
       </Typography>
       <Divider sx={{ borderColor: "divider", my: "0.5em" }} />
       <Stack direction={"row"} justifyContent={"center"} mt={1}>
@@ -73,7 +73,7 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
             onDelete(favourite.id);
           }}
         >
-          Удалить
+          {t("buttons.delete", { ns: "common" })}
         </Button>
       </Stack>
     </Popover>
@@ -90,7 +90,7 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
             sx={{ fontSize: "16px", alignSelf: "center" }}
             title={
               <Typography p={"0.5em"} fontSize={"14px"}>
-                Актуальные записи будут первыми в списке
+                {t("favourites.isActualTooltip")}
               </Typography>
             }
           >
@@ -101,7 +101,11 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
             />
           </Tooltip>
         }
-        label={isActual ? "Да" : "Нет"}
+        label={
+          isActual
+            ? t("buttons.yes", { ns: "common" })
+            : t("buttons.no", { ns: "common" })
+        }
       />
     </Box>
   );
@@ -152,15 +156,15 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Место</CustomLabel>
+            <CustomLabel>{t("favourites.headings.place")}</CustomLabel>
             {favTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Ссылка</CustomLabel>
+            <CustomLabel>{t("favourites.headings.link")}</CustomLabel>
             {favSlugBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Дата добавления</CustomLabel>
+            <CustomLabel>{t("favourites.headings.date")}</CustomLabel>
             {dateInfoBox}
           </Grid>
           <Grid
@@ -171,7 +175,7 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
             display={"flex"}
             alignItems={"center"}
           >
-            <CustomLabel>Актуальность</CustomLabel>
+            <CustomLabel>{t("favourites.headings.actuality")}</CustomLabel>
             {favIsActualBox}
           </Grid>
         </Grid>

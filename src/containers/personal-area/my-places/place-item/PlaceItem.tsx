@@ -34,7 +34,7 @@ interface IPlaceItemProps {
 const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation(["personal-area", "common"]);
   const placeStatuses = usePlaceStatuses();
   const dateFnsLocale = useDateFnsLocale();
   const menu = useMyPlaceMenu({ placeId: place.id, onDelete });
@@ -43,9 +43,9 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
   const Menu = (
     <MyPlaceMenu
       status={place.status}
-      anchorEl={menu.anchorEl}
-      open={menu.open}
-      handleClose={menu.handleClose}
+      anchorEl={menu.popover.anchor}
+      open={menu.popover.open}
+      handleClose={menu.popover.handleClose}
       onDelete={menu.handleDelete}
       onEdit={menu.handleEdit}
       placeSlug={place.slug}
@@ -60,9 +60,9 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     if (place.status === PlaceStatusesEnum.REJECTED)
       return place.moderationMessage;
     if (place.status === PlaceStatusesEnum.NEEDS_PAYMENT)
-      return "Cогласно правилам данного сайта, созданное Вами Место признано коммерческим, поэтому для его публикации необходимо провести оплату, согласно тарифу на рекламные услуги.";
+      return t("places.feedback.needsPayment");
     if (place.status === PlaceStatusesEnum.COMMERCIAL_EXPIRED)
-      return "Срок действия рекламы созданного Вами коммерческого Места истек. Для возобновления публикации на сайте, необходимо провести оплату, согласно тарифу на рекламные услуги.";
+      return t("places.feedback.commercialExpired");
     return null;
   };
   const tooltipText = parseTooltipText();
@@ -109,7 +109,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     <Tooltip
       arrow
       enterTouchDelay={0}
-      leaveTouchDelay={9000}
+      leaveTouchDelay={6000}
       title={
         tooltipText ? (
           <Typography p={"0.5em"} fontSize={"14px"}>
@@ -143,16 +143,16 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
   const advertisementBox = (
     <Box>
       <Typography variant={"body1"}>
-        {place.advertisement ? "Да" : "Нет"}
+        {place.advertisement
+          ? t("buttons.yes", { ns: "common" })
+          : t("buttons.no", { ns: "common" })}
       </Typography>
       {!!place.advEndDate && (
-        <Typography variant={"body1"} mt={"0.2em"}>{`До ${format(
-          new Date(place.advEndDate),
-          "dd MMM yyyy",
-          {
-            locale: dateFnsLocale,
-          }
-        )}`}</Typography>
+        <Typography variant={"body1"} mt={"0.2em"}>{`${t("filters.to", {
+          ns: "common",
+        })} ${format(new Date(place.advEndDate), "dd MMM yyyy", {
+          locale: dateFnsLocale,
+        })}`}</Typography>
       )}
     </Box>
   );
@@ -182,29 +182,29 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Название</CustomLabel>
+            <CustomLabel>{t("places.headings.title")}</CustomLabel>
             {placeTitleBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Тип</CustomLabel>
+            <CustomLabel>{t("places.headings.type")}</CustomLabel>
             {placeTypeBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Статус</CustomLabel>
+            <CustomLabel>{t("places.headings.status")}</CustomLabel>
             {statusInfoBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Коммерция</CustomLabel>
+            <CustomLabel>{t("places.headings.commercial")}</CustomLabel>
             {advertisementBox}
           </Grid>
           <Grid item xs={12} sm={6} gap={"0.5em"}>
-            <CustomLabel>Дата создания</CustomLabel>
+            <CustomLabel>{t("places.headings.createdAt")}</CustomLabel>
             {dateInfoBox}
           </Grid>
         </Grid>
         <Stack ml={"0.5em"} justifyContent={"space-between"}>
           <IconButton
-            onClick={menu.handleClick}
+            onClick={menu.popover.handleOpen}
             color={"secondary"}
             size={"small"}
           >
@@ -265,7 +265,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
           <IconButton
             color={"secondary"}
             sx={{ mr: "0.5em" }}
-            onClick={menu.handleClick}
+            onClick={menu.popover.handleOpen}
           >
             <MoreVertIcon />
           </IconButton>

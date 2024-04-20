@@ -23,7 +23,7 @@ import animationVariants from "@/shared/animation-variants";
 import NextLink from "next/link";
 
 const MyPlacesPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("personal-area");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const logic = useMyPlaces();
@@ -44,7 +44,7 @@ const MyPlacesPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Мои места
+                {t("places.title")}
               </Typography>
               {isMobile ? (
                 <NextLink href={routerLinks.createPlace}>
@@ -68,7 +68,7 @@ const MyPlacesPage = () => {
                   linkTo={routerLinks.createPlace}
                   sx={{ color: "primary", height: "44px" }}
                 >
-                  Новое место
+                  {t("places.newPlace")}
                 </Button>
               )}
             </Stack>
@@ -86,7 +86,7 @@ const MyPlacesPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  Пользовательские места не найдены
+                  {t("places.noItems")}
                 </Typography>
               )}
               <PlaceItemsTableHead

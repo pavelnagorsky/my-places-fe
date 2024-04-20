@@ -23,7 +23,7 @@ import Filters from "@/containers/personal-area/my-places/filters/Filters";
 import NextLink from "next/link";
 
 const MyReviewsPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("personal-area");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const logic = useMyReviews();
@@ -44,7 +44,7 @@ const MyReviewsPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Мои заметки
+                {t("reviews.title")}
               </Typography>
               {isMobile ? (
                 <NextLink href={routerLinks.createReview}>
@@ -68,7 +68,7 @@ const MyReviewsPage = () => {
                   linkTo={routerLinks.createReview}
                   sx={{ color: "primary", height: "44px" }}
                 >
-                  Новая заметка
+                  {t("reviews.newReview")}
                 </Button>
               )}
             </Stack>
@@ -86,7 +86,7 @@ const MyReviewsPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  Пользовательские заметки не найдены
+                  {t("reviews.noItems")}
                 </Typography>
               )}
 

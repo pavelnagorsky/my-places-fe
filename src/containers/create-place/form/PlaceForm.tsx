@@ -143,7 +143,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
                   initial="inactive"
                 >
                   <TabPanel value={activeTab} index={2}>
-                    <Tab3 />
+                    <Tab3 canDeleteByAPI />
                   </TabPanel>
                 </motion.div>
                 <motion.div

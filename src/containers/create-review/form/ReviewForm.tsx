@@ -90,7 +90,10 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
       </motion.div>
       <motion.div variants={animationVariants.defaultItemVariant}>
         <WrappedContainer>
-          <ReviewPhotos sx={{ py: { xs: "1.5em", md: "2em" } }} />
+          <ReviewPhotos
+            canDeleteByAPI
+            sx={{ py: { xs: "1.5em", md: "2em" } }}
+          />
         </WrappedContainer>
       </motion.div>
       <motion.div variants={animationVariants.defaultItemVariant}>

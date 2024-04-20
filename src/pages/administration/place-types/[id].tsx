@@ -2,6 +2,8 @@ import dynamic from "next/dynamic";
 import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
+import { NextSeo } from "next-seo";
+import { Fragment } from "react";
 
 const PlaceTypeLazy = dynamic(
   () => import("@/containers/admin/place-types/place-type/PlaceType"),
@@ -9,7 +11,17 @@ const PlaceTypeLazy = dynamic(
 );
 
 const PlaceType: NextPage = () => {
-  return <PlaceTypeLazy />;
+  return (
+    <Fragment>
+      <NextSeo
+        title={"Типы мест"}
+        openGraph={{
+          title: "Типы мест",
+        }}
+      />
+      <PlaceTypeLazy />
+    </Fragment>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {

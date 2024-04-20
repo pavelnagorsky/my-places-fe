@@ -20,11 +20,13 @@ import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel
 import useLanguages from "@/hooks/useLanguages";
 import SaveIcon from "@mui/icons-material/Save";
 import regExp from "@/shared/regExp";
+import { useTranslation } from "next-i18next";
 
 const UserSettingsPage = () => {
+  const { t } = useTranslation(["personal-area", "common"]);
   const logic = useSettings();
   const languages = useLanguages();
-  const languageOptions = [{ id: "", label: "Нету" }].concat(
+  const languageOptions = [{ id: "", label: t("settings.missing") }].concat(
     languages as any[]
   );
 
@@ -44,7 +46,7 @@ const UserSettingsPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                Настройки профиля
+                {t("settings.title")}
               </Typography>
             </Stack>
           </motion.div>
@@ -53,19 +55,23 @@ const UserSettingsPage = () => {
           <FormProvider {...logic.form}>
             <Grid container spacing={{ xs: "1em", md: "2em" }} mb={"4em"}>
               <Grid item xs={12} sm={6}>
-                <CustomLabel htmlFor={"firstName"}>Имя</CustomLabel>
+                <CustomLabel htmlFor={"firstName"}>
+                  {t("auth.signup.firstName", { ns: "common" })}
+                </CustomLabel>
                 <TextFieldElement
                   name={"firstName"}
                   id={"firstName"}
                   required
                   fullWidth
-                  placeholder={"Ваше имя..."}
+                  placeholder={t("auth.signup.firstNamePlaceholder", {
+                    ns: "common",
+                  })}
                   parseError={(error) => {
                     if (error.type === "pattern")
-                      return "Поле не должно содержать пробелов";
+                      return t("errors.noWhiteSpaces", { ns: "common" });
                     return error.type === "maxLength"
-                      ? "Превышена максимальная длина строки"
-                      : "Это поле обязательно к заполнению";
+                      ? t("errors.maxLength", { ns: "common", value: 30 })
+                      : t("errors.required", { ns: "common" });
                   }}
                   validation={{
                     pattern: regExp.noWhiteSpaces,
@@ -75,19 +81,23 @@ const UserSettingsPage = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <CustomLabel htmlFor={"lastName"}>Фамилия</CustomLabel>
+                <CustomLabel htmlFor={"lastName"}>
+                  {t("auth.signup.lastName", { ns: "common" })}
+                </CustomLabel>
                 <TextFieldElement
                   name={"lastName"}
                   id={"lastName"}
                   required
                   fullWidth
-                  placeholder={"Ваша фамилия..."}
+                  placeholder={t("auth.signup.lastNamePlaceholder", {
+                    ns: "common",
+                  })}
                   parseError={(error) => {
                     if (error.type === "pattern")
-                      return "Поле не должно содержать пробелов";
+                      return t("errors.noWhiteSpaces", { ns: "common" });
                     return error.type === "maxLength"
-                      ? "Превышена максимальная длина строки"
-                      : "Это поле обязательно к заполнению";
+                      ? t("errors.maxLength", { ns: "common", value: 30 })
+                      : t("errors.required", { ns: "common" });
                   }}
                   validation={{
                     pattern: regExp.noWhiteSpaces,
@@ -97,19 +107,23 @@ const UserSettingsPage = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <CustomLabel htmlFor={"email"}>Электронная почта</CustomLabel>
+                <CustomLabel htmlFor={"email"}>
+                  {t("auth.login.emailLabel", { ns: "common" })}
+                </CustomLabel>
                 <TextFieldElement
                   type={"email"}
                   name={"email"}
                   id={"email"}
                   fullWidth
                   required
-                  placeholder={"Введите адрес электронной почты..."}
+                  placeholder={t("auth.login.emailPlaceholder", {
+                    ns: "common",
+                  })}
                   validation={{
-                    required: "Это поле обязательно к заполнению",
+                    required: t("errors.required", { ns: "common" }),
                     pattern: {
                       value: regExp.email,
-                      message: "Введен некорректный адрес электронной почты",
+                      message: t("errors.email", { ns: "common" }),
                     },
                   }}
                 />
@@ -117,13 +131,13 @@ const UserSettingsPage = () => {
                   <CheckboxElement
                     name={"receiveEmails"}
                     id={"receiveEmails"}
-                    label={"Получать оповещения на почту"}
+                    label={t("settings.receiveEmails")}
                   />
                 </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <CustomLabel htmlFor={"preferredLanguageId"}>
-                  Предпочитаемый язык
+                  {t("settings.preferredLanguage")}
                 </CustomLabel>
                 <SelectElement
                   name={"preferredLanguageId"}
@@ -154,7 +168,7 @@ const UserSettingsPage = () => {
                       width: { xs: "100%", sm: "auto" },
                     }}
                   >
-                    Сохранить
+                    {t("buttons.save", { ns: "common" })}
                   </Button>
                 </Box>
               </Grid>

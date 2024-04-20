@@ -34,7 +34,7 @@ const MyReviewMenu = ({
   reviewId,
   status,
 }: IMyReviewMenuProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["personal-area", "common"]);
   const popover = usePopover("confirm-review-delete");
   const showViewOption = status === ReviewStatusesEnum.APPROVED;
 
@@ -53,7 +53,7 @@ const MyReviewMenu = ({
         }}
       >
         <Typography fontSize={"16px"} fontWeight={500}>
-          Вы уверены?
+          {t("confirmText")}
         </Typography>
         <Divider sx={{ borderColor: "divider", my: "0.5em" }} />
         <Stack direction={"row"} justifyContent={"center"} mt={1}>
@@ -66,7 +66,7 @@ const MyReviewMenu = ({
               onDelete();
             }}
           >
-            Удалить
+            {t("buttons.delete", { ns: "common" })}
           </Button>
         </Stack>
       </Popover>
@@ -86,11 +86,13 @@ const MyReviewMenu = ({
             href={routerLinks.review(placeSlug, reviewId)}
             target={"_blank"}
           >
-            Просмотр
+            {t("reviews.menu.view")}
           </MenuItem>
         )}
-        <MenuItem onClick={onEdit}>Редактировать</MenuItem>
-        <MenuItem onClick={popover.handleOpen}>Удалить</MenuItem>
+        <MenuItem onClick={onEdit}>{t("reviews.menu.edit")}</MenuItem>
+        <MenuItem onClick={popover.handleOpen}>
+          {t("buttons.delete", { ns: "common" })}
+        </MenuItem>
       </Menu>
     </Fragment>
   );

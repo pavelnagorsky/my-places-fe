@@ -4,26 +4,28 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { ReactElement } from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import { useTranslation } from "next-i18next";
 
 const usePersonalAreaMenu = () => {
+  const { t } = useTranslation("personal-area");
   return [
     {
-      title: "Профиль",
+      title: t("links.profile"),
       href: routerLinks.personalAreaSettings,
       icon: <SettingsIcon />,
     },
     {
-      title: "Избранное",
+      title: t("links.favourites"),
       href: routerLinks.personalAreaFavourites,
       icon: <BookmarkBorderIcon />,
     },
     {
-      title: "Мои места",
+      title: t("links.places"),
       href: routerLinks.personalAreaPlaces,
       icon: <PlaceIcon />,
     },
     {
-      title: "Мои заметки",
+      title: t("links.reviews"),
       href: routerLinks.personalAreaReviews,
       icon: <NewspaperIcon />,
     },

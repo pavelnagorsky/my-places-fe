@@ -4,7 +4,10 @@ import ImageUploader from "@/components/forms/image-uploader/ImageUploader";
 import { IPlaceTabProps } from "@/containers/create-place/form/interfaces";
 import { useTranslation } from "next-i18next";
 
-const Tab3 = ({ readonly }: IPlaceTabProps) => {
+const Tab3 = ({
+  readonly,
+  canDeleteByAPI,
+}: IPlaceTabProps & { canDeleteByAPI?: boolean }) => {
   const { t } = useTranslation("place-management");
 
   return (
@@ -22,6 +25,7 @@ const Tab3 = ({ readonly }: IPlaceTabProps) => {
       </Typography>
       <Box mt={"2em"} mb={"3em"}>
         <ImageUploader
+          canDeleteByAPI={canDeleteByAPI}
           readonly={readonly}
           required
           maxLimit={5}

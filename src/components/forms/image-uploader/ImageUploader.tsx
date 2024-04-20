@@ -26,6 +26,7 @@ interface IImageUploaderProps {
   required?: boolean;
   maxLimit?: number;
   readonly?: boolean;
+  canDeleteByAPI?: boolean;
 }
 
 const ImageUploader = ({
@@ -33,6 +34,7 @@ const ImageUploader = ({
   maxLimit,
   required,
   readonly,
+  canDeleteByAPI,
 }: IImageUploaderProps) => {
   const { t } = useTranslation("common");
   const [loading, setLoading] = useState(false);
@@ -76,7 +78,9 @@ const ImageUploader = ({
   };
 
   const handleDelete = (index: number) => {
-    fileService.deleteImage(fields[index]?.id).catch(() => {});
+    if (canDeleteByAPI && fields[index]?.id) {
+      fileService.deleteImage(fields[index].id).catch(() => {});
+    }
     remove(index);
   };
 
