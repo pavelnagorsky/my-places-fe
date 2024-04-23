@@ -11,7 +11,7 @@ const reportsService = {
     return axiosInstance.post("/Reports", data);
   },
 
-  REPORTS_ITEMS_PER_PAGE: 20,
+  REPORTS_ITEMS_PER_PAGE: 15,
 
   getReports: (payload: IGetReportsRequest) => {
     return axiosInstance.post<IPaginationResponse<IReport>>(

@@ -65,7 +65,7 @@ const placesService = {
     );
   },
 
-  MY_PLACES_ITEMS_PER_PAGE: 20,
+  MY_PLACES_ITEMS_PER_PAGE: 15,
 
   getMyPlaces: (lang: string, payload: IMyPlacesRequest) => {
     const langId = parseLanguageToId(lang);
@@ -129,7 +129,7 @@ const placesService = {
     return axiosInstance.delete(`/favourites/${id}`);
   },
 
-  MODERATION_PLACES_ITEMS_PER_PAGE: 20,
+  MODERATION_PLACES_ITEMS_PER_PAGE: 15,
 
   getModerationPlaces: (lang: string, payload: IModerationPlacesRequest) => {
     const langId = parseLanguageToId(lang);
