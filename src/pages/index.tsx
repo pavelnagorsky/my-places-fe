@@ -19,7 +19,6 @@ const Index: NextPage = (props, context: NextPageContext) => {
     <Fragment>
       <NextSeo
         title={t("title")}
-        titleTemplate={"%s"}
         description={t("description")}
         canonical={canonical}
         languageAlternates={alternateLinks}
