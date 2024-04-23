@@ -38,7 +38,7 @@ const reviewsService = {
     return axiosInstance.get<IReview>(`/Reviews/${reviewId}?lang=${langId}`);
   },
 
-  MY_REVIEWS_ITEMS_PER_PAGE: 10,
+  MY_REVIEWS_ITEMS_PER_PAGE: 20,
 
   getMyReviews: (lang: string, payload: IMyReviewsRequest) => {
     const langId = parseLanguageToId(lang);
@@ -70,7 +70,7 @@ const reviewsService = {
     );
   },
 
-  MODERATION_REVIEWS_ITEMS_PER_PAGE: 10,
+  MODERATION_REVIEWS_ITEMS_PER_PAGE: 20,
 
   getModerationReviews: (lang: string, payload: IModerationReviewsRequest) => {
     const langId = parseLanguageToId(lang);
