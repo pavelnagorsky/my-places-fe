@@ -32,6 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
+        "personal-area",
         "review-management",
         "common",
       ])),
