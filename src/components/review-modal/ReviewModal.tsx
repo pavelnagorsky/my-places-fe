@@ -16,6 +16,7 @@ import { format } from "date-fns";
 import ClearIcon from "@mui/icons-material/Clear";
 import ReviewGallery from "@/components/review-modal/ReviewGallery";
 import StyledReviewModalContainer from "@/components/UI/review-containers/StyledReviewModalContainer";
+import { Fragment } from "react";
 
 interface IReviewModalProps {
   readonly review: IReview | null;
@@ -29,6 +30,8 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
   function createMarkup() {
     return { __html: review?.description || "" };
   }
+
+  const hasPhotos = (review?.images?.length as number) > 0;
 
   const heading = review ? (
     <Stack
@@ -55,12 +58,46 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
     </Stack>
   ) : null;
 
+  const gallerySection = review ? (
+    <Grid item xs={12} md={hasPhotos ? 5 : 12} lg={hasPhotos ? 4 : 12}>
+      <Stack
+        mb={"1em"}
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+      >
+        <Typography
+          variant={"body2"}
+          fontWeight={500}
+          fontSize={{ xs: "14px", md: "18px" }}
+        >
+          {review.authorUsername}
+        </Typography>
+        <Typography
+          variant={"body2"}
+          fontWeight={500}
+          fontSize={{ xs: "14px", md: "18px" }}
+        >
+          {format(new Date(review.createdAt), "dd.MM.yyyy")}
+        </Typography>
+      </Stack>
+      {hasPhotos && (
+        <Fragment>
+          <Hidden mdUp>
+            <Divider />
+          </Hidden>
+          <ReviewGallery images={review.images} alt={review.title} />
+        </Fragment>
+      )}
+    </Grid>
+  ) : null;
+
   return (
     <Dialog
       onClose={onClose}
       open={open}
       fullWidth
-      maxWidth={"lg"}
+      maxWidth={hasPhotos ? "lg" : "md"}
       fullScreen={isMobile}
       PaperProps={{
         sx: {
@@ -77,39 +114,14 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
         <Grid
           mb={{ xs: "2em", md: 0 }}
           container
-          spacing={{ xs: "1em", md: "2em" }}
+          spacing={hasPhotos ? { xs: "1em", md: "2em" } : undefined}
         >
-          <Grid item xs={12} md={5} lg={4}>
-            <Stack
-              mb={"1em"}
-              direction={"row"}
-              alignItems={"center"}
-              justifyContent={"space-between"}
-            >
-              <Typography
-                variant={"body2"}
-                fontWeight={500}
-                fontSize={{ xs: "14px", md: "18px" }}
-              >
-                {review.authorUsername}
-              </Typography>
-              <Typography
-                variant={"body2"}
-                fontWeight={500}
-                fontSize={{ xs: "14px", md: "18px" }}
-              >
-                {format(new Date(review.createdAt), "dd.MM.yyyy")}
-              </Typography>
-            </Stack>
-            <Hidden mdUp>
-              <Divider />
-            </Hidden>
-            <ReviewGallery images={review.images} alt={review.title} />
-          </Grid>
-          <Grid item xs={12} md={7} lg={8}>
+          {hasPhotos && gallerySection}
+          <Grid item xs={12} md={hasPhotos ? 7 : 12} lg={hasPhotos ? 8 : 12}>
             <Hidden mdDown implementation="css">
               {heading}
             </Hidden>
+            {!hasPhotos && gallerySection}
             <StyledReviewModalContainer
               sx={{
                 maxHeight: { md: "630px" },

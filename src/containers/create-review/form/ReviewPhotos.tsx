@@ -30,7 +30,6 @@ const ReviewPhotos = ({
       <Box my={"2em"}>
         <ImageUploader
           readonly={readonly}
-          required
           maxLimit={10}
           fieldName={"images"}
           canDeleteByAPI={canDeleteByAPI}

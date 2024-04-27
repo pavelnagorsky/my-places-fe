@@ -7,6 +7,7 @@ export const store = configureStore({
     alerts: alertsSlice,
     user: userSlice,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export type RootState = ReturnType<typeof store.getState>;
