@@ -13,7 +13,7 @@
     "newPlace": "Новое место",
     "selectPlace": "Выберите место",
     "photos": "Фотографии",
-    "photosDescription": "Загрузите до {{limit}} фотографий, сделанных на этой локации в формате jpg, jpeg, png.",
+    "photosDescription": "Загрузите до {{limit}} фотографий, сделанных на этой локации, в формате jpg, jpeg, png.",
     "reviewDescription": "Описание",
     "reviewTitle": "Придумайте заголовок заметки и опишите место, в котором вы побывали.",
     "reviewTitlePlaceholder": "Введите заголовок...",

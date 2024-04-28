@@ -1,0 +1,34 @@
+{
+  "creation": {
+    "title": "Creating a Review",
+    "description": "A Review is an author's tour of a selected place. Here you can tell others about the location you visited, adding a description and attaching photos."
+  },
+  "edit": {
+    "title": "Editing a Review",
+    "description": "After editing, the Review will be sent for moderation."
+  },
+  "form": {
+    "place": "Place",
+    "placeDescription": "At this point, you need to select a Place from the drop-down list or create a new one.",
+    "newPlace": "New Place",
+    "selectPlace": "Select the Place",
+    "photos": "Photos",
+    "photosDescription": "Upload up to {{limit}} photos taken at this location in jpg, jpeg, png format.",
+    "reviewDescription": "Description",
+    "reviewTitle": "Come up with the title for the Review and describe the Place you visited.",
+    "reviewTitlePlaceholder": "Enter the title...",
+    "reviewText": "Review text:",
+    "reviewTextPlaceholder": "Enter Review text"
+  },
+  "feedback": {
+    "notFound": "The Review is not found.",
+    "update": {
+      "success": "The Review has been updated and sent for moderation.",
+      "error": "Error while updating the Review."
+    },
+    "create": {
+      "success": "The Review has been created and sent for moderation. You can see its status in your personal account",
+      "error": "Error while creating the Review"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "title": "User Agreement",
+  "description": "This User Agreement (hereinafter referred to as the Agreement) regulates the relationship between the owner of my-places.by (hereinafter referred to as Know Your Land or Administration) on the one hand and the user of the site on the other. The Know Your Land site is not a mass media.",
+  "agreement1": "By using the site, you agree to the terms of this agreement.",
+  "agreement2": "If you do not agree with the terms of this agreement, do not use the Know Your Land website!",
+  "subject": "Subject of the agreement",
+  "block1": {
+    "title": "The administration grants the user the right to post the following information on the website:",
+    "item1": "Text information",
+    "item2": "Photo materials",
+    "item3": "Links to materials posted on other websites"
+  },
+  "block2": {
+    "title": "The user has the right:",
+    "item1": "search for information on the website",
+    "item2": "receive information on the website",
+    "item3": "create information for the website",
+    "item4": "distribute information on the site",
+    "item5": "comment on content posted on the website",
+    "item6": "copy information to other websites indicating the source",
+    "item7": "use the site information for personal non-commercial purposes",
+    "item8": "use the site information for commercial purposes with the permission of the copyright holders"
+  },
+  "block3": {
+    "title": "The administration has the right:",
+    "item1": "at the discretion and need to create, change, cancel rules",
+    "item2": "limit access to any information on the website",
+    "item3": "create, change, delete information",
+    "item4": "delete or block accounts",
+    "item5": "refuse registration without explanation"
+  },
+  "block4": {
+    "title": "The user undertakes:",
+    "item1": "ensure the reliability of the provided information",
+    "item2": "ensure the safety of personal data from access by third parties",
+    "item3": "update the Personal data provided during registration if they change",
+    "item4": "do not disrupt the functionality of the site",
+    "item5": "do not take actions aimed at misleading other Users"
+  },
+  "block5": {
+    "title": "The administration undertakes:",
+    "item1": "maintain the functionality of the site unless this is impossible for reasons beyond the control of the Administration.",
+    "item2": "provide comprehensive protection of the User account",
+    "item3": "protect information the distribution of which is limited or prohibited by law by issuing a warning or deleting the account of the user who has violated the rules"
+  },
+  "responsibility": {
+    "title": "Responsibility of the parties:",
+    "item1": "the user is personally responsible for the information he disseminates.",
+    "item2": "the administration does not bear responsibility for the accuracy of information copied from other sources",
+    "item3": "the administration does not bear any responsibility for services provided by third parties",
+    "item4": "in the event of a force majeure situation (combat operations, state of emergency, natural disaster, etc.) the Administration does not guarantee the safety of information posted by the User, as well as the uninterrupted operation of the information resource"
+  },
+  "termsOfAgreement": {
+    "title": "Terms of the Agreement",
+    "item1": "This Agreement comes into force upon registration on the site.",
+    "item2": "The agreement is valid indefinitely.",
+    "item3": "The administration reserves the right to unilaterally change this agreement at its discretion.",
+    "item4": "When the agreement changes, in some cases, the administration can notify users in a way convenient for it."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Feedback",
+  "description": "Here we will answer all questions, requests, suggestions and so on.",
+  "feedback": {
+    "success": "The message was sent successfully. Your request will be processed by the administration and you will receive a response by email",
+    "error": "Can't send feedback"
+  },
+  "info": {
+    "about": "About the project",
+    "aboutDescription": "Read more about our project:",
+    "contactUs": "Contact us",
+    "contactUsEmail": "Haven't found the answer to your question? Ask it directly via email:"
+  },
+  "form": {
+    "title": "Contact Information",
+    "fullName": "Your First and Last Name",
+    "whoAreYou": "Who are you?",
+    "userTypes": {
+      "private": "A private user",
+      "company": "A company"
+    },
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message"
+  }
+}

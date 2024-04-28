@@ -1,0 +1,61 @@
+{
+  "creation": {
+    "title": "Creating a Place",
+    "description": "Creating a new Place is an opportunity to talk about a visited object. Here you can add a description, attach photos, and also indicate the type, location and address"
+  },
+  "edit": {
+    "title": "Editing a Place",
+    "description": "After editing, the Place will be sent for moderation."
+  },
+  "tabs": {
+    "1": {
+      "title": "Description",
+      "description": "Enter the title and describe the place you visited.",
+      "placeTitle": "Title:",
+      "placeTitlePlaceholder": "Enter the title...",
+      "placeDescription": "A short description:",
+      "placeDescriptionPlaceholder": "Enter a short description...",
+      "placeDescriptionHelper": "Maximum length - {{value}} characters",
+      "placeWebsite": "Site of the attraction",
+      "placeWebsiteDescription": "Indicate the website of this place or attraction (optional)"
+    },
+    "2": {
+      "title": "Categories",
+      "formTitle": "Type and categories",
+      "tooltip": "The type and categories are needed to correctly search for your place on our site, you can always change them in your personal account",
+      "commercial": "Publication on a commercial basis",
+      "commercialLabel": "Advertising publication",
+      "commercialHelper": "To publish a commercially oriented object (an estate, an exhibition, a museum, a hotel, etc.) on the website for advertising purposes, select this option.",
+      "placeType": "Select the Place Type",
+      "placeTypePlaceholder": "Select the Place Type...",
+      "placeCategories": "Categories",
+      "placeCategoriesDescription": "Select the categories to which the place belongs to"
+    },
+    "3": {
+      "title": "Photos",
+      "description": "Upload up to {{limit}} photos taken at this location in jpg, jpeg, png format."
+    },
+    "4": {
+      "title": "Address",
+      "description": "t this stage, you need to enter the address of the given location. In addition, you can find it on the map and indicate the exact coordinates.",
+      "addressPlaceholder": "Belarus, Grodno region, Smorgon district, Krevo village...",
+      "mapTitle": "Check if the map shows the correct location",
+      "mapDescription": "The Place coordinates are automatically recognized depending on the entered address. If necessary, you can move the marker on the map or specify the exact coordinates",
+      "coordinates": "Coordinates",
+      "coordinatesDescription": "You can specify the coordinates of a location if you know them. Latitude is specified first, then longitude.",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
+    }
+  },
+  "feedback": {
+    "notFound": "The Place is not found.",
+    "update": {
+      "success": "The Place has been updated and sent for moderation. You can see its status in your personal account",
+      "error": "Error while updating the Place."
+    },
+    "create": {
+      "success": "The Place has been created and sent for moderation. You can see its status in your personal account",
+      "error": "Error while creating the Place."
+    }
+  }
+}

@@ -12,54 +12,51 @@ import card2Image from "/public/images/about-us/card2.jpg";
 const AboutPageLazy = dynamic(() => import("../containers/about-us/AboutUs"));
 
 const About: NextPage = () => {
-  const { t, i18n } = useTranslation("about");
+  const { t } = useTranslation("about");
   const { canonical, alternateLinks } = useAlternateLinks();
 
-  const data = useMemo(
-    () => [
-      {
-        questionName: t("faq.1.1.title"),
-        acceptedAnswerName: t("faq.1.1.description"),
-      },
-      {
-        questionName: t("faq.1.2.title"),
-        acceptedAnswerName: t("faq.1.2.description"),
-      },
-      {
-        questionName: t("faq.1.3.title"),
-        acceptedAnswerName: t("faq.1.3.description"),
-      },
-      {
-        questionName: t("faq.1.4.title"),
-        acceptedAnswerName: t("faq.1.4.description"),
-      },
-      {
-        questionName: t("faq.2.1.title"),
-        acceptedAnswerName: t("faq.2.1.description"),
-      },
-      {
-        questionName: t("faq.2.2.title"),
-        acceptedAnswerName: t("faq.2.2.description"),
-      },
-      {
-        questionName: t("faq.3.1.title"),
-        acceptedAnswerName: t("faq.3.1.description"),
-      },
-      {
-        questionName: t("faq.3.2.title"),
-        acceptedAnswerName: t("faq.3.2.description"),
-      },
-      {
-        questionName: t("faq.3.3.title"),
-        acceptedAnswerName: t("faq.3.3.description"),
-      },
-      {
-        questionName: t("faq.4.1.title"),
-        acceptedAnswerName: t("faq.4.1.description"),
-      },
-    ],
-    [i18n.language]
-  );
+  const data = [
+    {
+      questionName: t("faq.1.1.title"),
+      acceptedAnswerName: t("faq.1.1.description"),
+    },
+    {
+      questionName: t("faq.1.2.title"),
+      acceptedAnswerName: t("faq.1.2.description"),
+    },
+    {
+      questionName: t("faq.1.3.title"),
+      acceptedAnswerName: t("faq.1.3.description"),
+    },
+    {
+      questionName: t("faq.1.4.title"),
+      acceptedAnswerName: t("faq.1.4.description"),
+    },
+    {
+      questionName: t("faq.2.1.title"),
+      acceptedAnswerName: t("faq.2.1.description"),
+    },
+    {
+      questionName: t("faq.2.2.title"),
+      acceptedAnswerName: t("faq.2.2.description"),
+    },
+    {
+      questionName: t("faq.3.1.title"),
+      acceptedAnswerName: t("faq.3.1.description"),
+    },
+    {
+      questionName: t("faq.3.2.title"),
+      acceptedAnswerName: t("faq.3.2.description"),
+    },
+    {
+      questionName: t("faq.3.3.title"),
+      acceptedAnswerName: t("faq.3.3.description"),
+    },
+    {
+      questionName: t("faq.4.1.title"),
+      acceptedAnswerName: t("faq.4.1.description"),
+    },
+  ];
 
   return (
     <Fragment>

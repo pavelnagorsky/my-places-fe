@@ -1,0 +1,155 @@
+{
+  "links": {
+    "contactUs": "Feedback",
+    "create": "Create",
+    "createPlace": "Creating a Place",
+    "createPlaceMobile": "Create a Place",
+    "createReview": "Creating a Review",
+    "createReviewMobile": "Write a Review",
+    "search": "Search",
+    "about": "About the project",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "User Agreement",
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out",
+    "personalArea": "Personal account",
+    "moderation": "Moderation",
+    "administration": "Administration"
+  },
+  "footer": {
+    "title": "We are contactable!"
+  },
+  "feedback": {
+    "success": "Success!",
+    "error": "Error!"
+  },
+  "errors": {
+    "description": "Check the entered data and network connection or contact our support team...",
+    "email": "Incorrect email address is entered",
+    "required": "This field is required",
+    "allFieldsRequired": "Not all required fields are filled in!",
+    "maxLength": " The limit of {{value}} characters is exceeded.",
+    "maxLengthString": "The maximum string length has been exceeded",
+    "imagesLimit": "The maximum number of images is exceeded",
+    "invalid": "An invalid value is entered",
+    "phone": "An incorrect phone number is entered",
+    "noWhiteSpaces": "This field shouldn't include whitespaces"
+  },
+  "buttons": {
+    "send": "Send",
+    "clear": "Clear",
+    "apply": "Apply",
+    "create": "Create",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "cancellation": "Cancellation",
+    "edit": "Edit",
+    "delete": "Delete",
+    "open": "Open",
+    "back": "Back",
+    "accept": "Accept",
+    "reject": "Reject",
+    "update": "Update",
+    "yes": "Yes",
+    "no": "No",
+    "save": "Save"
+  },
+  "auth": {
+    "login": {
+      "title": "Log in",
+      "emailNotConfirmed": "Email adress is not verified",
+      "userBlockedUntil": "The user is blocked until",
+      "invalidCredentials": "Invalid email adress or password entered",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email address...",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password...",
+      "rememberMe": "Remember me",
+      "submit": "Log in"
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "description": "Please enter your email address and we will send you a link to reset your password.",
+      "feedback": {
+        "success": "A password reset link has been sent to your email adress.",
+        "error": "There was an error processing your request."
+      }
+    },
+    "signup": {
+      "title": "Sign up",
+      "emailAlreadyInUse": "This email address is already taken",
+      "firstName": "First name",
+      "firstNamePlaceholder": "Your first name...",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Your last name...",
+      "passwordHelper": "The password must contain Latin letter, at least one number and one uppercase letter. Your password must be at least 8 characters long.",
+      "confirmPassword": "Password confirmation",
+      "confirmPasswordPlaceholder": "Confirm your password...",
+      "confirmPasswordError": "Passwords must match",
+      "policyConfirmError": "Consent is required for registration",
+      "policyConfirm1": "By registering on the site you agree to our",
+      "policyConfirm2": "Privacy Policy",
+      "policyConfirm3": "and",
+      "policyConfirm4": "User Agreement",
+      "submit": "Sign up",
+      "feedback": {
+        "success": "You have successfully completed registration, an email has been sent to your email address {{email}} to activate your account"
+      }
+    },
+    "confirmEmail": {
+      "success": "Your email adress has been successfully verified",
+      "error": "Email verification failed. Contact our cupport..."
+    },
+    "resetPassword": {
+      "title": "Reset the password",
+      "submit": "Update your password",
+      "feedback": {
+        "success": "Your password has been updated successfully",
+        "error": "Error updating password. Try submitting your password reset request again or contact our support team..."
+      }
+    }
+  },
+  "translations": {
+    "title": "Update translations",
+    "helperText": "Update translations into other languages",
+    "tooltip": "The text must be entered in accordance with the selected language on the site. The content will be translated into other languages automatically using the Google Translate service. If necessary, you can edit translations in your personal account"
+  },
+  "sorting": "Sorting",
+  "loading": "Loading...",
+  "filters": {
+    "title": "Filters",
+    "dateRange": "Select date range",
+    "from": "From",
+    "to": "To"
+  },
+  "textEditor": {
+    "fontSizes": {
+      "small": "Small",
+      "normal": "Normal",
+      "large": "Large"
+    }
+  },
+  "placeStatuses": {
+    "moderation": "Moderation",
+    "approved": "Published",
+    "rejected": "Rejected",
+    "needsPayment": "Awaiting payment",
+    "commercialExpired": "Payment deadline has expired."
+  },
+  "reviewStatuses": {
+    "moderation": "Moderation",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "roles": {
+    "user": "User",
+    "moderator": "Moderator",
+    "admin": "Admin"
+  },
+  "crmStatuses": {
+    "new": "New",
+    "done": "Done",
+    "declined": "Declined"
+  }
+}

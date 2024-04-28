@@ -1,0 +1,38 @@
+{
+  "title": "Privacy Policy",
+  "description": "The administration of the site my-places.by is committed to maintaining your privacy on the Internet. We attach great importance to protecting the data you provide. Our privacy policy is based on the requirements of the European Union General Data Protection Regulation (GDPR). The purposes for which we collect personal data: improving the operation of our service, contacting visitors to this site, sending email newsletters, providing information requested by the user, providing services related to the activities of this site, as well as for the actions listed below.",
+  "data": {
+    "1": {
+      "title": "Collection and use of personal data",
+      "description": "We collect and use your personal data only if you voluntarily consent. By agreeing to this, you allow us to collect and use the following data: your first and last name, email, personal photographs. The collection and processing of your data is carried out in accordance with laws in force in the European Union and in the state of Belarus."
+    },
+    "2": {
+      "title": "Data storage, modification and deletion",
+      "description": "he user who has provided his personal data to the site my-places.by has the right to change and delete it, as well as to withdraw his consent to its use. The period during which your personal data will be stored: the time required to use the data for the main activities of the site. When you finish using your data, the site administration deletes it. To access your personal data, you can contact the site administration at the following address: Know your land, support@my-places.by. We can transfer your personal data to a third party only with your voluntary consent; if it has been transferred, then we cannot change the data in other organizations not related to us."
+    },
+    "3": {
+      "title": "Use of technical data when visiting the site",
+      "description": "When you visit the site my-places.by, records are stored in the database about your IP address, time of visit, browser settings, as well as other technical information necessary for the correct display of the site content. Using this data, we are unable to identify the visitor's identity"
+    },
+    "4": {
+      "title": "Use of cookies",
+      "description": "To display the content correctly and to make the website my-places.by easier to use, we use cookies. These are small files that are stored on your device. They help the site remember information about you, such as what language you are viewing the site in and what pages you have already opened, this information will be useful the next time you visit. Cookies make browsing the site much more convenient. You can learn more about these files here. You can configure your browser to accept or block cookies yourself. Failure to accept cookies may limit the functionality of the site."
+    },
+    "5": {
+      "title": "Use of personal data by other services",
+      "description": "This site uses third-party Internet services that collect information independently of us: Google Analytics. The data they collect may be shared with other services within those organizations, which may use the data to personalize advertising for their own advertising network. You can read the user agreements of these organizations on their websites. There you can refuse to collect personal data from them using blocker programs. We do not share personal information with other organizations or services not listed in this privacy policy. The only exception is the transfer of information under the legal requirements of government bodies authorized to carry out these actions."
+    },
+    "6": {
+      "title": "Links to other sites",
+      "description": "Our website my-places.by may contain links to other websites that are not operated by us. We are not responsible for their content. We encourage you to read the privacy policy of each website you visit, if it has one."
+    },
+    "7": {
+      "title": "Changes to the privacy policy",
+      "description": "Our site my-places.by may update our privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page. We monitor changes in legislation regarding personal data in the European Union and in the state of Belarus If you left personal information with us, we will notify you of changes in the privacy policy. If your personal information was entered incorrectly, we will not be able to contact you."
+    },
+    "8": {
+      "title": "Feedback, final provisions",
+      "description": "You can contact the administration of the my-places.by website regarding questions related to the privacy policy at: support@my-places.by, or using the contact form specified in the corresponding section of this website. If you do not agree with this privacy policy, you cannot use the services of the my-places.by website, in which case you should refrain from visiting our website."
+    }
+  }
+}

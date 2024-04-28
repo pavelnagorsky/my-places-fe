@@ -57,6 +57,7 @@ const Footer = () => {
             borderRadius: "50%",
             color: palette.secondary.main,
             p: "0.1em",
+            mt: "0.2em",
             border: `1px solid ${palette.secondary.main}`,
           })}
         />

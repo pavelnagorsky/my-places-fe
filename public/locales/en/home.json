@@ -1,0 +1,15 @@
+{
+  "title": "Tourist attractions of Belarus",
+  "description": "Welcome, dear guest! Our website is a universal guide to Belarus. We invite you to immerse yourself in the unique history of our country. Are you ready to travel? Then let's go!",
+  "card1": {
+    "title": "About search",
+    "description": "The site contains an expanded search bar, as well as a search filter. You can find a specific place or select only the region of Belarus and you will get a map with all objects in this region. In addition, you will have the ability to set a radius around a given region or point",
+    "link": "Start your search"
+  },
+  "card2": {
+    "title": "Share a Place",
+    "description": "If you have visited some unusual place in Belarus, be sure to share it! Our website provides the opportunity to create a Note in which you can convey your feeling from the visit and attach photos. Do not forget to indicate on the map exactly where this attraction is located so that others can share in your delight",
+    "link": "Share"
+  },
+  "bottomText": "The uniqueness of the project lies in the fact that the users themselves participate in its information content. Anyone can share the history and beauty of places dear to their hearts"
+}

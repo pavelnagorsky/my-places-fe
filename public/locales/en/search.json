@@ -1,0 +1,27 @@
+{
+  "seo": {
+    "title": "Search for places",
+    "description": "You can find a specific place or select only the region of Belarus and you will be get a map with all the objects in this region. In addition, you will have the opportunity to set a radius around the given region or point."
+  },
+  "placesFound": "Places found",
+  "noResults": "Unfortunately, your search returned no results.",
+  "pagination": {
+    "of": "of",
+    "results": "results"
+  },
+  "filters": {
+    "filters": "Filters",
+    "map": "Map",
+    "location": "Location",
+    "searchRadius": "Search radius",
+    "searchRadiusLocation": "Location search radius",
+    "km": "km",
+    "searchByMe": "Search from my location",
+    "enterLocation": "Enter the location",
+    "selectPlace": "Select the place",
+    "searchByTitle": "Search by the title",
+    "enterTitle": "Enter the title",
+    "types": "Types of places",
+    "categories": "Categories"
+  }
+}

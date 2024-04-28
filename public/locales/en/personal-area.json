@@ -1,0 +1,98 @@
+{
+  "links": {
+    "places": "My places",
+    "reviews": "My reviews",
+    "favourites": "Favourites",
+    "profile": "Profile"
+  },
+  "favourites": {
+    "title": "Favorite Places",
+    "noItems": "Favorite places are not found",
+    "filters": {
+      "placeTitle": "the Place title",
+      "byDate": "By date added"
+    },
+    "headings": {
+      "actuality": "Relevance",
+      "place": "Place",
+      "link": "Link",
+      "date": "Date added"
+    },
+    "isActualTooltip": "Current entries will be first in the list",
+    "feedback": {
+      "delete": {
+        "success": "The Place has been successfully removed from your Favorites.",
+        "error": "Failed to remove the Place from favorites."
+      }
+    }
+  },
+  "places": {
+    "title": "My places",
+    "newPlace": "New place",
+    "noItems": "Custom places are not found",
+    "filters": {
+      "placeTitle": "the Place Title",
+      "byStatus": "By status",
+      "byCreatedAt": "By creation date"
+    },
+    "headings": {
+      "title": "Title",
+      "type": "Type",
+      "status": "Status",
+      "commercial": "Commerce",
+      "createdAt": "Creation date",
+      "reviewsCount": "Reviews:",
+      "viewsCount": "Views:",
+      "likesCount": "Likes:",
+      "commentsCount": "Comments:"
+    },
+    "menu": {
+      "view": "View",
+      "edit": "Edit"
+    },
+    "feedback": {
+      "needsPayment": "According to the rules of this site, the Place you created is recognized as commercial, therefore, to publish it, you must pay according to the tariff for advertising services.",
+      "commercialExpired": "The advertising of the commercial Place you created has expired. To resume publication on the site, you must pay according to the tariff for advertising services.",
+      "delete": {
+        "success": "The Place was successfully deleted.",
+        "error": "Failed to delete the Place."
+      }
+    }
+  },
+  "reviews": {
+    "title": "My reviews",
+    "newReview": "New Review",
+    "noItems": "User Reviews are not found",
+    "filters": {
+      "reviewTitle": "the Review title"
+    },
+    "headings": {
+      "title": "Title",
+      "place": "Place",
+      "status": "Status",
+      "views": "Views",
+      "createdAt": "Creation date"
+    },
+    "menu": {
+      "view": "View",
+      "edit": "Edit"
+    },
+    "feedback": {
+      "delete": {
+        "success": "The Review was successfully deleted.",
+        "error": "Failed to delete the Place."
+      }
+    }
+  },
+  "settings": {
+    "title": "Profile Settings",
+    "receiveEmails": "Receive alerts by email",
+    "preferredLanguage": "Preferred language",
+    "missing": "Missing",
+    "feedback": {
+      "success": "The profile has been successfully updated.",
+      "error": "Error while updating the profile."
+    }
+  },
+  "confirmText": "Are you sure?"
+}

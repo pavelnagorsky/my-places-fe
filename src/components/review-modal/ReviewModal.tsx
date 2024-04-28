@@ -104,7 +104,7 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
           pt: { xs: 0, md: "1em" },
           minHeight: "518px",
           p: "1em",
-          border: "2px solid #FF7A00",
+          border: `${isMobile ? "1" : "2"}px solid #FF7A00`,
           borderRadius: { md: "15px" },
         },
       }}

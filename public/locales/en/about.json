@@ -1,0 +1,61 @@
+{
+  "title": "About the project",
+  "description1": "When planning a tourist route sometimes you have to spend a long time collecting data from various sources to compile a list of objects that are worth seeing. And after visiting, there is a desire to share the accumulated impressions. Our website is a universal guide to the country, which is filled out by the users themselves. Our task is to popularize domestic tourism and acquaint people with the beauties of Belarus!",
+  "description2": "The site is based on two concepts: a Place and a Review. A Place - is directly a tourist object. A Review - author’s mini-tour of this Place. Registered users have access to the Personal Account, which displays all created places, reviews and their current status with the ability to view and edit. The site supports three languages: Belarusian, Russian, and English. After entering the text in the selected language, all information is automatically translated into other languages of the site.",
+  "info": "We invite to take an active part in the content of the project both professional guides and experts of the cultural and historical heritage of Belarus, and just indifferent people who love their country. Let’s do it together!",
+  "faq": {
+    "title": "FAQ",
+    "1": {
+      "title": "Common questions",
+      "1": {
+        "title": "What is a Place?",
+        "description": "A Place is any physical object falling under the concept of \"tourist attraction\" (a museum, a temple, an old building, a pedestrian street, a park, etc.). The object has a number of properties such as Name, Short Description, Address, Site (if any), Type, Category, etc. You can also attach photos. Only registered users can create Places."
+      },
+      "2": {
+        "title": "What is a Review?",
+        "description": "A Review - detailed information about a Place, including text and photos. Only registered users can create them. In fact, the Review is an author’s mini-tour of a tourist object. Reviews can be supplemented and edited at any time."
+      },
+      "3": {
+        "title": "Moderation",
+        "description": "After the user creates/edits a Place/Review, they are first checked by the site administrators (moderation). And only after successful completion of it information appears on the site. If the object created by the user is rejected by the administrator (for one reason or another), it is given the status of \"Rejected\" and a notification with the reason is sent to the user’s mail. In the future, the Place/Review can be finalized and sent back to the moderation."
+      },
+      "4": {
+        "title": "What languages does the site support?",
+        "description": "The site currently supports three languages: Belarusian, Russian, English. The current language is displayed in the corresponding window at the bottom of each page and can be changed at any time. In the Personal Account settings you can specify your preferred language - it will always be the default language.\nAfter entering and saving any text information it is automatically translated into other languages of the site. If you want to correct the translation, you must select the desired language and go to editing."
+      }
+    },
+    "2": {
+      "title": "Users",
+      "1": {
+        "title": "Registration",
+        "description": "Searching for tourist objects does not require authorization. But if you want to create your own Places and Reviews, leave comments and ratings, save Places to Favorites, registration is required. To do this, you need to choose your Login/Password, enter your first and last name, as well as a valid email address. You will receive a notification and a link to confirm registration. In the future, when entering the site, the user must enter/confirm his login and password, after that he will have access to the extended functionality."
+      },
+      "2": {
+        "title": "User's Personal Account",
+        "description": "The Personal Account consists of several bookmarks.\n1) Settings.\nHere you can change personal data.\n2) My Places and Reviews.\nHere users see their created Places and Reviews, and their status (Posted, Moderated, Rejected, etc.). When clicking on the Place/Review, a user gets into the window for editing the corresponding object.\n3) Favorites.\nIn this section a user sees the Places he previously selected (which he might like to visit). Opposite each Place there is a checkmark \"current\" – thereby, the users mark the Places that they plan to visit first (in the near future). Such Places are displayed at the top of the list."
+      }
+    },
+    "3": {
+      "title": "Creating Places",
+      "1": {
+        "title": "Rules for creating Places",
+        "description": "When you create a new object, make sure (by searching) that it does not exist in order to avoid unnecessary duplication.\nIn addition to general information about the Place (its name, address or coordinates, brief description, photo, etc.) for subsequent filtering of the search the Type (one) and the Category (there may be several) of the object are specified.\n Also it is possible to create objects of near-tourist infrastructure (accommodation, food places, travel agencies, activities) - for this you just need to select the appropriate checkbox. Objects of this kind are posted on the site for a fee basis."
+      },
+      "2": {
+        "title": "Commercial Places",
+        "description": "Objects of near-tourism infrastructure, such as: accommodation, food, travel services, activities - are placed on the site on advertising rights, on a temporary commercial basis.\nTarifs are given below:\n- 1 month 150 rubles;\n- 2 months 280 rubles;\n- 6 months 750 rubles;\n- 12 months 1200 rubles."
+      },
+      "3": {
+        "title": "Rating of Places",
+        "description": "In addition to creating a Review for a Place, registered users have the opportunity to leave comments and likes for the Place. Based on the number of likes and views, the Place rating is formed, which subsequently affects the order in which Places are displayed in the list."
+      }
+    },
+    "4": {
+      "title": "Creating Reviews",
+      "1": {
+        "title": "Rules for creating Reviews",
+        "description": "The rules of writing any text are intuitive. It is forbidden to use abnormal language, insult or humiliate someone. Calls for violence and the overthrow of the state system are prohibited.\nThe length of Reviews is limited to 6000 characters (approximately two full pages A4 format), you can also attach no more than 10 photos.\nUsers can edit their own Reviews at any time."
+      }
+    }
+  }
+}

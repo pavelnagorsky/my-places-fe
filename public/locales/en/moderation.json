@@ -1,0 +1,89 @@
+{
+  "links": {
+    "places": "Places",
+    "reviews": "Reviews",
+    "reports": "Complaints"
+  },
+  "form": {
+    "titlePlace": "Moderation of the Place",
+    "titleReview": "Moderation of the Review",
+    "feedback": "Feedback",
+    "feedbackPlaceholder": "Reason",
+    "feedbackHelper": "It is mandatory if rejected"
+  },
+  "filters": {
+    "placeTitle": "the Place title",
+    "reviewTitle": "the Review title",
+    "byAuthorEmail": "By the author's email",
+    "email": "Email",
+    "byUpdatedAt": "By last date of update"
+  },
+  "places": {
+    "title": "Places for moderation",
+    "notFound": "Places requiring moderation were not found",
+    "headings": {
+      "title": "Title",
+      "type": "Type",
+      "author": "Author",
+      "commercial": "Commerce",
+      "createdAt": "Creation date",
+      "updatedAt": "Update date"
+    }
+  },
+  "reviews": {
+    "title": "Reviews for moderation",
+    "notFound": "Reviews requiring moderation were not found",
+    "headings": {
+      "title": "Title",
+      "place": "Place",
+      "author": "Author",
+      "createdAt": "Creation date",
+      "updatedAt": "Update date"
+    }
+  },
+  "reports": {
+    "title": "Complaints about places",
+    "notFound": "Complaints were not found",
+    "headings": {
+      "report": "Complaint",
+      "place": "Place",
+      "status": "Status",
+      "createdAt": "Creation date"
+    },
+    "menu": {
+      "reportRejection": "Rejection of the complaint",
+      "placeRejection": "Rejection of the place",
+      "rejectReport": "Reject the complaint",
+      "rejectPlace": "Reject the place",
+      "reason": "Reason",
+      "viewPlace": "View the place"
+    },
+    "filters": {
+      "report": "Complaint",
+      "byStatus": "By status",
+      "byCreatedAt": "By creation date"
+    }
+  },
+  "feedback": {
+    "place": {
+      "accept": "The place was successfully accepted by moderation",
+      "reject": "The place was successfully rejected by moderation",
+      "error": "Error while moderating the place."
+    },
+    "review": {
+      "accept": "The review was successfully accepted by moderation",
+      "reject": "The review was successfully rejected by moderation",
+      "error": "Error while moderating the review."
+    },
+    "report": {
+      "rejectPlace": {
+        "success": "",
+        "error": ""
+      },
+      "rejectReport": {
+        "success": "The complaint was successfully rejected by moderation",
+        "error": "Error while rejecting the complaint."
+      }
+    }
+  }
+}
