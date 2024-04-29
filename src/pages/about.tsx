@@ -15,49 +15,6 @@ const About: NextPage = () => {
   const { t } = useTranslation("about");
   const { canonical, alternateLinks } = useAlternateLinks();
 
-  const data = [
-    {
-      questionName: t("faq.1.1.title"),
-      acceptedAnswerName: t("faq.1.1.description"),
-    },
-    {
-      questionName: t("faq.1.2.title"),
-      acceptedAnswerName: t("faq.1.2.description"),
-    },
-    {
-      questionName: t("faq.1.3.title"),
-      acceptedAnswerName: t("faq.1.3.description"),
-    },
-    {
-      questionName: t("faq.1.4.title"),
-      acceptedAnswerName: t("faq.1.4.description"),
-    },
-    {
-      questionName: t("faq.2.1.title"),
-      acceptedAnswerName: t("faq.2.1.description"),
-    },
-    {
-      questionName: t("faq.2.2.title"),
-      acceptedAnswerName: t("faq.2.2.description"),
-    },
-    {
-      questionName: t("faq.3.1.title"),
-      acceptedAnswerName: t("faq.3.1.description"),
-    },
-    {
-      questionName: t("faq.3.2.title"),
-      acceptedAnswerName: t("faq.3.2.description"),
-    },
-    {
-      questionName: t("faq.3.3.title"),
-      acceptedAnswerName: t("faq.3.3.description"),
-    },
-    {
-      questionName: t("faq.4.1.title"),
-      acceptedAnswerName: t("faq.4.1.description"),
-    },
-  ];
-
   return (
     <Fragment>
       <NextSeo
@@ -85,7 +42,50 @@ const About: NextPage = () => {
           ],
         }}
       />
-      <FAQPageJsonLd mainEntity={data} />
+      <FAQPageJsonLd
+        mainEntity={[
+          {
+            questionName: t("faq.1.1.title"),
+            acceptedAnswerText: t("faq.1.1.description"),
+          },
+          {
+            questionName: t("faq.1.2.title"),
+            acceptedAnswerText: t("faq.1.2.description"),
+          },
+          {
+            questionName: t("faq.1.3.title"),
+            acceptedAnswerText: t("faq.1.3.description"),
+          },
+          {
+            questionName: t("faq.1.4.title"),
+            acceptedAnswerText: t("faq.1.4.description"),
+          },
+          {
+            questionName: t("faq.2.1.title"),
+            acceptedAnswerText: t("faq.2.1.description"),
+          },
+          {
+            questionName: t("faq.2.2.title"),
+            acceptedAnswerText: t("faq.2.2.description"),
+          },
+          {
+            questionName: t("faq.3.1.title"),
+            acceptedAnswerText: t("faq.3.1.description"),
+          },
+          {
+            questionName: t("faq.3.2.title"),
+            acceptedAnswerText: t("faq.3.2.description"),
+          },
+          {
+            questionName: t("faq.3.3.title"),
+            acceptedAnswerText: t("faq.3.3.description"),
+          },
+          {
+            questionName: t("faq.4.1.title"),
+            acceptedAnswerText: t("faq.4.1.description"),
+          },
+        ]}
+      />
       <AboutPageLazy />
     </Fragment>
   );
