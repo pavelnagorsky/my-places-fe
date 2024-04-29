@@ -28,7 +28,7 @@ export function Logo({ small }: { small?: boolean }) {
     >
       <Box
         sx={{
-          mr: "1em",
+          mr: "0.8em",
           height: "50px",
         }}
       >
@@ -36,8 +36,8 @@ export function Logo({ small }: { small?: boolean }) {
           src={logoImage}
           alt={"Знай свой край"}
           priority={true}
-          width={50}
-          height={50}
+          width={52}
+          height={52}
         />
       </Box>
       {small ? (
