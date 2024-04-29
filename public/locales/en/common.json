@@ -58,9 +58,9 @@
   "auth": {
     "login": {
       "title": "Log in",
-      "emailNotConfirmed": "Email adress is not verified",
+      "emailNotConfirmed": "Email address is not verified",
       "userBlockedUntil": "The user is blocked until",
-      "invalidCredentials": "Invalid email adress or password entered",
+      "invalidCredentials": "Invalid email address or password entered",
       "emailLabel": "Email",
       "emailPlaceholder": "Enter your email address...",
       "password": "Password",
@@ -72,8 +72,8 @@
       "title": "Forgot your password?",
       "description": "Please enter your email address and we will send you a link to reset your password.",
       "feedback": {
-        "success": "A password reset link has been sent to your email adress.",
-        "error": "There was an error processing your request."
+        "success": "A password reset link has been sent to your email address.",
+        "error": "The user with this email has not been found!"
       }
     },
     "signup": {
@@ -98,8 +98,8 @@
       }
     },
     "confirmEmail": {
-      "success": "Your email adress has been successfully verified",
-      "error": "Email verification failed. Contact our cupport..."
+      "success": "Your email address has been successfully verified",
+      "error": "Email verification failed. Contact our support..."
     },
     "resetPassword": {
       "title": "Reset the password",

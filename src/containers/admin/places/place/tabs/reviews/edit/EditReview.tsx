@@ -11,7 +11,6 @@ import animationVariants from "@/shared/animation-variants";
 import { FormContainer, FormProvider } from "react-hook-form-mui";
 import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
-import utils from "@/shared/utils";
 import MyStepper from "@/components/UI/stepper/MyStepper";
 import PlaceSelect from "@/containers/create-review/form/place-select/PlaceSelect";
 import { Button } from "@/components/UI/button/Button";
@@ -88,7 +87,7 @@ const EditReview = () => {
                       type={"submit"}
                       disabled={
                         !logic.form.formState.isValid ||
-                        utils.isEmptyObject(logic.form.formState.dirtyFields)
+                        !logic.form.formState.isDirty
                       }
                       sx={{
                         fontWeight: 700,

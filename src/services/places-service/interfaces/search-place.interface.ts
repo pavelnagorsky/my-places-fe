@@ -31,7 +31,7 @@ export interface ISearchPlace {
   categories: IPlaceCategory[];
 
   // Place image
-  image: string;
+  image?: string;
 
   // Place coordinates {lat;lng}
   coordinates: ILatLngCoordinate;

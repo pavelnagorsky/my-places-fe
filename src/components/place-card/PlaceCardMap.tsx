@@ -29,7 +29,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
           priority
           height={121}
           width={176}
-          src={place.image}
+          src={place.image || "/"}
           alt={place.title}
         />
       </CardMedia>

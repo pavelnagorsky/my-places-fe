@@ -43,8 +43,8 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
             const { lat, lng } = response.results[0].geometry.location;
             // optimizing rerenders of map
             if (position?.lat !== +lat && position?.lng !== +lng) {
-              setValue("lat", lat);
-              setValue("lng", lng);
+              setValue("lat", lat, { shouldDirty: true });
+              setValue("lng", lng, { shouldDirty: true });
             }
             clearErrors(["lat", "lng"]);
           })

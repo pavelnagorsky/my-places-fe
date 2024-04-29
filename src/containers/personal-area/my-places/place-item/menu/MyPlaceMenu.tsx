@@ -19,6 +19,7 @@ interface IMyPlaceMenuProps {
   handleClose: () => void;
   onDelete: () => void;
   onEdit: () => void;
+  onAddReview: () => void;
   placeSlug: string;
   status: PlaceStatusesEnum;
 }
@@ -29,6 +30,7 @@ const MyPlaceMenu = ({
   open,
   onDelete,
   placeSlug,
+  onAddReview,
   onEdit,
   status,
 }: IMyPlaceMenuProps) => {
@@ -87,6 +89,7 @@ const MyPlaceMenu = ({
             {t("places.menu.view")}
           </MenuItem>
         )}
+        <MenuItem onClick={onAddReview}>{t("places.menu.addReview")}</MenuItem>
         <MenuItem onClick={onEdit}>{t("places.menu.edit")}</MenuItem>
         <MenuItem onClick={popover.handleOpen}>
           {t("buttons.delete", { ns: "common" })}

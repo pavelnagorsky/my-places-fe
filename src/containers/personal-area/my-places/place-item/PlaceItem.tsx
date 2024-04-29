@@ -49,6 +49,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
       onDelete={menu.handleDelete}
       onEdit={menu.handleEdit}
       placeSlug={place.slug}
+      onAddReview={menu.handleAddReview}
     />
   );
 

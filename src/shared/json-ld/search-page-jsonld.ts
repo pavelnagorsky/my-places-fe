@@ -9,7 +9,7 @@ const searchPageJsonld = (places: ISearchPlace[]) => {
         "@type": "TouristAttraction",
         name: place.title,
         description: place.description,
-        image: place.image,
+        image: place.image ?? undefined,
         touristType: place.categories.map((c) => c.title).join(", "),
         additionalType: place.type.title,
         location: {

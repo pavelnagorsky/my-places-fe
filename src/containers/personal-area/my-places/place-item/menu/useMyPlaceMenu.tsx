@@ -16,6 +16,11 @@ const useMyPlaceMenu = ({ placeId, onDelete }: IUseMyPlaceMenuProps) => {
     router.push(routerLinks.personalAreaEditPlace(placeId));
   };
 
+  const handleAddReview = () => {
+    popover.handleClose();
+    router.push(routerLinks.createReview + `?placeId=${placeId}`);
+  };
+
   const handleDelete = () => {
     popover.handleClose();
     onDelete(placeId);
@@ -25,6 +30,7 @@ const useMyPlaceMenu = ({ placeId, onDelete }: IUseMyPlaceMenuProps) => {
     popover,
     handleEdit,
     handleDelete,
+    handleAddReview,
   };
 };
 

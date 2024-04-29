@@ -9,7 +9,6 @@ import PlaceSelect from "@/containers/create-review/form/place-select/PlaceSelec
 import { IReviewFormContext } from "@/containers/create-review/form/interfaces";
 import { routerLinks } from "@/routing/routerLinks";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
-import utils from "@/shared/utils";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
 import ReviewPhotos from "@/containers/create-review/form/ReviewPhotos";
@@ -113,10 +112,7 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
                   tooltipText={t("errors.allFieldsRequired", { ns: "common" })}
                   variant={"contained"}
                   type={"submit"}
-                  disabled={
-                    !formState.isValid ||
-                    utils.isEmptyObject(formState.dirtyFields)
-                  }
+                  disabled={!formState.isValid}
                   sx={{
                     fontWeight: 700,
                     mt: "2em",

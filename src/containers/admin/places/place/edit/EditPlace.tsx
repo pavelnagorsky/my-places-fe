@@ -14,7 +14,6 @@ import animationVariants from "@/shared/animation-variants";
 import { FormContainer, FormProvider } from "react-hook-form-mui";
 import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
-import utils from "@/shared/utils";
 import Navigation from "@/containers/create-place/form/Navigation";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
 import Tab1 from "@/containers/create-place/form/tabs/Tab1";
@@ -112,10 +111,7 @@ const EditPlace = () => {
                       tooltipText={"Не все обязательные поля формы заполнены!"}
                       variant={"contained"}
                       type={"submit"}
-                      disabled={
-                        !formState.isValid ||
-                        utils.isEmptyObject(formState.dirtyFields)
-                      }
+                      disabled={!formState.isValid || !formState.isDirty}
                       sx={{
                         fontWeight: 700,
                         py: "1em",

@@ -12,7 +12,6 @@ import Tab2 from "@/containers/create-place/form/tabs/Tab2";
 import useCreatePlaceMeta from "@/containers/create-place/form/useCreatePlaceMeta";
 import Tab4 from "@/containers/create-place/form/tabs/Tab4";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
-import utils from "@/shared/utils";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import { useTranslation } from "next-i18next";
@@ -86,10 +85,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
                   tooltipText={t("errors.allFieldsRequired", { ns: "common" })}
                   variant={"contained"}
                   type={"submit"}
-                  disabled={
-                    !formState.isValid ||
-                    utils.isEmptyObject(formState.dirtyFields)
-                  }
+                  disabled={!formState.isValid}
                   sx={{
                     fontWeight: 700,
                     py: "1em",

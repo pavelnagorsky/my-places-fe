@@ -48,7 +48,8 @@
     },
     "menu": {
       "view": "View",
-      "edit": "Edit"
+      "edit": "Edit",
+      "addReview": "Add a review"
     },
     "feedback": {
       "needsPayment": "According to the rules of this site, the Place you created is recognized as commercial, therefore, to publish it, you must pay according to the tariff for advertising services.",

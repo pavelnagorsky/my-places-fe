@@ -18,7 +18,6 @@ import { routerLinks } from "@/routing/routerLinks";
 import ReviewPhotos from "@/containers/create-review/form/ReviewPhotos";
 import ReviewText from "@/containers/create-review/form/ReviewText";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
-import utils from "@/shared/utils";
 import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
 import { useTranslation } from "next-i18next";
 
@@ -96,7 +95,7 @@ const EditMyReview = () => {
                       type={"submit"}
                       disabled={
                         !logic.form.formState.isValid ||
-                        utils.isEmptyObject(logic.form.formState.dirtyFields)
+                        !logic.form.formState.isDirty
                       }
                       sx={{
                         fontWeight: 700,

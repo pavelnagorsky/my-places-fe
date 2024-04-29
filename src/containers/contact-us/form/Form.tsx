@@ -3,12 +3,17 @@ import {
   FieldError,
   RadioButtonGroup,
   TextFieldElement,
+  useFormContext,
 } from "react-hook-form-mui";
 import regExp from "@/shared/regExp";
 import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
 import PhoneInput from "@/components/forms/PhoneInput";
 import { Button } from "@/components/UI/button/Button";
 import { useTranslation } from "next-i18next";
+import { useAppSelector } from "@/store/hooks";
+import { selectUserData } from "@/store/user-slice/user.slice";
+import { useEffect } from "react";
+import { IContactUsForm } from "@/containers/contact-us/interfaces";
 
 interface IFormProps {
   onSubmit: () => void;
@@ -17,11 +22,19 @@ interface IFormProps {
 
 const Form = ({ onSubmit, loading }: IFormProps) => {
   const { t } = useTranslation(["contact-us", "common"]);
+  const { setValue } = useFormContext<IContactUsForm>();
+  const userData = useAppSelector(selectUserData);
   const userTypes = useUserTypes();
   const parseError = (e: FieldError): string => {
     if (e.type === "pattern") return t("errors.email", { ns: "common" });
     return t("errors.required", { ns: "common" });
   };
+
+  useEffect(() => {
+    if (!userData) return;
+    setValue("fullName", `${userData.firstName} ${userData.lastName}`);
+    setValue("email", userData.email);
+  }, [userData]);
 
   return (
     <Box>
@@ -39,7 +52,10 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
           <Typography
             variant={"body2"}
             mb={"0.5em"}
-            fontSize={{ xs: "14px", md: "20px" }}
+            component={"label"}
+            display={"block"}
+            htmlFor={"fullName"}
+            fontSize={{ xs: "16px", md: "20px" }}
           >
             {t("form.fullName")}
           </Typography>
@@ -47,11 +63,12 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             required
             fullWidth
             name={"fullName"}
+            id={"fullName"}
             validation={{
               required: true,
             }}
             parseError={parseError}
-            label={t("form.fullName")}
+            placeholder={t("form.fullName")}
           />
         </Box>
         <Box
@@ -77,7 +94,10 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
           <Typography
             variant={"body2"}
             mb={"0.5em"}
-            fontSize={{ xs: "14px", md: "20px" }}
+            component={"label"}
+            display={"block"}
+            htmlFor={"email"}
+            fontSize={{ xs: "16px", md: "20px" }}
           >
             {t("form.email")}
           </Typography>
@@ -85,20 +105,24 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             fullWidth
             name={"email"}
             type={"email"}
+            id={"email"}
             validation={{
               pattern: regExp.email,
               required: true,
             }}
             required
             parseError={parseError}
-            label={t("form.email")}
+            placeholder={t("form.email")}
           />
         </Box>
         <Box>
           <Typography
             variant={"body2"}
             mb={"0.5em"}
-            fontSize={{ xs: "14px", md: "20px" }}
+            component={"label"}
+            display={"block"}
+            htmlFor={"phone"}
+            fontSize={{ xs: "16px", md: "20px" }}
           >
             {t("form.phone")}
           </Typography>
@@ -112,8 +136,11 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
         <Box>
           <Typography
             variant={"body2"}
+            component={"label"}
+            display={"block"}
+            htmlFor={"message"}
             mb={"0.5em"}
-            fontSize={{ xs: "14px", md: "20px" }}
+            fontSize={{ xs: "16px", md: "20px" }}
           >
             {t("form.message")}
           </Typography>
@@ -123,11 +150,12 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             multiline
             minRows={3}
             name={"message"}
+            id={"message"}
             validation={{
               required: true,
             }}
             parseError={parseError}
-            label={t("form.message")}
+            placeholder={t("form.message")}
           />
         </Box>
         <Box>

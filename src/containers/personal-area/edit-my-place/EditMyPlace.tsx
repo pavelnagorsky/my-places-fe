@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
-import utils from "@/shared/utils";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
 import Tab1 from "@/containers/create-place/form/tabs/Tab1";
@@ -120,10 +119,7 @@ const EditMyPlace = () => {
                       })}
                       variant={"contained"}
                       type={"submit"}
-                      disabled={
-                        !formState.isValid ||
-                        utils.isEmptyObject(formState.dirtyFields)
-                      }
+                      disabled={!formState.isValid || !formState.isDirty}
                       sx={{
                         fontWeight: 700,
                         py: "1em",
