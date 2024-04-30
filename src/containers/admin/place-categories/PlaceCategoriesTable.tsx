@@ -35,7 +35,7 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState<IOrderBy>({
     direction: "asc",
-    id: null,
+    id: "id",
   });
 
   useEffect(() => {
@@ -148,18 +148,18 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
                 switch (order.id) {
                   case "id": {
                     return order.direction === "asc"
-                      ? Number(a.id < b.id)
-                      : Number(a.id > b.id);
+                      ? a.id - b.id
+                      : b.id - a.id;
                   }
                   case "title": {
                     return order.direction === "asc"
-                      ? Number(a.title < b.title)
-                      : Number(a.title > b.title);
+                      ? a.title.localeCompare(b.title)
+                      : b.title.localeCompare(a.title);
                   }
                   default: {
                     return order.direction === "asc"
-                      ? Number(a.id < b.id)
-                      : Number(a.id > b.id);
+                      ? a.id - b.id
+                      : b.id - a.id;
                   }
                 }
               })
