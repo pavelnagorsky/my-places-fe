@@ -5,9 +5,7 @@ import dynamic from "next/dynamic";
 import { Fragment } from "react";
 import { useTranslation } from "next-i18next";
 import { NextSeo } from "next-seo";
-import { Environment } from "@/shared/Environment";
 import mainImageMd from "public/images/home-page/main-image-md.jpg";
-import { useRouter } from "next/router";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 
 const HomePageLazy = dynamic(() => import("../containers/home-page/HomePage"));
