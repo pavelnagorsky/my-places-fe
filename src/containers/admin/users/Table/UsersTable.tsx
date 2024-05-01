@@ -19,6 +19,7 @@ import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import useRolesOptions from "@/hooks/useRolesOptions";
 import UsersHeader from "@/containers/admin/users/Table/UsersHeader";
 import { FormProvider } from "react-hook-form-mui";
+import TableLoader from "@/components/UI/helper/TableLoader";
 
 const PlaceTypesTable = () => {
   const { i18n } = useTranslation();
@@ -136,6 +137,7 @@ const PlaceTypesTable = () => {
         </Table>
       </Stack>
       {noItems}
+      {loading && items.length === 0 && <TableLoader />}
       <TablePagination
         component="div"
         count={totalItems}

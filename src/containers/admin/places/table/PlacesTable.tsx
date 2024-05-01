@@ -25,6 +25,7 @@ import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-st
 import { routerLinks } from "@/routing/routerLinks";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import usePlaceStatuses from "@/hooks/usePlaceStatuses";
+import TableLoader from "@/components/UI/helper/TableLoader";
 
 const PlacesTable = () => {
   const { i18n } = useTranslation();
@@ -224,6 +225,7 @@ const PlacesTable = () => {
         </Table>
       </Stack>
       {noItems}
+      {loading && items.length === 0 && <TableLoader />}
       <TablePagination
         component="div"
         count={totalItems}

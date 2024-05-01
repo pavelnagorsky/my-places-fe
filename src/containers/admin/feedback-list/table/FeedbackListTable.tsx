@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
 import {
   Box,
+  CircularProgress,
   Stack,
   Table,
   TableBody,
@@ -21,6 +22,7 @@ import { IFeedback } from "@/services/contact-service/interfaces/feedback.interf
 import FeedbackListHeader from "@/containers/admin/feedback-list/table/FeedbackListHeader";
 import FeedbackListTableHead from "@/containers/admin/feedback-list/table/FeedbackListTableHead";
 import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
+import TableLoader from "@/components/UI/helper/TableLoader";
 
 const FeedbackListTable = () => {
   const { i18n } = useTranslation();
@@ -151,6 +153,7 @@ const FeedbackListTable = () => {
           </TableBody>
         </Table>
       </Stack>
+      {loading && items.length === 0 && <TableLoader />}
       {noItems}
       <TablePagination
         component="div"
