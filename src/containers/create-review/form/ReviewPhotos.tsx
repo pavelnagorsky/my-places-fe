@@ -25,12 +25,12 @@ const ReviewPhotos = ({
         {t("form.photos")}
       </Typography>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        {t("form.photosDescription", { limit: 10 })}
+        {t("form.photosDescription", { limit: 5 })}
       </Typography>
       <Box my={"2em"}>
         <ImageUploader
           readonly={readonly}
-          maxLimit={10}
+          maxLimit={5}
           fieldName={"images"}
           canDeleteByAPI={canDeleteByAPI}
         />

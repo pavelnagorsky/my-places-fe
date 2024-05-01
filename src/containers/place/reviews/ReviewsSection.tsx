@@ -56,14 +56,16 @@ const ReviewsSection = ({
   }, [router.query]);
 
   const onClickOpenReview = (reviewId: number) => {
-    router.push(router.asPath + `?review=${reviewId}`, undefined, {
+    router.replace(router.asPath + `?review=${reviewId}`, undefined, {
       shallow: true,
     });
     handleLoadReview(reviewId);
   };
 
   const onCloseReview = () => {
-    router.push(`/places/${router.query.slug}`, undefined, { shallow: true });
+    router.replace(`/places/${router.query.slug}`, undefined, {
+      shallow: true,
+    });
     dialog.handleClose();
     setReview(null);
   };

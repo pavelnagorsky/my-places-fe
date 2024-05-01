@@ -1,4 +1,4 @@
-import { Fragment, memo, useEffect, useMemo } from "react";
+import { Fragment, memo, useCallback, useEffect, useMemo } from "react";
 import {
   Box,
   debounce,
@@ -24,10 +24,9 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
   const { t } = useTranslation(["place-management", "common"]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { setValue, watch, trigger, clearErrors } =
+  const { setValue, watch, trigger, clearErrors, formState } =
     useFormContext<IPlaceFormContext>();
   const Geocode = useGeocode();
-  const watchAddress = watch("address");
   const watchLat = watch("lat");
   const watchLng = watch("lng");
   const watchPosition = {
@@ -35,38 +34,32 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
     lng: watchLng ? +watchLng : 0,
   };
 
-  const fetchLatLng = useMemo(
-    () =>
-      debounce((address: string, position: ILatLngCoordinate) => {
-        Geocode.fromAddress(address)
-          .then((response) => {
-            const { lat, lng } = response.results[0].geometry.location;
-            // optimizing rerenders of map
-            if (position?.lat !== +lat && position?.lng !== +lng) {
-              setValue("lat", lat, { shouldDirty: true });
-              setValue("lng", lng, { shouldDirty: true });
-            }
-            clearErrors(["lat", "lng"]);
-          })
-          .catch((err) => {
-            setValue("lat", null as any);
-            setValue("lng", null as any);
-            trigger(["lat", "lng"]);
-          });
-      }, 300),
-    []
+  const fetchLatLng = useCallback(
+    (address: string) => {
+      if (!address) return;
+      Geocode.fromAddress(address)
+        .then((response) => {
+          const { lat, lng } = response.results[0].geometry.location;
+          // optimizing rerenders of map
+          if (watchPosition?.lat !== +lat && watchPosition?.lng !== +lng) {
+            setValue("lat", lat, { shouldDirty: true });
+            setValue("lng", lng, { shouldDirty: true });
+          }
+          clearErrors(["lat", "lng"]);
+        })
+        .catch((err) => {
+          setValue("lat", null as any);
+          setValue("lng", null as any);
+          trigger(["lat", "lng"]);
+        });
+    },
+    [watchPosition]
   );
-
-  // updating map marker
-  useEffect(() => {
-    if (!watchAddress) return;
-    fetchLatLng(watchAddress, watchPosition);
-  }, [watchAddress]);
 
   const onDragEnd: (e: google.maps.MapMouseEvent) => void = ({ latLng }) => {
     if (!latLng) return;
-    setValue("lat", latLng.lat());
-    setValue("lng", latLng.lng());
+    setValue("lat", latLng.lat(), { shouldDirty: true });
+    setValue("lng", latLng.lng(), { shouldDirty: true });
   };
 
   return (
@@ -102,6 +95,9 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
       <TextFieldElement
         InputProps={{
           readOnly: readonly,
+        }}
+        inputProps={{
+          onChange: debounce((e) => fetchLatLng(e.target.value), 300),
         }}
         sx={{
           my: "1em",

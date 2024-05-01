@@ -34,7 +34,7 @@ const PlaceCategoriesTable = ({ searchText }: ITableProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState<IOrderBy>({
-    direction: "asc",
+    direction: "desc",
     id: "id",
   });
 

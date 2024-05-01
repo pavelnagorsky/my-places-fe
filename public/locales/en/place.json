@@ -3,6 +3,10 @@
   "website": "Website:",
   "categories": "Categories",
   "location": "Location",
+  "coordinates": {
+    "lat": "Latitude:",
+    "lng": "Longitude:"
+  },
   "comments": {
     "title": "Comments",
     "authHelper": "Only authorized users can leave comments",

@@ -42,7 +42,12 @@ const PlaceGallery = (props: IGalleryProps) => {
             md: props.desktopHeight || defaultImageHeight,
           },
           sx: {
-            "& img": { objectFit: "cover", borderRadius: "10px" },
+            "& img": {
+              objectFit: "cover",
+              borderRadius: "10px",
+              pointerEvents: "none",
+              userSelect: "none",
+            },
           },
         }}
         imageProps={{

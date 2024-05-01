@@ -27,7 +27,10 @@ export const autoLoginThunk = createAsyncThunk(
   "auth/auto-login",
   (arg, thunkAPI) => {
     const lcToken = localStorage.getItem(localStorageFields.TOKEN);
-    if (lcToken) thunkAPI.dispatch(getUserDataThunk());
+    if (lcToken) {
+      thunkAPI.dispatch(getUserDataThunk());
+      return thunkAPI.fulfillWithValue(lcToken);
+    }
     return thunkAPI.rejectWithValue(null);
   }
 );

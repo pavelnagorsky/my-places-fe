@@ -9,8 +9,13 @@ interface IReviewGalleryProps {
 }
 
 const StyledContainer = styled(Box)({
-  ".thumbs-wrapper": {
-    mx: "13px !important",
+  "& .thumbs-wrapper": {
+    "& .control-prev.control-arrow::before": {
+      borderRightColor: "#959595 !important",
+    },
+    "& .control-next.control-arrow::before": {
+      borderLeftColor: "#959595 !important",
+    },
   },
   // ".carousel .control-prev.control-arrow::before": {
   //   borderRightColor: "primary.main",
@@ -24,7 +29,7 @@ const StyledContainer = styled(Box)({
     "&:hover": {
       border: `1px solid #FF7A00 !important`,
     },
-    border: "none !important",
+    border: "1px solid transparent !important",
     "&.selected": {
       border: `1px solid #FF7A00 !important`,
       "& img": { opacity: 1 },
@@ -36,6 +41,8 @@ const StyledContainer = styled(Box)({
     // filter: "grayscale(80%)",
     opacity: 0.5,
     borderRadius: "5px",
+    pointerEvents: "none",
+    userSelect: "none",
   },
 });
 
@@ -46,13 +53,14 @@ const ReviewGallery = ({ images, alt }: IReviewGalleryProps) => {
       <Carousel
         showIndicators={false}
         showArrows
-        showThumbs
         statusFormatter={(currentItem, total) =>
           `${currentItem} ${t("reviews.from")} ${total}`
         }
+        //thumbWidth={55}
+        emulateTouch
         renderThumbs={(children) =>
           children.map((ch, i) => (
-            <Box borderRadius={"5px"} height={72} width={72} key={i}>
+            <Box borderRadius={"5px"} height={55} key={i}>
               {ch}
             </Box>
           ))
@@ -63,7 +71,11 @@ const ReviewGallery = ({ images, alt }: IReviewGalleryProps) => {
             component={"img"}
             borderRadius={"10px"}
             height={"320px"}
-            sx={{ objectFit: "cover" }}
+            sx={{
+              objectFit: "cover",
+              pointerEvents: "none",
+              userSelect: "none",
+            }}
             src={image}
             alt={alt}
             key={i}

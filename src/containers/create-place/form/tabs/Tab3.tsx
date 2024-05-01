@@ -21,14 +21,14 @@ const Tab3 = ({
         {t("tabs.3.title")}
       </Typography>
       <Typography variant={"body2"} fontSize={{ md: "20px" }}>
-        {t("tabs.3.description", { limit: 5 })}
+        {t("tabs.3.description", { limit: 10 })}
       </Typography>
       <Box mt={"2em"} mb={"3em"}>
         <ImageUploader
           canDeleteByAPI={canDeleteByAPI}
           readonly={readonly}
           required
-          maxLimit={5}
+          maxLimit={10}
           fieldName={"images"}
         />
       </Box>
