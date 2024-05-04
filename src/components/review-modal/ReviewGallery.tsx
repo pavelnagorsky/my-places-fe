@@ -41,7 +41,6 @@ const StyledContainer = styled(Box)({
     // filter: "grayscale(80%)",
     opacity: 0.5,
     borderRadius: "5px",
-    pointerEvents: "none",
     userSelect: "none",
   },
 });
@@ -73,7 +72,6 @@ const ReviewGallery = ({ images, alt }: IReviewGalleryProps) => {
             height={"320px"}
             sx={{
               objectFit: "cover",
-              pointerEvents: "none",
               userSelect: "none",
             }}
             src={image}

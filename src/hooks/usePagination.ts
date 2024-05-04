@@ -69,9 +69,6 @@ const usePagination = <ItemType = any, OrderByType = number>({
       orderAsc: orderDirection === OrderDirectionsEnum.ASC,
     })
       .then(async ({ data }) => {
-        await new Promise((resolve) => {
-          setTimeout(() => resolve(1), 2000);
-        });
         setItems(data.items);
         setCurrentPage(data.page);
         setTotalItems(data.totalItems);

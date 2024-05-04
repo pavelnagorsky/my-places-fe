@@ -45,7 +45,6 @@ const PlaceGallery = (props: IGalleryProps) => {
             "& img": {
               objectFit: "cover",
               borderRadius: "10px",
-              pointerEvents: "none",
               userSelect: "none",
             },
           },
