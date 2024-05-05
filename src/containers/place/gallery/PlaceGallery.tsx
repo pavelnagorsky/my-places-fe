@@ -31,6 +31,8 @@ const StyledContainer = styled(Box)({
 });
 
 const PlaceGallery = (props: IGalleryProps) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const images = props.images.map((image, index) => {
     return (
       <MuiImage
@@ -67,8 +69,9 @@ const PlaceGallery = (props: IGalleryProps) => {
         showArrows
         //showThumbs={false}
         renderThumbs={() => []}
-        swipeable
-        emulateTouch
+        swipeable={!isMobile}
+        emulateTouch={!isMobile}
+        swipeScrollTolerance={20}
         showStatus={false}
         className={"container"}
         infiniteLoop

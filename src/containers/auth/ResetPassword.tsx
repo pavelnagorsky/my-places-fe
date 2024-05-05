@@ -119,7 +119,7 @@ const ResetPassword = () => {
               <Tooltip
                 arrow
                 enterTouchDelay={0}
-                leaveTouchDelay={6000}
+                leaveTouchDelay={2000}
                 sx={{ fontSize: "14px", alignSelf: "start" }}
                 title={
                   <Typography p={"0.5em"}>

@@ -110,7 +110,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     <Tooltip
       arrow
       enterTouchDelay={0}
-      leaveTouchDelay={6000}
+      leaveTouchDelay={3000}
       title={
         tooltipText ? (
           <Typography p={"0.5em"} fontSize={"14px"}>

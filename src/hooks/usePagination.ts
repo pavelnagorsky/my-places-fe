@@ -51,7 +51,6 @@ const usePagination = <ItemType = any, OrderByType = number>({
   };
 
   const changeCurrentPage = (page: number) => {
-    setCurrentPage(page);
     fetch(page);
   };
 

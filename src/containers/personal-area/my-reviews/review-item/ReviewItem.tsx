@@ -74,7 +74,7 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
     <Tooltip
       arrow
       enterTouchDelay={0}
-      leaveTouchDelay={9000}
+      leaveTouchDelay={3000}
       title={
         review.moderationMessage ? (
           <Typography p={"0.5em"} fontSize={"14px"}>

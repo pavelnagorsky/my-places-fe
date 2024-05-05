@@ -36,7 +36,7 @@ const ButtonWithTooltip = ({
         <Tooltip
           arrow
           enterTouchDelay={0}
-          leaveTouchDelay={6000}
+          leaveTouchDelay={3000}
           title={tooltipText}
         >
           <p style={{ width: "100%" }}>{buttonText}</p>

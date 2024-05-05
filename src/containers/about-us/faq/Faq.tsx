@@ -56,6 +56,7 @@ const Faq = () => {
         { title: t("faq.3.1.title"), description: t("faq.3.1.description") },
         { title: t("faq.3.2.title"), description: t("faq.3.2.description") },
         { title: t("faq.3.3.title"), description: t("faq.3.3.description") },
+        { title: t("faq.3.4.title"), description: t("faq.3.4.description") },
       ],
     },
     {

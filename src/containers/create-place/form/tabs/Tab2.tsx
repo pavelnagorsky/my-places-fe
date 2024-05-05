@@ -59,7 +59,7 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
         <Tooltip
           arrow
           enterTouchDelay={0}
-          leaveTouchDelay={6000}
+          leaveTouchDelay={3000}
           sx={{ fontSize: "16px", alignSelf: "center" }}
           title={<Typography p={"0.5em"}>{t("tabs.2.tooltip")}</Typography>}
         >

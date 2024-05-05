@@ -22,7 +22,7 @@ import { ISearchPlace } from "@/services/places-service/interfaces/search-place.
 import { IChangePlaceStatus } from "@/services/places-service/interfaces/change-place-status.interface";
 
 const placesService = {
-  SEARCH_PLACES_PER_PAGE: 12,
+  SEARCH_PLACES_PER_PAGE: 9,
 
   getPlaceBySlug: (slug: string, lang: string) => {
     const langId = parseLanguageToId(lang);

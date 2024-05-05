@@ -40,10 +40,14 @@ const SearchPagination = ({
           onChange={(event, page) => {
             if (page - 1 !== currentPage) {
               onChangeCurrentPage(page - 1);
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              });
+              setTimeout(
+                () =>
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  }),
+                1
+              );
             }
           }}
         />

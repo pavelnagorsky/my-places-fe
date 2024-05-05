@@ -81,6 +81,10 @@ const About: NextPage = () => {
             acceptedAnswerText: t("faq.3.3.description"),
           },
           {
+            questionName: t("faq.3.4.title"),
+            acceptedAnswerText: t("faq.3.4.description"),
+          },
+          {
             questionName: t("faq.4.1.title"),
             acceptedAnswerText: t("faq.4.1.description"),
           },

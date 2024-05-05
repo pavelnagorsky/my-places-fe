@@ -42,10 +42,14 @@
         "description": "When you create a new object, make sure (by searching) that it does not exist in order to avoid unnecessary duplication.\nIn addition to general information about the Place (its name, address or coordinates, brief description, photo, etc.) for subsequent filtering of the search the Type (one) and the Category (there may be several) of the object are specified.\n Also it is possible to create objects of near-tourist infrastructure (accommodation, food places, travel agencies, activities) - for this you just need to select the appropriate checkbox. Objects of this kind are posted on the site for a fee basis."
       },
       "2": {
-        "title": "Commercial Places",
-        "description": "Objects of near-tourism infrastructure, such as: accommodation, food, travel services, activities - are placed on the site on advertising rights, on a temporary commercial basis.\nTariffs are given below:\n- 1 month 150 rubles;\n- 2 months 280 rubles;\n- 6 months 750 rubles;\n- 12 months 1200 rubles."
+        "title": "Favorites",
+        "description": "It is possible to add a Place to Favorites – to do this, click on the corresponding icon on the Place page. This allows you to save your favorite Places that you want to visit. \nThe Favorites section is marked with a separate tab in your Personal Account. To plan the next excursion, it is possible to mark favorite Places with the \"Relevance\" check mark – such Places will be shown first in the favorites list."
       },
       "3": {
+        "title": "Commercial Places",
+        "description": "Objects of near-tourism infrastructure, such as: accommodation, food, travel services, activities - are placed on the site on advertising rights, on a temporary commercial basis.\nTariffs are given below:\n- 1 month 150 BYN;\n- 2 months 280 BYN;\n- 6 months 750 BYN;\n- 12 months 1200 BYN."
+      },
+      "4": {
         "title": "Rating of Places",
         "description": "In addition to creating a Review for a Place, registered users have the opportunity to leave comments and likes for the Place. Based on the number of likes and views, the Place rating is formed, which subsequently affects the order in which Places are displayed in the list."
       }

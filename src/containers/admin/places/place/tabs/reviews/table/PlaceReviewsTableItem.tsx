@@ -53,7 +53,7 @@ const PlaceReviewsTableItem = ({
         <Tooltip
           arrow
           enterTouchDelay={0}
-          leaveTouchDelay={9000}
+          leaveTouchDelay={3000}
           title={
             item.moderationMessage ? (
               <Typography p={"0.5em"} fontSize={"14px"}>

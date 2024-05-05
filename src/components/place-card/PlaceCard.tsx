@@ -58,55 +58,81 @@ function PlaceCard({ place }: IPlaceCardProps) {
             background: "linear-gradient(180deg, #FFF 0%, #FFF2E6 100%)",
           }}
         >
-          <Typography
-            textTransform={"uppercase"}
-            textAlign={"center"}
-            gutterBottom
-            mb={{ xs: "0.6em", md: "0.7em" }}
-            fontSize={{ xs: "16px", md: "18px" }}
-            fontWeight={700}
-            height={"23.4px"}
+          <Box
+            height={{ xs: "173px", md: "183px" }}
             overflow={"hidden"}
-            whiteSpace={"nowrap"}
             textOverflow={"ellipsis"}
           >
-            {place.title}
-          </Typography>
-          <Stack
-            overflow={"hidden"}
-            direction={"row"}
-            alignItems={"center"}
-            gap={"0.5em"}
-            mb="1em"
-            height={{ xs: "33px", md: "35px" }}
-          >
-            <PlaceOutlinedIcon
-              sx={{ ml: "-0.1em", color: secondaryLightColor }}
-            />
             <Typography
-              fontWeight={300}
+              textTransform={"uppercase"}
+              textAlign={"center"}
+              gutterBottom
+              mb={{ xs: "0.6em", md: "0.7em" }}
+              fontSize={{ xs: "16px", md: "17px" }}
+              fontWeight={700}
+              //height={"23.4px"}
+              maxHeight={"44.2px"}
               overflow={"hidden"}
-              maxHeight={{ xs: "33px", md: "35px" }}
+              //whiteSpace={"nowrap"}
               textOverflow={"ellipsis"}
+              sx={{
+                wordWrap: "break-word",
+                hyphens: "auto",
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 2,
+              }}
+            >
+              {place.title}
+            </Typography>
+            <Stack
+              overflow={"hidden"}
+              direction={"row"}
+              alignItems={"center"}
+              height={{ xs: "33px", md: "35px" }}
+              gap={"0.5em"}
+              mb="0.8em"
+              maxHeight={{ xs: "33px", md: "35px" }}
+            >
+              <PlaceOutlinedIcon
+                sx={{ ml: "-0.1em", color: secondaryLightColor }}
+              />
+              <Typography
+                fontWeight={300}
+                overflow={"hidden"}
+                maxHeight={{ xs: "33px", md: "35px" }}
+                textOverflow={"ellipsis"}
+                variant="body2"
+                fontSize={{ xs: "13px", md: "14px" }}
+                align={"justify"}
+                sx={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 2,
+                }}
+              >
+                {place.address}
+              </Typography>
+            </Stack>
+            <Typography
               variant="body2"
+              lineHeight={"135%"}
               fontSize={{ xs: "13px", md: "14px" }}
               align={"justify"}
+              my={{ xs: "16px", md: 0 }}
+              // height={{ xs: "88px", md: "95px" }}
+              // maxHeight={{ xs: "88px", md: "95px" }}
+              textOverflow={"ellipsis"}
+              overflow={"hidden"}
+              sx={{
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 5,
+              }}
             >
-              {place.address}
+              {place.description}
             </Typography>
-          </Stack>
-          <Typography
-            variant="body2"
-            lineHeight={"135%"}
-            fontSize={{ xs: "13px", md: "14px" }}
-            align={"justify"}
-            my={{ xs: "16px", md: 0 }}
-            height={{ xs: "88px", md: "95px" }}
-            textOverflow={"ellipsis"}
-            overflow={"hidden"}
-          >
-            {place.description}
-          </Typography>
+          </Box>
           <Typography
             mb="1.2em"
             mt={{ xs: "0.8em", md: "1.2em" }}
@@ -189,4 +215,4 @@ function PlaceCard({ place }: IPlaceCardProps) {
   );
 }
 
-export default memo(PlaceCard);
+export default PlaceCard;

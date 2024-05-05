@@ -1,4 +1,4 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
@@ -41,7 +41,7 @@ const Search: NextPage<{
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   const { data } = await placesService.search(locale as string, {
     page: 0,
     pageSize: placesService.SEARCH_PLACES_PER_PAGE,
@@ -61,7 +61,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       ])),
       // Will be passed to the page component as props
     },
-    revalidate: 60,
   };
 };
 

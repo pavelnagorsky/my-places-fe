@@ -75,18 +75,22 @@ const PlaceStatistics = ({
   };
 
   useEffect(() => {
-    if (!isAuth) {
-      setIsLiked(false);
-      return;
-    }
     likesService
       .checkPlaceLikeExists(placeId)
       .then(({ data }) => {
         if (data.isLiked) {
+          // to handle SSG issue when places is liked by user but there is 0 likes in the SSG cache
+          if (likesCount === 0) {
+            setLikesCount((count) => count + 1);
+          }
           setIsLiked(true);
         }
       })
       .catch(() => {});
+    if (!isAuth) {
+      setIsLiked(false);
+      return;
+    }
   }, [placeId, isAuth]);
 
   const onAuth = () => {
@@ -95,22 +99,21 @@ const PlaceStatistics = ({
 
   const changeLike = () => {
     const wasLiked = isLiked;
+    setIsLiked(!isLiked);
+    if (wasLiked) {
+      setLikesCount(likesCount - 1);
+    } else {
+      setLikesCount(likesCount + 1);
+    }
     likesService
       .changePlaceLike(placeId)
-      .then(() => {
-        setIsLiked(!isLiked);
-        if (wasLiked) {
-          setLikesCount(likesCount - 1);
-        } else {
-          setLikesCount(likesCount + 1);
-        }
-      })
+      .then(() => {})
       .catch(() => {});
   };
 
-  const likeButton = isAuth ? (
+  const likeButton = (
     <IconButton
-      onClick={changeLike}
+      onClick={isAuth ? changeLike : onAuth}
       sx={({ transitions }) => ({
         color: isLiked ? "red" : "secondary.main",
         "&:hover": { color: "red", transform: "scale(1.1)" },
@@ -125,34 +128,6 @@ const PlaceStatistics = ({
         <FavoriteBorderIcon aria-label="like" />
       )}
     </IconButton>
-  ) : (
-    <Tooltip
-      arrow
-      enterTouchDelay={0}
-      title={
-        <Stack p={"0.5em"}>
-          <Typography mb={"1em"} variant={"body1"}>
-            {t("likesHelper")}
-          </Typography>
-          <Button onClick={onAuth} variant={"contained"}>
-            {t("likesAuthLink")}
-          </Button>
-        </Stack>
-      }
-    >
-      <IconButton
-        onClick={onAuth}
-        sx={({ transitions }) => ({
-          color: "secondary.main",
-          "&:hover": { color: "red", transform: "scale(1.1)" },
-          transition: transitions.create(["color", "transform"], {
-            duration: transitions.duration.short,
-          }),
-        })}
-      >
-        <FavoriteBorderIcon aria-label="like" />
-      </IconButton>
-    </Tooltip>
   );
 
   return (
@@ -203,7 +178,7 @@ const PlaceStatistics = ({
             <Tooltip
               arrow
               enterTouchDelay={0}
-              leaveTouchDelay={6000}
+              //leaveTouchDelay={6000}
               sx={{ fontSize: "14px", alignSelf: "center" }}
               title={t("favourites.tooltip")}
             >
@@ -217,7 +192,6 @@ const PlaceStatistics = ({
           <Tooltip
             arrow
             enterTouchDelay={0}
-            leaveTouchDelay={6000}
             sx={{ fontSize: "16px", alignSelf: "center" }}
             title={t("report.title")}
           >

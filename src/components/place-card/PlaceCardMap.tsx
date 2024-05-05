@@ -1,18 +1,26 @@
-import { Box, Card, CardMedia, Stack, Typography } from "@mui/material";
+import { Box, Card, CardMedia, Hidden, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { secondaryLightColor } from "@/styles/theme/lightTheme";
-import CastleOutlinedIcon from "@mui/icons-material/CastleOutlined";
 import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
 import { Button } from "@/components/UI/button/Button";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { routerLinks } from "@/routing/routerLinks";
 
 const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
+  const actionButton = (
+    <Button
+      linkTo={routerLinks.place(place.slug)}
+      variant={"contained"}
+      sx={{ p: 0 }}
+    >
+      <ArrowRightAltIcon sx={{ color: "white" }} />
+    </Button>
+  );
+
   return (
     <Card
       sx={{
         alignItems: "center",
-        maxWidth: "340px",
+        maxWidth: "360px",
         // maxHeight: "161px",
         // borderRadius: "10px",
         display: "flex",
@@ -53,6 +61,9 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
         >
           {place.title}
         </Typography>
+        <Hidden mdUp>
+          <div>{actionButton}</div>
+        </Hidden>
         <Typography fontWeight={300} variant="body1" fontSize={"12px"}>
           {place.categories.map((c) => c.title).join(" | ")}
         </Typography>
@@ -85,13 +96,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
               }}
             />
           </Typography>
-          <Button
-            linkTo={routerLinks.place(place.slug)}
-            variant={"contained"}
-            sx={{ p: 0 }}
-          >
-            <ArrowRightAltIcon sx={{ color: "white" }} />
-          </Button>
+          <Hidden mdDown>{actionButton}</Hidden>
         </Stack>
       </Box>
     </Card>

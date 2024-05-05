@@ -32,7 +32,6 @@ const SortingButton = ({
     <Tooltip
       arrow
       enterTouchDelay={0}
-      leaveTouchDelay={6000}
       title={<Typography fontSize={"12px"}>{t("sorting")}</Typography>}
     >
       <Stack

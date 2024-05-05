@@ -34,7 +34,7 @@ function FormContainer({ onSubmit }: { onSubmit: () => void }) {
 
   return (
     <Box py={"1.6em"}>
-      <Hidden smUp implementation={"css"}>
+      <Hidden mdUp implementation={"css"}>
         <Stack
           direction={"row"}
           gap={"1em"}
@@ -56,7 +56,7 @@ function FormContainer({ onSubmit }: { onSubmit: () => void }) {
           />
         </Stack>
       </Hidden>
-      <Hidden smDown implementation={"css"}>
+      <Hidden mdDown implementation={"css"}>
         <Stack direction={"row"} gap={"3em"} justifyContent={"space-between"}>
           <LocationPopover
             triggerSubmit={onSubmit}

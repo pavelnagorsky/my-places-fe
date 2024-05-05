@@ -18,6 +18,10 @@ const useReviews = ({ defaultData, placeSlug }: IUseReviewsProps) => {
   const [hasMore, setHasMore] = useState<boolean>(
     defaultData.totalItems > defaultData.items.length
   );
+  useEffect(() => {
+    if (!defaultData.items.length) return;
+    setReviews(defaultData.items);
+  }, [i18n.language]);
 
   const handleSearch = () => {
     reviewsService

@@ -68,8 +68,9 @@ const PlaceHeader = ({ title, id }: { title?: string; id: number }) => {
             <Typography
               sx={{
                 overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
+                // textOverflow: "ellipsis",
+                // whiteSpace: "nowrap",
+                textAlign: { xs: "center", sm: "start" },
               }}
               fontSize={{ xs: "20px", md: "25px" }}
               fontWeight={600}
