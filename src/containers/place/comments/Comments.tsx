@@ -51,20 +51,7 @@ const Comments = ({ placeId }: { placeId: number }) => {
       {commentsData.loading ? <CircularProgress size={25} /> : <SendIcon />}
     </IconButton>
   ) : (
-    <Tooltip
-      arrow
-      enterTouchDelay={0}
-      title={
-        <Stack p={"0.5em"}>
-          <Typography mb={"1em"} variant={"body1"}>
-            {t("comments.authHelper")}
-          </Typography>
-          <Button onClick={onAuth} variant={"contained"}>
-            {t("comments.authLink")}
-          </Button>
-        </Stack>
-      }
-    >
+    <Tooltip arrow enterTouchDelay={0} title={t("comments.authHelper")}>
       <IconButton
         type={"submit"}
         color={"secondary"}

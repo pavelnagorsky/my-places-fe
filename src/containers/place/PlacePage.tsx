@@ -252,11 +252,11 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                   <Marker position={place.coordinates} />
                 </Map>
                 <Typography pt={"0.5em"} color={"secondary.main"}>
-                  {t("coordinates.lat")} {place.coordinates.lat}
+                  {t("coordinates.lat")} {+place.coordinates.lat.toFixed(8)}
                   <Hidden smUp>
                     <br />
                   </Hidden>{" "}
-                  {t("coordinates.lng")} {place.coordinates.lng}
+                  {t("coordinates.lng")} {+place.coordinates.lng.toFixed(8)}
                 </Typography>
               </Box>
               <Hidden implementation="css" lgDown>
