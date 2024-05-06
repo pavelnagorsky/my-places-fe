@@ -59,7 +59,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
           }}
         >
           <Box
-            height={{ xs: "173px", md: "183px" }}
+            height={{ xs: "170px", md: "183px" }}
             overflow={"hidden"}
             textOverflow={"ellipsis"}
           >
@@ -135,7 +135,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
           </Box>
           <Typography
             mb="1.2em"
-            mt={{ xs: "1em", md: "1.2em" }}
+            mt={{ xs: "0.8em", md: "1.2em" }}
             fontWeight={300}
             variant="body1"
             fontSize={{ xs: "13px", md: "14px" }}
