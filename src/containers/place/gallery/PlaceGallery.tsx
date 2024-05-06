@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
-import { alpha, Box, styled, useMediaQuery, useTheme } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 
 interface IGalleryProps {
@@ -31,8 +31,6 @@ const StyledContainer = styled(Box)({
 });
 
 const PlaceGallery = (props: IGalleryProps) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const images = props.images.map((image, index) => {
     return (
       <MuiImage
@@ -69,14 +67,15 @@ const PlaceGallery = (props: IGalleryProps) => {
         showArrows
         //showThumbs={false}
         renderThumbs={() => []}
-        swipeable={!isMobile}
-        emulateTouch={!isMobile}
-        swipeScrollTolerance={20}
+        swipeable
+        emulateTouch
+        swipeScrollTolerance={30}
         showStatus={false}
         className={"container"}
         infiniteLoop
         autoPlay
         interval={6000}
+        preventMovementUntilSwipeScrollTolerance
       >
         {images}
       </Carousel>

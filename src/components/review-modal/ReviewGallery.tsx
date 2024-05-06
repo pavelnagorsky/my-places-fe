@@ -1,5 +1,5 @@
 import { Carousel } from "react-responsive-carousel";
-import { Box, styled, useMediaQuery, useTheme } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useTranslation } from "next-i18next";
 
@@ -47,8 +47,6 @@ const StyledContainer = styled(Box)({
 
 const ReviewGallery = ({ images, alt }: IReviewGalleryProps) => {
   const { t } = useTranslation("place");
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <StyledContainer>
@@ -58,10 +56,10 @@ const ReviewGallery = ({ images, alt }: IReviewGalleryProps) => {
         statusFormatter={(currentItem, total) =>
           `${currentItem} ${t("reviews.from")} ${total}`
         }
-        //thumbWidth={55}
-        swipeable={!isMobile}
-        swipeScrollTolerance={20}
-        emulateTouch={!isMobile}
+        swipeable
+        swipeScrollTolerance={30}
+        preventMovementUntilSwipeScrollTolerance
+        emulateTouch
         renderThumbs={(children) =>
           children.map((ch, i) => (
             <Box borderRadius={"5px"} height={55} key={i}>
