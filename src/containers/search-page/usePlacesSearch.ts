@@ -2,11 +2,11 @@ import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form-mui";
 import { useCallback, useEffect, useRef } from "react";
 import { IPaginationRequest, IPaginationResponse } from "@/services/interfaces";
-import { ISearchPlacesRequest } from "@/services/places-service/interfaces/interfaces";
-import placesService from "@/services/places-service/places.service";
 import usePagination from "@/hooks/usePagination";
-import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
+import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { ISearchForm } from "@/containers/search-page/interfaces";
+import { ISearchPlacesRequest } from "@/services/search-service/interfaces/interfaces";
+import searchService from "@/services/search-service/search.service";
 
 const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
   const { i18n } = useTranslation();
@@ -39,14 +39,14 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
         title: data.title,
         ...pagination,
       };
-      return placesService.search(i18n.language, payload);
+      return searchService.search(i18n.language, payload);
     },
     [i18n.language]
   );
 
   const paginator = usePagination<ISearchPlace>({
     defaultOrderBy: 1, // no order by on search
-    pageSize: placesService.SEARCH_PLACES_PER_PAGE,
+    pageSize: searchService.SEARCH_PLACES_PER_PAGE,
     apiCall: apiCall,
     defaultItems: ssrResults?.items,
     defaultTotalItems: ssrResults?.totalItems,

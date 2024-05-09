@@ -5,7 +5,6 @@ import {
   IModerationPlacesRequest,
   IMyFavouritesRequest,
   IMyPlacesRequest,
-  ISearchPlacesRequest,
 } from "@/services/places-service/interfaces/interfaces";
 import ISelectPlace from "@/services/places-service/interfaces/select-place.interface";
 import { ICreatePlace } from "@/services/places-service/interfaces/create-place.interface";
@@ -18,8 +17,9 @@ import { IModeration } from "@/services/places-service/interfaces/moderation.int
 import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import { IPaginationResponse } from "@/services/interfaces";
-import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
+import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { IChangePlaceStatus } from "@/services/places-service/interfaces/change-place-status.interface";
+import { ISearchPlacesRequest } from "@/services/search-service/interfaces/interfaces";
 
 const placesService = {
   SEARCH_PLACES_PER_PAGE: 9,

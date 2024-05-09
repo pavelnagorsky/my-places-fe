@@ -1,15 +1,6 @@
 import { IPaginationRequest } from "@/services/interfaces";
 import { PlaceStatusesEnum } from "./place-statuses.enum";
 
-export interface ISearchPlacesRequest
-  extends Omit<IPaginationRequest, "orderBy" | "orderAsc"> {
-  typesIds: number[];
-  categoriesIds: number[];
-  title: string;
-  radius: number;
-  searchCoordinates: string | null;
-}
-
 export interface IMyPlacesRequest
   extends IPaginationRequest<MyPlacesOrderByEnum> {
   dateFrom?: string | null;

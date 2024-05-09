@@ -2,15 +2,15 @@ import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
-import placesService from "@/services/places-service/places.service";
 import { IPaginationResponse } from "@/services/interfaces";
-import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
+import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { Fragment } from "react";
 import { NextSeo } from "next-seo";
 import { useTranslation } from "next-i18next";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import JsonLd from "@/shared/json-ld/JsonLd";
 import searchPageJsonld from "@/shared/json-ld/search-page-jsonld";
+import searchService from "@/services/search-service/search.service";
 
 const SearchPageLazy = dynamic(
   () => import("../containers/search-page/SearchPage")
@@ -42,9 +42,9 @@ const Search: NextPage<{
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
-  const { data } = await placesService.search(locale as string, {
+  const { data } = await searchService.search(locale as string, {
     page: 0,
-    pageSize: placesService.SEARCH_PLACES_PER_PAGE,
+    pageSize: searchService.SEARCH_PLACES_PER_PAGE,
     typesIds: [],
     categoriesIds: [],
     radius: 100,

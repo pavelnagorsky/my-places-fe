@@ -1,7 +1,7 @@
 import { Box, Pagination, Stack, Typography } from "@mui/material";
 import { useMemo } from "react";
-import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
+import searchService from "@/services/search-service/search.service";
 
 interface ISearchPaginationProps {
   currentResultsCount: number;
@@ -20,7 +20,7 @@ const SearchPagination = ({
 }: ISearchPaginationProps) => {
   const { t } = useTranslation("search");
   const firstAndLastVisibleResults = useMemo(() => {
-    const first = currentPage * placesService.SEARCH_PLACES_PER_PAGE + 1;
+    const first = currentPage * searchService.SEARCH_PLACES_PER_PAGE + 1;
     const last = first + currentResultsCount - 1;
     return { first, last };
   }, [currentPage, currentResultsCount]);

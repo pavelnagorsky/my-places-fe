@@ -18,7 +18,7 @@ import { FormProvider } from "react-hook-form-mui";
 import utils from "@/shared/utils";
 import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
 import { useTranslation } from "next-i18next";
-import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
+import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import PlaceCardMap from "@/components/place-card/PlaceCardMap";
 import SearchPagination from "@/containers/search-page/SearchPagination";
 import animationVariants from "@/shared/animation-variants";

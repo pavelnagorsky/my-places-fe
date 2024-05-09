@@ -1,4 +1,4 @@
-import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
+import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 
 const searchPageJsonld = (places: ISearchPlace[]) => {
   return {

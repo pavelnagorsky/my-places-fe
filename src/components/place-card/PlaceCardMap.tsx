@@ -1,6 +1,6 @@
 import { Box, Card, CardMedia, Hidden, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { ISearchPlace } from "@/services/places-service/interfaces/search-place.interface";
+import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { Button } from "@/components/UI/button/Button";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { routerLinks } from "@/routing/routerLinks";
