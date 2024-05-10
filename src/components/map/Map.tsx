@@ -92,9 +92,6 @@ function Map({
             options={{
               styles: defaultMapStyle,
               maxZoom: 13,
-              restriction: {
-                latLngBounds: defaultBounds,
-              },
               mapTypeControl: false,
               fullscreenControl: fullscreenControlEnabled,
               zoomControlOptions: {

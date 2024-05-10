@@ -43,6 +43,7 @@ const CreateMenu = ({ activePath }: { activePath: string }) => {
         onClick={menu.handleToggleCreateMenu}
         sx={{
           fontSize: "14px",
+          fontWeight: 400,
           textTransform: "none",
           color: "secondary.main",
           py: "0.5em",

@@ -33,7 +33,7 @@ const useComments = (placeId: number) => {
     if (
       e.target.value &&
       e.target.value.trim().length > 0 &&
-      form.formState.isValid
+      e.target.value.length < 700
     ) {
       if (!canSendComment) setCanSendComment(true);
     } else {
@@ -42,13 +42,12 @@ const useComments = (placeId: number) => {
   };
 
   const onDeleteComment = (id: number) => {
+    setComments(comments.filter((c) => c.id !== id));
     const request = hasModerationAccess
       ? commentsService.deleteCommentAdministration
       : commentsService.deleteComment;
     request(id)
-      .then(() => {
-        setComments(comments.filter((c) => c.id !== id));
-      })
+      .then(() => {})
       .catch(() => {
         dispatch(
           showAlert({

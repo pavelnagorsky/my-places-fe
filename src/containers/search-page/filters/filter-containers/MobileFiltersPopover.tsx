@@ -148,6 +148,8 @@ const MobileFiltersPopover = ({
               width: "49%",
               mx: 0,
               wordBreak: "break-word",
+              wordWrap: "break-word",
+              hyphens: "auto",
               overflow: "hidden",
               marginInlineEnd: "0.5px",
               "& span:first-of-type": {
@@ -181,6 +183,8 @@ const MobileFiltersPopover = ({
               width: "49%",
               mx: 0,
               wordBreak: "break-word",
+              wordWrap: "break-word",
+              hyphens: "auto",
               overflow: "hidden",
               marginInlineEnd: "0.5px",
               "& span:first-of-type": {

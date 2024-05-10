@@ -26,7 +26,6 @@ import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
 import { useTranslation } from "next-i18next";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { ISearchForm } from "@/containers/search-page/interfaces";
-import useDialog from "@/hooks/useDialog";
 
 interface IMoreFiltersPopoverProps {
   inputSx?: SxProps;
@@ -114,6 +113,8 @@ function MoreFiltersPopover({
               sx: {
                 width: "49%",
                 wordBreak: "break-word",
+                wordWrap: "break-word",
+                hyphens: "auto",
                 overflow: "hidden",
                 mx: 0,
                 marginInlineEnd: "0.5px",
@@ -145,6 +146,8 @@ function MoreFiltersPopover({
                 width: "49%",
                 mx: 0,
                 wordBreak: "break-word",
+                wordWrap: "break-word",
+                hyphens: "auto",
                 overflow: "hidden",
                 marginInlineEnd: "0.5px",
                 "& span:first-of-type": {
