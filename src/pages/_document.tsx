@@ -18,6 +18,18 @@ const MyDocument = (props: any) => {
         <link
           rel="icon"
           type="image/png"
+          sizes="120x120"
+          href="/favicon-120x120.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="48x48"
+          href="/favicon-48x48.png"
+        />
+        {/* <link
+          rel="icon"
+          type="image/png"
           sizes="32x32"
           href="/favicon-32x32.png"
         />
@@ -26,7 +38,7 @@ const MyDocument = (props: any) => {
           type="image/png"
           sizes="16x16"
           href="/favicon-16x16.png"
-        />
+        /> */}
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="msapplication-TileImage" content="/mstile-150x150.png" />
