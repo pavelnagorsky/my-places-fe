@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form-mui";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IPaginationRequest, IPaginationResponse } from "@/services/interfaces";
 import usePagination from "@/hooks/usePagination";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
@@ -12,6 +12,10 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
   const { i18n } = useTranslation();
   // flag to skip first fetch to support SSR results
   const skipFirstFetchRef = useRef(true);
+
+  const [mapResults, setMapResults] = useState<ISearchPlace[]>(
+    ssrResults?.items || []
+  );
 
   const formContext = useForm<ISearchForm>({
     mode: "onChange",
@@ -27,6 +31,24 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
       showMap: false,
     },
   });
+
+  const fetchMapResults = () => {
+    const data = formContext.getValues();
+    const payload: ISearchPlacesRequest = {
+      searchCoordinates: data.search,
+      radius: data.radius,
+      categoriesIds: data.categories,
+      typesIds: data.types,
+      title: data.title,
+      // all places should be visible on map
+      page: 0,
+      pageSize: 1000,
+    };
+    searchService
+      .search(i18n.language, payload)
+      .then((res) => setMapResults(res.data.items))
+      .catch((e) => {});
+  };
 
   const apiCall = useCallback(
     (pagination: IPaginationRequest) => {
@@ -59,6 +81,9 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
   };
 
   useEffect(() => {
+    formContext.handleSubmit((data) => {
+      fetchMapResults()
+    })();
     if (skipFirstFetchRef.current) {
       skipFirstFetchRef.current = false;
       return;
@@ -67,6 +92,7 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
   }, [i18n.language]);
 
   return {
+    mapResults,
     formContext,
     onSubmit,
     items: paginator.items,

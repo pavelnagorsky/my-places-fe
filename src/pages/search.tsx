@@ -41,7 +41,7 @@ const Search: NextPage<{
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const { data } = await searchService.search(locale as string, {
     page: 0,
     pageSize: searchService.SEARCH_PLACES_PER_PAGE,
@@ -61,6 +61,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
       ])),
       // Will be passed to the page component as props
     },
+    revalidate: 60
   };
 };
 

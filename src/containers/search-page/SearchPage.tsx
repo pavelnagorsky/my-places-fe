@@ -41,7 +41,7 @@ function SearchPage({
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
 
   const handleClickMarker = (placeId: number) => {
-    const place = logic.items.find((p) => p.id === placeId);
+    const place = logic.mapResults.find((p) => p.id === placeId);
     if (!place) return;
     // close and open again to prevent Google Maps bug of not displaying info window
     setSelectedPlace(null);
@@ -53,13 +53,13 @@ function SearchPage({
   const showMap = logic.formContext.watch("showMap");
 
   const placesOnMap = useMemo(() => {
-    return logic.items.map((p) => ({
+    return logic.mapResults.map((p) => ({
       ...p.coordinates,
       id: p.id,
       title: p.title,
       typeIcon: (p.type.image2 || p.type.image) as string,
     }));
-  }, [logic.items]);
+  }, [logic.mapResults]);
 
   const mapCircle = useMemo(() => {
     if (!searchCoordinates) return;

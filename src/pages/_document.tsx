@@ -2,6 +2,9 @@ import * as React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "../styles/utility/createEmotionCache";
+import websiteJsonld from "@/shared/json-ld/website-jsonld";
+
+const jsonLdData = JSON.stringify(websiteJsonld())
 
 const MyDocument = (props: any) => {
   return (
@@ -29,6 +32,10 @@ const MyDocument = (props: any) => {
         <meta name="msapplication-TileImage" content="/mstile-150x150.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdData }}
+        />
         {props.emotionStyleTags}
       </Head>
       <body>
