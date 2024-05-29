@@ -7,7 +7,7 @@ const useAlternateLinks = () => {
   const isDefaultLocale = locale === defaultLocale;
   const canonical = `${basePath}${
     isDefaultLocale ? "" : `/${locale}`
-  }${asPath}`;
+  }${asPath === '/' ? '' : asPath}`;
   const alternateLinks = (locales || [])
     .filter((l) => l !== locale)
     .map((l) => ({

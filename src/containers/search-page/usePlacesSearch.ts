@@ -76,6 +76,7 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
 
   const onSubmit = () => {
     formContext.handleSubmit((data) => {
+      fetchMapResults()
       paginator.fetch();
     })();
   };

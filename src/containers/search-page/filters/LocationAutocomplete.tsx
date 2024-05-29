@@ -46,7 +46,7 @@ export interface PlaceType {
 
 function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
   const { t } = useTranslation("search");
-  const [selected, setSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(true);
   const autocompleteService = useGoogleAutocompleteService();
   const searchCoordinates = useCoordinatesByPlaceId();
   const form = useFormContext<ISearchForm>();
@@ -61,7 +61,7 @@ function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    setSelected(false);
+    setIsSelected(false);
   };
 
   const onArrowDownPressed = (e: KeyboardEvent) => {
@@ -75,7 +75,7 @@ function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
   const onSelect = (option: PlaceType) => {
     setInputValue(option.structured_formatting.main_text);
     form.setValue("locationTitle", option.structured_formatting.main_text);
-    setSelected(true);
+    setIsSelected(true);
     searchCoordinates(option.place_id)
       .then((latLng) => {
         form.setValue("search", utils.latLngToString(latLng as any));
@@ -106,7 +106,7 @@ function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
   useEffect(() => {
     let active = true;
 
-    if (selected) {
+    if (isSelected) {
       setOptions([]);
       return;
     }
@@ -142,7 +142,7 @@ function LocationAutocomplete({ autoFocus }: { autoFocus?: boolean }) {
     return () => {
       active = false;
     };
-  }, [selected, inputValue, fetch]);
+  }, [isSelected, inputValue, fetch]);
 
   return (
     <Box>
