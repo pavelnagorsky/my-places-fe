@@ -48,7 +48,6 @@ function LocationPopover({
     form.setValue("search", null);
     form.setValue("locationTitle", "");
     form.setValue("locationInputValue", "");
-    console.log(form.getValues())
   };
 
   const formatSelectedOptions = () => {
