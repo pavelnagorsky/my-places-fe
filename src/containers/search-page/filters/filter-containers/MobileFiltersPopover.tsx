@@ -73,9 +73,10 @@ const MobileFiltersPopover = ({
     form.resetField("types");
     form.resetField("radius");
     form.resetField("searchByMe");
-    form.resetField("search");
+    form.setValue("search", null);
     form.setValue("locationTitle", "");
     form.setValue("locationInputValue", "");
+    
   };
 
   const content = (
