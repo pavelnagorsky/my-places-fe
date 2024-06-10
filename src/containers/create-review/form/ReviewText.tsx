@@ -14,7 +14,7 @@ import TextEditor from "@/components/forms/text-editor/TextEditor";
 import { useTranslation } from "next-i18next";
 
 const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
-  const { t } = useTranslation(["review-management", "common"]);
+  const { t, i18n } = useTranslation(["review-management", "common"]);
   return (
     <Box sx={sx}>
       <MyStepper totalOptions={3} activeOption={3} />

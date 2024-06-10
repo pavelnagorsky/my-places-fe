@@ -44,26 +44,23 @@ const TextEditor = ({
   placeholder?: string;
   sx?: SxProps;
 }) => {
-  const { t, i18n } = useTranslation("common");
+  const { t } = useTranslation("common");
   const { setValue } = useFormContext();
 
-  const translationsSx: SxProps = useMemo(
-    () => ({
-      '& .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="large"]::before, .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="large"]::before':
-        {
-          content: `"${t("textEditor.fontSizes.large")}"`,
-        },
-      "& .ql-snow .ql-picker.ql-size .ql-picker-label::before, .ql-snow .ql-picker.ql-size .ql-picker-item::before":
-        {
-          content: `"${t("textEditor.fontSizes.normal")}"`,
-        },
-      '& .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="small"]::before, .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="small"]::before':
-        {
-          content: `"${t("textEditor.fontSizes.small")}"`,
-        },
-    }),
-    [i18n.language]
-  );
+  const translationsSx: SxProps = {
+    '& .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="large"]::before, .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="large"]::before':
+      {
+        content: `"${t("textEditor.fontSizes.large")}"`,
+      },
+    "& .ql-snow .ql-picker.ql-size .ql-picker-label::before, .ql-snow .ql-picker.ql-size .ql-picker-item::before":
+      {
+        content: `"${t("textEditor.fontSizes.normal")}"`,
+      },
+    '& .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="small"]::before, .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="small"]::before':
+      {
+        content: `"${t("textEditor.fontSizes.small")}"`,
+      },
+  };
 
   return (
     <Box sx={sx}>
@@ -107,4 +104,4 @@ const TextEditor = ({
   );
 };
 
-export default memo(TextEditor);
+export default TextEditor;
