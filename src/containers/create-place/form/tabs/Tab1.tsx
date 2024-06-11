@@ -84,6 +84,9 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
       >
         {t("tabs.1.placeDescription")}
       </Typography>
+      <Typography variant={"body2"} mt={"0.5em"} fontSize={{ md: "16px" }}>
+        {t("tabs.1.placeDescriptionInfo")}
+      </Typography>
       <TextFieldElement
         InputProps={{
           readOnly: readonly,
