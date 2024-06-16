@@ -91,7 +91,7 @@ function Map({
             }
             options={{
               styles: defaultMapStyle,
-              maxZoom: 13,
+              maxZoom: 17,
               mapTypeControl: false,
               fullscreenControl: fullscreenControlEnabled,
               zoomControlOptions: {
