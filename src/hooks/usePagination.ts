@@ -71,12 +71,11 @@ const usePagination = <ItemType = any, OrderByType = number>({
         setItems(data.items);
         setCurrentPage(data.page);
         setTotalItems(data.totalItems);
-        setLoading(false);
       })
       .catch((reason) => {
-        setLoading(false);
         setItems([]);
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return {

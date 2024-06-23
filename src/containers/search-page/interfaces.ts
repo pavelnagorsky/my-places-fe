@@ -8,4 +8,10 @@ export interface ISearchForm {
   locationTitle: string;
   locationInputValue: string;
   showMap: boolean;
+  orderBy: SearchOrderByStringEnum;
+}
+
+export enum SearchOrderByStringEnum {
+  CREATED_AT = "0",
+  RATING = "1",
 }

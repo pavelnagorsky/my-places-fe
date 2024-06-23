@@ -39,3 +39,8 @@ export interface IModerationPlacesRequest
   dateTo?: string | null;
   search?: string;
 }
+
+export enum SearchOrderByEnum {
+  CREATED_AT,
+  RATING,
+}
