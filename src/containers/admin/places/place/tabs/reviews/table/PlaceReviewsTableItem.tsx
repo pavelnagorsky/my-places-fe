@@ -99,6 +99,10 @@ const PlaceReviewsTableItem = ({
       </TableCell>
 
       <TableCell component="th" scope="row">
+        <Typography variant={"body1"}>{item.author || "-"}</Typography>
+      </TableCell>
+
+      <TableCell component="th" scope="row">
         <IconButton
           onClick={menu.popover.handleOpen}
           color={"secondary"}

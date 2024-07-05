@@ -20,4 +20,6 @@ export interface IMyReview {
   placeSlug: string;
 
   placeId: number;
+
+  author: string | null;
 }

@@ -15,4 +15,5 @@ export interface IMyPlace {
   title: string;
   reviewsCount: number;
   commentsCount: number;
+  author: string | null;
 }

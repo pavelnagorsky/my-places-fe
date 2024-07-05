@@ -9,6 +9,10 @@ export interface IMyPlacesRequest
   statuses?: PlaceStatusesEnum[];
 }
 
+export interface IAdminPlacesRequest extends IMyPlacesRequest {
+  userIds?: number[];
+}
+
 export enum MyPlacesOrderByEnum {
   CREATED_AT = 0,
   TITLE = 1,

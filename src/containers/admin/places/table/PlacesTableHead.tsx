@@ -53,6 +53,13 @@ const rows = [
     label: "Дата создания",
     sort: true,
   },
+  {
+    id: "author",
+    align: "left",
+    disablePadding: false,
+    label: "Автор",
+    sort: false,
+  },
 ];
 
 interface IPlacesTableHeadProps {

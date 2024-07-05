@@ -2,6 +2,7 @@ import axiosInstance from "@/services/axios.instance";
 import { IPlaceSlug } from "@/services/places-service/interfaces/place-slug.interface";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import {
+  IAdminPlacesRequest,
   IModerationPlacesRequest,
   IMyFavouritesRequest,
   IMyPlacesRequest,
@@ -75,7 +76,7 @@ const placesService = {
     );
   },
 
-  getAdminPlaces: (lang: string, payload: IMyPlacesRequest) => {
+  getAdminPlaces: (lang: string, payload: IAdminPlacesRequest) => {
     const langId = parseLanguageToId(lang);
     return axiosInstance.post<IPaginationResponse<IMyPlace>>(
       `/places/administration-places?lang=${langId}`,

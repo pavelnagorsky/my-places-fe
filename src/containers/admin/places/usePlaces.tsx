@@ -5,12 +5,13 @@ import utils from "@/shared/utils";
 import usePagination from "@/hooks/usePagination";
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import {
+  IAdminPlacesRequest,
   IMyPlacesRequest,
   MyPlacesOrderByEnum,
 } from "@/services/places-service/interfaces/interfaces";
-import { IMyPlacesFormContext } from "@/containers/personal-area/my-places/interfaces";
 import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
+import { IAdminPlacesFormContext } from "@/containers/admin/places/interfaces";
 
 const usePlaces = () => {
   const { i18n } = useTranslation();
@@ -20,25 +21,27 @@ const usePlaces = () => {
     setRowsPerPage(size);
   };
 
-  const formContext = useForm<IMyPlacesFormContext>({
+  const formContext = useForm<IAdminPlacesFormContext>({
     defaultValues: {
       search: "",
       statuses: [],
       dateTo: null,
       dateFrom: null,
+      userIds: [],
     },
   });
 
   const apiCall = useCallback(
     (pagination: IPaginationRequest<MyPlacesOrderByEnum>) => {
       const data = formContext.getValues();
-      const payload: IMyPlacesRequest = {
+      const payload: IAdminPlacesRequest = {
         search: data.search,
         statuses: (data.statuses || []).map((sId) => +sId),
         dateFrom: data.dateFrom
           ? utils.parseFilterDate(data.dateFrom, true)
           : null,
         dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
+        userIds: data.userIds,
         ...pagination,
       };
       return placesService.getAdminPlaces(i18n.language, payload);

@@ -48,6 +48,13 @@ const rows = [
     sort: true,
   },
   {
+    id: "author",
+    align: "left",
+    disablePadding: false,
+    label: "Автор",
+    sort: false,
+  },
+  {
     id: "menu",
     align: "left",
     disablePadding: false,

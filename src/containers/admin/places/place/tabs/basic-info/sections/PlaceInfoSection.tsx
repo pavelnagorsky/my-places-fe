@@ -71,6 +71,10 @@ const PlaceInfoSection = ({ place }: { place: IMyPlace }) => {
           <Typography>{place.title}</Typography>
         </Stack>
         <Stack>
+          <Typography fontWeight={600}>Автор:</Typography>
+          <Typography>{place.author || "-"}</Typography>
+        </Stack>
+        <Stack>
           <Typography fontWeight={600}>Ссылка:</Typography>
           <Typography
             component={Link}

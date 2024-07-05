@@ -218,6 +218,12 @@ const PlacesTable = () => {
                       })}
                     </Typography>
                   </TableCell>
+
+                  <TableCell component="th" scope="row">
+                    <Typography variant={"body1"}>
+                      {item.author || "-"}
+                    </Typography>
+                  </TableCell>
                 </TableRow>
               );
             })}
