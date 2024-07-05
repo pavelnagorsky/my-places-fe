@@ -18,6 +18,7 @@ import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
 import RadiusFilter from "@/containers/search-page/filters/RadiusFilter";
 import { useTranslation } from "next-i18next";
 import { ISearchForm } from "@/containers/search-page/interfaces";
+import { defaultSearchFilters } from "../../usePlacesSearch";
 
 interface IRadiusSelectProps {
   inputSx?: SxProps;
@@ -50,8 +51,15 @@ export function RadiusPopover({
   };
 
   const onClear = () => {
-    form.resetField("radius");
-    form.resetField("searchByMe");
+    form.resetField("radius", {
+      defaultValue: defaultSearchFilters.radius,
+    });
+    if (form.getValues("searchByMe")) {
+      form.setValue("search", null);
+    }
+    form.resetField("searchByMe", {
+      defaultValue: defaultSearchFilters.searchByMe,
+    });
   };
 
   const containerContent = (

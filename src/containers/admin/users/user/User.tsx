@@ -1,5 +1,12 @@
 import useUser from "@/containers/admin/users/user/useUser";
-import { Box, CircularProgress, Grid, Stack, Typography } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  CircularProgress,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import BasicInfo from "@/containers/admin/users/user/sections/BasicInfo";
 import AdminLayout from "@/containers/admin/layout/AdminLayout";
 import ModeratorForm from "@/containers/admin/users/user/sections/ModeratorForm";
@@ -9,20 +16,22 @@ import UserHeader from "@/containers/admin/users/user/UserHeader";
 const User = () => {
   const logic = useUser();
 
-  const loader = !logic.user ? (
-    <Stack
-      direction={"row"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      gap={"0.5em"}
-      height={"50vh"}
-    >
-      <CircularProgress size={30} />
-      <Typography fontSize={"18px"} color={"secondary.main"} fontWeight={600}>
-        Загрузка...
-      </Typography>
-    </Stack>
-  ) : null;
+  const loader = (
+    <Backdrop sx={{ zIndex: 1000 }} open={!logic.user}>
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        gap={"0.5em"}
+        height={"400px"}
+      >
+        <CircularProgress size={30} />
+        <Typography fontSize={"18px"} color={"secondary.main"} fontWeight={600}>
+          Загрузка...
+        </Typography>
+      </Stack>
+    </Backdrop>
+  );
 
   return (
     <AdminLayout>

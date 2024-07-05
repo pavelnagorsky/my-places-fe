@@ -2,34 +2,29 @@ import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form-mui";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { IPaginationRequest, IPaginationResponse } from "@/services/interfaces";
-import usePagination from "@/hooks/usePagination";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
-import { ISearchForm } from "@/containers/search-page/interfaces";
+import {
+  ISearchForm,
+  SearchOrderByStringEnum,
+} from "@/containers/search-page/interfaces";
 import { ISearchPlacesRequest } from "@/services/search-service/interfaces/interfaces";
 import searchService from "@/services/search-service/search.service";
+import useSearchPagination from "./useSearchPagination";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  selectSearchFilters,
+  setFilters,
+} from "@/store/search-slice/search.slice";
 
-const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
+const usePlacesSearch = () => {
   const { i18n } = useTranslation();
-  // flag to skip first fetch to support SSR results
-  const skipFirstFetchRef = useRef(true);
-
-  const [mapResults, setMapResults] = useState<ISearchPlace[]>(
-    ssrResults?.items || []
-  );
+  const dispatch = useAppDispatch();
+  const initialFilters = useAppSelector(selectSearchFilters);
+  const [mapResults, setMapResults] = useState<ISearchPlace[]>([]);
 
   const formContext = useForm<ISearchForm>({
     mode: "onChange",
-    defaultValues: {
-      title: "",
-      radius: 100,
-      searchByMe: false,
-      types: [],
-      categories: [],
-      search: null,
-      locationTitle: "",
-      locationInputValue: "",
-      showMap: false,
-    },
+    defaultValues: initialFilters,
   });
 
   const fetchMapResults = () => {
@@ -40,6 +35,7 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
       categoriesIds: data.categories,
       typesIds: data.types,
       title: data.title,
+      orderBy: +data.orderBy,
       // all places should be visible on map
       page: 0,
       pageSize: 1000,
@@ -59,6 +55,7 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
         categoriesIds: data.categories,
         typesIds: data.types,
         title: data.title,
+        orderBy: +data.orderBy,
         ...pagination,
       };
       return searchService.search(i18n.language, payload);
@@ -66,29 +63,20 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
     [i18n.language]
   );
 
-  const paginator = usePagination<ISearchPlace>({
-    defaultOrderBy: 1, // no order by on search
+  const paginator = useSearchPagination({
     pageSize: searchService.SEARCH_PLACES_PER_PAGE,
     apiCall: apiCall,
-    defaultItems: ssrResults?.items,
-    defaultTotalItems: ssrResults?.totalItems,
   });
 
   const onSubmit = () => {
     formContext.handleSubmit((data) => {
-      fetchMapResults()
+      dispatch(setFilters(data));
+      fetchMapResults();
       paginator.fetch();
     })();
   };
 
   useEffect(() => {
-    formContext.handleSubmit((data) => {
-      fetchMapResults()
-    })();
-    if (skipFirstFetchRef.current) {
-      skipFirstFetchRef.current = false;
-      return;
-    }
     onSubmit();
   }, [i18n.language]);
 
@@ -106,3 +94,16 @@ const usePlacesSearch = (ssrResults?: IPaginationResponse<ISearchPlace>) => {
 };
 
 export default usePlacesSearch;
+
+export const defaultSearchFilters: ISearchForm = {
+  title: "",
+  radius: 100,
+  searchByMe: false,
+  types: [],
+  categories: [],
+  search: null,
+  locationTitle: "",
+  locationInputValue: "",
+  showMap: false,
+  orderBy: SearchOrderByStringEnum.CREATED_AT,
+};

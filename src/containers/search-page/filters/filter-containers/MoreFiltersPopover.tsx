@@ -26,6 +26,7 @@ import { primaryBackground, primaryColor } from "@/styles/theme/lightTheme";
 import { useTranslation } from "next-i18next";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { ISearchForm } from "@/containers/search-page/interfaces";
+import { defaultSearchFilters } from "../../usePlacesSearch";
 
 interface IMoreFiltersPopoverProps {
   inputSx?: SxProps;
@@ -65,9 +66,15 @@ function MoreFiltersPopover({
   };
 
   const onClear = () => {
-    form.resetField("title");
-    form.resetField("categories");
-    form.resetField("types");
+    form.resetField("title", {
+      defaultValue: defaultSearchFilters.title,
+    });
+    form.resetField("categories", {
+      defaultValue: defaultSearchFilters.categories,
+    });
+    form.resetField("types", {
+      defaultValue: defaultSearchFilters.types,
+    });
   };
 
   const containerContent = (

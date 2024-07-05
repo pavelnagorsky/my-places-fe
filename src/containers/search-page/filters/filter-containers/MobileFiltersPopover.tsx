@@ -27,6 +27,7 @@ import { useTranslation } from "next-i18next";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { ISearchForm } from "@/containers/search-page/interfaces";
 import useDialog from "@/hooks/useDialog";
+import { defaultSearchFilters } from "../../usePlacesSearch";
 
 interface IMoreFiltersPopoverProps {
   startText: string;
@@ -68,15 +69,24 @@ const MobileFiltersPopover = ({
   };
 
   const onClear = () => {
-    form.resetField("title");
-    form.resetField("categories");
-    form.resetField("types");
-    form.resetField("radius");
-    form.resetField("searchByMe");
+    form.resetField("title", {
+      defaultValue: defaultSearchFilters.title,
+    });
+    form.resetField("categories", {
+      defaultValue: defaultSearchFilters.categories,
+    });
+    form.resetField("types", {
+      defaultValue: defaultSearchFilters.types,
+    });
+    form.resetField("radius", {
+      defaultValue: defaultSearchFilters.radius,
+    });
+    form.resetField("searchByMe", {
+      defaultValue: defaultSearchFilters.searchByMe,
+    });
     form.setValue("search", null);
     form.setValue("locationTitle", "");
     form.setValue("locationInputValue", "");
-    
   };
 
   const content = (

@@ -26,17 +26,13 @@ import { motion } from "framer-motion";
 import usePlacesSearch from "@/containers/search-page/usePlacesSearch";
 import { IPaginationResponse } from "@/services/interfaces";
 
-function SearchPage({
-  ssrResults,
-}: {
-  ssrResults?: IPaginationResponse<ISearchPlace>;
-}) {
+function SearchPage() {
   const { t } = useTranslation("search");
   // responsive design tools
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   // info about search request
-  const logic = usePlacesSearch(ssrResults);
+  const logic = usePlacesSearch();
   // selected place on map
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
 
@@ -105,15 +101,7 @@ function SearchPage({
         wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
       >
         <motion.div variants={animationVariants.defaultItemVariant}>
-          <Box
-            mt={"2.5em"}
-            sx={{
-              "& .custom-marker": {
-                paddingBottom: "4em",
-              },
-            }}
-            display={!showMap && isMobile ? "none" : "block"}
-          >
+          <Box mt={"2.5em"} display={!showMap && isMobile ? "none" : "block"}>
             <Map
               containerStyle={{
                 height: isMobile ? "323px" : "500px",
@@ -148,14 +136,9 @@ function SearchPage({
                   key={i}
                   position={res}
                   title={res.title}
-                  label={{
-                    text: res.title,
-                    fontWeight: "500",
-                    className: "custom-marker",
-                  }}
                   icon={{
                     url: res.typeIcon,
-                    scaledSize: { width: 37, height: 37 } as any,
+                    scaledSize: { width: 30, height: 30 } as any,
                   }}
                   onClick={() => handleClickMarker(res.id)}
                 />
@@ -191,9 +174,10 @@ function SearchPage({
                 [1, 2, 3].map((place, index) => (
                   <PlaceCardSkeleton key={index} />
                 ))}
-              {logic.items.map((place, index) => (
-                <PlaceCard place={place} key={index} />
-              ))}
+              {!logic.loading &&
+                logic.items.map((place, index) => (
+                  <PlaceCard place={place} key={index} />
+                ))}
             </Stack>
           </Stack>
           <SearchPagination
