@@ -8,6 +8,8 @@ import { IModerator } from "@/services/user-service/interfaces/moderator.interfa
 import { ISaveModerator } from "@/services/user-service/interfaces/save-moderator.interface";
 import { IBlockUser } from "@/services/user-service/interfaces/block-user.interface";
 import { IEmail } from "@/services/user-service/interfaces/email.interface";
+import { ISelect } from "@/shared/interfaces";
+import { IUserSelect } from "@/services/user-service/interfaces/user-select.interface";
 
 const userService = {
   getUserData: () => {
@@ -23,6 +25,10 @@ const userService = {
       "/users/list",
       payload
     );
+  },
+
+  getUsersSelect: () => {
+    return axiosInstance.get<IUserSelect[]>(`/users/all`);
   },
 
   getUserDataForAdmin: (id: number | string) => {

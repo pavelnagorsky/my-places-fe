@@ -27,7 +27,7 @@ const usePlaces = () => {
       statuses: [],
       dateTo: null,
       dateFrom: null,
-      userIds: [],
+      users: [],
     },
   });
 
@@ -41,7 +41,7 @@ const usePlaces = () => {
           ? utils.parseFilterDate(data.dateFrom, true)
           : null,
         dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
-        userIds: data.userIds,
+        userIds: data.users.map((u) => u.id),
         ...pagination,
       };
       return placesService.getAdminPlaces(i18n.language, payload);

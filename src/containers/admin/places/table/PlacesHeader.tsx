@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import { TextFieldElement } from "react-hook-form-mui";
 import SearchIcon from "@mui/icons-material/Search";
-import AdditionalFilters from "@/containers/personal-area/my-places/filters/AdditionalFilters";
+import AdditionalFilters from "@/containers/admin/places/table/filters/AdditionalFilters";
 
 interface IUsersHeaderProps {
   onSubmit: () => void;
@@ -46,7 +46,7 @@ const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
         >
-          <AdditionalFilters onSubmit={onSubmit} type={"places"} />
+          <AdditionalFilters onSubmit={onSubmit} />
         </motion.div>
         <motion.div
           initial={{ y: -20, opacity: 0 }}
