@@ -1,4 +1,11 @@
-import { Box, Pagination, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Pagination,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "next-i18next";
 import searchService from "@/services/search-service/search.service";
@@ -19,6 +26,8 @@ const SearchPagination = ({
   onChangeCurrentPage,
 }: ISearchPaginationProps) => {
   const { t } = useTranslation("search");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const firstAndLastVisibleResults = useMemo(() => {
     const first = currentPage * searchService.SEARCH_PLACES_PER_PAGE + 1;
@@ -38,6 +47,7 @@ const SearchPagination = ({
           color="primary"
           variant="outlined"
           shape="rounded"
+          size={isMobile ? "small" : "medium"}
           onChange={(event, page) => {
             if (page - 1 !== currentPage) {
               onChangeCurrentPage(page - 1);

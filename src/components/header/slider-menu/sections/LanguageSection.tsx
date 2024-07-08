@@ -13,9 +13,13 @@ const LanguageSection = ({ onClose }: ILanguageSectionProps) => {
 
   const handleChangeLanguage = (event: SelectChangeEvent<string>) => {
     onClose();
-    router.push({ pathname: router.pathname, query: router.query }, undefined, {
-      locale: event.target.value,
-    });
+    router.replace(
+      { pathname: router.pathname, query: router.query },
+      undefined,
+      {
+        locale: event.target.value,
+      }
+    );
   };
 
   return (
