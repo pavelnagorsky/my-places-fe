@@ -49,7 +49,7 @@ const HomePage = () => {
             title={t("card2.title")}
             description={t("card2.description")}
             btnText={t("card2.link")}
-            linkTo={routerLinks.createReview}
+            linkTo={routerLinks.createPlace}
             showImageMobile
             image={card2Image}
           />

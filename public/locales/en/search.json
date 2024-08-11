@@ -22,6 +22,11 @@
     "searchByTitle": "Search by the title",
     "enterTitle": "Enter the title",
     "types": "Types of places",
-    "categories": "Categories"
+    "categories": "Categories",
+    "orderBy": {
+      "title": "Sorting",
+      "1": "By creation date",
+      "2": "By rating"
+    }
   }
 }

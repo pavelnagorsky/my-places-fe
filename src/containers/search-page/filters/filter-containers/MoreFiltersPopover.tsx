@@ -27,6 +27,7 @@ import { useTranslation } from "next-i18next";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { ISearchForm } from "@/containers/search-page/interfaces";
 import { defaultSearchFilters } from "../../usePlacesSearch";
+import OrderBySelector from "@/containers/search-page/filters/order-by-selector/OrderBySelector";
 
 interface IMoreFiltersPopoverProps {
   inputSx?: SxProps;
@@ -110,7 +111,13 @@ function MoreFiltersPopover({
           ),
         }}
       />
-      <Box maxHeight={"400px"} overflow={"auto"} pb={"0.2em"}>
+      <OrderBySelector />
+      <Box
+        maxHeight={"400px"}
+        overflow={"auto"}
+        sx={{ scrollbarWidth: "thin" }}
+        pb={"0.2em"}
+      >
         <Typography fontSize={"18px"} component={"p"} mb={"0.8em"} mt={"0.5em"}>
           {t("filters.types")}
         </Typography>
@@ -246,7 +253,7 @@ function MoreFiltersPopover({
             pt: "1.5em",
             pb: "0.5em",
             borderRadius: "10px",
-            maxWidth: "450px",
+            maxWidth: "540px",
           },
         }}
       >

@@ -19,6 +19,7 @@ import ReviewText from "@/containers/create-review/form/ReviewText";
 import useReviewModeration from "@/containers/moderation/review-moderation/useReviewModeration";
 import ModerationForm from "@/containers/moderation/place-moderation/ModerationForm";
 import { useTranslation } from "next-i18next";
+import ModerationLayout from "../layout/ModerationLayout";
 
 const ReviewModeration = () => {
   const { t } = useTranslation(["moderation", "review-management", "common"]);
@@ -33,7 +34,7 @@ const ReviewModeration = () => {
   );
 
   return (
-    <PersonalAreaLayout>
+    <ModerationLayout>
       <motion.div
         variants={animationVariants.defaultContainerVariant}
         initial="hidden"
@@ -130,7 +131,7 @@ const ReviewModeration = () => {
           </FormContainer>
         </FormProvider>
       </motion.div>
-    </PersonalAreaLayout>
+    </ModerationLayout>
   );
 };
 

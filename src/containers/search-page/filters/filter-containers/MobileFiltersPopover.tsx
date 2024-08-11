@@ -28,6 +28,7 @@ import { IPlaceCategory } from "@/services/place-categories-service/place-catego
 import { ISearchForm } from "@/containers/search-page/interfaces";
 import useDialog from "@/hooks/useDialog";
 import { defaultSearchFilters } from "../../usePlacesSearch";
+import OrderBySelector from "@/containers/search-page/filters/order-by-selector/OrderBySelector";
 
 interface IMoreFiltersPopoverProps {
   startText: string;
@@ -117,6 +118,13 @@ const MobileFiltersPopover = ({
         {t("filters.searchRadius")}
       </Typography>
       <RadiusFilter searchByMeSx={{ justifyContent: "start", mt: "-0.5em" }} />
+
+      <Divider
+        variant={"middle"}
+        sx={{ borderColor: primaryBackground, mt: "0.5em", mb: "1em" }}
+      />
+
+      <OrderBySelector />
 
       <Divider
         variant={"middle"}
