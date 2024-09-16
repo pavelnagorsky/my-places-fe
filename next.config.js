@@ -5,9 +5,19 @@ const redirectsList = require("./redirects");
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: [
-      "storage.googleapis.com",
-      "storage.googleapis.com/my-places-bucket-1/images/",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        port: "",
+        pathname: "my-places-bucket-1/images/**",
+      },
     ],
   },
   env: {

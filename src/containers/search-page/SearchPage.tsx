@@ -67,17 +67,6 @@ function SearchPage() {
     });
   }, [searchRadius, searchCoordinates]);
 
-  const mapFitBounds: ILatLngCoordinate[] = useMemo(() => {
-    if (mapCircle) {
-      const bounds = mapCircle.getBounds();
-      return [
-        bounds?.getNorthEast().toJSON(),
-        bounds?.getSouthWest().toJSON(),
-      ] as ILatLngCoordinate[];
-    }
-    return placesOnMap;
-  }, [mapCircle, placesOnMap]);
-
   return (
     <motion.div
       variants={animationVariants.defaultContainerVariant}
@@ -107,7 +96,7 @@ function SearchPage() {
                 height: isMobile ? "323px" : "500px",
                 transition: "height 0.5s ease-in",
               }}
-              fitCoordinates={mapFitBounds}
+              fitCoordinates={placesOnMap}
             >
               {mapCircle ? (
                 <Circle

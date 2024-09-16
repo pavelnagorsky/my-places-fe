@@ -78,6 +78,7 @@ const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
             getAriaValueText={valueText}
             step={10}
             max={200}
+            min={10}
             valueLabelDisplay="auto"
           />
         </Box>
@@ -104,6 +105,7 @@ const RadiusFilter = ({ searchByMeSx }: IRadiusFilterProps) => {
             inputMode: "numeric",
             step: 10,
             max: 200,
+            min: 10,
             "aria-labelledby": "search-distance",
           }}
         />

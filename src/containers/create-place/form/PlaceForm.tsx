@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form-mui";
 import { Fragment, SyntheticEvent, useState } from "react";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { IPlaceFormContext } from "@/containers/create-place/form/interfaces";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
 import dynamic from "next/dynamic";

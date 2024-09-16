@@ -33,7 +33,7 @@ const Navigation = ({
   const _isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isMobile = _isMobile || !!alwaysHorizontal;
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", mt: { md: "-0.5em" } }}>
       <Tabs
         value={activeTab}
         onChange={handleChange}
