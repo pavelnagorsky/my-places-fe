@@ -1,95 +1,98 @@
 import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form-mui";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { IPaginationRequest, IPaginationResponse } from "@/services/interfaces";
-import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
+import { useEffect } from "react";
 import {
   ISearchForm,
   SearchOrderByStringEnum,
 } from "@/containers/search-page/interfaces";
 import { ISearchPlacesRequest } from "@/services/search-service/interfaces/interfaces";
 import searchService from "@/services/search-service/search.service";
-import useSearchPagination from "./useSearchPagination";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
+  getMapResultsThunk,
+  getSearchResultsThunk,
+  selectCurrentItemsLength,
+  selectIsDataFetched,
+  selectScrollPosition,
   selectSearchFilters,
   setFilters,
+  setScrollPosition,
 } from "@/store/search-slice/search.slice";
+import utils from "@/shared/utils";
+import { debounce } from "@mui/material";
 
 const usePlacesSearch = () => {
   const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const initialFilters = useAppSelector(selectSearchFilters);
-  const [mapResults, setMapResults] = useState<ISearchPlace[]>([]);
+  const isDataFetched = useAppSelector(selectIsDataFetched);
+  const currentItemsLength = useAppSelector(selectCurrentItemsLength);
+  const scrollPosition = useAppSelector(selectScrollPosition);
 
   const formContext = useForm<ISearchForm>({
     mode: "onChange",
     defaultValues: initialFilters,
   });
 
-  const fetchMapResults = () => {
-    const data = formContext.getValues();
-    const payload: ISearchPlacesRequest = {
-      searchCoordinates: data.search,
-      radius: data.radius,
-      categoriesIds: data.categories,
-      typesIds: data.types,
-      title: data.title,
-      orderBy: +data.orderBy,
-      // all places should be visible on map
-      page: 0,
-      pageSize: 1000,
-    };
-    searchService
-      .search(i18n.language, payload)
-      .then((res) => setMapResults(res.data.items))
-      .catch((e) => {});
-  };
+  useEffect(() => {
+    if (scrollPosition) {
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          window.scrollTo(0, scrollPosition);
+        });
+      }, 0);
+    }
+  }, []);
 
-  const apiCall = useCallback(
-    (pagination: IPaginationRequest) => {
-      const data = formContext.getValues();
-      const payload: ISearchPlacesRequest = {
+  useEffect(() => {
+    const handleScroll = debounce(() => {
+      dispatch(setScrollPosition(window.scrollY));
+    }, 300);
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const onSubmit = (fromStart = true) => {
+    formContext.handleSubmit((data) => {
+      // calculate page for pagination
+      const requestedPage = fromStart
+        ? 0
+        : utils.calculateCurrentScrollPage(
+            currentItemsLength,
+            searchService.SEARCH_PLACES_PER_PAGE
+          );
+      const payload: ISearchPlacesRequest & { language: string } = {
         searchCoordinates: data.search,
         radius: data.radius,
         categoriesIds: data.categories,
         typesIds: data.types,
         title: data.title,
         orderBy: +data.orderBy,
-        ...pagination,
+        pageSize: searchService.SEARCH_PLACES_PER_PAGE,
+        page: requestedPage,
+        language: i18n.language,
       };
-      return searchService.search(i18n.language, payload);
-    },
-    [i18n.language]
-  );
-
-  const paginator = useSearchPagination({
-    pageSize: searchService.SEARCH_PLACES_PER_PAGE,
-    apiCall: apiCall,
-  });
-
-  const onSubmit = () => {
-    formContext.handleSubmit((data) => {
-      dispatch(setFilters(data));
-      fetchMapResults();
-      paginator.fetch();
+      if (fromStart) {
+        dispatch(setFilters(data));
+        // fetch map results
+        dispatch(getMapResultsThunk(payload));
+      }
+      dispatch(getSearchResultsThunk(payload));
     })();
   };
 
   useEffect(() => {
+    if (isDataFetched) return;
     onSubmit();
-  }, [i18n.language]);
+  }, [i18n.language, isDataFetched]);
 
   return {
-    mapResults,
     formContext,
     onSubmit,
-    items: paginator.items,
-    changeCurrentPage: paginator.changeCurrentPage,
-    loading: paginator.loading,
-    currentPage: paginator.currentPage,
-    totalItems: paginator.totalItems,
-    totalPages: paginator.totalPages,
   };
 };
 
