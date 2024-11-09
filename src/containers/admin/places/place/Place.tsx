@@ -1,7 +1,6 @@
 import {
   Box,
   CircularProgress,
-  Grid,
   Stack,
   Tab,
   Tabs,

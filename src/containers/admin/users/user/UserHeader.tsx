@@ -18,11 +18,12 @@ import { IUserShortInfo } from "@/services/user-service/interfaces/user-short-in
 import usePopover from "@/hooks/usePopover";
 import { Fragment } from "react";
 import {
-  DatePickerElement,
   FormProvider,
   TextFieldElement,
   UseFormReturn,
 } from "react-hook-form-mui";
+// @ts-ignore
+import { DatePickerElement } from "react-hook-form-mui/date-pickers";
 import { IBlockUserForm } from "@/containers/admin/users/user/interfaces";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { useRouter } from "next/router";

@@ -131,7 +131,7 @@ const Login = () => {
             type={"email"}
             id={"login-email"}
             placeholder={t("auth.login.emailPlaceholder")}
-            validation={{
+            rules={{
               required: t("errors.required"),
               pattern: {
                 value: regExp.email,
@@ -155,7 +155,7 @@ const Login = () => {
             type={"password"}
             id={"login-password"}
             placeholder={t("auth.login.passwordPlaceholder")}
-            validation={{
+            rules={{
               required: t("errors.required"),
             }}
           />

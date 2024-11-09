@@ -5,7 +5,6 @@ import {
   Checkbox,
   Divider,
   FormControlLabel,
-  Grid,
   IconButton,
   Link,
   Popover,
@@ -15,6 +14,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useTranslation } from "next-i18next";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { routerLinks } from "@/routing/routerLinks";
@@ -154,22 +154,20 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
     >
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("favourites.headings.place")}</CustomLabel>
             {favTitleBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("favourites.headings.link")}</CustomLabel>
             {favSlugBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("favourites.headings.date")}</CustomLabel>
             {dateInfoBox}
           </Grid>
           <Grid
-            item
-            xs={12}
-            sm={6}
+            size={{ xs: 12, sm: 6 }}
             gap={"0.5em"}
             display={"flex"}
             alignItems={"center"}
@@ -203,19 +201,11 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
       }}
     >
       <Grid container pl={"1em"} spacing={"1em"} alignItems={"center"}>
-        <Grid item xs={2}>
-          {favIsActualBox}
-        </Grid>
-        <Grid item xs={3}>
-          {favTitleBox}
-        </Grid>
-        <Grid item xs={3.5}>
-          {favSlugBox}
-        </Grid>
-        <Grid item xs={2.5}>
-          {dateInfoBox}
-        </Grid>
-        <Grid item xs={1}>
+        <Grid size={{ xs: 2 }}>{favIsActualBox}</Grid>
+        <Grid size={{ xs: 3 }}>{favTitleBox}</Grid>
+        <Grid size={{ xs: 3.5 }}>{favSlugBox}</Grid>
+        <Grid size={{ xs: 2.5 }}>{dateInfoBox}</Grid>
+        <Grid size={{ xs: 1 }}>
           <IconButton
             color={"error"}
             //sx={{ mr: "0.5em" }}

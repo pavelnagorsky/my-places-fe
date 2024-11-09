@@ -1,7 +1,6 @@
 import { IReport } from "@/services/reports-service/interfaces/report.interface";
 import {
   Box,
-  Grid,
   IconButton,
   Link,
   Select,
@@ -10,6 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useTranslation } from "next-i18next";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { format } from "date-fns";
@@ -110,19 +110,19 @@ const ReportItem = ({ report }: IReportItemProps) => {
     >
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reports.headings.report")}</CustomLabel>
             {textBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reports.headings.place")}</CustomLabel>
             {placeSlugBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reports.headings.status")}</CustomLabel>
             {statusBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reports.headings.createdAt")}</CustomLabel>
             {createdAtInfoBox}
           </Grid>
@@ -153,19 +153,11 @@ const ReportItem = ({ report }: IReportItemProps) => {
       }}
     >
       <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid item xs={4}>
-          {textBox}
-        </Grid>
-        <Grid item xs={3}>
-          {placeSlugBox}
-        </Grid>
-        <Grid item xs={2}>
-          {statusBox}
-        </Grid>
-        <Grid item xs={2}>
-          {createdAtInfoBox}
-        </Grid>
-        <Grid item xs={1}>
+        <Grid size={{ xs: 4 }}>{textBox}</Grid>
+        <Grid size={{ xs: 3 }}>{placeSlugBox}</Grid>
+        <Grid size={{ xs: 2 }}>{statusBox}</Grid>
+        <Grid size={{ xs: 2 }}>{createdAtInfoBox}</Grid>
+        <Grid size={{ xs: 1 }}>
           <IconButton
             color={"secondary"}
             sx={{ mr: "0.5em" }}

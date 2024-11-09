@@ -1,4 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { ReportsOrderByEnum } from "@/services/reports-service/interfaces/interfaces";
 import { OrderDirectionsEnum } from "@/services/interfaces";
@@ -37,7 +38,7 @@ const ReportItemsTableHead = ({
           "& p": { fontWeight: 700, fontSize: "12px", color: "secondary.main" },
         }}
       >
-        <Grid item xs={4}>
+        <Grid size={{ xs: 4 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === ReportsOrderByEnum.TEXT}
@@ -47,7 +48,7 @@ const ReportItemsTableHead = ({
             <Typography>{t("reports.headings.report")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={3}>
+        <Grid size={{ xs: 3 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === ReportsOrderByEnum.PLACE_SLUG}
@@ -59,7 +60,7 @@ const ReportItemsTableHead = ({
             <Typography>{t("reports.headings.place")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={2}>
+        <Grid size={{ xs: 2 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === ReportsOrderByEnum.STATUS}
@@ -69,7 +70,7 @@ const ReportItemsTableHead = ({
             <Typography>{t("reports.headings.status")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={"auto"}>
+        <Grid size={{ xs: "auto" }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === ReportsOrderByEnum.CREATED_AT}

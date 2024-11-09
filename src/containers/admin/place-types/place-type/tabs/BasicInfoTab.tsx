@@ -3,7 +3,8 @@ import {
   TextFieldElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { Grid, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { IPlaceCategoryFormContext } from "@/containers/admin/place-categories/place-category/interfaces";
 import useLanguages from "@/hooks/useLanguages";
 import SingleImageUploader from "@/components/forms/image-uploader/SingleImageUploader";
@@ -29,7 +30,7 @@ const BasicInfoTab = () => {
               required
               variant="outlined"
               fullWidth
-              validation={{ required: true }}
+              rules={{ required: true }}
               parseError={() => "Это поле обязательно к заполнению"}
             />
           ))}
@@ -44,7 +45,7 @@ const BasicInfoTab = () => {
       </Stack>
 
       <Grid container spacing={"1em"} mb={"2em"}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h6" mb="1em">
             Иконка
           </Typography>
@@ -55,7 +56,7 @@ const BasicInfoTab = () => {
             onDelete={(fieldName) => setValue("image", null)}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h6" mb="1em">
             Иконка цветная
           </Typography>

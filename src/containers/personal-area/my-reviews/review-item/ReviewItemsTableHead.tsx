@@ -1,4 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { MyReviewsOrderByEnum } from "@/services/reviews-service/interfaces/interfaces";
 import { OrderDirectionsEnum } from "@/services/interfaces";
@@ -37,7 +38,7 @@ const ReviewItemsTableHead = ({
           "& p": { fontWeight: 700, fontSize: "12px", color: "secondary.main" },
         }}
       >
-        <Grid item xs={2.5}>
+        <Grid size={{ xs: 2.5 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyReviewsOrderByEnum.TITLE}
@@ -47,7 +48,7 @@ const ReviewItemsTableHead = ({
             <Typography>{t("reviews.headings.title")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={2.5}>
+        <Grid size={{ xs: 2.5 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyReviewsOrderByEnum.PLACE_TITLE}
@@ -59,7 +60,7 @@ const ReviewItemsTableHead = ({
             <Typography>{t("reviews.headings.place")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={2.2}>
+        <Grid size={{ xs: 2.2 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyReviewsOrderByEnum.STATUS}
@@ -69,7 +70,7 @@ const ReviewItemsTableHead = ({
             <Typography>{t("reviews.headings.status")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={1.8}>
+        <Grid size={{ xs: 1.8 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyReviewsOrderByEnum.VIEWS}
@@ -79,7 +80,7 @@ const ReviewItemsTableHead = ({
             <Typography>{t("reviews.headings.views")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={"auto"} display={"flex"} alignItems={"center"}>
+        <Grid size={{ xs: "auto" }} display={"flex"} alignItems={"center"}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyReviewsOrderByEnum.CREATED_AT}

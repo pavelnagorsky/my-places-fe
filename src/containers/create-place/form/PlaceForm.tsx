@@ -2,7 +2,8 @@ import { useFormContext } from "react-hook-form-mui";
 import { Fragment, SyntheticEvent, useState } from "react";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
-import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { IPlaceFormContext } from "@/containers/create-place/form/interfaces";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
 import dynamic from "next/dynamic";
@@ -98,7 +99,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
           </Box>
         </motion.div>
         <Grid container spacing={"1em"} mb={"3em"}>
-          <Grid item xs={12} md={3} lg={2}>
+          <Grid size={{ xs: 12, md: 3, lg: 2 }}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Navigation
                 activeTab={activeTab}
@@ -106,7 +107,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
               />
             </motion.div>
           </Grid>
-          <Grid item xs={12} md={9} lg={10}>
+          <Grid size={{ xs: 12, md: 9, lg: 10 }}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <AnimatePresence mode={"sync"}>
                 <motion.div

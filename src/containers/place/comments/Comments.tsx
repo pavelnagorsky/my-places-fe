@@ -76,7 +76,7 @@ const Comments = ({ placeId }: { placeId: number }) => {
           multiline
           placeholder={t("comments.placeholder")}
           maxRows={5}
-          validation={{
+          rules={{
             maxLength: {
               value: 700,
               message: t("errors.maxLength", { value: 500, ns: "common" }),
@@ -84,22 +84,24 @@ const Comments = ({ placeId }: { placeId: number }) => {
           }}
           onChange={commentsData.onChangeInput}
           fullWidth
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position={"end"}>{sendButton}</InputAdornment>
-            ),
-            startAdornment: !!commentsData.editCommentId ? (
-              <InputAdornment position={"start"}>
-                <Button
-                  variant={"text"}
-                  sx={{ textTransform: "none" }}
-                  color={"secondary"}
-                  onClick={commentsData.onCancelEdit}
-                >
-                  {t("buttons.cancel", { ns: "common" })}
-                </Button>
-              </InputAdornment>
-            ) : undefined,
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position={"end"}>{sendButton}</InputAdornment>
+              ),
+              startAdornment: !!commentsData.editCommentId ? (
+                <InputAdornment position={"start"}>
+                  <Button
+                    variant={"text"}
+                    sx={{ textTransform: "none" }}
+                    color={"secondary"}
+                    onClick={commentsData.onCancelEdit}
+                  >
+                    {t("buttons.cancel", { ns: "common" })}
+                  </Button>
+                </InputAdornment>
+              ) : undefined,
+            },
           }}
         />
       </FormProvider>

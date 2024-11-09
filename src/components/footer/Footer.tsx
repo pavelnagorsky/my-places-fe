@@ -1,4 +1,4 @@
-import { Hidden, Stack, SxProps, Typography } from "@mui/material";
+import { Box, Stack, SxProps, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { Logo } from "@/components/logo/Logo";
@@ -24,7 +24,7 @@ const Footer = () => {
   const { t } = useTranslation("common");
 
   const linksSection = (
-    <Hidden mdDown implementation="css">
+    <Box display={{ xs: "none", md: "block" }}>
       <Stack direction={"row"} gap={"3em"}>
         <Stack gap={"0.5em"}>
           <MyLink href={routerLinks.contactUs} sx={linkSx}>
@@ -43,7 +43,7 @@ const Footer = () => {
           </MyLink>
         </Stack>
       </Stack>
-    </Hidden>
+    </Box>
   );
 
   const footerText = (

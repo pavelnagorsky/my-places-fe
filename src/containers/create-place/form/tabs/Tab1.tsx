@@ -63,7 +63,7 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
           fontSize: { md: "20px" },
         }}
         name={"title"}
-        validation={{
+        rules={{
           required: t("errors.required", {
             ns: "common",
           }),
@@ -101,7 +101,7 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
         // rows={4}
         minRows={4}
         name={"description"}
-        validation={{
+        rules={{
           required: t("errors.required", {
             ns: "common",
           }),
@@ -158,7 +158,7 @@ const Tab1 = ({ readonly }: IPlaceTabProps) => {
           ),
         }}
         name={"website"}
-        validation={{
+        rules={{
           pattern: {
             value: regExp.urlPattern,
             message: t("errors.invalid", {

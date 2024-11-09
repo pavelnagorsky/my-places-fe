@@ -56,7 +56,7 @@ const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
         InputProps={{
           readOnly: readonly,
         }}
-        validation={{ required: t("errors.required", { ns: "common" }) }}
+        rules={{ required: t("errors.required", { ns: "common" }) }}
         placeholder={t("form.reviewTitlePlaceholder")}
       />
       <Typography variant={"body1"} my={"1em"} fontSize={{ md: "20px" }}>

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { forwardRef, PropsWithChildren } from "react";
 import { Button as Btn, ButtonProps } from "@mui/material";
 import NextLink from "next/link";
 
@@ -6,9 +6,13 @@ interface IButtonProps {
   linkTo?: string;
 }
 
-export function Button(props: PropsWithChildren & ButtonProps & IButtonProps) {
+export const Button = forwardRef<
+  HTMLButtonElement,
+  PropsWithChildren<ButtonProps & IButtonProps>
+>((props, ref) => {
   return (
     <Btn
+      ref={ref}
       startIcon={props.startIcon}
       variant={props.variant ?? "outlined"}
       color={props.color}
@@ -41,4 +45,6 @@ export function Button(props: PropsWithChildren & ButtonProps & IButtonProps) {
       {props.children}
     </Btn>
   );
-}
+});
+
+Button.displayName = "Button";

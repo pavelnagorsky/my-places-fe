@@ -3,10 +3,10 @@ import {
   Backdrop,
   Box,
   CircularProgress,
-  Grid,
   Stack,
   Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import BasicInfo from "@/containers/admin/users/user/sections/BasicInfo";
 import AdminLayout from "@/containers/admin/layout/AdminLayout";
 import ModeratorForm from "@/containers/admin/users/user/sections/ModeratorForm";
@@ -44,10 +44,10 @@ const User = () => {
       />
       {loader}
       <Grid container spacing={"2em"} p={"1em"}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           {logic.user && <BasicInfo user={logic.user} />}
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <FormProvider {...logic.moderatorForm}>
             <ModeratorForm
               isModerator={!!logic.moderator}

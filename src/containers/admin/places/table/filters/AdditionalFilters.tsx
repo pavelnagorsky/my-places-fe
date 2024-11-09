@@ -1,9 +1,10 @@
 import {
   AutocompleteElement,
   CheckboxButtonGroup,
-  DatePickerElement,
   useFormContext,
 } from "react-hook-form-mui";
+// @ts-ignore
+import { DatePickerElement } from "react-hook-form-mui/date-pickers";
 import { useTranslation } from "next-i18next";
 import {
   Badge,

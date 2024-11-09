@@ -1,12 +1,12 @@
 import {
   Box,
-  Grid,
   Link,
   Stack,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
@@ -104,23 +104,23 @@ const ReviewItem = ({ review }: IReviewItemProps) => {
     >
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.title")}</CustomLabel>
             {reviewTitleBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.place")}</CustomLabel>
             {placeTitleBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.author")}</CustomLabel>
             {authorInfoBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.createdAt")}</CustomLabel>
             {createdAtInfoBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.updatedAt")}</CustomLabel>
             {updatedAtInfoBox}
           </Grid>
@@ -146,21 +146,11 @@ const ReviewItem = ({ review }: IReviewItemProps) => {
       }}
     >
       <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid item xs={2.5}>
-          {reviewTitleBox}
-        </Grid>
-        <Grid item xs={3}>
-          {placeTitleBox}
-        </Grid>
-        <Grid item xs={2.5}>
-          {authorInfoBox}
-        </Grid>
-        <Grid item xs={2}>
-          {createdAtInfoBox}
-        </Grid>
-        <Grid item xs={2}>
-          {updatedAtInfoBox}
-        </Grid>
+        <Grid size={{ xs: 2.5 }}>{reviewTitleBox}</Grid>
+        <Grid size={{ xs: 3 }}>{placeTitleBox}</Grid>
+        <Grid size={{ xs: 2.5 }}>{authorInfoBox}</Grid>
+        <Grid size={{ xs: 2 }}>{createdAtInfoBox}</Grid>
+        <Grid size={{ xs: 2 }}>{updatedAtInfoBox}</Grid>
       </Grid>
     </Box>
   );

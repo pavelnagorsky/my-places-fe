@@ -4,10 +4,10 @@ import {
   Box,
   Button,
   CircularProgress,
-  Grid,
   Stack,
   Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import PersonalAreaLayout from "@/containers/personal-area/layout/PersonalAreaLayout";
 import { motion } from "framer-motion";
 import {
@@ -54,7 +54,7 @@ const UserSettingsPage = () => {
         <motion.div variants={animationVariants.defaultItemVariant}>
           <FormProvider {...logic.form}>
             <Grid container spacing={{ xs: "1em", md: "2em" }} mb={"4em"}>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <CustomLabel htmlFor={"firstName"}>
                   {t("auth.signup.firstName", { ns: "common" })}
                 </CustomLabel>
@@ -73,14 +73,14 @@ const UserSettingsPage = () => {
                       ? t("errors.maxLength", { ns: "common", value: 30 })
                       : t("errors.required", { ns: "common" });
                   }}
-                  validation={{
+                  rules={{
                     pattern: regExp.noWhiteSpaces,
                     required: true,
                     maxLength: 30,
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <CustomLabel htmlFor={"lastName"}>
                   {t("auth.signup.lastName", { ns: "common" })}
                 </CustomLabel>
@@ -99,14 +99,14 @@ const UserSettingsPage = () => {
                       ? t("errors.maxLength", { ns: "common", value: 30 })
                       : t("errors.required", { ns: "common" });
                   }}
-                  validation={{
+                  rules={{
                     pattern: regExp.noWhiteSpaces,
                     required: true,
                     maxLength: 30,
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <CustomLabel htmlFor={"email"}>
                   {t("auth.login.emailLabel", { ns: "common" })}
                 </CustomLabel>
@@ -119,7 +119,7 @@ const UserSettingsPage = () => {
                   placeholder={t("auth.login.emailPlaceholder", {
                     ns: "common",
                   })}
-                  validation={{
+                  rules={{
                     required: t("errors.required", { ns: "common" }),
                     pattern: {
                       value: regExp.email,
@@ -135,7 +135,7 @@ const UserSettingsPage = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <CustomLabel htmlFor={"preferredLanguageId"}>
                   {t("settings.preferredLanguage")}
                 </CustomLabel>
@@ -146,7 +146,7 @@ const UserSettingsPage = () => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <Box>
                   <Button
                     disabled={!logic.form.formState.isDirty}

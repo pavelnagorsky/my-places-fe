@@ -1,13 +1,14 @@
 import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
 import { Box, CircularProgress, Paper, Stack, Typography } from "@mui/material";
 import {
-  DatePickerElement,
   FormProvider,
   SelectElement,
   SwitchElement,
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
+// @ts-ignore
+import { DatePickerElement } from "react-hook-form-mui/date-pickers";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { StyledButton } from "@/components/UI/button/StyledButton";
 import { useEffect, useState } from "react";

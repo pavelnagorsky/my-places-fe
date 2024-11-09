@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import ModerationSideBar from "@/containers/moderation/layout/ModerationSideBar";
 
 const ModerationLayout = ({ children }: PropsWithChildren) => {
@@ -15,12 +15,13 @@ const ModerationLayout = ({ children }: PropsWithChildren) => {
           mb={"3em"}
           position={"relative"}
         >
-          <Grid item xs={12} xl={2} sx={{ zIndex: 10, mt: { md: "0.5em" } }}>
+          <Grid
+            size={{ xs: 12, xl: 2 }}
+            sx={{ zIndex: 10, mt: { md: "0.5em" } }}
+          >
             <ModerationSideBar />
           </Grid>
-          <Grid item xs={12} xl={10}>
-            {children}
-          </Grid>
+          <Grid size={{ xs: 12, xl: 10 }}>{children}</Grid>
         </Grid>
       </WrappedContainer>
     </ProtectedAuth>

@@ -2,15 +2,13 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { IPlace } from "@/services/places-service/interfaces/place.interface";
 import {
   Box,
-  Grid,
-  Hidden,
-  IconButton,
   Link,
   Stack,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
@@ -73,7 +71,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
         animate="show"
       >
         <Grid container spacing={{ md: "3em" }} mb={"5em"}>
-          <Grid item xs={12} lg={8}>
+          <Grid size={{ xs: 12, lg: 8 }}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Typography
                 variant={"h1"}
@@ -253,27 +251,21 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                 </Map>
                 <Typography pt={"0.5em"} color={"secondary.main"}>
                   {t("coordinates.lat")} {+place.coordinates.lat.toFixed(8)}
-                  <Hidden smUp>
-                    <br />
-                  </Hidden>{" "}
+                  <Box component={"br"} display={{ sm: "none" }} />{" "}
                   {t("coordinates.lng")} {+place.coordinates.lng.toFixed(8)}
                 </Typography>
               </Box>
-              <Hidden implementation="css" lgDown>
-                {comments}
-              </Hidden>
+              <Box display={{ xs: "none", lg: "block" }}>{comments}</Box>
             </motion.div>
           </Grid>
-          <Grid item xs={12} lg={4}>
+          <Grid size={{ xs: 12, lg: 4 }}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <ReviewsSection
                 placeSlug={place.slug}
                 placeId={place.id}
                 reviews={reviews}
               />
-              <Hidden implementation="css" lgUp>
-                {comments}
-              </Hidden>
+              <Box display={{ lg: "none" }}>{comments}</Box>
             </motion.div>
           </Grid>
         </Grid>

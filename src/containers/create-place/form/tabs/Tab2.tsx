@@ -117,7 +117,7 @@ const Tab2 = ({ placeTypes, categories, readonly }: ITab2Props) => {
         SelectProps={{
           readOnly: readonly,
         }}
-        validation={{
+        rules={{
           required: t("errors.required", {
             ns: "common",
           }),

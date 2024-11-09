@@ -1,4 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import InfoPanel from "@/containers/contact-us/form/InfoPanel";
 import Form from "@/containers/contact-us/form/Form";
 import animationVariants from "@/shared/animation-variants";
@@ -21,7 +22,7 @@ const ContactUs = () => {
       >
         <motion.div variants={animationVariants.defaultItemVariant}>
           <Grid container spacing={"4em"} mb="1em">
-            <Grid item xs={12} md={7}>
+            <Grid size={{ xs: 12, md: 7 }}>
               <Typography
                 variant={"h1"}
                 fontSize={{ xs: "30px", md: "40px" }}
@@ -40,14 +41,14 @@ const ContactUs = () => {
           spacing={{ xs: "2em", md: "4em", lg: "6em" }}
           mb={"6em"}
         >
-          <Grid item xs={12} md={7}>
+          <Grid size={{ xs: 12, md: 7 }}>
             <FormProvider {...logic.form}>
               <motion.div variants={animationVariants.defaultItemVariant}>
                 <Form onSubmit={logic.onSubmit} loading={logic.loading} />
               </motion.div>
             </FormProvider>
           </Grid>
-          <Grid item xs={12} md={5}>
+          <Grid size={{ xs: 12, md: 5 }}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <InfoPanel />
             </motion.div>

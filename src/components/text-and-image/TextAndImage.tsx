@@ -1,4 +1,5 @@
-import { Box, Grid, SxProps, Typography } from "@mui/material";
+import { Box, SxProps, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
 import { Button } from "../UI/button/Button";
 import Image, { StaticImageData } from "next/image";
@@ -41,7 +42,7 @@ function TextAndImage({
         ...sx,
       }}
     >
-      <Grid item xs={12} md={6}>
+      <Grid size={{ xs: 12, md: 6 }}>
         {title && (
           <Typography
             variant="h1"
@@ -85,7 +86,7 @@ function TextAndImage({
           </Button>
         )}
       </Grid>
-      <Grid item xs={showImageMobile ? 12 : 0} md={6}>
+      <Grid size={{ xs: showImageMobile ? 12 : 0, md: 6 }}>
         <Box
           // component={Image}
           // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

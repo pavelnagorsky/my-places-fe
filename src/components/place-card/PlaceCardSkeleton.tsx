@@ -11,11 +11,12 @@ import {
 function PlaceCardSkeleton() {
   return (
     <Card
-      elevation={2}
+      // elevation={2}
       sx={{
         width: { xs: "330px", md: "374px" },
         height: { xs: "510px", md: "565px" },
         borderRadius: "10px",
+        boxShadow: "0px 2px 22px 0px #00000012",
         // boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
         "& .MuiSkeleton-root": {
           bgcolor: "#D9D9D9",

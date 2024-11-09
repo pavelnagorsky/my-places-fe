@@ -109,7 +109,7 @@ const Signup = () => {
             type={"email"}
             id={"signup-email"}
             placeholder={t("auth.login.emailPlaceholder")}
-            validation={{
+            rules={{
               required: t("errors.required"),
               pattern: {
                 value: regExp.email,
@@ -137,7 +137,7 @@ const Signup = () => {
                 ? t("errors.maxLengthString")
                 : t("errors.required");
             }}
-            validation={{
+            rules={{
               pattern: regExp.noWhiteSpaces,
               required: true,
               maxLength: 30,
@@ -163,7 +163,7 @@ const Signup = () => {
                 ? t("errors.maxLengthString")
                 : t("errors.required");
             }}
-            validation={{
+            rules={{
               pattern: regExp.noWhiteSpaces,
               required: true,
               maxLength: 30,
@@ -207,7 +207,7 @@ const Signup = () => {
             type={"password"}
             id={"signup-password"}
             placeholder={t("auth.login.passwordPlaceholder")}
-            validation={{
+            rules={{
               required: t("errors.required"),
               pattern: {
                 value: regExp.password,
@@ -239,7 +239,7 @@ const Signup = () => {
                 return t("errors.required");
               }
             }}
-            validation={{
+            rules={{
               required: true,
             }}
           />
@@ -259,7 +259,7 @@ const Signup = () => {
             color={"secondary"}
             name={"privacyPolicy"}
             required
-            validation={{
+            rules={{
               required: t("auth.signup.policyConfirmError"),
             }}
             label={

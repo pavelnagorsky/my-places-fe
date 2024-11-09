@@ -127,7 +127,7 @@ const ReportForm = ({
             name={"text"}
             maxRows={4}
             multiline
-            validation={{
+            rules={{
               required: t("errors.required", { ns: "common" }),
               maxLength: {
                 value: 500,

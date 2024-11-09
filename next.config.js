@@ -25,6 +25,12 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  webpack: (config) => {
+    config.resolve.extensionAlias = {
+      ".js": [".js", ".ts", ".tsx"],
+    };
+    return config;
+  },
   transpilePackages: ["mui-tel-input"],
 };
 

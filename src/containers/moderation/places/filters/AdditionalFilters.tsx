@@ -1,8 +1,4 @@
-import {
-  DatePickerElement,
-  TextFieldElement,
-  useFormContext,
-} from "react-hook-form-mui";
+import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import { useMemo } from "react";
 import {
   Badge,
@@ -16,6 +12,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+// @ts-ignore
+import { DatePickerElement } from "react-hook-form-mui/date-pickers";
 import { useTranslation } from "next-i18next";
 import CloseIcon from "@mui/icons-material/Close";
 import { primaryBackground } from "@/styles/theme/lightTheme";

@@ -6,10 +6,10 @@ import {
   Box,
   Button,
   CircularProgress,
-  Grid,
   Stack,
   Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import animationVariants from "@/shared/animation-variants";
 import { FormContainer, FormProvider } from "react-hook-form-mui";
 import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
@@ -125,14 +125,14 @@ const EditPlace = () => {
             </motion.div>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Grid container spacing={"1em"} mb={"3em"}>
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Navigation
                     alwaysHorizontal
                     activeTab={activeTab}
                     handleChange={handleChangeTab}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <AnimatePresence mode={"sync"}>
                     <motion.div
                       key={0}

@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { memo, useEffect, useMemo } from "react";
 import { Controller, useFormContext } from "react-hook-form-mui";
 import { Box, styled, SxProps, Typography } from "@mui/material";
 import textEditorConfig from "@/components/forms/text-editor/text-editor.config";

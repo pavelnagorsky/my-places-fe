@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, Hidden, Stack, Typography } from "@mui/material";
+import { Box, Card, CardMedia, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { Button } from "@/components/UI/button/Button";
@@ -61,9 +61,9 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
         >
           {place.title}
         </Typography>
-        <Hidden mdUp>
+        <Box display={{ md: "none" }}>
           <div>{actionButton}</div>
-        </Hidden>
+        </Box>
         <Typography fontWeight={300} variant="body1" fontSize={"12px"}>
           {place.categories.map((c) => c.title).join(" | ")}
         </Typography>
@@ -96,7 +96,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
               }}
             />
           </Typography>
-          <Hidden mdDown>{actionButton}</Hidden>
+          <Box display={{ xs: "none", md: "block" }}>{actionButton}</Box>
         </Stack>
       </Box>
     </Card>

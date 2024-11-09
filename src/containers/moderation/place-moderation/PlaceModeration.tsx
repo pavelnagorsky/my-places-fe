@@ -4,11 +4,10 @@ import {
   Box,
   Button,
   CircularProgress,
-  FormHelperText,
-  Grid,
   Stack,
   Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
 import Tab1 from "@/containers/create-place/form/tabs/Tab1";
@@ -108,14 +107,14 @@ const PlaceModeration = () => {
             </motion.div>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Grid container spacing={"1em"} mb={"3em"}>
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Navigation
                     alwaysHorizontal
                     activeTab={activeTab}
                     handleChange={handleChangeTab}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <AnimatePresence mode={"sync"}>
                     <motion.div
                       key={0}

@@ -1,4 +1,6 @@
-import { DatePickerElement, useFormContext } from "react-hook-form-mui";
+import { useFormContext } from "react-hook-form-mui";
+// @ts-ignore
+import { DatePickerElement } from "react-hook-form-mui/date-pickers";
 import { useMemo } from "react";
 import {
   Badge,

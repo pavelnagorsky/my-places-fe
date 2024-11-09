@@ -1,6 +1,5 @@
 import {
   Box,
-  Grid,
   IconButton,
   Link,
   Stack,
@@ -9,6 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
 import { routerLinks } from "@/routing/routerLinks";
@@ -148,23 +148,23 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
     >
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.title")}</CustomLabel>
             {reviewTitleBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.place")}</CustomLabel>
             {placeTitleBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.status")}</CustomLabel>
             {statusInfoBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.views")}</CustomLabel>
             {viewsBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reviews.headings.createdAt")}</CustomLabel>
             {dateInfoBox}
           </Grid>
@@ -194,22 +194,12 @@ const ReviewItem = ({ review, onDelete }: IReviewItemProps) => {
       }}
     >
       <Grid container pl={"1em"} spacing={"1em"} alignItems={"center"}>
-        <Grid item xs={2.5}>
-          {reviewTitleBox}
-        </Grid>
-        <Grid item xs={2.5}>
-          {placeTitleBox}
-        </Grid>
-        <Grid item xs={2.5}>
-          {statusInfoBox}
-        </Grid>
-        <Grid item xs={1.5}>
-          {viewsBox}
-        </Grid>
-        <Grid item xs={2}>
-          {dateInfoBox}
-        </Grid>
-        <Grid item xs={1}>
+        <Grid size={{ xs: 2.5 }}>{reviewTitleBox}</Grid>
+        <Grid size={{ xs: 2.5 }}>{placeTitleBox}</Grid>
+        <Grid size={{ xs: 2.5 }}>{statusInfoBox}</Grid>
+        <Grid size={{ xs: 1.5 }}>{viewsBox}</Grid>
+        <Grid size={{ xs: 2 }}>{dateInfoBox}</Grid>
+        <Grid size={{ xs: 1 }}>
           <IconButton
             color={"secondary"}
             //sx={{ mr: "0.5em" }}

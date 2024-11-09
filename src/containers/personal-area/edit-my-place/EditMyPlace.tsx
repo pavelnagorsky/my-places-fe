@@ -6,10 +6,10 @@ import {
   Box,
   Button,
   CircularProgress,
-  Grid,
   Stack,
   Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
@@ -133,14 +133,14 @@ const EditMyPlace = () => {
             </motion.div>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Grid container spacing={"1em"} mb={"3em"}>
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Navigation
                     alwaysHorizontal
                     activeTab={activeTab}
                     handleChange={handleChangeTab}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <AnimatePresence mode={"sync"}>
                     <motion.div
                       key={0}

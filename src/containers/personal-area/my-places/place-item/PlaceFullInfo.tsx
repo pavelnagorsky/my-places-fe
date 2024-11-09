@@ -1,5 +1,6 @@
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
-import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useTranslation } from "next-i18next";
 
 interface IPlaceFullInfoProps {
@@ -16,22 +17,22 @@ const PlaceFullInfo = ({ place }: IPlaceFullInfoProps) => {
         spacing={{ xs: "1em", md: "2em" }}
         justifyContent={{ xs: "start", sm: "center" }}
       >
-        <Grid item xs={"auto"} md={"auto"}>
+        <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
             {t("places.headings.reviewsCount")} {place.reviewsCount}
           </Typography>
         </Grid>
-        <Grid item xs={"auto"} md={"auto"}>
+        <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
             {t("places.headings.viewsCount")} {place.viewsCount}
           </Typography>
         </Grid>
-        <Grid item xs={"auto"} md={"auto"}>
+        <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
             {t("places.headings.likesCount")} {place.likesCount}
           </Typography>
         </Grid>
-        <Grid item xs={"auto"} md={"auto"}>
+        <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
             {t("places.headings.commentsCount")} {place.commentsCount}
           </Typography>

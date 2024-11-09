@@ -143,7 +143,7 @@ const ResetPassword = () => {
               type={"password"}
               id={"signup-password"}
               placeholder={t("auth.login.passwordPlaceholder")}
-              validation={{
+              rules={{
                 required: t("errors.required"),
                 pattern: {
                   value: regExp.password,
@@ -175,7 +175,7 @@ const ResetPassword = () => {
                   return t("errors.required");
                 }
               }}
-              validation={{
+              rules={{
                 required: true,
               }}
             />

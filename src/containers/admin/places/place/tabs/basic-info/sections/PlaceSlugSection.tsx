@@ -121,7 +121,7 @@ const PlaceSlugSection = ({ place, onReloadPlace }: IPlaceSlugSectionProps) => {
           }}
           name={"slug"}
           onChange={(event) => validateSlug(event.target.value)}
-          validation={{
+          rules={{
             required: "Это поле обязательно к заполнению",
             pattern: {
               value: regExp.slugPattern,

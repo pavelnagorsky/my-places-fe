@@ -1,4 +1,5 @@
-import { CircularProgress, Grid, Stack, Typography } from "@mui/material";
+import { CircularProgress, Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import AdminLayout from "@/containers/admin/layout/AdminLayout";
 import useFeedback from "@/containers/admin/feedback-list/feedback/useFeedback";
 import FeedbackHeader from "@/containers/admin/feedback-list/feedback/FeedbackHeader";
@@ -28,10 +29,10 @@ const Feedback = () => {
       <FeedbackHeader feedback={feedback} />
       {loader}
       <Grid container spacing={"2em"} p={"1em"}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           {feedback && <BasicInfo feedback={feedback} />}
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           {feedback && <EmailSection feedback={feedback} />}
         </Grid>
       </Grid>

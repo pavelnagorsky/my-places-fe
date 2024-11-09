@@ -1,6 +1,5 @@
 import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
-import lightTheme from "@/styles/theme/lightTheme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "@/styles/utility/createEmotionCache";
@@ -12,7 +11,7 @@ import { EmotionCache } from "@emotion/cache";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { DefaultSeo } from "next-seo";
 import { Environment } from "@/shared/Environment";

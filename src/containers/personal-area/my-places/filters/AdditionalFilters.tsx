@@ -1,8 +1,6 @@
-import {
-  CheckboxButtonGroup,
-  DatePickerElement,
-  useFormContext,
-} from "react-hook-form-mui";
+import { CheckboxButtonGroup, useFormContext } from "react-hook-form-mui";
+// @ts-ignore
+import { DatePickerElement } from "react-hook-form-mui/date-pickers";
 import { useMemo } from "react";
 import {
   Badge,

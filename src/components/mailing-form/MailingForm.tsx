@@ -10,7 +10,7 @@ const MailingForm = () => {
       <Stack>
         <CustomLabel htmlFor={"to"}>Email пользователя</CustomLabel>
         <TextFieldElement
-          validation={{
+          rules={{
             required: "Это поле обязательно к заполнению",
             pattern: {
               value: regExp.email,
@@ -25,7 +25,7 @@ const MailingForm = () => {
       <Stack>
         <CustomLabel htmlFor={"subject"}>Тема</CustomLabel>
         <TextFieldElement
-          validation={{
+          rules={{
             required: "Это поле обязательно к заполнению",
           }}
           name={"subject"}

@@ -1,7 +1,5 @@
 import { Box, IconButton, Stack } from "@mui/material";
-
 import { Logo } from "../logo/Logo";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "next-i18next";

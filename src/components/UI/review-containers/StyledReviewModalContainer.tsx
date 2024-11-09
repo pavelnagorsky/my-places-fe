@@ -5,7 +5,6 @@ const StyledReviewModalContainer = styled(Box)(({ theme }) => ({
   wordBreak: "break-word",
   lineHeight: "140%",
   p: "0.5em",
-  height: "100%",
   img: {
     objectFit: "cover",
     maxWidth: "100%",

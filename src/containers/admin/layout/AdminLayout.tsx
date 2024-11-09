@@ -1,7 +1,8 @@
 import { PropsWithChildren } from "react";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { Grid, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import AdminSideBar from "@/containers/admin/layout/AdminSideBar";
 
 const AdminLayout = ({ children }: PropsWithChildren) => {
@@ -15,10 +16,10 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
           mb={"5em"}
           position={"relative"}
         >
-          <Grid item xs={12} xl={2} sx={{ zIndex: 10 }}>
+          <Grid size={{ xs: 12, xl: 2 }} sx={{ zIndex: 10 }}>
             <AdminSideBar />
           </Grid>
-          <Grid item xs={12} xl={10}>
+          <Grid size={{ xs: 12, xl: 10 }}>
             <Paper>{children}</Paper>
           </Grid>
         </Grid>

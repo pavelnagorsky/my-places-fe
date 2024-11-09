@@ -66,6 +66,9 @@ export const searchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getSearchResultsThunk.pending, (state, action) => {
+      if (action.meta.arg.page === 0) {
+        state.items = [];
+      }
       state.hasMore = true;
       state.noItems = false;
       state.isDataFetched = true;

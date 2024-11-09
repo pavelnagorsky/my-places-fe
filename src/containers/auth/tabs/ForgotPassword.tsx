@@ -1,7 +1,5 @@
 import {
   FormContainer,
-  PasswordElement,
-  PasswordRepeatElement,
   SubmitHandler,
   TextFieldElement,
   useForm,
@@ -158,7 +156,7 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
               type={"email"}
               id={"reset-pw-email"}
               placeholder={t("auth.login.emailPlaceholder")}
-              validation={{
+              rules={{
                 required: t("errors.required"),
                 pattern: {
                   value: regExp.email,

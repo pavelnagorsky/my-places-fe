@@ -64,7 +64,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             fullWidth
             name={"fullName"}
             id={"fullName"}
-            validation={{
+            rules={{
               required: true,
             }}
             parseError={parseError}
@@ -106,7 +106,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             name={"email"}
             type={"email"}
             id={"email"}
-            validation={{
+            rules={{
               pattern: regExp.email,
               required: true,
             }}
@@ -151,7 +151,7 @@ const Form = ({ onSubmit, loading }: IFormProps) => {
             minRows={3}
             name={"message"}
             id={"message"}
-            validation={{
+            rules={{
               required: true,
             }}
             parseError={parseError}

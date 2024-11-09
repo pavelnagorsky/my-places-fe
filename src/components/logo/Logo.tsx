@@ -1,4 +1,4 @@
-import { Box, Hidden, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import logoImage from "../../../public/images/logo/logo.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -41,9 +41,7 @@ export function Logo({ small }: { small?: boolean }) {
         />
       </Box>
       {small ? (
-        <Hidden mdDown implementation={"css"}>
-          {logoText}
-        </Hidden>
+        <Box display={{ xs: "none", md: "block" }}>{logoText}</Box>
       ) : (
         logoText
       )}

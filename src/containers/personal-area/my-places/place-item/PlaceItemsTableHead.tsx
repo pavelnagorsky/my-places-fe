@@ -1,4 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { MyPlacesOrderByEnum } from "@/services/places-service/interfaces/interfaces";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { OrderDirectionsEnum } from "@/services/interfaces";
@@ -36,8 +37,8 @@ const PlaceItemsTableHead = ({
           "& p": { fontWeight: 700, fontSize: "12px", color: "secondary.main" },
         }}
       >
-        <Grid item xs={1}></Grid>
-        <Grid item xs={2.5}>
+        <Grid size={{ xs: 1 }}></Grid>
+        <Grid size={{ xs: 2.5 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyPlacesOrderByEnum.TITLE}
@@ -47,7 +48,7 @@ const PlaceItemsTableHead = ({
             <Typography>{t("places.headings.title")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={1.6}>
+        <Grid size={{ xs: 1.6 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyPlacesOrderByEnum.TYPE}
@@ -57,7 +58,7 @@ const PlaceItemsTableHead = ({
             <Typography>{t("places.headings.type")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={2.4}>
+        <Grid size={{ xs: 2.4 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyPlacesOrderByEnum.STATUS}
@@ -67,7 +68,7 @@ const PlaceItemsTableHead = ({
             <Typography>{t("places.headings.status")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={1.75}>
+        <Grid size={{ xs: 1.75 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyPlacesOrderByEnum.COMMERCIAL}
@@ -79,7 +80,7 @@ const PlaceItemsTableHead = ({
             <Typography>{t("places.headings.commercial")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid item xs={"auto"} display={"flex"} alignItems={"center"}>
+        <Grid size={{ xs: "auto" }} display={"flex"} alignItems={"center"}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyPlacesOrderByEnum.CREATED_AT}

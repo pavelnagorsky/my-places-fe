@@ -1,12 +1,5 @@
-import {
-  Box,
-  Grid,
-  Link,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
@@ -109,27 +102,27 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
     >
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, md: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.title")}</CustomLabel>
             {placeTitleBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, md: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.type")}</CustomLabel>
             {placeTypeBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, md: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.author")}</CustomLabel>
             {placeAuthorInfoBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, md: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.commercial")}</CustomLabel>
             {advertisementBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, md: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.createdAt")}</CustomLabel>
             {createdAtInfoBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, md: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.updatedAt")}</CustomLabel>
             {updatedAtInfoBox}
           </Grid>
@@ -155,24 +148,12 @@ const PlaceItem = ({ place }: IPlaceItemProps) => {
       }}
     >
       <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid item xs={2.5}>
-          {placeTitleBox}
-        </Grid>
-        <Grid item xs={1.5}>
-          {placeTypeBox}
-        </Grid>
-        <Grid item xs={2.5}>
-          {placeAuthorInfoBox}
-        </Grid>
-        <Grid item xs={1.5}>
-          {advertisementBox}
-        </Grid>
-        <Grid item xs={2}>
-          {createdAtInfoBox}
-        </Grid>
-        <Grid item xs={2}>
-          {updatedAtInfoBox}
-        </Grid>
+        <Grid size={{ xs: 2.5 }}>{placeTitleBox}</Grid>
+        <Grid size={{ xs: 1.5 }}>{placeTypeBox}</Grid>
+        <Grid size={{ xs: 2.5 }}>{placeAuthorInfoBox}</Grid>
+        <Grid size={{ xs: 1.5 }}>{advertisementBox}</Grid>
+        <Grid size={{ xs: 2 }}>{createdAtInfoBox}</Grid>
+        <Grid size={{ xs: 2 }}>{updatedAtInfoBox}</Grid>
       </Grid>
     </Box>
   );

@@ -1,7 +1,6 @@
 import {
   Box,
   Collapse,
-  Grid,
   IconButton,
   Link,
   Stack,
@@ -10,6 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
@@ -182,23 +182,23 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
     >
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.title")}</CustomLabel>
             {placeTitleBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.type")}</CustomLabel>
             {placeTypeBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.status")}</CustomLabel>
             {statusInfoBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.commercial")}</CustomLabel>
             {advertisementBox}
           </Grid>
-          <Grid item xs={12} sm={6} gap={"0.5em"}>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("places.headings.createdAt")}</CustomLabel>
             {dateInfoBox}
           </Grid>
@@ -236,7 +236,7 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
       }}
     >
       <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid item xs={1}>
+        <Grid size={{ xs: 1 }}>
           <IconButton
             color={"primary"}
             sx={{ ml: "0.5em" }}
@@ -247,22 +247,12 @@ const PlaceItem = ({ place, onDelete }: IPlaceItemProps) => {
             />
           </IconButton>
         </Grid>
-        <Grid item xs={2.5}>
-          {placeTitleBox}
-        </Grid>
-        <Grid item xs={1.6}>
-          {placeTypeBox}
-        </Grid>
-        <Grid item xs={2.4}>
-          {statusInfoBox}
-        </Grid>
-        <Grid item xs={1.75}>
-          {advertisementBox}
-        </Grid>
-        <Grid item xs={1.75}>
-          {dateInfoBox}
-        </Grid>
-        <Grid item xs={1}>
+        <Grid size={{ xs: 2.5 }}>{placeTitleBox}</Grid>
+        <Grid size={{ xs: 1.6 }}>{placeTypeBox}</Grid>
+        <Grid size={{ xs: 2.4 }}>{statusInfoBox}</Grid>
+        <Grid size={{ xs: 1.75 }}>{advertisementBox}</Grid>
+        <Grid size={{ xs: 1.75 }}>{dateInfoBox}</Grid>
+        <Grid size={{ xs: 1 }}>
           <IconButton
             color={"secondary"}
             sx={{ mr: "0.5em" }}

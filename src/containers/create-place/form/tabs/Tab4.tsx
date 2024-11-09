@@ -107,7 +107,7 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
         }}
         type={"search"}
         name={"address"}
-        validation={{
+        rules={{
           required: t("errors.required", {
             ns: "common",
           }),
@@ -164,7 +164,7 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
           fullWidth
           name={"lat"}
           inputProps={{ step: "0.1", readOnly: readonly }}
-          validation={{
+          rules={{
             min: {
               value: 1,
               message: t("errors.invalid", {
@@ -186,7 +186,7 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
             fontSize: { md: "20px" },
           }}
           name={"lng"}
-          validation={{
+          rules={{
             min: {
               value: 1,
               message: t("errors.invalid", {
