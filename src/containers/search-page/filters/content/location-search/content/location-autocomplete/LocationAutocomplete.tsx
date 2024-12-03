@@ -53,7 +53,7 @@ function LocationAutocomplete({
       debounce(
         (
           request: google.maps.places.AutocompletionRequest,
-          callback: (results?: readonly IPlaceType[]) => void
+          callback: (results?: IPlaceType[]) => void
         ) => {
           (autocompleteService as any)?.getPlacePredictions(request, callback);
         },

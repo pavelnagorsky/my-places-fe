@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { PlaceType } from "@/containers/search-page/filters/LocationAutocomplete";
 import {
   ICoordinate,
   POLYGON_TYPES,
@@ -8,7 +7,7 @@ import { ILatLngCoordinate } from "@/components/map/Map";
 import openStreetMapService from "@/services/open-street-map-service/open-street-map.service";
 
 interface IUsePolygonsProps {
-  readonly address: PlaceType | null;
+  readonly address: any | null;
 }
 
 // custom hook to display region borders based on region address
