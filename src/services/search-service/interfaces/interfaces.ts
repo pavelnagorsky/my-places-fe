@@ -7,5 +7,6 @@ export interface ISearchPlacesRequest
   categoriesIds: number[];
   title: string;
   radius: number;
-  searchCoordinates: string | null;
+  searchStartCoordinates: string | null;
+  searchEndCoordinates: string | null;
 }

@@ -121,7 +121,6 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
         sx: {
           p: "1em",
           scrollbarWidth: "thin",
-          paddingInlineEnd: { md: 0 },
           minHeight: "518px",
           border: isMobile ? 0 : `2px solid #FF7A00`,
           borderRadius: { md: "15px" },
@@ -137,6 +136,7 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
           sx={{
             scrollbarWidth: "thin",
             overflowY: { md: "auto" },
+            paddingInlineEnd: { md: "1em" },
           }}
           container
           spacing={hasPhotos ? { xs: "1em", md: "2em" } : undefined}
@@ -151,7 +151,6 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
               sx={{
                 p: 0,
                 mb: "1em",
-                paddingInlineEnd: { md: "1em" },
               }}
               dangerouslySetInnerHTML={createMarkup()}
             />

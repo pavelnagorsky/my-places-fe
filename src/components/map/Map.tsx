@@ -77,14 +77,7 @@ function Map({
   return (
     <Grow in={isLoaded}>
       {isLoaded ? (
-        <Box
-          sx={{
-            borderImage:
-              "linear-gradient(45deg, rgba(255, 122, 0, 1), rgba(255, 184, 0, 1)) 1",
-            borderStyle: "solid",
-            borderWidth: "3px",
-          }}
-        >
+        <Box>
           <GoogleMap
             mapContainerStyle={
               containerStyle ? containerStyle : { height: "400px" }

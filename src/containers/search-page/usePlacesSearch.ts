@@ -1,16 +1,15 @@
 import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form-mui";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   ISearchForm,
+  SearchModesEnum,
   SearchOrderByStringEnum,
 } from "@/containers/search-page/interfaces";
 import { ISearchPlacesRequest } from "@/services/search-service/interfaces/interfaces";
 import searchService from "@/services/search-service/search.service";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
-  getMapResultsThunk,
-  getSearchResultsThunk,
   selectCurrentItemsLength,
   selectIsDataFetched,
   selectScrollPosition,
@@ -20,12 +19,19 @@ import {
 } from "@/store/search-slice/search.slice";
 import utils from "@/shared/utils";
 import { debounce } from "@mui/material";
+import {
+  getMapResultsThunk,
+  getPlaceCategoriesThunk,
+  getPlaceTypesThunk,
+  getSearchResultsThunk,
+} from "@/store/search-slice/thunks";
 
 const usePlacesSearch = () => {
   const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const initialFilters = useAppSelector(selectSearchFilters);
   const isDataFetched = useAppSelector(selectIsDataFetched);
+  const isFirstFetchRef = useRef(true);
   const currentItemsLength = useAppSelector(selectCurrentItemsLength);
   const scrollPosition = useAppSelector(selectScrollPosition);
 
@@ -66,7 +72,11 @@ const usePlacesSearch = () => {
             searchService.SEARCH_PLACES_PER_PAGE
           );
       const payload: ISearchPlacesRequest & { language: string } = {
-        searchCoordinates: data.search,
+        searchStartCoordinates: data.locationStartCoordinates,
+        searchEndCoordinates:
+          data.mode === SearchModesEnum.ROUTE
+            ? data.locationEndCoordinates
+            : null,
         radius: data.radius,
         categoriesIds: data.categories,
         typesIds: data.types,
@@ -86,9 +96,15 @@ const usePlacesSearch = () => {
   };
 
   useEffect(() => {
-    if (isDataFetched) return;
+    if (isDataFetched && isFirstFetchRef.current) return;
+    isFirstFetchRef.current = false;
     onSubmit();
   }, [i18n.language, isDataFetched]);
+
+  useEffect(() => {
+    dispatch(getPlaceTypesThunk({ language: i18n.language }));
+    dispatch(getPlaceCategoriesThunk({ language: i18n.language }));
+  }, [i18n.language]);
 
   return {
     formContext,
@@ -104,9 +120,11 @@ export const defaultSearchFilters: ISearchForm = {
   searchByMe: false,
   types: [],
   categories: [],
-  search: null,
-  locationTitle: "",
-  locationInputValue: "",
+  locationStart: null,
+  locationStartCoordinates: null,
+  locationEnd: null,
+  locationEndCoordinates: null,
   showMap: false,
+  mode: SearchModesEnum.ONE_LOCATION,
   orderBy: SearchOrderByStringEnum.CREATED_AT,
 };

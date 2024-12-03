@@ -23,10 +23,23 @@
     "enterTitle": "Enter the title",
     "types": "Types of places",
     "categories": "Categories",
+    "locationStartLabel": "Select departure location",
+    "locationEndLabel": "Select your arrival location",
+    "locationSearch": {
+      "title": "Location",
+      "description": "Specify the location within the radius of which the search will be carried out.",
+      "radiusLabel": "Search radius"
+    },
+    "routeSearch": {
+      "title": "Route",
+      "description": "Enter the starting and finishing locations of your trip to find out what interesting places you will meet along the way.",
+      "radiusLabel": "Search indentation"
+    },
     "orderBy": {
       "title": "Sorting",
-      "1": "By creation date",
-      "2": "By rating"
+      "1": "by creation date",
+      "2": "by rating",
+      "3": "by title"
     }
   }
 }

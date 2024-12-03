@@ -9,20 +9,14 @@ interface IButtonProps {
 export const Button = forwardRef<
   HTMLButtonElement,
   PropsWithChildren<ButtonProps & IButtonProps>
->((props, ref) => {
+>(({ linkTo, ...props }, ref) => {
   return (
     <Btn
       ref={ref}
-      startIcon={props.startIcon}
+      {...props}
       variant={props.variant ?? "outlined"}
-      color={props.color}
-      fullWidth={props.fullWidth}
-      component={props.linkTo !== undefined ? NextLink : "button"}
-      href={props.linkTo}
-      type={props.type}
-      size={props.size}
-      onClick={props.onClick}
-      disabled={props.disabled}
+      component={linkTo !== undefined ? NextLink : "button"}
+      href={linkTo}
       sx={{
         fontWeight: 500,
         fontSize: {

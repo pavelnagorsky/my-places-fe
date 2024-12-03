@@ -13,6 +13,10 @@ const useSearchOrderByOptions = () => {
       id: SearchOrderByStringEnum.RATING,
       label: t("filters.orderBy.2"),
     },
+    {
+      id: SearchOrderByStringEnum.TITLE,
+      label: t("filters.orderBy.3"),
+    },
   ];
 
   return options;

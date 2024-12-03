@@ -1,13 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
+
+const autocompleteService: {
+  current: google.maps.places.AutocompleteService | null;
+} = { current: null };
 
 export function useGoogleAutocompleteService() {
-  // const isApiLoaded = useAppSelector(selectGoogleApiLoaded)
-  const [service, setService] =
-    useState<google.maps.places.AutocompleteService | null>(null);
+  const loaded = useRef(false);
+
+  const googleMapsLoaded =
+    typeof google !== "undefined" &&
+    typeof google.maps !== "undefined" &&
+    typeof google.maps.places !== "undefined";
 
   useEffect(() => {
-    if (!service) setService(new google.maps.places.AutocompleteService());
-  }, []);
+    if (!loaded.current && googleMapsLoaded) {
+      loaded.current = true;
+      autocompleteService.current =
+        new google.maps.places.AutocompleteService();
+    }
+  }, [googleMapsLoaded]);
 
-  return service;
+  return autocompleteService.current;
 }

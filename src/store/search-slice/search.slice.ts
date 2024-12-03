@@ -1,35 +1,17 @@
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { ISearchForm } from "@/containers/search-page/interfaces";
 import { defaultSearchFilters } from "@/containers/search-page/usePlacesSearch";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
-import { ISearchPlacesRequest } from "@/services/search-service/interfaces/interfaces";
-import searchService from "@/services/search-service/search.service";
-
-export const getSearchResultsThunk = createAsyncThunk(
-  "search/get-places",
-  async (payload: ISearchPlacesRequest & { language: string }, thunkAPI) => {
-    const { data } = await searchService.search(payload.language, payload);
-    return data;
-  }
-);
-
-export const getMapResultsThunk = createAsyncThunk(
-  "search/get-places-map",
-  async (payload: ISearchPlacesRequest & { language: string }, thunkAPI) => {
-    const { data } = await searchService.search(payload.language, {
-      ...payload,
-      page: 0,
-      pageSize: 5000,
-    });
-    return data;
-  }
-);
+import { ISelect } from "@/shared/interfaces";
+import {
+  getMapResultsThunk,
+  getPlaceCategoriesThunk,
+  getPlaceTypesThunk,
+  getSearchResultsThunk,
+} from "@/store/search-slice/thunks";
+import { IPlaceType } from "@/services/place-types-service/place-type.interface";
+import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 
 interface ISearchState {
   hasMore: boolean;
@@ -40,9 +22,14 @@ interface ISearchState {
   isDataFetched: boolean;
   mapResults: ISearchPlace[];
   scrollPosition: number;
+  loading: boolean;
+  // filters options
+  placeTypes: IPlaceType[];
+  placeCategories: IPlaceCategory[];
 }
 
 const initialState: ISearchState = {
+  loading: false,
   hasMore: true,
   noItems: false,
   items: [],
@@ -51,6 +38,8 @@ const initialState: ISearchState = {
   isDataFetched: false,
   mapResults: [],
   scrollPosition: 0,
+  placeTypes: [],
+  placeCategories: [],
 };
 
 export const searchSlice = createSlice({
@@ -67,6 +56,7 @@ export const searchSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getSearchResultsThunk.pending, (state, action) => {
       if (action.meta.arg.page === 0) {
+        state.loading = true;
         state.items = [];
       }
       state.hasMore = true;
@@ -74,6 +64,7 @@ export const searchSlice = createSlice({
       state.isDataFetched = true;
     });
     builder.addCase(getSearchResultsThunk.fulfilled, (state, { payload }) => {
+      state.loading = false;
       const fromStart = payload.page === 0;
       const updatedItems = fromStart
         ? payload.items
@@ -84,12 +75,21 @@ export const searchSlice = createSlice({
       state.items = updatedItems;
     });
     builder.addCase(getSearchResultsThunk.rejected, (state, action) => {
+      state.loading = false;
       state.noItems = state.items.length === 0;
       state.hasMore = false;
     });
 
     builder.addCase(getMapResultsThunk.fulfilled, (state, { payload }) => {
       state.mapResults = payload.items;
+    });
+
+    builder.addCase(getPlaceTypesThunk.fulfilled, (state, { payload }) => {
+      state.placeTypes = payload;
+    });
+
+    builder.addCase(getPlaceCategoriesThunk.fulfilled, (state, { payload }) => {
+      state.placeCategories = payload;
     });
   },
 });
@@ -140,6 +140,27 @@ export const selectMapResults = createSelector(
 export const selectScrollPosition = createSelector(
   selectSearchState,
   (s) => s.scrollPosition
+);
+
+export const selectSearchFiltersLoading = createSelector(
+  selectSearchState,
+  (s) => s.loading
+);
+
+export const selectPlaceTypesOptions = createSelector(selectSearchState, (s) =>
+  s.placeTypes.map((type) => ({
+    id: type.id,
+    label: type.title,
+  }))
+);
+
+export const selectPlaceCategoriesOptions = createSelector(
+  selectSearchState,
+  (s) =>
+    s.placeCategories.map((category) => ({
+      id: category.id,
+      label: category.title,
+    }))
 );
 
 export const { setFilters, setScrollPosition } = searchSlice.actions;
