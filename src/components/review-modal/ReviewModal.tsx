@@ -115,7 +115,7 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
       onClose={onClose}
       open={open}
       fullWidth
-      maxWidth={hasPhotos ? "lg" : "md"}
+      maxWidth={"lg"}
       fullScreen={isMobile}
       PaperProps={{
         sx: {

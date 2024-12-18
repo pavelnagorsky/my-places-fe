@@ -15,6 +15,7 @@ import { ISearchPlace } from "@/services/search-service/interfaces/search-place.
 import Image from "next/image";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
 import { routerLinks } from "@/routing/routerLinks";
+import Link from "next/link";
 
 interface IPlaceCardProps {
   place: ISearchPlace;
@@ -32,6 +33,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
     >
       <CardActionArea
         target={"_blank"}
+        component={Link}
         href={routerLinks.place(place.slug)}
         sx={{ height: "100%" }}
       >

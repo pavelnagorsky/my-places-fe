@@ -1,13 +1,14 @@
 import Map from "../../components/map/Map";
 import {
   Circle,
+  DirectionsRenderer,
   InfoWindow,
   Marker,
   MarkerClusterer,
   Polygon,
-  Rectangle,
 } from "@react-google-maps/api";
-import { useMemo, useState } from "react";
+import { lineString, buffer } from "turf";
+import { useEffect, useMemo, useState } from "react";
 import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import PlaceCard from "@/components/place-card/PlaceCard";
 import { primaryBackground } from "@/styles/theme/lightTheme";
@@ -41,7 +42,7 @@ import FiltersContainerMobile from "@/containers/search-page/filters/filters-con
 import { SearchModesEnum } from "@/containers/search-page/interfaces";
 
 function SearchPage() {
-  const { t } = useTranslation("search");
+  const { t, i18n } = useTranslation("search");
   // responsive design tools
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
@@ -107,11 +108,56 @@ function SearchPage() {
     );
 
     return routeBounds;
-
-    // return new google.maps.Rectangle({
-    //   bounds: routeBounds,
-    // });
   }, [filters]);
+
+  useEffect(() => {
+    setSelectedPlace(null);
+    setTimeout(() => {
+      onSearchDir();
+    }, 1000);
+  }, [i18n.language]);
+
+  const [directions, setDirections] = useState<any>(null);
+  const onSearchDir = () => {
+    if (!window.google?.maps?.DirectionsService) return;
+    const directionsService = new window.google.maps.DirectionsService();
+    directionsService.route(
+      {
+        origin: start,
+        destination: end,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK && !!result) {
+          console.log("result", result);
+          const route = result.routes[0].overview_path;
+          const polygonCoords = route.map((point) => [
+            point.lng(),
+            point.lat(),
+          ]);
+
+          // setDirections(polygonCoords);
+          setDirections(addPolygonOffset(polygonCoords));
+        } else {
+          console.error(`Error fetching directions ${result}`);
+        }
+      }
+    );
+  };
+
+  const addPolygonOffset = (polygon: any) => {
+    const line = lineString(polygon);
+    console.log("line", line);
+    const buffered = buffer(line as any, 100, "kilometers");
+    const offsetPolygonPath = buffered.geometry.coordinates[0].map((coord) => ({
+      lat: coord[1],
+      lng: coord[0],
+    }));
+    return offsetPolygonPath;
+  };
+
+  const start = { lat: 52.4345, lng: 30.9754 }; // Гомель
+  const end = { lat: 55.187222, lng: 30.205116 }; // Витебск
 
   return (
     <motion.div
@@ -154,6 +200,7 @@ function SearchPage() {
               <Box
                 display={!showMap && isMobile ? "none" : "block"}
                 sx={{
+                  "& .gm-style-iw-d": { overflow: "auto !important" },
                   "& .gm-style-iw-c": { padding: 0, borderRadius: "15px" },
                   "& .gm-style-iw-chr": {
                     height: 0,
@@ -189,6 +236,15 @@ function SearchPage() {
                   {mapPolygon ? (
                     <Polygon
                       paths={mapPolygon}
+                      options={{
+                        strokeColor: theme.palette.primary.main,
+                        fillOpacity: 0.15,
+                      }}
+                    />
+                  ) : null}
+                  {directions ? (
+                    <Polygon
+                      paths={directions}
                       options={{
                         strokeColor: theme.palette.primary.main,
                         fillOpacity: 0.15,
@@ -248,7 +304,11 @@ function SearchPage() {
           </Stack>
           <Stack alignItems={"center"} justifyContent={"center"} mb={"2em"}>
             <InfiniteScroll
-              style={{ padding: "0 1em", margin: "0 -1em" }}
+              style={{
+                padding: "0 1em",
+                paddingBottom: "2em",
+                margin: "0 -1em",
+              }}
               dataLength={places.length}
               next={() => onSubmit(false)}
               hasMore={hasMore}

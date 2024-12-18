@@ -5,11 +5,16 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { routerLinks } from "@/routing/routerLinks";
 import Grid from "@mui/material/Grid2";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
+  const { t } = useTranslation("search");
+
   const actionButton = (
     <Button
       href={routerLinks.place(place.slug)}
+      component={Link}
       target="_blank"
       variant={"contained"}
       fullWidth
@@ -17,7 +22,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
       size={"small"}
       endIcon={<ArrowRightAltIcon sx={{ color: "white" }} />}
     >
-      Узнать больше
+      {t("moreInfo")}
     </Button>
   );
 
@@ -43,7 +48,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
               mb: "-1em",
               objectFit: "cover",
               height: "100%",
-              maxHeight: "200px",
+              //maxHeight: "200px",
               width: "100%",
             },
           }}
