@@ -7,7 +7,7 @@ import {
 import {
   ISearchForm,
   SearchModesEnum,
-} from "@/containers/search-page/interfaces";
+} from "@/containers/search-page/logic/interfaces";
 import {
   Box,
   InputAdornment,

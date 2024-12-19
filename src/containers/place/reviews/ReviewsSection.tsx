@@ -143,7 +143,7 @@ const ReviewsSection = ({
           <AnimatePresence mode="popLayout">
             {data.reviews.map((r, i) => {
               // each card will be delayed based on it's index
-              // but, we need to subtract the delay from all the previously loaded cards
+              // but, we need to subtract the delay from all the previously loaded cards-section
               const recalculatedDelay =
                 i >= reviews.totalItems * 2
                   ? (i - reviews.totalItems * (data.reviews.length - 1)) / 15

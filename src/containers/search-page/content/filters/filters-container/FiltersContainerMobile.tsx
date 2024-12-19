@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import { SwitchElement } from "react-hook-form-mui";
 import { Stack } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import FiltersPopup from "@/containers/search-page/filters/filters-container/mobile/filters-popup";
+import FiltersPopup from "@/containers/search-page/content/filters/filters-container/mobile/filters-popup";
 
 const FiltersContainerMobile = ({
   triggerSubmit,

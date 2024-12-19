@@ -2,7 +2,7 @@ import { CheckboxElement, useFormContext } from "react-hook-form-mui";
 import { CircularProgress, Stack } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useRef, useState } from "react";
-import { ISearchForm } from "@/containers/search-page/interfaces";
+import { ISearchForm } from "@/containers/search-page/logic/interfaces";
 
 const SearchByMe = () => {
   const { t } = useTranslation("search");

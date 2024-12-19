@@ -1,4 +1,4 @@
-import { IPlaceType } from "@/containers/search-page/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
+import { IPlaceType } from "@/containers/search-page/content/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
 
 export interface ISearchForm {
   categories: number[];

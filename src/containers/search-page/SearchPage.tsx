@@ -1,163 +1,23 @@
-import Map from "../../components/map/Map";
-import {
-  Circle,
-  DirectionsRenderer,
-  InfoWindow,
-  Marker,
-  MarkerClusterer,
-  Polygon,
-} from "@react-google-maps/api";
-import { lineString, buffer } from "turf";
-import { useEffect, useMemo, useState } from "react";
-import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
-import PlaceCard from "@/components/place-card/PlaceCard";
+import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { FormProvider } from "react-hook-form-mui";
-import utils from "@/shared/utils";
 import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
-import { useTranslation } from "next-i18next";
-import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
-import PlaceCardMap from "@/components/place-card/PlaceCardMap";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
-import usePlacesSearch from "@/containers/search-page/usePlacesSearch";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useAppSelector } from "@/store/hooks";
-import {
-  selectHasMore,
-  selectItems,
-  selectMapResults,
-  selectNoItems,
-  selectSearchFilters,
-  selectTotalItems,
-} from "@/store/search-slice/search.slice";
-import SearchResultsLoader, {
-  searchResultsGridSx,
-} from "@/containers/search-page/SearchResultsLoader";
+import usePlacesSearch from "@/containers/search-page/logic/usePlacesSearch";
 import Grid from "@mui/material/Grid2";
-import FiltersContainer from "@/containers/search-page/filters/filters-container/FiltersContainer";
-import OrderBySelector from "@/containers/search-page/filters/order-by-selector/OrderBySelector";
-import FiltersContainerMobile from "@/containers/search-page/filters/filters-container/FiltersContainerMobile";
-import { SearchModesEnum } from "@/containers/search-page/interfaces";
+import FiltersContainer from "@/containers/search-page/content/filters/filters-container/FiltersContainer";
+import OrderBySelector from "@/containers/search-page/content/filters/order-by-selector/OrderBySelector";
+import FiltersContainerMobile from "@/containers/search-page/content/filters/filters-container/FiltersContainerMobile";
+import MapSection from "@/containers/search-page/content/map-section/MapSection";
+import CardsSection from "@/containers/search-page/content/cards-section/CardsSection";
+import TotalResultsCount from "@/containers/search-page/content/cards-section/TotalResultsCount";
 
 function SearchPage() {
-  const { t, i18n } = useTranslation("search");
-  // responsive design tools
+  const { formContext, onSubmit } = usePlacesSearch();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
-  const isMobileMd = useMediaQuery(theme.breakpoints.down("md"));
-  // info about search request
-  const hasMore = useAppSelector(selectHasMore);
-  const noItems = useAppSelector(selectNoItems);
-  const places = useAppSelector(selectItems);
-  const totalItems = useAppSelector(selectTotalItems);
-  const mapResults = useAppSelector(selectMapResults);
-  const { formContext, onSubmit } = usePlacesSearch();
-  // selected place on map
-  const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
-
-  const handleClickMarker = (placeId: number) => {
-    const place = mapResults.find((p) => p.id === placeId);
-    if (!place) return;
-    // close and open again to prevent Google Maps bug of not displaying info window
-    setSelectedPlace(null);
-    setTimeout(() => setSelectedPlace(place), 100);
-  };
-
-  const filters = useAppSelector(selectSearchFilters);
-  const showMap = formContext.watch("showMap");
-
-  const placesOnMap = useMemo(() => {
-    return mapResults.map((p) => ({
-      ...p.coordinates,
-      id: p.id,
-      title: p.title,
-      typeIcon: (p.type.image2 || p.type.image) as string,
-    }));
-  }, [mapResults]);
-
-  // Show map circle if search by location
-  const mapCircle = useMemo(() => {
-    if (
-      !filters?.locationStartCoordinates ||
-      filters.mode !== SearchModesEnum.ONE_LOCATION
-    )
-      return;
-    const latLng = utils.stringToLatLng(filters.locationStartCoordinates);
-    return new google.maps.Circle({
-      center: latLng,
-      radius: utils.kmToMeters(filters.radius),
-    });
-  }, [filters]);
-
-  // Show map rectangle if search by route
-  const mapPolygon = useMemo(() => {
-    if (
-      !filters?.locationStartCoordinates ||
-      !filters.locationEndCoordinates ||
-      filters.mode !== SearchModesEnum.ROUTE
-    )
-      return;
-    const startLatLng = utils.stringToLatLng(filters.locationStartCoordinates);
-    const endLatLng = utils.stringToLatLng(filters.locationEndCoordinates);
-    const routeBounds = utils.getRouteBounds(
-      startLatLng,
-      endLatLng,
-      filters.radius
-    );
-
-    return routeBounds;
-  }, [filters]);
-
-  useEffect(() => {
-    setSelectedPlace(null);
-    setTimeout(() => {
-      onSearchDir();
-    }, 1000);
-  }, [i18n.language]);
-
-  const [directions, setDirections] = useState<any>(null);
-  const onSearchDir = () => {
-    if (!window.google?.maps?.DirectionsService) return;
-    const directionsService = new window.google.maps.DirectionsService();
-    directionsService.route(
-      {
-        origin: start,
-        destination: end,
-        travelMode: window.google.maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (status === window.google.maps.DirectionsStatus.OK && !!result) {
-          console.log("result", result);
-          const route = result.routes[0].overview_path;
-          const polygonCoords = route.map((point) => [
-            point.lng(),
-            point.lat(),
-          ]);
-
-          // setDirections(polygonCoords);
-          setDirections(addPolygonOffset(polygonCoords));
-        } else {
-          console.error(`Error fetching directions ${result}`);
-        }
-      }
-    );
-  };
-
-  const addPolygonOffset = (polygon: any) => {
-    const line = lineString(polygon);
-    console.log("line", line);
-    const buffered = buffer(line as any, 100, "kilometers");
-    const offsetPolygonPath = buffered.geometry.coordinates[0].map((coord) => ({
-      lat: coord[1],
-      lng: coord[0],
-    }));
-    return offsetPolygonPath;
-  };
-
-  const start = { lat: 52.4345, lng: 30.9754 }; // Гомель
-  const end = { lat: 55.187222, lng: 30.205116 }; // Витебск
 
   return (
     <motion.div
@@ -184,106 +44,18 @@ function SearchPage() {
         wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
       >
         <motion.div variants={animationVariants.defaultItemVariant}>
-          <Grid
-            container
-            spacing={3}
-            mt={{ xs: showMap ? "2em" : 0, lg: "2em" }}
-          >
-            {!isMobile && (
-              <Grid size={{ xs: 0, lg: 5, xl: 4.5 }}>
-                <FormProvider {...formContext}>
+          <FormProvider {...formContext}>
+            <Grid container spacing={3} mt={{ xs: 0, lg: "2em" }}>
+              {!isMobile && (
+                <Grid size={{ xs: 0, lg: 5, xl: 4.5 }}>
                   <FiltersContainer triggerSubmit={onSubmit} />
-                </FormProvider>
+                </Grid>
+              )}
+              <Grid size={{ xs: 12, lg: 7, xl: 7.5 }}>
+                <MapSection />
               </Grid>
-            )}
-            <Grid size={{ xs: 12, lg: 7, xl: 7.5 }}>
-              <Box
-                display={!showMap && isMobile ? "none" : "block"}
-                sx={{
-                  "& .gm-style-iw-d": { overflow: "auto !important" },
-                  "& .gm-style-iw-c": { padding: 0, borderRadius: "15px" },
-                  "& .gm-style-iw-chr": {
-                    height: 0,
-                    "& button": {
-                      "& span": {
-                        m: "10px 10px 0 0 !important",
-                      },
-                      bgcolor: "white !important",
-                      width: "auto !important",
-                      height: "24px !important",
-                    },
-                  },
-                }}
-              >
-                <Map
-                  containerStyle={{
-                    height: isMobileMd ? "400px" : "600px",
-                    transition: "height 0.5s ease-in",
-                    borderRadius: "15px",
-                  }}
-                  fitCoordinates={placesOnMap}
-                >
-                  {mapCircle ? (
-                    <Circle
-                      radius={mapCircle.getRadius()}
-                      center={mapCircle.getCenter() ?? undefined}
-                      options={{
-                        strokeColor: theme.palette.primary.main,
-                        fillOpacity: 0.15,
-                      }}
-                    />
-                  ) : null}
-                  {mapPolygon ? (
-                    <Polygon
-                      paths={mapPolygon}
-                      options={{
-                        strokeColor: theme.palette.primary.main,
-                        fillOpacity: 0.15,
-                      }}
-                    />
-                  ) : null}
-                  {directions ? (
-                    <Polygon
-                      paths={directions}
-                      options={{
-                        strokeColor: theme.palette.primary.main,
-                        fillOpacity: 0.15,
-                      }}
-                    />
-                  ) : null}
-                  {selectedPlace && (
-                    <InfoWindow
-                      position={selectedPlace.coordinates}
-                      options={{
-                        ariaLabel: "selected place",
-                        pixelOffset: new window.google.maps.Size(0, -30),
-                      }}
-                      onCloseClick={() => setSelectedPlace(null)}
-                    >
-                      <PlaceCardMap place={selectedPlace} />
-                    </InfoWindow>
-                  )}
-                  <MarkerClusterer maxZoom={14}>
-                    {(clusterer) =>
-                      placesOnMap.map((res, i) => (
-                        <Marker
-                          key={i}
-                          clusterer={clusterer}
-                          position={res}
-                          title={res.title}
-                          icon={{
-                            url: res.typeIcon,
-                            scaledSize: { width: 30, height: 30 } as any,
-                          }}
-                          onClick={() => handleClickMarker(res.id)}
-                        />
-                      ))
-                    }
-                  </MarkerClusterer>
-                </Map>
-              </Box>
             </Grid>
-          </Grid>
+          </FormProvider>
         </motion.div>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <Stack
@@ -293,34 +65,12 @@ function SearchPage() {
             gap={"1em"}
             my={{ xs: "1.5em", md: "2em" }}
           >
-            <Typography fontSize={"20px"} fontWeight={700} component={"h1"}>
-              {noItems
-                ? t("noResults")
-                : `${t("placesFound")}: ${totalItems || ""}`}
-            </Typography>
+            <TotalResultsCount />
             <FormProvider {...formContext}>
               <OrderBySelector triggerSubmit={onSubmit} />
             </FormProvider>
           </Stack>
-          <Stack alignItems={"center"} justifyContent={"center"} mb={"2em"}>
-            <InfiniteScroll
-              style={{
-                padding: "0 1em",
-                paddingBottom: "2em",
-                margin: "0 -1em",
-              }}
-              dataLength={places.length}
-              next={() => onSubmit(false)}
-              hasMore={hasMore}
-              loader={<SearchResultsLoader />}
-            >
-              <Stack sx={searchResultsGridSx}>
-                {places.map((place) => (
-                  <PlaceCard place={place} key={place.id} />
-                ))}
-              </Stack>
-            </InfiniteScroll>
-          </Stack>
+          <CardsSection onSubmit={onSubmit} />
         </motion.div>
       </WrappedContainer>
     </motion.div>

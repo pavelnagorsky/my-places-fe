@@ -1,4 +1,4 @@
-import useSearchOrderByOptions from "@/containers/search-page/filters/order-by-selector/useSearchOrderByOptions";
+import useSearchOrderByOptions from "@/containers/search-page/content/filters/order-by-selector/useSearchOrderByOptions";
 import { useTranslation } from "next-i18next";
 import { Box, InputAdornment } from "@mui/material";
 import { SelectElement } from "react-hook-form-mui";

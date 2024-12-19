@@ -1,15 +1,14 @@
 import { CircularProgress, Stack, styled } from "@mui/material";
-import RadiusFilter from "@/containers/search-page/filters/content/RadiusFilter";
-import TypesAndCategoriesFilter from "@/containers/search-page/filters/content/TypesAndCategoriesFilter";
-import LocationSearch from "@/containers/search-page/filters/content/location-search/LocationSearch";
+import RadiusFilter from "@/containers/search-page/content/filters/content/RadiusFilter";
+import TypesAndCategoriesFilter from "@/containers/search-page/content/filters/content/TypesAndCategoriesFilter";
+import LocationSearch from "@/containers/search-page/content/filters/content/location-search/LocationSearch";
 import { Button } from "@/components/UI/button/Button";
 import { primaryColor } from "@/styles/theme/lightTheme";
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
-import { ISearchForm } from "@/containers/search-page/interfaces";
+import { ISearchForm } from "@/containers/search-page/logic/interfaces";
 import { useAppSelector } from "@/store/hooks";
 import { selectSearchFiltersLoading } from "@/store/search-slice/search.slice";
-import TitleFilter from "@/containers/search-page/filters/content/TitleFilter";
 
 const FiltersContainer = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
   const { t } = useTranslation("common");

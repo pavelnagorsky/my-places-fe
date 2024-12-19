@@ -1,12 +1,12 @@
 import { Stack, Typography } from "@mui/material";
-import LocationModeToggle from "@/containers/search-page/filters/content/location-search/content/LocationModeToggle";
-import LocationAutocomplete from "@/containers/search-page/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
+import LocationModeToggle from "@/containers/search-page/content/filters/content/location-search/content/LocationModeToggle";
+import LocationAutocomplete from "@/containers/search-page/content/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
 import { useFormContext } from "react-hook-form-mui";
 import {
   ISearchForm,
   SearchModesEnum,
-} from "@/containers/search-page/interfaces";
-import SearchByMe from "@/containers/search-page/filters/content/location-search/content/SearchByMe";
+} from "@/containers/search-page/logic/interfaces";
+import SearchByMe from "@/containers/search-page/content/filters/content/location-search/content/SearchByMe";
 import { useTranslation } from "next-i18next";
 
 const LocationSearch = () => {

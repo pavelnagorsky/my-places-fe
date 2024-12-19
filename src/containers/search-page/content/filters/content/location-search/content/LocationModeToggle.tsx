@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form-mui";
 import {
   ISearchForm,
   SearchModesEnum,
-} from "@/containers/search-page/interfaces";
+} from "@/containers/search-page/logic/interfaces";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import { useTranslation } from "next-i18next";
 

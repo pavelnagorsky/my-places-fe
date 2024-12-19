@@ -9,14 +9,14 @@ import {
 } from "@mui/material";
 import { CheckboxButtonGroup, useFormContext } from "react-hook-form-mui";
 import { useTranslation } from "next-i18next";
-import { ISearchForm } from "@/containers/search-page/interfaces";
+import { ISearchForm } from "@/containers/search-page/logic/interfaces";
 import { useAppSelector } from "@/store/hooks";
 import {
   selectPlaceCategoriesOptions,
   selectPlaceTypesOptions,
 } from "@/store/search-slice/search.slice";
-import filtersIcon from "public/images/icons/filters.svg";
-import TitleFilter from "@/containers/search-page/filters/content/TitleFilter";
+import filtersIcon from "../../../../../../public/images/icons/filters.svg";
+import TitleFilter from "@/containers/search-page/content/filters/content/TitleFilter";
 
 const checkboxesLabelSx: SxProps = {
   width: "49%",

@@ -3,7 +3,7 @@ import parse from "autosuggest-highlight/parse";
 import Grid from "@mui/material/Grid2";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Box, Typography } from "@mui/material";
-import { IPlaceType } from "@/containers/search-page/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
+import { IPlaceType } from "@/containers/search-page/content/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
 
 const LocationOption = (
   props: HTMLAttributes<HTMLLIElement> & { key: any },

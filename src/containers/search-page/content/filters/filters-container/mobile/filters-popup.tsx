@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
-import { ISearchForm } from "@/containers/search-page/interfaces";
+import { ISearchForm } from "@/containers/search-page/logic/interfaces";
 import useDialog from "@/hooks/useDialog";
 import {
   Box,
@@ -13,12 +13,12 @@ import {
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import LocationSearch from "@/containers/search-page/filters/content/location-search/LocationSearch";
-import RadiusFilter from "@/containers/search-page/filters/content/RadiusFilter";
-import TypesAndCategoriesFilter from "@/containers/search-page/filters/content/TypesAndCategoriesFilter";
+import LocationSearch from "@/containers/search-page/content/filters/content/location-search/LocationSearch";
+import RadiusFilter from "@/containers/search-page/content/filters/content/RadiusFilter";
+import TypesAndCategoriesFilter from "@/containers/search-page/content/filters/content/TypesAndCategoriesFilter";
 import { Button } from "@/components/UI/button/Button";
 import { primaryColor } from "@/styles/theme/lightTheme";
-import TitleFilter from "@/containers/search-page/filters/content/TitleFilter";
+import TitleFilter from "@/containers/search-page/content/filters/content/TitleFilter";
 
 const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
   const { t } = useTranslation(["search", "common"]);
