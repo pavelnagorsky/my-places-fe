@@ -1,10 +1,10 @@
 import { useAppSelector } from "@/store/hooks";
 import {
+  selectIsMapOpen,
   selectMapResults,
-  selectSearchFilters,
 } from "@/store/search-slice/search.slice";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import Map from "@/components/map/Map";
 import {
@@ -18,20 +18,19 @@ import PlaceCardMap from "@/components/place-card/PlaceCardMap";
 import useRoutePolygon from "@/containers/search-page/content/map-section/hooks/useRoutePolygon";
 import { useTranslation } from "next-i18next";
 import useMapCircle from "@/containers/search-page/content/map-section/hooks/useMapCircle";
-import { useFormContext } from "react-hook-form-mui";
-import { ISearchForm } from "@/containers/search-page/logic/interfaces";
 
 const MapSection = () => {
-  console.log("render map");
   const { i18n } = useTranslation();
-  const { watch } = useFormContext<ISearchForm>();
-  const showMap = watch("showMap");
+  const showMap = useAppSelector(selectIsMapOpen);
   // responsive design tools
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const isMobileMd = useMediaQuery(theme.breakpoints.down("md"));
   // all places
   const mapResults = useAppSelector(selectMapResults);
+  const fitMapCoordinates = useMemo(() => {
+    return mapResults.map((place) => place.coordinates);
+  }, [mapResults]);
   // selected place on map
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
 
@@ -79,7 +78,7 @@ const MapSection = () => {
           transition: "height 0.5s ease-in",
           borderRadius: "15px",
         }}
-        fitCoordinates={mapResults.map((place) => place.coordinates)}
+        fitCoordinates={fitMapCoordinates}
       >
         {mapCircle ? (
           <Circle
@@ -124,7 +123,9 @@ const MapSection = () => {
                   url: place.type.image2 || (place.type.image as string),
                   scaledSize: { width: 30, height: 30 } as any,
                 }}
-                onClick={() => handleClickMarker(place.id)}
+                onClick={(e) => {
+                  handleClickMarker(place.id);
+                }}
               />
             ))
           }

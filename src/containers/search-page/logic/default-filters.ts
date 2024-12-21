@@ -14,7 +14,6 @@ export const defaultSearchFilters: ISearchForm = {
   locationStartCoordinates: null,
   locationEnd: null,
   locationEndCoordinates: null,
-  showMap: false,
   mode: SearchModesEnum.ONE_LOCATION,
   orderBy: SearchOrderByStringEnum.CREATED_AT,
 };

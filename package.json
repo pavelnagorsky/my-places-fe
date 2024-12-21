@@ -23,7 +23,7 @@
     "@mui/x-date-pickers": "^7.9.0",
     "@react-google-maps/api": "^2.19.3",
     "@reduxjs/toolkit": "^1.9.5",
-    "@types/turf": "^3.5.32",
+    "@turf/turf": "^7.1.0",
     "autosuggest-highlight": "^3.3.4",
     "axios": "1.7.7",
     "browser-image-compression": "^2.0.2",
@@ -47,7 +47,6 @@
     "react-redux": "^8.1.1",
     "react-responsive-carousel": "^3.2.23",
     "sharp": "^0.33.5",
-    "turf": "^3.0.14",
     "typescript": "^4.8.4"
   },
   "eslintConfig": {

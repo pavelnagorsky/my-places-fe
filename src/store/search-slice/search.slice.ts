@@ -23,6 +23,7 @@ interface ISearchState {
   mapResults: ISearchPlace[];
   scrollPosition: number;
   loading: boolean;
+  isMapOpen: boolean;
   // filters options
   placeTypes: IPlaceType[];
   placeCategories: IPlaceCategory[];
@@ -32,6 +33,7 @@ const initialState: ISearchState = {
   loading: false,
   hasMore: true,
   noItems: false,
+  isMapOpen: false,
   items: [],
   totalItems: 0,
   filters: defaultSearchFilters,
@@ -46,6 +48,9 @@ export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
+    setMapOpen: (state, { payload }: PayloadAction<boolean>) => {
+      state.isMapOpen = payload;
+    },
     setFilters: (state, { payload }: PayloadAction<ISearchForm>) => {
       state.filters = payload;
     },
@@ -78,6 +83,10 @@ export const searchSlice = createSlice({
       state.loading = false;
       state.noItems = state.items.length === 0;
       state.hasMore = false;
+    });
+
+    builder.addCase(getMapResultsThunk.pending, (state, action) => {
+      state.mapResults = [];
     });
 
     builder.addCase(getMapResultsThunk.fulfilled, (state, { payload }) => {
@@ -163,6 +172,12 @@ export const selectPlaceCategoriesOptions = createSelector(
     }))
 );
 
-export const { setFilters, setScrollPosition } = searchSlice.actions;
+export const selectIsMapOpen = createSelector(
+  selectSearchState,
+  (s) => s.isMapOpen
+);
+
+export const { setFilters, setScrollPosition, setMapOpen } =
+  searchSlice.actions;
 
 export default searchSlice.reducer;

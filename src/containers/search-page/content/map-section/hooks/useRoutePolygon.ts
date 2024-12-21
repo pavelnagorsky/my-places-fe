@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { buffer, lineString } from "turf";
 import { SearchModesEnum } from "@/containers/search-page/logic/interfaces";
 import { ILatLngCoordinate } from "@/components/map/Map";
 import { useAppSelector } from "@/store/hooks";
 import { selectSearchFilters } from "@/store/search-slice/search.slice";
 import utils from "@/shared/utils";
+import { buffer, lineString } from "@turf/turf";
 
 const useRoutePolygon = () => {
   const filters = useAppSelector(selectSearchFilters);
@@ -15,12 +15,30 @@ const useRoutePolygon = () => {
     offsetKm: number
   ): ILatLngCoordinate[] => {
     const line = lineString(polygonCoordinates);
-    const buffered = buffer(line as any, offsetKm, "kilometers");
-    const offsetPolygonPath = buffered.geometry.coordinates[0].map((coord) => ({
-      lat: coord[1],
-      lng: coord[0],
-    }));
-    return offsetPolygonPath;
+    const buffered = buffer(line as any, offsetKm, { units: "kilometers" });
+    const bufferedPolygonCoordinates = buffered?.geometry?.coordinates ?? [];
+    const flattenedCoordinates: ILatLngCoordinate[] = [];
+    bufferedPolygonCoordinates.forEach((coordinatesChunk) => {
+      coordinatesChunk.forEach((coordinatesSet) => {
+        if (Array.isArray(coordinatesSet[0])) {
+          // Needs additional iteration
+          coordinatesSet.forEach((coordinates) => {
+            if (!Array.isArray(coordinates)) return;
+            flattenedCoordinates.push({
+              lat: coordinates[1],
+              lng: coordinates[0],
+            });
+          });
+        } else {
+          if (!Array.isArray(coordinatesSet)) return;
+          flattenedCoordinates.push({
+            lat: coordinatesSet[1] as number,
+            lng: coordinatesSet[0] as number,
+          });
+        }
+      });
+    });
+    return flattenedCoordinates;
   };
 
   const handleRoutePolygon = (

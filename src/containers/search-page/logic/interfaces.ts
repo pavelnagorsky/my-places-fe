@@ -10,7 +10,6 @@ export interface ISearchForm {
   locationStartCoordinates: string | null;
   locationEnd: IPlaceType | null;
   locationEndCoordinates: string | null;
-  showMap: boolean;
   mode: SearchModesEnum;
   orderBy: SearchOrderByStringEnum;
 }
