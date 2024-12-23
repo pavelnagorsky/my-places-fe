@@ -16,6 +16,9 @@ import Image from "next/image";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
 import { routerLinks } from "@/routing/routerLinks";
 import Link from "next/link";
+import likeImage from "/public/images/icons/heart.png";
+import locationImage from "/public/images/icons/location.png";
+import eyeImage from "/public/images/icons/eye.png";
 
 interface IPlaceCardProps {
   place: ISearchPlace;
@@ -90,11 +93,13 @@ function PlaceCard({ place }: IPlaceCardProps) {
               gap={"0.5em"}
               mb="0.8em"
             >
-              <PlaceOutlinedIcon
-                sx={{ ml: "-0.1em", color: secondaryLightColor }}
+              <Image
+                src={locationImage}
+                alt={"Location"}
+                height={24}
+                width={24}
               />
               <Typography
-                fontWeight={300}
                 overflow={"hidden"}
                 textOverflow={"ellipsis"}
                 whiteSpace={"nowrap"}
@@ -105,7 +110,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
               </Typography>
             </Stack>
             <Typography
-              variant="body2"
+              variant="body1"
               lineHeight={"135%"}
               fontSize={{ xs: "14px", md: "16px" }}
               mt={{ xs: "0.8em", md: 0 }}
@@ -123,8 +128,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
           <Typography
             mb="1.2em"
             mt={{ xs: "1em", md: "1.2em" }}
-            fontWeight={300}
-            variant="body1"
+            variant="body2"
             fontSize={{ xs: "13px", md: "15px" }}
             textAlign={"center"}
             height={{ xs: "18px", md: "19px" }}
@@ -144,7 +148,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
             >
               <Typography
                 fontWeight={400}
-                variant="body2"
+                variant="body1"
                 fontSize={{ xs: "14px", md: "16px" }}
                 textOverflow={"ellipsis"}
                 overflow={"hidden"}
@@ -167,24 +171,24 @@ function PlaceCard({ place }: IPlaceCardProps) {
             <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
               <Typography
                 fontWeight={300}
-                variant="body2"
+                variant="body1"
                 fontSize={{ xs: "13px", md: "15px" }}
                 display={"flex"}
                 alignItems={"center"}
                 gap={"0.5em"}
               >
-                <FavoriteBorderIcon sx={{ color: secondaryLightColor }} />
+                <Image src={likeImage} alt={"Likes"} height={20} width={22} />
                 {place.likesCount}
               </Typography>
               <Typography
                 fontWeight={300}
-                variant="body2"
+                variant="body1"
                 fontSize={{ xs: "13px", md: "15px" }}
                 display={"flex"}
                 alignItems={"center"}
                 gap={"0.5em"}
               >
-                <VisibilityOutlinedIcon sx={{ color: secondaryLightColor }} />
+                <Image src={eyeImage} alt={"Views"} height={20} width={22} />
                 {place.viewsCount}
               </Typography>
             </Stack>
