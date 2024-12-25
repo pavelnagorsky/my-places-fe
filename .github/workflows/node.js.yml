@@ -40,7 +40,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Setup SSH agent
+      run: |
+        eval $(ssh-agent -s)
+        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+
     - name: Deploy to VPS
       run: |
-        rsync -avz -e "ssh -i private_key -o StrictHostKeyChecking=no" --exclude=node_modules --exclude=.next . $VPS_USER@$VPS_HOST:/var/www/www-root/data/www/my-places.by/
-        ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST "cd /var/www/www-root/data/www/my-places.by/ && npm ci && npm run build && pm2 restart all"
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" --exclude=node_modules --exclude=.next . $VPS_USER@$VPS_HOST:/var/www/www-root/data/www/my-places.by/
+        ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST "cd /var/www/www-root/data/www/my-places.by/ && npm ci && npm run build && pm2 restart all"
