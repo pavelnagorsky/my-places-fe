@@ -6,7 +6,7 @@ const instance = axios.create({
   baseURL: Environment.backendBaseUrl,
   withCredentials: true,
 });
-console.log("axios instance", instance.defaults);
+console.log("axios instance", instance.defaults.baseURL);
 
 instance.interceptors.request.use((req) => {
   if (typeof window === "undefined") return req;
