@@ -10,15 +10,15 @@ export const secondaryLightColor = "#727272";
 const createLightTheme = (locale: keyof typeof I18nLanguages) => {
   const lightTheme = createTheme(
     {
-      breakpoints: {
-        values: {
-          xs: 0,
-          sm: 500,
-          md: 900,
-          lg: 1200,
-          xl: 1440,
-        },
-      },
+      // breakpoints: {
+      //   values: {
+      //     xs: 0,
+      //     sm: 500,
+      //     md: 900,
+      //     lg: 1200,
+      //     xl: 1440,
+      //   },
+      // },
       palette: {
         mode: "light",
         primary: {

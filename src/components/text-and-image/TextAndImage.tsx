@@ -1,4 +1,4 @@
-import { Box, SxProps, Typography } from "@mui/material";
+import { SxProps, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 import { Button } from "../UI/button/Button";
@@ -35,7 +35,7 @@ function TextAndImage({
       my={{ xs: "2em", md: "5em" }}
       container
       columnSpacing={{ xs: "0", md: "4em", lg: "7em" }}
-      direction={reverse ? "row-reverse" : undefined}
+      direction={{ md: reverse ? "row-reverse" : undefined }}
       sx={{
         display: "flex",
         alignItems: "center",
@@ -86,14 +86,14 @@ function TextAndImage({
           </Button>
         )}
       </Grid>
-      <Grid size={{ xs: showImageMobile ? 12 : 0, md: 6 }}>
-        <Box
-          // component={Image}
-          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          position={"relative"}
-          sx={{
+      <Grid
+        size={{ xs: showImageMobile ? 12 : 0, md: 6 }}
+        position={"relative"}
+        width={"100%"}
+        sx={{
+          "& img": {
             display: {
-              xs: showImageMobile ? "block" : "none",
+              xs: showImageMobile ? "flex" : "none",
               md: "flex",
             },
             borderRadius: {
@@ -102,25 +102,19 @@ function TextAndImage({
             },
             mb: { xs: showImageMobile ? "1em" : "0em", md: "0em" },
             mt: { xs: showImageMobile ? "3em" : "0em", md: "0em" },
-            width: { xs: "100%", sm: "50%", md: "100%" },
+            width: { xs: "100%", sm: "80%", md: "100%" },
             height: "100%",
-            maxHeight: "320px",
-            minHeight: { xs: "220px", md: "320px" },
-            "& img": {
-              objectFit: "cover",
-            },
-          }}
-          // src={image}
-          // alt={title}
-        >
-          <Image
-            src={image}
-            alt={title || "Belarus immage"}
-            style={{ borderRadius: "inherit" }}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </Box>
+            maxHeight: { xs: "220px", sm: "320px" },
+            minHeight: { xs: "220px", sm: "320px", xl: "350px" },
+          },
+        }}
+      >
+        <Image
+          src={image}
+          alt={title || "Belarus image"}
+          style={{ objectFit: "cover" }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </Grid>
     </Grid>
   );

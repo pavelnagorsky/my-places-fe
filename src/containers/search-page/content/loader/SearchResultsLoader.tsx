@@ -3,15 +3,15 @@ import PlaceCardSkeleton from "@/components/place-card/PlaceCardSkeleton";
 
 export const searchResultsGridSx: SxProps = {
   width: {
-    xs: "330px",
+    xs: "350px",
     // sm: "700px",
-    md: "790px",
+    md: "850px",
     xl: "100%",
   },
   flexWrap: "wrap",
   flexDirection: { xs: "column", sm: "row" },
   rowGap: { xs: "2em", md: "3em" },
-  columnGap: { xs: "1em", sm: "2em", md: "2.5em", xl: "2.3em" },
+  columnGap: { xs: "0em", sm: "2em", md: "3em", xl: "3em" },
 };
 
 const SearchResultsLoader = () => {

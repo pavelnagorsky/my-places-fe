@@ -4,16 +4,11 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  Divider,
   Stack,
   Typography,
 } from "@mui/material";
-import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import Image from "next/image";
-import { secondaryLightColor } from "@/styles/theme/lightTheme";
 import { routerLinks } from "@/routing/routerLinks";
 import Link from "next/link";
 import likeImage from "/public/images/icons/heart.png";
@@ -28,7 +23,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
   return (
     <Card
       sx={{
-        width: { xs: "330px", md: "374px" },
+        width: { xs: "350px", md: "400px", xl: "400px" },
         height: { xs: "510px", md: "565px" },
         borderRadius: "10px",
         boxShadow: "0px 2px 22px 0px #00000012",

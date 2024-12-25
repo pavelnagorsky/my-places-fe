@@ -99,6 +99,8 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
         <Box
           sx={{
             backgroundImage: `url(${backgroundImage.src})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
           mb={"3em"}
         >

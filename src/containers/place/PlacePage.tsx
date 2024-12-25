@@ -75,7 +75,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Typography
                 variant={"h1"}
-                fontSize={{ xs: "30px", md: "35px" }}
+                fontSize={{ xs: "27px", md: "35px" }}
                 component={"h1"}
                 mb={"0.5em"}
               >
