@@ -46,7 +46,12 @@ jobs:
         eval $(ssh-agent -s)
         echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
 
+    - name: Create target directory on VPS
+      run: |
+       ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST "mkdir -p /var/www/www-root/data/www/my-places.by/"
+
     - name: Deploy to VPS
       run: |
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no" --exclude=node_modules --exclude=.next . $VPS_USER@$VPS_HOST:/var/www/www-root/data/www/my-places.by/
+        echo "Starting deployment..."
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" --exclude=node_modules --exclude=.next . $VPS_USER@$VPS_HOST:/var/www/www-root/data/www/my-places.by/ --verbose
         ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST "cd /var/www/www-root/data/www/my-places.by/ && npm ci && npm run build && pm2 restart all"
