@@ -52,6 +52,10 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     "Environment base url is prod-api:",
     Environment.backendBaseUrl === "https://prod-api.my-places.by"
   );
+  console.log(
+    "Environment base url is 3*:",
+    Environment.backendBaseUrl === "***"
+  );
 
   const { data } = await placesService.getPlacesSlugs();
 
