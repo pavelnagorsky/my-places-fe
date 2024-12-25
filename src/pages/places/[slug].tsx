@@ -50,8 +50,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   console.log(
     "Environment Variables:",
     `!!!${Environment.backendBaseUrl}`,
-    process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
-    process.env
+    process.env.NEXT_PUBLIC_BACKEND_BASE_URL
   );
   const { data } = await placesService.getPlacesSlugs();
 
