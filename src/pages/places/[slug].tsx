@@ -12,6 +12,8 @@ import { NextSeo } from "next-seo";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import placePageJsonld from "@/shared/json-ld/place-page-jsonld";
 import JsonLd from "@/shared/json-ld/JsonLd";
+import { Environment } from "@/shared/Environment";
+import * as process from "node:process";
 
 interface IPlacePageProps {
   place: IPlace;
@@ -45,7 +47,11 @@ const Slug: NextPage<IPlacePageProps> = ({ place, reviews }) => {
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
   // Log environment variables
-  console.log("Environment Variables:", process.env);
+  console.log(
+    "Environment Variables:",
+    Environment,
+    process.env.NEXT_PUBLIC_BACKEND_BASE_URL
+  );
   try {
     const { data } = await placesService.getPlacesSlugs();
 
@@ -64,7 +70,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     // on-demand if the path doesn't exist.
     return { paths: localizedPaths, fallback: "blocking" };
   } catch (e) {
-    console.error(e);
+    console.error((e as any)?.errors);
     throw e;
   }
 };
