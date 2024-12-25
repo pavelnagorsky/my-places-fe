@@ -46,21 +46,6 @@ const Slug: NextPage<IPlacePageProps> = ({ place, reviews }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  // Log environment variables
-  console.log(
-    "Environment base url length:",
-    Environment.backendBaseUrl.length
-  );
-  console.log(Environment.backendBaseUrl.toUpperCase());
-  console.log(
-    "Environment base url is prod-api:",
-    Environment.backendBaseUrl === "https://prod-api.my-places.by"
-  );
-  console.log(
-    "Environment base url is 3*:",
-    Environment.backendBaseUrl === "***"
-  );
-
   const { data } = await placesService.getPlacesSlugs();
 
   let localizedPaths: any[] = [];

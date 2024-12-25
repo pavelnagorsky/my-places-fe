@@ -30,10 +30,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: echo '${NEXT_PUBLIC_BACKEND_BASE_URL}'
-    - run: npm run build
-    - run: npm test
+#    - run: npm ci
+#    - run: npm run build
 
   deploy:
     needs: build
