@@ -49,7 +49,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   // Log environment variables
   console.log(
     "Environment Variables:",
-    Environment.backendBaseUrl,
+    `!!!${Environment.backendBaseUrl}`,
     process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
     process.env
   );
