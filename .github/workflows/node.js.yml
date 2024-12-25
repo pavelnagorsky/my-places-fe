@@ -42,7 +42,5 @@ jobs:
       uses: actions/checkout@v4
     - name: Deploy to VPS
       run: |
-        echo "$SSH_PRIVATE_KEY" > private_key
-        chmod 600 private_key
-        rsync -avz -e "ssh -i private_key" --exclude=node_modules --exclude=.next . $VPS_USER@$VPS_HOST:/var/www/www-root/data/www/my-places.by/
-        ssh -i private_key $VPS_USER@$VPS_HOST "cd /var/www/www-root/data/www/my-places.by/ && npm ci && npm run build && npm start"
+        rsync -avz -e "ssh -i private_key -o StrictHostKeyChecking=no" --exclude=node_modules --exclude=.next . $VPS_USER@$VPS_HOST:/var/www/www-root/data/www/my-places.by/
+        ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST "cd /var/www/www-root/data/www/my-places.by/ && npm ci && npm run build && pm2 restart all"
