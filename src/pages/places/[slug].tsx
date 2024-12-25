@@ -44,22 +44,29 @@ const Slug: NextPage<IPlacePageProps> = ({ place, reviews }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const { data } = await placesService.getPlacesSlugs();
+  // Log environment variables
+  console.log("Environment Variables:", process.env);
+  try {
+    const { data } = await placesService.getPlacesSlugs();
 
-  let localizedPaths: any[] = [];
-  ctx.locales?.forEach((locale) => {
-    // Get the paths we want to pre-render based on places slugs
-    const paths = data.map((place) => ({
-      params: { slug: place.slug },
-      locale: locale,
-    }));
-    localizedPaths = [...localizedPaths, ...paths];
-  });
+    let localizedPaths: any[] = [];
+    ctx.locales?.forEach((locale) => {
+      // Get the paths we want to pre-render based on places slugs
+      const paths = data.map((place) => ({
+        params: { slug: place.slug },
+        locale: locale,
+      }));
+      localizedPaths = [...localizedPaths, ...paths];
+    });
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: 'blocking' } will server-render pages
-  // on-demand if the path doesn't exist.
-  return { paths: localizedPaths, fallback: "blocking" };
+    // We'll pre-render only these paths at build time.
+    // { fallback: 'blocking' } will server-render pages
+    // on-demand if the path doesn't exist.
+    return { paths: localizedPaths, fallback: "blocking" };
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 };
 
 export const getStaticProps: GetStaticProps<IPlacePageProps> = async ({
