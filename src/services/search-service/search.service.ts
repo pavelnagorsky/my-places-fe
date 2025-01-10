@@ -14,6 +14,16 @@ const searchService = {
       payload
     );
   },
+
+  searchByIds: (payload: number[], language: string) => {
+    const langId = parseLanguageToId(language);
+    return axiosInstance.get<ISearchPlace[]>(`/search/ids`, {
+      params: {
+        ids: payload,
+        lang: langId,
+      },
+    });
+  },
 };
 
 export default searchService;

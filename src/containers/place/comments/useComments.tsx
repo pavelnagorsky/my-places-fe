@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { IComment } from "@/services/comments-service/comment.interface";
 import commentsService from "@/services/comments-service/comments.service";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/roles.enum";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
@@ -50,7 +50,7 @@ const useComments = (placeId: number) => {
       .then(() => {})
       .catch(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error", { ns: "common" }),
               description: `${t("comments.feedback.deleteError")} ${t(
@@ -121,7 +121,7 @@ const useComments = (placeId: number) => {
         .catch(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: t("feedback.error", { ns: "common" }),
                 description: `${t("comments.feedback.updateError")} ${t(
@@ -154,7 +154,7 @@ const useComments = (placeId: number) => {
         .catch(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: t("feedback.error", { ns: "common" }),
                 description: `${t("comments.feedback.createError")} ${t(

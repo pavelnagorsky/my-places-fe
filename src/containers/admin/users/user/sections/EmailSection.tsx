@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form-mui";
 import { IEmail } from "@/services/user-service/interfaces/email.interface";
 import userService from "@/services/user-service/user.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import {
   CircularProgress,
   IconButton,
@@ -45,7 +45,7 @@ const EmailSection = ({ user, sx }: { user: IUserShortInfo; sx?: SxProps }) => {
           popover.handleClose();
           form.reset();
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Успех!",
                 description: `Письмо было успешно отправлено ${data.to}.`,

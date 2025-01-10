@@ -17,7 +17,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
     height: "auto",
     position: "relative",
     maxHeight: "500px",
-    minHeight: "450px",
+    minHeight: "470px",
     borderRadius: { xs: 0, md: "10px" },
   };
 

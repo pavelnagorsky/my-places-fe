@@ -13,7 +13,7 @@ import placesService from "@/services/places-service/places.service";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import { useAppDispatch } from "@/store/hooks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { StyledButton } from "@/components/UI/button/StyledButton";
 
 interface IPlaceSlugSectionProps {
@@ -42,7 +42,7 @@ const PlaceSlugSection = ({ place, onReloadPlace }: IPlaceSlugSectionProps) => {
           setLoading(false);
           form.reset({ slug: data.slug });
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Успех!",
                 description: "Ссылка на места успешно обновлена",
@@ -57,7 +57,7 @@ const PlaceSlugSection = ({ place, onReloadPlace }: IPlaceSlugSectionProps) => {
         .catch(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Ошибка!",
                 description: "Ошибка при изменении ссылки на место.",

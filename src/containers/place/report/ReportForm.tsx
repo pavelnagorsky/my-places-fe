@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 import reportsService from "@/services/reports-service/reports.service";
 import { useAppDispatch } from "@/store/hooks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 
 interface IReportFormProps {
@@ -53,7 +53,7 @@ const ReportForm = ({
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", { ns: "common" }),
           description: `${t("report.feedback.error")} ${t(
@@ -70,7 +70,7 @@ const ReportForm = ({
 
   const handleShowSuccess = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success", { ns: "common" }),
           description: t("report.feedback.success"),

@@ -22,6 +22,8 @@
     "selectPlace": "Select the place",
     "searchByTitle": "Search by the title",
     "enterTitle": "Enter the title",
+    "searchByDescription": "Search by text",
+    "enterDescription": "Enter the text",
     "types": "Types of places",
     "categories": "Categories",
     "locationStartLabel": "Select departure location",

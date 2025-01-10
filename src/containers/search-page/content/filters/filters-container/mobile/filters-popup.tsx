@@ -19,6 +19,7 @@ import TypesAndCategoriesFilter from "@/containers/search-page/content/filters/c
 import { Button } from "@/components/UI/button/Button";
 import { primaryColor } from "@/styles/theme/lightTheme";
 import TitleFilter from "@/containers/search-page/content/filters/content/TitleFilter";
+import { defaultSearchFilters } from "@/containers/search-page/logic/default-filters";
 
 const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
   const { t } = useTranslation(["search", "common"]);
@@ -31,6 +32,7 @@ const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
       getValues("types").length +
       getValues("categories").length +
       (getValues("title").length > 0 ? 1 : 0) +
+      (getValues("description").length > 0 ? 1 : 0) +
       (getValues("locationStartCoordinates") ? 1 : 0) +
       (getValues("locationEndCoordinates") ? 1 : 0);
     return `${t("filters.filters")} ${value > 0 ? `(${value})` : ""}`;
@@ -42,10 +44,7 @@ const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
   };
 
   const onClear = () => {
-    reset((defaultValues) => ({
-      ...defaultValues,
-      showMap: getValues("searchByMe"),
-    }));
+    reset(defaultSearchFilters);
   };
 
   const content = (
@@ -80,12 +79,16 @@ const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
         gap={"1em"}
         py={"1em"}
         zIndex={10}
-        justifyContent={"space-between"}
       >
-        <Button sx={{ color: primaryColor }} onClick={onClear}>
+        <Button fullWidth sx={{ color: primaryColor }} onClick={onClear}>
           {t("buttons.clear", { ns: "common" })}
         </Button>
-        <Button variant={"contained"} type={"submit"} onClick={onSubmit}>
+        <Button
+          fullWidth
+          variant={"contained"}
+          type={"submit"}
+          onClick={onSubmit}
+        >
           {t("buttons.apply", { ns: "common" })}
         </Button>
       </Stack>

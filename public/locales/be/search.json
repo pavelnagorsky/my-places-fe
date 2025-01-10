@@ -22,6 +22,8 @@
     "selectPlace": "Абярыце месца",
     "searchByTitle": "Шукаць па назве",
     "enterTitle": "Увядзіце назву",
+    "searchByDescription": "Шукаць па тэксце",
+    "enterDescription": "Увядзіце тэкст",
     "types": "Тыпы месцаў",
     "categories": "Катэгорыі",
     "locationStartLabel": "Абярыце месца адпраўлення",

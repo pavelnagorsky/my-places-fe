@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form-mui";
 import { useCallback, useEffect } from "react";
 import { useTranslation } from "next-i18next";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { IMyReview } from "@/services/reviews-service/interfaces/my-review.interface";
 import {
@@ -65,7 +65,7 @@ const useMyReviews = () => {
       .deleteReview(reviewId)
       .then(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.success", { ns: "common" }),
               description: t("reviews.feedback.delete.success"),
@@ -82,7 +82,7 @@ const useMyReviews = () => {
       })
       .catch(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error", { ns: "common" }),
               description: `${t("reviews.feedback.delete.error")} ${t(

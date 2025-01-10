@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form-mui";
 import { routerLinks } from "@/routing/routerLinks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { IEditReviewFormContext } from "@/containers/personal-area/edit-my-review/interfaces";
 
@@ -31,7 +31,7 @@ const useReviewModeration = () => {
 
   const handleShowNotFoundError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", { ns: "common" }),
           description: `${t("feedback.notFound")} ${t("errors.description", {

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form-mui";
 import { IEditPlaceContext } from "@/containers/personal-area/edit-my-place/interfaces";
 import { routerLinks } from "@/routing/routerLinks";
-import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
+import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import placesService from "@/services/places-service/places.service";
 import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
 
@@ -35,7 +35,7 @@ const useEditPlace = () => {
 
   const handleShowNotFoundError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Ошибка!",
           description:
@@ -83,7 +83,7 @@ const useEditPlace = () => {
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Ошибка!",
           description:
@@ -98,7 +98,7 @@ const useEditPlace = () => {
 
   const handleShowSuccess = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Успех!",
           description: "Место было успешно обновлено",

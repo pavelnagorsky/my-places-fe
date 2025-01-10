@@ -7,7 +7,7 @@ import {
   useForm,
 } from "react-hook-form-mui";
 import { IReviewFormContext } from "@/containers/create-review/form/interfaces";
-import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
+import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { useTranslation } from "next-i18next";
 import { ICreateReview } from "@/services/reviews-service/interfaces/create-review.interface";
@@ -32,7 +32,7 @@ const CreateReview = () => {
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", {
             ns: "common",
@@ -53,7 +53,7 @@ const CreateReview = () => {
 
   const handleShowSuccess = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success", {
             ns: "common",

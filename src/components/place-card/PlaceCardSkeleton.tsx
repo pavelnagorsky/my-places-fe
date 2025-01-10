@@ -13,7 +13,7 @@ function PlaceCardSkeleton() {
     <Card
       // elevation={2}
       sx={{
-        width: { xs: "330px", md: "374px" },
+        width: { xs: "340px", md: "400px", xl: "400px" },
         height: { xs: "510px", md: "565px" },
         borderRadius: "10px",
         boxShadow: "0px 2px 22px 0px #00000012",

@@ -3,7 +3,7 @@ import { IContactUsForm } from "@/containers/contact-us/interfaces";
 import { UserTypesEnum } from "@/services/contact-service/interfaces/interfaces";
 import { useState } from "react";
 import contactService from "@/services/contact-service/contact.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import utils from "@/shared/utils";
 import { useTranslation } from "next-i18next";
@@ -27,7 +27,7 @@ const useContactUs = () => {
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", { ns: "common" }),
           description: `${t("feedback.error")} ${t("errors.description", {
@@ -43,7 +43,7 @@ const useContactUs = () => {
 
   const handleShowSuccess = (email: string) => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success", { ns: "common" }),
           description: `${t("feedback.success")} ${email}`,

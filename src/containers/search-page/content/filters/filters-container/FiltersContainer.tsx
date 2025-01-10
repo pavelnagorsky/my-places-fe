@@ -9,6 +9,7 @@ import { useFormContext } from "react-hook-form-mui";
 import { ISearchForm } from "@/containers/search-page/logic/interfaces";
 import { useAppSelector } from "@/store/hooks";
 import { selectSearchFiltersLoading } from "@/store/search-slice/search.slice";
+import { defaultSearchFilters } from "@/containers/search-page/logic/default-filters";
 
 const FiltersContainer = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
   const { t } = useTranslation("common");
@@ -16,7 +17,7 @@ const FiltersContainer = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
   const loading = useAppSelector(selectSearchFiltersLoading);
 
   const onClear = () => {
-    reset();
+    reset(defaultSearchFilters);
   };
 
   return (
@@ -41,16 +42,12 @@ const FiltersContainer = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
         <RadiusFilter />
         <TypesAndCategoriesFilter />
       </Stack>
-      <Stack
-        direction={"row"}
-        gap={"1em"}
-        pt={"1em"}
-        justifyContent={"space-between"}
-      >
-        <Button sx={{ color: primaryColor }} onClick={onClear}>
+      <Stack direction={"row"} gap={"1em"} pt={"1em"}>
+        <Button sx={{ color: primaryColor }} fullWidth onClick={onClear}>
           {t("buttons.clear")}
         </Button>
         <Button
+          fullWidth
           variant={"contained"}
           type={"submit"}
           onClick={triggerSubmit}

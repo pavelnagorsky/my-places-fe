@@ -1,5 +1,4 @@
-import { Box, Card, CardMedia, Stack, Typography, Button } from "@mui/material";
-import Image from "next/image";
+import { Box, Typography, Button } from "@mui/material";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { routerLinks } from "@/routing/routerLinks";
@@ -7,6 +6,7 @@ import Grid from "@mui/material/Grid2";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import AddToCart from "@/components/place-card/add-to-cart-panel/AddToCart";
 
 const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
   const { t } = useTranslation("search");
@@ -37,8 +37,10 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
       }}
     >
       <Grid size={{ xs: 0, md: 6 }}>
+        <AddToCart placeId={place.id} mapCardMode />
         <MuiImage
           imageProps={{
+            style: { objectFit: "cover" },
             fill: true,
             src: place.image ?? "/none",
             alt: place.title,
@@ -46,7 +48,6 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
           boxProps={{
             sx: {
               mb: "-1em",
-              objectFit: "cover",
               height: "100%",
               //maxHeight: "200px",
               width: "100%",

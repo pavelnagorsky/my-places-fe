@@ -4,21 +4,12 @@ import { beBY, ruRU } from "@mui/material/locale";
 import I18nLanguages from "@/shared/I18nLanguages";
 
 export const primaryColor = "#FF7A00";
-export const primaryBackground = "#FFE9D6";
+export const primaryBackground = "#FFEFE2";
 export const secondaryLightColor = "#727272";
 
 const createLightTheme = (locale: keyof typeof I18nLanguages) => {
   const lightTheme = createTheme(
     {
-      // breakpoints: {
-      //   values: {
-      //     xs: 0,
-      //     sm: 500,
-      //     md: 900,
-      //     lg: 1200,
-      //     xl: 1440,
-      //   },
-      // },
       palette: {
         mode: "light",
         primary: {
@@ -124,6 +115,11 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
           },
         },
         MuiButton: {
+          styleOverrides: {
+            root: ({ ownerState }) => ({
+              borderRadius: "8px",
+            }),
+          },
           defaultProps: {
             style: { boxShadow: "none" },
           },

@@ -10,7 +10,7 @@ import {
 import { StyledButton } from "@/components/UI/button/StyledButton";
 import { useState } from "react";
 import placesService from "@/services/places-service/places.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
@@ -40,7 +40,7 @@ const ModerationForm = ({
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", { ns: "common" }),
           description: `${
@@ -60,7 +60,7 @@ const ModerationForm = ({
 
   const handleShowSuccess = (action: "accept" | "reject") => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success", { ns: "common" }),
           description:

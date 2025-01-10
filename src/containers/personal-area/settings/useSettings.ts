@@ -5,7 +5,7 @@ import { IUpdateUserFormContext } from "@/containers/personal-area/settings/inte
 import { useEffect, useState } from "react";
 import userService from "@/services/user-service/user.service";
 import { getUserDataThunk } from "@/store/user-slice/thunks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 
 const useSettings = () => {
@@ -32,7 +32,7 @@ const useSettings = () => {
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", { ns: "common" }),
           description: `${t("settings.feedback.error")} ${t(
@@ -51,7 +51,7 @@ const useSettings = () => {
 
   const handleShowSuccess = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success", { ns: "common" }),
           description: t("settings.feedback.success"),

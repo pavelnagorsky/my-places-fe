@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import authService from "@/services/auth-service/auth.service";
 import { useAppDispatch } from "@/store/hooks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 import { openAuth } from "@/store/user-slice/user.slice";
 
@@ -20,7 +20,7 @@ const ConfirmEmail = () => {
       .confirmEmail(query.token)
       .then(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.success"),
               description: t("auth.confirmEmail.success"),
@@ -33,7 +33,7 @@ const ConfirmEmail = () => {
       })
       .catch(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error"),
               description: t("auth.confirmEmail.error"),

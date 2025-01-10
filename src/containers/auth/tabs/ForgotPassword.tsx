@@ -20,7 +20,7 @@ import regExp from "@/shared/regExp";
 import { Button } from "@/components/UI/button/Button";
 import { forwardRef, ReactElement, Ref, useState } from "react";
 import authService from "@/services/auth-service/auth.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import CloseIcon from "@mui/icons-material/Close";
 import { TransitionProps } from "@mui/material/transitions/transition";
@@ -65,7 +65,7 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
         setLoading(false);
         handleClose();
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.success"),
               description: `${t(
@@ -81,7 +81,7 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
       .catch(() => {
         setLoading(false);
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error"),
               description: `${t("auth.forgotPassword.feedback.error")} ${t(

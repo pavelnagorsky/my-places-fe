@@ -14,21 +14,31 @@ import Link from "next/link";
 import likeImage from "/public/images/icons/heart.png";
 import locationImage from "/public/images/icons/location.png";
 import eyeImage from "/public/images/icons/eye.png";
+import AddToCart from "@/components/place-card/add-to-cart-panel/AddToCart";
+import { useAppSelector } from "@/store/hooks";
+import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice";
+import { primaryColor } from "@/styles/theme/lightTheme";
 
 interface IPlaceCardProps {
   place: ISearchPlace;
 }
 
 function PlaceCard({ place }: IPlaceCardProps) {
+  const cardPlaceIds = useAppSelector(selectCartPlaceIds);
+  const isInCart = cardPlaceIds.includes(place.id);
+
   return (
     <Card
       sx={{
-        width: { xs: "350px", md: "400px", xl: "400px" },
+        border: isInCart ? `2px solid ${primaryColor}` : "none",
+        width: { xs: "340px", md: "400px", xl: "400px" },
         height: { xs: "510px", md: "565px" },
         borderRadius: "10px",
         boxShadow: "0px 2px 22px 0px #00000012",
+        position: "relative",
       }}
     >
+      <AddToCart placeId={place.id} />
       <CardActionArea
         target={"_blank"}
         component={Link}

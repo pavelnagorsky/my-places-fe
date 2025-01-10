@@ -3,7 +3,7 @@ import PlaceCardSkeleton from "@/components/place-card/PlaceCardSkeleton";
 
 export const searchResultsGridSx: SxProps = {
   width: {
-    xs: "350px",
+    xs: "340px",
     // sm: "700px",
     md: "850px",
     xl: "100%",

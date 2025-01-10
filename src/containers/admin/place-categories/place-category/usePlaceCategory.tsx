@@ -3,7 +3,7 @@ import { IPlaceCategoryFormContext } from "@/containers/admin/place-categories/p
 import { useRouter } from "next/router";
 import placeCategoriesService from "@/services/place-categories-service/place-categories.service";
 import { ICreatePlaceCategoryAdmin } from "@/services/place-categories-service/interfaces";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ const usePlaceCategory = () => {
 
   const handleShowError = (description: string) => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Ошибка!",
           description: description,
@@ -32,7 +32,7 @@ const usePlaceCategory = () => {
 
   const handleShowSuccess = (description: string) => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Успех!",
           description: description,

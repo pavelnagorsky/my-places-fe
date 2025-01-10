@@ -10,7 +10,7 @@ import {
 } from "@/containers/admin/users/user/interfaces";
 import utils from "@/shared/utils";
 import { useAppDispatch } from "@/store/hooks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 
 const useUser = () => {
   const dispatch = useAppDispatch();
@@ -83,7 +83,7 @@ const useUser = () => {
           .then(() => {
             setBlockLoading(false);
             dispatch(
-              showAlert({
+              showAlertThunk({
                 alertProps: {
                   title: "Успех!",
                   description: "Пользователь успешно заблокирован",
@@ -100,7 +100,7 @@ const useUser = () => {
           .catch(() => {
             setBlockLoading(false);
             dispatch(
-              showAlert({
+              showAlertThunk({
                 alertProps: {
                   title: "Ошибка!",
                   description: "Ошибка при блокировке пользователя.",
@@ -124,7 +124,7 @@ const useUser = () => {
       .then(() => {
         setBlockLoading(false);
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: "Успех!",
               description: "Пользователь успешно разблокирован",
@@ -141,7 +141,7 @@ const useUser = () => {
       .catch(() => {
         setBlockLoading(false);
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: "Ошибка!",
               description: "Ошибка при разблокировке пользователя.",
@@ -167,7 +167,7 @@ const useUser = () => {
           fetch();
           setModeratorLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Успех!",
                 description: "Данные модератора были успешно сохранены",
@@ -183,7 +183,7 @@ const useUser = () => {
         .catch(() => {
           setModeratorLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Ошибка!",
                 description: "Ошибка при сохранении модератора.",
@@ -206,7 +206,7 @@ const useUser = () => {
         fetch();
         setModeratorDeleteLoading(false);
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: "Успех!",
               description: "Доступ модератора был успешно удален",
@@ -222,7 +222,7 @@ const useUser = () => {
       .catch(() => {
         setModeratorDeleteLoading(false);
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: "Ошибка!",
               description: "Ошибка при удалении доступа модератора.",

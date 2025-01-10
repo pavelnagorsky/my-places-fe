@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form-mui";
 import { IEmail } from "@/services/user-service/interfaces/email.interface";
 import userService from "@/services/user-service/user.service";
 import { useAppDispatch } from "@/store/hooks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { IFeedback } from "@/services/contact-service/interfaces/feedback.interface";
 import { Box, CircularProgress, Paper, Stack, Typography } from "@mui/material";
 import MailingForm from "@/components/mailing-form/MailingForm";
@@ -32,7 +32,7 @@ const EmailSection = ({ feedback }: { feedback: IFeedback }) => {
         .then(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Успех!",
                 description: `Письмо было успешно отправлено ${data.to}.`,

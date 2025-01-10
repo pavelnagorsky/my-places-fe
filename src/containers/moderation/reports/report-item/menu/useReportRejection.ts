@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppDispatch } from "@/store/hooks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import reportsService from "@/services/reports-service/reports.service";
 import { CrmStatusesEnum } from "@/services/interfaces";
 import { useTranslation } from "next-i18next";
@@ -24,7 +24,7 @@ const useReportRejection = ({ id, onSuccess }: IUseReportRejectionProps) => {
         setLoading(false);
         onSuccess();
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.success", { ns: "common" }),
               description: t("feedback.report.rejectReport.success"),
@@ -38,7 +38,7 @@ const useReportRejection = ({ id, onSuccess }: IUseReportRejectionProps) => {
       .catch(() => {
         setLoading(false);
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error", { ns: "common" }),
               description: `${t("feedback.report.rejectReport.error")} ${t(

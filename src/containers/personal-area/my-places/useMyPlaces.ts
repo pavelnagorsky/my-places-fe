@@ -8,7 +8,7 @@ import {
   MyPlacesOrderByEnum,
 } from "@/services/places-service/interfaces/interfaces";
 import placesService from "@/services/places-service/places.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";
@@ -65,7 +65,7 @@ const useMyPlaces = () => {
       .deletePlace(placeId)
       .then(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.success", { ns: "common" }),
               description: t("places.feedback.delete.success"),
@@ -80,7 +80,7 @@ const useMyPlaces = () => {
       })
       .catch(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error", { ns: "common" }),
               description: `${t("places.feedback.delete.error")} ${t(

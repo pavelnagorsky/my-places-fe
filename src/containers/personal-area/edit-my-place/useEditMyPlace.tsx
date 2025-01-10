@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { SubmitHandler, useForm } from "react-hook-form-mui";
 import { IEditPlaceContext } from "@/containers/personal-area/edit-my-place/interfaces";
-import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
+import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import placesService from "@/services/places-service/places.service";
 import { routerLinks } from "@/routing/routerLinks";
@@ -35,7 +35,7 @@ const useEditMyPlace = () => {
 
   const handleShowNotFoundError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", { ns: "common" }),
           description: `${t("feedback.notFound")} ${t("errors.description", {
@@ -84,7 +84,7 @@ const useEditMyPlace = () => {
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", { ns: "common" }),
           description: `${t("feedback.update.error")} ${t(
@@ -101,7 +101,7 @@ const useEditMyPlace = () => {
 
   const handleShowSuccess = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success", { ns: "common" }),
           description: t("feedback.update.success"),

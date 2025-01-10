@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form-mui";
 import { IEditReviewFormContext } from "@/containers/personal-area/edit-my-review/interfaces";
 import { routerLinks } from "@/routing/routerLinks";
-import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
+import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { IUpdateReview } from "@/services/reviews-service/interfaces/update-review.interface";
 
@@ -34,7 +34,7 @@ const useEditReview = () => {
 
   const handleShowNotFoundError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Ошибка!",
           description:
@@ -77,7 +77,7 @@ const useEditReview = () => {
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Ошибка!",
           description:
@@ -92,7 +92,7 @@ const useEditReview = () => {
 
   const handleShowSuccess = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Успех!",
           description: "Заметка была успешно обновлена.",

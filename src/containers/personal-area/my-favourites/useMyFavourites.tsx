@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form-mui";
 import { IMyFavouritesFormContext } from "@/containers/personal-area/my-favourites/interfaces";
 import { IFavourite } from "@/services/places-service/interfaces/favourite.interface";
 import placesService from "@/services/places-service/places.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { IMyFavouritesRequest } from "@/services/places-service/interfaces/interfaces";
 
 const useMyFavourites = () => {
@@ -27,7 +27,7 @@ const useMyFavourites = () => {
       .deleteFavourite(id)
       .then(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.success", { ns: "common" }),
               description: t("favourites.feedback.delete.success"),
@@ -42,7 +42,7 @@ const useMyFavourites = () => {
       })
       .catch(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error", { ns: "common" }),
               description: `${t("favourites.feedback.delete.error")} ${t(

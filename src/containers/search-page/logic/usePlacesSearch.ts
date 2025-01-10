@@ -12,6 +12,7 @@ import {
   selectCurrentItemsLength,
   selectIsDataFetched,
   selectSearchFilters,
+  selectSearchFiltersLoading,
   setFilters,
 } from "@/store/search-slice/search.slice";
 import utils from "@/shared/utils";
@@ -29,6 +30,7 @@ const usePlacesSearch = () => {
   const isDataFetched = useAppSelector(selectIsDataFetched);
   const isFirstFetchRef = useRef(true);
   const currentItemsLength = useAppSelector(selectCurrentItemsLength);
+  const loading = useAppSelector(selectSearchFiltersLoading);
 
   const formContext = useForm<ISearchForm>({
     mode: "onChange",
@@ -38,6 +40,7 @@ const usePlacesSearch = () => {
   const onSubmit = useCallback(
     (fromStart = true) => {
       formContext.handleSubmit((data) => {
+        if (loading) return;
         // calculate page for pagination
         const requestedPage = fromStart
           ? 0
@@ -59,6 +62,7 @@ const usePlacesSearch = () => {
           pageSize: searchService.SEARCH_PLACES_PER_PAGE,
           page: requestedPage,
           language: i18n.language,
+          description: data.description,
         };
         if (fromStart) {
           dispatch(setFilters(data));
@@ -68,7 +72,7 @@ const usePlacesSearch = () => {
         dispatch(getSearchResultsThunk(payload));
       })();
     },
-    [i18n.language, dispatch, currentItemsLength]
+    [i18n.language, dispatch, currentItemsLength, loading]
   );
 
   useEffect(() => {

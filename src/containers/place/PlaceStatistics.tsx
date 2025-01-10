@@ -18,7 +18,7 @@ import { format } from "date-fns";
 import usePopover from "@/hooks/usePopover";
 import ReportForm from "@/containers/place/report/ReportForm";
 import placesService from "@/services/places-service/places.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import { useTranslation } from "next-i18next";
 
@@ -48,7 +48,7 @@ const PlaceStatistics = ({
       .addPlaceToFavourites(placeId)
       .then(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.success", { ns: "common" }),
               description: t("favourites.feedback.success"),
@@ -61,7 +61,7 @@ const PlaceStatistics = ({
       })
       .catch(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error", { ns: "common" }),
               description: t("favourites.feedback.error"),

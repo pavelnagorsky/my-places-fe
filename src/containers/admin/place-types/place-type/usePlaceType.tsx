@@ -1,6 +1,6 @@
 import { useForm, useFormContext } from "react-hook-form-mui";
 import { useRouter } from "next/router";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { useState } from "react";
 import { IPlaceTypeFormContext } from "@/containers/admin/place-types/place-type/interfaces";
@@ -18,7 +18,7 @@ const usePlaceType = () => {
 
   const handleShowError = (description: string) => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Ошибка!",
           description: description,
@@ -32,7 +32,7 @@ const usePlaceType = () => {
 
   const handleShowSuccess = (description: string) => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: "Успех!",
           description: description,

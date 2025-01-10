@@ -17,6 +17,7 @@ import {
 } from "@/store/search-slice/search.slice";
 import filtersIcon from "../../../../../../public/images/icons/filters.svg";
 import TitleFilter from "@/containers/search-page/content/filters/content/TitleFilter";
+import DescriptionFilter from "@/containers/search-page/content/filters/content/DescriptionFilter";
 
 const checkboxesLabelSx: SxProps = {
   width: "49%",
@@ -49,6 +50,7 @@ const TypesAndCategoriesFilter = () => {
       </Stack>
       <Stack>
         <TitleFilter />
+        <DescriptionFilter />
         <Typography fontSize={"18px"} mb={"0.5em"}>
           {t("filters.types")}
         </Typography>

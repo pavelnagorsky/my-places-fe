@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form-mui";
 import { routerLinks } from "@/routing/routerLinks";
-import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
+import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { IEditReviewFormContext } from "@/containers/personal-area/edit-my-review/interfaces";
 import { IUpdateReview } from "@/services/reviews-service/interfaces/update-review.interface";
@@ -34,7 +34,7 @@ const useEditMyReview = () => {
 
   const handleShowNotFoundError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", {
             ns: "common",
@@ -80,7 +80,7 @@ const useEditMyReview = () => {
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", {
             ns: "common",
@@ -101,7 +101,7 @@ const useEditMyReview = () => {
 
   const handleShowSuccess = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success", {
             ns: "common",

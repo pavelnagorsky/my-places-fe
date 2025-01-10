@@ -24,7 +24,7 @@ import regExp from "@/shared/regExp";
 import { Button } from "@/components/UI/button/Button";
 import authService from "@/services/auth-service/auth.service";
 import { openAuth } from "@/store/user-slice/user.slice";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 
 const ResetPassword = () => {
   const { t } = useTranslation("common");
@@ -47,7 +47,7 @@ const ResetPassword = () => {
       .then(() => {
         setLoading(false);
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.success"),
               description: t("auth.resetPassword.feedback.success"),
@@ -64,7 +64,7 @@ const ResetPassword = () => {
       .catch(() => {
         setLoading(false);
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: t("feedback.error"),
               description: t("auth.resetPassword.feedback.error"),

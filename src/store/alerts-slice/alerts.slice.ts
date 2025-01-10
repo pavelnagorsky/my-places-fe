@@ -1,4 +1,9 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import { AlertProps, SnackbarProps } from "@mui/material";
 import {
@@ -6,6 +11,7 @@ import {
   ICustomSnackbarProps,
 } from "@/store/alerts-slice/interfaces";
 import { ReactNode } from "react";
+import utils from "@/shared/utils";
 
 interface IAlertsState {
   show: boolean;
@@ -29,31 +35,41 @@ const initialState: IAlertsState = {
   },
 };
 
+export const showAlertThunk = createAsyncThunk(
+  "alerts/show",
+  async (
+    payload: {
+      snackbarProps: ICustomSnackbarProps;
+      alertProps: ICustomAlertProps;
+    },
+    thunkAPI
+  ) => {
+    thunkAPI.dispatch(hideAlert());
+    // Small delay to ensure state update
+    await utils.delay(100);
+    return payload;
+  }
+);
+
 export const alertsSlice = createSlice({
   name: "alerts",
   initialState,
   reducers: {
-    showAlert: (
-      state,
-      {
-        payload,
-      }: PayloadAction<{
-        snackbarProps: ICustomSnackbarProps;
-        alertProps: ICustomAlertProps;
-      }>
-    ) => {
+    hideAlert: (state) => {
+      state.show = false;
+      state.alertProps.description = undefined;
+      state.snackbarProps.autoHideDuration = 6000;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(showAlertThunk.fulfilled, (state, { payload }) => {
       state.show = true;
       state.alertProps = { ...state.alertProps, ...payload.alertProps };
       state.snackbarProps = {
         ...state.snackbarProps,
         ...payload.snackbarProps,
       };
-    },
-    hideAlert: (state) => {
-      state.show = false;
-      state.alertProps.description = undefined;
-      state.snackbarProps.autoHideDuration = 6000;
-    },
+    });
   },
 });
 
@@ -75,6 +91,6 @@ export const selectSnackbarProps = createSelector(
   (s) => s.snackbarProps
 );
 
-export const { showAlert, hideAlert } = alertsSlice.actions;
+export const { hideAlert } = alertsSlice.actions;
 
 export default alertsSlice.reducer;

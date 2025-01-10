@@ -22,6 +22,8 @@
     "selectPlace": "Выберите место",
     "searchByTitle": "Искать по названию",
     "enterTitle": "Введите название",
+    "searchByDescription": "Искать по тексту",
+    "enterDescription": "Введите текст",
     "types": "Типы мест",
     "categories": "Категории",
     "locationStartLabel": "Выберите место отправления",

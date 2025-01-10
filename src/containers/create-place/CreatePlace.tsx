@@ -11,7 +11,7 @@ import { ICreatePlace } from "@/services/places-service/interfaces/create-place.
 import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch } from "@/store/hooks";
-import { hideAlert, showAlert } from "@/store/alerts-slice/alerts.slice";
+import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
@@ -36,7 +36,7 @@ const CreatePlace = () => {
 
   const handleShowError = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.error", {
             ns: "common",
@@ -57,7 +57,7 @@ const CreatePlace = () => {
 
   const handleShowSuccess = () => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success", {
             ns: "common",

@@ -19,12 +19,9 @@ export const Button = forwardRef<
       href={linkTo}
       sx={{
         fontWeight: 500,
-        fontSize: {
-          xs: "16px",
-          md: "16px",
-        },
+        fontSize: "16px",
         letterSpacing: "0.02em",
-        borderRadius: "10px",
+        borderRadius: "8px",
         borderWidth: "2px",
         "&:hover": {
           borderWidth: "2px",

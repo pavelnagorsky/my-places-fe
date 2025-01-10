@@ -27,7 +27,7 @@ import {
   selectAuthLoading,
 } from "@/store/user-slice/user.slice";
 import { signupThunk } from "@/store/user-slice/thunks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 
 const Signup = () => {
@@ -49,7 +49,7 @@ const Signup = () => {
 
   const afterSignup = (email: string) => {
     dispatch(
-      showAlert({
+      showAlertThunk({
         alertProps: {
           title: t("feedback.success"),
           description: t("auth.signup.feedback.success", { email: email }),

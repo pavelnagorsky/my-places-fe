@@ -7,7 +7,7 @@ import { ISelect } from "@/shared/interfaces";
 import { useAppDispatch } from "@/store/hooks";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import placesService from "@/services/places-service/places.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 
@@ -41,7 +41,7 @@ const DeletePlaceSection = ({ id, hasReviews }: IDeletePlaceSectionProps) => {
         .then(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Успех!",
                 description: "Место успешно удалено",
@@ -56,7 +56,7 @@ const DeletePlaceSection = ({ id, hasReviews }: IDeletePlaceSectionProps) => {
         .catch(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Ошибка!",
                 description: "Ошибка при удалении места.",

@@ -86,7 +86,7 @@ export const searchSlice = createSlice({
     });
 
     builder.addCase(getMapResultsThunk.pending, (state, action) => {
-      state.mapResults = [];
+      // state.mapResults = [];
     });
 
     builder.addCase(getMapResultsThunk.fulfilled, (state, { payload }) => {

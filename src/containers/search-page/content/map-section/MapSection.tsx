@@ -18,6 +18,8 @@ import PlaceCardMap from "@/components/place-card/PlaceCardMap";
 import useRoutePolygon from "@/containers/search-page/content/map-section/hooks/useRoutePolygon";
 import { useTranslation } from "next-i18next";
 import useMapCircle from "@/containers/search-page/content/map-section/hooks/useMapCircle";
+import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice";
+import { primaryColor } from "@/styles/theme/lightTheme";
 
 const MapSection = () => {
   const { i18n } = useTranslation();
@@ -28,11 +30,16 @@ const MapSection = () => {
   const isMobileMd = useMediaQuery(theme.breakpoints.down("md"));
   // all places
   const mapResults = useAppSelector(selectMapResults);
+  const _mapResultsDependencyString = mapResults.map((r) => r.id).join("");
   const fitMapCoordinates = useMemo(() => {
     return mapResults.map((place) => place.coordinates);
-  }, [mapResults]);
+  }, [_mapResultsDependencyString]);
   // selected place on map
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
+  const cardPlaceIds = useAppSelector(selectCartPlaceIds);
+  const isSelectedPlaceInCart = selectedPlace
+    ? cardPlaceIds.includes(selectedPlace.id)
+    : false;
 
   const handleClickMarker = (placeId: number) => {
     const place = mapResults.find((p) => p.id === placeId);
@@ -52,13 +59,25 @@ const MapSection = () => {
     setSelectedPlace(null);
   }, [i18n.language]);
 
+  // Workaround to make clusters repaint correctly
+  // Source: https://github.com/JustFly1984/react-google-maps-api/issues/2849
+  const clustererRef = useRef<any>(null);
+  useEffect(() => {
+    if (!clustererRef.current) return;
+    clustererRef.current.repaint();
+  }, [fitMapCoordinates]);
+
   return (
     <Box
       mt={{ xs: showMap && isMobile ? "2em" : 0, md: 0 }}
       display={!showMap && isMobile ? "none" : "block"}
       sx={{
         "& .gm-style-iw-d": { overflow: "auto !important" },
-        "& .gm-style-iw-c": { padding: 0, borderRadius: "15px" },
+        "& .gm-style-iw-c": {
+          padding: 0,
+          borderRadius: "15px",
+          border: isSelectedPlaceInCart ? `2px solid ${primaryColor}` : "unset",
+        },
         "& .gm-style-iw-chr": {
           height: 0,
           "& button": {
@@ -111,23 +130,31 @@ const MapSection = () => {
             <PlaceCardMap place={selectedPlace} />
           </InfoWindow>
         )}
-        <MarkerClusterer maxZoom={14}>
+        <MarkerClusterer
+          maxZoom={14}
+          onLoad={(clusterer) => {
+            clustererRef.current = clusterer;
+          }}
+        >
           {(clusterer) =>
-            mapResults.map((place, i) => (
-              <Marker
-                key={i}
-                clusterer={clusterer}
-                position={place.coordinates}
-                title={place.title}
-                icon={{
-                  url: place.type.image2 || (place.type.image as string),
-                  scaledSize: { width: 30, height: 30 } as any,
-                }}
-                onClick={(e) => {
-                  handleClickMarker(place.id);
-                }}
-              />
-            ))
+            mapResults.map((place, i) => {
+              return (
+                <Marker
+                  key={i}
+                  clusterer={clusterer}
+                  noClustererRedraw
+                  position={place.coordinates}
+                  title={place.title}
+                  icon={{
+                    url: place.type.image2 || (place.type.image as string),
+                    scaledSize: { width: 30, height: 30 } as any,
+                  }}
+                  onClick={(e) => {
+                    handleClickMarker(place.id);
+                  }}
+                />
+              );
+            })
           }
         </MarkerClusterer>
       </Map>

@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import contactService from "@/services/contact-service/contact.service";
 import { useRouter } from "next/router";
 import { useAppDispatch } from "@/store/hooks";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 
 interface IUserHeaderProps {
   feedback: IFeedback | null;
@@ -43,7 +43,7 @@ const FeedbackHeader = ({ feedback }: IUserHeaderProps) => {
       .updateStatus(query.id, status)
       .then(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: "Успех!",
               description: "Статус успешно изменен",
@@ -58,7 +58,7 @@ const FeedbackHeader = ({ feedback }: IUserHeaderProps) => {
       })
       .catch(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: "Ошибка!",
               description: "Ошибка при изменении статуса.",

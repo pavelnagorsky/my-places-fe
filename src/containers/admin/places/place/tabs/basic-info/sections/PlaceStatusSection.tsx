@@ -16,7 +16,7 @@ import { useAppDispatch } from "@/store/hooks";
 import usePlaceStatuses from "@/hooks/usePlaceStatuses";
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import placesService from "@/services/places-service/places.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 
 interface IPlaceStatusSectionProps {
   place: IMyPlace;
@@ -52,7 +52,6 @@ const PlaceStatusSection = ({
 
   const watchCommercial = form.watch("isCommercial");
   const watchStatus = form.watch("status");
-  const watchAdvEndDate = form.watch("advertisementEndDate");
   const canUpdate =
     place.status !== watchStatus ||
     place.advertisement !== watchCommercial ||
@@ -89,7 +88,7 @@ const PlaceStatusSection = ({
         .then(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Успех!",
                 description: "Статус места успешно обновлен",
@@ -104,7 +103,7 @@ const PlaceStatusSection = ({
         .catch(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: "Ошибка!",
                 description: "Ошибка при изменении статуса места.",

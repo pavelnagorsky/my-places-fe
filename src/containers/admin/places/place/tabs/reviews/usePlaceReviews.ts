@@ -11,7 +11,7 @@ import {
 } from "@/services/reviews-service/interfaces/interfaces";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { IMyReview } from "@/services/reviews-service/interfaces/my-review.interface";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 
 const usePlaceReviews = () => {
@@ -66,7 +66,7 @@ const usePlaceReviews = () => {
       .deleteReview(reviewId)
       .then(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: "Успех!",
               description: "Заметка была успешно удалена.",
@@ -83,7 +83,7 @@ const usePlaceReviews = () => {
       })
       .catch(() => {
         dispatch(
-          showAlert({
+          showAlertThunk({
             alertProps: {
               title: "Ошибка!",
               description:

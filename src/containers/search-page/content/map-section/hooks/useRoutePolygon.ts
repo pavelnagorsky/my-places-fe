@@ -14,31 +14,35 @@ const useRoutePolygon = () => {
     polygonCoordinates: number[][],
     offsetKm: number
   ): ILatLngCoordinate[] => {
-    const line = lineString(polygonCoordinates);
-    const buffered = buffer(line as any, offsetKm, { units: "kilometers" });
-    const bufferedPolygonCoordinates = buffered?.geometry?.coordinates ?? [];
-    const flattenedCoordinates: ILatLngCoordinate[] = [];
-    bufferedPolygonCoordinates.forEach((coordinatesChunk) => {
-      coordinatesChunk.forEach((coordinatesSet) => {
-        if (Array.isArray(coordinatesSet[0])) {
-          // Needs additional iteration
-          coordinatesSet.forEach((coordinates) => {
-            if (!Array.isArray(coordinates)) return;
-            flattenedCoordinates.push({
-              lat: coordinates[1],
-              lng: coordinates[0],
+    try {
+      const line = lineString(polygonCoordinates);
+      const buffered = buffer(line as any, offsetKm, { units: "kilometers" });
+      const bufferedPolygonCoordinates = buffered?.geometry?.coordinates ?? [];
+      const flattenedCoordinates: ILatLngCoordinate[] = [];
+      bufferedPolygonCoordinates.forEach((coordinatesChunk) => {
+        coordinatesChunk.forEach((coordinatesSet) => {
+          if (Array.isArray(coordinatesSet[0])) {
+            // Needs additional iteration
+            coordinatesSet.forEach((coordinates) => {
+              if (!Array.isArray(coordinates)) return;
+              flattenedCoordinates.push({
+                lat: coordinates[1],
+                lng: coordinates[0],
+              });
             });
-          });
-        } else {
-          if (!Array.isArray(coordinatesSet)) return;
-          flattenedCoordinates.push({
-            lat: coordinatesSet[1] as number,
-            lng: coordinatesSet[0] as number,
-          });
-        }
+          } else {
+            if (!Array.isArray(coordinatesSet)) return;
+            flattenedCoordinates.push({
+              lat: coordinatesSet[1] as number,
+              lng: coordinatesSet[0] as number,
+            });
+          }
+        });
       });
-    });
-    return flattenedCoordinates;
+      return flattenedCoordinates;
+    } catch (e) {
+      return [];
+    }
   };
 
   const handleRoutePolygon = (

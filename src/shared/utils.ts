@@ -115,6 +115,10 @@ const utils = {
     const bounds = [bound2, bound1, bound3, bound4];
     return bounds;
   },
+
+  delay: (ms: number): Promise<void> => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  },
 };
 
 export default utils;

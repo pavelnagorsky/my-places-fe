@@ -12,6 +12,7 @@ export interface ISearchForm {
   locationEndCoordinates: string | null;
   mode: SearchModesEnum;
   orderBy: SearchOrderByStringEnum;
+  description: string;
 }
 
 export enum SearchModesEnum {

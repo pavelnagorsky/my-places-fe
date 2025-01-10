@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form-mui";
 import { useState } from "react";
 import placesService from "@/services/places-service/places.service";
-import { showAlert } from "@/store/alerts-slice/alerts.slice";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import reportsService from "@/services/reports-service/reports.service";
 import { CrmStatusesEnum } from "@/services/interfaces";
@@ -45,7 +45,7 @@ const usePlaceRejection = ({
             .catch(() => {});
           onSuccess();
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: t("feedback.success", { ns: "common" }),
                 description: t("feedback.report.rejectPlace.success"),
@@ -59,7 +59,7 @@ const usePlaceRejection = ({
         .catch(() => {
           setLoading(false);
           dispatch(
-            showAlert({
+            showAlertThunk({
               alertProps: {
                 title: t("feedback.error", { ns: "common" }),
                 description: `${t("feedback.report.rejectPlace.error")} ${t(
