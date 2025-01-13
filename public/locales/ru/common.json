@@ -15,7 +15,8 @@
     "logout": "Выйти",
     "personalArea": "Личный кабинет",
     "moderation": "Модерация",
-    "administration": "Администрация"
+    "administration": "Администрация",
+    "routeBuilder": "Маршруты"
   },
   "footer": {
     "title": "Мы на связи с вами!"

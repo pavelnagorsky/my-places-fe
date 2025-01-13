@@ -31,7 +31,7 @@ const PlaceSelect = ({
 }: IPlaceSelectProps) => {
   const { t, i18n } = useTranslation(["review-management", "common"]);
   const router = useRouter();
-  const { setValue } = useFormContext<IReviewFormContext>();
+  const { setValue } = useFormContext();
   const [options, setOptions] = useState<ISelectPlace[]>([]);
   const [loading, setLoading] = useState(false);
   const [alreadySelectedPlaceId, setAlreadySelectedPlaceId] = useState(false);
@@ -43,9 +43,9 @@ const PlaceSelect = ({
     const placeId = +query.placeId;
     if (options.length === 0) return;
     const place = options.find((p) => p.id === placeId);
-    setValue("place", place || null);
+    setValue(fieldName, place || null);
     setAlreadySelectedPlaceId(true);
-  }, [query.placeId, options]);
+  }, [query.placeId, options, fieldName]);
 
   const fetch = (value: string) =>
     placesService

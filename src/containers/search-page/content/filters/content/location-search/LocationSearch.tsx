@@ -30,7 +30,10 @@ const LocationSearch = () => {
           fieldName={"locationStart"}
           fieldNameCoordinates={"locationStartCoordinates"}
         />
-        <SearchByMe />
+        <SearchByMe
+          fieldName={"searchByMe"}
+          fieldNameCoordinates={"locationStartCoordinates"}
+        />
       </Stack>
       {selectedMode === SearchModesEnum.ROUTE && (
         <LocationAutocomplete

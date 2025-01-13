@@ -15,6 +15,7 @@ import { BoxPlaceholder } from "@/components/UI/placeholders/BoxPlaceholder";
 import SortableList, { SortableItem } from "react-easy-sort";
 
 import { getCartItemsThunk } from "@/store/search-cart-slice/thunks/thunks";
+import { AnimatePresence, motion } from "framer-motion";
 
 const CartItems = () => {
   const { i18n } = useTranslation();
@@ -42,23 +43,43 @@ const CartItems = () => {
       height={"100%"}
       px={{ xs: "1em", md: "2em" }}
       pb={"1em"}
+      sx={{ "& .drag-container": { width: "100%" } }}
     >
       <CartStepper />
-      <SortableList onSortEnd={onSortEnd} draggedItemClassName="dragged">
+      <SortableList
+        onSortEnd={onSortEnd}
+        draggedItemClassName="dragged"
+        className={"drag-container"}
+      >
         <Stack gap={"1em"} width={"100%"}>
-          {items.map((item) => (
-            <SortableItem key={item.id}>
-              <Stack
-                sx={{
-                  "&.dragged": {
-                    zIndex: 9999,
-                  },
+          <AnimatePresence mode="popLayout">
+            {items.map((item) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, scale: 0.5, x: -200 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{
+                  opacity: 0,
+                  x: 200,
+                  zIndex: 1,
+                  scale: 1.2,
                 }}
+                transition={{ duration: 0.6, type: "spring" }}
               >
-                <CartItem place={item} onRemove={onRemove} />
-              </Stack>
-            </SortableItem>
-          ))}
+                <SortableItem>
+                  <Stack
+                    sx={{
+                      "&.dragged": {
+                        zIndex: 9999,
+                      },
+                    }}
+                  >
+                    <CartItem place={item} onRemove={onRemove} />
+                  </Stack>
+                </SortableItem>
+              </motion.div>
+            ))}
+          </AnimatePresence>
           {loading &&
             ids.map((id) => (
               <BoxPlaceholder sx={{ height: "200px" }} key={id} />

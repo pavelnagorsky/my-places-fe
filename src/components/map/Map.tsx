@@ -32,7 +32,7 @@ export const defaultBounds = {
 };
 
 export const defaultCountrySign = "By";
-const libraries = ["places", "geometry"];
+export const googleMapsLibraries = ["places", "geometry"];
 
 function Map({
   children,
@@ -45,7 +45,7 @@ function Map({
   const { isLoaded } = useJsApiLoader({
     id: "google-Map-script",
     googleMapsApiKey: Environment.googleMapsKey,
-    libraries: libraries as any,
+    libraries: googleMapsLibraries as any,
   });
 
   // focus map to cover all set of coordinates

@@ -1,24 +1,22 @@
 import { useEffect, useRef } from "react";
+import { useJsApiLoader } from "@react-google-maps/api";
+import { Environment } from "@/shared/Environment";
+import { googleMapsLibraries } from "@/components/map/Map";
 
-const autocompleteService: {
-  current: google.maps.places.AutocompleteService | null;
-} = { current: null };
+let autocompleteService: google.maps.places.AutocompleteService | null = null;
 
 export function useGoogleAutocompleteService() {
-  const loaded = useRef(false);
-
-  const googleMapsLoaded =
-    typeof google !== "undefined" &&
-    typeof google.maps !== "undefined" &&
-    typeof google.maps.places !== "undefined";
+  const { isLoaded } = useJsApiLoader({
+    id: "google-Map-script",
+    googleMapsApiKey: Environment.googleMapsKey,
+    libraries: googleMapsLibraries as any,
+  });
 
   useEffect(() => {
-    if (!loaded.current && googleMapsLoaded) {
-      loaded.current = true;
-      autocompleteService.current =
-        new google.maps.places.AutocompleteService();
+    if (isLoaded) {
+      autocompleteService = new google.maps.places.AutocompleteService();
     }
-  }, [googleMapsLoaded]);
+  }, [isLoaded]);
 
-  return autocompleteService.current;
+  return autocompleteService;
 }

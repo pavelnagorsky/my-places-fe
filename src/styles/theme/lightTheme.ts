@@ -118,6 +118,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
           styleOverrides: {
             root: ({ ownerState }) => ({
               borderRadius: "8px",
+              "&.MuiButton-sizeLarge": { height: "44px" },
             }),
           },
           defaultProps: {

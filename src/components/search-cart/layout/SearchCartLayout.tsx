@@ -22,6 +22,7 @@ const SearchCartLayout = ({ children }: PropsWithChildren) => {
       PaperProps={{
         id: "root-layout",
         sx: {
+          overflowX: "hidden",
           width: "100%",
           maxWidth: "886px",
           scrollbarWidth: "thin",

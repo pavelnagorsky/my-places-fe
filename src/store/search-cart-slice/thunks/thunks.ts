@@ -3,6 +3,19 @@ import { RootState } from "@/store/store";
 import searchService from "@/services/search-service/search.service";
 import localStorageFields from "@/shared/localStorageFields";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
+import { setItems } from "@/store/route-builder-slice/route-builder.slice";
+
+export const cartToRouteBuilderThunk = createAsyncThunk(
+  "search-cart/cart-to-route-builder",
+  async (arg, thunkAPI) => {
+    const rootState = thunkAPI.getState() as RootState;
+    const cartItems = rootState.searchCart.items;
+
+    thunkAPI.dispatch(setItems(cartItems));
+
+    return;
+  }
+);
 
 export const restoreCartFromLocalStorageThunk = createAsyncThunk(
   "search-cart/restore-from-cache",

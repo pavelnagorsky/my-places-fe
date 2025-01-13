@@ -15,7 +15,8 @@
     "logout": "Log out",
     "personalArea": "Personal account",
     "moderation": "Moderation",
-    "administration": "Administration"
+    "administration": "Administration",
+    "routeBuilder": "Routes"
   },
   "footer": {
     "title": "We are contactable!"

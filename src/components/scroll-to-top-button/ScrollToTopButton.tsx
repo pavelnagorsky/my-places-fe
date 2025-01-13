@@ -27,7 +27,7 @@ const ScrollToTopButton = () => {
           onClick={scrollToTop}
           sx={{
             opacity: 0.7,
-            boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
+            boxShadow: "none",
           }}
           color="primary"
           size="small"

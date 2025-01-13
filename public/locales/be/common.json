@@ -15,7 +15,8 @@
     "logout": "Выйсці",
     "personalArea": "Асабісты кабінет",
     "moderation": "Мадэрацыя",
-    "administration": "Адміністрацыя"
+    "administration": "Адміністрацыя",
+    "routeBuilder": "Маршруты"
   },
   "footer": {
     "title": "Мы на сувязі з вамі!"

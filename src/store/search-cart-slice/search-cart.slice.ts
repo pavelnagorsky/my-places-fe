@@ -1,8 +1,8 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
-
 import {
+  cartToRouteBuilderThunk,
   getCartItemsThunk,
   restoreCartFromLocalStorageThunk,
   togglePlaceIdInCartThunk,
@@ -31,7 +31,11 @@ const searchCartSlice = createSlice({
     },
     removeCartItem: (state, { payload }: PayloadAction<number>) => {
       state.ids = state.ids.filter((id) => id !== payload);
-      state.items = state.items.filter((item) => item.id !== payload);
+      const filteredItems = state.items.filter((item) => item.id !== payload);
+      state.items = filteredItems;
+      if (filteredItems.length === 0) {
+        state.open = false;
+      }
     },
     sortItems: (
       state,
@@ -76,6 +80,10 @@ const searchCartSlice = createSlice({
         state.ids = payload;
       }
     );
+
+    builder.addCase(cartToRouteBuilderThunk.fulfilled, (state, { payload }) => {
+      state.open = false;
+    });
   },
 });
 

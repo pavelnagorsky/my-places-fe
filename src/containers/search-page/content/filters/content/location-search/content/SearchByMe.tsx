@@ -4,43 +4,48 @@ import { useTranslation } from "next-i18next";
 import { useRef, useState } from "react";
 import { ISearchForm } from "@/containers/search-page/logic/interfaces";
 
-const SearchByMe = () => {
+interface ISearchByMeProps {
+  fieldNameCoordinates: string;
+  fieldName: string;
+}
+
+const SearchByMe = ({ fieldName, fieldNameCoordinates }: ISearchByMeProps) => {
   const { t } = useTranslation("search");
   const [loading, setLoading] = useState(false);
-  const { setValue, getValues } = useFormContext<ISearchForm>();
+  const { setValue, getValues } = useFormContext();
   const oldSearchCoordinatesRef = useRef<string | null>(null);
 
   const onSearchByMe = (event: any, checked: boolean) => {
     if (!checked) {
       setLoading(false);
-      setValue("searchByMe", false);
+      setValue(fieldName, false);
       if (oldSearchCoordinatesRef.current) {
-        setValue("locationStartCoordinates", oldSearchCoordinatesRef.current);
+        setValue(fieldNameCoordinates, oldSearchCoordinatesRef.current);
       } else {
-        setValue("locationStartCoordinates", null);
+        setValue(fieldNameCoordinates, null);
       }
       return;
     }
     const geolocationAPI = navigator.geolocation;
     if (!geolocationAPI) {
       console.error("geolocation not available");
-      setValue("searchByMe", false);
+      setValue(fieldName, false);
       return;
     }
     setLoading(true);
     geolocationAPI.getCurrentPosition(
       ({ coords }) => {
-        oldSearchCoordinatesRef.current = getValues("locationStartCoordinates");
+        oldSearchCoordinatesRef.current = getValues(fieldNameCoordinates);
         setValue(
-          "locationStartCoordinates",
+          fieldNameCoordinates,
           `${coords.latitude};${coords.longitude}`
         );
-        setValue("searchByMe", true);
+        setValue(fieldName, true);
         setLoading(false);
       },
       (error) => {
         console.log(error.message);
-        setValue("searchByMe", false);
+        setValue(fieldName, false);
         setLoading(false);
       }
     );
@@ -56,7 +61,7 @@ const SearchByMe = () => {
         onChange={onSearchByMe}
         sx={{ color: "primary.light" }}
         inputProps={{ "aria-label": "Search by me enabled" }}
-        name={"searchByMe"}
+        name={fieldName}
         label={
           loading ? <CircularProgress size={20} /> : t("filters.searchByMe")
         }
