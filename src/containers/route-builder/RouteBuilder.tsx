@@ -7,6 +7,7 @@ import RouteTitle from "@/containers/route-builder/content/form/sections/RouteTi
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import Form from "@/containers/route-builder/content/form/Form";
 import Details from "@/containers/route-builder/content/form/sections/Details";
+import MapSection from "@/containers/route-builder/content/form/sections/MapSection";
 
 const RouteBuilder = () => {
   const logic = useRouteBuilder();
@@ -24,11 +25,14 @@ const RouteBuilder = () => {
               <Grid size={12}>
                 <RouteTitle />
               </Grid>
-              <Grid size={{ xs: 12, md: 9 }}>
+              <Grid size={{ xs: 12, lg: 9 }}>
                 <Form />
               </Grid>
-              <Grid size={{ xs: 12, md: 3 }}>
+              <Grid size={{ xs: 12, lg: 3 }}>
                 <Details />
+              </Grid>
+              <Grid size={12}>
+                <MapSection />
               </Grid>
             </Grid>
           </FormProvider>

@@ -38,7 +38,12 @@ const ControlButtons = () => {
   };
 
   return (
-    <Stack direction={"row"} mt={"1em"} gap={"1em"} alignItems={"center"}>
+    <Stack
+      direction={{ md: "row" }}
+      mt={"1em"}
+      gap={"1em"}
+      alignItems={{ md: "center" }}
+    >
       {isAddMode ? (
         <>
           <PlaceSelect required fieldName={"addPlace"} />
@@ -59,6 +64,7 @@ const ControlButtons = () => {
             onClick={onClickAddLocation}
             variant={"outlined"}
             size={"large"}
+            sx={{ borderWidth: 2 }}
             startIcon={<AddIcon />}
           >
             Добавить локацию

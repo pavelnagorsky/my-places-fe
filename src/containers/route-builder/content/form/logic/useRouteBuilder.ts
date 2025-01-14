@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { useAppDispatch } from "@/store/hooks";
+import { resetState } from "@/store/route-builder-slice/route-builder.slice";
 
 const useRouteBuilder = () => {
+  const dispatch = useAppDispatch();
   const form = useForm<IRouteBuilderForm>({
     mode: "onChange",
     shouldUseNativeValidation: false,
@@ -26,6 +29,12 @@ const useRouteBuilder = () => {
     form.handleSubmit((data) => {
       console.log(data);
     })();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetState());
+    };
   }, []);
 
   return { form, onSaveRoute };

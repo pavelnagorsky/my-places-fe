@@ -140,7 +140,7 @@ const MapSection = () => {
             mapResults.map((place, i) => {
               return (
                 <Marker
-                  key={i}
+                  key={place.id}
                   clusterer={clusterer}
                   noClustererRedraw
                   position={place.coordinates}

@@ -10,10 +10,14 @@ import searchService from "@/services/search-service/search.service";
 
 interface IRouteBuilderState {
   items: ISearchPlace[];
+  distance: number; // meters
+  duration: number; // seconds
 }
 
 const initialState: IRouteBuilderState = {
   items: [],
+  distance: 0,
+  duration: 0,
 };
 
 export const addRouteItemThunk = createAsyncThunk(
@@ -38,6 +42,12 @@ const routeBuilderSlice = createSlice({
     removeItem: (state, { payload }: PayloadAction<number>) => {
       state.items = state.items.filter((item) => item.id !== payload);
     },
+    setDuration: (state, { payload }: PayloadAction<number>) => {
+      state.duration = payload;
+    },
+    setDistance: (state, { payload }: PayloadAction<number>) => {
+      state.distance = payload;
+    },
     sortItems: (
       state,
       action: PayloadAction<{ oldIndex: number; newIndex: number }>
@@ -58,7 +68,17 @@ const selectState = (state: RootState) => state.routeBuilder;
 
 export const selectItems = createSelector(selectState, (s) => s.items);
 
-export const { setItems, resetState, sortItems, removeItem } =
-  routeBuilderSlice.actions;
+export const selectDuration = createSelector(selectState, (s) => s.duration);
+
+export const selectDistance = createSelector(selectState, (s) => s.distance);
+
+export const {
+  setItems,
+  resetState,
+  sortItems,
+  removeItem,
+  setDuration,
+  setDistance,
+} = routeBuilderSlice.actions;
 
 export default routeBuilderSlice.reducer;
