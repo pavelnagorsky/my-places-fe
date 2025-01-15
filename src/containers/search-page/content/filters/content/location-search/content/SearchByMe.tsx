@@ -12,7 +12,7 @@ interface ISearchByMeProps {
 const SearchByMe = ({ fieldName, fieldNameCoordinates }: ISearchByMeProps) => {
   const { t } = useTranslation("search");
   const [loading, setLoading] = useState(false);
-  const { setValue, getValues } = useFormContext();
+  const { setValue, getValues, clearErrors } = useFormContext();
   const oldSearchCoordinatesRef = useRef<string | null>(null);
 
   const onSearchByMe = (event: any, checked: boolean) => {

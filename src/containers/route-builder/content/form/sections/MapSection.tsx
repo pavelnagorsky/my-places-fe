@@ -24,7 +24,6 @@ const MapSection = () => {
   const [directions, setDirections] = useState<any | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
   const { watch } = useFormContext<IRouteBuilderForm>();
-  const [waypoints, setWaypoints] = useState<ISearchPlace[]>([]);
 
   const coordinatesStartString = watch("searchFrom.coordinates");
   const startLatLng = coordinatesStartString
@@ -39,6 +38,7 @@ const MapSection = () => {
     setSelectedPlace(null);
   }, [i18n.language]);
 
+  const placesDependency = places.map((p) => p.id).join(",");
   useEffect(() => {
     if (!startLatLng || !endLatLng) return;
     const directionsService = new window.google.maps.DirectionsService();
@@ -62,7 +62,7 @@ const MapSection = () => {
           const orderedWaypoints = route.waypoint_order.map(
             (index) => places[index]
           );
-          setWaypoints(orderedWaypoints);
+          dispatch(setItems(orderedWaypoints));
           const distanceInMeters = route.legs.reduce(
             (prev, current) => prev + (current.distance?.value ?? 0),
             0
@@ -78,7 +78,7 @@ const MapSection = () => {
         }
       }
     );
-  }, [places, startLatLng, endLatLng]);
+  }, [coordinatesStartString, coordinatesEndString, placesDependency]);
 
   return (
     <Box>
@@ -109,7 +109,7 @@ const MapSection = () => {
             title={"Route start"}
           />
         )}
-        {waypoints.map((place, index) => (
+        {places.map((place, index) => (
           <Marker
             key={place.id}
             position={place.coordinates}
@@ -125,7 +125,7 @@ const MapSection = () => {
           >
             <div>
               <h2>
-                #{waypoints.indexOf(selectedPlace) + 1} - {selectedPlace.title}
+                #{places.indexOf(selectedPlace) + 1} - {selectedPlace.title}
               </h2>
               <p>{selectedPlace.address}</p>
             </div>

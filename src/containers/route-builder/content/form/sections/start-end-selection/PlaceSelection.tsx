@@ -4,15 +4,24 @@ import LocationAutocomplete from "@/containers/search-page/content/filters/conte
 import SearchByMe from "@/containers/search-page/content/filters/content/location-search/content/SearchByMe";
 import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
+import { useTranslation } from "next-i18next";
+import { useEffect } from "react";
 
 interface IPlaceSelectionProps {
   isRouteStart: boolean;
 }
 
 const PlaceSelection = ({ isRouteStart }: IPlaceSelectionProps) => {
+  const { t } = useTranslation(["common"]);
   const baseFieldName = isRouteStart ? "searchFrom" : "searchTo";
-  const { watch } = useFormContext<IRouteBuilderForm>();
+  const { watch, clearErrors } = useFormContext<IRouteBuilderForm>();
   const isSearchByMe = watch(`${baseFieldName}.isSearchByMe`);
+
+  useEffect(() => {
+    if (isSearchByMe) {
+      clearErrors(`${baseFieldName}.location`);
+    }
+  }, [isSearchByMe]);
 
   return (
     <Stack
@@ -37,6 +46,8 @@ const PlaceSelection = ({ isRouteStart }: IPlaceSelectionProps) => {
             : "Выберите место прибытия",
         }}
         disabled={isSearchByMe}
+        required={!isSearchByMe}
+        rules={{ required: isSearchByMe ? undefined : t("errors.required") }}
         fieldName={`${baseFieldName}.location`}
         fieldNameCoordinates={`${baseFieldName}.coordinates`}
       />

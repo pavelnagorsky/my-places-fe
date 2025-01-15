@@ -7,18 +7,44 @@ import {
 } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import searchService from "@/services/search-service/search.service";
+import routesService from "@/services/routes-service/routes.service";
 
 interface IRouteBuilderState {
   items: ISearchPlace[];
   distance: number; // meters
   duration: number; // seconds
+  submitLoading: boolean;
 }
 
 const initialState: IRouteBuilderState = {
   items: [],
   distance: 0,
   duration: 0,
+  submitLoading: false,
 };
+
+export const saveRouteThunk = createAsyncThunk(
+  "route-builder/save",
+  async (
+    payload: {
+      coordinatesStart: string;
+      coordinatesEnd: string;
+      title: string;
+    },
+    thunkAPI
+  ) => {
+    const { routeBuilder } = thunkAPI.getState() as RootState;
+    const { data } = await routesService.createRoute({
+      coordinatesStart: payload.coordinatesStart,
+      coordinatesEnd: payload.coordinatesEnd,
+      title: payload.title,
+      distance: routeBuilder.distance / 1000, // to KM
+      duration: routeBuilder.duration / 60, // to minutes
+      placeIds: routeBuilder.items.map((item) => item.id),
+    });
+    return data;
+  }
+);
 
 export const addRouteItemThunk = createAsyncThunk(
   "route-builder/add-item",
@@ -61,6 +87,16 @@ const routeBuilderSlice = createSlice({
     builder.addCase(addRouteItemThunk.fulfilled, (state, { payload }) => {
       state.items = [...state.items, ...payload];
     });
+
+    builder.addCase(saveRouteThunk.pending, (state, action) => {
+      state.submitLoading = true;
+    });
+    builder.addCase(saveRouteThunk.rejected, (state, action) => {
+      state.submitLoading = false;
+    });
+    builder.addCase(saveRouteThunk.fulfilled, (state, { payload }) => {
+      state.submitLoading = false;
+    });
   },
 });
 
@@ -68,9 +104,16 @@ const selectState = (state: RootState) => state.routeBuilder;
 
 export const selectItems = createSelector(selectState, (s) => s.items);
 
+export const selectHasItems = createSelector(selectItems, (s) => s.length > 0);
+
 export const selectDuration = createSelector(selectState, (s) => s.duration);
 
 export const selectDistance = createSelector(selectState, (s) => s.distance);
+
+export const selectSubmitLoading = createSelector(
+  selectState,
+  (s) => s.submitLoading
+);
 
 export const {
   setItems,

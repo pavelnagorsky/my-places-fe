@@ -3,7 +3,11 @@ import { useEffect, useMemo, useState } from "react";
 import { useGoogleAutocompleteService } from "@/hooks/useGoogleAutocompleteService";
 import { i18n, useTranslation } from "next-i18next";
 import { useCoordinatesByPlaceId } from "@/hooks/useCoordinatesByPlaceId";
-import { AutocompleteElement, useFormContext } from "react-hook-form-mui";
+import {
+  AutocompleteElement,
+  RegisterOptions,
+  useFormContext,
+} from "react-hook-form-mui";
 import { defaultCountrySign } from "@/components/map/Map";
 import LocationOption from "@/containers/search-page/content/filters/content/location-search/content/location-autocomplete/LocationOption";
 import utils from "@/shared/utils";
@@ -31,6 +35,8 @@ interface ILocationAutocompleteProps {
   fieldNameCoordinates: string;
   textFieldProps?: Partial<TextFieldProps>;
   disabled?: boolean;
+  rules?: RegisterOptions;
+  required?: boolean;
 }
 
 function LocationAutocomplete({
@@ -38,6 +44,8 @@ function LocationAutocomplete({
   fieldNameCoordinates,
   disabled,
   textFieldProps,
+  rules,
+  required,
 }: ILocationAutocompleteProps) {
   const { t } = useTranslation("search");
   const autocompleteService = useGoogleAutocompleteService();
@@ -103,9 +111,11 @@ function LocationAutocomplete({
 
   return (
     <AutocompleteElement
+      required={required}
       name={fieldName}
       label={textFieldProps?.label}
       options={options}
+      rules={rules}
       textFieldProps={{
         ...textFieldProps,
         placeholder: textFieldProps?.placeholder || t("filters.enterLocation"),
