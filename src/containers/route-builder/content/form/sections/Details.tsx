@@ -6,14 +6,13 @@ import {
 } from "@/store/route-builder-slice/route-builder.slice";
 import { TFunction, useTranslation } from "next-i18next";
 
-function formatSeconds(seconds: number, t: TFunction) {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  return `${hours}ч ${minutes}мин`;
+function formatMinutes(minutes: number, t: TFunction) {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+  return `${hours}ч ${+remainingMinutes.toFixed(0)}мин`;
 }
 
-function formatMeters(meters: number, locale: string) {
-  const kilometers = meters / 1000;
+function formatKM(kilometers: number, locale: string) {
   return new Intl.NumberFormat(locale, {
     style: "unit",
     maximumFractionDigits: 1,
@@ -27,8 +26,8 @@ const Details = () => {
   const distance = useAppSelector(selectDistance);
   const duration = useAppSelector(selectDuration);
 
-  const formattedDistance = formatMeters(distance, i18n.language);
-  const formattedDuration = formatSeconds(duration, t);
+  const formattedDistance = formatKM(distance, i18n.language);
+  const formattedDuration = formatMinutes(duration, t);
   return (
     <Stack
       zIndex={1}

@@ -11,8 +11,8 @@ import routesService from "@/services/routes-service/routes.service";
 
 interface IRouteBuilderState {
   items: ISearchPlace[];
-  distance: number; // meters
-  duration: number; // seconds
+  distance: number; // km
+  duration: number; // minutes
   submitLoading: boolean;
 }
 
@@ -38,8 +38,8 @@ export const saveRouteThunk = createAsyncThunk(
       coordinatesStart: payload.coordinatesStart,
       coordinatesEnd: payload.coordinatesEnd,
       title: payload.title,
-      distance: routeBuilder.distance / 1000, // to KM
-      duration: routeBuilder.duration / 60, // to minutes
+      distance: routeBuilder.distance,
+      duration: routeBuilder.duration,
       placeIds: routeBuilder.items.map((item) => item.id),
     });
     return data;

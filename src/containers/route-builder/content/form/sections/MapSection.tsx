@@ -71,8 +71,8 @@ const MapSection = () => {
             (prev, current) => prev + (current.duration?.value ?? 0),
             0
           );
-          dispatch(setDistance(distanceInMeters));
-          dispatch(setDuration(durationInSeconds));
+          dispatch(setDistance(distanceInMeters / 1000));
+          dispatch(setDuration(durationInSeconds / 60));
         } else {
           console.error(`error fetching directions ${result}`);
         }
