@@ -98,15 +98,15 @@ const MapSection = () => {
         {startLatLng && (
           <Marker
             position={startLatLng}
-            label={{ color: "white", fontWeight: "700", text: `Route start` }}
+            label={{ color: "white", fontWeight: "700", text: `*` }}
             title={"Route start"}
           />
         )}
         {endLatLng && (
           <Marker
             position={endLatLng}
-            label={{ color: "white", fontWeight: "700", text: `Route start` }}
-            title={"Route start"}
+            label={{ color: "white", fontWeight: "700", text: `*` }}
+            title={"Route end"}
           />
         )}
         {places.map((place, index) => (

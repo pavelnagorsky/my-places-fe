@@ -12,7 +12,6 @@ import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
 import { AutocompleteElement, useFormContext } from "react-hook-form-mui";
 import { useRouter } from "next/router";
-import { IReviewFormContext } from "@/containers/create-review/form/interfaces";
 import { useAppSelector } from "@/store/hooks";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
 
@@ -63,17 +62,13 @@ const PlaceSelect = ({
     fetch("");
   }, [i18n.language, query.placeId, isAuth]);
 
-  const onInputChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setLoading(true);
-      fetch(event.target.value);
-    },
-    [i18n.language]
-  );
-
   const debouncedInputChange = useMemo(
-    () => debounce(onInputChange, 300),
-    [onInputChange]
+    () =>
+      debounce((event: ChangeEvent<HTMLInputElement>) => {
+        setLoading(true);
+        fetch(event.target.value);
+      }, 300),
+    [i18n.language]
   );
 
   return (

@@ -1,8 +1,12 @@
-import { ISearchPlacesRequest } from "@/services/search-service/interfaces/interfaces";
+import {
+  ISearchPlacesOptionsRequest,
+  ISearchPlacesRequest,
+} from "@/services/search-service/interfaces/interfaces";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import axiosInstance from "@/services/axios.instance";
 import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
+import { ISearchPlaceOption } from "@/services/search-service/interfaces/search-place-option.interface";
 
 const searchService = {
   SEARCH_PLACES_PER_PAGE: 12,
@@ -23,6 +27,17 @@ const searchService = {
         lang: langId,
       },
     });
+  },
+
+  searchPlaceOptions: (
+    payload: ISearchPlacesOptionsRequest,
+    language: string
+  ) => {
+    const langId = parseLanguageToId(language);
+    return axiosInstance.post<IPaginationResponse<ISearchPlaceOption>>(
+      `/search/options?lang=${langId}`,
+      payload
+    );
   },
 };
 

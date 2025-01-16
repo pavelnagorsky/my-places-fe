@@ -11,3 +11,9 @@ export interface ISearchPlacesRequest
   searchStartCoordinates: string | null;
   searchEndCoordinates: string | null;
 }
+
+export interface ISearchPlacesOptionsRequest
+  extends Omit<IPaginationRequest<SearchOrderByEnum>, "orderAsc"> {
+  search: string;
+  excludeIds?: number[];
+}

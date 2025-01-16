@@ -32,7 +32,6 @@ const Form = () => {
         direction={"row"}
         gap={{ xs: "1em", md: "2em" }}
         height={"100%"}
-        px={{ xs: "1em", md: "2em" }}
         pb={"1em"}
         sx={{ "& .drag-container": { width: "100%" } }}
       >

@@ -47,4 +47,5 @@ export interface IModerationPlacesRequest
 export enum SearchOrderByEnum {
   CREATED_AT,
   RATING,
+  TITLE,
 }
