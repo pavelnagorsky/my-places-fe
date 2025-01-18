@@ -20,16 +20,10 @@ const useRouteBuilder = () => {
         coordinates: null,
         location: null,
       },
-      addPlace: null,
+      addPlaces: [],
       title: "Мой маршрут №1",
     },
   });
-
-  const onSaveRoute = useCallback(() => {
-    form.handleSubmit((data) => {
-      console.log(data);
-    })();
-  }, []);
 
   useEffect(() => {
     return () => {
@@ -37,7 +31,7 @@ const useRouteBuilder = () => {
     };
   }, []);
 
-  return { form, onSaveRoute };
+  return form;
 };
 
 export default useRouteBuilder;

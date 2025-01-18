@@ -1,15 +1,6 @@
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import { AutocompleteElement, useFormContext } from "react-hook-form-mui";
-import {
-  ChangeEvent,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import ISelectPlace from "@/services/places-service/interfaces/select-place.interface";
+import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
 import { debounce } from "@mui/material";
 import searchService from "@/services/search-service/search.service";
 import { SearchOrderByEnum } from "@/services/places-service/interfaces/interfaces";
@@ -17,6 +8,7 @@ import { ISearchPlaceOption } from "@/services/search-service/interfaces/search-
 
 interface IPlacesAutocompleteProps {
   fieldName: string;
+  multiple?: boolean;
   readonly?: boolean;
   required?: boolean;
   excludeIds?: number[];
@@ -34,10 +26,12 @@ const PlaceAutocomplete = ({
   excludeIds,
   pageSize,
   orderBy,
+  multiple,
 }: IPlacesAutocompleteProps) => {
   const { t, i18n } = useTranslation(["review-management", "common"]);
   const [options, setOptions] = useState<ISearchPlaceOption[]>([]);
   const [loading, setLoading] = useState(false);
+  const { getValues } = useFormContext();
 
   const fetch = (value: string) =>
     searchService
@@ -52,10 +46,26 @@ const PlaceAutocomplete = ({
         i18n.language
       )
       .then(({ data }) => {
-        setOptions(data.items);
+        const selectedValue = getValues(fieldName) as
+          | ISearchPlaceOption
+          | ISearchPlaceOption[];
+        const selectedOptions = Array.isArray(selectedValue)
+          ? selectedValue
+          : selectedValue
+          ? [selectedValue]
+          : [];
+        // Filter out duplicated keys
+        const uniqueOptions = selectedOptions.filter(
+          (option) =>
+            !data.items.some((newOption) => option.id === newOption.id)
+        );
+        // Update options state
+        setOptions([...data.items, ...uniqueOptions]);
+        //setOptions(data.items);
         setLoading(false);
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         setLoading(false);
       });
 
@@ -79,6 +89,7 @@ const PlaceAutocomplete = ({
       rules={{
         required: required,
       }}
+      multiple={multiple}
       parseError={(error) => t("errors.required", { ns: "common" })}
       name={fieldName}
       loading={loading}
@@ -94,6 +105,10 @@ const PlaceAutocomplete = ({
       }}
       autocompleteProps={{
         readOnly: readonly,
+        freeSolo: true,
+        filterSelectedOptions: true,
+        filterOptions: (x) => x,
+        autoComplete: true,
       }}
     />
   );

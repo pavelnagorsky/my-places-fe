@@ -10,7 +10,7 @@ import Details from "@/containers/route-builder/content/form/sections/Details";
 import MapSection from "@/containers/route-builder/content/form/sections/MapSection";
 
 const RouteBuilder = () => {
-  const logic = useRouteBuilder();
+  const form = useRouteBuilder();
 
   return (
     <motion.div
@@ -20,7 +20,7 @@ const RouteBuilder = () => {
     >
       <WrappedContainer>
         <motion.div variants={animationVariants.defaultItemVariant}>
-          <FormProvider {...logic.form}>
+          <FormProvider {...form}>
             <Grid container spacing={4} mb={"4em"}>
               <Grid size={12}>
                 <RouteTitle />

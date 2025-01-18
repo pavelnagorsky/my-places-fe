@@ -15,7 +15,9 @@ export const store = configureStore({
     routeBuilder: routeBuilderSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(searchCartCacheMiddleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(searchCartCacheMiddleware),
   devTools: process.env.NODE_ENV !== "production",
 });
 

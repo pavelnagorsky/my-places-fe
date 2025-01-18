@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { DirectionsRenderer, InfoWindow, Marker } from "@react-google-maps/api";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
+  getRouteDirectionsThunk,
   selectItems,
+  selectRouteDirections,
   setDistance,
   setDuration,
   setItems,
@@ -21,7 +23,7 @@ const MapSection = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const places = useAppSelector(selectItems);
-  const [directions, setDirections] = useState<any | null>(null);
+  const directions = useAppSelector(selectRouteDirections);
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
   const { watch } = useFormContext<IRouteBuilderForm>();
 
@@ -41,42 +43,13 @@ const MapSection = () => {
   const placesDependency = places.map((p) => p.id).join(",");
   useEffect(() => {
     if (!startLatLng || !endLatLng) return;
-    const directionsService = new window.google.maps.DirectionsService();
-    const waypoints = places.map((place) => ({
-      location: { lat: place.coordinates.lat, lng: place.coordinates.lng },
-      stopover: true,
-    }));
-    directionsService.route(
-      {
-        origin: startLatLng,
-        destination: endLatLng,
-        waypoints: waypoints,
-        // optimizeWaypoints: true,
+    dispatch(
+      getRouteDirectionsThunk({
         language: i18n.language,
-        travelMode: window.google.maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (status === window.google.maps.DirectionsStatus.OK && !!result) {
-          setDirections(result);
-          const route = result.routes[0];
-          const orderedWaypoints = route.waypoint_order.map(
-            (index) => places[index]
-          );
-          dispatch(setItems(orderedWaypoints));
-          const distanceInMeters = route.legs.reduce(
-            (prev, current) => prev + (current.distance?.value ?? 0),
-            0
-          );
-          const durationInSeconds = route.legs.reduce(
-            (prev, current) => prev + (current.duration?.value ?? 0),
-            0
-          );
-          dispatch(setDistance(distanceInMeters / 1000));
-          dispatch(setDuration(durationInSeconds / 60));
-        } else {
-          console.error(`error fetching directions ${result}`);
-        }
-      }
+        startLatLng,
+        endLatLng,
+        optimizeWaypoints: false,
+      })
     );
   }, [coordinatesStartString, coordinatesEndString, placesDependency]);
 

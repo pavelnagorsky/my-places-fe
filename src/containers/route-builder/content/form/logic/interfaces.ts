@@ -5,7 +5,7 @@ export interface IRouteBuilderForm {
   title: string;
   searchFrom: ISearchInput;
   searchTo: ISearchInput;
-  addPlace: ISelectPlace | null;
+  addPlaces: ISelectPlace[];
 }
 
 interface ISearchInput {

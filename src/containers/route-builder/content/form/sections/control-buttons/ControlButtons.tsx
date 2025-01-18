@@ -1,16 +1,17 @@
 import { Button, Stack } from "@mui/material";
 import SubmitButton from "@/containers/route-builder/content/form/sections/control-buttons/SubmitButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
-  addRouteItemThunk,
+  addRouteItemsThunk,
   selectItems,
 } from "@/store/route-builder-slice/route-builder.slice";
 import { useTranslation } from "next-i18next";
 import PlacesAutocomplete from "@/components/forms/custom-form-elements/PlacesAutocomplete";
+import OptimizeButton from "@/containers/route-builder/content/form/sections/control-buttons/OptimizeButton";
 
 const ControlButtons = () => {
   const { t, i18n } = useTranslation("route-builder");
@@ -28,19 +29,25 @@ const ControlButtons = () => {
   };
 
   const onConfirmLocation = () => {
-    trigger("addPlace").then((isValid) => {
+    trigger("addPlaces").then((isValid) => {
       if (isValid) {
         dispatch(
-          addRouteItemThunk({
-            id: getValues("addPlace.id") as number,
+          addRouteItemsThunk({
+            ids: getValues("addPlaces").map((place) => place.id),
             language: i18n.language,
           })
         );
-        setValue("addPlace", null);
+        setValue("addPlaces", []);
         onCancel();
       }
     });
   };
+
+  useEffect(() => {
+    if (!selectedPlaces.length) {
+      setIsAddMode(true);
+    }
+  }, []);
 
   return (
     <Stack
@@ -52,8 +59,9 @@ const ControlButtons = () => {
       {isAddMode ? (
         <>
           <PlacesAutocomplete
+            multiple
             required
-            fieldName={"addPlace"}
+            fieldName={"addPlaces"}
             excludeIds={selectedPlaces.map((p) => p.id)}
           />
           <Stack gap={"1em"} alignItems={"center"} direction={"row"}>
@@ -80,7 +88,15 @@ const ControlButtons = () => {
           >
             Добавить локацию
           </Button>
-          <SubmitButton />
+          <Stack
+            direction={{ sm: "row" }}
+            gap={"1em"}
+            flexGrow={1}
+            sx={{ "& button": { width: { xs: "100%", md: "auto" } } }}
+          >
+            <SubmitButton />
+            <OptimizeButton />
+          </Stack>
         </>
       )}
     </Stack>
