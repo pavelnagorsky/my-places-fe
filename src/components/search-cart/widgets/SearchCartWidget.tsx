@@ -1,5 +1,13 @@
 import SearchCart from "@/components/search-cart/SearchCart";
-import { Badge, Box, Fab, useMediaQuery, useTheme, Zoom } from "@mui/material";
+import {
+  Badge,
+  Box,
+  Fab,
+  SxProps,
+  useMediaQuery,
+  useTheme,
+  Zoom,
+} from "@mui/material";
 import routingIcon from "/public/images/icons/routing.png";
 import {
   selectCartPlaceIdsLength,
@@ -11,7 +19,11 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Image from "next/image";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 
-const SearchCartWidget = () => {
+interface ISearchCartWidgetProps {
+  sx?: SxProps;
+}
+
+const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useAppDispatch();
@@ -34,6 +46,7 @@ const SearchCartWidget = () => {
             bottom: 102,
             right: { xs: 18, md: 22, lg: 54 },
             zIndex: 100,
+            ...sx,
           }}
         >
           <Fab

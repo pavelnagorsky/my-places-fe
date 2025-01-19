@@ -8,6 +8,7 @@ import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import utils from "@/shared/utils";
 import { Button, CircularProgress } from "@mui/material";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 
 const OptimizeButton = () => {
   const dispatch = useAppDispatch();
@@ -41,13 +42,19 @@ const OptimizeButton = () => {
   return (
     <Button
       onClick={onClickOptimize}
-      variant={"contained"}
+      variant={"outlined"}
       disabled={!isValid}
       size={"large"}
       sx={{ borderWidth: 2 }}
-      endIcon={loading && <CircularProgress color="inherit" size={22} />}
+      endIcon={
+        loading ? (
+          <CircularProgress color="inherit" size={22} />
+        ) : (
+          <SettingsSuggestIcon />
+        )
+      }
     >
-      Оптимизировать маршрут
+      Оптимизировать
     </Button>
   );
 };

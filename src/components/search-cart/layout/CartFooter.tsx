@@ -11,7 +11,7 @@ const CartFooter = () => {
 
   const onCreateRoute = () => {
     dispatch(cartToRouteBuilderThunk()).then(() => {
-      router.push(routerLinks.routeBuilder);
+      router.push(routerLinks.createRoute);
     });
   };
 

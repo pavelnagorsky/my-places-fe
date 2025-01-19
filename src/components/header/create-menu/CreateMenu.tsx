@@ -25,6 +25,10 @@ const CreateMenu = ({ activePath }: { activePath: string }) => {
       title: t("links.createPlace"),
       href: "/create-place",
     },
+    {
+      title: t("links.createRoute"),
+      href: "/create-route",
+    },
   ];
 
   const isButtonActive =

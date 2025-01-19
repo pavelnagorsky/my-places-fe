@@ -60,12 +60,6 @@ const Header = ({ wideMode }: IHeaderProps) => {
             <HeaderLink to={routerLinks.aboutUs} pathname={router.pathname}>
               {t("links.about")}
             </HeaderLink>
-            <HeaderLink
-              to={routerLinks.routeBuilder}
-              pathname={router.pathname}
-            >
-              {t("links.routeBuilder")}
-            </HeaderLink>
           </Stack>
           <IconButton
             onClick={menu.handleClick}

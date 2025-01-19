@@ -1,5 +1,5 @@
 import CartItem from "@/components/search-cart/content/CartItem";
-import { Stack } from "@mui/material";
+import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   removeCartItem,
@@ -23,6 +23,8 @@ const CartItems = () => {
   const ids = useAppSelector(selectCartPlaceIds);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectLoading);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     dispatch(getCartItemsThunk({ language: i18n.language }));
@@ -45,7 +47,7 @@ const CartItems = () => {
       pb={"1em"}
       sx={{ "& .drag-container": { width: "100%" } }}
     >
-      <CartStepper />
+      {!isMobile && <CartStepper />}
       <SortableList
         onSortEnd={onSortEnd}
         draggedItemClassName="dragged"
@@ -53,7 +55,7 @@ const CartItems = () => {
       >
         <Stack gap={"1em"} width={"100%"}>
           <AnimatePresence mode="popLayout">
-            {items.map((item) => (
+            {items.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, scale: 0.5, x: -200 }}
@@ -74,7 +76,7 @@ const CartItems = () => {
                       },
                     }}
                   >
-                    <CartItem place={item} onRemove={onRemove} />
+                    <CartItem place={item} index={index} onRemove={onRemove} />
                   </Stack>
                 </SortableItem>
               </motion.div>

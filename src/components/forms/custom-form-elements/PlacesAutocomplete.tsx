@@ -95,7 +95,7 @@ const PlaceAutocomplete = ({
       loading={loading}
       options={options}
       textFieldProps={{
-        placeholder: t("form.selectPlace"),
+        placeholder: multiple ? t("form.selectPlaces") : t("form.selectPlace"),
         fullWidth: true,
         sx: {
           minWidth: { sm: "300px", md: "350px" },

@@ -11,6 +11,7 @@ import StartEndSelection from "@/containers/route-builder/content/form/sections/
 import Stepper from "@/containers/route-builder/content/form/sections/Stepper";
 import ControlButtons from "@/containers/route-builder/content/form/sections/control-buttons/ControlButtons";
 import { AnimatePresence, motion, Reorder } from "framer-motion";
+import PlaceSelection from "@/containers/route-builder/content/form/sections/start-end-selection/PlaceSelection";
 
 const Form = () => {
   const theme = useTheme();
@@ -37,15 +38,16 @@ const Form = () => {
       >
         {!isMobile && <Stepper />}
         <Stack gap={4} width={"100%"}>
-          <StartEndSelection />
+          {!isMobile && <StartEndSelection />}
           <SortableList
             onSortEnd={onSortEnd}
             draggedItemClassName="dragged"
             className={"drag-container"}
           >
             <Stack gap={"1em"} width={"100%"}>
+              {isMobile && <PlaceSelection isRouteStart={true} />}
               <AnimatePresence mode="popLayout">
-                {items.map((item) => (
+                {items.map((item, index) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, scale: 0.5, x: -400 }}
@@ -60,12 +62,17 @@ const Form = () => {
                   >
                     <SortableItem>
                       <Stack>
-                        <CartItem place={item} onRemove={onRemove} />
+                        <CartItem
+                          place={item}
+                          index={index}
+                          onRemove={onRemove}
+                        />
                       </Stack>
                     </SortableItem>
                   </motion.div>
                 ))}
               </AnimatePresence>
+              {isMobile && <PlaceSelection isRouteStart={false} />}
             </Stack>
           </SortableList>
           <ControlButtons />

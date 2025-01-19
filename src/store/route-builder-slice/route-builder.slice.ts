@@ -88,22 +88,33 @@ export const saveRouteThunk = createAsyncThunk(
   "route-builder/save",
   async (
     payload: {
-      coordinatesStart: string;
-      coordinatesEnd: string;
-      title: string;
+      route: {
+        coordinatesStart: string;
+        coordinatesEnd: string;
+        title: string;
+      };
+      onSuccess?: () => void;
+      onError?: () => void;
     },
     thunkAPI
   ) => {
     const { routeBuilder } = thunkAPI.getState() as RootState;
-    const { data } = await routesService.createRoute({
-      coordinatesStart: payload.coordinatesStart,
-      coordinatesEnd: payload.coordinatesEnd,
-      title: payload.title,
-      distance: routeBuilder.distance,
-      duration: routeBuilder.duration,
-      placeIds: routeBuilder.items.map((item) => item.id),
-    });
-    return data;
+    try {
+      const { data } = await routesService.createRoute({
+        coordinatesStart: payload.route.coordinatesStart,
+        coordinatesEnd: payload.route.coordinatesEnd,
+        title: payload.route.title,
+        distance: routeBuilder.distance,
+        duration: routeBuilder.duration,
+        placeIds: routeBuilder.items.map((item) => item.id),
+      });
+      if (typeof payload.onSuccess === "function") payload.onSuccess();
+
+      return data;
+    } catch (e) {
+      if (typeof payload.onError === "function") payload.onError();
+      return thunkAPI.rejectWithValue(e);
+    }
   }
 );
 

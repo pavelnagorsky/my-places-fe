@@ -21,7 +21,7 @@ const CartHeader = () => {
       gap={"1em"}
       position={"sticky"}
       top={0}
-      zIndex={1}
+      zIndex={2}
       py={{ xs: "1em", md: "2em" }}
       pl={{ xs: "1em", md: "6em" }}
       pr={{ xs: "1em", md: "2em" }}

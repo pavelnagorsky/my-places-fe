@@ -5,9 +5,18 @@ import { FormProvider } from "react-hook-form-mui";
 import Grid from "@mui/material/Grid2";
 import RouteTitle from "@/containers/route-builder/content/form/sections/RouteTitle";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import Form from "@/containers/route-builder/content/form/Form";
 import Details from "@/containers/route-builder/content/form/sections/Details";
 import MapSection from "@/containers/route-builder/content/form/sections/MapSection";
+import dynamic from "next/dynamic";
+import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
+import { Stack } from "@mui/material";
+
+const Form = dynamic(
+  () => import("@/containers/route-builder/content/form/Form"),
+  {
+    ssr: false,
+  }
+);
 
 const RouteBuilder = () => {
   const form = useRouteBuilder();
@@ -19,24 +28,31 @@ const RouteBuilder = () => {
       animate="show"
     >
       <WrappedContainer>
-        <motion.div variants={animationVariants.defaultItemVariant}>
-          <FormProvider {...form}>
-            <Grid container spacing={4} mb={"4em"}>
-              <Grid size={12}>
+        <FormProvider {...form}>
+          <Grid container spacing={4} mb={"4em"}>
+            <Grid size={12}>
+              <motion.div variants={animationVariants.defaultItemVariant}>
+                <Stack mb={3}>
+                  <Breadcrumbs />
+                </Stack>
                 <RouteTitle />
-              </Grid>
-              <Grid size={{ xs: 12, lg: 9 }}>
-                <Form />
-              </Grid>
-              <Grid size={{ xs: 12, lg: 3 }}>
-                <Details />
-              </Grid>
-              <Grid size={12}>
-                <MapSection />
-              </Grid>
+              </motion.div>
             </Grid>
-          </FormProvider>
-        </motion.div>
+            <Grid size={{ xs: 12, lg: 9 }}>
+              <motion.div variants={animationVariants.defaultItemVariant}>
+                <Form />
+              </motion.div>
+            </Grid>
+            <Grid size={{ xs: 12, lg: 3 }}>
+              <Details />
+            </Grid>
+            <Grid size={12}>
+              <motion.div variants={animationVariants.defaultItemVariant}>
+                <MapSection />
+              </motion.div>
+            </Grid>
+          </Grid>
+        </FormProvider>
       </WrappedContainer>
     </motion.div>
   );

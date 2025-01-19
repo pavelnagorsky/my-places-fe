@@ -6,6 +6,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import HomeIcon from "@mui/icons-material/Home";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
+import RouteIcon from "@mui/icons-material/Route";
 import SliderMenuLink from "../SliderMenuLink";
 import { useTranslation } from "next-i18next";
 
@@ -61,6 +62,13 @@ const LinksSection = ({
         text={t("links.createPlaceMobile")}
         href={routerLinks.createPlace}
         icon={<AddBoxIcon fontSize={"small"} color={"secondary"} />}
+      />
+      <SliderMenuLink
+        pathname={pathname}
+        onClick={onClose}
+        text={t("links.createRouteMobile")}
+        href={routerLinks.createRoute}
+        icon={<RouteIcon fontSize={"small"} color={"secondary"} />}
       />
       {desktopLinks}
     </Fragment>

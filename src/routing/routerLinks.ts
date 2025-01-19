@@ -6,6 +6,7 @@ export const routerLinks = {
   contactUs: "/contact-us",
   createReview: "/create-review",
   createPlace: "/create-place",
+  createRoute: "/create-route",
   place: (slug: string) => `/places/${slug}`,
   review: (placeSlug: string, reviewId: number) =>
     `/places/${placeSlug}?review=${reviewId}`,
@@ -37,5 +38,4 @@ export const routerLinks = {
   moderationReports: "/moderation/reports",
   placeModeration: (placeId: number) => `/moderation/places/${placeId}`,
   reviewModeration: (reviewId: number) => `/moderation/reviews/${reviewId}`,
-  routeBuilder: "/route-builder",
 };

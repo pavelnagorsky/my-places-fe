@@ -12,6 +12,7 @@
     "placeDescription": "At this point, you need to select a Place from the drop-down list or create a new one.",
     "newPlace": "New Place",
     "selectPlace": "Select the Place",
+    "selectPlaces": "Select Places",
     "photos": "Photos",
     "photosDescription": "Upload up to {{limit}} photos taken at this location in jpg, jpeg, png format.",
     "reviewDescription": "Description",

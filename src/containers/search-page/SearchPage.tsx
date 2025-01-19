@@ -13,7 +13,7 @@ import FiltersContainerMobile from "@/containers/search-page/content/filters/fil
 import MapSection from "@/containers/search-page/content/map-section/MapSection";
 import CardsSection from "@/containers/search-page/content/cards-section/CardsSection";
 import TotalResultsCount from "@/containers/search-page/content/cards-section/TotalResultsCount";
-import SearchCartWidget from "@/components/search-cart/SearchCartWidget";
+import SearchCartWidget from "@/components/search-cart/widgets/SearchCartWidget";
 
 function SearchPage() {
   const { formContext, onSubmit } = usePlacesSearch();

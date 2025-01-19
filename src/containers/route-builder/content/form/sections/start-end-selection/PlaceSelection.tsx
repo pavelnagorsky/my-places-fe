@@ -14,13 +14,20 @@ interface IPlaceSelectionProps {
 const PlaceSelection = ({ isRouteStart }: IPlaceSelectionProps) => {
   const { t } = useTranslation(["common"]);
   const baseFieldName = isRouteStart ? "searchFrom" : "searchTo";
-  const { watch, clearErrors } = useFormContext<IRouteBuilderForm>();
+  const {
+    watch,
+    clearErrors,
+    trigger,
+    formState: { isDirty },
+  } = useFormContext<IRouteBuilderForm>();
   const isSearchByMe = watch(`${baseFieldName}.isSearchByMe`);
 
   useEffect(() => {
-    if (isSearchByMe) {
+    if (!isDirty) return;
+    setTimeout(() => {
+      trigger(`${baseFieldName}.location`);
       clearErrors(`${baseFieldName}.location`);
-    }
+    }, 100);
   }, [isSearchByMe]);
 
   return (

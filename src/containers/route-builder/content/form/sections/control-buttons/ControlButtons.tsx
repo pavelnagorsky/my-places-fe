@@ -51,7 +51,7 @@ const ControlButtons = () => {
 
   return (
     <Stack
-      direction={{ md: "row" }}
+      direction={{ sm: isAddMode ? "column" : "row", md: "row" }}
       mt={{ md: "1em" }}
       gap={"1em"}
       alignItems={{ md: "center" }}
@@ -88,15 +88,7 @@ const ControlButtons = () => {
           >
             Добавить локацию
           </Button>
-          <Stack
-            direction={{ sm: "row" }}
-            gap={"1em"}
-            flexGrow={1}
-            sx={{ "& button": { width: { xs: "100%", md: "auto" } } }}
-          >
-            <SubmitButton />
-            <OptimizeButton />
-          </Stack>
+          <SubmitButton />
         </>
       )}
     </Stack>

@@ -41,7 +41,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
         h1: {
           fontWeight: 600,
           color: "#303030",
-          fontSize: "40px",
+          fontSize: "32px",
           marginBottom: "30px",
         },
         h2: {

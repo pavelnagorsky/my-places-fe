@@ -25,6 +25,16 @@ import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
 import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
+import dynamic from "next/dynamic";
+
+const SearchCartWidget = dynamic(
+  () => import("@/components/search-cart/widgets/SearchCartWidget"),
+  { ssr: false }
+);
+const AddToCartWidget = dynamic(
+  () => import("@/components/search-cart/widgets/AddToCartWidget"),
+  { ssr: false }
+);
 
 interface IPlaceProps {
   place: IPlace;
@@ -65,6 +75,8 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
 
   return (
     <WrappedContainer>
+      <AddToCartWidget placeId={place.id} />
+      <SearchCartWidget sx={{ bottom: 32 }} />
       <motion.div
         variants={animationVariants.defaultContainerVariant}
         initial="hidden"

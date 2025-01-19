@@ -11,7 +11,7 @@ const RouteBuilderPageLazy = dynamic(
   () => import("../containers/route-builder/RouteBuilder")
 );
 
-const RouteBuilder: NextPage = () => {
+const CreateRoute: NextPage = () => {
   const { t } = useTranslation("route-builder");
   const { canonical, alternateLinks } = useAlternateLinks();
 
@@ -47,4 +47,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default RouteBuilder;
+export default CreateRoute;

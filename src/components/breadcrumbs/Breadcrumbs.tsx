@@ -15,12 +15,13 @@ const Breadcrumbs = () => {
   const breadcrumbNameMap = {
     ["create-review"]: t("links.createReview"),
     ["create-place"]: t("links.createPlace"),
+    ["create-route"]: t("links.createRoute"),
     ["privacy-policy"]: t("links.privacyPolicy"),
     ["terms-of-use"]: t("links.termsOfUse"),
   };
 
   return (
-    <Box role="presentation" mt={"1em"}>
+    <Box role="presentation">
       <Crumbs aria-label="breadcrumb">
         <NextMuiLink underline="hover" color="inherit" href="/">
           Знай свой край

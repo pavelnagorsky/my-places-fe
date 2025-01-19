@@ -1,4 +1,4 @@
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Map from "@/components/map/Map";
 import { useState, useEffect } from "react";
 import { DirectionsRenderer, InfoWindow, Marker } from "@react-google-maps/api";
@@ -55,6 +55,9 @@ const MapSection = () => {
 
   return (
     <Box>
+      <Typography variant={"h1"} component={"h2"}>
+        Визуальное построение маршрута
+      </Typography>
       <Map
         containerStyle={{
           height: isMobile ? "400px" : "600px",

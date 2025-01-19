@@ -13,18 +13,60 @@ import {
 import Image from "next/image";
 import locationImage from "../../../../public/images/icons/location.png";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
-import DeleteIcon from "@mui/icons-material/Delete";
+// import DeleteIcon from "@mui/icons-material/Delete";
+import deleteIcon from "/public/images/icons/basket.png";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import { SortableKnob } from "react-easy-sort";
 
 interface ICartItemProps {
   onRemove: (id: number) => void;
   place: ISearchPlace;
+  index: number;
 }
 
-const CartItem = ({ place, onRemove }: ICartItemProps) => {
+const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobileSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const dragButton = (
+    <Box>
+      <SortableKnob>
+        <IconButton
+          size={"small"}
+          color={"primary"}
+          sx={{
+            bgcolor: `${primaryBackground} !important`,
+            cursor: "grab",
+          }}
+        >
+          <DragHandleIcon />
+        </IconButton>
+      </SortableKnob>
+    </Box>
+  );
+
+  const deleteButton = (
+    <Box>
+      <IconButton
+        size={"small"}
+        color={"primary"}
+        sx={isMobileSm ? { bgcolor: primaryBackground, opacity: 0.8 } : {}}
+        onClick={() => onRemove(place.id)}
+      >
+        <Box
+          component={"img"}
+          src={deleteIcon.src}
+          alt={"Delete"}
+          sx={{
+            height: "25px",
+            width: "100%",
+            userSelect: "none",
+          }}
+        />
+      </IconButton>
+    </Box>
+  );
 
   return (
     <Paper
@@ -36,45 +78,78 @@ const CartItem = ({ place, onRemove }: ICartItemProps) => {
     >
       <Grid
         container
-        spacing={{ sm: 2 }}
+        spacing={{ xs: 0, sm: 2 }}
         sx={{
           width: "100%",
-          minHeight: { xs: "217px", sm: "200px" },
+          minHeight: { sm: "200px" },
         }}
       >
-        {!isMobile && (
-          <Grid size={{ xs: 12, sm: 4 }}>
-            <MuiImage
-              imageProps={{
-                style: { objectFit: "cover" },
-                fill: true,
-                src: place.image ?? "/none",
-                alt: place.title,
-                sizes: "(max-width: 768px) 100vw, 30vw",
-              }}
-              boxProps={{
-                sx: {
-                  height: { xs: "150px", sm: "200px" },
-                  width: "100%",
-                  "& img": {
-                    borderTopRightRadius: { xs: "10px", sm: 0 },
-                    borderTopLeftRadius: "10px",
-                    borderBottomLeftRadius: { xs: 0, sm: "10px" },
-                  },
+        <Grid size={{ xs: 12, sm: 4 }}>
+          {isMobileSm && (
+            <Stack
+              position={"absolute"}
+              zIndex={1}
+              right={"0.5em"}
+              top={"0.5em"}
+              direction={"column"}
+              gap={"0.5em"}
+            >
+              {dragButton}
+              {deleteButton}
+            </Stack>
+          )}
+          {isMobile && (
+            <Stack
+              position={"absolute"}
+              zIndex={1}
+              left={"0.5em"}
+              top={"0.5em"}
+              bgcolor={primaryBackground}
+              borderRadius={"50%"}
+              fontWeight={700}
+              fontSize={"20px"}
+              color={"primary.main"}
+              width={"42px"}
+              height={"42px"}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              {index + 1}
+            </Stack>
+          )}
+          <MuiImage
+            imageProps={{
+              style: { objectFit: "cover" },
+              fill: true,
+              src: place.image ?? "/none",
+              alt: place.title,
+              sizes: "(max-width: 768px) 100vw, 30vw",
+            }}
+            boxProps={{
+              sx: {
+                position: "relative",
+                height: { xs: "210px", sm: "200px" },
+                width: "100%",
+                "& img": {
+                  borderTopRightRadius: { xs: "10px", sm: 0 },
+                  borderTopLeftRadius: "10px",
+                  borderBottomLeftRadius: { xs: 0, sm: "10px" },
                 },
-              }}
-            />
-          </Grid>
-        )}
+              },
+            }}
+          />
+        </Grid>
         <Grid size={{ xs: 12, sm: 6.8, md: 7 }}>
           <Stack
+            alignItems={{ xs: "center", sm: "start" }}
             height={"100%"}
             py={{ xs: "1em" }}
             px={{ xs: "1em", sm: 0 }}
             gap={{ xs: "1em", sm: "0.5em" }}
           >
             <Typography
-              fontSize={{ xs: "18px", md: "22px" }}
+              fontSize={"22px"}
+              textAlign={{ xs: "center", sm: "start" }}
               mb={{ xs: 0, md: "0.5em" }}
               fontWeight={500}
               sx={{
@@ -97,7 +172,7 @@ const CartItem = ({ place, onRemove }: ICartItemProps) => {
                 overflow={"hidden"}
                 textOverflow={"ellipsis"}
                 variant="body2"
-                fontSize={{ xs: "14px", md: "18px" }}
+                fontSize={"18px"}
                 sx={{
                   display: "-webkit-box",
                   WebkitBoxOrient: "vertical",
@@ -112,7 +187,7 @@ const CartItem = ({ place, onRemove }: ICartItemProps) => {
               mt={"auto"}
               fontWeight={500}
               variant="body1"
-              fontSize={{ xs: "14px", md: "18px" }}
+              fontSize={"18px"}
               display={"flex"}
               alignItems={"center"}
               sx={{ wordBreak: "break-word" }}
@@ -132,41 +207,19 @@ const CartItem = ({ place, onRemove }: ICartItemProps) => {
             </Typography>
           </Stack>
         </Grid>
-        <Grid
-          size={{ xs: 12, sm: 1.2, md: 1 }}
-          width={{ xs: "100%", sm: "auto" }}
-        >
-          <Stack
-            justifyContent={"end"}
-            direction={{ xs: "row-reverse", sm: "column" }}
-            gap={"1em"}
-            m={{ xs: "0 1em 1em 1em", sm: "1em 0" }}
-          >
-            <Box>
-              <SortableKnob>
-                <IconButton
-                  size={"small"}
-                  color={"primary"}
-                  sx={{
-                    bgcolor: `${primaryBackground} !important`,
-                    cursor: "grab",
-                  }}
-                >
-                  <DragHandleIcon />
-                </IconButton>
-              </SortableKnob>
-            </Box>
-            <Box>
-              <IconButton
-                size={"small"}
-                color={"primary"}
-                onClick={() => onRemove(place.id)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Box>
-          </Stack>
-        </Grid>
+        {!isMobileSm && (
+          <Grid size={{ sm: 1.2, md: 1 }}>
+            <Stack
+              justifyContent={"end"}
+              direction={"column"}
+              gap={"1em"}
+              my={"1em"}
+            >
+              {dragButton}
+              {deleteButton}
+            </Stack>
+          </Grid>
+        )}
       </Grid>
     </Paper>
   );

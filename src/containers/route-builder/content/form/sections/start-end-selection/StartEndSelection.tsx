@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid2";
 import PlaceSelection from "@/containers/route-builder/content/form/sections/start-end-selection/PlaceSelection";
+import { memo } from "react";
 
 const StartEndSelection = () => {
   return (
@@ -14,4 +15,4 @@ const StartEndSelection = () => {
   );
 };
 
-export default StartEndSelection;
+export default memo(StartEndSelection);
