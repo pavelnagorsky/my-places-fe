@@ -1,6 +1,7 @@
 import { ILatLngCoordinate } from "@/components/map/Map";
 import { LanguageIdsEnum } from "@/shared/LanguageIdsEnum";
 import I18nLanguages from "@/shared/I18nLanguages";
+import { TFunction } from "next-i18next";
 
 function isEmpty(obj: Object) {
   for (const prop in obj) {
@@ -118,6 +119,21 @@ const utils = {
 
   delay: (ms: number): Promise<void> => {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  },
+
+  formatKM: (kilometers: number, locale: string) => {
+    return new Intl.NumberFormat(locale, {
+      style: "unit",
+      maximumFractionDigits: 1,
+      unit: "kilometer",
+      unitDisplay: "short",
+    }).format(kilometers);
+  },
+
+  formatMinutes: (minutes: number, t: TFunction) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return `${hours}ч ${+remainingMinutes.toFixed(0)}мин`;
   },
 };
 

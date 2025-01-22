@@ -19,6 +19,10 @@ const reviewsService = {
   },
 
   MY_ROUTES_ITEMS_PER_PAGE: 15,
+
+  delete: (id: number) => {
+    return axiosInstance.delete<{ id: number }>(`/Routes/${id}`);
+  },
 };
 
 export default reviewsService;

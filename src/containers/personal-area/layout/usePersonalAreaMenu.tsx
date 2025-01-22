@@ -4,6 +4,7 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { ReactElement } from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import RouteIcon from "@mui/icons-material/Route";
 import { useTranslation } from "next-i18next";
 
 const usePersonalAreaMenu = () => {
@@ -28,6 +29,11 @@ const usePersonalAreaMenu = () => {
       title: t("links.reviews"),
       href: routerLinks.personalAreaReviews,
       icon: <NewspaperIcon />,
+    },
+    {
+      title: t("links.routes"),
+      href: routerLinks.personalAreaRoutes,
+      icon: <RouteIcon />,
     },
   ] as { title: string; href: string; icon: ReactElement }[];
 };

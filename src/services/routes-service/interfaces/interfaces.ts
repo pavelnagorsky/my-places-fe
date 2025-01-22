@@ -11,5 +11,5 @@ export enum MyRoutesOrderByEnum {
   CREATED_AT,
   TITLE,
   DISTANCE,
-  TIME,
+  DURATION,
 }

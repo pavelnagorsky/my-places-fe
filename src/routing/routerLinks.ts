@@ -20,6 +20,7 @@ export const routerLinks = {
   personalAreaReviews: "/personal-area/my-reviews",
   personalAreaSettings: "/personal-area/settings",
   personalAreaFavourites: "/personal-area/favourites",
+  personalAreaRoutes: "/personal-area/my-routes",
   personalAreaEditPlace: (placeId: number) =>
     `/personal-area/my-places/${placeId}/edit`,
   personalAreaEditReview: (reviewId: number) =>

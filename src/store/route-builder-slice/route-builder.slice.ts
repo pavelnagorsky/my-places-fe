@@ -104,8 +104,6 @@ export const saveRouteThunk = createAsyncThunk(
         coordinatesStart: payload.route.coordinatesStart,
         coordinatesEnd: payload.route.coordinatesEnd,
         title: payload.route.title,
-        distance: routeBuilder.distance,
-        duration: routeBuilder.duration,
         placeIds: routeBuilder.items.map((item) => item.id),
       });
       if (typeof payload.onSuccess === "function") payload.onSuccess();

@@ -29,7 +29,7 @@ const SubmitButton = () => {
           title: t("feedback.error", {
             ns: "common",
           }),
-          description: `${t("feedback.create.error")} ${t(
+          description: `Ошибка при создании маршрута. ${t(
             "errors.description",
             {
               ns: "common",
@@ -50,7 +50,7 @@ const SubmitButton = () => {
           title: t("feedback.success", {
             ns: "common",
           }),
-          description: t("feedback.create.success"),
+          description: `Маршрут был успешно сохранен. Вы сможете просмотреть его в личном кабинете`,
           variant: "standard",
           severity: "success",
         },

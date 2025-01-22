@@ -2,6 +2,8 @@ import { ILatLngCoordinate } from "@/components/map/Map";
 import { IRoutePlace } from "@/services/routes-service/interfaces/route-place.interface";
 
 export interface IRoute {
+  id: number;
+
   // Route start coordinates {lat;lng}
   coordinatesStart: ILatLngCoordinate;
 
@@ -15,4 +17,8 @@ export interface IRoute {
   distance: number; // Km
 
   places: IRoutePlace[];
+
+  createdAt: string;
+
+  updatedAt: string;
 }
