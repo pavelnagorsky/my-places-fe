@@ -47,7 +47,7 @@ function LocationAutocomplete({
   rules,
   required,
 }: ILocationAutocompleteProps) {
-  const { t } = useTranslation("search");
+  const { t } = useTranslation("common");
   const autocompleteService = useGoogleAutocompleteService();
   const searchCoordinates = useCoordinatesByPlaceId();
   const { watch, setValue } = useFormContext();

@@ -19,8 +19,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import NextLink from "next/link";
 import useMyRoutes from "@/containers/personal-area/my-routes/useMyRoutes";
-import RouteItemsTableHead from "@/containers/personal-area/my-routes/place-item/RouteItemsTableHead";
-import RouteItem from "@/containers/personal-area/my-routes/place-item/RouteItem";
+import RouteItemsTableHead from "@/containers/personal-area/my-routes/route-item/RouteItemsTableHead";
+import RouteItem from "@/containers/personal-area/my-routes/route-item/RouteItem";
 
 const MyRoutesPage = () => {
   const { t } = useTranslation("personal-area");

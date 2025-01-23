@@ -20,8 +20,8 @@ import { useState } from "react";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
-import useMyRouteMenu from "@/containers/personal-area/my-routes/place-item/menu/useMyRouteMenu";
-import MyRouteMenu from "@/containers/personal-area/my-routes/place-item/menu/MyRouteMenu";
+import useMyRouteMenu from "@/containers/personal-area/my-routes/route-item/menu/useMyRouteMenu";
+import MyRouteMenu from "@/containers/personal-area/my-routes/route-item/menu/MyRouteMenu";
 import utils from "@/shared/utils";
 
 interface IRouteItemProps {

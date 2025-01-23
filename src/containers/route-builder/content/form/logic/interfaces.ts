@@ -10,6 +10,6 @@ export interface IRouteBuilderForm {
 
 interface ISearchInput {
   isSearchByMe: boolean;
-  location: IPlaceType | null;
+  location: IPlaceType | { description: string } | null;
   coordinates: string | null;
 }

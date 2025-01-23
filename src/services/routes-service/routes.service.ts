@@ -13,8 +13,13 @@ const reviewsService = {
   getMyRoutes: (payload: IMyRoutesRequest, lang: string) => {
     const langId = parseLanguageToId(lang);
     return axiosInstance.post<IPaginationResponse<IRoute>>(
-      `/routes/my-routes?lang=${langId}`,
-      payload
+      `/routes/my-routes`,
+      payload,
+      {
+        params: {
+          lang: langId,
+        },
+      }
     );
   },
 
@@ -22,6 +27,15 @@ const reviewsService = {
 
   delete: (id: number) => {
     return axiosInstance.delete<{ id: number }>(`/Routes/${id}`);
+  },
+
+  getRoute: (id: number, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.get<IRoute>(`/Routes/${id}`, {
+      params: {
+        lang: langId,
+      },
+    });
   },
 };
 

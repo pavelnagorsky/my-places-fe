@@ -1,6 +1,6 @@
-import PersonalAreaLayout from "../layout/PersonalAreaLayout";
+import PersonalAreaLayout from "../../layout/PersonalAreaLayout";
 import { FormContainer, FormProvider } from "react-hook-form-mui";
-import useEditMyPlace from "@/containers/personal-area/edit-my-place/useEditMyPlace";
+import useEditMyPlace from "@/containers/personal-area/my-places/edit-my-place/useEditMyPlace";
 import {
   Backdrop,
   Box,
@@ -21,7 +21,7 @@ import useCreatePlaceMeta from "@/containers/create-place/form/useCreatePlaceMet
 import { SyntheticEvent, useState } from "react";
 import Navigation from "@/containers/create-place/form/Navigation";
 import animationVariants from "@/shared/animation-variants";
-import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
+import UpdateTranslations from "@/containers/personal-area/my-places/edit-my-place/UpdateTranslations";
 import { useTranslation } from "next-i18next";
 
 const tabContentVariant: Variants = {

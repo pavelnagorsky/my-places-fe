@@ -6,25 +6,25 @@ import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic
 import { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 
-const RouteTitle = () => {
+const RouteTitle = ({ editMode }: { editMode?: boolean }) => {
   const { watch, trigger } = useFormContext<IRouteBuilderForm>();
   const title = watch("title");
-  const [editMode, setEditMode] = useState(false);
+  const [editTitleMode, setEditTitleMode] = useState(false);
 
-  const toggleEditMode = () => {
-    if (editMode) {
+  const toggleEditTitleMode = () => {
+    if (editTitleMode) {
       trigger("title").then((res) => {
-        if (res) setEditMode(false);
+        if (res) setEditTitleMode(false);
       });
     } else {
-      setEditMode(true);
+      setEditTitleMode(true);
     }
   };
 
   return (
     <Stack gap={"1em"} direction={"row"} flexWrap={"wrap"}>
       <Typography variant={"h1"} mb={0}>
-        Создание маршрута:
+        {editMode ? "Маршрут:" : "Создание маршрута:"}
       </Typography>
       <Stack
         direction={"row"}
@@ -32,7 +32,7 @@ const RouteTitle = () => {
         alignItems={"center"}
         flexWrap={"wrap"}
       >
-        {editMode ? (
+        {editTitleMode ? (
           <TextFieldElement
             name={"title"}
             rules={{ required: true }}
@@ -55,12 +55,12 @@ const RouteTitle = () => {
         )}
         <Box>
           <IconButton
-            onClick={toggleEditMode}
+            onClick={toggleEditTitleMode}
             color={"primary"}
             size={"small"}
             sx={{ bgcolor: primaryBackground }}
           >
-            {editMode ? <CheckIcon /> : <ModeEditIcon />}
+            {editTitleMode ? <CheckIcon /> : <ModeEditIcon />}
           </IconButton>
         </Box>
       </Stack>

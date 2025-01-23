@@ -7,7 +7,8 @@ import { NextSeo } from "next-seo";
 import { useTranslation } from "next-i18next";
 
 const EditMyPlaceLazy = dynamic(
-  () => import("@/containers/personal-area/edit-my-place/EditMyPlace"),
+  () =>
+    import("@/containers/personal-area/my-places/edit-my-place/EditMyPlace"),
   { ssr: false }
 );
 

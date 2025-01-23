@@ -124,7 +124,11 @@
     "title": "Фильтры",
     "dateRange": "Выберите промежуток дат",
     "from": "От",
-    "to": "До"
+    "to": "До",
+    "selectPlace": "Выберите место",
+    "selectPlaces": "Выберите места",
+    "searchByMe": "Поиск от моего местоположения",
+    "enterLocation": "Введите локацию"
   },
   "textEditor": {
     "fontSizes": {

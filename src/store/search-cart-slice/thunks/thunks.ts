@@ -9,7 +9,11 @@ export const cartToRouteBuilderThunk = createAsyncThunk(
   "search-cart/cart-to-route-builder",
   async (arg, thunkAPI) => {
     const rootState = thunkAPI.getState() as RootState;
-    const cartItems = rootState.searchCart.items;
+    const cartItems = rootState.searchCart.items.map((place) => ({
+      ...place,
+      duration: 0,
+      distance: 0,
+    }));
 
     thunkAPI.dispatch(setItems(cartItems));
 

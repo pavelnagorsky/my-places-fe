@@ -6,7 +6,7 @@ import {
   Typography,
   Button as Btn,
 } from "@mui/material";
-import useEditMyReview from "@/containers/personal-area/edit-my-review/useEditMyReview";
+import useEditMyReview from "@/containers/personal-area/my-reviews/edit-my-review/useEditMyReview";
 import animationVariants from "@/shared/animation-variants";
 import PersonalAreaLayout from "@/containers/personal-area/layout/PersonalAreaLayout";
 import { motion } from "framer-motion";
@@ -18,7 +18,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import ReviewPhotos from "@/containers/create-review/form/ReviewPhotos";
 import ReviewText from "@/containers/create-review/form/ReviewText";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
-import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
+import UpdateTranslations from "@/containers/personal-area/my-places/edit-my-place/UpdateTranslations";
 import { useTranslation } from "next-i18next";
 
 const EditMyReview = () => {

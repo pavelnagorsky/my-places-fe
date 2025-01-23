@@ -3,7 +3,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form-mui";
-import { IEditReviewFormContext } from "@/containers/personal-area/edit-my-review/interfaces";
+import { IEditReviewFormContext } from "@/containers/personal-area/my-reviews/edit-my-review/interfaces";
 import { routerLinks } from "@/routing/routerLinks";
 import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import reviewsService from "@/services/reviews-service/reviews.service";

@@ -124,7 +124,11 @@
     "title": "Фільтры",
     "dateRange": "Абярыце прамежак дат",
     "from": "Ад",
-    "to": "Да"
+    "to": "Да",
+    "searchByMe": "Пошук ад майго месцазнаходжання",
+    "enterLocation": "Увядзіце лакацыю",
+    "selectPlace": "Абярыце месца",
+    "selectPlaces": "Абярыце месцы"
   },
   "textEditor": {
     "fontSizes": {

@@ -3,7 +3,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form-mui";
-import { IEditPlaceContext } from "@/containers/personal-area/edit-my-place/interfaces";
+import { IEditPlaceContext } from "@/containers/personal-area/my-places/edit-my-place/interfaces";
 import { routerLinks } from "@/routing/routerLinks";
 import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import placesService from "@/services/places-service/places.service";

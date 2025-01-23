@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form-mui";
 import { routerLinks } from "@/routing/routerLinks";
 import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import reviewsService from "@/services/reviews-service/reviews.service";
-import { IEditReviewFormContext } from "@/containers/personal-area/edit-my-review/interfaces";
+import { IEditReviewFormContext } from "@/containers/personal-area/my-reviews/edit-my-review/interfaces";
 import { IUpdateReview } from "@/services/reviews-service/interfaces/update-review.interface";
 
 const useEditMyReview = () => {

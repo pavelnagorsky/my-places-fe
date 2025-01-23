@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { SubmitHandler, useForm } from "react-hook-form-mui";
-import { IEditPlaceContext } from "@/containers/personal-area/edit-my-place/interfaces";
+import { IEditPlaceContext } from "@/containers/personal-area/my-places/edit-my-place/interfaces";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import placesService from "@/services/places-service/places.service";

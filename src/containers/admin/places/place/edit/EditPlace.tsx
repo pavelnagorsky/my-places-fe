@@ -12,7 +12,7 @@ import {
 import Grid from "@mui/material/Grid2";
 import animationVariants from "@/shared/animation-variants";
 import { FormContainer, FormProvider } from "react-hook-form-mui";
-import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
+import UpdateTranslations from "@/containers/personal-area/my-places/edit-my-place/UpdateTranslations";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
 import Navigation from "@/containers/create-place/form/Navigation";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";

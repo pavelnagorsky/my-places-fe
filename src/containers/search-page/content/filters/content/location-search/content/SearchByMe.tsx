@@ -10,9 +10,9 @@ interface ISearchByMeProps {
 }
 
 const SearchByMe = ({ fieldName, fieldNameCoordinates }: ISearchByMeProps) => {
-  const { t } = useTranslation("search");
+  const { t } = useTranslation("common");
   const [loading, setLoading] = useState(false);
-  const { setValue, getValues, clearErrors } = useFormContext();
+  const { setValue, getValues } = useFormContext();
   const oldSearchCoordinatesRef = useRef<string | null>(null);
 
   const onSearchByMe = (event: any, checked: boolean) => {

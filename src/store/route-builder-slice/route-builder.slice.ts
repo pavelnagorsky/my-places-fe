@@ -10,8 +10,13 @@ import searchService from "@/services/search-service/search.service";
 import routesService from "@/services/routes-service/routes.service";
 import { ILatLngCoordinate } from "@/components/map/Map";
 
+interface IRouteBuilderItem extends ISearchPlace {
+  duration: number; // Minutes
+  distance: number; // Km
+}
+
 interface IRouteBuilderState {
-  items: ISearchPlace[];
+  items: IRouteBuilderItem[];
   distance: number; // km
   duration: number; // minutes
   submitLoading: boolean;
@@ -123,7 +128,7 @@ export const addRouteItemsThunk = createAsyncThunk(
       payload.ids,
       payload.language
     );
-    return data;
+    return data.map((place) => ({ ...place, duration: 0, distance: 0 }));
   }
 );
 
@@ -131,7 +136,7 @@ const routeBuilderSlice = createSlice({
   name: "route-builder",
   initialState,
   reducers: {
-    setItems: (state, { payload }: PayloadAction<ISearchPlace[]>) => {
+    setItems: (state, { payload }: PayloadAction<IRouteBuilderItem[]>) => {
       state.items = payload;
     },
     resetState: () => initialState,

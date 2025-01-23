@@ -9,7 +9,7 @@ import {
 import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import { FormContainer, FormProvider } from "react-hook-form-mui";
-import UpdateTranslations from "@/containers/personal-area/edit-my-place/UpdateTranslations";
+import UpdateTranslations from "@/containers/personal-area/my-places/edit-my-place/UpdateTranslations";
 import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
 import MyStepper from "@/components/UI/stepper/MyStepper";
 import PlaceSelect from "@/containers/create-review/form/place-select/PlaceSelect";

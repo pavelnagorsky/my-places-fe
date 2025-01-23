@@ -124,7 +124,11 @@
     "title": "Filters",
     "dateRange": "Select date range",
     "from": "From",
-    "to": "To"
+    "to": "To",
+    "searchByMe": "Search from my location",
+    "enterLocation": "Enter the location",
+    "selectPlace": "Select the Place",
+    "selectPlaces": "Select Places"
   },
   "textEditor": {
     "fontSizes": {

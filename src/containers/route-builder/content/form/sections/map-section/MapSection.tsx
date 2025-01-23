@@ -1,21 +1,19 @@
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Map from "@/components/map/Map";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { DirectionsRenderer, InfoWindow, Marker } from "@react-google-maps/api";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   getRouteDirectionsThunk,
   selectItems,
   selectRouteDirections,
-  setDistance,
-  setDuration,
-  setItems,
 } from "@/store/route-builder-slice/route-builder.slice";
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import utils from "@/shared/utils";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
+import NavigatorControls from "@/containers/route-builder/content/form/sections/map-section/NavigatorControls";
 
 const MapSection = () => {
   const { i18n } = useTranslation();
@@ -55,9 +53,17 @@ const MapSection = () => {
 
   return (
     <Box>
-      <Typography variant={"h1"} component={"h2"}>
-        Визуальное построение маршрута
-      </Typography>
+      <Stack
+        direction={{ md: "row" }}
+        mb={"1.5em"}
+        alignItems={{ md: "center" }}
+        gap={"1em"}
+      >
+        <Typography variant={"h1"} mb={"0em"} component={"h2"} flexGrow={1}>
+          Визуальное построение маршрута
+        </Typography>
+        <NavigatorControls />
+      </Stack>
       <Map
         containerStyle={{
           height: isMobile ? "400px" : "600px",
@@ -101,7 +107,10 @@ const MapSection = () => {
           >
             <div>
               <h2>
-                #{places.indexOf(selectedPlace) + 1} - {selectedPlace.title}
+                #
+                {places.findIndex((place) => place.id === selectedPlace?.id) +
+                  1}{" "}
+                - {selectedPlace.title}
               </h2>
               <p>{selectedPlace.address}</p>
             </div>
@@ -112,4 +121,4 @@ const MapSection = () => {
   );
 };
 
-export default MapSection;
+export default memo(MapSection);

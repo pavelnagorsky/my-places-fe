@@ -28,7 +28,7 @@ const PlaceAutocomplete = ({
   orderBy,
   multiple,
 }: IPlacesAutocompleteProps) => {
-  const { t, i18n } = useTranslation(["review-management", "common"]);
+  const { t, i18n } = useTranslation("common");
   const [options, setOptions] = useState<ISearchPlaceOption[]>([]);
   const [loading, setLoading] = useState(false);
   const { getValues } = useFormContext();
@@ -89,13 +89,14 @@ const PlaceAutocomplete = ({
       rules={{
         required: required,
       }}
+      label={multiple ? t("filters.selectPlaces") : t("filters.selectPlace")}
       multiple={multiple}
-      parseError={(error) => t("errors.required", { ns: "common" })}
+      parseError={(error) => t("errors.required")}
       name={fieldName}
       loading={loading}
       options={options}
       textFieldProps={{
-        placeholder: multiple ? t("form.selectPlaces") : t("form.selectPlace"),
+        placeholder: t("filters.enterLocation"),
         fullWidth: true,
         sx: {
           minWidth: { sm: "300px", md: "350px" },

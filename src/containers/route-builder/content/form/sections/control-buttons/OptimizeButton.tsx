@@ -7,11 +7,18 @@ import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import utils from "@/shared/utils";
-import { Button, CircularProgress } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 
 const OptimizeButton = () => {
   const dispatch = useAppDispatch();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const loading = useAppSelector(selectRouteDirectionsLoading);
   const { i18n } = useTranslation();
   const {
@@ -36,7 +43,13 @@ const OptimizeButton = () => {
         endLatLng,
         optimizeWaypoints: true,
       })
-    );
+    ).then(() => {
+      if (isMobile) return;
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    });
   };
 
   return (

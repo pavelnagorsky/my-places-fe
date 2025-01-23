@@ -13,7 +13,7 @@ const useMyRouteMenu = ({ routeId, onDelete }: IUseMyRouteMenuProps) => {
 
   const handleEdit = () => {
     popover.handleClose();
-    router.push(routerLinks.personalAreaEditPlace(routeId));
+    router.push(routerLinks.personalAreaEditRoute(routeId));
   };
 
   const handleDelete = () => {
