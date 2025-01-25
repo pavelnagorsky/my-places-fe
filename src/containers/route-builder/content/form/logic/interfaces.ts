@@ -6,6 +6,7 @@ export interface IRouteBuilderForm {
   searchFrom: ISearchInput;
   searchTo: ISearchInput;
   addPlaces: ISelectPlace[];
+  time: Date;
 }
 
 interface ISearchInput {

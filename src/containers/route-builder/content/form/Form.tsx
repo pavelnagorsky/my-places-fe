@@ -1,4 +1,4 @@
-import { Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
 import SortableList, { SortableItem } from "react-easy-sort";
 import CartItem from "@/components/search-cart/content/CartItem";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -12,6 +12,8 @@ import Stepper from "@/containers/route-builder/content/form/sections/Stepper";
 import ControlButtons from "@/containers/route-builder/content/form/sections/control-buttons/ControlButtons";
 import { AnimatePresence, motion, Reorder } from "framer-motion";
 import PlaceSelection from "@/containers/route-builder/content/form/sections/start-end-selection/PlaceSelection";
+// @ts-ignore
+import { TimePickerElement } from "react-hook-form-mui/date-pickers";
 
 const Form = () => {
   const theme = useTheme();
@@ -39,6 +41,9 @@ const Form = () => {
         {!isMobile && <Stepper />}
         <Stack gap={4} width={"100%"}>
           {!isMobile && <StartEndSelection />}
+          <Box>
+            <TimePickerElement name={"time"} required />
+          </Box>
           <SortableList
             onSortEnd={onSortEnd}
             draggedItemClassName="dragged"

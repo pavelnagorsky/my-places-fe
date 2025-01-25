@@ -20,6 +20,7 @@ const useRouteBuilder = () => {
         coordinates: null,
         location: null,
       },
+      time: new Date(),
       addPlaces: [],
       title: "Мой маршрут №1",
     },

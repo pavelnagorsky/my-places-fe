@@ -2,6 +2,7 @@ import { interFont } from "@/styles/fonts/fonts";
 import { createTheme } from "@mui/material";
 import { beBY, ruRU } from "@mui/material/locale";
 import I18nLanguages from "@/shared/I18nLanguages";
+import type {} from "@mui/x-date-pickers/themeAugmentation";
 
 export const primaryColor = "#FF7A00";
 export const primaryBackground = "#FFEFE2";
@@ -132,6 +133,13 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
               borderColor: primaryColor,
               opacity: 0.5,
             },
+          },
+        },
+        MuiList: {
+          styleOverrides: {
+            root: ({ ownerState }) => ({
+              scrollbarWidth: "thin",
+            }),
           },
         },
       },
