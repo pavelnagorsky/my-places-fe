@@ -4,10 +4,15 @@ import { IMyRoutesRequest } from "@/services/routes-service/interfaces/interface
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { IPaginationResponse } from "@/services/interfaces";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
+import { IUpdateRoute } from "@/services/routes-service/interfaces/update-route.interface";
 
 const reviewsService = {
   createRoute: (payload: ICreateRoute) => {
     return axiosInstance.post<{ id: number }>(`/Routes`, payload);
+  },
+
+  updateRoute: (payload: IUpdateRoute) => {
+    return axiosInstance.put<{ id: number }>(`/Routes/${payload.id}`, payload);
   },
 
   getMyRoutes: (payload: IMyRoutesRequest, lang: string) => {

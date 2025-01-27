@@ -11,17 +11,21 @@ import {
 } from "@/store/route-builder-slice/route-builder.slice";
 import { useTranslation } from "next-i18next";
 import PlacesAutocomplete from "@/components/forms/custom-form-elements/PlacesAutocomplete";
-import OptimizeButton from "@/containers/route-builder/content/form/sections/control-buttons/OptimizeButton";
+import { useRouter } from "next/router";
+import { routerLinks } from "@/routing/routerLinks";
 
 const ControlButtons = () => {
   const { t, i18n } = useTranslation("route-builder");
+  const router = useRouter();
   const dispatch = useAppDispatch();
-  const { trigger, getValues, setValue } = useFormContext<IRouteBuilderForm>();
+  const { trigger, getValues, setValue, setFocus } =
+    useFormContext<IRouteBuilderForm>();
   const [isAddMode, setIsAddMode] = useState(false);
   const selectedPlaces = useAppSelector(selectItems);
 
   const onClickAddLocation = () => {
     setIsAddMode(true);
+    setTimeout(() => setFocus("addPlaces"), 100);
   };
 
   const onCancel = () => {
@@ -30,7 +34,7 @@ const ControlButtons = () => {
 
   const onConfirmLocation = () => {
     trigger("addPlaces").then((isValid) => {
-      if (isValid) {
+      if (isValid && getValues("addPlaces").length > 0) {
         dispatch(
           addRouteItemsThunk({
             ids: getValues("addPlaces").map((place) => place.id),
@@ -39,12 +43,14 @@ const ControlButtons = () => {
         );
         setValue("addPlaces", []);
         onCancel();
+      } else {
+        setFocus("addPlaces");
       }
     });
   };
 
   useEffect(() => {
-    if (!selectedPlaces.length) {
+    if (!selectedPlaces.length && router.asPath === routerLinks.createRoute) {
       setIsAddMode(true);
     }
   }, []);
@@ -60,7 +66,6 @@ const ControlButtons = () => {
         <>
           <PlacesAutocomplete
             multiple
-            required
             fieldName={"addPlaces"}
             excludeIds={selectedPlaces.map((p) => p.id)}
           />

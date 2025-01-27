@@ -9,6 +9,10 @@ import { RootState } from "@/store/store";
 import searchService from "@/services/search-service/search.service";
 import routesService from "@/services/routes-service/routes.service";
 import { ILatLngCoordinate } from "@/components/map/Map";
+import googlePlacesAutocompleteService from "@/services/google-places-service/google-places.service";
+import { IRoute } from "@/services/routes-service/interfaces/route.interface";
+import { ICreateRoute } from "@/services/routes-service/interfaces/create-route.interface";
+import { IUpdateRoute } from "@/services/routes-service/interfaces/update-route.interface";
 
 interface IRouteBuilderItem extends ISearchPlace {
   duration: number; // Minutes
@@ -22,6 +26,7 @@ interface IRouteBuilderState {
   submitLoading: boolean;
   directions: any | null;
   directionsLoading: boolean;
+  editRouteId: number | null;
 }
 
 const initialState: IRouteBuilderState = {
@@ -31,7 +36,51 @@ const initialState: IRouteBuilderState = {
   submitLoading: false,
   directions: null,
   directionsLoading: false,
+  editRouteId: null,
 };
+
+export const startRouteEditingThunk = createAsyncThunk(
+  "route-builder/start-editing",
+  async (
+    payload: {
+      id: number;
+      language: string;
+      onSuccess?: (data: IRoute) => void;
+      onError?: () => void;
+    },
+    thunkAPI
+  ) => {
+    try {
+      const { data } = await routesService.getRoute(
+        payload.id,
+        payload.language
+      );
+      const placesResponse = await searchService.searchByIds(
+        data.places.map((place) => place.id),
+        payload.language
+      );
+
+      const items = placesResponse.data.map((place, index) => ({
+        ...place,
+        duration: data.places[index]?.duration || 0,
+        distance: data.places[index]?.distance || 0,
+      }));
+
+      if (typeof payload.onSuccess === "function") payload.onSuccess(data);
+
+      return {
+        items,
+        duration: data.duration,
+        distance: data.distance,
+        id: data.id,
+      };
+    } catch (e) {
+      console.log(e);
+      if (typeof payload.onError === "function") payload.onError();
+      return thunkAPI.rejectWithValue(null);
+    }
+  }
+);
 
 export const getRouteDirectionsThunk = createAsyncThunk(
   "route-builder/get-directions",
@@ -104,13 +153,21 @@ export const saveRouteThunk = createAsyncThunk(
     thunkAPI
   ) => {
     const { routeBuilder } = thunkAPI.getState() as RootState;
+    const routeId = routeBuilder.editRouteId;
     try {
-      const { data } = await routesService.createRoute({
+      const requestPayload: ICreateRoute | IUpdateRoute = {
+        id: routeId as any,
         coordinatesStart: payload.route.coordinatesStart,
         coordinatesEnd: payload.route.coordinatesEnd,
         title: payload.route.title,
         placeIds: routeBuilder.items.map((item) => item.id),
-      });
+      };
+
+      const apiCall = !!routeId
+        ? routesService.updateRoute
+        : routesService.createRoute;
+
+      const { data } = await apiCall(requestPayload);
       if (typeof payload.onSuccess === "function") payload.onSuccess();
 
       return data;
@@ -184,6 +241,16 @@ const routeBuilderSlice = createSlice({
       state.directions = payload;
       state.directionsLoading = false;
     });
+
+    builder.addCase(startRouteEditingThunk.rejected, (state, action) => {
+      state.editRouteId = null;
+    });
+    builder.addCase(startRouteEditingThunk.fulfilled, (state, { payload }) => {
+      state.editRouteId = payload.id;
+      state.items = payload.items;
+      state.distance = payload.distance;
+      state.duration = payload.duration;
+    });
   },
 });
 
@@ -206,9 +273,15 @@ export const selectRouteDirections = createSelector(
   selectState,
   (s) => s.directions
 );
+
 export const selectRouteDirectionsLoading = createSelector(
   selectState,
   (s) => s.directionsLoading
+);
+
+export const selectIsEditingMode = createSelector(
+  selectState,
+  (s) => typeof s.editRouteId === "number"
 );
 
 export const {

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   saveRouteThunk,
   selectHasItems,
+  selectIsEditingMode,
   selectSubmitLoading,
 } from "@/store/route-builder-slice/route-builder.slice";
 import { openAuth, selectIsAuth } from "@/store/user-slice/user.slice";
@@ -10,13 +11,17 @@ import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
+import { routerLinks } from "@/routing/routerLinks";
+import { useRouter } from "next/router";
 
 const SubmitButton = () => {
-  const { t, i18n } = useTranslation(["review-management", "common"]);
+  const { t } = useTranslation(["route-management", "common"]);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectSubmitLoading);
   const hasItems = useAppSelector(selectHasItems);
   const isAuth = useAppSelector(selectIsAuth);
+  const isEditMode = useAppSelector(selectIsEditingMode);
+  const router = useRouter();
   const {
     handleSubmit,
     formState: { isValid },
@@ -29,12 +34,13 @@ const SubmitButton = () => {
           title: t("feedback.error", {
             ns: "common",
           }),
-          description: `Ошибка при создании маршрута. ${t(
-            "errors.description",
-            {
-              ns: "common",
-            }
-          )}`,
+          description: `${
+            isEditMode
+              ? "Ошибка при обновлении маршрута."
+              : "Ошибка при создании маршрута."
+          } ${t("errors.description", {
+            ns: "common",
+          })}`,
           variant: "standard",
           severity: "error",
         },
@@ -50,13 +56,18 @@ const SubmitButton = () => {
           title: t("feedback.success", {
             ns: "common",
           }),
-          description: `Маршрут был успешно сохранен. Вы сможете просмотреть его в личном кабинете`,
+          description: isEditMode
+            ? `Маршрут был успешно обновлен. Вы сможете просмотреть его в личном кабинете`
+            : `Маршрут был успешно сохранен. Вы сможете просмотреть его в личном кабинете`,
           variant: "standard",
           severity: "success",
         },
         snackbarProps: {},
       })
     );
+    if (isEditMode) {
+      router.push(routerLinks.personalAreaRoutes);
+    }
   };
 
   const onSubmit = () => {
@@ -90,7 +101,7 @@ const SubmitButton = () => {
       endIcon={loading && <CircularProgress color="inherit" size={22} />}
       onClick={onSubmit}
     >
-      Сохранить маршрут
+      {isEditMode ? "Обновить маршрут" : "Сохранить маршрут"}
     </Button>
   );
 };

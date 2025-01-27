@@ -74,8 +74,8 @@
       "createdAt": "Дата создания",
       "duration": "Время",
       "distance": "Расстояние",
-      "places": "Места",
-      "placesCount": "{{count}} мест",
+      "places": "Мест в маршруте",
+      "placesCount": "Мест: {{count}}",
       "commentsCount": "Комментарии:"
     },
     "menu": {

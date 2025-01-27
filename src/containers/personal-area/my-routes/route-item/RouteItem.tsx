@@ -83,6 +83,7 @@ const RouteItem = ({ route, onDelete }: IRouteItemProps) => {
       <Stack
         direction={"row"}
         alignItems={"center"}
+        width={"fit-content"}
         gap={"0.5em"}
         sx={{ cursor: "pointer" }}
       >

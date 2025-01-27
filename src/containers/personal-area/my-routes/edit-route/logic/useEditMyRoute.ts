@@ -11,12 +11,15 @@ import { IUpdateReview } from "@/services/reviews-service/interfaces/update-revi
 import { IEditRouteForm } from "@/containers/personal-area/my-routes/edit-route/logic/interfaces";
 import routesService from "@/services/routes-service/routes.service";
 import {
+  resetState,
   setDistance,
   setDuration,
   setItems,
+  startRouteEditingThunk,
 } from "@/store/route-builder-slice/route-builder.slice";
 import searchService from "@/services/search-service/search.service";
 import googlePlacesAutocompleteService from "@/services/google-places-service/google-places.service";
+import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 
 const useEditMyRoute = () => {
   const { t, i18n } = useTranslation(["review-management", "common"]);
@@ -39,13 +42,13 @@ const useEditMyRoute = () => {
         location: null,
       },
       addPlaces: [],
+      time: new Date(),
       title: "",
     },
     mode: "onChange",
     shouldFocusError: true,
     shouldUseNativeValidation: false,
   });
-  console.log(form.getValues("searchFrom"));
 
   const onGoBack = () => router.replace(routerLinks.personalAreaRoutes);
 
@@ -75,14 +78,10 @@ const useEditMyRoute = () => {
       return;
     }
 
-    const apiRequest = async () => {
-      setLoading(true);
+    setLoading(true);
+
+    const onSuccess = async (data: IRoute) => {
       try {
-        const { data } = await routesService.getRoute(+routeId, i18n.language);
-        const placesResponse = await searchService.searchByIds(
-          data.places.map((place) => place.id),
-          i18n.language
-        );
         const startLocationTitleResponse =
           await googlePlacesAutocompleteService.getLocationTitle(
             data.coordinatesStart,
@@ -93,17 +92,7 @@ const useEditMyRoute = () => {
             data.coordinatesEnd,
             i18n.language
           );
-        dispatch(
-          setItems(
-            placesResponse.data.map((place, index) => ({
-              ...place,
-              duration: data.places[index]?.duration || 0,
-              distance: data.places[index]?.distance || 0,
-            }))
-          )
-        );
-        dispatch(setDuration(data.duration));
-        dispatch(setDistance(data.distance));
+
         // reset form state
         form.reset({
           ...form.getValues(),
@@ -127,15 +116,30 @@ const useEditMyRoute = () => {
           },
           title: data.title,
         });
-        setLoading(false);
-      } catch (e) {
-        console.log(e);
-        setLoading(false);
-        handleShowNotFoundError();
-      }
+      } catch (e) {}
+      setLoading(false);
     };
-    apiRequest();
+
+    const onError = () => {
+      setLoading(false);
+      handleShowNotFoundError();
+    };
+
+    dispatch(
+      startRouteEditingThunk({
+        id: +routeId,
+        language: i18n.language,
+        onSuccess,
+        onError,
+      })
+    );
   }, [i18n.language, routeId]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetState());
+    };
+  }, []);
 
   const handleShowError = () => {
     dispatch(
