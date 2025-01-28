@@ -6,4 +6,6 @@ export interface ICreateRoute {
   coordinatesStart: string;
 
   coordinatesEnd: string;
+
+  timeStart: string;
 }

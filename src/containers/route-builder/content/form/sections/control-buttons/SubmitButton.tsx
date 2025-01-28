@@ -85,6 +85,7 @@ const SubmitButton = () => {
             coordinatesStart: data.searchFrom.coordinates as string,
             coordinatesEnd: data.searchTo.coordinates as string,
             title: data.title,
+            datetime: data.time,
           },
           onError: handleShowError,
           onSuccess: handleShowSuccess,

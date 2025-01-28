@@ -2,6 +2,7 @@ import { ILatLngCoordinate } from "@/components/map/Map";
 import { LanguageIdsEnum } from "@/shared/LanguageIdsEnum";
 import I18nLanguages from "@/shared/I18nLanguages";
 import { TFunction } from "next-i18next";
+import { isValid } from "date-fns";
 
 function isEmpty(obj: Object) {
   for (const prop in obj) {
@@ -38,6 +39,11 @@ const utils = {
       lat,
       lng,
     };
+  },
+
+  dateOutputTransform: (value: Date | null) => {
+    if (!isValid(value)) return null;
+    return value;
   },
 
   isEmptyObject: (value: any) => {

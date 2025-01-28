@@ -113,10 +113,11 @@ export const getRouteDirectionsThunk = createAsyncThunk(
       (result, status) => {
         if (status === window.google.maps.DirectionsStatus.OK && !!result) {
           const route = result.routes[0];
-          const orderedWaypoints = route.waypoint_order.map(
-            (index) => places[index]
-          );
-          thunkAPI.dispatch(setItems(orderedWaypoints));
+          const orderedWaypoints = route.waypoint_order.map((index) => ({
+            ...places[index],
+            distance: (route.legs[index]?.distance?.value || 0) / 1000,
+            duration: (route.legs[index]?.duration?.value || 0) / 60,
+          }));
           const distanceInMeters = route.legs.reduce(
             (prev, current) => prev + (current.distance?.value ?? 0),
             0
@@ -125,6 +126,7 @@ export const getRouteDirectionsThunk = createAsyncThunk(
             (prev, current) => prev + (current.duration?.value ?? 0),
             0
           );
+          thunkAPI.dispatch(setItems(orderedWaypoints));
           thunkAPI.dispatch(setDistance(distanceInMeters / 1000));
           thunkAPI.dispatch(setDuration(durationInSeconds / 60));
 
@@ -143,6 +145,7 @@ export const saveRouteThunk = createAsyncThunk(
   async (
     payload: {
       route: {
+        datetime: Date;
         coordinatesStart: string;
         coordinatesEnd: string;
         title: string;
@@ -161,6 +164,7 @@ export const saveRouteThunk = createAsyncThunk(
         coordinatesEnd: payload.route.coordinatesEnd,
         title: payload.route.title,
         placeIds: routeBuilder.items.map((item) => item.id),
+        timeStart: payload.route.datetime.toISOString(),
       };
 
       const apiCall = !!routeId
@@ -272,6 +276,11 @@ export const selectSubmitLoading = createSelector(
 export const selectRouteDirections = createSelector(
   selectState,
   (s) => s.directions
+);
+
+export const selectHasRouteDirections = createSelector(
+  selectRouteDirections,
+  (s) => Boolean(s)
 );
 
 export const selectRouteDirectionsLoading = createSelector(

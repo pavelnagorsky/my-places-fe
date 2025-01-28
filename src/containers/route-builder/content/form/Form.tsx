@@ -12,8 +12,7 @@ import Stepper from "@/containers/route-builder/content/form/sections/Stepper";
 import ControlButtons from "@/containers/route-builder/content/form/sections/control-buttons/ControlButtons";
 import { AnimatePresence, motion, Reorder } from "framer-motion";
 import PlaceSelection from "@/containers/route-builder/content/form/sections/start-end-selection/PlaceSelection";
-// @ts-ignore
-import { TimePickerElement } from "react-hook-form-mui/date-pickers";
+import TimeSelection from "@/containers/route-builder/content/form/sections/TimeSelection";
 
 const Form = () => {
   const theme = useTheme();
@@ -39,11 +38,9 @@ const Form = () => {
         sx={{ "& .drag-container": { width: "100%" } }}
       >
         {!isMobile && <Stepper />}
-        <Stack gap={4} width={"100%"}>
+        <Stack gap={2} width={"100%"}>
           {!isMobile && <StartEndSelection />}
-          <Box>
-            <TimePickerElement name={"time"} required />
-          </Box>
+          <TimeSelection />
           <SortableList
             onSortEnd={onSortEnd}
             draggedItemClassName="dragged"
