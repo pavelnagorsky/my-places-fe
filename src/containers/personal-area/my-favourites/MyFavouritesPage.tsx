@@ -3,7 +3,15 @@ import useMyFavourites from "@/containers/personal-area/my-favourites/useMyFavou
 import PersonalAreaLayout from "@/containers/personal-area/layout/PersonalAreaLayout";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
-import { Box, Hidden, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grow,
+  Hidden,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { FormProvider } from "react-hook-form-mui";
 import { BoxPlaceholder } from "@/components/UI/placeholders/BoxPlaceholder";
 import FavouriteItem from "@/containers/personal-area/my-favourites/favourite-item/FavouriteItem";
@@ -13,6 +21,7 @@ import Filters from "./filters/Filters";
 const MyFavouritesPage = () => {
   const { t } = useTranslation("personal-area");
   const logic = useMyFavourites();
+  console.log(logic.favourites.map((f) => f.actual));
 
   return (
     <PersonalAreaLayout>
@@ -35,9 +44,27 @@ const MyFavouritesPage = () => {
             </Stack>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
-            <FormProvider {...logic.formContext}>
-              <Filters onSubmit={logic.onSubmit} />
-            </FormProvider>
+            <Stack
+              direction={{ sm: "row" }}
+              gap={"1em"}
+              alignItems={{ sm: "center" }}
+            >
+              <FormProvider {...logic.formContext}>
+                <Filters onSubmit={logic.onSubmit} />
+              </FormProvider>
+              <Grow in={logic.canCreateRouteFromFavourites}>
+                <Box>
+                  <Button
+                    size={"large"}
+                    color={"primary"}
+                    onClick={logic.onCreateRouteFromFavourites}
+                    variant={"contained"}
+                  >
+                    Создать маршрут
+                  </Button>
+                </Box>
+              </Grow>
+            </Stack>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <Box my={{ xs: "1.5em", md: "2.5em" }}>

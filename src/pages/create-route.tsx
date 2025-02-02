@@ -12,20 +12,20 @@ const RouteBuilderPageLazy = dynamic(
 );
 
 const CreateRoute: NextPage = () => {
-  const { t } = useTranslation("route-builder");
+  const { t } = useTranslation("route-management");
   const { canonical, alternateLinks } = useAlternateLinks();
 
   return (
     <Fragment>
       <NextSeo
-        title={t("creation.title")}
-        description={t("creation.description")}
+        title={t("seo.create.title")}
+        description={t("seo.create.description")}
         canonical={canonical}
         languageAlternates={alternateLinks}
         openGraph={{
           url: canonical,
-          title: t("creation.title"),
-          description: t("creation.description"),
+          title: t("seo.create.title"),
+          description: t("seo.create.description"),
         }}
       />
       <RouteBuilderPageLazy />
@@ -37,9 +37,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
-        "route-builder",
         "search",
-        "review-management",
+        "route-management",
         "common",
       ])),
       // Will be passed to the page component as props

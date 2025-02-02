@@ -1,26 +1,12 @@
-import SearchCart from "@/components/search-cart/SearchCart";
-import {
-  Badge,
-  Box,
-  Fab,
-  IconButton,
-  SxProps,
-  useMediaQuery,
-  useTheme,
-  Zoom,
-} from "@mui/material";
-import routingIcon from "/public/images/icons/routing.png";
-import { memo, useEffect } from "react";
-import {
-  restoreCartFromLocalStorageThunk,
-  togglePlaceIdInCartThunk,
-} from "@/store/search-cart-slice/thunks/thunks";
+import { Box, Fab, SxProps, useMediaQuery, useTheme } from "@mui/material";
+import { memo } from "react";
+import { togglePlaceIdInCartThunk } from "@/store/search-cart-slice/thunks/thunks";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import Image from "next/image";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import { useTranslation } from "next-i18next";
 
 const AddRoCartWidget = ({
   sx,
@@ -29,6 +15,7 @@ const AddRoCartWidget = ({
   sx?: SxProps;
   placeId: number;
 }) => {
+  const { t } = useTranslation("route-management");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useAppDispatch();
@@ -39,8 +26,8 @@ const AddRoCartWidget = ({
     dispatch(
       togglePlaceIdInCartThunk({
         placeId,
-        addedMsg: "Место добавлено в конструктор маршрутов",
-        removedMsg: "Место удалено из конструктора маршрутов",
+        addedMsg: t("cart.placeAdded"),
+        removedMsg: t("cart.placeRemoved"),
       })
     );
   };

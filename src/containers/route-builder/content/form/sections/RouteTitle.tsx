@@ -5,8 +5,10 @@ import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
+import { useTranslation } from "next-i18next";
 
 const RouteTitle = ({ editMode }: { editMode?: boolean }) => {
+  const { t } = useTranslation("route-management");
   const { watch, trigger } = useFormContext<IRouteBuilderForm>();
   const title = watch("title");
   const [editTitleMode, setEditTitleMode] = useState(false);
@@ -22,9 +24,14 @@ const RouteTitle = ({ editMode }: { editMode?: boolean }) => {
   };
 
   return (
-    <Stack gap={"1em"} direction={"row"} flexWrap={"wrap"}>
+    <Stack
+      rowGap={"0.5em"}
+      columnGap={"1em"}
+      direction={"row"}
+      flexWrap={"wrap"}
+    >
       <Typography variant={"h1"} mb={0}>
-        {editMode ? "Маршрут:" : "Создание маршрута:"}
+        {editMode ? t("route") : t("routeCreation")}
       </Typography>
       <Stack
         direction={"row"}

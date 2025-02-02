@@ -4,8 +4,10 @@ import { useAppDispatch } from "@/store/hooks";
 import { cartToRouteBuilderThunk } from "@/store/search-cart-slice/thunks/thunks";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
+import { useTranslation } from "next-i18next";
 
 const CartFooter = () => {
+  const { t } = useTranslation("route-management");
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -29,16 +31,15 @@ const CartFooter = () => {
       bgcolor={"white"}
     >
       <Button
-        fullWidth
         variant={"contained"}
         sx={{ py: "0.9em" }}
         onClick={onCreateRoute}
       >
-        Создать маршрут
+        {t("cart.createRoute")}
       </Button>
-      <Button fullWidth sx={{ py: "0.8em", color: "primary.main" }}>
-        Создать экскурсию
-      </Button>
+      {/*<Button fullWidth sx={{ py: "0.8em", color: "primary.main" }}>*/}
+      {/*{t("cart.createExcursion")}*/}
+      {/*</Button>*/}
     </Stack>
   );
 };

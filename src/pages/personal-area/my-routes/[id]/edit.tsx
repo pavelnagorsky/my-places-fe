@@ -16,11 +16,11 @@ const EditRoute: NextPage = () => {
   return (
     <Fragment>
       <NextSeo
-        title={t("edit.title")}
-        description={t("edit.description")}
+        title={t("seo.edit.title")}
+        description={t("seo.edit.description")}
         openGraph={{
-          title: t("edit.title"),
-          description: t("edit.description"),
+          title: t("seo.edit.title"),
+          description: t("seo.edit.description"),
         }}
       />
       <EditMyRouteLazy />

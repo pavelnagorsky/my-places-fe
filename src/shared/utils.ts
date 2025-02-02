@@ -136,10 +136,18 @@ const utils = {
     }).format(kilometers);
   },
 
-  formatMinutes: (minutes: number, t: TFunction) => {
+  formatMinutes: (
+    minutes: number,
+    {
+      hoursTranslation,
+      minutesTranslation,
+    }: { hoursTranslation: string; minutesTranslation: string }
+  ) => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
-    return `${hours}ч ${+remainingMinutes.toFixed(0)}мин`;
+    return `${hours}${hoursTranslation} ${+remainingMinutes.toFixed(
+      0
+    )}${minutesTranslation}`;
   },
 };
 

@@ -12,7 +12,7 @@ interface IPlaceSelectionProps {
 }
 
 const PlaceSelection = ({ isRouteStart }: IPlaceSelectionProps) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(["route-management", "common"]);
   const baseFieldName = isRouteStart ? "searchFrom" : "searchTo";
   const {
     watch,
@@ -44,17 +44,23 @@ const PlaceSelection = ({ isRouteStart }: IPlaceSelectionProps) => {
         fontSize={{ xs: "18px", md: "22px" }}
         mb={"0.7em"}
       >
-        {isRouteStart ? "Начало вашего маршрута" : "Конец вашего маршрута"}
+        {isRouteStart
+          ? t("locationSelection.start")
+          : t("locationSelection.end")}
       </Typography>
       <LocationAutocomplete
         textFieldProps={{
           label: isRouteStart
-            ? "Выберите место отправления"
-            : "Выберите место прибытия",
+            ? t("locationSelection.startPlaceholder")
+            : t("locationSelection.endPlaceholder"),
         }}
         disabled={isSearchByMe}
         required={!isSearchByMe}
-        rules={{ required: isSearchByMe ? undefined : t("errors.required") }}
+        rules={{
+          required: isSearchByMe
+            ? undefined
+            : t("errors.required", { ns: "common" }),
+        }}
         fieldName={`${baseFieldName}.location`}
         fieldNameCoordinates={`${baseFieldName}.coordinates`}
       />

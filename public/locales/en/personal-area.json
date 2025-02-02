@@ -12,6 +12,7 @@
       "placeTitle": "the Place title",
       "byDate": "By date added"
     },
+    "createRoute": "Create a route",
     "headings": {
       "actuality": "Relevance",
       "place": "Place",
@@ -57,6 +58,36 @@
       "delete": {
         "success": "The Place was successfully deleted.",
         "error": "Failed to delete the Place."
+      }
+    }
+  },
+  "routes": {
+    "title": "My Routes",
+    "newRoute": "New Route",
+    "noItems": "No custom routes found",
+    "filters": {
+      "title": "Route Name",
+      "byCreatedAt": "By Creation Date"
+    },
+    "headings": {
+      "title": "Title",
+      "createdAt": "Creation Date",
+      "duration": "Time",
+      "distance": "Distance",
+      "places": "Places in Route",
+      "placesCount": "Places: {{count}}",
+      "commentsCount": "Comments:"
+    },
+    "menu": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "google": "Google Navigator",
+      "yandex": "Yandex Navigator"
+    },
+    "feedback": {
+      "delete": {
+        "success": "Route was successfully deleted.",
+        "error": "Failed to delete route."
       }
     }
   },

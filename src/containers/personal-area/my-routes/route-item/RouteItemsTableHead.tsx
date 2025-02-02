@@ -28,6 +28,7 @@ const RouteItemsTableHead = ({
       display={{ xs: "none", md: show ? "block" : "none" }}
     >
       <Grid
+        pl={"1em"}
         container
         spacing={"1em"}
         fontSize={"14px"}
@@ -37,8 +38,7 @@ const RouteItemsTableHead = ({
           "& p": { fontWeight: 700, fontSize: "12px", color: "secondary.main" },
         }}
       >
-        <Grid size={{ xs: 1 }}></Grid>
-        <Grid size={{ xs: 2.5 }}>
+        <Grid size={{ xs: 3 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyRoutesOrderByEnum.TITLE}
@@ -48,10 +48,10 @@ const RouteItemsTableHead = ({
             <Typography>{t("routes.headings.title")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid size={{ xs: 2.4 }}>
+        <Grid size={{ xs: 2 }}>
           <Typography>{t("routes.headings.places")}</Typography>
         </Grid>
-        <Grid size={{ xs: 1.6 }}>
+        <Grid size={{ xs: 2 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyRoutesOrderByEnum.DISTANCE}
@@ -63,7 +63,7 @@ const RouteItemsTableHead = ({
             <Typography>{t("routes.headings.distance")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid size={{ xs: 1.75 }}>
+        <Grid size={{ xs: 2 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyRoutesOrderByEnum.DURATION}

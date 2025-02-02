@@ -1,14 +1,16 @@
 import { IconButton, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch, useSelector } from "react-redux";
 import {
   selectCartPlaceIdsLength,
   setCartOpen,
 } from "@/store/search-cart-slice/search-cart.slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useTranslation } from "next-i18next";
 
 const CartHeader = () => {
-  const dispatch = useDispatch();
-  const totalItems = useSelector(selectCartPlaceIdsLength);
+  const { t } = useTranslation("route-management");
+  const dispatch = useAppDispatch();
+  const totalItems = useAppSelector(selectCartPlaceIdsLength);
   const onClose = () => {
     dispatch(setCartOpen(false));
   };
@@ -28,7 +30,7 @@ const CartHeader = () => {
       bgcolor={"white"}
     >
       <Typography fontSize={{ xs: "20px", md: "26px" }} fontWeight={500}>
-        Выбранные локации ({totalItems})
+        {t("cart.totalSelected", { totalItems: totalItems })}
       </Typography>
       <IconButton onClick={onClose}>
         <CloseIcon />

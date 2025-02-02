@@ -38,6 +38,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
         "search",
+        "route-management",
         "common",
       ])),
       // Will be passed to the page component as props

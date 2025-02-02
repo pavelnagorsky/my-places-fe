@@ -12,7 +12,6 @@ import Stepper from "@/containers/route-builder/content/form/sections/Stepper";
 import ControlButtons from "@/containers/route-builder/content/form/sections/control-buttons/ControlButtons";
 import { AnimatePresence, motion, Reorder } from "framer-motion";
 import PlaceSelection from "@/containers/route-builder/content/form/sections/start-end-selection/PlaceSelection";
-import TimeSelection from "@/containers/route-builder/content/form/sections/TimeSelection";
 
 const Form = () => {
   const theme = useTheme();
@@ -40,7 +39,6 @@ const Form = () => {
         {!isMobile && <Stepper />}
         <Stack gap={2} width={"100%"}>
           {!isMobile && <StartEndSelection />}
-          <TimeSelection />
           <SortableList
             onSortEnd={onSortEnd}
             draggedItemClassName="dragged"

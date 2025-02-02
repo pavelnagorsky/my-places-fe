@@ -24,6 +24,11 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useState } from "react";
 import usePopover from "@/hooks/usePopover";
 import placesService from "@/services/places-service/places.service";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  selectActualPlaceIds,
+  toggleActualPlaceId,
+} from "@/store/personal-area/favourites-slice/favourites.slice";
 
 interface IFavouriteItemProps {
   favourite: IFavourite;
@@ -35,15 +40,17 @@ const FavouriteItem = ({ favourite, onDelete }: IFavouriteItemProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t } = useTranslation(["personal-area", "common"]);
   const dateFnsLocale = useDateFnsLocale();
-  const [isActual, setIsActual] = useState(favourite.actual);
   const popover = usePopover("confirm-favourite-delete");
+  const dispatch = useAppDispatch();
+  const actualIds = useAppSelector(selectActualPlaceIds);
+  const isActual = actualIds.includes(favourite.placeId);
 
   const onChangeActual = () => {
-    setIsActual(!isActual);
     placesService
-      .toggleFavouriteIsActual(favourite.id)
+      .toggleFavouriteIsActual(favourite.id, { isActual: !isActual })
       .then(() => {})
       .catch(() => {});
+    dispatch(toggleActualPlaceId({ id: favourite.placeId, add: !isActual }));
   };
 
   const deleteConfirm = (

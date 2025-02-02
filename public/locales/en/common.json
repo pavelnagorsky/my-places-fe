@@ -120,6 +120,8 @@
   },
   "sorting": "Sorting",
   "loading": "Loading...",
+  "hours": "h",
+  "minutes": "min",
   "filters": {
     "title": "Filters",
     "dateRange": "Select date range",

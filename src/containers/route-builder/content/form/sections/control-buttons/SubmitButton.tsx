@@ -1,7 +1,6 @@
 import { Button, CircularProgress } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
-  saveRouteThunk,
   selectHasItems,
   selectIsEditingMode,
   selectSubmitLoading,
@@ -13,6 +12,7 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
+import { saveRouteThunk } from "@/store/route-builder-slice/thunks";
 
 const SubmitButton = () => {
   const { t } = useTranslation(["route-management", "common"]);
@@ -35,9 +35,7 @@ const SubmitButton = () => {
             ns: "common",
           }),
           description: `${
-            isEditMode
-              ? "Ошибка при обновлении маршрута."
-              : "Ошибка при создании маршрута."
+            isEditMode ? t("feedback.update.error") : t("feedback.create.error")
           } ${t("errors.description", {
             ns: "common",
           })}`,
@@ -57,8 +55,8 @@ const SubmitButton = () => {
             ns: "common",
           }),
           description: isEditMode
-            ? `Маршрут был успешно обновлен. Вы сможете просмотреть его в личном кабинете`
-            : `Маршрут был успешно сохранен. Вы сможете просмотреть его в личном кабинете`,
+            ? t("feedback.update.success")
+            : t("feedback.create.success"),
           variant: "standard",
           severity: "success",
         },
@@ -85,7 +83,7 @@ const SubmitButton = () => {
             coordinatesStart: data.searchFrom.coordinates as string,
             coordinatesEnd: data.searchTo.coordinates as string,
             title: data.title,
-            datetime: data.time,
+            travelMode: data.travelMode,
           },
           onError: handleShowError,
           onSuccess: handleShowSuccess,
@@ -102,7 +100,7 @@ const SubmitButton = () => {
       endIcon={loading && <CircularProgress color="inherit" size={22} />}
       onClick={onSubmit}
     >
-      {isEditMode ? "Обновить маршрут" : "Сохранить маршрут"}
+      {isEditMode ? t("updateRoute") : t("createRoute")}
     </Button>
   );
 };

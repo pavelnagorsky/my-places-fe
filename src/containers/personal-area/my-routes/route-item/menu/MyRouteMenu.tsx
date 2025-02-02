@@ -17,6 +17,8 @@ interface IMyRouteMenuProps {
   handleClose: () => void;
   onDelete: () => void;
   onEdit: () => void;
+  onOpenYandexNavigator: () => void;
+  onOpenGoogleNavigator: () => void;
 }
 
 const MyRouteMenu = ({
@@ -25,6 +27,8 @@ const MyRouteMenu = ({
   open,
   onDelete,
   onEdit,
+  onOpenGoogleNavigator,
+  onOpenYandexNavigator,
 }: IMyRouteMenuProps) => {
   const { t } = useTranslation(["personal-area", "common"]);
   const popover = usePopover("confirm-route-delete");
@@ -70,9 +74,15 @@ const MyRouteMenu = ({
           "aria-labelledby": "my-route-menu",
         }}
       >
-        <MenuItem onClick={onEdit}>{t("places.menu.edit")}</MenuItem>
+        <MenuItem onClick={onEdit}>{t("routes.menu.edit")}</MenuItem>
         <MenuItem onClick={popover.handleOpen}>
           {t("buttons.delete", { ns: "common" })}
+        </MenuItem>
+        <MenuItem onClick={onOpenGoogleNavigator}>
+          {t("routes.menu.google")}
+        </MenuItem>
+        <MenuItem onClick={onOpenYandexNavigator}>
+          {t("routes.menu.yandex")}
         </MenuItem>
       </Menu>
     </Fragment>

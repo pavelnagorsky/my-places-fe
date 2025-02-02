@@ -21,6 +21,7 @@ import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { IChangePlaceStatus } from "@/services/places-service/interfaces/change-place-status.interface";
 import { ISearchPlacesRequest } from "@/services/search-service/interfaces/interfaces";
+import { IToggleFavourite } from "@/services/places-service/interfaces/toggle-favourite.interface";
 
 const placesService = {
   SEARCH_PLACES_PER_PAGE: 9,
@@ -122,8 +123,8 @@ const placesService = {
     );
   },
 
-  toggleFavouriteIsActual: (id: number) => {
-    return axiosInstance.patch(`/favourites/${id}`);
+  toggleFavouriteIsActual: (id: number, payload: IToggleFavourite) => {
+    return axiosInstance.put(`/favourites/${id}`, payload);
   },
 
   deleteFavourite: (id: number) => {

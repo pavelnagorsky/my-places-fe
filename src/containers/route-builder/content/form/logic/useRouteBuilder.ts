@@ -1,10 +1,13 @@
 import { useForm } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch } from "@/store/hooks";
 import { resetState } from "@/store/route-builder-slice/route-builder.slice";
+import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
+import { useTranslation } from "next-i18next";
 
 const useRouteBuilder = () => {
+  const { t } = useTranslation("route-management");
   const dispatch = useAppDispatch();
   const form = useForm<IRouteBuilderForm>({
     mode: "onChange",
@@ -22,7 +25,8 @@ const useRouteBuilder = () => {
       },
       time: new Date(),
       addPlaces: [],
-      title: "Мой маршрут №1",
+      title: t("defaultTitle"),
+      travelMode: TravelModesEnum.DRIVING,
     },
   });
 

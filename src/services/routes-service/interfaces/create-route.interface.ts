@@ -1,3 +1,5 @@
+import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
+
 export interface ICreateRoute {
   title: string;
 
@@ -7,5 +9,5 @@ export interface ICreateRoute {
 
   coordinatesEnd: string;
 
-  timeStart: string;
+  travelMode: TravelModesEnum;
 }

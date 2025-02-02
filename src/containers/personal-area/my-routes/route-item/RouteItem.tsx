@@ -34,11 +34,14 @@ const RouteItem = ({ route, onDelete }: IRouteItemProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation(["personal-area", "common"]);
   const dateFnsLocale = useDateFnsLocale();
-  const menu = useMyRouteMenu({ routeId: route.id, onDelete });
+  const menu = useMyRouteMenu({ route: route, onDelete });
   const [fullOpen, setFullOpen] = useState(false);
 
   const formattedDistance = utils.formatKM(route.distance, i18n.language);
-  const formattedDuration = utils.formatMinutes(route.duration, t);
+  const formattedDuration = utils.formatMinutes(route.duration, {
+    hoursTranslation: t("hours", { ns: "common" }),
+    minutesTranslation: t("minutes", { ns: "common" }),
+  });
 
   const Menu = (
     <MyRouteMenu
@@ -47,6 +50,8 @@ const RouteItem = ({ route, onDelete }: IRouteItemProps) => {
       handleClose={menu.popover.handleClose}
       onDelete={menu.handleDelete}
       onEdit={menu.handleEdit}
+      onOpenGoogleNavigator={menu.handleOpenGoogleNavigator}
+      onOpenYandexNavigator={menu.handleOpenYandexNavigator}
     />
   );
 
@@ -157,23 +162,15 @@ const RouteItem = ({ route, onDelete }: IRouteItemProps) => {
             <MoreVertIcon />
           </IconButton>
           {Menu}
-          <IconButton color={"primary"} size={"small"} onClick={toggleFull}>
-            <ExpandMoreIcon
-              sx={{ transform: fullOpen ? "rotate(180deg)" : undefined }}
-            />
-          </IconButton>
         </Stack>
       </Stack>
-      {/*<Collapse in={fullOpen}>*/}
-      {/*  <PlaceFullInfo place={route} />*/}
-      {/*</Collapse>*/}
     </Box>
   );
 
   const desktopView = (
     <Box
       py={"1em"}
-      px={"0em"}
+      pl={"1em"}
       sx={{
         boxShadow: "rgba(32, 31, 61, 0.1) 0px 5px 10px",
         my: "1em",
@@ -181,22 +178,11 @@ const RouteItem = ({ route, onDelete }: IRouteItemProps) => {
       }}
     >
       <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid size={{ xs: 1 }}>
-          <IconButton
-            color={"primary"}
-            sx={{ ml: "0.5em" }}
-            onClick={toggleFull}
-          >
-            <ExpandMoreIcon
-              sx={{ transform: fullOpen ? "rotate(180deg)" : undefined }}
-            />
-          </IconButton>
-        </Grid>
-        <Grid size={{ xs: 2.5 }}>{routeTitleBox}</Grid>
-        <Grid size={{ xs: 2.4 }}>{placesInfoBox}</Grid>
-        <Grid size={{ xs: 1.6 }}>{routeDistanceBox}</Grid>
-        <Grid size={{ xs: 1.75 }}>{routeDurationBox}</Grid>
-        <Grid size={{ xs: 1.75 }}>{dateInfoBox}</Grid>
+        <Grid size={{ xs: 3 }}>{routeTitleBox}</Grid>
+        <Grid size={{ xs: 2 }}>{placesInfoBox}</Grid>
+        <Grid size={{ xs: 2 }}>{routeDistanceBox}</Grid>
+        <Grid size={{ xs: 2 }}>{routeDurationBox}</Grid>
+        <Grid size={{ xs: 2 }}>{dateInfoBox}</Grid>
         <Grid size={{ xs: 1 }}>
           <IconButton
             color={"secondary"}
@@ -208,9 +194,6 @@ const RouteItem = ({ route, onDelete }: IRouteItemProps) => {
           {Menu}
         </Grid>
       </Grid>
-      {/*<Collapse in={fullOpen}>*/}
-      {/*  <PlaceFullInfo place={route} />*/}
-      {/*</Collapse>*/}
     </Box>
   );
 

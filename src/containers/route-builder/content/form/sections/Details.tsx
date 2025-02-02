@@ -7,13 +7,18 @@ import {
 import { TFunction, useTranslation } from "next-i18next";
 import OptimizeButton from "@/containers/route-builder/content/form/sections/control-buttons/OptimizeButton";
 import utils from "@/shared/utils";
+import { RadioButtonGroup, SwitchElement } from "react-hook-form-mui";
+import TravelMode from "@/containers/route-builder/content/form/sections/travel-mode/TravelMode";
 
 const Details = () => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("route-management");
   const distance = useAppSelector(selectDistance);
   const duration = useAppSelector(selectDuration);
   const formattedDistance = utils.formatKM(distance, i18n.language);
-  const formattedDuration = utils.formatMinutes(duration, t);
+  const formattedDuration = utils.formatMinutes(duration, {
+    hoursTranslation: t("hours", { ns: "common" }),
+    minutesTranslation: t("minutes", { ns: "common" }),
+  });
 
   return (
     <Stack zIndex={1} position={{ md: "sticky" }} top={{ md: "5.5em" }} gap={2}>
@@ -25,21 +30,22 @@ const Details = () => {
         color={"white"}
       >
         <Typography fontWeight={600} fontSize={"22px"} gutterBottom>
-          Детали вашей поездки
+          {t("details.title")}
         </Typography>
         <Typography fontWeight={500} fontSize={"18px"}>
-          Время в пути:
+          {t("details.duration")}
         </Typography>
         <Typography fontWeight={600} fontSize={"40px"}>
           {formattedDuration}
         </Typography>
         <Typography fontWeight={500} fontSize={"18px"}>
-          Километраж:
+          {t("details.distance")}
         </Typography>
         <Typography fontWeight={600} fontSize={"40px"}>
           {formattedDistance}
         </Typography>
       </Stack>
+      <TravelMode />
       <Box sx={{ "& button": { width: { lg: "100%" } } }}>
         <OptimizeButton />
       </Box>

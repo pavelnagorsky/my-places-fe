@@ -13,3 +13,8 @@ export enum MyRoutesOrderByEnum {
   DISTANCE,
   DURATION,
 }
+
+export enum TravelModesEnum {
+  DRIVING = "DRIVING",
+  WALKING = "WALKING",
+}

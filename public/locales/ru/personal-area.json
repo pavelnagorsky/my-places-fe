@@ -13,6 +13,7 @@
       "placeTitle": "Название места",
       "byDate": "По дате добавления"
     },
+    "createRoute": "Составить маршрут",
     "headings": {
       "actuality": "Актуальность",
       "place": "Место",
@@ -80,7 +81,9 @@
     },
     "menu": {
       "edit": "Редактировать",
-      "delete": "Удалить"
+      "delete": "Удалить",
+      "google": "Google навигатор",
+      "yandex": "Яндекс навигатор"
     },
     "feedback": {
       "delete": {

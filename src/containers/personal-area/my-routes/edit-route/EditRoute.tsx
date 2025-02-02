@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next";
-import { Backdrop, Box, CircularProgress, Stack } from "@mui/material";
+import { Backdrop, Box, Button, CircularProgress, Stack } from "@mui/material";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
@@ -19,7 +19,7 @@ const Form = dynamic(
 );
 
 const EditRoute = () => {
-  const { t } = useTranslation(["review-management", "common"]);
+  const { t } = useTranslation(["route-management", "common"]);
   const { form, loading, onGoBack } = useEditMyRoute();
 
   const loader = (
@@ -42,6 +42,18 @@ const EditRoute = () => {
           <Grid container spacing={4} mb={"4em"}>
             <Grid size={12}>
               <motion.div variants={animationVariants.defaultItemVariant}>
+                <Button
+                  onClick={onGoBack}
+                  sx={{
+                    borderRadius: "10px",
+                    textTransform: "none",
+                    mb: "1em",
+                  }}
+                  variant={"outlined"}
+                  color={"secondary"}
+                >
+                  {t("buttons.back", { ns: "common" })}
+                </Button>
                 <RouteTitle editMode />
               </motion.div>
             </Grid>

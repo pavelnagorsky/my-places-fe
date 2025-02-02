@@ -5,15 +5,19 @@ import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic
 import utils from "@/shared/utils";
 import { useAppSelector } from "@/store/hooks";
 import { selectItems } from "@/store/route-builder-slice/route-builder.slice";
+import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
+import { useTranslation } from "next-i18next";
 
 const NavigatorControls = () => {
   const {
     getValues,
     formState: { isValid },
   } = useFormContext<IRouteBuilderForm>();
+  const { t } = useTranslation("route-management");
   const places = useAppSelector(selectItems);
 
   const prepareData = () => {
+    const travelMode = getValues("travelMode");
     const waypoints = places.map((place) => place.coordinates);
     const coordinatesStartString = getValues("searchFrom.coordinates");
     const startLatLng = coordinatesStartString
@@ -24,31 +28,39 @@ const NavigatorControls = () => {
       ? utils.stringToLatLng(coordinatesEndString)
       : null;
 
-    return { waypoints, startLatLng, endLatLng };
+    return { waypoints, startLatLng, endLatLng, travelMode };
   };
 
   const onOpenGoogleNavigator = () => {
-    const { waypoints, startLatLng, endLatLng } = prepareData();
+    const { waypoints, startLatLng, endLatLng, travelMode } = prepareData();
     if (!startLatLng || !endLatLng) return;
 
     const waypointsString = waypoints
       .map((wp) => `${wp.lat},${wp.lng}`)
       .join("|");
 
-    const url = `https://www.google.com/maps/dir/?api=1&origin=${startLatLng.lat},${startLatLng.lng}&destination=${endLatLng.lat},${endLatLng.lng}&waypoints=${waypointsString}&travelmode=driving`;
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${
+      startLatLng.lat
+    },${startLatLng.lng}&destination=${endLatLng.lat},${
+      endLatLng.lng
+    }&waypoints=${waypointsString}&travelmode=${travelMode.toLowerCase()}`;
 
     window.open(url, "_blank");
   };
 
   const onOpenYandexNavigator = () => {
-    const { waypoints, startLatLng, endLatLng } = prepareData();
+    const { waypoints, startLatLng, endLatLng, travelMode } = prepareData();
     if (!startLatLng || !endLatLng) return;
 
     const waypointsString = waypoints
       .map((wp) => `${wp.lat},${wp.lng}`)
       .join("~");
 
-    const url = `https://yandex.ru/maps/?rtext=${startLatLng.lat},${startLatLng.lng}~${waypointsString}~${endLatLng.lat},${endLatLng.lng}&rtt=auto`;
+    const url = `https://yandex.ru/maps/?rtext=${startLatLng.lat},${
+      startLatLng.lng
+    }~${waypointsString}~${endLatLng.lat},${endLatLng.lng}&rtt=${
+      travelMode === TravelModesEnum.DRIVING ? "auto" : "pd"
+    }`;
 
     window.open(url, "_blank");
   };
@@ -66,7 +78,7 @@ const NavigatorControls = () => {
         variant={"outlined"}
         color={"secondary"}
       >
-        Google навигатор
+        {t("navigator.google")}
       </Button>
       <Button
         onClick={onOpenYandexNavigator}
@@ -74,7 +86,7 @@ const NavigatorControls = () => {
         variant={"outlined"}
         color={"secondary"}
       >
-        Yandex навигатор
+        {t("navigator.yandex")}
       </Button>
     </Stack>
   );

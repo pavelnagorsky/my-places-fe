@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, memo } from "react";
 import { DirectionsRenderer, InfoWindow, Marker } from "@react-google-maps/api";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
-  getRouteDirectionsThunk,
   selectItems,
   selectRouteDirections,
 } from "@/store/route-builder-slice/route-builder.slice";
@@ -13,10 +12,14 @@ import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import utils from "@/shared/utils";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
-import NavigatorControls from "@/containers/route-builder/content/form/sections/map-section/NavigatorControls";
+import NavigatorControls from "@/containers/route-builder/content/form/sections/navigator-export/NavigatorControls";
+import routeStartIcon from "/public/images/icons/route-start.png";
+import routeEndIcon from "/public/images/icons/route-end.png";
+import markerIcon from "/public/images/icons/marker-filled.png";
+import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
 
 const MapSection = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation("route-management");
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -25,6 +28,7 @@ const MapSection = () => {
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
   const { watch } = useFormContext<IRouteBuilderForm>();
 
+  const travelMode = watch("travelMode");
   const coordinatesStartString = watch("searchFrom.coordinates");
   const startLatLng = coordinatesStartString
     ? utils.stringToLatLng(coordinatesStartString)
@@ -47,9 +51,15 @@ const MapSection = () => {
         startLatLng,
         endLatLng,
         optimizeWaypoints: false,
+        travelMode,
       })
     );
-  }, [coordinatesStartString, coordinatesEndString, placesDependency]);
+  }, [
+    coordinatesStartString,
+    coordinatesEndString,
+    placesDependency,
+    travelMode,
+  ]);
 
   return (
     <Box>
@@ -60,7 +70,7 @@ const MapSection = () => {
         gap={"1em"}
       >
         <Typography variant={"h1"} mb={"0em"} component={"h2"} flexGrow={1}>
-          Визуальное построение маршрута
+          {t("mapView")}
         </Typography>
         <NavigatorControls />
       </Stack>
@@ -81,14 +91,22 @@ const MapSection = () => {
           <Marker
             position={startLatLng}
             label={{ color: "white", fontWeight: "700", text: `*` }}
-            title={"Route start"}
+            title={t("locationSelection.start")}
+            icon={{
+              url: routeStartIcon.src,
+              scaledSize: { width: 50, height: 50 } as any,
+            }}
           />
         )}
         {endLatLng && (
           <Marker
             position={endLatLng}
             label={{ color: "white", fontWeight: "700", text: `*` }}
-            title={"Route end"}
+            title={t("locationSelection.end")}
+            icon={{
+              url: routeEndIcon.src,
+              scaledSize: { width: 50, height: 50 } as any,
+            }}
           />
         )}
         {places.map((place, index) => (
@@ -98,6 +116,11 @@ const MapSection = () => {
             label={{ color: "white", fontWeight: "700", text: `${index + 1}` }}
             title={place.title}
             onClick={() => setSelectedPlace(place)}
+            icon={{
+              url: markerIcon.src,
+              labelOrigin: { y: 18, x: 15 } as any,
+              scaledSize: { width: 30, height: 40 } as any,
+            }}
           />
         ))}
         {selectedPlace && (

@@ -1,0 +1,58 @@
+{
+  "seo": {
+    "create": {
+      "title": "Route Creation",
+      "description": "The route builder allows you to create and save a set of tourist attractions in Belarus with a starting and ending location of the trip. It provides visual route display, time and distance calculation, automatic optimization functionality, and export to navigator."
+    },
+    "edit": {
+      "title": "Route Editing",
+      "description": "The route builder allows you to create and save a set of tourist attractions in Belarus with a starting and ending location of the trip. It provides visual route display, time and distance calculation, automatic optimization functionality, and export to navigator."
+    }
+  },
+  "cart": {
+    "placeAdded": "Place added to route builder",
+    "placeRemoved": "Place removed from route builder",
+    "totalSelected": "Selected locations ({{totalItems}})",
+    "createRoute": "Create route",
+    "createExcursion": "Create excursion"
+  },
+  "defaultTitle": "My Route #1",
+  "route": "Route:",
+  "routeCreation": "Route creation:",
+  "mapView": "Visual route building",
+  "add": "Add",
+  "addLocation": "Add location",
+  "details": {
+    "title": "Your trip details",
+    "duration": "Travel time:",
+    "distance": "Distance:"
+  },
+  "travelModes": {
+    "driving": "Driving",
+    "walking": "Walking"
+  },
+  "locationSelection": {
+    "start": "Start of your route",
+    "startPlaceholder": "Select departure location",
+    "end": "End of your route",
+    "endPlaceholder": "Select arrival location"
+  },
+  "navigator": {
+    "google": "Google Navigator",
+    "yandex": "Yandex Navigator"
+  },
+  "feedback": {
+    "notFound": "Route not found.",
+    "create": {
+      "success": "Route was successfully saved. You can view it in your personal account",
+      "error": "Error creating route."
+    },
+    "update": {
+      "success": "Route was successfully updated. You can view it in your personal account",
+      "error": "Error updating route."
+    }
+  },
+  "optimize": "Optimize",
+  "createRoute": "Save route",
+  "updateRoute": "Update route"
+}
