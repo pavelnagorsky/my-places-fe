@@ -51,7 +51,7 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
       <IconButton
         size={"small"}
         color={"primary"}
-        sx={isMobileSm ? { bgcolor: primaryBackground, opacity: 0.8 } : {}}
+        sx={isMobileSm ? { bgcolor: primaryBackground } : {}}
         onClick={() => onRemove(place.id)}
       >
         <Box
@@ -60,7 +60,7 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
           alt={"Delete"}
           sx={{
             height: "25px",
-            width: "100%",
+            width: "25px",
             userSelect: "none",
           }}
         />

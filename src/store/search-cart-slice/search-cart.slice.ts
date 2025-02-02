@@ -37,6 +37,11 @@ const searchCartSlice = createSlice({
         state.open = false;
       }
     },
+    clearCart: (state) => {
+      state.open = false;
+      state.ids = [];
+      state.items = [];
+    },
     sortItems: (
       state,
       action: PayloadAction<{ oldIndex: number; newIndex: number }>
@@ -111,7 +116,7 @@ export const selectCartPlaceIdsLength = createSelector(
   (s) => s.length
 );
 
-export const { setCartOpen, removeCartItem, sortItems } =
+export const { setCartOpen, removeCartItem, sortItems, clearCart } =
   searchCartSlice.actions;
 
 export default searchCartSlice.reducer;
