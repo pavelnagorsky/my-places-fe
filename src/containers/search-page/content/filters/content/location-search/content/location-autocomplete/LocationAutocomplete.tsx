@@ -1,16 +1,16 @@
 import { debounce, TextFieldProps } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { useGoogleAutocompleteService } from "@/hooks/useGoogleAutocompleteService";
-import { i18n, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 import { useCoordinatesByPlaceId } from "@/hooks/useCoordinatesByPlaceId";
 import {
   AutocompleteElement,
   RegisterOptions,
   useFormContext,
 } from "react-hook-form-mui";
-import { defaultCountrySign } from "@/components/map/Map";
 import LocationOption from "@/containers/search-page/content/filters/content/location-search/content/location-autocomplete/LocationOption";
 import utils from "@/shared/utils";
+import { defaultCountrySign } from "@/components/map/config";
 
 interface MainTextMatchedSubstrings {
   offset: number;
@@ -47,15 +47,14 @@ function LocationAutocomplete({
   rules,
   required,
 }: ILocationAutocompleteProps) {
-  const { t } = useTranslation("common");
-  const autocompleteService = useGoogleAutocompleteService();
+  const { t, i18n } = useTranslation("common");
+  const { autocompleteService, isInitialized } = useGoogleAutocompleteService();
   const searchCoordinates = useCoordinatesByPlaceId();
   const { watch, setValue } = useFormContext();
   const [inputValue, setInputValue] = useState("");
   const value: IPlaceTypeWithCoordinates | null = watch(fieldName);
   const [options, setOptions] = useState<IPlaceType[]>([]);
 
-  const isAutocompleteServiceInitialized = autocompleteService !== null;
   const fetch = useMemo(
     () =>
       debounce(
@@ -67,47 +66,39 @@ function LocationAutocomplete({
         },
         300
       ),
-    [isAutocompleteServiceInitialized]
+    [autocompleteService]
   );
 
   useEffect(() => {
-    let active = true;
-
     if (!autocompleteService) {
       return;
     }
 
-    if (inputValue === "") {
-      setOptions(value ? [value] : []);
-      return;
-    }
+    // if (inputValue === "") {
+    //   setOptions(value ? [value] : []);
+    //    return;
+    // }
 
     fetch(
       {
-        input: inputValue,
-        language: i18n?.language,
+        input: inputValue || t("filters.defaultLocationSearch"),
+        language: i18n.language,
         componentRestrictions: { country: defaultCountrySign },
       },
       (results?: readonly IPlaceType[]) => {
-        if (active) {
-          let newOptions: IPlaceType[] = [];
+        let newOptions: IPlaceType[] = [];
 
-          if (value) {
-            newOptions = [value];
-          }
-
-          if (results) {
-            newOptions = [...newOptions, ...results];
-          }
-          setOptions(newOptions);
+        if (value) {
+          newOptions = [value];
         }
+
+        if (results) {
+          newOptions = [...newOptions, ...results];
+        }
+        setOptions(newOptions);
       }
     );
-
-    return () => {
-      active = false;
-    };
-  }, [value, inputValue, fetch]);
+  }, [value, inputValue, fetch, isInitialized, i18n.language]);
 
   return (
     <AutocompleteElement

@@ -1,22 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
-import { Environment } from "@/shared/Environment";
-import { googleMapsLibraries } from "@/components/map/Map";
+import mapConfig from "@/components/map/config";
 
 let autocompleteService: google.maps.places.AutocompleteService | null = null;
 
 export function useGoogleAutocompleteService() {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-Map-script",
-    googleMapsApiKey: Environment.googleMapsKey,
-    libraries: googleMapsLibraries as any,
-  });
+  const { isLoaded } = useJsApiLoader(mapConfig);
+  const [isInitialized, setIsInitialized] = useState(isLoaded);
 
   useEffect(() => {
     if (isLoaded) {
       autocompleteService = new google.maps.places.AutocompleteService();
+      setIsInitialized(true);
     }
   }, [isLoaded]);
 
-  return autocompleteService;
+  return { autocompleteService, isInitialized };
 }

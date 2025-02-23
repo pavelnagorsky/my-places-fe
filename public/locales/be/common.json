@@ -130,7 +130,8 @@
     "searchByMe": "Пошук ад майго месцазнаходжання",
     "enterLocation": "Увядзіце лакацыю",
     "selectPlace": "Абярыце месца",
-    "selectPlaces": "Абярыце месцы"
+    "selectPlaces": "Абярыце месцы",
+    "defaultLocationSearch": "А"
   },
   "textEditor": {
     "fontSizes": {
