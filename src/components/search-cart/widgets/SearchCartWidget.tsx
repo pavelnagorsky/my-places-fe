@@ -50,7 +50,7 @@ const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
           }}
         >
           <Fab
-            size={isMobile ? "small" : "large"}
+            size={isMobile ? "medium" : "large"}
             onClick={onClick}
             sx={{
               boxShadow: "none",
@@ -79,8 +79,8 @@ const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
                 src={routingIcon}
                 alt={"search cart"}
                 priority
-                height={isMobile ? 27 : 40}
-                width={isMobile ? 27 : 40}
+                height={isMobile ? 32 : 40}
+                width={isMobile ? 32 : 40}
               />
             </Badge>
           </Fab>

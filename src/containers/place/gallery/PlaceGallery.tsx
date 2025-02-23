@@ -43,7 +43,7 @@ const PlaceGallery = (props: IGalleryProps) => {
           },
           sx: {
             "& img": {
-              objectFit: "cover",
+              objectFit: "contain",
               borderRadius: "10px",
               userSelect: "none",
             },

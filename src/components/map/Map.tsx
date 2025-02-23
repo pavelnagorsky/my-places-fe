@@ -1,15 +1,15 @@
 import {
-  memo,
-  useState,
-  useCallback,
-  PropsWithChildren,
   CSSProperties,
+  memo,
+  PropsWithChildren,
+  useCallback,
   useEffect,
+  useState,
 } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { Environment } from "@/shared/Environment";
 import { defaultMapStyle } from "@/components/map/map-styles/default";
 import { Box, Grow } from "@mui/material";
+import mapConfig, { defaultBounds } from "@/components/map/config";
 
 export interface ILatLngCoordinate {
   lat: number;
@@ -24,16 +24,6 @@ interface IMapProps {
   fitCoordinates?: ILatLngCoordinate[];
 }
 
-export const defaultBounds = {
-  south: 51.26201100000001,
-  west: 23.1783377,
-  north: 56.1718719,
-  east: 32.7768202,
-};
-
-export const defaultCountrySign = "By";
-export const googleMapsLibraries = ["places", "geometry"];
-
 function Map({
   children,
   containerStyle,
@@ -42,11 +32,7 @@ function Map({
 }: PropsWithChildren & IMapProps) {
   const [map, setMap] = useState<google.maps.Map | null>(null);
 
-  const { isLoaded } = useJsApiLoader({
-    id: "google-Map-script",
-    googleMapsApiKey: Environment.googleMapsKey,
-    libraries: googleMapsLibraries as any,
-  });
+  const { isLoaded } = useJsApiLoader(mapConfig);
 
   // focus map to cover all set of coordinates
   useEffect(() => {

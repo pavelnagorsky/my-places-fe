@@ -130,7 +130,8 @@
     "searchByMe": "Search from my location",
     "enterLocation": "Enter the location",
     "selectPlace": "Select the Place",
-    "selectPlaces": "Select Places"
+    "selectPlaces": "Select Places",
+    "defaultLocationSearch": "A"
   },
   "textEditor": {
     "fontSizes": {

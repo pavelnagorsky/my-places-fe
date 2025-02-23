@@ -130,7 +130,8 @@
     "selectPlace": "Выберите место",
     "selectPlaces": "Выберите места",
     "searchByMe": "Поиск от моего местоположения",
-    "enterLocation": "Введите локацию"
+    "enterLocation": "Введите локацию",
+    "defaultLocationSearch": "А"
   },
   "textEditor": {
     "fontSizes": {
