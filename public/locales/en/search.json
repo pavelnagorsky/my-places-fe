@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Search places",
-    "description": "You can find a specific place or select only the region of Belarus and you will be get a map with all the objects in this region. In addition, you will have the opportunity to set a radius around the given region or point."
+    "title": "Sights of Belarus: An interactive catalog",
+    "description": "Discover the sights of Belarus with our interactive catalog. Use advanced filters, an interactive map, and route-building functionality to plan your ideal trip."
   },
   "placesFound": "Places found",
   "noResults": "Unfortunately, your search returned no results.",
