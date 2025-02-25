@@ -33,7 +33,6 @@ const useEditMyRoute = () => {
         location: null,
       },
       addPlaces: [],
-      time: new Date(),
       title: t("defaultTitle"),
       travelMode: TravelModesEnum.DRIVING,
     },
