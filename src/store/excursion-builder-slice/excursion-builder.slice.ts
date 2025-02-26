@@ -2,11 +2,11 @@ import { ISearchPlace } from "@/services/search-service/interfaces/search-place.
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import {
-  addRouteItemsThunk,
-  getRouteDirectionsThunk,
-  saveRouteThunk,
-  startRouteEditingThunk,
-} from "@/store/route-builder-slice/thunks";
+  addExcursionItemsThunk,
+  getExcursionDirectionsThunk,
+  saveExcursionThunk,
+  startExcursionEditingThunk,
+} from "@/store/excursion-builder-slice/thunks";
 
 interface IExcursionBuilderItem extends ISearchPlace {
   duration: number; // Minutes
@@ -60,41 +60,47 @@ const excursionBuilderSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(addRouteItemsThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(addExcursionItemsThunk.fulfilled, (state, { payload }) => {
       state.items = [...state.items, ...payload];
     });
 
-    builder.addCase(saveRouteThunk.pending, (state, action) => {
+    builder.addCase(saveExcursionThunk.pending, (state, action) => {
       state.submitLoading = true;
     });
-    builder.addCase(saveRouteThunk.rejected, (state, action) => {
+    builder.addCase(saveExcursionThunk.rejected, (state, action) => {
       state.submitLoading = false;
     });
-    builder.addCase(saveRouteThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(saveExcursionThunk.fulfilled, (state, { payload }) => {
       state.submitLoading = false;
     });
 
-    builder.addCase(getRouteDirectionsThunk.pending, (state, action) => {
+    builder.addCase(getExcursionDirectionsThunk.pending, (state, action) => {
       state.directionsLoading = true;
     });
-    builder.addCase(getRouteDirectionsThunk.rejected, (state, action) => {
+    builder.addCase(getExcursionDirectionsThunk.rejected, (state, action) => {
       state.directions = null;
       state.directionsLoading = false;
     });
-    builder.addCase(getRouteDirectionsThunk.fulfilled, (state, { payload }) => {
-      state.directions = payload;
-      state.directionsLoading = false;
-    });
+    builder.addCase(
+      getExcursionDirectionsThunk.fulfilled,
+      (state, { payload }) => {
+        state.directions = payload;
+        state.directionsLoading = false;
+      }
+    );
 
-    builder.addCase(startRouteEditingThunk.rejected, (state, action) => {
+    builder.addCase(startExcursionEditingThunk.rejected, (state, action) => {
       state.editExcursionId = null;
     });
-    builder.addCase(startRouteEditingThunk.fulfilled, (state, { payload }) => {
-      state.editExcursionId = payload.id;
-      state.items = payload.items;
-      state.distance = payload.distance;
-      state.duration = payload.duration;
-    });
+    builder.addCase(
+      startExcursionEditingThunk.fulfilled,
+      (state, { payload }) => {
+        state.editExcursionId = payload.id;
+        state.items = payload.items;
+        state.distance = payload.distance;
+        state.duration = payload.duration;
+      }
+    );
   },
 });
 

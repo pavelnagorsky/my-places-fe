@@ -84,6 +84,7 @@ export const getExcursionDirectionsThunk = createAsyncThunk(
 
     // Exclude the first and last items from the waypoints array
     const intermediateWaypoints = waypoints.slice(1, waypoints.length - 1);
+    const waypointPlaces = places.slice(1, places.length - 1);
     return directionsService.route(
       {
         origin,
@@ -96,8 +97,16 @@ export const getExcursionDirectionsThunk = createAsyncThunk(
       (result, status) => {
         if (status === window.google.maps.DirectionsStatus.OK && !!result) {
           const route = result.routes[0];
+          const firstPlace = { ...places[0], distance: 0, duration: 0 };
+          const lastPlace = {
+            ...places[places.length - 1],
+            distance:
+              (route.legs[route.legs.length - 1]?.distance?.value || 0) / 1000,
+            duration:
+              (route.legs[route.legs.length - 1]?.duration?.value || 0) / 60,
+          };
           const orderedWaypoints = route.waypoint_order.map((index) => ({
-            ...places[index],
+            ...waypointPlaces[index],
             distance: (route.legs[index]?.distance?.value || 0) / 1000,
             duration: (route.legs[index]?.duration?.value || 0) / 60,
           }));
@@ -109,7 +118,9 @@ export const getExcursionDirectionsThunk = createAsyncThunk(
             (prev, current) => prev + (current.duration?.value ?? 0),
             0
           );
-          thunkAPI.dispatch(setItems(orderedWaypoints));
+          thunkAPI.dispatch(
+            setItems([firstPlace, ...orderedWaypoints, lastPlace])
+          );
           thunkAPI.dispatch(setDistance(distanceInMeters / 1000));
           thunkAPI.dispatch(setDuration(durationInSeconds / 60));
 

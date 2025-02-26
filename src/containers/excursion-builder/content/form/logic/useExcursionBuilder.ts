@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "@/store/hooks";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
-import { IExcursionBuilderForm } from "@/containers/_excursions-builder/content/form/logic/interfaces";
+import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import { ExcursionTypesEnum } from "@/services/excursions-service/interfaces/excursion-types.enum";
 import { resetState } from "@/store/excursion-builder-slice/excursion-builder.slice";
 
