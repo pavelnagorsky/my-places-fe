@@ -63,6 +63,8 @@ const ReviewText = ({ sx, readonly }: { sx?: SxProps; readonly?: boolean }) => {
         {t("form.reviewText")}
       </Typography>
       <TextEditor
+        required
+        maxSymbols={6000}
         readonly={readonly}
         fieldName={"description"}
         placeholder={t("form.reviewTextPlaceholder")}
