@@ -23,7 +23,6 @@ const useRouteBuilder = () => {
         coordinates: null,
         location: null,
       },
-      time: new Date(),
       addPlaces: [],
       title: t("defaultTitle"),
       travelMode: TravelModesEnum.DRIVING,
