@@ -4,14 +4,13 @@ import {
   selectDistance,
   selectDuration,
 } from "@/store/route-builder-slice/route-builder.slice";
-import { TFunction, useTranslation } from "next-i18next";
-import OptimizeButton from "@/containers/route-builder/content/form/sections/control-buttons/OptimizeButton";
+import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
-import { RadioButtonGroup, SwitchElement } from "react-hook-form-mui";
-import TravelMode from "@/containers/route-builder/content/form/sections/travel-mode/TravelMode";
+import ExcursionType from "@/containers/excursion-builder/content/form/content/excurion-type/ExcursionType";
+import OptimizeButton from "@/containers/excursion-builder/content/details/OptimizeButton";
 
 const Details = () => {
-  const { t, i18n } = useTranslation("route-management");
+  const { t, i18n } = useTranslation(["excursion-management", "common"]);
   const distance = useAppSelector(selectDistance);
   const duration = useAppSelector(selectDuration);
   const formattedDistance = utils.formatKM(distance, i18n.language);
@@ -45,9 +44,11 @@ const Details = () => {
           {formattedDistance}
         </Typography>
       </Stack>
-      <TravelMode />
       <Box sx={{ "& button": { width: { lg: "100%" } } }}>
         <OptimizeButton />
+      </Box>
+      <Box mt={"0.5em"}>
+        <ExcursionType />
       </Box>
     </Stack>
   );

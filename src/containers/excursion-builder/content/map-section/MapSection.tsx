@@ -3,40 +3,29 @@ import Map from "@/components/map/Map";
 import { useState, useEffect, useRef, memo } from "react";
 import { DirectionsRenderer, InfoWindow, Marker } from "@react-google-maps/api";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-  selectItems,
-  selectRouteDirections,
-} from "@/store/route-builder-slice/route-builder.slice";
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
-import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
-import utils from "@/shared/utils";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
-import NavigatorControls from "@/containers/route-builder/content/form/sections/navigator-export/NavigatorControls";
-import routeStartIcon from "/public/images/icons/route-start.png";
-import routeEndIcon from "/public/images/icons/route-end.png";
+import NavigatorControls from "@/containers/route-builder/content/map-section/navigator-export/NavigatorControls";
 import markerIcon from "/public/images/icons/marker-filled.png";
-import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
+import {
+  selectExcursionDirections,
+  selectItems,
+} from "@/store/excursion-builder-slice/excursion-builder.slice";
+import { getExcursionDirectionsThunk } from "@/store/excursion-builder-slice/thunks";
+import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 
 const MapSection = () => {
-  const { t, i18n } = useTranslation("route-management");
+  const { t, i18n } = useTranslation("excursion-management");
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const places = useAppSelector(selectItems);
-  const directions = useAppSelector(selectRouteDirections);
+  const directions = useAppSelector(selectExcursionDirections);
   const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
-  const { watch } = useFormContext<IRouteBuilderForm>();
+  const { watch } = useFormContext<IExcursionBuilderForm>();
 
   const travelMode = watch("travelMode");
-  const coordinatesStartString = watch("searchFrom.coordinates");
-  const startLatLng = coordinatesStartString
-    ? utils.stringToLatLng(coordinatesStartString)
-    : null;
-  const coordinatesEndString = watch("searchTo.coordinates");
-  const endLatLng = coordinatesEndString
-    ? utils.stringToLatLng(coordinatesEndString)
-    : null;
 
   useEffect(() => {
     setSelectedPlace(null);
@@ -44,22 +33,14 @@ const MapSection = () => {
 
   const placesDependency = places.map((p) => p.id).join(",");
   useEffect(() => {
-    if (!startLatLng || !endLatLng) return;
     dispatch(
-      getRouteDirectionsThunk({
+      getExcursionDirectionsThunk({
         language: i18n.language,
-        startLatLng,
-        endLatLng,
         optimizeWaypoints: false,
         travelMode,
       })
     );
-  }, [
-    coordinatesStartString,
-    coordinatesEndString,
-    placesDependency,
-    travelMode,
-  ]);
+  }, [placesDependency, travelMode]);
 
   return (
     <Box>
@@ -85,28 +66,6 @@ const MapSection = () => {
           <DirectionsRenderer
             directions={directions}
             options={{ suppressMarkers: true }}
-          />
-        )}
-        {startLatLng && (
-          <Marker
-            position={startLatLng}
-            label={{ color: "white", fontWeight: "700", text: `*` }}
-            title={t("locationSelection.start")}
-            icon={{
-              url: routeStartIcon.src,
-              scaledSize: { width: 50, height: 50 } as any,
-            }}
-          />
-        )}
-        {endLatLng && (
-          <Marker
-            position={endLatLng}
-            label={{ color: "white", fontWeight: "700", text: `*` }}
-            title={t("locationSelection.end")}
-            icon={{
-              url: routeEndIcon.src,
-              scaledSize: { width: 50, height: 50 } as any,
-            }}
           />
         )}
         {places.map((place, index) => (

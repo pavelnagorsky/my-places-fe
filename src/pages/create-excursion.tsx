@@ -7,13 +7,13 @@ import { NextSeo } from "next-seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 
-const RouteBuilderPageLazy = dynamic(
-  () => import("../containers/route-builder/RouteBuilder"),
+const ExcursionBuilderPageLazy = dynamic(
+  () => import("../containers/excursion-builder/ExcursionBuilder"),
   { ssr: false }
 );
 
-const CreateRoute: NextPage = () => {
-  const { t } = useTranslation("route-management");
+const CreateExcursion: NextPage = () => {
+  const { t } = useTranslation("excursion-management");
   const { canonical, alternateLinks } = useAlternateLinks();
 
   return (
@@ -29,7 +29,7 @@ const CreateRoute: NextPage = () => {
           description: t("seo.create.description"),
         }}
       />
-      <RouteBuilderPageLazy />
+      <ExcursionBuilderPageLazy />
     </Fragment>
   );
 };
@@ -39,6 +39,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
         "search",
+        "excursion-management",
         "route-management",
         "common",
       ])),
@@ -47,4 +48,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default CreateRoute;
+export default CreateExcursion;

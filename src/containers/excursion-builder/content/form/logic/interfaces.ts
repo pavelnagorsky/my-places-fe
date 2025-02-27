@@ -7,7 +7,7 @@ export interface IExcursionBuilderForm {
   description: string;
   addPlaces: ISelectPlace[];
   travelMode: TravelModesEnum;
-  type: ExcursionTypesEnum;
+  type: `${ExcursionTypesEnum}`;
   places: IExcursionBuilderFormPlace[];
 }
 
