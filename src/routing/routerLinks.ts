@@ -7,6 +7,7 @@ export const routerLinks = {
   createReview: "/create-review",
   createPlace: "/create-place",
   createRoute: "/create-route",
+  createExcursion: "/create-excursion",
   place: (slug: string) => `/places/${slug}`,
   review: (placeSlug: string, reviewId: number) =>
     `/places/${placeSlug}?review=${reviewId}`,
@@ -16,11 +17,12 @@ export const routerLinks = {
   administrationPlaceTypes: "/administration/place-types",
   administrationUsers: "/administration/users",
   administrationFeedbackList: "/administration/feedback-list",
-  personalAreaPlaces: "/personal-area/my-places",
-  personalAreaReviews: "/personal-area/my-reviews",
+  personalAreaPlaces: "/personal-area/places",
+  personalAreaReviews: "/personal-area/reviews",
   personalAreaSettings: "/personal-area/settings",
   personalAreaFavourites: "/personal-area/favourites",
-  personalAreaRoutes: "/personal-area/my-routes",
+  personalAreaRoutes: "/personal-area/routes",
+  personalAreaExcursions: "/personal-area/excursions",
   personalAreaEditPlace: (placeId: number) =>
     `/personal-area/my-places/${placeId}/edit`,
   personalAreaEditReview: (reviewId: number) =>

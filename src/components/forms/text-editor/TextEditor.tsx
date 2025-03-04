@@ -123,12 +123,14 @@ const TextEditor = ({
               justifyContent={"space-between"}
               alignItems={"center"}
             >
-              {!!fieldState.error && (
+              {!!fieldState.error ? (
                 <FormHelperText
                   sx={{ color: "error.main", fontSize: "14px", mt: 0 }}
                 >
                   {fieldState.error?.message}
                 </FormHelperText>
+              ) : (
+                <div />
               )}
               {maxSymbols && (
                 <Typography variant={"body2"}>

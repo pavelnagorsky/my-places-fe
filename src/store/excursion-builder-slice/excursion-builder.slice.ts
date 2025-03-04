@@ -108,6 +108,8 @@ const selectState = (state: RootState) => state.excursionBuilder;
 
 export const selectItems = createSelector(selectState, (s) => s.items);
 
+export const selectItemsLength = createSelector(selectItems, (s) => s.length);
+
 export const selectHasItems = createSelector(selectItems, (s) => s.length > 0);
 
 export const selectDuration = createSelector(selectState, (s) => s.duration);

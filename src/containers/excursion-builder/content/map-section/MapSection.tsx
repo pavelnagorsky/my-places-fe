@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
-import NavigatorControls from "@/containers/route-builder/content/map-section/navigator-export/NavigatorControls";
 import markerIcon from "/public/images/icons/marker-filled.png";
 import {
   selectExcursionDirections,
@@ -14,6 +13,7 @@ import {
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
 import { getExcursionDirectionsThunk } from "@/store/excursion-builder-slice/thunks";
 import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
+import NavigatorControls from "@/containers/excursion-builder/content/map-section/navigator-export/NavigatorControls";
 
 const MapSection = () => {
   const { t, i18n } = useTranslation("excursion-management");

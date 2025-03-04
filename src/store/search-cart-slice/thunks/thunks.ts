@@ -3,7 +3,24 @@ import { RootState } from "@/store/store";
 import searchService from "@/services/search-service/search.service";
 import localStorageFields from "@/shared/localStorageFields";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
-import { setItems } from "@/store/route-builder-slice/route-builder.slice";
+import { setItems as setRouteItems } from "@/store/route-builder-slice/route-builder.slice";
+import { setItems as setExcursionItems } from "@/store/excursion-builder-slice/excursion-builder.slice";
+
+export const cartToExcursionBuilderThunk = createAsyncThunk(
+  "search-cart/cart-to-excursion-builder",
+  async (arg, thunkAPI) => {
+    const rootState = thunkAPI.getState() as RootState;
+    const cartItems = rootState.searchCart.items.map((place) => ({
+      ...place,
+      duration: 0,
+      distance: 0,
+    }));
+
+    thunkAPI.dispatch(setExcursionItems(cartItems));
+
+    return;
+  }
+);
 
 export const cartToRouteBuilderThunk = createAsyncThunk(
   "search-cart/cart-to-route-builder",
@@ -15,7 +32,7 @@ export const cartToRouteBuilderThunk = createAsyncThunk(
       distance: 0,
     }));
 
-    thunkAPI.dispatch(setItems(cartItems));
+    thunkAPI.dispatch(setRouteItems(cartItems));
 
     return;
   }

@@ -4,12 +4,13 @@ import {
   selectItems,
   sortItems,
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
-import Stepper from "@/containers/route-builder/content/form/sections/Stepper";
 import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { AnimatePresence, motion } from "framer-motion";
 import CartItem from "@/components/search-cart/content/CartItem";
-import ControlButtons from "@/containers/route-builder/content/form/sections/control-buttons/ControlButtons";
+import Stepper from "@/containers/excursion-builder/content/form/content/excursion-places/stepper/Stepper";
+import ControlButtons from "@/containers/excursion-builder/content/form/content/control-buttons/ControlButtons";
+import ExcursionPlaceCard from "@/containers/excursion-builder/content/form/content/excursion-places/excursion-place-card/ExcursionPlaceCard";
 
 const ExcursionPlaces = () => {
   const theme = useTheme();
@@ -56,7 +57,7 @@ const ExcursionPlaces = () => {
                 >
                   <SortableItem>
                     <Stack>
-                      <CartItem
+                      <ExcursionPlaceCard
                         place={item}
                         index={index}
                         onRemove={onRemove}

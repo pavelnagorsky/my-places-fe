@@ -7,10 +7,10 @@ import {
 import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
 import ExcursionType from "@/containers/excursion-builder/content/form/content/excurion-type/ExcursionType";
-import OptimizeButton from "@/containers/excursion-builder/content/details/OptimizeButton";
+import OptimizeButton from "@/containers/excursion-builder/content/form/content/control-buttons/OptimizeButton";
 
 const Details = () => {
-  const { t, i18n } = useTranslation(["excursion-management", "common"]);
+  const { t, i18n } = useTranslation(["route-management", "common"]);
   const distance = useAppSelector(selectDistance);
   const duration = useAppSelector(selectDuration);
   const formattedDistance = utils.formatKM(distance, i18n.language);

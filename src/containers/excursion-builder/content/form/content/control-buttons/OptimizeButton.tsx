@@ -1,4 +1,3 @@
-import { selectRouteDirectionsLoading } from "@/store/route-builder-slice/route-builder.slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
@@ -11,17 +10,19 @@ import {
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import { getExcursionDirectionsThunk } from "@/store/excursion-builder-slice/thunks";
+import {
+  selectExcursionDirectionsLoading,
+  selectItemsLength,
+} from "@/store/excursion-builder-slice/excursion-builder.slice";
 
 const OptimizeButton = () => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const loading = useAppSelector(selectRouteDirectionsLoading);
+  const loading = useAppSelector(selectExcursionDirectionsLoading);
+  const placesCount = useAppSelector(selectItemsLength);
   const { t, i18n } = useTranslation("route-management");
-  const {
-    getValues,
-    formState: { isValid },
-  } = useFormContext<IExcursionBuilderForm>();
+  const { getValues } = useFormContext<IExcursionBuilderForm>();
 
   const onClickOptimize = () => {
     dispatch(
@@ -43,7 +44,7 @@ const OptimizeButton = () => {
     <Button
       onClick={onClickOptimize}
       variant={"outlined"}
-      disabled={!isValid}
+      disabled={placesCount < 3}
       size={"large"}
       sx={{ borderWidth: 2 }}
       endIcon={
