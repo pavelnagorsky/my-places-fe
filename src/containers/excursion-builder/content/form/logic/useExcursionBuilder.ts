@@ -25,6 +25,7 @@ const useExcursionBuilder = () => {
 
   useEffect(() => {
     return () => {
+      form.reset();
       dispatch(resetState());
     };
   }, []);

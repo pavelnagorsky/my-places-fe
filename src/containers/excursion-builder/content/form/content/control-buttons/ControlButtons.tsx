@@ -1,7 +1,7 @@
 import { Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import { useFormContext } from "react-hook-form-mui";
+import { useFieldArray, useFormContext } from "react-hook-form-mui";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useTranslation } from "next-i18next";
 import PlacesAutocomplete from "@/components/forms/custom-form-elements/PlacesAutocomplete";
@@ -11,15 +11,17 @@ import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/fo
 import { selectItems } from "@/store/excursion-builder-slice/excursion-builder.slice";
 import { addExcursionItemsThunk } from "@/store/excursion-builder-slice/thunks";
 import SubmitButton from "@/containers/excursion-builder/content/form/content/control-buttons/SubmitButton";
+import useExcursionPlacesFieldArrayContext from "../excursion-places/context/useExcursionPlacesFieldArrayContext";
 
 const ControlButtons = () => {
   const { t, i18n } = useTranslation(["route-management", "common"]);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { trigger, getValues, setValue, setFocus } =
+  const { trigger, getValues, setValue, setFocus, control } =
     useFormContext<IExcursionBuilderForm>();
   const [isAddMode, setIsAddMode] = useState(false);
   const selectedPlaces = useAppSelector(selectItems);
+  const { append } = useExcursionPlacesFieldArrayContext();
 
   const onClickAddLocation = () => {
     setIsAddMode(true);
@@ -33,6 +35,13 @@ const ControlButtons = () => {
   const onConfirmLocation = () => {
     trigger("addPlaces").then((isValid) => {
       if (isValid && getValues("addPlaces").length > 0) {
+        append(
+          getValues("addPlaces").map((place) => ({
+            id: place.id,
+            description: "",
+            excursionDuration: 15,
+          }))
+        );
         dispatch(
           addExcursionItemsThunk({
             ids: getValues("addPlaces").map((place) => place.id),

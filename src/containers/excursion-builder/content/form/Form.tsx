@@ -4,7 +4,7 @@ import ExcursionPlaces from "@/containers/excursion-builder/content/form/content
 
 const ExcursionBuilderForm = () => {
   return (
-    <Stack gap={"2em"}>
+    <Stack gap={"1em"}>
       <ExcursionInfo />
       <ExcursionPlaces />
     </Stack>

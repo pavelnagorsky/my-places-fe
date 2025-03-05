@@ -77,6 +77,7 @@ const SubmitButton = () => {
     }
 
     handleSubmit((data) => {
+      console.log(data);
       // dispatch(
       //   saveExcursionThunk({
       //     route: {

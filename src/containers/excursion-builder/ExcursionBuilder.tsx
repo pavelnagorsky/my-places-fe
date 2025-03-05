@@ -2,54 +2,67 @@ import useExcursionBuilder from "@/containers/excursion-builder/content/form/log
 import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { FormProvider } from "react-hook-form-mui";
+import { FormProvider, useFieldArray } from "react-hook-form-mui";
 import Grid from "@mui/material/Grid2";
-import { Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import Form from "@/containers/excursion-builder/content/form/Form";
 import MapSection from "./content/map-section/MapSection";
 import Details from "@/containers/excursion-builder/content/details/Details";
+import ExcursionPlacesFieldArrayProvider from "@/containers/excursion-builder/content/form/content/excursion-places/context/ExcursionPlacesFieldArrayProvider";
+import { useTranslation } from "next-i18next";
+import ProtectedAuth from "@/hoc/ProtectedAuth";
 
 const ExcursionBuilder = () => {
+  const { t } = useTranslation("excursion-management");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const form = useExcursionBuilder();
+  const fieldArray = useFieldArray({
+    control: form.control,
+    keyName: "key",
+    name: "places",
+  });
 
   return (
-    <motion.div
-      variants={animationVariants.defaultContainerVariant}
-      initial="hidden"
-      animate="show"
-    >
-      <WrappedContainer>
-        <FormProvider {...form}>
-          <Grid container spacing={4} mb={"4em"}>
-            {!isMobile && (
-              <Grid size={12}>
-                <motion.div variants={animationVariants.defaultItemVariant}>
-                  <Stack mb={3}>
-                    <Breadcrumbs />
-                  </Stack>
-                </motion.div>
+    <ProtectedAuth mode={"redirectAfter"}>
+      <motion.div
+        variants={animationVariants.defaultContainerVariant}
+        initial="hidden"
+        animate="show"
+      >
+        <WrappedContainer>
+          <FormProvider {...form}>
+            <motion.div variants={animationVariants.defaultItemVariant}>
+              <Stack mb={3}>
+                <Breadcrumbs />
+              </Stack>
+              <Typography variant={"h1"} mb={{ xs: 2, md: 4 }}>
+                Создание экскурсии
+                {/*{t("creation.title")}*/}
+              </Typography>
+            </motion.div>
+            <ExcursionPlacesFieldArrayProvider {...fieldArray}>
+              <Grid container spacing={4} mb={"4em"}>
+                <Grid size={{ xs: 12, lg: 9 }}>
+                  <motion.div variants={animationVariants.defaultItemVariant}>
+                    <Form />
+                  </motion.div>
+                </Grid>
+                <Grid size={{ xs: 12, lg: 3 }}>
+                  <Details />
+                </Grid>
+                <Grid size={12}>
+                  <motion.div variants={animationVariants.defaultItemVariant}>
+                    <MapSection />
+                  </motion.div>
+                </Grid>
               </Grid>
-            )}
-            <Grid size={{ xs: 12, lg: 9 }}>
-              <motion.div variants={animationVariants.defaultItemVariant}>
-                <Form />
-              </motion.div>
-            </Grid>
-            <Grid size={{ xs: 12, lg: 3 }}>
-              <Details />
-            </Grid>
-            <Grid size={12}>
-              <motion.div variants={animationVariants.defaultItemVariant}>
-                <MapSection />
-              </motion.div>
-            </Grid>
-          </Grid>
-        </FormProvider>
-      </WrappedContainer>
-    </motion.div>
+            </ExcursionPlacesFieldArrayProvider>
+          </FormProvider>
+        </WrappedContainer>
+      </motion.div>
+    </ProtectedAuth>
   );
 };
 

@@ -13,5 +13,6 @@ export interface IExcursionBuilderForm {
 
 export interface IExcursionBuilderFormPlace {
   id: number;
-  excursionDuration: Date;
+  description: string;
+  excursionDuration: number;
 }

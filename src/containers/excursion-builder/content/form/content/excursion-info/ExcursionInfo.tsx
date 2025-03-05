@@ -15,14 +15,14 @@ const ExcursionInfo = () => {
           fontSize={{ xs: "20px", md: "30px" }}
           mb={"0.5em"}
         >
-          Название экскурсии
+          Название
         </Typography>
         <TextFieldElement
           autoFocus
           name={"title"}
           required
           fullWidth
-          placeholder={"Название экскурсии"}
+          placeholder={"Введите название экскурсии"}
           rules={{
             required: t("errors.required", {
               ns: "common",
@@ -36,7 +36,7 @@ const ExcursionInfo = () => {
           fontSize={{ xs: "20px", md: "30px" }}
           mb={"0.5em"}
         >
-          Описание экскурсии
+          Краткое описание
         </Typography>
         <TextEditor
           sx={{

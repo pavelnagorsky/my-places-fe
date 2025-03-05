@@ -63,6 +63,7 @@ export const getExcursionDirectionsThunk = createAsyncThunk(
       language: string;
       optimizeWaypoints?: boolean;
       travelMode: TravelModesEnum;
+      onReorder?: (reorderedIds: number[]) => void;
     },
     thunkAPI
   ) => {
@@ -118,9 +119,11 @@ export const getExcursionDirectionsThunk = createAsyncThunk(
             (prev, current) => prev + (current.duration?.value ?? 0),
             0
           );
-          thunkAPI.dispatch(
-            setItems([firstPlace, ...orderedWaypoints, lastPlace])
-          );
+          const updateItems = [firstPlace, ...orderedWaypoints, lastPlace];
+          if (typeof payload.onReorder === "function") {
+            payload.onReorder(updateItems.map((item) => item.id));
+          }
+          thunkAPI.dispatch(setItems(updateItems));
           thunkAPI.dispatch(setDistance(distanceInMeters / 1000));
           thunkAPI.dispatch(setDuration(durationInSeconds / 60));
 

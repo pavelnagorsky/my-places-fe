@@ -16,6 +16,7 @@ const Breadcrumbs = () => {
     ["create-review"]: t("links.createReview"),
     ["create-place"]: t("links.createPlace"),
     ["create-route"]: t("links.createRoute"),
+    ["create-excursion"]: t("links.createExcursion"),
     ["privacy-policy"]: t("links.privacyPolicy"),
     ["terms-of-use"]: t("links.termsOfUse"),
   };

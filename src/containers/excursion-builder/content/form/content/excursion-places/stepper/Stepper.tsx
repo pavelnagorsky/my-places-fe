@@ -24,7 +24,7 @@ const DashedLine = ({ sx }: { sx?: SxProps }) => (
   <Box
     sx={{
       width: 2,
-      height: { xs: "190px", sm: "170px" },
+      height: { xs: "190px", sm: "265px" },
       borderRight: "1.5px dashed #D4D4D4",
       my: "0.2em",
       ...sx,
@@ -36,7 +36,7 @@ const Stepper = () => {
   const items = useAppSelector(selectItems);
 
   return (
-    <Stack alignItems={"center"} py={{ xs: "80px" }}>
+    <Stack alignItems={"center"} pt={{ xs: "170px" }}>
       {items.map((item, i) => {
         return (
           <Fragment key={item.id}>
