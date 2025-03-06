@@ -33,19 +33,16 @@ const ExcursionBuilder = () => {
       >
         <WrappedContainer>
           <FormProvider {...form}>
-            <motion.div variants={animationVariants.defaultItemVariant}>
-              <Stack mb={3}>
-                <Breadcrumbs />
-              </Stack>
-              <Typography variant={"h1"} mb={{ xs: 2, md: 4 }}>
-                Создание экскурсии
-                {/*{t("creation.title")}*/}
-              </Typography>
-            </motion.div>
+            <Stack mb={2}>
+              <Breadcrumbs />
+            </Stack>
             <ExcursionPlacesFieldArrayProvider {...fieldArray}>
               <Grid container spacing={4} mb={"4em"}>
                 <Grid size={{ xs: 12, lg: 9 }}>
                   <motion.div variants={animationVariants.defaultItemVariant}>
+                    <Typography variant={"h1"} mb={3}>
+                      {t("seo.create.title")}
+                    </Typography>
                     <Form />
                   </motion.div>
                 </Grid>

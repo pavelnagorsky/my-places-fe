@@ -11,6 +11,9 @@ import {
   setDuration,
   setItems,
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
+import CreateExcursion from "@/pages/create-excursion";
+import { ICreateExcursion } from "@/services/excursions-service/interfaces/create-excursion.interface";
+import excursionsService from "@/services/excursions-service/excursions.service";
 
 export const startExcursionEditingThunk = createAsyncThunk(
   "excursion-builder/start-editing",
@@ -140,12 +143,7 @@ export const saveExcursionThunk = createAsyncThunk(
   "excursion-builder/save",
   async (
     payload: {
-      route: {
-        coordinatesStart: string;
-        coordinatesEnd: string;
-        title: string;
-        travelMode: TravelModesEnum;
-      };
+      data: ICreateExcursion;
       onSuccess?: () => void;
       onError?: () => void;
     },
@@ -154,22 +152,12 @@ export const saveExcursionThunk = createAsyncThunk(
     const { excursionBuilder } = thunkAPI.getState() as RootState;
     const id = excursionBuilder.editExcursionId;
     try {
-      const requestPayload: ICreateRoute | IUpdateRoute = {
-        id: id as any,
-        coordinatesStart: payload.route.coordinatesStart,
-        coordinatesEnd: payload.route.coordinatesEnd,
-        title: payload.route.title,
-        placeIds: excursionBuilder.items.map((item) => item.id),
-        travelMode: payload.route.travelMode,
-      };
-
       const apiCall = !!id
-        ? routesService.updateRoute
-        : routesService.createRoute;
+        ? excursionsService.updateExcursion
+        : excursionsService.createExcursion;
 
-      const { data } = await apiCall(requestPayload);
+      const { data } = await apiCall({ ...payload.data, id: id as number });
       if (typeof payload.onSuccess === "function") payload.onSuccess();
-
       return data;
     } catch (e) {
       if (typeof payload.onError === "function") payload.onError();

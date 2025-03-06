@@ -20,7 +20,8 @@
     "administration": "Administration",
     "routeBuilder": "Routes",
     "excursionBuilder": "Excursions",
-    "createExcursion": "Create an Excursion"
+    "createExcursion": "Create an Excursion",
+    "createExcursionMobile": "Create an Excursion"
   },
   "footer": {
     "title": "We are contactable!"

@@ -70,6 +70,13 @@ const LinksSection = ({
         href={routerLinks.createRoute}
         icon={<RouteIcon fontSize={"small"} color={"secondary"} />}
       />
+      <SliderMenuLink
+        pathname={pathname}
+        onClick={onClose}
+        text={t("links.createExcursionMobile")}
+        href={routerLinks.createExcursion}
+        icon={<RouteIcon fontSize={"small"} color={"secondary"} />}
+      />
       {desktopLinks}
     </Fragment>
   ) : (

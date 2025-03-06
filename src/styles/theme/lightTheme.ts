@@ -45,6 +45,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
           fontWeight: 600,
           color: "#303030",
           marginBottom: "30px",
+          fontSize: "32px",
         },
         h2: {
           fontWeight: 600,
@@ -168,9 +169,8 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
 
   lightTheme.typography.h1 = {
     ...lightTheme.typography.h1,
-    fontSize: "24px",
-    [lightTheme.breakpoints.up("md")]: {
-      fontSize: "35px",
+    [lightTheme.breakpoints.down("md")]: {
+      fontSize: "24px",
     },
   };
 

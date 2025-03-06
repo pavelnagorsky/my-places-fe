@@ -20,7 +20,8 @@
     "administration": "Администрация",
     "routeBuilder": "Маршруты",
     "excursionBuilder": "Экскурсии",
-    "createExcursion": "Составление экскурсии"
+    "createExcursion": "Составление экскурсии",
+    "createExcursionMobile": "Составить экскурсию"
   },
   "footer": {
     "title": "Мы на связи с вами!"

@@ -8,14 +8,21 @@ import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
 import ExcursionType from "@/containers/excursion-builder/content/form/content/excurion-type/ExcursionType";
 import OptimizeButton from "@/containers/excursion-builder/content/form/content/control-buttons/OptimizeButton";
-import { useFormContext } from "react-hook-form-mui";
+import { useFormContext, useWatch } from "react-hook-form-mui";
 import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
+import useExcursionPlacesFieldArrayContext from "@/containers/excursion-builder/content/form/content/excursion-places/context/useExcursionPlacesFieldArrayContext";
 
 const Details = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
-  const { getValues } = useFormContext<IExcursionBuilderForm>();
-  const totalExcursionsDuration = getValues("places").reduce((acc, cur) => {
-    acc += cur.excursionDuration || 0;
+  const { control } = useFormContext<IExcursionBuilderForm>();
+  const { fields } = useExcursionPlacesFieldArrayContext();
+  // @ts-ignore
+  const excursionDurations: number[] = useWatch({
+    control,
+    name: fields.map((_, idx) => `places.${idx}.excursionDuration`),
+  });
+  const totalExcursionsDuration = excursionDurations.reduce((acc, cur) => {
+    acc += cur || 0;
     return acc;
   }, 0);
   const distance = useAppSelector(selectDistance);

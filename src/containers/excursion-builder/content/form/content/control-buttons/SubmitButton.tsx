@@ -13,6 +13,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
 import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import { saveExcursionThunk } from "@/store/excursion-builder-slice/thunks";
+import { ICreateExcursion } from "@/services/excursions-service/interfaces/create-excursion.interface";
 
 const SubmitButton = () => {
   const { t } = useTranslation(["excursion-management", "common"]);
@@ -77,19 +78,20 @@ const SubmitButton = () => {
     }
 
     handleSubmit((data) => {
-      console.log(data);
-      // dispatch(
-      //   saveExcursionThunk({
-      //     route: {
-      //       coordinatesStart: data.searchFrom.coordinates as string,
-      //       coordinatesEnd: data.searchTo.coordinates as string,
-      //       title: data.title,
-      //       travelMode: data.travelMode,
-      //     },
-      //     onError: handleShowError,
-      //     onSuccess: handleShowSuccess,
-      //   })
-      // );
+      const payload: ICreateExcursion = {
+        title: data.title,
+        description: data.description,
+        travelMode: data.travelMode,
+        type: +data.type,
+        places: data.places,
+      };
+      dispatch(
+        saveExcursionThunk({
+          data: payload,
+          onError: handleShowError,
+          onSuccess: handleShowSuccess,
+        })
+      );
     })();
   };
 

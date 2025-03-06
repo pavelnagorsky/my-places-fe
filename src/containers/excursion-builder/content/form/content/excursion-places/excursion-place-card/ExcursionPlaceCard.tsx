@@ -89,13 +89,12 @@ const ExcursionPlaceCard = ({
       <Stack width={"100%"} gap={2}>
         <Typography
           fontSize={"22px"}
-          textAlign={{ xs: "center", sm: "start" }}
           fontWeight={500}
           sx={{
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
-            WebkitLineClamp: { xs: 2, sm: 3, md: 2 },
+            WebkitLineClamp: 2,
           }}
         >
           {place.title}
@@ -110,7 +109,7 @@ const ExcursionPlaceCard = ({
             sx={{
               display: "-webkit-box",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: { xs: 2, sm: 3, md: 2 },
+              WebkitLineClamp: { xs: 3, md: 2 },
               overflow: "hidden",
             }}
           >
@@ -133,11 +132,15 @@ const ExcursionPlaceCard = ({
         </Stack>
         <Stack
           justifyContent={"space-between"}
-          alignItems={"center"}
+          alignItems={{ xs: "end", sm: "center" }}
           direction={"row"}
           gap={"1em"}
         >
-          <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
+          <Stack
+            direction={{ sm: "row" }}
+            alignItems={{ sm: "center" }}
+            gap={"1em"}
+          >
             <Typography color={"secondary.dark"}>
               {t("form.durationSelect")}
             </Typography>
