@@ -15,7 +15,7 @@ import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/fo
 import { saveExcursionThunk } from "@/store/excursion-builder-slice/thunks";
 
 const SubmitButton = () => {
-  const { t } = useTranslation(["route-management", "common"]);
+  const { t } = useTranslation(["excursion-management", "common"]);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectSubmitLoading);
   const hasItems = useAppSelector(selectHasItems);
@@ -64,7 +64,7 @@ const SubmitButton = () => {
       })
     );
     if (isEditMode) {
-      router.push(routerLinks.personalAreaRoutes);
+      router.push(routerLinks.personalAreaExcursions);
     }
   };
 
@@ -101,7 +101,7 @@ const SubmitButton = () => {
       endIcon={loading && <CircularProgress color="inherit" size={22} />}
       onClick={onSubmit}
     >
-      {isEditMode ? t("updateRoute") : t("createRoute")}
+      {isEditMode ? t("updateExcursion") : t("createExcursion")}
     </Button>
   );
 };

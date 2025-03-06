@@ -37,7 +37,6 @@ const ExcursionPlaceCard = ({
   const theme = useTheme();
   const isMobileSm = useMediaQuery(theme.breakpoints.down("sm"));
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { watch } = useFormContext<IExcursionBuilderForm>();
   const { i18n, t } = useTranslation(["excursion-management", "common"]);
 
   const dragButton = (
@@ -123,7 +122,7 @@ const ExcursionPlaceCard = ({
             name={`places.${index}.description`}
             multiline
             rows={4}
-            placeholder={"Введите краткое описание"}
+            placeholder={t("form.placeDescriptionPlaceholder")}
             rules={{
               maxLength: {
                 value: 300,
@@ -140,7 +139,7 @@ const ExcursionPlaceCard = ({
         >
           <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
             <Typography color={"secondary.dark"}>
-              Введите время на посещение экскурсии:
+              {t("form.durationSelect")}
             </Typography>
             <DurationPicker
               name={`places.${index}.excursionDuration`}

@@ -18,7 +18,9 @@
     "personalArea": "Personal account",
     "moderation": "Moderation",
     "administration": "Administration",
-    "routeBuilder": "Routes"
+    "routeBuilder": "Routes",
+    "excursionBuilder": "Excursions",
+    "createExcursion": "Create an Excursion"
   },
   "footer": {
     "title": "We are contactable!"

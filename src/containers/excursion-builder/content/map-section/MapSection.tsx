@@ -50,7 +50,7 @@ const MapSection = () => {
         alignItems={{ md: "center" }}
         gap={"1em"}
       >
-        <Typography variant={"h1"} mb={"0em"} component={"h2"} flexGrow={1}>
+        <Typography variant={"h2"} pb={"0em"} flexGrow={1}>
           {t("mapView")}
         </Typography>
         <NavigatorControls />

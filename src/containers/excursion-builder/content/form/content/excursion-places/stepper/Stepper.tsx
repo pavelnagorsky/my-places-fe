@@ -36,7 +36,7 @@ const Stepper = () => {
   const items = useAppSelector(selectItems);
 
   return (
-    <Stack alignItems={"center"} pt={{ xs: "170px" }}>
+    <Stack alignItems={"center"} pt={{ xs: "150px" }}>
       {items.map((item, i) => {
         return (
           <Fragment key={item.id}>

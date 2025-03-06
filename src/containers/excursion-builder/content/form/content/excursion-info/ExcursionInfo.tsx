@@ -10,19 +10,15 @@ const ExcursionInfo = () => {
   return (
     <Grid container spacing={3}>
       <Grid size={12}>
-        <Typography
-          component={"h2"}
-          fontSize={{ xs: "20px", md: "30px" }}
-          mb={"0.5em"}
-        >
-          Название
+        <Typography fontWeight={500} fontSize={"22px"} mb={"0.5em"}>
+          {t("form.title")}
         </Typography>
         <TextFieldElement
           autoFocus
           name={"title"}
           required
           fullWidth
-          placeholder={"Введите название экскурсии"}
+          placeholder={t("form.titlePlaceholder")}
           rules={{
             required: t("errors.required", {
               ns: "common",
@@ -31,12 +27,8 @@ const ExcursionInfo = () => {
         />
       </Grid>
       <Grid size={12}>
-        <Typography
-          component={"h2"}
-          fontSize={{ xs: "20px", md: "30px" }}
-          mb={"0.5em"}
-        >
-          Краткое описание
+        <Typography fontWeight={500} fontSize={"22px"} mb={"0.5em"}>
+          {t("form.description")}
         </Typography>
         <TextEditor
           sx={{
@@ -47,7 +39,7 @@ const ExcursionInfo = () => {
           required
           maxSymbols={2000}
           fieldName={"description"}
-          placeholder={"Введите описание экскурсии"}
+          placeholder={t("form.descriptionPlaceholder")}
         />
       </Grid>
     </Grid>

@@ -6,12 +6,11 @@ import { IUpdateRoute } from "@/services/routes-service/interfaces/update-route.
 import routesService from "@/services/routes-service/routes.service";
 import searchService from "@/services/search-service/search.service";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
-import { ILatLngCoordinate } from "@/components/map/Map";
 import {
   setDistance,
   setDuration,
   setItems,
-} from "@/store/route-builder-slice/route-builder.slice";
+} from "@/store/excursion-builder-slice/excursion-builder.slice";
 
 export const startExcursionEditingThunk = createAsyncThunk(
   "excursion-builder/start-editing",
