@@ -39,7 +39,7 @@ const Details = () => {
 
   return (
     <Stack zIndex={1} position={{ lg: "sticky" }} top={{ lg: "5.5em" }} gap={2}>
-      <Typography variant={"h2"} pb={"0em"}>
+      <Typography variant={"h2"} pb={"0.5em"}>
         {t("details.title")}
       </Typography>
       <Stack

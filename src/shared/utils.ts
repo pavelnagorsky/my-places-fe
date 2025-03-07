@@ -153,9 +153,13 @@ const utils = {
   ) => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
-    return `${hours}${hoursTranslation} ${+remainingMinutes.toFixed(
-      0
-    )}${minutesTranslation}`;
+    const hoursString = hours > 0 ? `${hours}${hoursTranslation}` : "";
+    const minutesString =
+      remainingMinutes > 0
+        ? `${+remainingMinutes.toFixed(0)}${minutesTranslation}`
+        : "";
+
+    return `${hoursString} ${minutesString}`;
   },
 };
 
