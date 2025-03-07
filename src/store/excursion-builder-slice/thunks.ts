@@ -143,7 +143,7 @@ export const saveExcursionThunk = createAsyncThunk(
   "excursion-builder/save",
   async (
     payload: {
-      data: ICreateExcursion;
+      data: ICreateExcursion & { language: string };
       onSuccess?: () => void;
       onError?: () => void;
     },
