@@ -16,7 +16,7 @@ import { saveExcursionThunk } from "@/store/excursion-builder-slice/thunks";
 import { ICreateExcursion } from "@/services/excursions-service/interfaces/create-excursion.interface";
 
 const SubmitButton = () => {
-  const { t } = useTranslation(["excursion-management", "common"]);
+  const { t, i18n } = useTranslation(["excursion-management", "common"]);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectSubmitLoading);
   const hasItems = useAppSelector(selectHasItems);
@@ -78,12 +78,13 @@ const SubmitButton = () => {
     }
 
     handleSubmit((data) => {
-      const payload: ICreateExcursion = {
+      const payload: ICreateExcursion & { language: string } = {
         title: data.title,
         description: data.description,
         travelMode: data.travelMode,
         type: +data.type,
         places: data.places,
+        language: i18n.language,
       };
       dispatch(
         saveExcursionThunk({
