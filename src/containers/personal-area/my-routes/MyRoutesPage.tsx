@@ -107,9 +107,9 @@ const MyRoutesPage = () => {
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.items.map((place, index) => (
+                  {logic.items.map((route, index) => (
                     <motion.div
-                      key={place.id}
+                      key={route.id}
                       layout
                       exit={{
                         opacity: 0,
@@ -117,7 +117,7 @@ const MyRoutesPage = () => {
                       }}
                       transition={{ duration: 0.6, type: "spring" }}
                     >
-                      <RouteItem route={place} onDelete={logic.handleDelete} />
+                      <RouteItem route={route} onDelete={logic.handleDelete} />
                     </motion.div>
                   ))}
                 </AnimatePresence>

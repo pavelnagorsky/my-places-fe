@@ -6,12 +6,11 @@ import { SubmitHandler, useForm } from "react-hook-form-mui";
 import { routerLinks } from "@/routing/routerLinks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { resetState } from "@/store/excursion-builder-slice/excursion-builder.slice";
-import googlePlacesAutocompleteService from "@/services/google-places-service/google-places.service";
-import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { IEditExcursionForm } from "@/containers/personal-area/my-excursions/edit-excursion/logic/interfaces";
 import { ExcursionTypesEnum } from "@/services/excursions-service/interfaces/excursion-types.enum";
 import { startExcursionEditingThunk } from "@/store/excursion-builder-slice/thunks";
+import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 
 const useEditMyExcursion = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
@@ -64,16 +63,16 @@ const useEditMyExcursion = () => {
 
     setLoading(true);
 
-    const onSuccess = async (data: any) => {
-      try {
-        // reset form state
-        form.reset({
-          ...form.getValues(),
-          title: data.title,
-          type: `${data.type || ExcursionTypesEnum.Overview}`,
-          travelMode: data.travelMode || TravelModesEnum.DRIVING,
-        });
-      } catch (e) {}
+    const onSuccess = async (data: IExcursion) => {
+      // try {
+      //   // reset form state
+      //   form.reset({
+      //     ...form.getValues(),
+      //     title: data.title,
+      //     type: `${data.type || ExcursionTypesEnum.Overview}`,
+      //     travelMode: data.travelMode || TravelModesEnum.DRIVING,
+      //   });
+      // } catch (e) {}
       setLoading(false);
     };
 

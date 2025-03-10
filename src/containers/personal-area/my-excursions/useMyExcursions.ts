@@ -13,12 +13,19 @@ import {
 } from "@/services/routes-service/interfaces/interfaces";
 import routesService from "@/services/routes-service/routes.service";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
+import { IMyExcursionsFormContext } from "@/containers/personal-area/my-excursions/interfaces";
+import {
+  IMyExcursionsRequest,
+  MyExcursionsOrderByEnum,
+} from "@/services/excursions-service/interfaces/interfaces";
+import excursionsService from "@/services/excursions-service/excursions.service";
+import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 
 const useMyExcursions = () => {
   const { t, i18n } = useTranslation(["personal-area", "common"]);
   const dispatch = useAppDispatch();
 
-  const formContext = useForm<IMyRoutesFormContext>({
+  const formContext = useForm<IMyExcursionsFormContext>({
     defaultValues: {
       search: "",
       dateTo: null,
@@ -27,9 +34,9 @@ const useMyExcursions = () => {
   });
 
   const apiCall = useCallback(
-    (pagination: IPaginationRequest<MyRoutesOrderByEnum>) => {
+    (pagination: IPaginationRequest<MyExcursionsOrderByEnum>) => {
       const data = formContext.getValues();
-      const payload: IMyRoutesRequest = {
+      const payload: IMyExcursionsRequest = {
         search: data.search,
         dateFrom: data.dateFrom
           ? utils.parseFilterDate(data.dateFrom, true)
@@ -37,14 +44,17 @@ const useMyExcursions = () => {
         dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
         ...pagination,
       };
-      return routesService.getMyRoutes(payload, i18n.language);
+      return excursionsService.getMyExcursions(payload, i18n.language);
     },
     [i18n.language]
   );
 
-  const paginator = useScrollPagination<IRoute, MyRoutesOrderByEnum>({
-    defaultOrderBy: MyRoutesOrderByEnum.CREATED_AT,
-    pageSize: routesService.MY_ROUTES_ITEMS_PER_PAGE,
+  const paginator = useScrollPagination<
+    IExcursionListItem,
+    MyExcursionsOrderByEnum
+  >({
+    defaultOrderBy: MyExcursionsOrderByEnum.CREATED_AT,
+    pageSize: excursionsService.MY_EXCURSIONS_ITEMS_PER_PAGE,
     apiCall: apiCall,
   });
 
@@ -66,7 +76,7 @@ const useMyExcursions = () => {
           showAlertThunk({
             alertProps: {
               title: t("feedback.success", { ns: "common" }),
-              description: t("routes.feedback.delete.success"),
+              description: t("excursions.feedback.delete.success"),
               variant: "standard",
               severity: "success",
             },
@@ -81,7 +91,7 @@ const useMyExcursions = () => {
           showAlertThunk({
             alertProps: {
               title: t("feedback.error", { ns: "common" }),
-              description: `${t("routes.feedback.delete.error")} ${t(
+              description: `${t("excursions.feedback.delete.error")} ${t(
                 "errors.description",
                 {
                   ns: "common",

@@ -106,7 +106,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
         <Box p={"2em"} pt={"1.5em"}>
           <Box>
             <CustomLabel sx={{ fontSize: "18px" }}>
-              {t("routes.filters.byCreatedAt")}
+              {t("excursions.filters.byCreatedAt")}
             </CustomLabel>
             <Typography color={"secondary.main"}>
               {t("filters.dateRange", { ns: "common" })}

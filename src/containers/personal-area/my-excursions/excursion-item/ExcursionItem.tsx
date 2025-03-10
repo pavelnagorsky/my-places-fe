@@ -23,28 +23,32 @@ import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 import useMyRouteMenu from "@/containers/personal-area/my-routes/route-item/menu/useMyRouteMenu";
 import MyRouteMenu from "@/containers/personal-area/my-routes/route-item/menu/MyRouteMenu";
 import utils from "@/shared/utils";
+import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
+import useMyExcursionMenu from "@/containers/personal-area/my-excursions/excursion-item/menu/useMyExcursionMenu";
+import MyExcursionMenu from "@/containers/personal-area/my-excursions/excursion-item/menu/MyExcursionMenu";
+import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 
-interface IRouteItemProps {
-  route: IRoute;
-  onDelete: (routeId: number) => void;
+interface IExcursionItemProps {
+  item: IExcursionListItem;
+  onDelete: (id: number) => void;
 }
 
-const ExcursionItem = ({ route, onDelete }: IRouteItemProps) => {
+const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation(["personal-area", "common"]);
   const dateFnsLocale = useDateFnsLocale();
-  const menu = useMyRouteMenu({ route: route, onDelete });
+  const menu = useMyExcursionMenu({ item, onDelete });
   const [fullOpen, setFullOpen] = useState(false);
 
-  const formattedDistance = utils.formatKM(route.distance, i18n.language);
-  const formattedDuration = utils.formatMinutes(route.duration, {
+  const formattedDistance = utils.formatKM(item.distance, i18n.language);
+  const formattedDuration = utils.formatMinutes(item.duration, {
     hoursTranslation: t("hours", { ns: "common" }),
     minutesTranslation: t("minutes", { ns: "common" }),
   });
 
   const Menu = (
-    <MyRouteMenu
+    <MyExcursionMenu
       anchorEl={menu.popover.anchor}
       open={menu.popover.open}
       handleClose={menu.popover.handleClose}
@@ -59,9 +63,7 @@ const ExcursionItem = ({ route, onDelete }: IRouteItemProps) => {
     setFullOpen(!fullOpen);
   };
 
-  const routeTitleBox = (
-    <Typography variant={"body1"}>{route.title}</Typography>
-  );
+  const routeTitleBox = <Typography variant={"body1"}>{item.title}</Typography>;
 
   const placesInfoBox = (
     <Tooltip
@@ -76,7 +78,7 @@ const ExcursionItem = ({ route, onDelete }: IRouteItemProps) => {
           flexDirection={"column"}
           gap={"0.5em"}
         >
-          {route.places.map((p) => (
+          {item.places.map((p) => (
             <span key={p.id}>
               {p.title}
               <br />
@@ -93,7 +95,7 @@ const ExcursionItem = ({ route, onDelete }: IRouteItemProps) => {
         sx={{ cursor: "pointer" }}
       >
         <Typography variant={"body1"}>
-          {t("routes.headings.placesCount", { count: route.places.length })}
+          {t("excursions.headings.placesCount", { count: item.places.length })}
         </Typography>
         <InfoOutlinedIcon color={"secondary"} fontSize={"small"} />
       </Stack>
@@ -111,7 +113,7 @@ const ExcursionItem = ({ route, onDelete }: IRouteItemProps) => {
   const dateInfoBox = (
     <Stack gap={"0.2em"}>
       <Typography variant={"body1"}>
-        {format(new Date(route.createdAt), "dd MMM yyyy", {
+        {format(new Date(item.createdAt), "dd MMM yyyy", {
           locale: dateFnsLocale,
         })}
       </Typography>
@@ -133,23 +135,23 @@ const ExcursionItem = ({ route, onDelete }: IRouteItemProps) => {
       <Stack direction={"row"}>
         <Grid container spacing={"1em"}>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
-            <CustomLabel>{t("routes.headings.title")}</CustomLabel>
+            <CustomLabel>{t("excursions.headings.title")}</CustomLabel>
             {routeTitleBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
-            <CustomLabel>{t("routes.headings.places")}</CustomLabel>
+            <CustomLabel>{t("excursions.headings.places")}</CustomLabel>
             {placesInfoBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
-            <CustomLabel>{t("routes.headings.distance")}</CustomLabel>
+            <CustomLabel>{t("excursions.headings.distance")}</CustomLabel>
             {routeDistanceBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
-            <CustomLabel>{t("routes.headings.duration")}</CustomLabel>
+            <CustomLabel>{t("excursions.headings.duration")}</CustomLabel>
             {routeDurationBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
-            <CustomLabel>{t("routes.headings.createdAt")}</CustomLabel>
+            <CustomLabel>{t("excursions.headings.createdAt")}</CustomLabel>
             {dateInfoBox}
           </Grid>
         </Grid>

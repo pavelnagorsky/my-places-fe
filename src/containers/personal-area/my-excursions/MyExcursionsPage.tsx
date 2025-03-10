@@ -18,15 +18,15 @@ import { routerLinks } from "@/routing/routerLinks";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import NextLink from "next/link";
-import useMyRoutes from "@/containers/personal-area/my-routes/useMyRoutes";
-import RouteItemsTableHead from "@/containers/personal-area/my-routes/route-item/RouteItemsTableHead";
-import RouteItem from "@/containers/personal-area/my-routes/route-item/RouteItem";
+import useMyExcursions from "@/containers/personal-area/my-excursions/useMyExcursions";
+import ExcursionItemsTableHead from "@/containers/personal-area/my-excursions/excursion-item/ExcursionItemsTableHead";
+import ExcursionItem from "@/containers/personal-area/my-excursions/excursion-item/ExcursionItem";
 
 const MyExcursionsPage = () => {
   const { t } = useTranslation("personal-area");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const logic = useMyRoutes();
+  const logic = useMyExcursions();
 
   return (
     <PersonalAreaLayout>
@@ -44,10 +44,10 @@ const MyExcursionsPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                {t("routes.title")}
+                {t("excursions.title")}
               </Typography>
               {isMobile ? (
-                <NextLink href={routerLinks.createRoute}>
+                <NextLink href={routerLinks.createExcursion}>
                   <IconButton
                     size={"small"}
                     sx={{
@@ -65,10 +65,10 @@ const MyExcursionsPage = () => {
               ) : (
                 <Button
                   variant={"contained"}
-                  linkTo={routerLinks.createRoute}
+                  linkTo={routerLinks.createExcursion}
                   sx={{ color: "primary", height: "44px" }}
                 >
-                  {t("routes.newRoute")}
+                  {t("excursions.newExcursion")}
                 </Button>
               )}
             </Stack>
@@ -86,10 +86,10 @@ const MyExcursionsPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  {t("routes.noItems")}
+                  {t("excursions.noItems")}
                 </Typography>
               )}
-              <RouteItemsTableHead
+              <ExcursionItemsTableHead
                 orderBy={logic.orderBy}
                 orderDirection={logic.orderDirection}
                 show={!logic.noItems}
@@ -107,9 +107,9 @@ const MyExcursionsPage = () => {
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.items.map((place, index) => (
+                  {logic.items.map((excursion, index) => (
                     <motion.div
-                      key={place.id}
+                      key={excursion.id}
                       layout
                       exit={{
                         opacity: 0,
@@ -117,7 +117,10 @@ const MyExcursionsPage = () => {
                       }}
                       transition={{ duration: 0.6, type: "spring" }}
                     >
-                      <RouteItem route={place} onDelete={logic.handleDelete} />
+                      <ExcursionItem
+                        item={excursion}
+                        onDelete={logic.handleDelete}
+                      />
                     </motion.div>
                   ))}
                 </AnimatePresence>

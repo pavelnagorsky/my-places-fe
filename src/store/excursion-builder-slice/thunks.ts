@@ -14,6 +14,7 @@ import {
 import CreateExcursion from "@/pages/create-excursion";
 import { ICreateExcursion } from "@/services/excursions-service/interfaces/create-excursion.interface";
 import excursionsService from "@/services/excursions-service/excursions.service";
+import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 
 export const startExcursionEditingThunk = createAsyncThunk(
   "excursion-builder/start-editing",
@@ -21,13 +22,13 @@ export const startExcursionEditingThunk = createAsyncThunk(
     payload: {
       id: number;
       language: string;
-      onSuccess?: (data: IRoute) => void;
+      onSuccess?: (data: IExcursion) => void;
       onError?: () => void;
     },
     thunkAPI
   ) => {
     try {
-      const { data } = await routesService.getRoute(
+      const { data } = await excursionsService.getExcursionById(
         payload.id,
         payload.language
       );
@@ -156,7 +157,10 @@ export const saveExcursionThunk = createAsyncThunk(
         ? excursionsService.updateExcursion
         : excursionsService.createExcursion;
 
-      const { data } = await apiCall({ ...payload.data, id: id as number });
+      const { data } = await apiCall(
+        { ...payload.data, id: id as number },
+        payload.data.language
+      );
       if (typeof payload.onSuccess === "function") payload.onSuccess();
       return data;
     } catch (e) {

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 
-interface IMyRouteMenuProps {
+interface IMyExcursionMenuProps {
   anchorEl: null | Element;
   open: boolean;
   handleClose: () => void;
@@ -29,9 +29,9 @@ const MyExcursionMenu = ({
   onEdit,
   onOpenGoogleNavigator,
   onOpenYandexNavigator,
-}: IMyRouteMenuProps) => {
+}: IMyExcursionMenuProps) => {
   const { t } = useTranslation(["personal-area", "common"]);
-  const popover = usePopover("confirm-route-delete");
+  const popover = usePopover("confirm-excursion-delete");
 
   return (
     <Fragment>
@@ -66,12 +66,12 @@ const MyExcursionMenu = ({
         </Stack>
       </Popover>
       <Menu
-        id="my-route-menu"
+        id="my-excursion-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          "aria-labelledby": "my-route-menu",
+          "aria-labelledby": "my-excursion-menu",
         }}
       >
         <MenuItem onClick={onEdit}>{t("routes.menu.edit")}</MenuItem>

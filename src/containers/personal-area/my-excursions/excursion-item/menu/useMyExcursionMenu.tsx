@@ -3,33 +3,40 @@ import { routerLinks } from "@/routing/routerLinks";
 import usePopover from "@/hooks/usePopover";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
+import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
+import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 
-interface IUseMyRouteMenuProps {
-  route: IRoute;
-  onDelete: (routeId: number) => void;
+interface IUseMyExcursionMenuProps {
+  item: IExcursionListItem;
+  onDelete: (id: number) => void;
 }
 
-const useMyExcursionMenu = ({ route, onDelete }: IUseMyRouteMenuProps) => {
+const useMyExcursionMenu = ({ item, onDelete }: IUseMyExcursionMenuProps) => {
   const router = useRouter();
-  const popover = usePopover("my-route-menu");
+  const popover = usePopover("my-excursion-menu");
 
   const handleEdit = () => {
     popover.handleClose();
-    router.push(routerLinks.personalAreaEditRoute(route.id));
+    router.push(routerLinks.personalAreaEditExcursion(item.id));
   };
 
   const handleDelete = () => {
     popover.handleClose();
-    onDelete(route.id);
+    onDelete(item.id);
   };
 
   const prepareData = () => {
-    const travelMode = route.travelMode ?? TravelModesEnum.DRIVING;
-    const waypoints = route.places.map((place) => place.coordinates);
-    const startLatLng = route.coordinatesStart;
-    const endLatLng = route.coordinatesEnd;
+    const travelMode = item.travelMode ?? TravelModesEnum.DRIVING;
+    const waypoints = item.places.map((place) => place.coordinates);
 
-    return { waypoints, startLatLng, endLatLng, travelMode };
+    // Extract start and end waypoints
+    const startLatLng = waypoints[0];
+    const endLatLng = waypoints[waypoints.length - 1];
+
+    // Slice waypoints array to exclude the first and last elements
+    const slicedWaypoints = waypoints.slice(1, waypoints.length - 1);
+
+    return { waypoints: slicedWaypoints, startLatLng, endLatLng, travelMode };
   };
 
   const handleOpenGoogleNavigator = () => {

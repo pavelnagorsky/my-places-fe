@@ -4,12 +4,13 @@ import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { OrderDirectionsEnum } from "@/services/interfaces";
 import { useTranslation } from "next-i18next";
 import { MyRoutesOrderByEnum } from "@/services/routes-service/interfaces/interfaces";
+import { MyExcursionsOrderByEnum } from "@/services/excursions-service/interfaces/interfaces";
 
 interface ITableHeadProps {
   show: boolean;
-  orderBy: MyRoutesOrderByEnum;
+  orderBy: MyExcursionsOrderByEnum;
   orderDirection: OrderDirectionsEnum;
-  onChangeOrderBy: (field: MyRoutesOrderByEnum) => void;
+  onChangeOrderBy: (field: MyExcursionsOrderByEnum) => void;
   onChangeOrderDirection: () => void;
 }
 
@@ -41,50 +42,52 @@ const ExcursionItemsTableHead = ({
         <Grid size={{ xs: 3 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === MyRoutesOrderByEnum.TITLE}
+            isActive={orderBy === MyExcursionsOrderByEnum.TITLE}
             onChangeDirection={onChangeOrderDirection}
-            onChangeOrderBy={() => onChangeOrderBy(MyRoutesOrderByEnum.TITLE)}
+            onChangeOrderBy={() =>
+              onChangeOrderBy(MyExcursionsOrderByEnum.TITLE)
+            }
           >
-            <Typography>{t("routes.headings.title")}</Typography>
+            <Typography>{t("excursions.headings.title")}</Typography>
           </SortingButton>
         </Grid>
         <Grid size={{ xs: 2 }}>
-          <Typography>{t("routes.headings.places")}</Typography>
+          <Typography>{t("excursions.headings.places")}</Typography>
         </Grid>
         <Grid size={{ xs: 2 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === MyRoutesOrderByEnum.DISTANCE}
+            isActive={orderBy === MyExcursionsOrderByEnum.DISTANCE}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(MyRoutesOrderByEnum.DISTANCE)
+              onChangeOrderBy(MyExcursionsOrderByEnum.DISTANCE)
             }
           >
-            <Typography>{t("routes.headings.distance")}</Typography>
+            <Typography>{t("excursions.headings.distance")}</Typography>
           </SortingButton>
         </Grid>
         <Grid size={{ xs: 2 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === MyRoutesOrderByEnum.DURATION}
+            isActive={orderBy === MyExcursionsOrderByEnum.DURATION}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(MyRoutesOrderByEnum.DURATION)
+              onChangeOrderBy(MyExcursionsOrderByEnum.DURATION)
             }
           >
-            <Typography>{t("routes.headings.duration")}</Typography>
+            <Typography>{t("excursions.headings.duration")}</Typography>
           </SortingButton>
         </Grid>
         <Grid size={{ xs: "auto" }} display={"flex"} alignItems={"center"}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === MyRoutesOrderByEnum.CREATED_AT}
+            isActive={orderBy === MyExcursionsOrderByEnum.CREATED_AT}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(MyRoutesOrderByEnum.CREATED_AT)
+              onChangeOrderBy(MyExcursionsOrderByEnum.CREATED_AT)
             }
           >
-            <Typography>{t("routes.headings.createdAt")}</Typography>
+            <Typography>{t("excursions.headings.createdAt")}</Typography>
           </SortingButton>
         </Grid>
       </Grid>
