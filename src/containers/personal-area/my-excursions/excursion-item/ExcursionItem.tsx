@@ -19,14 +19,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
-import { IRoute } from "@/services/routes-service/interfaces/route.interface";
-import useMyRouteMenu from "@/containers/personal-area/my-routes/route-item/menu/useMyRouteMenu";
-import MyRouteMenu from "@/containers/personal-area/my-routes/route-item/menu/MyRouteMenu";
-import utils from "@/shared/utils";
-import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
-import useMyExcursionMenu from "@/containers/personal-area/my-excursions/excursion-item/menu/useMyExcursionMenu";
-import MyExcursionMenu from "@/containers/personal-area/my-excursions/excursion-item/menu/MyExcursionMenu";
+import useMyExcursionMenu from "@/containers/personal-area/my-excursions/excursion-item/content/menu/useMyExcursionMenu";
+import MyExcursionMenu from "@/containers/personal-area/my-excursions/excursion-item/content/menu/MyExcursionMenu";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
+import ExcursionAdditionalInfo from "@/containers/personal-area/my-excursions/excursion-item/content/ExcursionAdditionalInfo";
+import useExcursionStatuses from "@/containers/personal-area/my-excursions/logic/utils/useExcursionStatuses";
+import useExcursionTypes from "@/containers/excursion-builder/content/form/logic/utils/useExcursionTypes";
 
 interface IExcursionItemProps {
   item: IExcursionListItem;
@@ -38,14 +36,10 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation(["personal-area", "common"]);
   const dateFnsLocale = useDateFnsLocale();
+  const statuses = useExcursionStatuses();
+  const types = useExcursionTypes();
   const menu = useMyExcursionMenu({ item, onDelete });
   const [fullOpen, setFullOpen] = useState(false);
-
-  const formattedDistance = utils.formatKM(item.distance, i18n.language);
-  const formattedDuration = utils.formatMinutes(item.duration, {
-    hoursTranslation: t("hours", { ns: "common" }),
-    minutesTranslation: t("minutes", { ns: "common" }),
-  });
 
   const Menu = (
     <MyExcursionMenu
@@ -63,7 +57,25 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
     setFullOpen(!fullOpen);
   };
 
-  const routeTitleBox = <Typography variant={"body1"}>{item.title}</Typography>;
+  const titleBox = (
+    <Stack gap={"0.2em"}>
+      <Typography variant={"body1"}>{item.title}</Typography>
+      <Typography
+        variant={"body1"}
+        component={Link}
+        color={"secondary.main"}
+        sx={{
+          textDecoration: "underline #565656",
+          wordBreak: "break-word",
+          width: "fit-content",
+        }}
+        href={routerLinks.excursion(item.slug)}
+        target={"_blank"}
+      >
+        {item.slug}
+      </Typography>
+    </Stack>
+  );
 
   const placesInfoBox = (
     <Tooltip
@@ -102,12 +114,10 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
     </Tooltip>
   );
 
-  const routeDistanceBox = (
-    <Typography variant={"body1"}>{formattedDistance}</Typography>
-  );
-
-  const routeDurationBox = (
-    <Typography variant={"body1"}>{formattedDuration}</Typography>
+  const typeBox = (
+    <Typography variant={"body1"}>
+      {types.find((type) => type.id === item.type)?.label || "-"}
+    </Typography>
   );
 
   const dateInfoBox = (
@@ -118,6 +128,40 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
         })}
       </Typography>
     </Stack>
+  );
+
+  const status = statuses.find((s) => s.id === item.status);
+  const statusInfoBox = (
+    <Tooltip
+      arrow
+      enterTouchDelay={0}
+      leaveTouchDelay={3000}
+      title={
+        item.moderationMessage ? (
+          <Typography p={"0.5em"} fontSize={"14px"}>
+            {item.moderationMessage}
+          </Typography>
+        ) : null
+      }
+    >
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        gap={"0.5em"}
+        sx={{ cursor: item.moderationMessage ? "pointer" : undefined }}
+      >
+        <Box
+          borderRadius={"50%"}
+          height={"10px"}
+          width={"10px"}
+          bgcolor={status?.color}
+        />
+        <Typography variant={"body1"}>{status?.label}</Typography>
+        {!!item.moderationMessage && (
+          <InfoOutlinedIcon color={"secondary"} fontSize={"small"} />
+        )}
+      </Stack>
+    </Tooltip>
   );
 
   const mobileView = (
@@ -136,7 +180,7 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
         <Grid container spacing={"1em"}>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("excursions.headings.title")}</CustomLabel>
-            {routeTitleBox}
+            {titleBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("excursions.headings.places")}</CustomLabel>
@@ -144,11 +188,11 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("excursions.headings.distance")}</CustomLabel>
-            {routeDistanceBox}
+            {statusInfoBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("excursions.headings.duration")}</CustomLabel>
-            {routeDurationBox}
+            {typeBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("excursions.headings.createdAt")}</CustomLabel>
@@ -164,6 +208,11 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
             <MoreVertIcon />
           </IconButton>
           {Menu}
+          <IconButton color={"primary"} size={"small"} onClick={toggleFull}>
+            <ExpandMoreIcon
+              sx={{ transform: fullOpen ? "rotate(180deg)" : undefined }}
+            />
+          </IconButton>
         </Stack>
       </Stack>
     </Box>
@@ -180,11 +229,22 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
       }}
     >
       <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid size={{ xs: 3 }}>{routeTitleBox}</Grid>
+        <Grid size={{ xs: 1 }}>
+          <IconButton
+            color={"primary"}
+            sx={{ ml: "0.5em" }}
+            onClick={toggleFull}
+          >
+            <ExpandMoreIcon
+              sx={{ transform: fullOpen ? "rotate(180deg)" : undefined }}
+            />
+          </IconButton>
+        </Grid>
+        <Grid size={{ xs: 3 }}>{titleBox}</Grid>
         <Grid size={{ xs: 2 }}>{placesInfoBox}</Grid>
-        <Grid size={{ xs: 2 }}>{routeDistanceBox}</Grid>
-        <Grid size={{ xs: 2 }}>{routeDurationBox}</Grid>
-        <Grid size={{ xs: 2 }}>{dateInfoBox}</Grid>
+        <Grid size={{ xs: 2 }}>{statusInfoBox}</Grid>
+        <Grid size={{ xs: 1.5 }}>{typeBox}</Grid>
+        <Grid size={{ xs: 1.5 }}>{dateInfoBox}</Grid>
         <Grid size={{ xs: 1 }}>
           <IconButton
             color={"secondary"}
@@ -196,6 +256,9 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
           {Menu}
         </Grid>
       </Grid>
+      <Collapse in={fullOpen}>
+        <ExcursionAdditionalInfo item={item} />
+      </Collapse>
     </Box>
   );
 

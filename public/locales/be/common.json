@@ -164,5 +164,9 @@
     "new": "Новае",
     "done": "Выканана",
     "declined": "Закрыта"
+  },
+  "travelModes": {
+    "driving": "На машыне",
+    "walking": "Пешшу"
   }
 }

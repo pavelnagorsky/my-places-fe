@@ -164,5 +164,9 @@
     "new": "New",
     "done": "Done",
     "declined": "Declined"
+  },
+  "travelModes": {
+    "driving": "Driving",
+    "walking": "Walking"
   }
 }

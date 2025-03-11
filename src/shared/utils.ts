@@ -159,6 +159,7 @@ const utils = {
         ? `${+remainingMinutes.toFixed(0)}${minutesTranslation}`
         : "";
 
+    if (!minutes) return `0${hoursTranslation}`;
     return `${hoursString} ${minutesString}`;
   },
 };

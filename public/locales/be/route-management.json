@@ -27,10 +27,6 @@
     "duration": "Час у дарозе:",
     "distance": "Кіламетраж:"
   },
-  "travelModes": {
-    "driving": "На машыне",
-    "walking": "Пешшу"
-  },
   "locationSelection": {
     "start": "Пачатак вашага маршруту",
     "startPlaceholder": "Выберыце месца адпраўлення",

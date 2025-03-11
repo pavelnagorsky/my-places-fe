@@ -11,6 +11,7 @@ export const routerLinks = {
   place: (slug: string) => `/places/${slug}`,
   review: (placeSlug: string, reviewId: number) =>
     `/places/${placeSlug}?review=${reviewId}`,
+  excursion: (slug: string) => `/excursions/${slug}`,
   privacyPolicy: "/privacy-policy",
   termsOfUse: "/terms-of-use",
   administrationPlaceCategories: "/administration/place-categories",

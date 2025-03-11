@@ -36,5 +36,14 @@
     }
   },
   "createExcursion": "Сохранить экскурсию",
-  "updateExcursion": "Обновить экскурсию"
+  "updateExcursion": "Обновить экскурсию",
+  "excursionStatuses": {
+    "moderation": "На модерации",
+    "approved": "Опубликовано",
+    "rejected": "Отклонено"
+  },
+  "excursionTypes": {
+    "overview": "Обзорная",
+    "region": "По региону"
+  }
 }

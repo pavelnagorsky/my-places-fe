@@ -13,7 +13,7 @@ import {
 } from "@/services/routes-service/interfaces/interfaces";
 import routesService from "@/services/routes-service/routes.service";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
-import { IMyExcursionsFormContext } from "@/containers/personal-area/my-excursions/interfaces";
+import { IMyExcursionsFormContext } from "@/containers/personal-area/my-excursions/logic/interfaces";
 import {
   IMyExcursionsRequest,
   MyExcursionsOrderByEnum,

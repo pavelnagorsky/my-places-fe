@@ -27,10 +27,6 @@
     "duration": "Travel time:",
     "distance": "Distance:"
   },
-  "travelModes": {
-    "driving": "Driving",
-    "walking": "Walking"
-  },
   "locationSelection": {
     "start": "Start of your route",
     "startPlaceholder": "Select departure location",

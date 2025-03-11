@@ -39,6 +39,7 @@ const ExcursionItemsTableHead = ({
           "& p": { fontWeight: 700, fontSize: "12px", color: "secondary.main" },
         }}
       >
+        <Grid size={{ xs: 1 }} />
         <Grid size={{ xs: 3 }}>
           <SortingButton
             orderDirection={orderDirection}
@@ -63,10 +64,10 @@ const ExcursionItemsTableHead = ({
               onChangeOrderBy(MyExcursionsOrderByEnum.DISTANCE)
             }
           >
-            <Typography>{t("excursions.headings.distance")}</Typography>
+            <Typography>{t("excursions.headings.status")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid size={{ xs: 2 }}>
+        <Grid size={{ xs: 1.5 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === MyExcursionsOrderByEnum.DURATION}
@@ -75,7 +76,7 @@ const ExcursionItemsTableHead = ({
               onChangeOrderBy(MyExcursionsOrderByEnum.DURATION)
             }
           >
-            <Typography>{t("excursions.headings.duration")}</Typography>
+            <Typography>{t("excursions.headings.type")}</Typography>
           </SortingButton>
         </Grid>
         <Grid size={{ xs: "auto" }} display={"flex"} alignItems={"center"}>

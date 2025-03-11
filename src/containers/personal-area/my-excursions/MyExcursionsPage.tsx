@@ -18,7 +18,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import NextLink from "next/link";
-import useMyExcursions from "@/containers/personal-area/my-excursions/useMyExcursions";
+import useMyExcursions from "@/containers/personal-area/my-excursions/logic/useMyExcursions";
 import ExcursionItemsTableHead from "@/containers/personal-area/my-excursions/excursion-item/ExcursionItemsTableHead";
 import ExcursionItem from "@/containers/personal-area/my-excursions/excursion-item/ExcursionItem";
 
