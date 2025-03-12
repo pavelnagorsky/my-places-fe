@@ -54,6 +54,10 @@ const excursionsService = {
       },
     });
   },
+
+  delete: (id: number) => {
+    return axiosInstance.delete(`/Excursions/${id}`);
+  },
 };
 
 export default excursionsService;

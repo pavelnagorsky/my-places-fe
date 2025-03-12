@@ -6,13 +6,6 @@ import { useAppDispatch } from "@/store/hooks";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";
 import utils from "@/shared/utils";
-import { IMyRoutesFormContext } from "@/containers/personal-area/my-routes/interfaces";
-import {
-  IMyRoutesRequest,
-  MyRoutesOrderByEnum,
-} from "@/services/routes-service/interfaces/interfaces";
-import routesService from "@/services/routes-service/routes.service";
-import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 import { IMyExcursionsFormContext } from "@/containers/personal-area/my-excursions/logic/interfaces";
 import {
   IMyExcursionsRequest,
@@ -68,9 +61,9 @@ const useMyExcursions = () => {
     onSubmit();
   }, [i18n.language, paginator.orderBy, paginator.orderDirection]);
 
-  const handleDelete = (routeId: number) => {
-    routesService
-      .delete(routeId)
+  const handleDelete = (excursionId: number) => {
+    excursionsService
+      .delete(excursionId)
       .then(() => {
         dispatch(
           showAlertThunk({
@@ -83,8 +76,10 @@ const useMyExcursions = () => {
             snackbarProps: {},
           })
         );
-        const filteredPlaces = paginator.items.filter((r) => r.id !== routeId);
-        paginator.setItems(filteredPlaces);
+        const filteredItems = paginator.items.filter(
+          (item) => item.id !== excursionId
+        );
+        paginator.setItems(filteredItems);
       })
       .catch(() => {
         dispatch(

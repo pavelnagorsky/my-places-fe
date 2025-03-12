@@ -11,10 +11,10 @@ import {
   setDuration,
   setItems,
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
-import CreateExcursion from "@/pages/create-excursion";
 import { ICreateExcursion } from "@/services/excursions-service/interfaces/create-excursion.interface";
 import excursionsService from "@/services/excursions-service/excursions.service";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
+import { IUpdateExcursion } from "@/services/excursions-service/interfaces/update-excursion.interface";
 
 export const startExcursionEditingThunk = createAsyncThunk(
   "excursion-builder/start-editing",
@@ -144,7 +144,9 @@ export const saveExcursionThunk = createAsyncThunk(
   "excursion-builder/save",
   async (
     payload: {
-      data: ICreateExcursion & { language: string };
+      data: (ICreateExcursion | Omit<IUpdateExcursion, "id">) & {
+        language: string;
+      };
       onSuccess?: () => void;
       onError?: () => void;
     },
@@ -158,7 +160,7 @@ export const saveExcursionThunk = createAsyncThunk(
         : excursionsService.createExcursion;
 
       const { data } = await apiCall(
-        { ...payload.data, id: id as number },
+        { ...payload.data, id: id as number } as any,
         payload.data.language
       );
       if (typeof payload.onSuccess === "function") payload.onSuccess();

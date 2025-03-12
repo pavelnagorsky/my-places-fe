@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import { saveExcursionThunk } from "@/store/excursion-builder-slice/thunks";
 import { ICreateExcursion } from "@/services/excursions-service/interfaces/create-excursion.interface";
+import { IUpdateExcursion } from "@/services/excursions-service/interfaces/update-excursion.interface";
+import { IEditExcursionForm } from "@/containers/personal-area/my-excursions/edit-excursion/logic/interfaces";
 
 const SubmitButton = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
@@ -26,7 +28,7 @@ const SubmitButton = () => {
   const {
     handleSubmit,
     formState: { isValid },
-  } = useFormContext<IExcursionBuilderForm>();
+  } = useFormContext<IEditExcursionForm>();
 
   const handleShowError = () => {
     dispatch(
@@ -78,12 +80,15 @@ const SubmitButton = () => {
     }
 
     handleSubmit((data) => {
-      const payload: ICreateExcursion & { language: string } = {
+      const payload: (ICreateExcursion | IUpdateExcursion) & {
+        language: string;
+      } = {
         title: data.title,
         description: data.description,
         travelMode: data.travelMode,
         type: +data.type,
         places: data.places,
+        shouldTranslate: data.updateTranslations,
         language: i18n.language,
       };
       dispatch(

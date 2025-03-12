@@ -25,13 +25,13 @@ export const routerLinks = {
   personalAreaRoutes: "/personal-area/routes",
   personalAreaExcursions: "/personal-area/excursions",
   personalAreaEditPlace: (placeId: number) =>
-    `/personal-area/my-places/${placeId}/edit`,
+    `/personal-area/places/${placeId}/edit`,
   personalAreaEditReview: (reviewId: number) =>
-    `/personal-area/my-reviews/${reviewId}/edit`,
+    `/personal-area/reviews/${reviewId}/edit`,
   personalAreaEditRoute: (routeId: number) =>
-    `/personal-area/my-routes/${routeId}/edit`,
+    `/personal-area/routes/${routeId}/edit`,
   personalAreaEditExcursion: (excursionId: number) =>
-    `/personal-area/my-excursions/${excursionId}/edit`,
+    `/personal-area/excursions/${excursionId}/edit`,
   administrationBasePath: "/administration",
   administrationPlaces: "/administration/places",
   administrationPlace: (placeId: number) => `/administration/places/${placeId}`,

@@ -15,8 +15,6 @@ import ProtectedAuth from "@/hoc/ProtectedAuth";
 
 const ExcursionBuilder = () => {
   const { t } = useTranslation("excursion-management");
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const form = useExcursionBuilder();
   const fieldArray = useFieldArray({
     control: form.control,

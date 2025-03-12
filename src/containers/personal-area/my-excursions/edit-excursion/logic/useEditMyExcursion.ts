@@ -27,6 +27,7 @@ const useEditMyExcursion = () => {
       places: [],
       travelMode: TravelModesEnum.DRIVING,
       type: `${ExcursionTypesEnum.Overview}`,
+      updateTranslations: false,
     },
     mode: "onChange",
     shouldFocusError: true,
@@ -64,15 +65,19 @@ const useEditMyExcursion = () => {
     setLoading(true);
 
     const onSuccess = async (data: IExcursion) => {
-      // try {
-      //   // reset form state
-      //   form.reset({
-      //     ...form.getValues(),
-      //     title: data.title,
-      //     type: `${data.type || ExcursionTypesEnum.Overview}`,
-      //     travelMode: data.travelMode || TravelModesEnum.DRIVING,
-      //   });
-      // } catch (e) {}
+      // reset form state
+      form.reset({
+        ...form.getValues(),
+        title: data.title,
+        description: data.description,
+        places: data.places.map((place) => ({
+          id: place.id,
+          description: place.excursionDescription || "",
+          excursionDuration: place.excursionDuration || 0,
+        })),
+        type: `${data.type || ExcursionTypesEnum.Overview}`,
+        travelMode: data.travelMode || TravelModesEnum.DRIVING,
+      });
       setLoading(false);
     };
 

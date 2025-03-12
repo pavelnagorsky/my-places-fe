@@ -26,7 +26,8 @@ const ExcursionAdditionalInfo = ({ item }: { item: IExcursionListItem }) => {
       <Divider sx={{ borderColor: "disabled", my: "1em" }} />
       <Grid
         container
-        spacing={{ xs: "1em", md: "2em" }}
+        columnSpacing={{ xs: 2, md: 4 }}
+        rowSpacing={2}
         justifyContent={{ xs: "start", sm: "center" }}
       >
         <Grid size={{ xs: "auto" }}>
@@ -50,6 +51,11 @@ const ExcursionAdditionalInfo = ({ item }: { item: IExcursionListItem }) => {
             {t("excursions.headings.travelMode")}:{" "}
             {travelModes.find((mode) => mode.id === item.travelMode)?.label ||
               "-"}
+          </Typography>
+        </Grid>
+        <Grid size={{ xs: "auto" }}>
+          <Typography variant={"body1"}>
+            {t("excursions.headings.views")}: {item.viewsCount}
           </Typography>
         </Grid>
       </Grid>

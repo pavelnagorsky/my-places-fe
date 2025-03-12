@@ -111,7 +111,8 @@
       "excursionDuration": "Время на осмотр",
       "travelMode": "Передвижение",
       "status": "Статус",
-      "type": "Тип"
+      "type": "Тип",
+      "views": "Просмотры"
     },
     "feedback": {
       "delete": {
