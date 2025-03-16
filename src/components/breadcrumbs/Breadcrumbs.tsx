@@ -6,7 +6,7 @@ import { useTranslation } from "next-i18next";
 
 type routesNames = "create-review" | "create-place";
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({ customEnding }: { customEnding?: string }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
   const pathnames = router.pathname.split("/").filter((x) => x);
