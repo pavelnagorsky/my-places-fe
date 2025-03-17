@@ -16,4 +16,5 @@ export interface IExcursion {
   type: ExcursionTypesEnum;
   travelMode: TravelModesEnum;
   viewsCount: number;
+  images: string[];
 }

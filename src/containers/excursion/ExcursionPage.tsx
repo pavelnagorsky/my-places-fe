@@ -2,9 +2,11 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
+import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
+import ExcursionStatistics from "@/containers/excursion/content/ExcursionStatistics";
 
 const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
   return (
@@ -17,7 +19,33 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
         <Stack mb={2}>
           <Breadcrumbs customEnding={excursion.title} />
         </Stack>
-        <Grid container spacing={2}></Grid>
+        <Grid container spacing={2}>
+          <Grid size={12}>
+            <Typography
+              variant={"h1"}
+              fontSize={{ xs: "27px", md: "35px" }}
+              component={"h1"}
+              mb={0}
+            >
+              {excursion.title}
+            </Typography>
+          </Grid>
+          <Grid size={12}>
+            <PlaceGallery
+              images={excursion.images.map((image, i) => ({
+                src: image,
+                alt: excursion.places[i]?.title || excursion.title,
+              }))}
+              mobileHeight={250}
+              laptopHeight={380}
+              desktopHeight={480}
+            />
+            <ExcursionStatistics
+              views={excursion.viewsCount}
+              createdAt={excursion.createdAt}
+            />
+          </Grid>
+        </Grid>
       </motion.div>
     </WrappedContainer>
   );
