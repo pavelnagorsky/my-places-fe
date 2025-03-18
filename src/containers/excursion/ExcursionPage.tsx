@@ -7,6 +7,9 @@ import Grid from "@mui/material/Grid2";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
 import ExcursionStatistics from "@/containers/excursion/content/ExcursionStatistics";
+import ExcursionDescription from "@/containers/excursion/content/ExcursionDescription";
+import ExcursionDetails from "@/containers/excursion/content/ExcursionDetails";
+import ExcursionMapSection from "@/containers/excursion/content/map-section/ExcursionMapSection";
 
 const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
   return (
@@ -44,6 +47,17 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
               views={excursion.viewsCount}
               createdAt={excursion.createdAt}
             />
+          </Grid>
+          <Grid size={{ xs: 12, md: 8 }}>
+            <Stack gap={2}>
+              <ExcursionDescription description={excursion.description} />
+            </Stack>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4 }}>
+            <ExcursionDetails excursion={excursion} />
+          </Grid>
+          <Grid size={12}>
+            <ExcursionMapSection excursion={excursion} />
           </Grid>
         </Grid>
       </motion.div>

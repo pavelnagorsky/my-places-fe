@@ -1,11 +1,21 @@
 import { ExcursionTypesEnum } from "@/services/excursions-service/interfaces/excursion-types.enum";
 import { useTranslation } from "next-i18next";
+import excursionTypeRegionImage from "/public/images/icons/excursion-type-region.png";
+import excursionTypeOverviewImage from "/public/images/icons/excursion-type-overview.png";
 
 const useExcursionTypes = () => {
   const { t } = useTranslation("excursion-management");
   const options = [
-    { id: ExcursionTypesEnum.Overview, label: t("excursionTypes.overview") },
-    { id: ExcursionTypesEnum.Region, label: t("excursionTypes.region") },
+    {
+      id: ExcursionTypesEnum.Overview,
+      label: t("excursionTypes.overview"),
+      image: excursionTypeOverviewImage.src,
+    },
+    {
+      id: ExcursionTypesEnum.Region,
+      label: t("excursionTypes.region"),
+      image: excursionTypeRegionImage.src,
+    },
   ];
 
   return options;

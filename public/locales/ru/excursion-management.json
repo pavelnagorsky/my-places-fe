@@ -45,5 +45,9 @@
   "excursionTypes": {
     "overview": "Обзорная",
     "region": "По региону"
+  },
+  "excursion": {
+    "description": "Описание",
+    "routeDetails": "Программа экскурсии"
   }
 }
