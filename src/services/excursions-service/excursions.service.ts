@@ -6,6 +6,7 @@ import { IPaginationResponse } from "@/services/interfaces";
 import { IMyExcursionsRequest } from "@/services/excursions-service/interfaces/interfaces";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
+import { ISlug } from "@/services/places-service/interfaces/place-slug.interface";
 
 const excursionsService = {
   createExcursion: (payload: ICreateExcursion, language: string) => {
@@ -46,9 +47,9 @@ const excursionsService = {
     });
   },
 
-  getExcursionBySlug: (slug: number, lang: string) => {
+  getExcursionBySlug: (slug: string, lang: string) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.get<IExcursion>(`/Excursions/slug/${slug}`, {
+    return axiosInstance.get<IExcursion>(`/Excursions/Slug/${slug}`, {
       params: {
         lang: langId,
       },
@@ -57,6 +58,10 @@ const excursionsService = {
 
   delete: (id: number) => {
     return axiosInstance.delete(`/Excursions/${id}`);
+  },
+
+  getSlugs: () => {
+    return axiosInstance.get<ISlug[]>("/Excursions/Slugs");
   },
 };
 

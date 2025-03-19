@@ -10,6 +10,7 @@ import ExcursionStatistics from "@/containers/excursion/content/ExcursionStatist
 import ExcursionDescription from "@/containers/excursion/content/ExcursionDescription";
 import ExcursionDetails from "@/containers/excursion/content/ExcursionDetails";
 import ExcursionMapSection from "@/containers/excursion/content/map-section/ExcursionMapSection";
+import ExcursionPlaces from "@/containers/excursion/content/excursion-places/ExcursionPlaces";
 
 const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
   return (
@@ -51,6 +52,7 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
           <Grid size={{ xs: 12, md: 8 }}>
             <Stack gap={2}>
               <ExcursionDescription description={excursion.description} />
+              <ExcursionPlaces items={excursion.places} />
             </Stack>
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>

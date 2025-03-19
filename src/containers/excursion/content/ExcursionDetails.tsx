@@ -4,7 +4,6 @@ import utils from "@/shared/utils";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import useExcursionTypes from "@/containers/excursion-builder/content/form/logic/utils/useExcursionTypes";
 import useTravelModeOptions from "@/containers/route-builder/content/form/sections/travel-mode/useTravelModeOptions";
-import Image from "next/image";
 
 const ExcursionDetails = ({ excursion }: { excursion: IExcursion }) => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);

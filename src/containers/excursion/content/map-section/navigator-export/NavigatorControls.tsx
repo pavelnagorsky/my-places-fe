@@ -1,20 +1,14 @@
 import { Button, Stack } from "@mui/material";
 import NearMeIcon from "@mui/icons-material/NearMe";
-import { useFormContext } from "react-hook-form-mui";
-import { useAppSelector } from "@/store/hooks";
-import { selectItems } from "@/store/route-builder-slice/route-builder.slice";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
-import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
+import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 
-const NavigatorControls = () => {
-  const { getValues } = useFormContext<IExcursionBuilderForm>();
+const NavigatorControls = ({ excursion }: { excursion: IExcursion }) => {
   const { t } = useTranslation("route-management");
-  const places = useAppSelector(selectItems);
 
   const prepareData = () => {
-    const travelMode = getValues("travelMode");
-    const waypoints = places.map((place) => place.coordinates);
+    const waypoints = excursion.places.map((place) => place.coordinates);
 
     // Extract start and end waypoints
     const startLatLng = waypoints[0];
@@ -23,7 +17,12 @@ const NavigatorControls = () => {
     // Slice waypoints array to exclude the first and last elements
     const slicedWaypoints = waypoints.slice(1, waypoints.length - 1);
 
-    return { waypoints: slicedWaypoints, startLatLng, endLatLng, travelMode };
+    return {
+      waypoints: slicedWaypoints,
+      startLatLng,
+      endLatLng,
+      travelMode: excursion.travelMode,
+    };
   };
 
   const onOpenGoogleNavigator = () => {
@@ -65,7 +64,7 @@ const NavigatorControls = () => {
       direction={"row"}
       alignItems={"center"}
       gap={"1em"}
-      display={places.length > 1 ? "flex" : "none"}
+      display={excursion.places.length > 1 ? "flex" : "none"}
     >
       <Button
         onClick={onOpenGoogleNavigator}

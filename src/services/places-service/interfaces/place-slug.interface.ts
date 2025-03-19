@@ -1,4 +1,4 @@
-export interface IPlaceSlug {
+export interface ISlug {
   id: number;
   slug: string;
 }

@@ -1,5 +1,5 @@
 import axiosInstance from "@/services/axios.instance";
-import { IPlaceSlug } from "@/services/places-service/interfaces/place-slug.interface";
+import { ISlug } from "@/services/places-service/interfaces/place-slug.interface";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import {
   IAdminPlacesRequest,
@@ -52,7 +52,7 @@ const placesService = {
   },
 
   getPlacesSlugs: () => {
-    return axiosInstance.get<IPlaceSlug[]>("/places/slugs");
+    return axiosInstance.get<ISlug[]>("/places/slugs");
   },
 
   validateSlug: (slugDto: ICreateSlug) => {

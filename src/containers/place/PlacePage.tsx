@@ -26,6 +26,7 @@ import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
+import TextWithBrTags from "@/components/UI/text-with-br-tags/TextWithBrTags";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -41,24 +42,10 @@ interface IPlaceProps {
   reviews: IPaginationResponse<ISearchReview>;
 }
 
-const parseStringWithBrTags = (text: string) => {
-  const sanitizedText = text || "";
-  return sanitizedText.split("\n").map((article, i) => {
-    return (
-      <span key={i}>
-        {article}
-        <br />
-      </span>
-    );
-  });
-};
-
 const PlacePage = ({ place, reviews }: IPlaceProps) => {
   const { t } = useTranslation("place");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-  const placeDescription = parseStringWithBrTags(place.description);
 
   const comments = (
     <Fragment>
@@ -159,7 +146,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                   variant="body2"
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  {placeDescription}
+                  <TextWithBrTags text={place.description} />
                 </Typography>
                 {place.website && (
                   <Stack

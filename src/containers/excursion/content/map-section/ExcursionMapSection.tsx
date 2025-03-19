@@ -6,6 +6,7 @@ import { useTranslation } from "next-i18next";
 import markerIcon from "/public/images/icons/marker-filled.png";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import { IExcursionPlace } from "@/services/excursions-service/interfaces/excursion-place.interface";
+import NavigatorControls from "@/containers/excursion/content/map-section/navigator-export/NavigatorControls";
 
 const ExcursionMapSection = ({ excursion }: { excursion: IExcursion }) => {
   const { t, i18n } = useTranslation("excursion-management");
@@ -65,7 +66,7 @@ const ExcursionMapSection = ({ excursion }: { excursion: IExcursion }) => {
         <Typography variant={"h2"} pb={"0em"} flexGrow={1}>
           {t("mapView")}
         </Typography>
-        {/*<NavigatorControls />*/}
+        <NavigatorControls excursion={excursion} />
       </Stack>
       <Map
         containerStyle={{
