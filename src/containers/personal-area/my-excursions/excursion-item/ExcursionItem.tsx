@@ -43,6 +43,7 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
 
   const Menu = (
     <MyExcursionMenu
+      slug={item.slug}
       anchorEl={menu.popover.anchor}
       open={menu.popover.open}
       handleClose={menu.popover.handleClose}

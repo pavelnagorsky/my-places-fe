@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
-import placePageJsonld from "@/shared/json-ld/place-page-jsonld";
 import { Fragment } from "react";
 import { NextSeo } from "next-seo";
 import JsonLd from "@/shared/json-ld/JsonLd";

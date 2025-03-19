@@ -1,6 +1,6 @@
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import locationImage from "../../../../../../../../public/images/icons/location.png";
+import locationImage from "/public/images/icons/location.png";
 import { useTranslation } from "next-i18next";
 import { IExcursionPlace } from "@/services/excursions-service/interfaces/excursion-place.interface";
 import TextWithBrTags from "@/components/UI/text-with-br-tags/TextWithBrTags";

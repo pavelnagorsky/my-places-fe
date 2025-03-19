@@ -10,8 +10,10 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { routerLinks } from "@/routing/routerLinks";
 
 interface IMyExcursionMenuProps {
+  slug: string;
   anchorEl: null | Element;
   open: boolean;
   handleClose: () => void;
@@ -22,6 +24,7 @@ interface IMyExcursionMenuProps {
 }
 
 const MyExcursionMenu = ({
+  slug,
   anchorEl,
   handleClose,
   open,
@@ -74,6 +77,13 @@ const MyExcursionMenu = ({
           "aria-labelledby": "my-excursion-menu",
         }}
       >
+        <MenuItem
+          component={"a"}
+          href={routerLinks.excursion(slug)}
+          target={"_blank"}
+        >
+          {t("places.menu.view")}
+        </MenuItem>
         <MenuItem onClick={onEdit}>{t("routes.menu.edit")}</MenuItem>
         <MenuItem onClick={popover.handleOpen}>
           {t("buttons.delete", { ns: "common" })}
