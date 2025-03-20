@@ -19,7 +19,10 @@ const ExcursionDescription = ({ description }: { description: string }) => {
         {t("excursion.description")}
       </Typography>
       <Box height={"100%"}>
-        <StyledReviewsContainer dangerouslySetInnerHTML={createMarkup()} />
+        <StyledReviewsContainer
+          fontSize={{ xs: "16px", md: "18px" }}
+          dangerouslySetInnerHTML={createMarkup()}
+        />
       </Box>
     </Stack>
   );

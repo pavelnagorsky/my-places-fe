@@ -14,7 +14,7 @@ import Link from "next/link";
 import likeImage from "/public/images/icons/heart.png";
 import locationImage from "/public/images/icons/location.png";
 import eyeImage from "/public/images/icons/eye.png";
-import AddToCart from "@/components/place-card/add-to-cart-panel/AddToCart";
+import AddToCart from "@/containers/search-page/content/cards-section/place-card/add-to-cart-panel/AddToCart";
 import { useAppSelector } from "@/store/hooks";
 import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice";
 import { primaryColor } from "@/styles/theme/lightTheme";

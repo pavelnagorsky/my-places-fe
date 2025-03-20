@@ -19,6 +19,7 @@ const Breadcrumbs = ({ customEnding }: { customEnding?: string }) => {
     ["create-excursion"]: t("links.createExcursion"),
     ["privacy-policy"]: t("links.privacyPolicy"),
     ["terms-of-use"]: t("links.termsOfUse"),
+    ["excursions"]: t("links.excursions"),
   };
 
   return (
@@ -31,20 +32,21 @@ const Breadcrumbs = ({ customEnding }: { customEnding?: string }) => {
           if (breadcrumbNameMap.hasOwnProperty(path)) {
             const pathName = breadcrumbNameMap[path as routesNames];
             return i < pathnames.length - 1 ? (
-              <NextMuiLink
-                color="primary.main"
-                key={i}
-                href={"/" + path}
-                underline="hover"
-              >
+              <NextMuiLink color="text.primary" key={i} href={"/" + path}>
                 {pathName}
               </NextMuiLink>
             ) : (
-              <Typography key={i} color="text.primary">
+              <Typography key={i} color="primary.main">
                 {pathName}
               </Typography>
             );
           } else {
+            if (customEnding)
+              return (
+                <Typography key={i} color="primary.main">
+                  {customEnding}
+                </Typography>
+              );
             return null;
           }
         })}

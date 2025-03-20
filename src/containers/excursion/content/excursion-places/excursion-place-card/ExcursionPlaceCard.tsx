@@ -8,13 +8,14 @@ import utils from "@/shared/utils";
 import arrowRightIcon from "/public/images/icons/arrow-right.png";
 import NextLink from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
+import PlaceReviewsSection from "@/containers/excursion/content/excursion-places/excursion-place-card/content/PlaceReviewsSection";
 
 interface IExcursionPlaceCardProps {
   place: IExcursionPlace;
 }
 
 const ExcursionPlaceCard = ({ place }: IExcursionPlaceCardProps) => {
-  const { i18n, t } = useTranslation(["excursion-management", "common"]);
+  const { t } = useTranslation(["excursion-management", "common"]);
   const formattedStayDuration = utils.formatMinutes(place.excursionDuration, {
     hoursTranslation: t("hours", { ns: "common" }),
     minutesTranslation: t("minutes", { ns: "common" }),
@@ -27,6 +28,7 @@ const ExcursionPlaceCard = ({ place }: IExcursionPlaceCardProps) => {
         borderRadius: "10px",
         position: "relative",
         p: 2,
+        minHeight: { md: "300px" },
       }}
     >
       <Stack width={"100%"} gap={2}>
@@ -70,18 +72,17 @@ const ExcursionPlaceCard = ({ place }: IExcursionPlaceCardProps) => {
           direction={"row"}
           gap={"1em"}
         >
-          <Stack
-            direction={{ sm: "row" }}
-            alignItems={{ sm: "center" }}
-            gap={"1em"}
-          >
-            <Typography color={"secondary.dark"}>
-              {t("form.durationSelect")} {formattedStayDuration}
-            </Typography>
-          </Stack>
+          <Typography color={"primary.main"} fontWeight={500}>
+            {t("excursion.stayDuration")} {formattedStayDuration}
+          </Typography>
           <Box>
-            <Button component={NextLink} href={routerLinks.place(place.slug)}>
+            <Button
+              component={"a"}
+              href={routerLinks.place(place.slug)}
+              target={"_blank"}
+            >
               <Box
+                height={"14px"}
                 component={"img"}
                 src={arrowRightIcon.src}
                 alt={"Подробнее"}
@@ -89,6 +90,7 @@ const ExcursionPlaceCard = ({ place }: IExcursionPlaceCardProps) => {
             </Button>
           </Box>
         </Stack>
+        <PlaceReviewsSection reviews={place.reviews} />
       </Stack>
     </Paper>
   );

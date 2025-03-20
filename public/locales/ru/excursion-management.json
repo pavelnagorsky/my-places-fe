@@ -48,6 +48,7 @@
   },
   "excursion": {
     "description": "Описание",
-    "routeDetails": "Программа экскурсии"
+    "routeDetails": "Программа экскурсии",
+    "stayDuration": "Время на посещение:"
   }
 }

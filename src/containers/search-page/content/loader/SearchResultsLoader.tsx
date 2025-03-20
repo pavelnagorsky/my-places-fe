@@ -1,5 +1,5 @@
 import { Stack, SxProps, useMediaQuery, useTheme } from "@mui/material";
-import PlaceCardSkeleton from "@/components/place-card/PlaceCardSkeleton";
+import PlaceCardSkeleton from "@/containers/search-page/content/cards-section/place-card/PlaceCardSkeleton";
 
 export const searchResultsGridSx: SxProps = {
   width: {

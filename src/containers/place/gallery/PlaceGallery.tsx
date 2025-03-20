@@ -2,6 +2,7 @@ import { memo } from "react";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import { Box, styled } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface IGalleryProps {
   images: { src: string; alt: string }[];

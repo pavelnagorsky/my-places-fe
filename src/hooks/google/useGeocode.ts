@@ -1,6 +1,6 @@
 import Geocode from "react-geocode";
 
-import { Environment } from "../shared/Environment";
+import { Environment } from "../../shared/Environment";
 import { useTranslation } from "next-i18next";
 
 export const useGeocode = () => {

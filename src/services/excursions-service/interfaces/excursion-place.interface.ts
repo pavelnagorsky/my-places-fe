@@ -1,4 +1,5 @@
 import { ILatLngCoordinate } from "@/components/map/Map";
+import { IExcursionPlaceReview } from "@/services/excursions-service/interfaces/excursion-place-review.interface";
 
 export interface IExcursionPlace {
   id: number;
@@ -10,4 +11,5 @@ export interface IExcursionPlace {
   duration: number;
   distance: number;
   coordinates: ILatLngCoordinate;
+  reviews: IExcursionPlaceReview[];
 }

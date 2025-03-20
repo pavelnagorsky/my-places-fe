@@ -2,7 +2,7 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
-import { Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
@@ -20,42 +20,40 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
         initial="hidden"
         animate="show"
       >
-        <Stack mb={2}>
+        <Stack mb={2} display={{ xs: "none", md: "flex" }}>
           <Breadcrumbs customEnding={excursion.title} />
         </Stack>
-        <Grid container spacing={2}>
-          <Grid size={12}>
-            <Typography
-              variant={"h1"}
-              fontSize={{ xs: "27px", md: "35px" }}
-              component={"h1"}
-              mb={0}
-            >
-              {excursion.title}
-            </Typography>
-          </Grid>
-          <Grid size={12}>
-            <PlaceGallery
-              images={excursion.images.map((image, i) => ({
-                src: image,
-                alt: excursion.places[i]?.title || excursion.title,
-              }))}
-              mobileHeight={250}
-              laptopHeight={380}
-              desktopHeight={480}
-            />
-            <ExcursionStatistics
-              views={excursion.viewsCount}
-              createdAt={excursion.createdAt}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, md: 8 }}>
-            <Stack gap={2}>
+        <Grid container spacing={{ xs: 2, md: 4 }} mb={8}>
+          <Grid size={{ xs: 12, lg: 8 }}>
+            <Stack gap={{ xs: 2, md: 4 }}>
+              <Typography
+                variant={"h1"}
+                fontSize={{ xs: "27px", md: "35px" }}
+                component={"h1"}
+                mb={0}
+              >
+                {excursion.title}
+              </Typography>
+              <Stack>
+                <PlaceGallery
+                  images={excursion.images.map((image, i) => ({
+                    src: image,
+                    alt: excursion.places[i]?.title || excursion.title,
+                  }))}
+                  mobileHeight={250}
+                  laptopHeight={380}
+                  desktopHeight={480}
+                />
+                <ExcursionStatistics
+                  views={excursion.viewsCount}
+                  createdAt={excursion.createdAt}
+                />
+              </Stack>
               <ExcursionDescription description={excursion.description} />
               <ExcursionPlaces items={excursion.places} />
             </Stack>
           </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
+          <Grid size={{ xs: 12, lg: 4 }}>
             <ExcursionDetails excursion={excursion} />
           </Grid>
           <Grid size={12}>

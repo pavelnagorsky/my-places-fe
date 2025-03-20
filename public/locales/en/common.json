@@ -21,7 +21,8 @@
     "routeBuilder": "Routes",
     "excursionBuilder": "Excursions",
     "createExcursion": "Create an Excursion",
-    "createExcursionMobile": "Create an Excursion"
+    "createExcursionMobile": "Create an Excursion",
+    "excursions": "Excursions"
   },
   "footer": {
     "title": "We are contactable!"

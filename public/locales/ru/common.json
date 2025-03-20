@@ -21,7 +21,8 @@
     "routeBuilder": "Маршруты",
     "excursionBuilder": "Экскурсии",
     "createExcursion": "Составление экскурсии",
-    "createExcursionMobile": "Составить экскурсию"
+    "createExcursionMobile": "Составить экскурсию",
+    "excursions": "Экскурсии"
   },
   "footer": {
     "title": "Мы на связи с вами!"

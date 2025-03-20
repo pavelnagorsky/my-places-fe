@@ -1,12 +1,15 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import useExcursionTypes from "@/containers/excursion-builder/content/form/logic/utils/useExcursionTypes";
 import useTravelModeOptions from "@/containers/route-builder/content/form/sections/travel-mode/useTravelModeOptions";
+import NavigatorControls from "@/containers/excursion/content/map-section/navigator-export/NavigatorControls";
 
 const ExcursionDetails = ({ excursion }: { excursion: IExcursion }) => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const types = useExcursionTypes();
   const type = types.find((type) => type.id === excursion.type);
   const travelModes = useTravelModeOptions();
@@ -28,8 +31,8 @@ const ExcursionDetails = ({ excursion }: { excursion: IExcursion }) => {
   );
 
   return (
-    <Stack zIndex={1} position={{ lg: "sticky" }} top={{ lg: "5.5em" }} gap={2}>
-      <Typography variant={"h2"} pb={"0.5em"}>
+    <Stack zIndex={1} position={{ lg: "sticky" }} top={{ lg: "5.5em" }} gap={4}>
+      <Typography variant={"h2"} pb={"0em"}>
         {t("details.title")}
       </Typography>
       <Stack
@@ -58,7 +61,7 @@ const ExcursionDetails = ({ excursion }: { excursion: IExcursion }) => {
           {formattedDistance}
         </Typography>
       </Stack>
-      <Stack mt={"0.5em"} gap={"1em"}>
+      <Stack direction={{ xl: "row" }} gap={2}>
         {type && (
           <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
             {type.image && (
@@ -120,6 +123,18 @@ const ExcursionDetails = ({ excursion }: { excursion: IExcursion }) => {
           </Stack>
         )}
       </Stack>
+      {!isMobile && (
+        <Stack
+          sx={{
+            "& .NavigationRoot": {
+              flexDirection: "column",
+              alignItems: "start",
+            },
+          }}
+        >
+          <NavigatorControls excursion={excursion} />
+        </Stack>
+      )}
     </Stack>
   );
 };

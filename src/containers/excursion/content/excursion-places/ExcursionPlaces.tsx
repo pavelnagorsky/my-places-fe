@@ -14,7 +14,7 @@ const ExcursionPlaces = ({ items }: { items: IExcursionPlace[] }) => {
     <Stack>
       <Typography
         variant={"h2"}
-        pb={"0.5em"}
+        pb={"1em"}
         fontSize={{ xs: "24px", md: "30px" }}
       >
         {t("excursion.routeDetails")}

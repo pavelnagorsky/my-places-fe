@@ -7,11 +7,15 @@ import markerIcon from "/public/images/icons/marker-filled.png";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import { IExcursionPlace } from "@/services/excursions-service/interfaces/excursion-place.interface";
 import NavigatorControls from "@/containers/excursion/content/map-section/navigator-export/NavigatorControls";
+import { useGoogleDirectionsService } from "@/hooks/google/useGoogleDirectionsService";
+import TextWithBrTags from "@/components/UI/text-with-br-tags/TextWithBrTags";
 
 const ExcursionMapSection = ({ excursion }: { excursion: IExcursion }) => {
   const { t, i18n } = useTranslation("excursion-management");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobileLg = useMediaQuery(theme.breakpoints.down("lg"));
+  const { directionsService, isInitialized } = useGoogleDirectionsService();
   const [directions, setDirections] = useState<any | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<IExcursionPlace | null>(
     null
@@ -22,7 +26,7 @@ const ExcursionMapSection = ({ excursion }: { excursion: IExcursion }) => {
   }, [i18n.language]);
 
   useEffect(() => {
-    const directionsService = new window.google.maps.DirectionsService();
+    if (!isInitialized || !directionsService) return;
     const waypoints = excursion.places.map((place) => ({
       location: { lat: place.coordinates.lat, lng: place.coordinates.lng },
       stopover: true,
@@ -53,7 +57,7 @@ const ExcursionMapSection = ({ excursion }: { excursion: IExcursion }) => {
         }
       }
     );
-  }, [excursion]);
+  }, [excursion, isInitialized]);
 
   return (
     <Box>
@@ -66,7 +70,7 @@ const ExcursionMapSection = ({ excursion }: { excursion: IExcursion }) => {
         <Typography variant={"h2"} pb={"0em"} flexGrow={1}>
           {t("mapView")}
         </Typography>
-        <NavigatorControls excursion={excursion} />
+        {isMobileLg && <NavigatorControls excursion={excursion} />}
       </Stack>
       <Map
         containerStyle={{
@@ -100,16 +104,21 @@ const ExcursionMapSection = ({ excursion }: { excursion: IExcursion }) => {
             position={selectedPlace.coordinates}
             onCloseClick={() => setSelectedPlace(null)}
           >
-            <div>
-              <h2>
+            <Stack gap={1}>
+              <Typography variant={"body1"} fontWeight={700}>
                 #
                 {excursion.places.findIndex(
                   (place) => place.id === selectedPlace?.id
                 ) + 1}{" "}
                 - {selectedPlace.title}
-              </h2>
+              </Typography>
               <p>{selectedPlace.address}</p>
-            </div>
+              {selectedPlace.excursionDescription && (
+                <Typography variant={"body1"} fontSize={"14px"}>
+                  <TextWithBrTags text={selectedPlace.excursionDescription} />
+                </Typography>
+              )}
+            </Stack>
           </InfoWindow>
         )}
       </Map>

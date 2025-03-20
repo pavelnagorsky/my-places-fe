@@ -63,6 +63,7 @@ const NavigatorControls = ({ excursion }: { excursion: IExcursion }) => {
     <Stack
       direction={"row"}
       alignItems={"center"}
+      className={"NavigationRoot"}
       gap={"1em"}
       display={excursion.places.length > 1 ? "flex" : "none"}
     >

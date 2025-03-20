@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid2";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
-import AddToCart from "@/components/place-card/add-to-cart-panel/AddToCart";
+import AddToCart from "@/containers/search-page/content/cards-section/place-card/add-to-cart-panel/AddToCart";
 
 const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
   const { t } = useTranslation("search");
