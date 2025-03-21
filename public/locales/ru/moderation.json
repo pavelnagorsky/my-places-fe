@@ -2,6 +2,7 @@
   "links": {
     "places": "Места",
     "reviews": "Заметки",
+    "excursions": "Экскурсии",
     "reports": "Жалобы"
   },
   "form": {
@@ -28,6 +29,27 @@
       "commercial": "Коммерция",
       "createdAt": "Дата создания",
       "updatedAt": "Дата обновления"
+    }
+  },
+  "excursions": {
+    "title": "Экскурсии на модерацию",
+    "noItems": "Экскурсии, требующие модерации, не найдены",
+    "filters": {
+      "title": "Название экскурсии",
+      "byCreatedAt": "По дате создания"
+    },
+    "headings": {
+      "title": "Название",
+      "createdAt": "Дата создания",
+      "duration": "Время",
+      "distance": "Расстояние",
+      "places": "Мест в экскурсии",
+      "placesCount": "Мест: {{count}}",
+      "excursionDuration": "Время на осмотр",
+      "travelMode": "Передвижение",
+      "status": "Статус",
+      "type": "Тип",
+      "views": "Просмотры"
     }
   },
   "reviews": {

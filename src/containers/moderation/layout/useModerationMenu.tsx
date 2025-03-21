@@ -3,6 +3,7 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { ReactElement } from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import FlagCircleIcon from "@mui/icons-material/FlagCircle";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import { useTranslation } from "next-i18next";
 
 const useModerationMenu = () => {
@@ -17,6 +18,11 @@ const useModerationMenu = () => {
       title: t("links.reviews"),
       href: routerLinks.moderationReviews,
       icon: <NewspaperIcon />,
+    },
+    {
+      title: t("links.excursions"),
+      href: routerLinks.moderationExcursions,
+      icon: <TravelExploreIcon />,
     },
     {
       title: t("links.reports"),

@@ -43,6 +43,7 @@ export const routerLinks = {
   moderationBasePath: "/moderation",
   moderationPlaces: "/moderation/places",
   moderationReviews: "/moderation/reviews",
+  moderationExcursions: "/moderation/excursions",
   moderationReports: "/moderation/reports",
   placeModeration: (placeId: number) => `/moderation/places/${placeId}`,
   reviewModeration: (reviewId: number) => `/moderation/reviews/${reviewId}`,

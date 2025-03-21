@@ -2,6 +2,7 @@
   "links": {
     "places": "Places",
     "reviews": "Reviews",
+    "excursions": "Excursions",
     "reports": "Complaints"
   },
   "form": {

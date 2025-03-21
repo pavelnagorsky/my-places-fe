@@ -3,10 +3,16 @@ import { ICreateExcursion } from "@/services/excursions-service/interfaces/creat
 import { IUpdateExcursion } from "@/services/excursions-service/interfaces/update-excursion.interface";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { IPaginationResponse } from "@/services/interfaces";
-import { IMyExcursionsRequest } from "@/services/excursions-service/interfaces/interfaces";
+import {
+  IModerationExcursionsRequest,
+  IMyExcursionsRequest,
+} from "@/services/excursions-service/interfaces/interfaces";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import { ISlug } from "@/services/places-service/interfaces/place-slug.interface";
+import { IModerationPlacesRequest } from "@/services/places-service/interfaces/interfaces";
+import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
+import { IExcursionModerationItem } from "@/services/excursions-service/interfaces/excursion-moderation-item.interface";
 
 const excursionsService = {
   createExcursion: (payload: ICreateExcursion, language: string) => {
@@ -63,6 +69,19 @@ const excursionsService = {
   getSlugs: () => {
     return axiosInstance.get<ISlug[]>("/Excursions/Slugs");
   },
+
+  getModerationExcursions: (
+    payload: IModerationExcursionsRequest,
+    lang: string
+  ) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IPaginationResponse<IExcursionModerationItem>>(
+      `/excursions/moderation-list?lang=${langId}`,
+      payload
+    );
+  },
+
+  MODERATION_EXCURSIONS_ITEMS_PER_PAGE: 15,
 };
 
 export default excursionsService;

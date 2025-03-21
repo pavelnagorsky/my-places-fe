@@ -18,9 +18,9 @@ import useCreatePlaceMeta from "@/containers/create-place/form/useCreatePlaceMet
 import { SyntheticEvent, useState } from "react";
 import Navigation from "@/containers/create-place/form/Navigation";
 import animationVariants from "@/shared/animation-variants";
-import usePlaceModeration from "@/containers/moderation/place-moderation/usePlaceModeration";
+import usePlaceModeration from "@/containers/moderation/places/place-moderation/usePlaceModeration";
 import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
-import ModerationForm from "@/containers/moderation/place-moderation/ModerationForm";
+import ModerationForm from "@/containers/moderation/places/place-moderation/ModerationForm";
 import { useTranslation } from "next-i18next";
 
 const tabContentVariant: Variants = {

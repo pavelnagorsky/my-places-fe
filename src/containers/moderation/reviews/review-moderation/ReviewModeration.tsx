@@ -16,10 +16,10 @@ import { Button } from "@/components/UI/button/Button";
 import { routerLinks } from "@/routing/routerLinks";
 import ReviewPhotos from "@/containers/create-review/form/ReviewPhotos";
 import ReviewText from "@/containers/create-review/form/ReviewText";
-import useReviewModeration from "@/containers/moderation/review-moderation/useReviewModeration";
-import ModerationForm from "@/containers/moderation/place-moderation/ModerationForm";
+import useReviewModeration from "@/containers/moderation/reviews/review-moderation/useReviewModeration";
+import ModerationForm from "@/containers/moderation/places/place-moderation/ModerationForm";
 import { useTranslation } from "next-i18next";
-import ModerationLayout from "../layout/ModerationLayout";
+import ModerationLayout from "../../layout/ModerationLayout";
 
 const ReviewModeration = () => {
   const { t } = useTranslation(["moderation", "review-management", "common"]);

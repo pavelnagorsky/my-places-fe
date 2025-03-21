@@ -13,3 +13,17 @@ export enum MyExcursionsOrderByEnum {
   DISTANCE,
   DURATION,
 }
+
+export enum ModerationExcursionsOrderByEnum {
+  CREATED_AT,
+  TITLE,
+  DISTANCE,
+  DURATION,
+}
+
+export interface IModerationExcursionsRequest
+  extends IPaginationRequest<ModerationExcursionsOrderByEnum> {
+  dateFrom?: string | null;
+  dateTo?: string | null;
+  search?: string;
+}

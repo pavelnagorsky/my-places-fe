@@ -1,42 +1,36 @@
 import dynamic from "next/dynamic";
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
-import { useTranslation } from "next-i18next";
 import { NextSeo } from "next-seo";
+import { useTranslation } from "next-i18next";
 import { Fragment } from "react";
 
-const ReviewModerationLazy = dynamic(
-  () =>
-    import(
-      "@/containers/moderation/reviews/review-moderation/ReviewModeration"
-    ),
-  {
-    ssr: false,
-  }
+const ModerationExcursionsLazy = dynamic(
+  () => import("@/containers/moderation/excursions/ExcursionsModerationPage"),
+  { ssr: false }
 );
 
-const ReviewModeration: NextPage = () => {
+const Index: NextPage = () => {
   const { t } = useTranslation("moderation");
   return (
     <Fragment>
       <NextSeo
-        title={t("form.titleReview")}
+        title={t("excursions.title")}
         openGraph={{
-          title: t("form.titleReview"),
+          title: t("excursions.title"),
         }}
       />
-      <ReviewModerationLazy />
+      <ModerationExcursionsLazy />
     </Fragment>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
         "moderation",
-        "review-management",
         "common",
       ])),
       // Will be passed to the page component as props
@@ -44,4 +38,4 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   };
 };
 
-export default ReviewModeration;
+export default Index;
