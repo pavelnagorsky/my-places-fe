@@ -20,7 +20,7 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 import TuneIcon from "@mui/icons-material/Tune";
 import { Button } from "@/components/UI/button/Button";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
-import { IModerationPlacesFormContext } from "@/containers/moderation/places/interfaces";
+import { IModerationPlacesFormContext } from "@/containers/moderation/places/places-list/logic/interfaces";
 import useDialog from "@/hooks/useDialog";
 import FilterTransition from "@/components/UI/transitions/FilterTransition";
 

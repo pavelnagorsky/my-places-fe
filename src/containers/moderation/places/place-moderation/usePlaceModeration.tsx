@@ -8,7 +8,7 @@ import placesService from "@/services/places-service/places.service";
 import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
 
-const useEditMyPlace = () => {
+const usePlaceModeration = () => {
   const { t } = useTranslation(["place-management", "common"]);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -87,4 +87,4 @@ const useEditMyPlace = () => {
   };
 };
 
-export default useEditMyPlace;
+export default usePlaceModeration;

@@ -58,10 +58,10 @@ const ExcursionItemsTableHead = ({
         <Grid size={{ xs: 2 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === MyExcursionsOrderByEnum.DISTANCE}
+            isActive={orderBy === MyExcursionsOrderByEnum.STATUS}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(MyExcursionsOrderByEnum.DISTANCE)
+              onChangeOrderBy(MyExcursionsOrderByEnum.STATUS)
             }
           >
             <Typography>{t("excursions.headings.status")}</Typography>
@@ -70,10 +70,10 @@ const ExcursionItemsTableHead = ({
         <Grid size={{ xs: 1.5 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === MyExcursionsOrderByEnum.DURATION}
+            isActive={orderBy === MyExcursionsOrderByEnum.TYPE}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(MyExcursionsOrderByEnum.DURATION)
+              onChangeOrderBy(MyExcursionsOrderByEnum.TYPE)
             }
           >
             <Typography>{t("excursions.headings.type")}</Typography>

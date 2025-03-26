@@ -10,15 +10,16 @@ export interface IMyExcursionsRequest
 export enum MyExcursionsOrderByEnum {
   CREATED_AT,
   TITLE,
-  DISTANCE,
-  DURATION,
+  STATUS,
+  TYPE,
 }
 
 export enum ModerationExcursionsOrderByEnum {
   CREATED_AT,
+  UPDATED_AT,
   TITLE,
-  DISTANCE,
-  DURATION,
+  AUTHOR,
+  TYPE,
 }
 
 export interface IModerationExcursionsRequest

@@ -1,37 +1,43 @@
 import dynamic from "next/dynamic";
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
-import { NextSeo } from "next-seo";
 import { useTranslation } from "next-i18next";
 import { Fragment } from "react";
+import { NextSeo } from "next-seo";
 
-const ModerationPlacesLazy = dynamic(
+const ExcursionModerationLazy = dynamic(
   () =>
-    import("@/containers/moderation/places/places-list/PlacesModerationPage"),
-  { ssr: false }
+    import(
+      "@/containers/moderation/excursions/excursion-moderation/ExcursionModeration"
+    ),
+  {
+    ssr: false,
+  }
 );
 
-const Index: NextPage = () => {
+const ExcursionModeration: NextPage = () => {
   const { t } = useTranslation("moderation");
   return (
     <Fragment>
       <NextSeo
-        title={t("places.title")}
+        title={t("form.titleExcursion")}
         openGraph={{
-          title: t("places.title"),
+          title: t("form.titleExcursion"),
         }}
       />
-      <ModerationPlacesLazy />
+      <ExcursionModerationLazy />
     </Fragment>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
         "moderation",
+        "excursion-management",
+        "route-management",
         "common",
       ])),
       // Will be passed to the page component as props
@@ -39,4 +45,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default Index;
+export default ExcursionModeration;

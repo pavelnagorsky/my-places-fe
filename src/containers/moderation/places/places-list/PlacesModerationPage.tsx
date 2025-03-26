@@ -5,15 +5,15 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { BoxPlaceholder } from "@/components/UI/placeholders/BoxPlaceholder";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
+import useModerationPlaces from "@/containers/moderation/places/places-list/logic/useModerationPlaces";
 import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
-import Filters from "@/containers/moderation/places/filters/Filters";
-import useModerationReviews from "@/containers/moderation/reviews/useModerationReviews";
-import ReviewItemsTableHead from "@/containers/moderation/reviews/review-item/ReviewItemsTableHead";
-import ReviewItem from "@/containers/moderation/reviews/review-item/ReviewItem";
+import Filters from "@/containers/moderation/places/places-list/filters/Filters";
+import PlaceItemsTableHead from "@/containers/moderation/places/places-list/place-item/PlaceItemsTableHead";
+import PlaceItem from "@/containers/moderation/places/places-list/place-item/PlaceItem";
 
-const ReviewsModerationPage = () => {
+const PlacesModerationPage = () => {
   const { t } = useTranslation("moderation");
-  const logic = useModerationReviews();
+  const logic = useModerationPlaces();
 
   return (
     <ModerationLayout>
@@ -31,13 +31,13 @@ const ReviewsModerationPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                {t("reviews.title")}
+                {t("places.title")}
               </Typography>
             </Stack>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <FormProvider {...logic.formContext}>
-              <Filters onSubmit={logic.onSubmit} type={"reviews"} />
+              <Filters onSubmit={logic.onSubmit} type={"places"} />
             </FormProvider>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
@@ -48,10 +48,10 @@ const ReviewsModerationPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  {t("reviews.notFound")}
+                  {t("places.notFound")}
                 </Typography>
               )}
-              <ReviewItemsTableHead
+              <PlaceItemsTableHead
                 orderBy={logic.orderBy}
                 orderDirection={logic.orderDirection}
                 show={!logic.noItems}
@@ -69,9 +69,9 @@ const ReviewsModerationPage = () => {
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.items.map((review, index) => (
+                  {logic.items.map((place, index) => (
                     <motion.div
-                      key={review.id}
+                      key={place.id}
                       layout
                       exit={{
                         opacity: 0,
@@ -79,7 +79,7 @@ const ReviewsModerationPage = () => {
                       }}
                       transition={{ duration: 0.6, type: "spring" }}
                     >
-                      <ReviewItem review={review} />
+                      <PlaceItem place={place} />
                     </motion.div>
                   ))}
                 </AnimatePresence>
@@ -92,4 +92,4 @@ const ReviewsModerationPage = () => {
   );
 };
 
-export default ReviewsModerationPage;
+export default PlacesModerationPage;

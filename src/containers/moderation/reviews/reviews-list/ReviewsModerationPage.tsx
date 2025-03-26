@@ -1,32 +1,19 @@
-import {
-  Box,
-  IconButton,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { FormProvider } from "react-hook-form-mui";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BoxPlaceholder } from "@/components/UI/placeholders/BoxPlaceholder";
-import Filters from "./filters/Filters";
-import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@/components/UI/button/Button";
-import { routerLinks } from "@/routing/routerLinks";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
-import NextLink from "next/link";
-import useModerationExcursions from "@/containers/moderation/excursions/logic/useModerationExcursions";
-import ExcursionItemsTableHead from "./excursion-item/ExcursionItemsTableHead";
-import ExcursionItem from "./excursion-item/ExcursionItem";
-import ModerationLayout from "../layout/ModerationLayout";
+import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
+import Filters from "@/containers/moderation/places/places-list/filters/Filters";
+import useModerationReviews from "@/containers/moderation/reviews/reviews-list/logic/useModerationReviews";
+import ReviewItemsTableHead from "@/containers/moderation/reviews/reviews-list/review-item/ReviewItemsTableHead";
+import ReviewItem from "@/containers/moderation/reviews/reviews-list/review-item/ReviewItem";
 
-const ExcursionsModerationPage = () => {
+const ReviewsModerationPage = () => {
   const { t } = useTranslation("moderation");
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const logic = useModerationExcursions();
+  const logic = useModerationReviews();
 
   return (
     <ModerationLayout>
@@ -44,13 +31,13 @@ const ExcursionsModerationPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                {t("excursions.title")}
+                {t("reviews.title")}
               </Typography>
             </Stack>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <FormProvider {...logic.formContext}>
-              <Filters onSubmit={logic.onSubmit} />
+              <Filters onSubmit={logic.onSubmit} type={"reviews"} />
             </FormProvider>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
@@ -61,10 +48,10 @@ const ExcursionsModerationPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  {t("excursions.noItems")}
+                  {t("reviews.notFound")}
                 </Typography>
               )}
-              <ExcursionItemsTableHead
+              <ReviewItemsTableHead
                 orderBy={logic.orderBy}
                 orderDirection={logic.orderDirection}
                 show={!logic.noItems}
@@ -82,9 +69,9 @@ const ExcursionsModerationPage = () => {
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.items.map((excursion, index) => (
+                  {logic.items.map((review, index) => (
                     <motion.div
-                      key={excursion.id}
+                      key={review.id}
                       layout
                       exit={{
                         opacity: 0,
@@ -92,7 +79,7 @@ const ExcursionsModerationPage = () => {
                       }}
                       transition={{ duration: 0.6, type: "spring" }}
                     >
-                      <ExcursionItem item={excursion} />
+                      <ReviewItem review={review} />
                     </motion.div>
                   ))}
                 </AnimatePresence>
@@ -105,4 +92,4 @@ const ExcursionsModerationPage = () => {
   );
 };
 
-export default ExcursionsModerationPage;
+export default ReviewsModerationPage;

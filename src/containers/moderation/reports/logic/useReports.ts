@@ -5,7 +5,7 @@ import {
   IGetReportsRequest,
   ReportsOrderByEnum,
 } from "@/services/reports-service/interfaces/interfaces";
-import { IReportsFormContext } from "@/containers/moderation/reports/interfaces";
+import { IReportsFormContext } from "@/containers/moderation/reports/logic/interfaces";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import reportsService from "@/services/reports-service/reports.service";
 import { IPaginationRequest } from "@/services/interfaces";

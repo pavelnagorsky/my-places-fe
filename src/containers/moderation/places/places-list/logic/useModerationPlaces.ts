@@ -6,7 +6,7 @@ import {
   ModerationPlacesOrderByEnum,
 } from "@/services/places-service/interfaces/interfaces";
 import placesService from "@/services/places-service/places.service";
-import { IModerationPlacesFormContext } from "@/containers/moderation/places/interfaces";
+import { IModerationPlacesFormContext } from "@/containers/moderation/places/places-list/logic/interfaces";
 import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";

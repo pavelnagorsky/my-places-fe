@@ -2,7 +2,7 @@ import { debounce, InputAdornment, Stack } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import SearchIcon from "@mui/icons-material/Search";
 import { TextFieldElement } from "react-hook-form-mui";
-import AdditionalFilters from "@/containers/moderation/places/filters/AdditionalFilters";
+import AdditionalFilters from "@/containers/moderation/places/places-list/filters/AdditionalFilters";
 
 interface IFilterProps {
   onSubmit: () => void;

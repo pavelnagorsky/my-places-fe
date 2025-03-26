@@ -13,6 +13,7 @@ import { ISlug } from "@/services/places-service/interfaces/place-slug.interface
 import { IModerationPlacesRequest } from "@/services/places-service/interfaces/interfaces";
 import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 import { IExcursionModerationItem } from "@/services/excursions-service/interfaces/excursion-moderation-item.interface";
+import { IModeration } from "@/services/places-service/interfaces/moderation.interface";
 
 const excursionsService = {
   createExcursion: (payload: ICreateExcursion, language: string) => {
@@ -82,6 +83,10 @@ const excursionsService = {
   },
 
   MODERATION_EXCURSIONS_ITEMS_PER_PAGE: 15,
+
+  moderateExcursion: (id: number, dto: IModeration) => {
+    return axiosInstance.post(`/excursions/${id}/moderation`, dto);
+  },
 };
 
 export default excursionsService;

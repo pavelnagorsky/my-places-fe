@@ -7,7 +7,10 @@ import { useTranslation } from "next-i18next";
 import { Fragment } from "react";
 
 const ModerationExcursionsLazy = dynamic(
-  () => import("@/containers/moderation/excursions/ExcursionsModerationPage"),
+  () =>
+    import(
+      "@/containers/moderation/excursions/excursions-list/ExcursionsModerationPage"
+    ),
   { ssr: false }
 );
 
@@ -31,6 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
         "moderation",
+        "excursion-management",
         "common",
       ])),
       // Will be passed to the page component as props

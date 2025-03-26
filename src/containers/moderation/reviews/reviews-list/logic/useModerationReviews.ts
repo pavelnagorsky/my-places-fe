@@ -5,7 +5,7 @@ import {
   IModerationReviewsRequest,
   ModerationReviewsOrderByEnum,
 } from "@/services/reviews-service/interfaces/interfaces";
-import { IModerationReviewsFormContext } from "@/containers/moderation/reviews/interfaces";
+import { IModerationReviewsFormContext } from "@/containers/moderation/reviews/reviews-list/logic/interfaces";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { IModerationReview } from "@/services/reviews-service/interfaces/moderation-review.interface";
 import useScrollPagination from "@/hooks/useScrollPagination";

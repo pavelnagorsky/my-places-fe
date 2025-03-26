@@ -17,6 +17,7 @@ import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel
 import useExcursionStatuses from "@/containers/personal-area/my-excursions/logic/utils/useExcursionStatuses";
 import useExcursionTypes from "@/containers/excursion-builder/content/form/logic/utils/useExcursionTypes";
 import { IExcursionModerationItem } from "@/services/excursions-service/interfaces/excursion-moderation-item.interface";
+import { useRouter } from "next/router";
 
 interface IExcursionItemProps {
   item: IExcursionModerationItem;
@@ -27,23 +28,24 @@ const ExcursionItem = ({ item }: IExcursionItemProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { t, i18n } = useTranslation(["moderation", "common"]);
   const dateFnsLocale = useDateFnsLocale();
-  const statuses = useExcursionStatuses();
   const types = useExcursionTypes();
+  const router = useRouter();
+
+  const onClick = () => {
+    router.push(routerLinks.excursionModeration(item.id));
+  };
 
   const titleBox = (
     <Stack gap={"0.2em"}>
       <Typography variant={"body1"}>{item.title}</Typography>
       <Typography
         variant={"body1"}
-        component={Link}
         color={"secondary.main"}
         sx={{
           textDecoration: "underline #565656",
           wordBreak: "break-word",
           width: "fit-content",
         }}
-        href={routerLinks.excursion(item.slug)}
-        target={"_blank"}
       >
         {item.slug}
       </Typography>
@@ -93,7 +95,7 @@ const ExcursionItem = ({ item }: IExcursionItemProps) => {
     </Typography>
   );
 
-  const dateInfoBox = (
+  const createdAtBox = (
     <Stack gap={"0.2em"}>
       <Typography variant={"body1"}>
         {format(new Date(item.createdAt), "dd MMM yyyy", {
@@ -103,15 +105,39 @@ const ExcursionItem = ({ item }: IExcursionItemProps) => {
     </Stack>
   );
 
+  const updatedAtBox = (
+    <Stack gap={"0.2em"}>
+      <Typography variant={"body1"}>
+        {format(new Date(item.updatedAt), "dd MMM yyyy", {
+          locale: dateFnsLocale,
+        })}
+      </Typography>
+    </Stack>
+  );
+
+  const authorBox = (
+    <Stack gap={"0.2em"}>
+      <Typography variant={"body1"}>{item.authorName}</Typography>
+      <Typography variant={"body2"} sx={{ wordBreak: "break-word" }}>
+        {item.authorEmail}
+      </Typography>
+    </Stack>
+  );
+
   const mobileView = (
     <Box
+      onClick={onClick}
       sx={{
+        cursor: "pointer",
         mb: "2em",
         boxShadow: "rgba(32, 31, 61, 0.1) 0px 5px 10px",
         p: "1.5em",
         borderRadius: "20px",
         "& label": {
           mb: "0.3em",
+        },
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.04)",
         },
       }}
     >
@@ -125,12 +151,20 @@ const ExcursionItem = ({ item }: IExcursionItemProps) => {
           {placesInfoBox}
         </Grid>
         <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
+          <CustomLabel>{t("excursions.headings.author")}</CustomLabel>
+          {authorBox}
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
           <CustomLabel>{t("excursions.headings.duration")}</CustomLabel>
           {typeBox}
         </Grid>
         <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
           <CustomLabel>{t("excursions.headings.createdAt")}</CustomLabel>
-          {dateInfoBox}
+          {createdAtBox}
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
+          <CustomLabel>{t("excursions.headings.updatedAt")}</CustomLabel>
+          {updatedAtBox}
         </Grid>
       </Grid>
     </Box>
@@ -138,20 +172,26 @@ const ExcursionItem = ({ item }: IExcursionItemProps) => {
 
   const desktopView = (
     <Box
+      onClick={onClick}
       py={"1em"}
       pl={"1em"}
       sx={{
+        cursor: "pointer",
         boxShadow: "rgba(32, 31, 61, 0.1) 0px 5px 10px",
         my: "1em",
         borderRadius: "20px",
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.04)",
+        },
       }}
     >
       <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid size={{ xs: 3 }}>{titleBox}</Grid>
+        <Grid size={{ xs: 2.5 }}>{titleBox}</Grid>
         <Grid size={{ xs: 2 }}>{placesInfoBox}</Grid>
-        <Grid size={{ xs: 2 }}></Grid>
+        <Grid size={{ xs: 2.5 }}>{authorBox}</Grid>
         <Grid size={{ xs: 1.5 }}>{typeBox}</Grid>
-        <Grid size={{ xs: 1.5 }}>{dateInfoBox}</Grid>
+        <Grid size={{ xs: 1.5 }}>{createdAtBox}</Grid>
+        <Grid size={{ xs: 1.5 }}>{updatedAtBox}</Grid>
       </Grid>
     </Box>
   );

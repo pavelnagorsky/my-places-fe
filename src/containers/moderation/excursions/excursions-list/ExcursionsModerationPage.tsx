@@ -1,19 +1,32 @@
-import { Box, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { FormProvider } from "react-hook-form-mui";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BoxPlaceholder } from "@/components/UI/placeholders/BoxPlaceholder";
+import Filters from "@/containers/moderation/excursions/excursions-list/filters/Filters";
+import AddIcon from "@mui/icons-material/Add";
+import { Button } from "@/components/UI/button/Button";
+import { routerLinks } from "@/routing/routerLinks";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
-import useModerationPlaces from "@/containers/moderation/places/useModerationPlaces";
-import ModerationLayout from "@/containers/moderation/layout/ModerationLayout";
-import Filters from "@/containers/moderation/places/filters/Filters";
-import PlaceItemsTableHead from "@/containers/moderation/places/place-item/PlaceItemsTableHead";
-import PlaceItem from "@/containers/moderation/places/place-item/PlaceItem";
+import NextLink from "next/link";
+import useModerationExcursions from "@/containers/moderation/excursions/excursions-list/logic/useModerationExcursions";
+import ExcursionItemsTableHead from "@/containers/moderation/excursions/excursions-list/excursion-item/ExcursionItemsTableHead";
+import ExcursionItem from "@/containers/moderation/excursions/excursions-list/excursion-item/ExcursionItem";
+import ModerationLayout from "../../layout/ModerationLayout";
 
-const PlacesModerationPage = () => {
+const ExcursionsModerationPage = () => {
   const { t } = useTranslation("moderation");
-  const logic = useModerationPlaces();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const logic = useModerationExcursions();
 
   return (
     <ModerationLayout>
@@ -31,13 +44,13 @@ const PlacesModerationPage = () => {
               justifyContent={"space-between"}
             >
               <Typography mb={0} variant={"h1"}>
-                {t("places.title")}
+                {t("excursions.title")}
               </Typography>
             </Stack>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
             <FormProvider {...logic.formContext}>
-              <Filters onSubmit={logic.onSubmit} type={"places"} />
+              <Filters onSubmit={logic.onSubmit} />
             </FormProvider>
           </motion.div>
           <motion.div variants={animationVariants.defaultItemVariant}>
@@ -48,10 +61,10 @@ const PlacesModerationPage = () => {
                   fontWeight={600}
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  {t("places.notFound")}
+                  {t("excursions.noItems")}
                 </Typography>
               )}
-              <PlaceItemsTableHead
+              <ExcursionItemsTableHead
                 orderBy={logic.orderBy}
                 orderDirection={logic.orderDirection}
                 show={!logic.noItems}
@@ -69,9 +82,9 @@ const PlacesModerationPage = () => {
                 loader={<BoxPlaceholder sx={{ mt: "2em" }} />}
               >
                 <AnimatePresence mode="popLayout">
-                  {logic.items.map((place, index) => (
+                  {logic.items.map((excursion, index) => (
                     <motion.div
-                      key={place.id}
+                      key={excursion.id}
                       layout
                       exit={{
                         opacity: 0,
@@ -79,7 +92,7 @@ const PlacesModerationPage = () => {
                       }}
                       transition={{ duration: 0.6, type: "spring" }}
                     >
-                      <PlaceItem place={place} />
+                      <ExcursionItem item={excursion} />
                     </motion.div>
                   ))}
                 </AnimatePresence>
@@ -92,4 +105,4 @@ const PlacesModerationPage = () => {
   );
 };
 
-export default PlacesModerationPage;
+export default ExcursionsModerationPage;

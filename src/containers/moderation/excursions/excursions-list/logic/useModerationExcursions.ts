@@ -9,7 +9,7 @@ import {
   ModerationExcursionsOrderByEnum,
 } from "@/services/excursions-service/interfaces/interfaces";
 import excursionsService from "@/services/excursions-service/excursions.service";
-import { IModerationExcursionsFormContext } from "@/containers/moderation/excursions/logic/interfaces";
+import { IModerationExcursionsFormContext } from "@/containers/moderation/excursions/excursions-list/logic/interfaces";
 import { IExcursionModerationItem } from "@/services/excursions-service/interfaces/excursion-moderation-item.interface";
 
 const useModerationExcursions = () => {
@@ -43,7 +43,7 @@ const useModerationExcursions = () => {
     IExcursionModerationItem,
     ModerationExcursionsOrderByEnum
   >({
-    defaultOrderBy: ModerationExcursionsOrderByEnum.CREATED_AT,
+    defaultOrderBy: ModerationExcursionsOrderByEnum.UPDATED_AT,
     pageSize: excursionsService.MODERATION_EXCURSIONS_ITEMS_PER_PAGE,
     apiCall: apiCall,
   });

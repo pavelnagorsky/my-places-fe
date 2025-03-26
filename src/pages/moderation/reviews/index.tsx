@@ -7,7 +7,10 @@ import { NextSeo } from "next-seo";
 import { Fragment } from "react";
 
 const ModerationReviewsLazy = dynamic(
-  () => import("@/containers/moderation/reviews/ReviewsModerationPage"),
+  () =>
+    import(
+      "@/containers/moderation/reviews/reviews-list/ReviewsModerationPage"
+    ),
   { ssr: false }
 );
 

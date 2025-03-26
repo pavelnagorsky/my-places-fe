@@ -42,7 +42,7 @@ const ExcursionItemsTableHead = ({
           "& p": { fontWeight: 700, fontSize: "12px", color: "secondary.main" },
         }}
       >
-        <Grid size={{ xs: 3 }}>
+        <Grid size={{ xs: 2.5 }}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === ModerationExcursionsOrderByEnum.TITLE}
@@ -57,31 +57,31 @@ const ExcursionItemsTableHead = ({
         <Grid size={{ xs: 2 }}>
           <Typography>{t("excursions.headings.places")}</Typography>
         </Grid>
-        <Grid size={{ xs: 2 }}>
+        <Grid size={{ xs: 2.5 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === ModerationExcursionsOrderByEnum.DISTANCE}
+            isActive={orderBy === ModerationExcursionsOrderByEnum.AUTHOR}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(ModerationExcursionsOrderByEnum.DISTANCE)
+              onChangeOrderBy(ModerationExcursionsOrderByEnum.AUTHOR)
             }
           >
-            <Typography>{t("excursions.headings.status")}</Typography>
+            <Typography>{t("excursions.headings.author")}</Typography>
           </SortingButton>
         </Grid>
         <Grid size={{ xs: 1.5 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === ModerationExcursionsOrderByEnum.DURATION}
+            isActive={orderBy === ModerationExcursionsOrderByEnum.TYPE}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(ModerationExcursionsOrderByEnum.DURATION)
+              onChangeOrderBy(ModerationExcursionsOrderByEnum.TYPE)
             }
           >
             <Typography>{t("excursions.headings.type")}</Typography>
           </SortingButton>
         </Grid>
-        <Grid size={{ xs: "auto" }} display={"flex"} alignItems={"center"}>
+        <Grid size={{ xs: 1.5 }} display={"flex"} alignItems={"center"}>
           <SortingButton
             orderDirection={orderDirection}
             isActive={orderBy === ModerationExcursionsOrderByEnum.CREATED_AT}
@@ -91,6 +91,18 @@ const ExcursionItemsTableHead = ({
             }
           >
             <Typography>{t("excursions.headings.createdAt")}</Typography>
+          </SortingButton>
+        </Grid>
+        <Grid size={{ xs: 1.5 }} display={"flex"} alignItems={"center"}>
+          <SortingButton
+            orderDirection={orderDirection}
+            isActive={orderBy === ModerationExcursionsOrderByEnum.UPDATED_AT}
+            onChangeDirection={onChangeOrderDirection}
+            onChangeOrderBy={() =>
+              onChangeOrderBy(ModerationExcursionsOrderByEnum.UPDATED_AT)
+            }
+          >
+            <Typography>{t("excursions.headings.updatedAt")}</Typography>
           </SortingButton>
         </Grid>
       </Grid>

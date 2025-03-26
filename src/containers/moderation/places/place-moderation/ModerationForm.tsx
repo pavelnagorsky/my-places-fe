@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { useTranslation } from "next-i18next";
+import excursionsService from "@/services/excursions-service/excursions.service";
 
 interface IModerationFormContext {
   feedback?: string;
@@ -26,7 +27,7 @@ const ModerationForm = ({
   mode,
 }: {
   id: number;
-  mode: "place" | "review";
+  mode: "place" | "review" | "excursion";
 }) => {
   const { t } = useTranslation(["moderation", "common"]);
   const dispatch = useAppDispatch();
@@ -43,13 +44,12 @@ const ModerationForm = ({
       showAlertThunk({
         alertProps: {
           title: t("feedback.error", { ns: "common" }),
-          description: `${
-            mode === "place"
-              ? t("feedback.place.error")
-              : t("feedback.review.error")
-          } ${t("errors.description", {
-            ns: "common",
-          })}`,
+          description: `${t(`feedback.${mode}.error`)} ${t(
+            "errors.description",
+            {
+              ns: "common",
+            }
+          )}`,
           variant: "standard",
           severity: "error",
         },
@@ -65,16 +65,8 @@ const ModerationForm = ({
           title: t("feedback.success", { ns: "common" }),
           description:
             action === "accept"
-              ? `${
-                  mode === "place"
-                    ? t("feedback.place.accept")
-                    : t("feedback.review.accept")
-                }`
-              : `${
-                  mode === "place"
-                    ? t("feedback.place.reject")
-                    : t("feedback.review.reject")
-                }`,
+              ? `${t(`feedback.${mode}.accept`)}`
+              : `${t(`feedback.${mode}.reject`)}`,
           variant: "standard",
           severity: "success",
         },
@@ -95,10 +87,11 @@ const ModerationForm = ({
       }
       if (loading) return;
       setLoading(action);
-      const apiCall =
-        mode === "place"
-          ? placesService.moderatePlace
-          : reviewsService.moderateReview;
+      const apiCall = {
+        place: placesService.moderatePlace,
+        review: reviewsService.moderateReview,
+        excursion: excursionsService.moderateExcursion,
+      }[mode];
       apiCall(id, {
         accept: action === "accept",
         feedback: data.feedback,
@@ -108,9 +101,11 @@ const ModerationForm = ({
           // success
           handleShowSuccess(action);
           router.push(
-            mode === "place"
-              ? routerLinks.moderationPlaces
-              : routerLinks.moderationReviews
+            {
+              place: routerLinks.moderationPlaces,
+              review: routerLinks.moderationReviews,
+              excursion: routerLinks.moderationExcursions,
+            }[mode]
           );
         })
         .catch(() => {
