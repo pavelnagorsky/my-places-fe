@@ -1,5 +1,6 @@
 import { Middleware } from "@reduxjs/toolkit";
 import {
+  clearCart,
   removeCartItem,
   sortItems,
 } from "@/store/search-cart-slice/search-cart.slice";
@@ -16,7 +17,8 @@ const searchCartCacheMiddleware: Middleware<{}, any, any> =
     if (
       togglePlaceIdInCartThunk.fulfilled.match(action) ||
       removeCartItem.match(action) ||
-      sortItems.match(action)
+      sortItems.match(action) ||
+      clearCart.match(action)
     ) {
       store.dispatch(saveCartToLocalStorageThunk());
     }
