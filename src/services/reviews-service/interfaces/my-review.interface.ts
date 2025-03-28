@@ -1,4 +1,4 @@
-import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
+import { ReviewStatusesEnum } from "@/services/reviews-service/enums/review-statuses.enum";
 
 export interface IMyReview {
   id: number;

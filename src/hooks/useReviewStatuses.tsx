@@ -1,5 +1,5 @@
 import { ISelect } from "@/shared/interfaces";
-import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
+import { ReviewStatusesEnum } from "@/services/reviews-service/enums/review-statuses.enum";
 import { useTranslation } from "next-i18next";
 
 const useReviewStatuses = () => {

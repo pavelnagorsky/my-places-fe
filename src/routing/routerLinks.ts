@@ -37,6 +37,11 @@ export const routerLinks = {
   administrationPlace: (placeId: number) => `/administration/places/${placeId}`,
   administrationEditPlace: (placeId: number) =>
     `/administration/places/${placeId}/edit`,
+  administrationExcursions: "/administration/excursions",
+  administrationExcursion: (excursionId: number) =>
+    `/administration/excursions/${excursionId}`,
+  administrationEditExcursion: (excursionId: number) =>
+    `/administration/excursions/${excursionId}/edit`,
   administrationEditReview: (reviewId: number) =>
     `/administration/reviews/${reviewId}/edit`,
   personalAreaBasePath: "/personal-area",

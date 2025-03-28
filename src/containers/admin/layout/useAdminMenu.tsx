@@ -5,6 +5,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import ChatIcon from "@mui/icons-material/Chat";
 import PlaceIcon from "@mui/icons-material/Place";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 
 const useAdminMenu = () => {
   return [
@@ -22,6 +23,11 @@ const useAdminMenu = () => {
       title: "Места",
       href: routerLinks.administrationPlaces,
       icon: <PlaceIcon />,
+    },
+    {
+      title: "Экскурсии",
+      href: routerLinks.administrationExcursions,
+      icon: <TravelExploreIcon />,
     },
     {
       title: "Типы мест",

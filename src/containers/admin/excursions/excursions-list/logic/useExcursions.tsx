@@ -3,17 +3,17 @@ import { useForm } from "react-hook-form-mui";
 import { IPaginationRequest } from "@/services/interfaces";
 import utils from "@/shared/utils";
 import usePagination from "@/hooks/usePagination";
-import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
-import {
-  IAdminPlacesRequest,
-  IMyPlacesRequest,
-  MyPlacesOrderByEnum,
-} from "@/services/places-service/interfaces/interfaces";
 import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
-import { IAdminPlacesFormContext } from "@/containers/admin/places/interfaces";
+import { IAdminExcursionsFormContext } from "@/containers/admin/excursions/excursions-list/logic/interfaces";
+import {
+  IAdminExcursionsRequest,
+  MyExcursionsOrderByEnum,
+} from "@/services/excursions-service/interfaces/interfaces";
+import excursionsService from "@/services/excursions-service/excursions.service";
+import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 
-const usePlaces = () => {
+const useExcursions = () => {
   const { i18n } = useTranslation();
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -21,7 +21,7 @@ const usePlaces = () => {
     setRowsPerPage(size);
   };
 
-  const formContext = useForm<IAdminPlacesFormContext>({
+  const formContext = useForm<IAdminExcursionsFormContext>({
     defaultValues: {
       search: "",
       statuses: [],
@@ -32,9 +32,9 @@ const usePlaces = () => {
   });
 
   const apiCall = useCallback(
-    (pagination: IPaginationRequest<MyPlacesOrderByEnum>) => {
+    (pagination: IPaginationRequest<MyExcursionsOrderByEnum>) => {
       const data = formContext.getValues();
-      const payload: IAdminPlacesRequest = {
+      const payload: IAdminExcursionsRequest = {
         search: data.search,
         statuses: (data.statuses || []).map((sId) => +sId),
         dateFrom: data.dateFrom
@@ -44,13 +44,13 @@ const usePlaces = () => {
         userIds: data.users.map((u) => u.id),
         ...pagination,
       };
-      return placesService.getAdminPlaces(i18n.language, payload);
+      return excursionsService.getAdminExcursions(payload, i18n.language);
     },
     [i18n.language]
   );
 
-  const paginator = usePagination<IMyPlace, MyPlacesOrderByEnum>({
-    defaultOrderBy: MyPlacesOrderByEnum.CREATED_AT,
+  const paginator = usePagination<IExcursionListItem, MyExcursionsOrderByEnum>({
+    defaultOrderBy: MyExcursionsOrderByEnum.CREATED_AT,
     pageSize: rowsPerPage,
     apiCall,
     keepItems: true,
@@ -84,4 +84,4 @@ const usePlaces = () => {
   };
 };
 
-export default usePlaces;
+export default useExcursions;

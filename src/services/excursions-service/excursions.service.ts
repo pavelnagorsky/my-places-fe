@@ -4,16 +4,21 @@ import { IUpdateExcursion } from "@/services/excursions-service/interfaces/updat
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { IPaginationResponse } from "@/services/interfaces";
 import {
+  IAdminExcursionsRequest,
   IModerationExcursionsRequest,
   IMyExcursionsRequest,
 } from "@/services/excursions-service/interfaces/interfaces";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import { ISlug } from "@/services/places-service/interfaces/place-slug.interface";
-import { IModerationPlacesRequest } from "@/services/places-service/interfaces/interfaces";
+import {
+  IAdminPlacesRequest,
+  IModerationPlacesRequest,
+} from "@/services/places-service/interfaces/interfaces";
 import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 import { IExcursionModerationItem } from "@/services/excursions-service/interfaces/excursion-moderation-item.interface";
 import { IModeration } from "@/services/places-service/interfaces/moderation.interface";
+import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 
 const excursionsService = {
   createExcursion: (payload: ICreateExcursion, language: string) => {
@@ -33,7 +38,7 @@ const excursionsService = {
   getMyExcursions: (payload: IMyExcursionsRequest, lang: string) => {
     const langId = parseLanguageToId(lang);
     return axiosInstance.post<IPaginationResponse<IExcursionListItem>>(
-      `/excursions/my-excursions`,
+      `/excursions/personal-list`,
       payload,
       {
         params: {
@@ -87,6 +92,16 @@ const excursionsService = {
   moderateExcursion: (id: number, dto: IModeration) => {
     return axiosInstance.post(`/excursions/${id}/moderation`, dto);
   },
+
+  getAdminExcursions: (payload: IAdminExcursionsRequest, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IPaginationResponse<IExcursionListItem>>(
+      `/excursions/administration-list?lang=${langId}`,
+      payload
+    );
+  },
+
+  ADMIN_EXCURSIONS_ITEMS_PER_PAGE: 15,
 };
 
 export default excursionsService;

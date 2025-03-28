@@ -16,11 +16,11 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { FormProvider } from "react-hook-form-mui";
-import useFeedbackList from "@/containers/admin/feedback-list/useFeedbackList";
+import useFeedbackList from "@/containers/admin/feedback-list/feedback-list/logic/useFeedbackList";
 import useCrmStatuses from "@/hooks/useCrmStatuses";
 import { IFeedback } from "@/services/contact-service/interfaces/feedback.interface";
-import FeedbackListHeader from "@/containers/admin/feedback-list/table/FeedbackListHeader";
-import FeedbackListTableHead from "@/containers/admin/feedback-list/table/FeedbackListTableHead";
+import FeedbackListHeader from "@/containers/admin/feedback-list/feedback-list/table/FeedbackListHeader";
+import FeedbackListTableHead from "@/containers/admin/feedback-list/feedback-list/table/FeedbackListTableHead";
 import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
 import TableLoader from "@/components/UI/helper/TableLoader";
 

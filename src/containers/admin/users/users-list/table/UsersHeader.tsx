@@ -1,15 +1,15 @@
 import { debounce, InputAdornment, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { primaryBackground } from "@/styles/theme/lightTheme";
+import AdditionalFilters from "@/containers/admin/users/users-list/table/filters/AdditionalFilters";
 import { TextFieldElement } from "react-hook-form-mui";
 import SearchIcon from "@mui/icons-material/Search";
-import AdditionalFilters from "@/containers/admin/places/table/filters/AdditionalFilters";
 
 interface IUsersHeaderProps {
   onSubmit: () => void;
 }
 
-const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
+const UsersHeader = ({ onSubmit }: IUsersHeaderProps) => {
   return (
     <Stack
       gap={"1em"}
@@ -28,7 +28,7 @@ const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
         fontWeight={700}
         fontSize={{ xs: "25px", md: "30px" }}
       >
-        Список мест
+        Пользователи
       </Typography>
 
       <Stack
@@ -36,11 +36,6 @@ const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
         direction={"row"}
         alignItems={"center"}
         justifyContent={"end"}
-        sx={{
-          "& .MuiIconButton-root": {
-            backgroundColor: "white",
-          },
-        }}
       >
         <motion.div
           initial={{ y: -20, opacity: 0 }}
@@ -60,7 +55,7 @@ const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
                 </InputAdornment>
               ),
             }}
-            placeholder="Поиск по названию"
+            placeholder="Поиск по почте"
             sx={{
               backgroundColor: "white",
               minWidth: {
@@ -68,7 +63,7 @@ const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
               },
             }}
             fullWidth
-            name={"search"}
+            name={"email"}
             onChange={debounce(onSubmit, 300)}
             inputProps={{
               "aria-label": "Search",
@@ -80,4 +75,4 @@ const PlacesHeader = ({ onSubmit }: IUsersHeaderProps) => {
   );
 };
 
-export default PlacesHeader;
+export default UsersHeader;

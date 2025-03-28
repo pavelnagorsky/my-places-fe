@@ -1,6 +1,7 @@
 import {
   AutocompleteElement,
   CheckboxButtonGroup,
+  SwitchElement,
   useFormContext,
 } from "react-hook-form-mui";
 // @ts-ignore
@@ -17,7 +18,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import usePlaceStatuses from "@/hooks/usePlaceStatuses";
 import useDialog from "@/hooks/useDialog";
 import { useMemo } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -26,26 +26,25 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 import CloseIcon from "@mui/icons-material/Close";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { Button } from "@/components/UI/button/Button";
-import { IAdminPlacesFormContext } from "@/containers/admin/places/interfaces";
-import useUsersAutocomplete from "@/containers/admin/places/table/filters/useUsersAutocomplete";
+import { IUsersFiltersForm } from "@/containers/admin/users/users-list/logic/interfaces";
+import useRolesOptions from "@/hooks/useRolesOptions";
 
 const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
-  const { resetField, watch, getValues } =
-    useFormContext<IAdminPlacesFormContext>();
-  const { t } = useTranslation(["personal-area", "common"]);
+  const { resetField, watch, getValues } = useFormContext<IUsersFiltersForm>();
+  const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const statuses = usePlaceStatuses();
+  const roles = useRolesOptions();
   const dialog = useDialog();
-  const usersAutocomplete = useUsersAutocomplete();
 
   const watchEndDate = watch("dateTo");
 
   const filtersCount = useMemo(() => {
-    const statusesCount = getValues("statuses")?.length || 0;
+    const rolesCount = getValues("roles")?.length || 0;
     const dateFromCount = getValues("dateFrom") !== null ? 1 : 0;
     const dateEndCount = getValues("dateTo") !== null ? 1 : 0;
-    return statusesCount + dateEndCount + dateFromCount;
+    const isBlockedCount = getValues("isBlocked") ? 1 : 0;
+    return rolesCount + dateEndCount + dateFromCount + isBlockedCount;
   }, [dialog.open]);
 
   const onApply = () => {
@@ -54,24 +53,26 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   };
 
   const onClear = () => {
-    resetField("statuses");
+    resetField("roles");
     resetField("dateFrom");
     resetField("dateTo");
-    resetField("users");
+    resetField("isBlocked");
   };
 
   return (
     <Box>
       <Badge badgeContent={filtersCount} color={"primary"}>
         <IconButton
+          color={"secondary"}
           onClick={dialog.handleOpen}
           sx={{
+            backgroundColor: "white",
             p: "0.5em",
             borderRadius: "10px",
             boxShadow: "rgba(32, 31, 61, 0.15) 0px 5px 10px",
           }}
         >
-          <TuneIcon color={"primary"} />
+          <TuneIcon color={"secondary"} />
         </IconButton>
       </Badge>
       <Dialog
@@ -99,36 +100,31 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
           alignItems={"center"}
         >
           <Typography mx={"auto"} fontWeight={600} fontSize={"20px"}>
-            {t("filters.title", { ns: "common" })}
+            Фильтры
           </Typography>
           <IconButton onClick={dialog.handleClose} sx={{ mr: "0.2em" }}>
             <CloseIcon />
           </IconButton>
         </Stack>
         <Box p={"2em"} pt={"1.5em"}>
-          <CustomLabel sx={{ fontSize: "18px" }}>
-            {t("places.filters.byStatus")}
-          </CustomLabel>
+          <CustomLabel sx={{ fontSize: "18px" }}>По ролям</CustomLabel>
           <Box
             sx={{ "& label": { color: "secondary.main", width: "50%", mx: 0 } }}
             display={"flex"}
           >
-            <CheckboxButtonGroup
-              options={statuses.map((s) => ({
-                id: `${s.id}`,
-                label: s.label,
-              }))}
-              name={"statuses"}
-              row
-            />
+            <CheckboxButtonGroup options={roles} name={"roles"} row />
+          </Box>
+          <Box>
+            <CustomLabel sx={{ fontSize: "18px" }}>По блокировке</CustomLabel>
+            <SwitchElement label={"Заблокирован"} name={"isBlocked"} />
           </Box>
           <Divider sx={{ my: "1.5em" }} />
           <Box>
             <CustomLabel sx={{ fontSize: "18px" }}>
-              {t("places.filters.byCreatedAt")}
+              По дате создания
             </CustomLabel>
             <Typography color={"secondary.main"}>
-              {t("filters.dateRange", { ns: "common" })}
+              Выберите промежуток дат
             </Typography>
             <Stack
               direction={"row"}
@@ -137,7 +133,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
               justifyContent={"space-between"}
             >
               <Box>
-                <CustomLabel>{t("filters.from", { ns: "common" })}</CustomLabel>
+                <CustomLabel>От</CustomLabel>
                 <DatePickerElement
                   name={"dateFrom"}
                   isDate
@@ -146,7 +142,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
                 />
               </Box>
               <Box>
-                <CustomLabel>{t("filters.to", { ns: "common" })}</CustomLabel>
+                <CustomLabel>До</CustomLabel>
                 <DatePickerElement
                   name={"dateTo"}
                   isDate
@@ -156,23 +152,11 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
               </Box>
             </Stack>
           </Box>
-          <Divider sx={{ my: "1.5em" }} />
-          <Stack>
-            <CustomLabel sx={{ fontSize: "18px" }}>Пользователи</CustomLabel>
-            <AutocompleteElement
-              multiple
-              name={"users"}
-              options={usersAutocomplete.users}
-              loading={usersAutocomplete.loading}
-            />
-          </Stack>
           <Divider sx={{ my: "2em" }} />
           <Stack direction={"row"} justifyContent={"space-between"} gap={"1em"}>
-            <Button onClick={onClear}>
-              {t("buttons.clear", { ns: "common" })}
-            </Button>
+            <Button onClick={onClear}>Очистить</Button>
             <Button onClick={onApply} variant={"contained"}>
-              {t("buttons.apply", { ns: "common" })}
+              Применить
             </Button>
           </Stack>
         </Box>

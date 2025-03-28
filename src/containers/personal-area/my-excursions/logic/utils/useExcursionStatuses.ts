@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next";
-import { ExcursionStatusesEnum } from "@/services/excursions-service/interfaces/excursion-statuses.enum";
+import { ExcursionStatusesEnum } from "@/services/excursions-service/enums/excursion-statuses.enum";
 
 const useExcursionStatuses = () => {
   const { t } = useTranslation("excursion-management");

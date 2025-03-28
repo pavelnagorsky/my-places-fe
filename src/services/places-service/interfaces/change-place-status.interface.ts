@@ -1,4 +1,4 @@
-import { PlaceStatusesEnum } from "./place-statuses.enum";
+import { PlaceStatusesEnum } from "../enums/place-statuses.enum";
 
 export interface IChangePlaceStatus {
   status: PlaceStatusesEnum;

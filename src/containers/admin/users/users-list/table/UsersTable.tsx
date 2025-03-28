@@ -12,12 +12,12 @@ import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { IUserShortInfo } from "@/services/user-service/interfaces/user-short-info.interface";
-import useUsers from "@/containers/admin/users/useUsers";
-import UsersTableHead from "@/containers/admin/users/Table/UsersTableHead";
+import useUsers from "@/containers/admin/users/users-list/logic/useUsers";
+import UsersTableHead from "@/containers/admin/users/users-list/table/UsersTableHead";
 import { format } from "date-fns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import useRolesOptions from "@/hooks/useRolesOptions";
-import UsersHeader from "@/containers/admin/users/Table/UsersHeader";
+import UsersHeader from "@/containers/admin/users/users-list/table/UsersHeader";
 import { FormProvider } from "react-hook-form-mui";
 import TableLoader from "@/components/UI/helper/TableLoader";
 

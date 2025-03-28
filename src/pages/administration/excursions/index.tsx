@@ -2,26 +2,26 @@ import dynamic from "next/dynamic";
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
-import { Fragment } from "react";
 import { NextSeo } from "next-seo";
+import { Fragment } from "react";
 
-const FeedbackListLazy = dynamic(
-  () => import("@/containers/admin/feedback-list/feedback-list/FeedbackList"),
+const ExcursionsLazy = dynamic(
+  () => import("@/containers/admin/excursions/excursions-list/Excursions"),
   {
     ssr: false,
   }
 );
 
-const FeedbackList: NextPage = () => {
+const Places: NextPage = () => {
   return (
     <Fragment>
       <NextSeo
-        title={"Обратная связь"}
+        title={"Экскурсии"}
         openGraph={{
-          title: "Обратная связь",
+          title: "Экскурсии",
         }}
       />
-      <FeedbackListLazy />
+      <ExcursionsLazy />
     </Fragment>
   );
 };
@@ -30,7 +30,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
-        "contact-us",
+        "personal-area",
+        "excursion-management",
         "common",
       ])),
       // Will be passed to the page component as props
@@ -38,4 +39,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default FeedbackList;
+export default Places;

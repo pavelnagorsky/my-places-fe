@@ -23,6 +23,7 @@ const useMyExcursions = () => {
       search: "",
       dateTo: null,
       dateFrom: null,
+      statuses: [],
     },
   });
 
@@ -35,6 +36,7 @@ const useMyExcursions = () => {
           ? utils.parseFilterDate(data.dateFrom, true)
           : null,
         dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
+        statuses: data.statuses,
         ...pagination,
       };
       return excursionsService.getMyExcursions(payload, i18n.language);

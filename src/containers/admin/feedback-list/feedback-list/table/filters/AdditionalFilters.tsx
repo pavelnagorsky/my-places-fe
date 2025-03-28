@@ -1,54 +1,54 @@
-import { CheckboxButtonGroup, useFormContext } from "react-hook-form-mui";
+import {
+  CheckboxButtonGroup,
+  SwitchElement,
+  useFormContext,
+} from "react-hook-form-mui";
 // @ts-ignore
 import { DatePickerElement } from "react-hook-form-mui/date-pickers";
-import { useMemo } from "react";
+import { useTranslation } from "next-i18next";
 import {
   Badge,
   Box,
   Dialog,
   Divider,
   IconButton,
-  Slide,
   Stack,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useTranslation } from "next-i18next";
-import CloseIcon from "@mui/icons-material/Close";
-import { primaryBackground } from "@/styles/theme/lightTheme";
-import { IMyPlacesFormContext } from "@/containers/personal-area/my-places/interfaces";
-import usePlaceStatuses from "@/hooks/usePlaceStatuses";
-import TuneIcon from "@mui/icons-material/Tune";
-import { Button } from "@/components/UI/button/Button";
-import useReviewStatuses from "@/hooks/useReviewStatuses";
-import { IMyReviewsFormContext } from "@/containers/personal-area/my-reviews/interfaces";
-import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import useDialog from "@/hooks/useDialog";
+import { useMemo } from "react";
+import TuneIcon from "@mui/icons-material/Tune";
 import FilterTransition from "@/components/UI/transitions/FilterTransition";
-import { IMyRoutesFormContext } from "@/containers/personal-area/my-routes/interfaces";
-import useExcursionStatuses from "@/containers/personal-area/my-excursions/logic/utils/useExcursionStatuses";
-import { IMyExcursionsFormContext } from "@/containers/personal-area/my-excursions/logic/interfaces";
+import { primaryBackground } from "@/styles/theme/lightTheme";
+import CloseIcon from "@mui/icons-material/Close";
+import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
+import { Button } from "@/components/UI/button/Button";
+import { IFeedbackListFiltersForm } from "@/containers/admin/feedback-list/feedback-list/logic/interfaces";
+import useCrmStatuses from "@/hooks/useCrmStatuses";
+import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
 
-interface IAdditionalFiltersProps {
-  onSubmit: () => void;
-}
-
-const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
+const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   const { resetField, watch, getValues } =
-    useFormContext<IMyExcursionsFormContext>();
-  const { t } = useTranslation(["personal-area", "common"]);
+    useFormContext<IFeedbackListFiltersForm>();
+  const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dialog = useDialog();
-  const statuses = useExcursionStatuses();
+  const { statuses } = useCrmStatuses();
+  const requestTypes = useUserTypes();
 
   const watchEndDate = watch("dateTo");
 
   const filtersCount = useMemo(() => {
-    const dateFromCount = getValues("dateFrom") !== null ? 1 : 0;
-    const dateEndCount = getValues("dateTo") !== null ? 1 : 0;
-    return dateEndCount + dateFromCount + (getValues("statuses")?.length || 0);
+    const data = getValues();
+    let count = 0;
+    if (data.dateFrom) count += 1;
+    if (data.dateTo) count += 1;
+    if (data.requestTypes.length > 0) count += 1;
+    if (data.statuses.length > 0) count += 1;
+    return count;
   }, [dialog.open]);
 
   const onApply = () => {
@@ -57,6 +57,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
   };
 
   const onClear = () => {
+    resetField("requestTypes");
     resetField("dateFrom");
     resetField("dateTo");
     resetField("statuses");
@@ -66,14 +67,16 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
     <Box>
       <Badge badgeContent={filtersCount} color={"primary"}>
         <IconButton
+          color={"secondary"}
           onClick={dialog.handleOpen}
           sx={{
+            backgroundColor: "white",
             p: "0.5em",
             borderRadius: "10px",
             boxShadow: "rgba(32, 31, 61, 0.15) 0px 5px 10px",
           }}
         >
-          <TuneIcon color={"primary"} />
+          <TuneIcon color={"secondary"} />
         </IconButton>
       </Badge>
       <Dialog
@@ -91,8 +94,6 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
         <Stack
           position={"sticky"}
           py={"0.5em"}
-          // pl={"2em"}
-          // pr={"0.2em"}
           top={0}
           zIndex={1}
           direction={"row"}
@@ -101,40 +102,57 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
           alignItems={"center"}
         >
           <Typography mx={"auto"} fontWeight={600} fontSize={"20px"}>
-            {t("filters.title", { ns: "common" })}
+            Фильтры
           </Typography>
           <IconButton onClick={dialog.handleClose} sx={{ mr: "0.2em" }}>
             <CloseIcon />
           </IconButton>
         </Stack>
         <Box p={"2em"} pt={"1.5em"}>
-          <Box>
-            <CustomLabel sx={{ fontSize: "18px" }}>
-              {t("excursions.filters.byStatus")}
-            </CustomLabel>
-            <Box
-              sx={{
-                "& label": { color: "secondary.main", width: "50%", mx: 0 },
-              }}
-              display={"flex"}
-            >
-              <CheckboxButtonGroup
-                options={statuses.map((s) => ({
-                  id: `${s.id}`,
-                  label: s.label,
-                }))}
-                name={"statuses"}
-                row
-              />
+          <Stack gap={"1em"}>
+            <Box>
+              <CustomLabel sx={{ fontSize: "18px" }}>По статусу</CustomLabel>
+              <Box
+                sx={{
+                  "& label": { color: "secondary.main", width: "50%", mx: 0 },
+                }}
+                display={"flex"}
+              >
+                <CheckboxButtonGroup
+                  options={statuses.map((s) => ({
+                    id: `${s.id}`,
+                    label: s.label,
+                  }))}
+                  name={"statuses"}
+                  row
+                />
+              </Box>
             </Box>
-          </Box>
+            <Box>
+              <CustomLabel sx={{ fontSize: "18px" }}>
+                По типу запроса
+              </CustomLabel>
+              <Box
+                sx={{
+                  "& label": { color: "secondary.main", width: "50%", mx: 0 },
+                }}
+                display={"flex"}
+              >
+                <CheckboxButtonGroup
+                  options={requestTypes}
+                  name={"requestTypes"}
+                  row
+                />
+              </Box>
+            </Box>
+          </Stack>
           <Divider sx={{ my: "1.5em" }} />
           <Box>
             <CustomLabel sx={{ fontSize: "18px" }}>
-              {t("excursions.filters.byCreatedAt")}
+              По дате создания
             </CustomLabel>
             <Typography color={"secondary.main"}>
-              {t("filters.dateRange", { ns: "common" })}
+              Выберите промежуток дат
             </Typography>
             <Stack
               direction={"row"}
@@ -143,7 +161,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
               justifyContent={"space-between"}
             >
               <Box>
-                <CustomLabel>{t("filters.from", { ns: "common" })}</CustomLabel>
+                <CustomLabel>От</CustomLabel>
                 <DatePickerElement
                   name={"dateFrom"}
                   isDate
@@ -152,7 +170,7 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
                 />
               </Box>
               <Box>
-                <CustomLabel>{t("filters.to", { ns: "common" })}</CustomLabel>
+                <CustomLabel>До</CustomLabel>
                 <DatePickerElement
                   name={"dateTo"}
                   isDate
@@ -164,11 +182,9 @@ const AdditionalFilters = ({ onSubmit }: IAdditionalFiltersProps) => {
           </Box>
           <Divider sx={{ my: "2em" }} />
           <Stack direction={"row"} justifyContent={"space-between"} gap={"1em"}>
-            <Button onClick={onClear}>
-              {t("buttons.clear", { ns: "common" })}
-            </Button>
+            <Button onClick={onClear}>Очистить</Button>
             <Button onClick={onApply} variant={"contained"}>
-              {t("buttons.apply", { ns: "common" })}
+              Применить
             </Button>
           </Stack>
         </Box>

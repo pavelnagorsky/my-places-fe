@@ -1,4 +1,4 @@
-import { ExcursionTypesEnum } from "@/services/excursions-service/interfaces/excursion-types.enum";
+import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
 import { useTranslation } from "next-i18next";
 import excursionTypeRegionImage from "/public/images/icons/excursion-type-region.png";
 import excursionTypeOverviewImage from "/public/images/icons/excursion-type-overview.png";

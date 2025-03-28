@@ -15,7 +15,7 @@ import { format } from "date-fns";
 import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
 import { routerLinks } from "@/routing/routerLinks";
 import usePlaceStatuses from "@/hooks/usePlaceStatuses";
-import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
+import { PlaceStatusesEnum } from "@/services/places-service/enums/place-statuses.enum";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";

@@ -1,4 +1,4 @@
-import { ExcursionTypesEnum } from "@/services/excursions-service/interfaces/excursion-types.enum";
+import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
 
 export interface IExcursionModerationItem {
   id: number;

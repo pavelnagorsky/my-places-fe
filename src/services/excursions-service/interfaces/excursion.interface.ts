@@ -1,4 +1,4 @@
-import { ExcursionTypesEnum } from "@/services/excursions-service/interfaces/excursion-types.enum";
+import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { IExcursionPlace } from "@/services/excursions-service/interfaces/excursion-place.interface";
 

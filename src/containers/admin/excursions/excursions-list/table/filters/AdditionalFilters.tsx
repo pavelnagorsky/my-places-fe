@@ -1,6 +1,6 @@
 import {
+  AutocompleteElement,
   CheckboxButtonGroup,
-  SwitchElement,
   useFormContext,
 } from "react-hook-form-mui";
 // @ts-ignore
@@ -17,6 +17,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import usePlaceStatuses from "@/hooks/usePlaceStatuses";
 import useDialog from "@/hooks/useDialog";
 import { useMemo } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -25,30 +26,27 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 import CloseIcon from "@mui/icons-material/Close";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { Button } from "@/components/UI/button/Button";
-import { IFeedbackListFiltersForm } from "@/containers/admin/feedback-list/interfaces";
-import useCrmStatuses from "@/hooks/useCrmStatuses";
-import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
+import useUsersAutocomplete from "@/containers/admin/places/places-list/table/filters/useUsersAutocomplete";
+import { IAdminExcursionsFormContext } from "@/containers/admin/excursions/excursions-list/logic/interfaces";
+import useExcursionStatuses from "@/containers/personal-area/my-excursions/logic/utils/useExcursionStatuses";
 
 const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   const { resetField, watch, getValues } =
-    useFormContext<IFeedbackListFiltersForm>();
-  const { t } = useTranslation();
+    useFormContext<IAdminExcursionsFormContext>();
+  const { t } = useTranslation(["personal-area", "common"]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const statuses = useExcursionStatuses();
   const dialog = useDialog();
-  const { statuses } = useCrmStatuses();
-  const requestTypes = useUserTypes();
+  const usersAutocomplete = useUsersAutocomplete();
 
   const watchEndDate = watch("dateTo");
 
   const filtersCount = useMemo(() => {
-    const data = getValues();
-    let count = 0;
-    if (data.dateFrom) count += 1;
-    if (data.dateTo) count += 1;
-    if (data.requestTypes.length > 0) count += 1;
-    if (data.statuses.length > 0) count += 1;
-    return count;
+    const statusesCount = getValues("statuses")?.length || 0;
+    const dateFromCount = getValues("dateFrom") !== null ? 1 : 0;
+    const dateEndCount = getValues("dateTo") !== null ? 1 : 0;
+    return statusesCount + dateEndCount + dateFromCount;
   }, [dialog.open]);
 
   const onApply = () => {
@@ -57,26 +55,24 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   };
 
   const onClear = () => {
-    resetField("requestTypes");
+    resetField("statuses");
     resetField("dateFrom");
     resetField("dateTo");
-    resetField("statuses");
+    resetField("users");
   };
 
   return (
     <Box>
       <Badge badgeContent={filtersCount} color={"primary"}>
         <IconButton
-          color={"secondary"}
           onClick={dialog.handleOpen}
           sx={{
-            backgroundColor: "white",
             p: "0.5em",
             borderRadius: "10px",
             boxShadow: "rgba(32, 31, 61, 0.15) 0px 5px 10px",
           }}
         >
-          <TuneIcon color={"secondary"} />
+          <TuneIcon color={"primary"} />
         </IconButton>
       </Badge>
       <Dialog
@@ -94,6 +90,8 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
         <Stack
           position={"sticky"}
           py={"0.5em"}
+          // pl={"2em"}
+          // pr={"0.2em"}
           top={0}
           zIndex={1}
           direction={"row"}
@@ -102,57 +100,36 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
           alignItems={"center"}
         >
           <Typography mx={"auto"} fontWeight={600} fontSize={"20px"}>
-            Фильтры
+            {t("filters.title", { ns: "common" })}
           </Typography>
           <IconButton onClick={dialog.handleClose} sx={{ mr: "0.2em" }}>
             <CloseIcon />
           </IconButton>
         </Stack>
         <Box p={"2em"} pt={"1.5em"}>
-          <Stack gap={"1em"}>
-            <Box>
-              <CustomLabel sx={{ fontSize: "18px" }}>По статусу</CustomLabel>
-              <Box
-                sx={{
-                  "& label": { color: "secondary.main", width: "50%", mx: 0 },
-                }}
-                display={"flex"}
-              >
-                <CheckboxButtonGroup
-                  options={statuses.map((s) => ({
-                    id: `${s.id}`,
-                    label: s.label,
-                  }))}
-                  name={"statuses"}
-                  row
-                />
-              </Box>
-            </Box>
-            <Box>
-              <CustomLabel sx={{ fontSize: "18px" }}>
-                По типу запроса
-              </CustomLabel>
-              <Box
-                sx={{
-                  "& label": { color: "secondary.main", width: "50%", mx: 0 },
-                }}
-                display={"flex"}
-              >
-                <CheckboxButtonGroup
-                  options={requestTypes}
-                  name={"requestTypes"}
-                  row
-                />
-              </Box>
-            </Box>
-          </Stack>
+          <CustomLabel sx={{ fontSize: "18px" }}>
+            {t("excursions.filters.byStatus")}
+          </CustomLabel>
+          <Box
+            sx={{ "& label": { color: "secondary.main", width: "50%", mx: 0 } }}
+            display={"flex"}
+          >
+            <CheckboxButtonGroup
+              options={statuses.map((s) => ({
+                id: `${s.id}`,
+                label: s.label,
+              }))}
+              name={"statuses"}
+              row
+            />
+          </Box>
           <Divider sx={{ my: "1.5em" }} />
           <Box>
             <CustomLabel sx={{ fontSize: "18px" }}>
-              По дате создания
+              {t("places.filters.byCreatedAt")}
             </CustomLabel>
             <Typography color={"secondary.main"}>
-              Выберите промежуток дат
+              {t("filters.dateRange", { ns: "common" })}
             </Typography>
             <Stack
               direction={"row"}
@@ -161,7 +138,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
               justifyContent={"space-between"}
             >
               <Box>
-                <CustomLabel>От</CustomLabel>
+                <CustomLabel>{t("filters.from", { ns: "common" })}</CustomLabel>
                 <DatePickerElement
                   name={"dateFrom"}
                   isDate
@@ -170,7 +147,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
                 />
               </Box>
               <Box>
-                <CustomLabel>До</CustomLabel>
+                <CustomLabel>{t("filters.to", { ns: "common" })}</CustomLabel>
                 <DatePickerElement
                   name={"dateTo"}
                   isDate
@@ -180,11 +157,23 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
               </Box>
             </Stack>
           </Box>
+          <Divider sx={{ my: "1.5em" }} />
+          <Stack>
+            <CustomLabel sx={{ fontSize: "18px" }}>Пользователи</CustomLabel>
+            <AutocompleteElement
+              multiple
+              name={"users"}
+              options={usersAutocomplete.users}
+              loading={usersAutocomplete.loading}
+            />
+          </Stack>
           <Divider sx={{ my: "2em" }} />
           <Stack direction={"row"} justifyContent={"space-between"} gap={"1em"}>
-            <Button onClick={onClear}>Очистить</Button>
+            <Button onClick={onClear}>
+              {t("buttons.clear", { ns: "common" })}
+            </Button>
             <Button onClick={onApply} variant={"contained"}>
-              Применить
+              {t("buttons.apply", { ns: "common" })}
             </Button>
           </Stack>
         </Box>

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { routerLinks } from "@/routing/routerLinks";
-import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
+import { PlaceStatusesEnum } from "@/services/places-service/enums/place-statuses.enum";
 
 interface IMyPlaceMenuProps {
   anchorEl: null | Element;

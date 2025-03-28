@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { routerLinks } from "@/routing/routerLinks";
-import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
+import { ReviewStatusesEnum } from "@/services/reviews-service/enums/review-statuses.enum";
 
 interface IMyReviewMenuProps {
   anchorEl: null | Element;

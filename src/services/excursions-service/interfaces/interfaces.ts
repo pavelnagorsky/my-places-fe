@@ -1,10 +1,13 @@
 import { IPaginationRequest } from "@/services/interfaces";
+import { ExcursionStatusesEnum } from "@/services/excursions-service/enums/excursion-statuses.enum";
+import { IMyPlacesRequest } from "@/services/places-service/interfaces/interfaces";
 
 export interface IMyExcursionsRequest
   extends IPaginationRequest<MyExcursionsOrderByEnum> {
   dateFrom?: string | null;
   dateTo?: string | null;
   search?: string;
+  statuses: ExcursionStatusesEnum[];
 }
 
 export enum MyExcursionsOrderByEnum {
@@ -12,6 +15,7 @@ export enum MyExcursionsOrderByEnum {
   TITLE,
   STATUS,
   TYPE,
+  UPDATED_AT,
 }
 
 export enum ModerationExcursionsOrderByEnum {
@@ -27,4 +31,8 @@ export interface IModerationExcursionsRequest
   dateFrom?: string | null;
   dateTo?: string | null;
   search?: string;
+}
+
+export interface IAdminExcursionsRequest extends IMyExcursionsRequest {
+  userIds?: number[];
 }

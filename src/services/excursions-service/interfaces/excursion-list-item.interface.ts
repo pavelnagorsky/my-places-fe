@@ -1,7 +1,7 @@
 import { IExcursionListItemPlace } from "@/services/excursions-service/interfaces/excursion-list-item-place.interface";
-import { ExcursionTypesEnum } from "@/services/excursions-service/interfaces/excursion-types.enum";
+import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
-import { ExcursionStatusesEnum } from "@/services/excursions-service/interfaces/excursion-statuses.enum";
+import { ExcursionStatusesEnum } from "@/services/excursions-service/enums/excursion-statuses.enum";
 
 export interface IExcursionListItem {
   id: number;
@@ -18,4 +18,6 @@ export interface IExcursionListItem {
   viewsCount: number;
   status: ExcursionStatusesEnum;
   moderationMessage: string | null;
+  authorName: string;
+  authorEmail: string;
 }

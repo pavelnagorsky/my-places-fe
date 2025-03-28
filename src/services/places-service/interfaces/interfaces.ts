@@ -1,5 +1,5 @@
 import { IPaginationRequest } from "@/services/interfaces";
-import { PlaceStatusesEnum } from "./place-statuses.enum";
+import { PlaceStatusesEnum } from "../enums/place-statuses.enum";
 
 export interface IMyPlacesRequest
   extends IPaginationRequest<MyPlacesOrderByEnum> {

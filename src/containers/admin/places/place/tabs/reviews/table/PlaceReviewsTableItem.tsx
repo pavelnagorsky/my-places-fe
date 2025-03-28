@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { IMyReview } from "../../../../../../../services/reviews-service/interfaces/my-review.interface";
-import { ReviewStatusesEnum } from "../../../../../../../services/reviews-service/interfaces/review-statuses.enum";
+import { ReviewStatusesEnum } from "../../../../../../../services/reviews-service/enums/review-statuses.enum";
 import useReviewStatuses from "@/hooks/useReviewStatuses";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { format } from "date-fns";

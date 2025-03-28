@@ -17,21 +17,23 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { FormProvider } from "react-hook-form-mui";
-import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
-import usePlaces from "@/containers/admin/places/usePlaces";
-import PlacesHeader from "@/containers/admin/places/table/PlacesHeader";
-import PlacesTableHead from "@/containers/admin/places/table/PlacesTableHead";
-import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
 import { routerLinks } from "@/routing/routerLinks";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import usePlaceStatuses from "@/hooks/usePlaceStatuses";
 import TableLoader from "@/components/UI/helper/TableLoader";
+import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
+import useExcursionStatuses from "@/containers/personal-area/my-excursions/logic/utils/useExcursionStatuses";
+import useExcursions from "@/containers/admin/excursions/excursions-list/logic/useExcursions";
+import { ExcursionStatusesEnum } from "@/services/excursions-service/enums/excursion-statuses.enum";
+import ExcursionsHeader from "@/containers/admin/excursions/excursions-list/table/ExcursionsHeader";
+import ExcursionsTableHead from "@/containers/admin/excursions/excursions-list/table/ExcursionsTableHead";
+import useExcursionTypes from "@/containers/excursion-builder/content/form/logic/utils/useExcursionTypes";
 
-const PlacesTable = () => {
+const ExcursionsTable = () => {
   const { i18n } = useTranslation();
   const router = useRouter();
   const locale = useDateFnsLocale();
-  const placeStatuses = usePlaceStatuses();
+  const statuses = useExcursionStatuses();
+  const types = useExcursionTypes();
 
   const {
     items,
@@ -47,10 +49,10 @@ const PlacesTable = () => {
     orderDirection,
     toggleOrderDirection,
     changeOrderBy,
-  } = usePlaces();
+  } = useExcursions();
 
-  function handleClick(item: IMyPlace) {
-    router.push(routerLinks.administrationPlace(item.id));
+  function handleClick(item: IExcursionListItem) {
+    router.push(routerLinks.administrationExcursion(item.id));
   }
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -70,29 +72,25 @@ const PlacesTable = () => {
         animate={{ opacity: 1, transition: { delay: 0.1 } }}
       >
         <Typography color="text.secondary" variant="h5">
-          Места не найдены
+          Экскурсии не найдены
         </Typography>
       </Stack>
     ) : null;
 
-  const parseStatusColor = (status: PlaceStatusesEnum) => {
-    if (
-      status === PlaceStatusesEnum.MODERATION ||
-      status === PlaceStatusesEnum.NEEDS_PAYMENT
-    )
-      return "warning.main";
-    if (status === PlaceStatusesEnum.APPROVED) return "success.main";
+  const parseStatusColor = (status: ExcursionStatusesEnum) => {
+    if (status === ExcursionStatusesEnum.MODERATION) return "warning.main";
+    if (status === ExcursionStatusesEnum.APPROVED) return "success.main";
     return "error.main";
   };
 
   return (
     <Stack width={"100%"} minHeight={"100%"}>
       <FormProvider {...formContext}>
-        <PlacesHeader onSubmit={onSubmit} />
+        <ExcursionsHeader onSubmit={onSubmit} />
       </FormProvider>
       <Stack flexGrow={1} sx={{ overflowX: "auto" }}>
         <Table stickyHeader aria-labelledby="tableTitle">
-          <PlacesTableHead
+          <ExcursionsTableHead
             orderDirection={orderDirection}
             orderBy={orderBy}
             changeOrderBy={changeOrderBy}
@@ -100,17 +98,6 @@ const PlacesTable = () => {
           />
           <TableBody>
             {items.map((item, index) => {
-              const parseTooltipText = (): string | null => {
-                if (item.status === PlaceStatusesEnum.REJECTED)
-                  return item.moderationMessage;
-                if (item.status === PlaceStatusesEnum.NEEDS_PAYMENT)
-                  return "Cогласно правилам данного сайта, созданное Вами Место признано коммерческим, поэтому для его публикации необходимо провести оплату, согласно тарифу на рекламные услуги.";
-                if (item.status === PlaceStatusesEnum.COMMERCIAL_EXPIRED)
-                  return "Срок действия рекламы созданного Вами коммерческого Места истек. Для возобновления публикации на сайте, необходимо провести оплату, согласно тарифу на рекламные услуги.";
-                return null;
-              };
-              const tooltipText = parseTooltipText();
-
               return (
                 <TableRow
                   sx={{ cursor: "pointer" }}
@@ -136,7 +123,7 @@ const PlacesTable = () => {
                           width: "fit-content",
                         }}
                         onClick={(e) => e.stopPropagation()}
-                        href={routerLinks.place(item.slug)}
+                        href={routerLinks.excursion(item.slug)}
                         target={"_blank"}
                       >
                         {item.slug}
@@ -145,7 +132,43 @@ const PlacesTable = () => {
                   </TableCell>
 
                   <TableCell component="th" scope="row">
-                    <Typography variant={"body1"}>{item.type}</Typography>
+                    <Tooltip
+                      arrow
+                      enterTouchDelay={0}
+                      leaveTouchDelay={3000}
+                      title={
+                        <Typography
+                          p={"0.5em"}
+                          fontSize={"14px"}
+                          display={"flex"}
+                          flexDirection={"column"}
+                          gap={"0.5em"}
+                        >
+                          {item.places.map((p) => (
+                            <span key={p.id}>
+                              {p.title}
+                              <br />
+                            </span>
+                          ))}
+                        </Typography>
+                      }
+                    >
+                      <Stack
+                        direction={"row"}
+                        alignItems={"center"}
+                        width={"fit-content"}
+                        gap={"0.5em"}
+                        sx={{ cursor: "pointer" }}
+                      >
+                        <Typography variant={"body1"}>
+                          Мест: {item.places.length || 0}
+                        </Typography>
+                        <InfoOutlinedIcon
+                          color={"secondary"}
+                          fontSize={"small"}
+                        />
+                      </Stack>
+                    </Tooltip>
                   </TableCell>
 
                   <TableCell component="th" scope="row">
@@ -154,9 +177,9 @@ const PlacesTable = () => {
                       enterTouchDelay={0}
                       leaveTouchDelay={3000}
                       title={
-                        tooltipText ? (
+                        !!item.moderationMessage ? (
                           <Typography p={"0.5em"} fontSize={"14px"}>
-                            {tooltipText}
+                            {item.moderationMessage}
                           </Typography>
                         ) : null
                       }
@@ -166,7 +189,9 @@ const PlacesTable = () => {
                         alignItems={"center"}
                         gap={"0.5em"}
                         sx={{
-                          cursor: tooltipText ? "pointer" : undefined,
+                          cursor: !!item.moderationMessage
+                            ? "pointer"
+                            : undefined,
                         }}
                       >
                         <Box
@@ -176,12 +201,9 @@ const PlacesTable = () => {
                           bgcolor={parseStatusColor(item.status)}
                         />
                         <Typography variant={"body1"}>
-                          {
-                            placeStatuses.find((s) => s.id === item.status)
-                              ?.label
-                          }
+                          {statuses.find((s) => s.id === item.status)?.label}
                         </Typography>
-                        {tooltipText && (
+                        {!!item.moderationMessage && (
                           <InfoOutlinedIcon
                             color={"secondary"}
                             fontSize={"small"}
@@ -192,23 +214,16 @@ const PlacesTable = () => {
                   </TableCell>
 
                   <TableCell component="th" scope="row">
-                    <Box>
-                      <Typography variant={"body1"}>
-                        {item.advertisement ? "Да" : "Нет"}
-                      </Typography>
-                      {!!item.advEndDate && (
-                        <Typography
-                          variant={"body1"}
-                          mt={"0.2em"}
-                        >{`До ${format(
-                          new Date(item.advEndDate),
-                          "dd MMM yyyy",
-                          {
-                            locale,
-                          }
-                        )}`}</Typography>
-                      )}
-                    </Box>
+                    <Typography variant={"body1"}>
+                      {types.find((type) => item.type === type.id)?.label ||
+                        "-"}
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell component="th" scope="row">
+                    <Typography variant={"body1"}>
+                      {item.authorName || "-"}
+                    </Typography>
                   </TableCell>
 
                   <TableCell component="th" scope="row">
@@ -221,7 +236,9 @@ const PlacesTable = () => {
 
                   <TableCell component="th" scope="row">
                     <Typography variant={"body1"}>
-                      {item.author || "-"}
+                      {format(new Date(item.updatedAt), "dd MMM yyyy", {
+                        locale,
+                      })}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -254,4 +271,4 @@ const PlacesTable = () => {
   );
 };
 
-export default PlacesTable;
+export default ExcursionsTable;

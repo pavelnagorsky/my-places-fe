@@ -8,7 +8,7 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { resetState } from "@/store/excursion-builder-slice/excursion-builder.slice";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { IEditExcursionForm } from "@/containers/personal-area/my-excursions/edit-excursion/logic/interfaces";
-import { ExcursionTypesEnum } from "@/services/excursions-service/interfaces/excursion-types.enum";
+import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
 import { startExcursionEditingThunk } from "@/store/excursion-builder-slice/thunks";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 

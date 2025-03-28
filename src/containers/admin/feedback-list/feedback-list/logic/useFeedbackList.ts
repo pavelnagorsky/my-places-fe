@@ -1,25 +1,25 @@
 import usePagination from "@/hooks/usePagination";
-import { IUserShortInfo } from "@/services/user-service/interfaces/user-short-info.interface";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form-mui";
-import { IUsersFiltersForm } from "@/containers/admin/users/interfaces";
 import { IPaginationRequest } from "@/services/interfaces";
-import { IUsersRequest } from "@/services/user-service/interfaces/interfaces";
-import userService from "@/services/user-service/user.service";
 import utils from "@/shared/utils";
+import { IFeedbackListFiltersForm } from "@/containers/admin/feedback-list/feedback-list/logic/interfaces";
+import { IFeedbackListRequest } from "@/services/contact-service/interfaces/interfaces";
+import contactService from "@/services/contact-service/contact.service";
+import { IFeedback } from "@/services/contact-service/interfaces/feedback.interface";
 
-const useUsers = () => {
+const useFeedbackList = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const onChangePageSize = (size: number) => {
     setRowsPerPage(size);
   };
 
-  const formContext = useForm<IUsersFiltersForm>({
+  const formContext = useForm<IFeedbackListFiltersForm>({
     defaultValues: {
-      email: "",
-      isBlocked: false,
-      roles: [],
+      authorEmail: "",
+      statuses: [],
+      requestTypes: [],
       dateTo: null,
       dateFrom: null,
     },
@@ -27,20 +27,20 @@ const useUsers = () => {
 
   const apiCall = useCallback((pagination: IPaginationRequest) => {
     const data = formContext.getValues();
-    const payload: IUsersRequest = {
-      email: data.email,
-      roles: data.roles,
-      isBlocked: data.isBlocked ? true : undefined,
+    const payload: IFeedbackListRequest = {
+      authorEmail: data.authorEmail,
+      statuses: data.statuses.map((s) => +s),
+      requestTypes: data.requestTypes,
       dateFrom: data.dateFrom
         ? utils.parseFilterDate(data.dateFrom, true)
         : null,
       dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
       ...pagination,
     };
-    return userService.getUsersList(payload);
+    return contactService.getList(payload);
   }, []);
 
-  const paginator = usePagination<IUserShortInfo>({
+  const paginator = usePagination<IFeedback>({
     defaultOrderBy: 1,
     pageSize: rowsPerPage,
     apiCall,
@@ -71,4 +71,4 @@ const useUsers = () => {
   };
 };
 
-export default useUsers;
+export default useFeedbackList;
