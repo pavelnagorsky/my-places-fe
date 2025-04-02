@@ -50,7 +50,7 @@ const ExcursionSlugSection = ({
             showAlertThunk({
               alertProps: {
                 title: "Успех!",
-                description: "Ссылка на места успешно обновлена",
+                description: "Ссылка на экскурсию успешно обновлена",
                 variant: "standard",
                 severity: "success",
               },
@@ -65,7 +65,7 @@ const ExcursionSlugSection = ({
             showAlertThunk({
               alertProps: {
                 title: "Ошибка!",
-                description: "Ошибка при изменении ссылки на место.",
+                description: "Ошибка при изменении ссылки на экскурсию.",
                 variant: "standard",
                 severity: "error",
               },
@@ -79,7 +79,7 @@ const ExcursionSlugSection = ({
   const validateSlug = useMemo(
     () =>
       debounce((value: string) => {
-        return placesService
+        return excursionsService
           .validateSlug({ slug: value, id: excursion.id })
           .then((res) => {
             return true;
@@ -121,7 +121,7 @@ const ExcursionSlugSection = ({
           }}
           InputProps={{
             startAdornment: (
-              <InputAdornment position={"end"}>places/</InputAdornment>
+              <InputAdornment position={"end"}>excursions/</InputAdornment>
             ),
           }}
           name={"slug"}
@@ -133,7 +133,7 @@ const ExcursionSlugSection = ({
               message: "Введено некорректное значение",
             },
           }}
-          placeholder={"crevo-castle"}
+          placeholder={"my-excursion"}
         />
         <Stack
           mt={"0.3em"}

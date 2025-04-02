@@ -2,6 +2,8 @@ import Grid from "@mui/material/Grid2";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import ExcursionInfoSection from "@/containers/admin/excursions/excursion/tabs/basic-info/sections/ExcursionInfoSection";
 import DeleteExcursionSection from "@/containers/admin/excursions/excursion/tabs/basic-info/sections/DeleteExcursionSection";
+import ExcursionSlugSection from "@/containers/admin/excursions/excursion/tabs/basic-info/sections/ExcursionSlugSection";
+import ExcursionStatusSection from "@/containers/admin/excursions/excursion/tabs/basic-info/sections/ExcursionStatusSection";
 
 interface IBasicInfoTabProps {
   excursion: IExcursion;
@@ -17,14 +19,20 @@ const BasicInfoTab = ({ excursion, fetchExcursion }: IBasicInfoTabProps) => {
             <ExcursionInfoSection item={excursion} />
           </Grid>
           <Grid size={{ xs: 12 }}>
-            {/*<PlaceSlugSection onReloadPlace={fetchPlace} place={place} />*/}
+            <ExcursionSlugSection
+              excursion={excursion}
+              onReloadExcursion={fetchExcursion}
+            />
           </Grid>
         </Grid>
       </Grid>
       <Grid size={{ xs: 12, md: 6 }}>
         <Grid container spacing={"2em"}>
           <Grid size={{ xs: 12 }}>
-            {/*<PlaceStatusSection fetchPlace={fetchPlace} place={place} />*/}
+            <ExcursionStatusSection
+              excursion={excursion}
+              onReloadExcursion={fetchExcursion}
+            />
           </Grid>
           <Grid size={{ xs: 12 }}>
             <DeleteExcursionSection id={excursion.id} />

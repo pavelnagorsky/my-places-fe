@@ -11,14 +11,10 @@ import {
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import { ISlug } from "@/services/places-service/interfaces/place-slug.interface";
-import {
-  IAdminPlacesRequest,
-  IModerationPlacesRequest,
-} from "@/services/places-service/interfaces/interfaces";
-import { IModerationPlace } from "@/services/places-service/interfaces/moderation-place.interface";
 import { IExcursionModerationItem } from "@/services/excursions-service/interfaces/excursion-moderation-item.interface";
 import { IModeration } from "@/services/places-service/interfaces/moderation.interface";
-import { IMyPlace } from "@/services/places-service/interfaces/my-place.interface";
+import { ICreateSlug } from "@/services/places-service/interfaces/create-slug.interface";
+import { IChangeExcursionStatus } from "@/services/excursions-service/interfaces/change-excursion-status.interface";
 
 const excursionsService = {
   createExcursion: (payload: ICreateExcursion, language: string) => {
@@ -105,6 +101,14 @@ const excursionsService = {
 
   updateSlug: (id: number, slug: string) => {
     return axiosInstance.put(`/excursions/${id}/slug`, { slug });
+  },
+
+  validateSlug: (slugDto: ICreateSlug) => {
+    return axiosInstance.post("/excursions/slugs/validate", slugDto);
+  },
+
+  changeStatus: (id: number | string, dto: IChangeExcursionStatus) => {
+    return axiosInstance.post(`/excursions/${id}/change-status`, dto);
   },
 };
 

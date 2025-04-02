@@ -65,7 +65,7 @@ const DeleteExcursionSection = ({ id }: IDeleteExcursionSectionProps) => {
           fontSize={{ xs: "22px", md: "25px" }}
           gutterBottom
         >
-          Удалить место
+          Удалить экскурсию
         </Typography>
         <Box mt={"0.5em"}>
           <StyledButton

@@ -3,12 +3,13 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import { Fragment } from "react";
 import { NextSeo } from "next-seo";
-import JsonLd from "@/shared/json-ld/JsonLd";
 import I18nLanguages from "@/shared/I18nLanguages";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import excursionsService from "@/services/excursions-service/excursions.service";
 import striptags from "striptags";
+import excursionPageJsonld from "@/shared/json-ld/excursion-page-jsonld";
+import JsonLd from "@/shared/json-ld/JsonLd";
 
 interface IExcursionPageProps {
   excursion: IExcursion;
@@ -20,7 +21,7 @@ const ExcursionPageLazy = dynamic(
 
 const Slug: NextPage<IExcursionPageProps> = ({ excursion }) => {
   const { canonical, alternateLinks } = useAlternateLinks();
-  // const jsonLdData = placePageJsonld(place);
+  const jsonLdData = excursionPageJsonld(excursion);
   const plainDescription = striptags(excursion.description);
   const seoDescription =
     plainDescription.substring(0, 160).trim() +
@@ -42,7 +43,7 @@ const Slug: NextPage<IExcursionPageProps> = ({ excursion }) => {
           })),
         }}
       />
-      {/*<JsonLd data={jsonLdData} />*/}
+      <JsonLd data={jsonLdData} />
       <ExcursionPageLazy excursion={excursion} />
     </Fragment>
   );
