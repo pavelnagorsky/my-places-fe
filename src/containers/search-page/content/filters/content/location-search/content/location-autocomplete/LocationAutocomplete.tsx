@@ -1,8 +1,8 @@
 import { debounce, TextFieldProps } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
-import { useGoogleAutocompleteService } from "@/hooks/useGoogleAutocompleteService";
+import { useGoogleAutocompleteService } from "@/hooks/google/useGoogleAutocompleteService";
 import { useTranslation } from "next-i18next";
-import { useCoordinatesByPlaceId } from "@/hooks/useCoordinatesByPlaceId";
+import { useCoordinatesByPlaceId } from "@/hooks/google/useCoordinatesByPlaceId";
 import {
   AutocompleteElement,
   RegisterOptions,

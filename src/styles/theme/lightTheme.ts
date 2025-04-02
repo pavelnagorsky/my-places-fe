@@ -3,6 +3,8 @@ import { createTheme } from "@mui/material";
 import { beBY, ruRU } from "@mui/material/locale";
 import I18nLanguages from "@/shared/I18nLanguages";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
+import { renderDigitalClockTimeView } from "@mui/x-date-pickers";
+import utils from "@/shared/utils";
 
 export const primaryColor = "#FF7A00";
 export const primaryBackground = "#FFEFE2";
@@ -42,8 +44,8 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
         h1: {
           fontWeight: 600,
           color: "#303030",
-          fontSize: "32px",
           marginBottom: "30px",
+          fontSize: "32px",
         },
         h2: {
           fontWeight: 600,
@@ -135,13 +137,29 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
             },
           },
         },
-        MuiList: {
-          styleOverrides: {
-            root: ({ ownerState }) => ({
-              scrollbarWidth: "thin",
-            }),
+        MuiDateTimePicker: {
+          defaultProps: {
+            timeSteps: { minutes: 60 },
+            viewRenderers: {
+              hours: renderDigitalClockTimeView,
+              minutes: null,
+              seconds: null,
+            },
+            slotProps: {
+              layout: {
+                sx: { "& .MuiDigitalClock-root": { scrollbarWidth: "thin" } },
+              },
+              inputAdornment: {
+                sx: {
+                  svg: {
+                    color: "primary.main",
+                  },
+                },
+              },
+            },
           },
         },
+        MuiList: { styleOverrides: { root: { scrollbarWidth: "thin" } } },
       },
     },
     locale === I18nLanguages.ru ? ruRU : locale === I18nLanguages.be ? beBY : {}
@@ -159,9 +177,9 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
   lightTheme.typography.h2 = {
     ...lightTheme.typography.h2,
     color: lightTheme.palette.secondary.dark,
-    fontSize: "1.625em",
+    fontSize: "24px",
     [lightTheme.breakpoints.up("md")]: {
-      fontSize: "2.5em",
+      fontSize: "30px",
     },
   };
 

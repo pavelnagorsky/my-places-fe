@@ -17,7 +17,7 @@ import {
   IPlaceFormContext,
   IPlaceTabProps,
 } from "@/containers/create-place/form/interfaces";
-import { useGeocode } from "@/hooks/useGeocode";
+import { useGeocode } from "@/hooks/google/useGeocode";
 import { useTranslation } from "next-i18next";
 
 const Tab4 = ({ readonly }: IPlaceTabProps) => {

@@ -18,7 +18,11 @@
     "personalArea": "Personal account",
     "moderation": "Moderation",
     "administration": "Administration",
-    "routeBuilder": "Routes"
+    "routeBuilder": "Routes",
+    "excursionBuilder": "Excursions",
+    "createExcursion": "Create an Excursion",
+    "createExcursionMobile": "Create an Excursion",
+    "excursions": "Excursions"
   },
   "footer": {
     "title": "We are contactable!"
@@ -161,5 +165,9 @@
     "new": "New",
     "done": "Done",
     "declined": "Declined"
+  },
+  "travelModes": {
+    "driving": "Driving",
+    "walking": "Walking"
   }
 }

@@ -4,6 +4,7 @@
     "reviews": "Мои заметки",
     "favourites": "Избранное",
     "routes": "Мои маршруты",
+    "excursions": "Мои экскурсии",
     "profile": "Профиль"
   },
   "favourites": {
@@ -89,6 +90,35 @@
       "delete": {
         "success": "Маршрут был успешно удален.",
         "error": "Не удалось удалить маршрут."
+      }
+    }
+  },
+  "excursions": {
+    "title": "Мои экскурсии",
+    "newExcursion": "Новая экскурсия",
+    "noItems": "Пользовательские экскурсии не найдены",
+    "filters": {
+      "title": "Название экскурсии",
+      "byCreatedAt": "По дате создания",
+      "byStatus": "По статусу"
+    },
+    "headings": {
+      "title": "Название",
+      "createdAt": "Дата создания",
+      "duration": "Время",
+      "distance": "Расстояние",
+      "places": "Мест в экскурсии",
+      "placesCount": "Мест: {{count}}",
+      "excursionDuration": "Время на осмотр",
+      "travelMode": "Передвижение",
+      "status": "Статус",
+      "type": "Тип",
+      "views": "Просмотры"
+    },
+    "feedback": {
+      "delete": {
+        "success": "Экскурсия была успешно удалена.",
+        "error": "Не удалось удалить экскурсию."
       }
     }
   },

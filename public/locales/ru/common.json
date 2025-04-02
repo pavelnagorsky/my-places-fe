@@ -18,7 +18,11 @@
     "personalArea": "Личный кабинет",
     "moderation": "Модерация",
     "administration": "Администрация",
-    "routeBuilder": "Маршруты"
+    "routeBuilder": "Маршруты",
+    "excursionBuilder": "Экскурсии",
+    "createExcursion": "Составление экскурсии",
+    "createExcursionMobile": "Составить экскурсию",
+    "excursions": "Экскурсии"
   },
   "footer": {
     "title": "Мы на связи с вами!"
@@ -161,5 +165,9 @@
     "new": "Новое",
     "done": "Выполнено",
     "declined": "Закрыто"
+  },
+  "travelModes": {
+    "driving": "На машине",
+    "walking": "Пешком"
   }
 }

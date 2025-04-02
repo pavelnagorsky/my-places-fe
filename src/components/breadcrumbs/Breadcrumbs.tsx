@@ -6,7 +6,7 @@ import { useTranslation } from "next-i18next";
 
 type routesNames = "create-review" | "create-place";
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({ customEnding }: { customEnding?: string }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
   const pathnames = router.pathname.split("/").filter((x) => x);
@@ -16,8 +16,10 @@ const Breadcrumbs = () => {
     ["create-review"]: t("links.createReview"),
     ["create-place"]: t("links.createPlace"),
     ["create-route"]: t("links.createRoute"),
+    ["create-excursion"]: t("links.createExcursion"),
     ["privacy-policy"]: t("links.privacyPolicy"),
     ["terms-of-use"]: t("links.termsOfUse"),
+    ["excursions"]: t("links.excursions"),
   };
 
   return (
@@ -30,20 +32,21 @@ const Breadcrumbs = () => {
           if (breadcrumbNameMap.hasOwnProperty(path)) {
             const pathName = breadcrumbNameMap[path as routesNames];
             return i < pathnames.length - 1 ? (
-              <NextMuiLink
-                color="primary.main"
-                key={i}
-                href={"/" + path}
-                underline="hover"
-              >
+              <NextMuiLink color="text.primary" key={i} href={"/" + path}>
                 {pathName}
               </NextMuiLink>
             ) : (
-              <Typography key={i} color="text.primary">
+              <Typography key={i} color="primary.main">
                 {pathName}
               </Typography>
             );
           } else {
+            if (customEnding)
+              return (
+                <Typography key={i} color="primary.main">
+                  {customEnding}
+                </Typography>
+              );
             return null;
           }
         })}

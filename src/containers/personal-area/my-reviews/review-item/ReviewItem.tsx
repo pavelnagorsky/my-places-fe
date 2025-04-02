@@ -18,7 +18,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { IMyReview } from "@/services/reviews-service/interfaces/my-review.interface";
 import useMyReviewMenu from "@/containers/personal-area/my-reviews/review-item/menu/useMyReviewMenu";
 import useReviewStatuses from "@/hooks/useReviewStatuses";
-import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
+import { ReviewStatusesEnum } from "@/services/reviews-service/enums/review-statuses.enum";
 import MyReviewMenu from "@/containers/personal-area/my-reviews/review-item/menu/MyReviewMenu";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 

@@ -6,8 +6,8 @@ import animationVariants from "@/shared/animation-variants";
 import { FormProvider } from "react-hook-form-mui";
 import Grid from "@mui/material/Grid2";
 import RouteTitle from "@/containers/route-builder/content/form/sections/RouteTitle";
-import Details from "@/containers/route-builder/content/form/sections/Details";
-import MapSection from "@/containers/route-builder/content/form/sections/map-section/MapSection";
+import Details from "@/containers/route-builder/content/details/Details";
+import MapSection from "@/containers/route-builder/content/map-section/MapSection";
 import PersonalAreaLayout from "@/containers/personal-area/layout/PersonalAreaLayout";
 import useEditMyRoute from "@/containers/personal-area/my-routes/edit-route/logic/useEditMyRoute";
 

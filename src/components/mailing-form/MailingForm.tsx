@@ -36,6 +36,8 @@ const MailingForm = () => {
       <Stack>
         <CustomLabel htmlFor={"text"}>Текст</CustomLabel>
         <TextEditor
+          required
+          maxSymbols={6000}
           sx={{ "& .ql-container": { minHeight: "150px !important" } }}
           fieldName={"text"}
           placeholder={"Текст письма"}

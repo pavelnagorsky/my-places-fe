@@ -14,7 +14,7 @@ import {
   MarkerClusterer,
   Polygon,
 } from "@react-google-maps/api";
-import PlaceCardMap from "@/components/place-card/PlaceCardMap";
+import PlaceCardMap from "@/containers/search-page/content/cards-section/place-card/PlaceCardMap";
 import useRoutePolygon from "@/containers/search-page/content/map-section/hooks/useRoutePolygon";
 import { useTranslation } from "next-i18next";
 import useMapCircle from "@/containers/search-page/content/map-section/hooks/useMapCircle";

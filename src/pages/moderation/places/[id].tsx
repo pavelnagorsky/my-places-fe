@@ -7,7 +7,8 @@ import { Fragment } from "react";
 import { NextSeo } from "next-seo";
 
 const PlaceModerationLazy = dynamic(
-  () => import("@/containers/moderation/place-moderation/PlaceModeration"),
+  () =>
+    import("@/containers/moderation/places/place-moderation/PlaceModeration"),
   {
     ssr: false,
   }

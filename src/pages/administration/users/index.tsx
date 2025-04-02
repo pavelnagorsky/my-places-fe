@@ -5,9 +5,12 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import { NextSeo } from "next-seo";
 import { Fragment } from "react";
 
-const UsersLazy = dynamic(() => import("@/containers/admin/users/Users"), {
-  ssr: false,
-});
+const UsersLazy = dynamic(
+  () => import("@/containers/admin/users/users-list/Users"),
+  {
+    ssr: false,
+  }
+);
 
 const Users: NextPage = () => {
   return (

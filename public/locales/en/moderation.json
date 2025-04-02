@@ -2,11 +2,13 @@
   "links": {
     "places": "Places",
     "reviews": "Reviews",
+    "excursions": "Excursions",
     "reports": "Complaints"
   },
   "form": {
     "titlePlace": "Moderation of the Place",
     "titleReview": "Moderation of the Review",
+    "titleExcursion": "Moderation of the Excursion",
     "feedback": "Feedback",
     "feedbackPlaceholder": "Reason",
     "feedbackHelper": "It is mandatory if rejected"

@@ -67,6 +67,7 @@ const ModerationSideBar = () => {
               textDecoration: "none",
               fontWeight: 500,
               fontSize: "18px",
+              cursor: option.href === customPathname ? "unset" : "pointer",
               color:
                 option.href === customPathname
                   ? "secondary.dark"

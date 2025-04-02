@@ -65,7 +65,6 @@ const useEditReview = () => {
           description: data.description,
           images: data.images,
           place: { id: data.placeId, title: data.placeTitle },
-          _textEditorContentLength: data.description.length - 1,
         });
         setLoading(false);
       })

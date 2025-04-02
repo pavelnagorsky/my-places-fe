@@ -21,7 +21,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { Button } from "@/components/UI/button/Button";
 import useCrmStatuses from "@/hooks/useCrmStatuses";
-import { IReportsFormContext } from "@/containers/moderation/reports/interfaces";
+import { IReportsFormContext } from "@/containers/moderation/reports/logic/interfaces";
 import useDialog from "@/hooks/useDialog";
 import FilterTransition from "@/components/UI/transitions/FilterTransition";
 

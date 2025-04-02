@@ -5,7 +5,7 @@ import { Box, Link, Paper, Stack, Tooltip, Typography } from "@mui/material";
 import { format } from "date-fns";
 import { routerLinks } from "@/routing/routerLinks";
 import usePlaceStatuses from "@/hooks/usePlaceStatuses";
-import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
+import { PlaceStatusesEnum } from "@/services/places-service/enums/place-statuses.enum";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { memo } from "react";
 

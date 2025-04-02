@@ -26,6 +26,7 @@ import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
+import TextWithBrTags from "@/components/UI/text-with-br-tags/TextWithBrTags";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -41,24 +42,10 @@ interface IPlaceProps {
   reviews: IPaginationResponse<ISearchReview>;
 }
 
-const parseStringWithBrTags = (text: string) => {
-  const sanitizedText = text || "";
-  return sanitizedText.split("\n").map((article, i) => {
-    return (
-      <span key={i}>
-        {article}
-        <br />
-      </span>
-    );
-  });
-};
-
 const PlacePage = ({ place, reviews }: IPlaceProps) => {
   const { t } = useTranslation("place");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-  const placeDescription = parseStringWithBrTags(place.description);
 
   const comments = (
     <Fragment>
@@ -159,7 +146,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                   variant="body2"
                   fontSize={{ xs: "16px", md: "20px" }}
                 >
-                  {placeDescription}
+                  <TextWithBrTags text={place.description} />
                 </Typography>
                 {place.website && (
                   <Stack
@@ -201,52 +188,47 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
               >
                 {t("categories")}
               </Typography>
-              <Stack
-                direction={"row"}
-                flexWrap={"wrap"}
-                alignItems={"center"}
-                gap={"2em"}
-                mb={"2em"}
-              >
+              <Grid container spacing={"2em"} mb={"2em"}>
                 {place.categories.map((c) => (
-                  <Stack
-                    key={c.id}
-                    direction={"row"}
-                    alignItems={"center"}
-                    gap={"0.5em"}
-                  >
-                    {c.image && (
-                      <Box
-                        bgcolor={"#FFE9D6"}
-                        borderRadius={"5px"}
-                        position={"relative"}
-                        p={"0.5em"}
-                        height={56}
-                        width={56}
-                        sx={{
-                          "& img": {
-                            objectFit: "cover",
-                          },
-                        }}
-                      >
-                        <Image
-                          src={c.image}
-                          alt={c.title}
-                          priority
-                          height={40}
-                          width={40}
-                        />
-                      </Box>
-                    )}
-                    <Typography
-                      variant={"body2"}
-                      fontSize={{ xs: "16px", md: "20px" }}
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={c.id}>
+                    <Stack
+                      direction={"row"}
+                      alignItems={"center"}
+                      gap={"0.5em"}
                     >
-                      {c.title}
-                    </Typography>
-                  </Stack>
+                      {c.image && (
+                        <Box
+                          bgcolor={"#FFE9D6"}
+                          borderRadius={"5px"}
+                          position={"relative"}
+                          p={"0.5em"}
+                          height={56}
+                          width={56}
+                          sx={{
+                            "& img": {
+                              objectFit: "cover",
+                            },
+                          }}
+                        >
+                          <Image
+                            src={c.image}
+                            alt={c.title}
+                            priority
+                            height={40}
+                            width={40}
+                          />
+                        </Box>
+                      )}
+                      <Typography
+                        variant={"body2"}
+                        fontSize={{ xs: "16px", md: "20px" }}
+                      >
+                        {c.title}
+                      </Typography>
+                    </Stack>
+                  </Grid>
                 ))}
-              </Stack>
+              </Grid>
               <Box mb={"2em"}>
                 <Typography
                   variant={"h2"}

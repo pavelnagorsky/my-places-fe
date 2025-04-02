@@ -5,9 +5,12 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import { NextSeo } from "next-seo";
 import { Fragment } from "react";
 
-const PlacesLazy = dynamic(() => import("@/containers/admin/places/Places"), {
-  ssr: false,
-});
+const PlacesLazy = dynamic(
+  () => import("@/containers/admin/places/places-list/Places"),
+  {
+    ssr: false,
+  }
+);
 
 const Places: NextPage = () => {
   return (

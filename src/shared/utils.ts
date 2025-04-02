@@ -2,7 +2,7 @@ import { ILatLngCoordinate } from "@/components/map/Map";
 import { LanguageIdsEnum } from "@/shared/LanguageIdsEnum";
 import I18nLanguages from "@/shared/I18nLanguages";
 import { TFunction } from "next-i18next";
-import { isValid } from "date-fns";
+import { formatDuration, intervalToDuration, isValid } from "date-fns";
 
 function isEmpty(obj: Object) {
   for (const prop in obj) {
@@ -41,9 +41,17 @@ const utils = {
     };
   },
 
-  dateOutputTransform: (value: Date | null) => {
-    if (!isValid(value)) return null;
+  dateOutputTransform: (value: Date | null, ctx: any) => {
+    if (!isValid(value) || !value) return null;
     return value;
+  },
+
+  formatTimeDifference: (endDate: Date) => {
+    const startTime = new Date();
+    startTime.setHours(0, 0, 0, 0); // Set start time to today's date at 00:00
+
+    const duration = intervalToDuration({ start: startTime, end: endDate });
+    return formatDuration(duration);
   },
 
   isEmptyObject: (value: any) => {
@@ -145,9 +153,14 @@ const utils = {
   ) => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
-    return `${hours}${hoursTranslation} ${+remainingMinutes.toFixed(
-      0
-    )}${minutesTranslation}`;
+    const hoursString = hours > 0 ? `${hours}${hoursTranslation}` : "";
+    const minutesString =
+      remainingMinutes > 0
+        ? `${+remainingMinutes.toFixed(0)}${minutesTranslation}`
+        : "";
+
+    if (!minutes) return `0${hoursTranslation}`;
+    return `${hoursString} ${minutesString}`;
   },
 };
 

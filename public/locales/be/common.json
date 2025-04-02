@@ -18,7 +18,11 @@
     "personalArea": "Асабісты кабінет",
     "moderation": "Мадэрацыя",
     "administration": "Адміністрацыя",
-    "routeBuilder": "Маршруты"
+    "routeBuilder": "Маршруты",
+    "excursionBuilder": "Экскурсіi",
+    "createExcursion": "Складанне экскурсіі",
+    "createExcursionMobile": "Стварыць экскурсію",
+    "excursions": "Экскурсіі"
   },
   "footer": {
     "title": "Мы на сувязі з вамі!"
@@ -161,5 +165,9 @@
     "new": "Новае",
     "done": "Выканана",
     "declined": "Закрыта"
+  },
+  "travelModes": {
+    "driving": "На машыне",
+    "walking": "Пешшу"
   }
 }

@@ -8,7 +8,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 
 const RouteBuilderPageLazy = dynamic(
-  () => import("../containers/route-builder/RouteBuilder")
+  () => import("../containers/route-builder/RouteBuilder"),
+  { ssr: false }
 );
 
 const CreateRoute: NextPage = () => {

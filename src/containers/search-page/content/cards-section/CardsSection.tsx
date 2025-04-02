@@ -1,7 +1,7 @@
 import SearchResultsLoader, {
   searchResultsGridSx,
 } from "@/containers/search-page/content/loader/SearchResultsLoader";
-import PlaceCard from "@/components/place-card/PlaceCard";
+import PlaceCard from "@/containers/search-page/content/cards-section/place-card/PlaceCard";
 import { Stack } from "@mui/material";
 import { useAppSelector } from "@/store/hooks";
 import { selectHasMore, selectItems } from "@/store/search-slice/search.slice";

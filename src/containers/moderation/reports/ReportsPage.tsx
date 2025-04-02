@@ -1,4 +1,4 @@
-import useReports from "@/containers/moderation/reports/useReports";
+import useReports from "@/containers/moderation/reports/logic/useReports";
 import { AnimatePresence, motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import { Box, Stack, Typography } from "@mui/material";

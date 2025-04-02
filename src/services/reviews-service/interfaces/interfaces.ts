@@ -1,5 +1,5 @@
 import { IReview } from "@/services/reviews-service/interfaces/review.interface";
-import { ReviewStatusesEnum } from "@/services/reviews-service/interfaces/review-statuses.enum";
+import { ReviewStatusesEnum } from "@/services/reviews-service/enums/review-statuses.enum";
 import { IPaginationRequest } from "@/services/interfaces";
 
 export interface ISearchReview extends Omit<IReview, "images"> {}

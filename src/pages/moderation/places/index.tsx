@@ -7,7 +7,8 @@ import { useTranslation } from "next-i18next";
 import { Fragment } from "react";
 
 const ModerationPlacesLazy = dynamic(
-  () => import("@/containers/moderation/places/PlacesModerationPage"),
+  () =>
+    import("@/containers/moderation/places/places-list/PlacesModerationPage"),
   { ssr: false }
 );
 

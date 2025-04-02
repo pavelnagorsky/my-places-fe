@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import { NextSeo } from "next-seo";
 
 const FeedbackListLazy = dynamic(
-  () => import("@/containers/admin/feedback-list/FeedbackList"),
+  () => import("@/containers/admin/feedback-list/feedback-list/FeedbackList"),
   {
     ssr: false,
   }

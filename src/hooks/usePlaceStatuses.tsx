@@ -1,4 +1,4 @@
-import { PlaceStatusesEnum } from "@/services/places-service/interfaces/place-statuses.enum";
+import { PlaceStatusesEnum } from "@/services/places-service/enums/place-statuses.enum";
 import { ISelect } from "@/shared/interfaces";
 import { useTranslation } from "next-i18next";
 

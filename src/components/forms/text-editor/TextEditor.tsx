@@ -1,10 +1,18 @@
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import { Controller, useFormContext } from "react-hook-form-mui";
-import { Box, styled, SxProps, Typography } from "@mui/material";
+import { Controller, FieldError, useFormContext } from "react-hook-form-mui";
+import {
+  Box,
+  FormHelperText,
+  Stack,
+  styled,
+  SxProps,
+  Typography,
+} from "@mui/material";
 import textEditorConfig from "@/components/forms/text-editor/text-editor.config";
 import { useTranslation } from "next-i18next";
+import { useRef } from "react";
 
 const StyledEditor = styled("div")(({ theme }) => ({
   backgroundColor: "white",
@@ -37,13 +45,18 @@ const TextEditor = ({
   readonly,
   placeholder,
   sx,
+  maxSymbols,
+  required,
 }: {
   fieldName: string;
   readonly?: boolean;
   placeholder?: string;
   sx?: SxProps;
+  maxSymbols?: number;
+  required?: boolean;
 }) => {
   const { t } = useTranslation("common");
+  const textLengthRef = useRef<number>(0);
   const { setValue } = useFormContext();
 
   const translationsSx: SxProps = {
@@ -65,39 +78,68 @@ const TextEditor = ({
     <Box sx={sx}>
       <Controller
         name={fieldName}
-        render={({ field }) => (
-          <StyledEditor sx={{ ...translationsSx }}>
-            <ReactQuill
-              readOnly={readonly}
-              theme="snow"
-              value={field.value}
-              onChange={(val: string, delta: any, source: any, editor: any) => {
-                field.onChange(val);
-                const contentLength = editor.getLength();
-                setValue("_textEditorContentLength", contentLength - 1);
-              }}
-              className="editor-input"
-              modules={textEditorConfig.modules}
-              formats={textEditorConfig.formats}
-              placeholder={placeholder}
-            />
-          </StyledEditor>
-        )}
-      />
-      <Controller
         rules={{
-          min: 1,
-          max: 6000,
-          required: true,
+          validate: (value) => {
+            if (!maxSymbols) return true;
+            const contentLength = textLengthRef.current;
+            if (required && contentLength === 0) {
+              return t("errors.required");
+            }
+            return contentLength <= maxSymbols
+              ? true
+              : t("errors.maxLength", { value: maxSymbols });
+          },
         }}
-        render={({ field }) => {
-          return (
-            <Typography variant={"body2"} mt={"0.5em"} sx={{ float: "right" }}>
-              {field.value || 0} / 6000
-            </Typography>
-          );
-        }}
-        name={"_textEditorContentLength"}
+        render={({ field, fieldState }) => (
+          <>
+            <StyledEditor sx={{ ...translationsSx }}>
+              <ReactQuill
+                readOnly={readonly}
+                theme="snow"
+                value={field.value}
+                onChange={(
+                  val: string,
+                  delta: any,
+                  source: "api" | "user",
+                  editor: any
+                ) => {
+                  const contentLength = editor.getLength();
+                  textLengthRef.current = contentLength - 1;
+                  if (source === "user") {
+                    field.onChange(val);
+                  } else {
+                    setValue(fieldName, val, { shouldDirty: false });
+                  }
+                }}
+                className="editor-input"
+                modules={textEditorConfig.modules}
+                formats={textEditorConfig.formats}
+                placeholder={placeholder}
+              />
+            </StyledEditor>
+            <Stack
+              mt={"0.5em"}
+              direction={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              {!!fieldState.error ? (
+                <FormHelperText
+                  sx={{ color: "error.main", fontSize: "14px", mt: 0 }}
+                >
+                  {fieldState.error?.message}
+                </FormHelperText>
+              ) : (
+                <div />
+              )}
+              {maxSymbols && (
+                <Typography variant={"body2"}>
+                  {textLengthRef?.current ?? 0} / {maxSymbols}
+                </Typography>
+              )}
+            </Stack>
+          </>
+        )}
       />
     </Box>
   );

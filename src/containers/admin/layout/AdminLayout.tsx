@@ -1,11 +1,14 @@
 import { PropsWithChildren } from "react";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { Paper } from "@mui/material";
+import { Paper, PaperProps } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import AdminSideBar from "@/containers/admin/layout/AdminSideBar";
 
-const AdminLayout = ({ children }: PropsWithChildren) => {
+const AdminLayout = ({
+  children,
+  paperProps,
+}: PropsWithChildren & { paperProps?: PaperProps }) => {
   return (
     <ProtectedAuth mode={"redirectPermanent"}>
       <WrappedContainer wrapperSx={{ px: { xs: "1.5em", md: "3em" } }}>
@@ -20,7 +23,7 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
             <AdminSideBar />
           </Grid>
           <Grid size={{ xs: 12, xl: 10 }}>
-            <Paper>{children}</Paper>
+            <Paper {...paperProps}>{children}</Paper>
           </Grid>
         </Grid>
       </WrappedContainer>
