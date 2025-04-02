@@ -102,6 +102,10 @@ const excursionsService = {
   },
 
   ADMIN_EXCURSIONS_ITEMS_PER_PAGE: 15,
+
+  updateSlug: (id: number, slug: string) => {
+    return axiosInstance.put(`/excursions/${id}/slug`, { slug });
+  },
 };
 
 export default excursionsService;
