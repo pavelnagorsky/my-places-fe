@@ -26,7 +26,7 @@ const DashedLine = ({ sx, time }: { sx?: SxProps; time?: string }) => (
   <Box
     sx={{
       width: 2,
-      height: { xs: "190px", sm: "265px" },
+      height: { xs: "190px", sm: "245px" },
       borderRight: "1.5px dashed #D4D4D4",
       my: "0.2em",
       position: "relative",
@@ -60,7 +60,7 @@ const Stepper = () => {
   const items = useAppSelector(selectItems);
 
   return (
-    <Stack alignItems={"center"} pt={{ xs: "150px" }}>
+    <Stack alignItems={"center"} pt={{ xs: "130px" }}>
       {items.map((item, i) => {
         const duration = items[i + 1]?.duration ?? 0;
         const formattedDuration = duration

@@ -25,6 +25,7 @@ const Details = () => {
     acc += cur || 0;
     return acc;
   }, 0);
+  console.log('stay duration', totalExcursionsDuration, excursionDurations);
   const distance = useAppSelector(selectDistance);
   const duration = useAppSelector(selectDuration);
   const formattedDistance = utils.formatKM(distance, i18n.language);

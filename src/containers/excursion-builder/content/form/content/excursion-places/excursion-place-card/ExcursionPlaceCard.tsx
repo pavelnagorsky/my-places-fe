@@ -120,12 +120,12 @@ const ExcursionPlaceCard = ({
           <TextFieldElement
             name={`places.${index}.description`}
             multiline
-            rows={4}
+            rows={3}
             placeholder={t("form.placeDescriptionPlaceholder")}
             rules={{
               maxLength: {
-                value: 300,
-                message: t("errors.maxLength", { ns: "common", value: 300 }),
+                value: 400,
+                message: t("errors.maxLength", { ns: "common", value: 400 }),
               },
             }}
           />
