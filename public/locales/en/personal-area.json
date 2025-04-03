@@ -92,6 +92,35 @@
       }
     }
   },
+  "excursions": {
+    "title": "My Excursions",
+    "newExcursion": "New Excursion",
+    "noItems": "No custom excursions found",
+    "filters": {
+      "title": "Excursion Title",
+      "byCreatedAt": "By Creation Date",
+      "byStatus": "By Status"
+    },
+    "headings": {
+      "title": "Title",
+      "createdAt": "Creation Date",
+      "duration": "Duration",
+      "distance": "Distance",
+      "places": "Places in Excursion",
+      "placesCount": "Places: {{count}}",
+      "excursionDuration": "Sightseeing Time",
+      "travelMode": "Transportation",
+      "status": "Status",
+      "type": "Type",
+      "views": "Views"
+    },
+    "feedback": {
+      "delete": {
+        "success": "Excursion was successfully deleted.",
+        "error": "Failed to delete the excursion."
+      }
+    }
+  },
   "reviews": {
     "title": "My reviews",
     "newReview": "New Review",

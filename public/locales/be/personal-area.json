@@ -92,6 +92,35 @@
       }
     }
   },
+  "excursions": {
+    "title": "Мае экскурсіі",
+    "newExcursion": "Новая экскурсія",
+    "noItems": "Карыстальніцкія экскурсіі не знойдзены",
+    "filters": {
+      "title": "Назва экскурсіі",
+      "byCreatedAt": "Па даце стварэння",
+      "byStatus": "Па статусе"
+    },
+    "headings": {
+      "title": "Назва",
+      "createdAt": "Дата стварэння",
+      "duration": "Час",
+      "distance": "Адлегласць",
+      "places": "Месцы ў экскурсіі",
+      "placesCount": "Месцаў: {{count}}",
+      "excursionDuration": "Час на агляд",
+      "travelMode": "Перамяшчэнне",
+      "status": "Статус",
+      "type": "Тып",
+      "views": "Прагляды"
+    },
+    "feedback": {
+      "delete": {
+        "success": "Экскурсія была паспяхова выдалена.",
+        "error": "Не ўдалося выдаліць экскурсію."
+      }
+    }
+  },
   "reviews": {
     "title": "Мае нататкі",
     "newReview": "Новая нататка",
