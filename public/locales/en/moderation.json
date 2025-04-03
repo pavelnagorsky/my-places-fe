@@ -32,6 +32,29 @@
       "updatedAt": "Update date"
     }
   },
+  "excursions": {
+    "title": "Excursions for Moderation",
+    "noItems": "No excursions requiring moderation found",
+    "filters": {
+      "title": "Excursion Title",
+      "byCreatedAt": "By Creation Date"
+    },
+    "headings": {
+      "title": "Title",
+      "createdAt": "Creation Date",
+      "duration": "Duration",
+      "distance": "Distance",
+      "author": "Author",
+      "updatedAt": "Update Date",
+      "places": "Places in Excursion",
+      "placesCount": "Places: {{count}}",
+      "excursionDuration": "Sightseeing Time",
+      "travelMode": "Transportation",
+      "status": "Status",
+      "type": "Type",
+      "views": "Views"
+    }
+  },
   "reviews": {
     "title": "Reviews for moderation",
     "notFound": "Reviews requiring moderation were not found",

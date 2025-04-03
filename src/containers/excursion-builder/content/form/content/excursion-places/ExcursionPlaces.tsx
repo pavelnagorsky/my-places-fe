@@ -12,7 +12,6 @@ import ControlButtons from "@/containers/excursion-builder/content/form/content/
 import ExcursionPlaceCard from "@/containers/excursion-builder/content/form/content/excursion-places/excursion-place-card/ExcursionPlaceCard";
 import { useFormContext } from "react-hook-form-mui";
 import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
-import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import useExcursionPlacesFieldArrayContext from "@/containers/excursion-builder/content/form/content/excursion-places/context/useExcursionPlacesFieldArrayContext";
 import { useEffect } from "react";
 
@@ -70,12 +69,9 @@ const ExcursionPlaces = () => {
         >
           <Stack gap={"1em"} width={"100%"}>
             <AnimatePresence mode="popLayout">
-              {fields
-                .filter(
-                  (formPlace) =>
-                    items.findIndex((item) => item.id === formPlace.id) > -1
-                )
-                .map((formPlace, index) => (
+              {fields.map((formPlace, index) => {
+                const place = items.find((item) => item.id === formPlace.id);
+                return (
                   <motion.div
                     key={formPlace.key}
                     initial={{ opacity: 0, scale: 0.5, x: -400 }}
@@ -88,21 +84,20 @@ const ExcursionPlaces = () => {
                     }}
                     transition={{ duration: 0.6, type: "spring" }}
                   >
-                    <SortableItem>
-                      <Stack>
-                        <ExcursionPlaceCard
-                          place={
-                            items.find(
-                              (item) => item.id === formPlace.id
-                            ) as ISearchPlace
-                          }
-                          index={index}
-                          onRemove={onRemove}
-                        />
-                      </Stack>
-                    </SortableItem>
+                    {place && (
+                      <SortableItem>
+                        <Stack>
+                          <ExcursionPlaceCard
+                            place={place}
+                            index={index}
+                            onRemove={onRemove}
+                          />
+                        </Stack>
+                      </SortableItem>
+                    )}
                   </motion.div>
-                ))}
+                );
+              })}
             </AnimatePresence>
           </Stack>
         </SortableList>

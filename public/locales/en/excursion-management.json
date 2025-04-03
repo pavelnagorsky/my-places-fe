@@ -1,0 +1,54 @@
+{
+  "seo": {
+    "create": {
+      "title": "Create an Excursion",
+      "description": "The excursion builder allows you to create a set of tourist attractions in Belarus. It provides a visual route display, time and distance calculation, automatic optimization functionality, and export to a navigator."
+    },
+    "edit": {
+      "title": "Edit Excursion",
+      "description": "The excursion builder allows you to create a set of tourist attractions in Belarus. It provides a visual route display, time and distance calculation, automatic optimization functionality, and export to a navigator."
+    }
+  },
+  "form": {
+    "title": "Title",
+    "titlePlaceholder": "Enter excursion title",
+    "description": "Short description",
+    "descriptionPlaceholder": "Enter excursion description",
+    "placeDescriptionPlaceholder": "Share a brief description of the place within the excursion...",
+    "durationSelect": "Enter time for visiting the excursion:"
+  },
+  "mapView": "Visual excursion planning",
+  "details": {
+    "title": "Trip details",
+    "duration": "Travel time:",
+    "stayDuration": "Sightseeing time:",
+    "distance": "Distance (km):"
+  },
+  "feedback": {
+    "notFound": "Excursion not found.",
+    "create": {
+      "success": "The excursion has been created and submitted for moderation. You can check its status in your personal account.",
+      "error": "Error creating the excursion."
+    },
+    "update": {
+      "success": "The excursion has been updated and submitted for moderation. You can check its status in your personal account.",
+      "error": "Error updating the excursion."
+    }
+  },
+  "createExcursion": "Save excursion",
+  "updateExcursion": "Update excursion",
+  "excursionStatuses": {
+    "moderation": "Under moderation",
+    "approved": "Published",
+    "rejected": "Rejected"
+  },
+  "excursionTypes": {
+    "overview": "Overview",
+    "region": "By region"
+  },
+  "excursion": {
+    "description": "Description",
+    "routeDetails": "Excursion program",
+    "stayDuration": "Visit duration:"
+  }
+}

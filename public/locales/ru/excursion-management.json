@@ -14,7 +14,7 @@
     "titlePlaceholder": "Введите название экскурсии",
     "description": "Краткое описание",
     "descriptionPlaceholder": "Введите описание экскурсии",
-    "placeDescriptionPlaceholder": "Введите краткое описание о посещении места",
+    "placeDescriptionPlaceholder": "Поделитесь кратким описанием места в рамках экскурсии...",
     "durationSelect": "Введите время на посещение экскурсии:"
   },
   "mapView": "Визуальное построение экскурсии",
