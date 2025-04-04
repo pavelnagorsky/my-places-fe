@@ -27,7 +27,6 @@ const useEditMyExcursion = () => {
       addPlaces: [],
       title: "",
       description: "",
-      places: [],
       travelMode: TravelModesEnum.DRIVING,
       type: `${ExcursionTypesEnum.Overview}`,
       updateTranslations: false,
@@ -78,11 +77,6 @@ const useEditMyExcursion = () => {
         ...form.getValues(),
         title: data.title,
         description: data.description,
-        places: data.places.map((place) => ({
-          id: place.id,
-          description: place.excursionDescription || "",
-          excursionDuration: place.excursionDuration || 0,
-        })),
         type: `${data.type || ExcursionTypesEnum.Overview}`,
         travelMode: data.travelMode || TravelModesEnum.DRIVING,
       });

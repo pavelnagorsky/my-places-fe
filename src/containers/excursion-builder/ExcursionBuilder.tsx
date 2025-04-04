@@ -9,18 +9,12 @@ import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import Form from "@/containers/excursion-builder/content/form/Form";
 import MapSection from "./content/map-section/MapSection";
 import Details from "@/containers/excursion-builder/content/details/Details";
-import ExcursionPlacesFieldArrayProvider from "@/containers/excursion-builder/content/form/content/excursion-places/context/ExcursionPlacesFieldArrayProvider";
 import { useTranslation } from "next-i18next";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
 
 const ExcursionBuilder = () => {
   const { t } = useTranslation("excursion-management");
   const form = useExcursionBuilder();
-  const fieldArray = useFieldArray({
-    control: form.control,
-    keyName: "key",
-    name: "places",
-  });
 
   return (
     <ProtectedAuth mode={"redirectAfter"}>
@@ -34,26 +28,24 @@ const ExcursionBuilder = () => {
             <Stack mb={2}>
               <Breadcrumbs />
             </Stack>
-            <ExcursionPlacesFieldArrayProvider {...fieldArray}>
-              <Grid container spacing={4} mb={"4em"}>
-                <Grid size={{ xs: 12, lg: 9 }}>
-                  <motion.div variants={animationVariants.defaultItemVariant}>
-                    <Typography variant={"h1"} mb={3}>
-                      {t("seo.create.title")}
-                    </Typography>
-                    <Form />
-                  </motion.div>
-                </Grid>
-                <Grid size={{ xs: 12, lg: 3 }}>
-                  <Details />
-                </Grid>
-                <Grid size={12}>
-                  <motion.div variants={animationVariants.defaultItemVariant}>
-                    <MapSection />
-                  </motion.div>
-                </Grid>
+            <Grid container spacing={4} mb={"4em"}>
+              <Grid size={{ xs: 12, lg: 9 }}>
+                <motion.div variants={animationVariants.defaultItemVariant}>
+                  <Typography variant={"h1"} mb={3}>
+                    {t("seo.create.title")}
+                  </Typography>
+                  <Form />
+                </motion.div>
               </Grid>
-            </ExcursionPlacesFieldArrayProvider>
+              <Grid size={{ xs: 12, lg: 3 }}>
+                <Details />
+              </Grid>
+              <Grid size={12}>
+                <motion.div variants={animationVariants.defaultItemVariant}>
+                  <MapSection />
+                </motion.div>
+              </Grid>
+            </Grid>
           </FormProvider>
         </WrappedContainer>
       </motion.div>
