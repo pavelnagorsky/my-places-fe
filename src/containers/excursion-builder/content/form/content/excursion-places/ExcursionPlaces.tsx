@@ -10,46 +10,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import Stepper from "@/containers/excursion-builder/content/form/content/excursion-places/stepper/Stepper";
 import ControlButtons from "@/containers/excursion-builder/content/form/content/control-buttons/ControlButtons";
 import ExcursionPlaceCard from "@/containers/excursion-builder/content/form/content/excursion-places/excursion-place-card/ExcursionPlaceCard";
-import { useFormContext } from "react-hook-form-mui";
-import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
-import useExcursionPlacesFieldArrayContext from "@/containers/excursion-builder/content/form/content/excursion-places/context/useExcursionPlacesFieldArrayContext";
-import { useEffect } from "react";
 
 const ExcursionPlaces = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectItems);
-  const { getValues } = useFormContext<IExcursionBuilderForm>();
-  const { fields, ...fieldArrayMethods } =
-    useExcursionPlacesFieldArrayContext();
-
-  // initial setup of field array from cart
-  useEffect(() => {
-    const formFields = getValues("places");
-    const updatedFormFields = items.map((item) => {
-      const existingFormField = formFields.find(
-        (field) => field.id === item.id
-      );
-      return (
-        existingFormField || {
-          id: item.id,
-          description: "",
-          excursionDuration: 15,
-        }
-      );
-    });
-    fieldArrayMethods.append(updatedFormFields);
-  }, []);
 
   const onRemove = (id: number) => {
-    const index = getValues("places").findIndex((place) => place.id === id);
-    fieldArrayMethods.remove(index);
     dispatch(removeItem(id));
   };
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    fieldArrayMethods.move(oldIndex, newIndex);
     dispatch(sortItems({ oldIndex, newIndex }));
   };
 
@@ -69,11 +41,10 @@ const ExcursionPlaces = () => {
         >
           <Stack gap={"1em"} width={"100%"}>
             <AnimatePresence mode="popLayout">
-              {fields.map((formPlace, index) => {
-                const place = items.find((item) => item.id === formPlace.id);
+              {items.map((place, index) => {
                 return (
                   <motion.div
-                    key={formPlace.key}
+                    key={place.id}
                     initial={{ opacity: 0, scale: 0.5, x: -400 }}
                     animate={{ opacity: 1, scale: 1, x: 0 }}
                     exit={{
@@ -84,17 +55,15 @@ const ExcursionPlaces = () => {
                     }}
                     transition={{ duration: 0.6, type: "spring" }}
                   >
-                    {place && (
-                      <SortableItem>
-                        <Stack>
-                          <ExcursionPlaceCard
-                            place={place}
-                            index={index}
-                            onRemove={onRemove}
-                          />
-                        </Stack>
-                      </SortableItem>
-                    )}
+                    <SortableItem>
+                      <Stack>
+                        <ExcursionPlaceCard
+                          place={place}
+                          index={index}
+                          onRemove={onRemove}
+                        />
+                      </Stack>
+                    </SortableItem>
                   </motion.div>
                 );
               })}

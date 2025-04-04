@@ -7,6 +7,7 @@ import routesService from "@/services/routes-service/routes.service";
 import searchService from "@/services/search-service/search.service";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 import {
+  IExcursionBuilderItem,
   setDistance,
   setDuration,
   setItems,
@@ -37,11 +38,17 @@ export const startExcursionEditingThunk = createAsyncThunk(
         payload.language
       );
 
-      const items = placesResponse.data.map((place, index) => ({
-        ...place,
-        duration: data.places[index]?.duration || 0,
-        distance: data.places[index]?.distance || 0,
-      }));
+      const items = placesResponse.data.map(
+        (place, index) =>
+          ({
+            ...place,
+            duration: data.places[index]?.duration || 0,
+            distance: data.places[index]?.distance || 0,
+            excursionDuration: data.places[index]?.excursionDuration || 15,
+            excursionDescription:
+              data.places[index]?.excursionDescription || "",
+          } as IExcursionBuilderItem)
+      );
 
       if (typeof payload.onSuccess === "function") payload.onSuccess(data);
 
@@ -166,6 +173,7 @@ export const saveExcursionThunk = createAsyncThunk(
       if (typeof payload.onSuccess === "function") payload.onSuccess();
       return data;
     } catch (e) {
+      console.error(e);
       if (typeof payload.onError === "function") payload.onError();
       return thunkAPI.rejectWithValue(e);
     }
@@ -179,6 +187,15 @@ export const addExcursionItemsThunk = createAsyncThunk(
       payload.ids,
       payload.language
     );
-    return data.map((place) => ({ ...place, duration: 0, distance: 0 }));
+    return data.map(
+      (place) =>
+        ({
+          ...place,
+          duration: 0,
+          distance: 0,
+          excursionDuration: 15,
+          description: "",
+        } as IExcursionBuilderItem)
+    );
   }
 );

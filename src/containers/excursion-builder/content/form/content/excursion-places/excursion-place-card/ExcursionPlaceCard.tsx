@@ -15,13 +15,18 @@ import deleteIcon from "../../../../../../../../public/images/icons/basket.png";
 import Image from "next/image";
 import locationImage from "../../../../../../../../public/images/icons/location.png";
 import {
-  FieldError,
+  FormProvider,
   TextFieldElement,
   useFormContext,
 } from "react-hook-form-mui";
-import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import DurationPicker from "@/components/forms/custom-form-elements/DurationPicker";
 import { useTranslation } from "next-i18next";
+import usePlaceCardForm from "@/containers/excursion-builder/content/form/content/excursion-places/excursion-place-card/logic/usePlaceCardForm";
+import {
+  updateItemDescription,
+  updateItemExcursionDuration,
+} from "@/store/excursion-builder-slice/excursion-builder.slice";
+import { useAppDispatch } from "@/store/hooks";
 
 interface IExcursionPlaceCardProps {
   onRemove: (id: number) => void;
@@ -36,8 +41,9 @@ const ExcursionPlaceCard = ({
 }: IExcursionPlaceCardProps) => {
   const theme = useTheme();
   const isMobileSm = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { i18n, t } = useTranslation(["excursion-management", "common"]);
+  const { t } = useTranslation(["excursion-management", "common"]);
+  const form = usePlaceCardForm();
+  const dispatch = useAppDispatch();
 
   const dragButton = (
     <Box>
@@ -78,86 +84,106 @@ const ExcursionPlaceCard = ({
   );
 
   return (
-    <Paper
-      sx={{
-        boxShadow: "0px 2px 30px 0px #0000000D",
-        borderRadius: "10px",
-        position: "relative",
-        p: 2,
-      }}
-    >
-      <Stack width={"100%"} gap={2}>
-        <Typography
-          fontSize={"22px"}
-          fontWeight={500}
-          sx={{
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            WebkitLineClamp: 2,
-          }}
-        >
-          {place.title}
-        </Typography>
-        <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
-          <Image src={locationImage} alt={"Location"} height={24} width={24} />
+    <FormProvider {...form}>
+      <Paper
+        sx={{
+          boxShadow: "0px 2px 30px 0px #0000000D",
+          borderRadius: "10px",
+          position: "relative",
+          p: 2,
+        }}
+      >
+        <Stack width={"100%"} gap={2}>
           <Typography
-            overflow={"hidden"}
-            textOverflow={"ellipsis"}
-            variant="body2"
-            fontSize={"18px"}
+            fontSize={"22px"}
+            fontWeight={500}
             sx={{
               display: "-webkit-box",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: { xs: 3, md: 2 },
               overflow: "hidden",
+              WebkitLineClamp: 2,
             }}
           >
-            {place.address}
+            {place.title}
           </Typography>
-        </Stack>
-        <Stack>
-          <TextFieldElement
-            name={`places.${index}.description`}
-            multiline
-            rows={3}
-            placeholder={t("form.placeDescriptionPlaceholder")}
-            rules={{
-              maxLength: {
-                value: 400,
-                message: t("errors.maxLength", { ns: "common", value: 400 }),
-              },
-            }}
-          />
-        </Stack>
-        <Stack
-          justifyContent={"space-between"}
-          alignItems={{ xs: "end", sm: "center" }}
-          direction={"row"}
-          gap={"1em"}
-        >
-          <Stack
-            direction={{ sm: "row" }}
-            alignItems={{ sm: "center" }}
-            gap={"1em"}
-          >
-            <Typography color={"secondary.dark"}>
-              {t("form.durationSelect")}
+          <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
+            <Image
+              src={locationImage}
+              alt={"Location"}
+              height={24}
+              width={24}
+            />
+            <Typography
+              overflow={"hidden"}
+              textOverflow={"ellipsis"}
+              variant="body2"
+              fontSize={"18px"}
+              sx={{
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: { xs: 3, md: 2 },
+                overflow: "hidden",
+              }}
+            >
+              {place.address}
             </Typography>
-            <DurationPicker
-              name={`places.${index}.excursionDuration`}
-              required
-              parseError={() => t("errors.required", { ns: "common" })}
-              slotProps={{ input: { size: "small" } }}
+          </Stack>
+          <Stack>
+            <TextFieldElement
+              name={`description`}
+              onChange={(val) => {
+                dispatch(
+                  updateItemDescription({
+                    id: place.id,
+                    value: val?.target?.value || "",
+                  })
+                );
+              }}
+              multiline
+              rows={3}
+              placeholder={t("form.placeDescriptionPlaceholder")}
+              rules={{
+                maxLength: {
+                  value: 400,
+                  message: t("errors.maxLength", { ns: "common", value: 400 }),
+                },
+              }}
             />
           </Stack>
-          <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
-            {dragButton}
-            {deleteButton}
+          <Stack
+            justifyContent={"space-between"}
+            alignItems={{ xs: "end", sm: "center" }}
+            direction={"row"}
+            gap={"1em"}
+          >
+            <Stack
+              direction={{ sm: "row" }}
+              alignItems={{ sm: "center" }}
+              gap={"1em"}
+            >
+              <Typography color={"secondary.dark"}>
+                {t("form.durationSelect")}
+              </Typography>
+              <DurationPicker
+                name={`excursionDuration`}
+                onChange={(val) => {
+                  dispatch(
+                    updateItemExcursionDuration({ id: place.id, value: val })
+                  );
+                }}
+                required
+                parseError={() => t("errors.required", { ns: "common" })}
+                slotProps={{ input: { size: "small" } }}
+              />
+            </Stack>
+            <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
+              {dragButton}
+              {deleteButton}
+            </Stack>
           </Stack>
         </Stack>
-      </Stack>
-    </Paper>
+      </Paper>
+    </FormProvider>
   );
 };
 

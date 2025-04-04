@@ -8,11 +8,4 @@ export interface IExcursionBuilderForm {
   addPlaces: ISelectPlace[];
   travelMode: TravelModesEnum;
   type: `${ExcursionTypesEnum}`;
-  places: IExcursionBuilderFormPlace[];
-}
-
-export interface IExcursionBuilderFormPlace {
-  id: number;
-  description: string;
-  excursionDuration: number;
 }

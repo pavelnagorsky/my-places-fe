@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   selectHasItems,
   selectIsEditingMode,
+  selectItems,
   selectSubmitLoading,
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
 import { openAuth, selectIsAuth } from "@/store/user-slice/user.slice";
@@ -24,6 +25,7 @@ const SubmitButton = () => {
   const hasItems = useAppSelector(selectHasItems);
   const isAuth = useAppSelector(selectIsAuth);
   const isEditMode = useAppSelector(selectIsEditingMode);
+  const items = useAppSelector(selectItems);
   const router = useRouter();
   const {
     handleSubmit,
@@ -87,7 +89,11 @@ const SubmitButton = () => {
         description: data.description,
         travelMode: data.travelMode,
         type: +data.type,
-        places: data.places,
+        places: items.map((item) => ({
+          id: item.id,
+          excursionDuration: item.excursionDuration,
+          description: item.description,
+        })),
         shouldTranslate: data.updateTranslations,
         language: i18n.language,
       };

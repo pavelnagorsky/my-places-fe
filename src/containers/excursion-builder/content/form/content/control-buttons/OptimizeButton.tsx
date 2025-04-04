@@ -8,10 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
-import {
-  IExcursionBuilderForm,
-  IExcursionBuilderFormPlace,
-} from "@/containers/excursion-builder/content/form/logic/interfaces";
+import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import { getExcursionDirectionsThunk } from "@/store/excursion-builder-slice/thunks";
 import {
   selectExcursionDirectionsLoading,
@@ -27,22 +24,12 @@ const OptimizeButton = () => {
   const { t, i18n } = useTranslation("route-management");
   const { getValues, setValue } = useFormContext<IExcursionBuilderForm>();
 
-  const onReorderFields = (reorderedIds: number[]) => {
-    const fields = getValues("places");
-    // Create a new array with the reordered fields
-    const newFields = reorderedIds
-      .map((id) => fields.find((field) => field.id === id))
-      .filter(Boolean) as IExcursionBuilderFormPlace[];
-    setValue("places", newFields);
-  };
-
   const onClickOptimize = () => {
     dispatch(
       getExcursionDirectionsThunk({
         language: i18n.language,
         optimizeWaypoints: true,
         travelMode: getValues("travelMode"),
-        onReorder: onReorderFields,
       })
     ).then(() => {
       if (isMobile) return;

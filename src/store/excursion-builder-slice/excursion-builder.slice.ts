@@ -8,9 +8,11 @@ import {
   startExcursionEditingThunk,
 } from "@/store/excursion-builder-slice/thunks";
 
-interface IExcursionBuilderItem extends ISearchPlace {
+export interface IExcursionBuilderItem extends ISearchPlace {
   duration: number; // Minutes
   distance: number; // Km
+  description: string;
+  excursionDuration: number; // Minutes
 }
 
 interface IExcursionBuilderState {
@@ -49,6 +51,24 @@ const excursionBuilderSlice = createSlice({
     },
     setDistance: (state, { payload }: PayloadAction<number>) => {
       state.distance = payload;
+    },
+    updateItemDescription: (
+      state,
+      { payload }: PayloadAction<{ id: number; value: string }>
+    ) => {
+      const itemIndex = state.items.findIndex((item) => item.id === payload.id);
+      if (itemIndex !== -1) {
+        state.items[itemIndex].description = payload.value;
+      }
+    },
+    updateItemExcursionDuration: (
+      state,
+      { payload }: PayloadAction<{ id: number; value: number }>
+    ) => {
+      const itemIndex = state.items.findIndex((item) => item.id === payload.id);
+      if (itemIndex !== -1) {
+        state.items[itemIndex].excursionDuration = payload.value;
+      }
     },
     sortItems: (
       state,
@@ -147,6 +167,8 @@ export const {
   sortItems,
   removeItem,
   setDuration,
+  updateItemExcursionDuration,
+  updateItemDescription,
   setDistance,
 } = excursionBuilderSlice.actions;
 
