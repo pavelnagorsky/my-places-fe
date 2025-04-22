@@ -76,7 +76,7 @@ const useEditMyExcursion = () => {
       form.reset({
         ...form.getValues(),
         title: data.title,
-        description: data.description,
+        description: data.description + " ",
         type: `${data.type || ExcursionTypesEnum.Overview}`,
         travelMode: data.travelMode || TravelModesEnum.DRIVING,
       });

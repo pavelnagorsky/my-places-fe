@@ -27,6 +27,9 @@ const SubmitButton = () => {
   const isEditMode = useAppSelector(selectIsEditingMode);
   const items = useAppSelector(selectItems);
   const router = useRouter();
+  const isAdminMode = router.asPath.startsWith(
+    routerLinks.administrationExcursions
+  );
   const {
     handleSubmit,
     formState: { isValid },
@@ -69,7 +72,11 @@ const SubmitButton = () => {
       })
     );
     if (isEditMode) {
-      router.push(routerLinks.personalAreaExcursions);
+      if (isAdminMode) {
+        router.push(routerLinks.administrationExcursions);
+      } else {
+        router.push(routerLinks.personalAreaExcursions);
+      }
     }
   };
 
@@ -92,7 +99,7 @@ const SubmitButton = () => {
         places: items.map((item) => ({
           id: item.id,
           excursionDuration: item.excursionDuration,
-          description: item.description,
+          description: item.excursionDescription,
         })),
         shouldTranslate: data.updateTranslations,
         language: i18n.language,

@@ -2,9 +2,8 @@ import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import usePopover from "@/hooks/usePopover";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
-import { IRoute } from "@/services/routes-service/interfaces/route.interface";
-import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
+import { ExcursionStatusesEnum } from "@/services/excursions-service/enums/excursion-statuses.enum";
 
 interface IUseMyExcursionMenuProps {
   item: IExcursionListItem;
@@ -14,6 +13,8 @@ interface IUseMyExcursionMenuProps {
 const useMyExcursionMenu = ({ item, onDelete }: IUseMyExcursionMenuProps) => {
   const router = useRouter();
   const popover = usePopover("my-excursion-menu");
+
+  const canView = item.status === ExcursionStatusesEnum.APPROVED;
 
   const handleEdit = () => {
     popover.handleClose();
@@ -81,6 +82,7 @@ const useMyExcursionMenu = ({ item, onDelete }: IUseMyExcursionMenuProps) => {
     handleDelete,
     handleOpenGoogleNavigator,
     handleOpenYandexNavigator,
+    canView,
   };
 };
 

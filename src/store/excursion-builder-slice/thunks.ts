@@ -33,20 +33,19 @@ export const startExcursionEditingThunk = createAsyncThunk(
         payload.id,
         payload.language
       );
-      const placesResponse = await searchService.searchByIds(
-        data.places.map((place) => place.id),
-        payload.language
-      );
+      // const placesResponse = await searchService.searchByIds(
+      //   data.places.map((place) => place.id),
+      //   payload.language
+      // );
 
-      const items = placesResponse.data.map(
+      const items = data.places.map(
         (place, index) =>
           ({
             ...place,
-            duration: data.places[index]?.duration || 0,
-            distance: data.places[index]?.distance || 0,
-            excursionDuration: data.places[index]?.excursionDuration || 15,
-            excursionDescription:
-              data.places[index]?.excursionDescription || "",
+            duration: place.duration || 0,
+            distance: place.distance || 0,
+            excursionDuration: place.excursionDuration || 15,
+            excursionDescription: place.excursionDescription || "",
           } as IExcursionBuilderItem)
       );
 
@@ -194,7 +193,7 @@ export const addExcursionItemsThunk = createAsyncThunk(
           duration: 0,
           distance: 0,
           excursionDuration: 15,
-          description: "",
+          excursionDescription: "",
         } as IExcursionBuilderItem)
     );
   }

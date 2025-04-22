@@ -51,6 +51,7 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
       onEdit={menu.handleEdit}
       onOpenGoogleNavigator={menu.handleOpenGoogleNavigator}
       onOpenYandexNavigator={menu.handleOpenYandexNavigator}
+      canView={menu.canView}
     />
   );
 

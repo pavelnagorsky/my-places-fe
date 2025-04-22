@@ -16,28 +16,36 @@ const PlaceReviewsSection = ({
     <>
       <ReviewModal open={dialog.open} onClose={onCloseReview} review={review} />
       <Stack direction="row" gap={2} flexWrap={"wrap"}>
-        {reviews.map((review) => (
-          <Box key={review.id}>
-            <Button
-              onClick={() => handleLoadReview(review.id)}
-              size={"small"}
-              sx={{
-                borderRadius: "100px",
-                textTransform: "none",
-                fontWeight: 500,
-                fontSize: "16px",
-                bgcolor: alpha(primaryBackground, 0.7),
-                px: "1em",
-              }}
-              variant={"outlined"}
-              startIcon={
-                <AssignmentIcon fontSize={"large"} color={"primary"} />
-              }
-            >
-              {review.title}
-            </Button>
-          </Box>
-        ))}
+        {reviews.map((reviewPreview) => {
+          const reviewTitle =
+            reviewPreview.title.substring(0, 70).trim() +
+            ((reviewPreview.title.length || 0) > 70 ? "..." : "");
+          return (
+            <Box key={reviewPreview.id}>
+              <Button
+                onClick={() => handleLoadReview(reviewPreview.id)}
+                size={"small"}
+                sx={{
+                  borderRadius: "100px",
+                  textTransform: "none",
+                  textAlign: "start",
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  bgcolor: alpha(primaryBackground, 0.7),
+                  px: "1em",
+                }}
+                variant={"outlined"}
+                startIcon={
+                  <AssignmentIcon fontSize={"large"} color={"primary"} />
+                }
+              >
+                {reviewTitle}
+              </Button>
+            </Box>
+          );
+        })}
       </Stack>
     </>
   );
