@@ -21,6 +21,7 @@ interface IMyExcursionMenuProps {
   onEdit: () => void;
   onOpenYandexNavigator: () => void;
   onOpenGoogleNavigator: () => void;
+  canView: boolean;
 }
 
 const MyExcursionMenu = ({
@@ -32,6 +33,7 @@ const MyExcursionMenu = ({
   onEdit,
   onOpenGoogleNavigator,
   onOpenYandexNavigator,
+  canView,
 }: IMyExcursionMenuProps) => {
   const { t } = useTranslation(["personal-area", "common"]);
   const popover = usePopover("confirm-excursion-delete");
@@ -77,13 +79,15 @@ const MyExcursionMenu = ({
           "aria-labelledby": "my-excursion-menu",
         }}
       >
-        <MenuItem
-          component={"a"}
-          href={routerLinks.excursion(slug)}
-          target={"_blank"}
-        >
-          {t("places.menu.view")}
-        </MenuItem>
+        {canView && (
+          <MenuItem
+            component={"a"}
+            href={routerLinks.excursion(slug)}
+            target={"_blank"}
+          >
+            {t("places.menu.view")}
+          </MenuItem>
+        )}
         <MenuItem onClick={onEdit}>{t("routes.menu.edit")}</MenuItem>
         <MenuItem onClick={popover.handleOpen}>
           {t("buttons.delete", { ns: "common" })}

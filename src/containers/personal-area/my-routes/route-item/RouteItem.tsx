@@ -52,6 +52,7 @@ const RouteItem = ({ route, onDelete }: IRouteItemProps) => {
       onEdit={menu.handleEdit}
       onOpenGoogleNavigator={menu.handleOpenGoogleNavigator}
       onOpenYandexNavigator={menu.handleOpenYandexNavigator}
+      onCopyLink={menu.copyLink}
     />
   );
 

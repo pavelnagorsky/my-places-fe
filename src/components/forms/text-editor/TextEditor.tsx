@@ -1,5 +1,4 @@
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Controller, FieldError, useFormContext } from "react-hook-form-mui";
 import {
@@ -12,7 +11,7 @@ import {
 } from "@mui/material";
 import textEditorConfig from "@/components/forms/text-editor/text-editor.config";
 import { useTranslation } from "next-i18next";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const StyledEditor = styled("div")(({ theme }) => ({
   backgroundColor: "white",
@@ -80,66 +79,68 @@ const TextEditor = ({
         name={fieldName}
         rules={{
           validate: (value) => {
-            if (!maxSymbols) return true;
             const contentLength = textLengthRef.current;
             if (required && contentLength === 0) {
               return t("errors.required");
             }
+            if (!maxSymbols) return true;
             return contentLength <= maxSymbols
               ? true
               : t("errors.maxLength", { value: maxSymbols });
           },
         }}
-        render={({ field, fieldState }) => (
-          <>
-            <StyledEditor sx={{ ...translationsSx }}>
-              <ReactQuill
-                readOnly={readonly}
-                theme="snow"
-                value={field.value}
-                onChange={(
-                  val: string,
-                  delta: any,
-                  source: "api" | "user",
-                  editor: any
-                ) => {
-                  const contentLength = editor.getLength();
-                  textLengthRef.current = contentLength - 1;
-                  if (source === "user") {
-                    field.onChange(val);
-                  } else {
-                    setValue(fieldName, val, { shouldDirty: false });
-                  }
-                }}
-                className="editor-input"
-                modules={textEditorConfig.modules}
-                formats={textEditorConfig.formats}
-                placeholder={placeholder}
-              />
-            </StyledEditor>
-            <Stack
-              mt={"0.5em"}
-              direction={"row"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              {!!fieldState.error ? (
-                <FormHelperText
-                  sx={{ color: "error.main", fontSize: "14px", mt: 0 }}
-                >
-                  {fieldState.error?.message}
-                </FormHelperText>
-              ) : (
-                <div />
-              )}
-              {maxSymbols && (
-                <Typography variant={"body2"}>
-                  {textLengthRef?.current ?? 0} / {maxSymbols}
-                </Typography>
-              )}
-            </Stack>
-          </>
-        )}
+        render={({ field, fieldState }) => {
+          return (
+            <>
+              <StyledEditor sx={{ ...translationsSx }}>
+                <ReactQuill
+                  readOnly={readonly}
+                  theme="snow"
+                  value={field.value}
+                  onChange={(
+                    val: string,
+                    delta: any,
+                    source: "api" | "user",
+                    editor: any
+                  ) => {
+                    const contentLength = editor.getLength();
+                    textLengthRef.current = contentLength - 1;
+                    if (source === "user") {
+                      field.onChange(val);
+                    } else {
+                      setValue(fieldName, val, { shouldDirty: false });
+                    }
+                  }}
+                  className="editor-input"
+                  modules={textEditorConfig.modules}
+                  formats={textEditorConfig.formats}
+                  placeholder={placeholder}
+                />
+              </StyledEditor>
+              <Stack
+                mt={"0.5em"}
+                direction={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                {!!fieldState.error ? (
+                  <FormHelperText
+                    sx={{ color: "error.main", fontSize: "14px", mt: 0 }}
+                  >
+                    {fieldState.error?.message}
+                  </FormHelperText>
+                ) : (
+                  <div />
+                )}
+                {maxSymbols && (
+                  <Typography variant={"body2"}>
+                    {textLengthRef?.current ?? 0} / {maxSymbols}
+                  </Typography>
+                )}
+              </Stack>
+            </>
+          );
+        }}
       />
     </Box>
   );

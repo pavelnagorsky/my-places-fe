@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid2";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import {
   Box,
+  Button,
   IconButton,
   Paper,
   Stack,
@@ -17,6 +18,9 @@ import DragHandleIcon from "@mui/icons-material/DragHandle";
 import deleteIcon from "/public/images/icons/basket.png";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import { SortableKnob } from "react-easy-sort";
+import { routerLinks } from "@/routing/routerLinks";
+import arrowRightIcon from "../../../../public/images/icons/arrow-right.png";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 interface ICartItemProps {
   onRemove: (id: number) => void;
@@ -64,6 +68,35 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
             userSelect: "none",
           }}
         />
+      </IconButton>
+    </Box>
+  );
+
+  const openPlaceButton = isMobile ? (
+    <Box>
+      <Button
+        component={"a"}
+        href={routerLinks.place(place.slug)}
+        target={"_blank"}
+      >
+        <Box
+          height={"14px"}
+          component={"img"}
+          src={arrowRightIcon.src}
+          alt={"Подробнее"}
+        />
+      </Button>
+    </Box>
+  ) : (
+    <Box>
+      <IconButton
+        size={"small"}
+        component={"a"}
+        href={routerLinks.place(place.slug)}
+        target={"_blank"}
+        color={"primary"}
+      >
+        <VisibilityIcon />
       </IconButton>
     </Box>
   );
@@ -183,28 +216,37 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
                 {place.address}
               </Typography>
             </Stack>
-            <Typography
+            <Stack
+              gap={"1em"}
+              direction={"row"}
               mt={"auto"}
-              fontWeight={500}
-              variant="body1"
-              fontSize={"18px"}
-              display={"flex"}
+              width={"100%"}
               alignItems={"center"}
-              sx={{ wordBreak: "break-word" }}
-              gap={"0.5em"}
+              justifyContent={"space-between"}
             >
-              <Box
-                component={"img"}
-                src={place.type.image as string}
-                alt={place.type.title}
-                sx={{
-                  objectFit: "cover",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              {place.type.title}
-            </Typography>
+              <Typography
+                fontWeight={500}
+                variant="body1"
+                fontSize={"18px"}
+                display={"flex"}
+                alignItems={"center"}
+                sx={{ wordBreak: "break-word" }}
+                gap={"0.5em"}
+              >
+                <Box
+                  component={"img"}
+                  src={place.type.image as string}
+                  alt={place.type.title}
+                  sx={{
+                    objectFit: "cover",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+                {place.type.title}
+              </Typography>
+              {isMobile && openPlaceButton}
+            </Stack>
           </Stack>
         </Grid>
         {!isMobileSm && (
@@ -217,6 +259,7 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
             >
               {dragButton}
               {deleteButton}
+              {!isMobile && openPlaceButton}
             </Stack>
           </Grid>
         )}

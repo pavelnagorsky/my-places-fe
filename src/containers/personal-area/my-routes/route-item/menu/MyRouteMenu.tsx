@@ -19,6 +19,7 @@ interface IMyRouteMenuProps {
   onEdit: () => void;
   onOpenYandexNavigator: () => void;
   onOpenGoogleNavigator: () => void;
+  onCopyLink: () => void;
 }
 
 const MyRouteMenu = ({
@@ -29,6 +30,7 @@ const MyRouteMenu = ({
   onEdit,
   onOpenGoogleNavigator,
   onOpenYandexNavigator,
+  onCopyLink,
 }: IMyRouteMenuProps) => {
   const { t } = useTranslation(["personal-area", "common"]);
   const popover = usePopover("confirm-route-delete");
@@ -74,6 +76,7 @@ const MyRouteMenu = ({
           "aria-labelledby": "my-route-menu",
         }}
       >
+        <MenuItem onClick={onCopyLink}>{t("routes.menu.copyLink")}</MenuItem>
         <MenuItem onClick={onEdit}>{t("routes.menu.edit")}</MenuItem>
         <MenuItem onClick={popover.handleOpen}>
           {t("buttons.delete", { ns: "common" })}

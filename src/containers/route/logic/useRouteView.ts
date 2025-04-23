@@ -2,9 +2,7 @@ import { useTranslation } from "next-i18next";
 import { useAppDispatch } from "@/store/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form-mui";
-import { IEditReviewFormContext } from "@/containers/personal-area/my-reviews/edit-my-review/interfaces";
-import { routerLinks } from "@/routing/routerLinks";
+import { useForm } from "react-hook-form-mui";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { IEditRouteForm } from "@/containers/personal-area/my-routes/edit-route/logic/interfaces";
 import { resetState } from "@/store/route-builder-slice/route-builder.slice";
@@ -19,6 +17,10 @@ const useEditMyRoute = () => {
   const router = useRouter();
   const routeId = router.query["id"] as string | undefined;
   const [loading, setLoading] = useState(true);
+  const [seoData, setSeoData] = useState<{
+    title: string;
+    description: string;
+  } | null>(null);
 
   const form = useForm<IEditRouteForm>({
     defaultValues: {
@@ -41,7 +43,7 @@ const useEditMyRoute = () => {
     shouldUseNativeValidation: false,
   });
 
-  const onGoBack = () => router.replace(routerLinks.personalAreaRoutes);
+  const onGoBack = () => router.replace("/not-found");
 
   const handleShowNotFoundError = () => {
     dispatch(
@@ -73,6 +75,10 @@ const useEditMyRoute = () => {
 
     const onSuccess = async (data: IRoute) => {
       try {
+        setSeoData({
+          title: data.title,
+          description: data.places.map((p) => p.title).join(`;\n `),
+        });
         const startLocationTitleResponse =
           await googlePlacesAutocompleteService.getLocationTitle(
             data.coordinatesStart,
@@ -120,7 +126,7 @@ const useEditMyRoute = () => {
     dispatch(
       startRouteEditingThunk({
         id: +routeId,
-        mode: "update",
+        mode: "duplicate",
         language: i18n.language,
         onSuccess,
         onError,
@@ -137,7 +143,7 @@ const useEditMyRoute = () => {
   return {
     form,
     loading,
-    onGoBack,
+    seoData,
   };
 };
 

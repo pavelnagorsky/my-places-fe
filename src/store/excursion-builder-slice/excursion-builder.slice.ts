@@ -1,4 +1,3 @@
-import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import {
@@ -7,11 +6,22 @@ import {
   saveExcursionThunk,
   startExcursionEditingThunk,
 } from "@/store/excursion-builder-slice/thunks";
+import { ILatLngCoordinate } from "@/components/map/Map";
 
-export interface IExcursionBuilderItem extends ISearchPlace {
+export interface IExcursionBuilderItem {
+  // Place id
+  id: number;
+  // Place url path
+  slug: string;
+  // Place title
+  title: string;
+  // Place address
+  address: string;
+  // Place coordinates {lat;lng}
+  coordinates: ILatLngCoordinate;
   duration: number; // Minutes
   distance: number; // Km
-  description: string;
+  excursionDescription: string;
   excursionDuration: number; // Minutes
 }
 
@@ -52,13 +62,13 @@ const excursionBuilderSlice = createSlice({
     setDistance: (state, { payload }: PayloadAction<number>) => {
       state.distance = payload;
     },
-    updateItemDescription: (
+    updateItemExcursionDescription: (
       state,
       { payload }: PayloadAction<{ id: number; value: string }>
     ) => {
       const itemIndex = state.items.findIndex((item) => item.id === payload.id);
       if (itemIndex !== -1) {
-        state.items[itemIndex].description = payload.value;
+        state.items[itemIndex].excursionDescription = payload.value;
       }
     },
     updateItemExcursionDuration: (
@@ -168,7 +178,7 @@ export const {
   removeItem,
   setDuration,
   updateItemExcursionDuration,
-  updateItemDescription,
+  updateItemExcursionDescription,
   setDistance,
 } = excursionBuilderSlice.actions;
 

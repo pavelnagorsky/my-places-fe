@@ -1,5 +1,6 @@
 import {
   Box,
+  debounce,
   IconButton,
   Paper,
   Stack,
@@ -7,7 +8,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { SortableKnob } from "react-easy-sort";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
@@ -23,14 +23,16 @@ import DurationPicker from "@/components/forms/custom-form-elements/DurationPick
 import { useTranslation } from "next-i18next";
 import usePlaceCardForm from "@/containers/excursion-builder/content/form/content/excursion-places/excursion-place-card/logic/usePlaceCardForm";
 import {
-  updateItemDescription,
+  IExcursionBuilderItem,
+  updateItemExcursionDescription,
   updateItemExcursionDuration,
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
 import { useAppDispatch } from "@/store/hooks";
+import { useCallback } from "react";
 
 interface IExcursionPlaceCardProps {
   onRemove: (id: number) => void;
-  place: ISearchPlace;
+  place: IExcursionBuilderItem;
   index: number;
 }
 
@@ -42,8 +44,20 @@ const ExcursionPlaceCard = ({
   const theme = useTheme();
   const isMobileSm = useMediaQuery(theme.breakpoints.down("sm"));
   const { t } = useTranslation(["excursion-management", "common"]);
-  const form = usePlaceCardForm();
+  const form = usePlaceCardForm({ place });
   const dispatch = useAppDispatch();
+
+  const onChangeDescriptionDebounced = useCallback(
+    debounce((event) => {
+      dispatch(
+        updateItemExcursionDescription({
+          id: place.id,
+          value: event.target.value,
+        })
+      );
+    }, 300),
+    [dispatch, place.id]
+  );
 
   const dragButton = (
     <Box>
@@ -131,14 +145,7 @@ const ExcursionPlaceCard = ({
           <Stack>
             <TextFieldElement
               name={`description`}
-              onChange={(val) => {
-                dispatch(
-                  updateItemDescription({
-                    id: place.id,
-                    value: val?.target?.value || "",
-                  })
-                );
-              }}
+              onChange={onChangeDescriptionDebounced}
               multiline
               rows={3}
               placeholder={t("form.placeDescriptionPlaceholder")}
