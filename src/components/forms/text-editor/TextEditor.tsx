@@ -1,6 +1,6 @@
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-import { Controller, FieldError, useFormContext } from "react-hook-form-mui";
+import { Controller, useFormContext } from "react-hook-form-mui";
 import {
   Box,
   FormHelperText,
@@ -11,7 +11,9 @@ import {
 } from "@mui/material";
 import textEditorConfig from "@/components/forms/text-editor/text-editor.config";
 import { useTranslation } from "next-i18next";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const StyledEditor = styled("div")(({ theme }) => ({
   backgroundColor: "white",
