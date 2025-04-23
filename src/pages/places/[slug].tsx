@@ -12,8 +12,6 @@ import { NextSeo } from "next-seo";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import placePageJsonld from "@/shared/json-ld/place-page-jsonld";
 import JsonLd from "@/shared/json-ld/JsonLd";
-import { Environment } from "@/shared/Environment";
-import * as process from "node:process";
 
 interface IPlacePageProps {
   place: IPlace;
@@ -95,8 +93,8 @@ export const getStaticProps: GetStaticProps<IPlacePageProps> = async ({
       },
       revalidate: 60,
     };
-  } catch (e) {
-    console.log("place page loading error:", e);
+  } catch (e: any) {
+    console.log("place page loading error:", e.response?.data);
     return {
       notFound: true,
     };
