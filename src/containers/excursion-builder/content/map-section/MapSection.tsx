@@ -5,9 +5,9 @@ import { DirectionsRenderer, InfoWindow, Marker } from "@react-google-maps/api";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
-import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import markerIcon from "/public/images/icons/marker-filled.png";
 import {
+  IExcursionBuilderItem,
   selectExcursionDirections,
   selectItems,
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
@@ -22,7 +22,8 @@ const MapSection = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const places = useAppSelector(selectItems);
   const directions = useAppSelector(selectExcursionDirections);
-  const [selectedPlace, setSelectedPlace] = useState<ISearchPlace | null>(null);
+  const [selectedPlace, setSelectedPlace] =
+    useState<IExcursionBuilderItem | null>(null);
   const { watch } = useFormContext<IExcursionBuilderForm>();
 
   const travelMode = watch("travelMode");

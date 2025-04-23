@@ -80,12 +80,14 @@
       "commentsCount": "Comments:"
     },
     "menu": {
+      "copyLink": "Copy link",
       "edit": "Edit",
       "delete": "Delete",
       "google": "Google Navigator",
       "yandex": "Yandex Navigator"
     },
     "feedback": {
+      "copyLink": "The route link has been copied successfully.",
       "delete": {
         "success": "Route was successfully deleted.",
         "error": "Failed to delete route."

@@ -2,9 +2,9 @@ import useExcursionBuilder from "@/containers/excursion-builder/content/form/log
 import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { FormProvider, useFieldArray } from "react-hook-form-mui";
+import { FormProvider } from "react-hook-form-mui";
 import Grid from "@mui/material/Grid2";
-import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import Form from "@/containers/excursion-builder/content/form/Form";
 import MapSection from "./content/map-section/MapSection";

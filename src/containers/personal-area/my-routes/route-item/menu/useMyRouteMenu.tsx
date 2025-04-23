@@ -3,6 +3,10 @@ import { routerLinks } from "@/routing/routerLinks";
 import usePopover from "@/hooks/usePopover";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
+import { useTranslation } from "next-i18next";
+import { useAppDispatch } from "@/store/hooks";
+import I18nLanguages from "@/shared/I18nLanguages";
 
 interface IUseMyRouteMenuProps {
   route: IRoute;
@@ -11,6 +15,8 @@ interface IUseMyRouteMenuProps {
 
 const useMyRouteMenu = ({ route, onDelete }: IUseMyRouteMenuProps) => {
   const router = useRouter();
+  const { t, i18n } = useTranslation("personal-area");
+  const dispatch = useAppDispatch();
   const popover = usePopover("my-route-menu");
 
   const handleEdit = () => {
@@ -68,12 +74,40 @@ const useMyRouteMenu = ({ route, onDelete }: IUseMyRouteMenuProps) => {
     window.open(url, "_blank");
   };
 
+  const getRouteLink = () => {
+    const link = `${window.location.origin}${
+      i18n.language === I18nLanguages.ru ? "" : `/${i18n.language}`
+    }/routes/${route.id}`;
+    return link;
+  };
+
+  const copyLink = async () => {
+    popover.handleClose();
+    const link = getRouteLink();
+    try {
+      await navigator.clipboard.writeText(link);
+      dispatch(
+        showAlertThunk({
+          alertProps: {
+            title: t("routes.feedback.copyLink"),
+            variant: "standard",
+            severity: "success",
+          },
+          snackbarProps: {},
+        })
+      );
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
   return {
     popover,
     handleEdit,
     handleDelete,
     handleOpenGoogleNavigator,
     handleOpenYandexNavigator,
+    copyLink,
   };
 };
 

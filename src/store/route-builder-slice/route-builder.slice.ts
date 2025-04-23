@@ -90,7 +90,7 @@ const routeBuilderSlice = createSlice({
       state.editRouteId = null;
     });
     builder.addCase(startRouteEditingThunk.fulfilled, (state, { payload }) => {
-      state.editRouteId = payload.id;
+      if (payload.mode === "update") state.editRouteId = payload.id;
       state.items = payload.items;
       state.distance = payload.distance;
       state.duration = payload.duration;

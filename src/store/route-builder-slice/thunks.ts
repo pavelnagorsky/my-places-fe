@@ -19,6 +19,7 @@ export const startRouteEditingThunk = createAsyncThunk(
     payload: {
       id: number;
       language: string;
+      mode: "update" | "duplicate";
       onSuccess?: (data: IRoute) => void;
       onError?: () => void;
     },
@@ -47,6 +48,7 @@ export const startRouteEditingThunk = createAsyncThunk(
         duration: data.duration,
         distance: data.distance,
         id: data.id,
+        mode: payload.mode,
       };
     } catch (e) {
       console.log(e);

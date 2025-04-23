@@ -15,7 +15,7 @@ export const cartToExcursionBuilderThunk = createAsyncThunk(
       duration: 0,
       distance: 0,
       excursionDuration: 15,
-      description: "",
+      excursionDescription: "",
     }));
 
     thunkAPI.dispatch(setExcursionItems(cartItems));
