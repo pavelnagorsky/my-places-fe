@@ -3,6 +3,7 @@ import { LanguageIdsEnum } from "@/shared/LanguageIdsEnum";
 import I18nLanguages from "@/shared/I18nLanguages";
 import { TFunction } from "next-i18next";
 import { formatDuration, intervalToDuration, isValid } from "date-fns";
+import i18nLanguages from "@/shared/I18nLanguages";
 
 function isEmpty(obj: Object) {
   for (const prop in obj) {
@@ -136,12 +137,15 @@ const utils = {
   },
 
   formatKM: (kilometers: number, locale: string) => {
-    return new Intl.NumberFormat(locale, {
-      style: "unit",
-      maximumFractionDigits: 1,
-      unit: "kilometer",
-      unitDisplay: "short",
-    }).format(kilometers);
+    return new Intl.NumberFormat(
+      locale === i18nLanguages.be ? i18nLanguages.ru : locale,
+      {
+        style: "unit",
+        maximumFractionDigits: 1,
+        unit: "kilometer",
+        unitDisplay: "short",
+      }
+    ).format(kilometers);
   },
 
   formatMinutes: (
