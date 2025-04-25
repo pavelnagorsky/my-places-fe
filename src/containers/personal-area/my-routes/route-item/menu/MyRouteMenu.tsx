@@ -10,6 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import ConfirmPopup from "@/components/confirm-popup/ConfirmPopup";
 
 interface IMyRouteMenuProps {
   anchorEl: null | Element;
@@ -33,40 +34,10 @@ const MyRouteMenu = ({
   onCopyLink,
 }: IMyRouteMenuProps) => {
   const { t } = useTranslation(["personal-area", "common"]);
-  const popover = usePopover("confirm-route-delete");
+  const deleteConfirmPopover = usePopover("confirm-route-delete");
 
   return (
     <Fragment>
-      <Popover
-        open={popover.open}
-        id={popover.id}
-        anchorEl={popover.anchor}
-        onClose={popover.handleClose}
-        PaperProps={{
-          sx: {
-            p: "1em",
-            borderRadius: "15px",
-          },
-        }}
-      >
-        <Typography fontSize={"16px"} fontWeight={500}>
-          {t("confirmText")}
-        </Typography>
-        <Divider sx={{ borderColor: "divider", my: "0.5em" }} />
-        <Stack direction={"row"} justifyContent={"center"} mt={1}>
-          <Button
-            variant={"contained"}
-            color={"error"}
-            sx={{ textTransform: "none", fontSize: 16 }}
-            onClick={() => {
-              popover.handleClose();
-              onDelete();
-            }}
-          >
-            {t("buttons.delete", { ns: "common" })}
-          </Button>
-        </Stack>
-      </Popover>
       <Menu
         id="my-route-menu"
         anchorEl={anchorEl}
@@ -78,7 +49,7 @@ const MyRouteMenu = ({
       >
         <MenuItem onClick={onCopyLink}>{t("routes.menu.copyLink")}</MenuItem>
         <MenuItem onClick={onEdit}>{t("routes.menu.edit")}</MenuItem>
-        <MenuItem onClick={popover.handleOpen}>
+        <MenuItem onClick={deleteConfirmPopover.handleOpen}>
           {t("buttons.delete", { ns: "common" })}
         </MenuItem>
         <MenuItem onClick={onOpenGoogleNavigator}>
@@ -88,6 +59,12 @@ const MyRouteMenu = ({
           {t("routes.menu.yandex")}
         </MenuItem>
       </Menu>
+      <ConfirmPopup
+        popoverProps={deleteConfirmPopover}
+        actionText={t("buttons.delete", { ns: "common" })}
+        title={t("confirmText")}
+        onSubmit={onDelete}
+      />
     </Fragment>
   );
 };

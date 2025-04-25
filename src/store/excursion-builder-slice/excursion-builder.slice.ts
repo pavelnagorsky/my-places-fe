@@ -5,6 +5,7 @@ import {
   getExcursionDirectionsThunk,
   saveExcursionThunk,
   startExcursionEditingThunk,
+  translateExcursionPlacesThunk,
 } from "@/store/excursion-builder-slice/thunks";
 import { ILatLngCoordinate } from "@/components/map/Map";
 
@@ -129,6 +130,21 @@ const excursionBuilderSlice = createSlice({
         state.items = payload.items;
         state.distance = payload.distance;
         state.duration = payload.duration;
+      }
+    );
+
+    builder.addCase(
+      translateExcursionPlacesThunk.fulfilled,
+      (state, { payload }) => {
+        state.items = state.items.map((item) => {
+          const translatedItem = payload.find((place) => place.id === item.id);
+          if (!translatedItem) return item;
+          return {
+            ...item,
+            title: translatedItem.title,
+            address: translatedItem.address,
+          } as IExcursionBuilderItem;
+        });
       }
     );
   },

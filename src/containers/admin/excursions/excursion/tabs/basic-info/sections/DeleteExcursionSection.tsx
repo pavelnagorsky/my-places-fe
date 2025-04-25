@@ -6,6 +6,8 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import excursionsService from "@/services/excursions-service/excursions.service";
+import ConfirmPopup from "@/components/confirm-popup/ConfirmPopup";
+import usePopover from "@/hooks/usePopover";
 
 interface IDeleteExcursionSectionProps {
   id: number;
@@ -15,6 +17,7 @@ const DeleteExcursionSection = ({ id }: IDeleteExcursionSectionProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const deleteConfirmPopover = usePopover("confirm-excursion-delete");
 
   const handleDelete = () => {
     if (loading) return;
@@ -73,12 +76,18 @@ const DeleteExcursionSection = ({ id }: IDeleteExcursionSectionProps) => {
             startIcon={
               loading ? <CircularProgress color={"inherit"} size={22} /> : null
             }
-            onClick={handleDelete}
+            onClick={deleteConfirmPopover.handleOpen}
             variant={"contained"}
             color={"error"}
           >
             Удалить
           </StyledButton>
+          <ConfirmPopup
+            popoverProps={deleteConfirmPopover}
+            actionText={"Удалить"}
+            title={"Вы уверены?"}
+            onSubmit={handleDelete}
+          />
         </Box>
       </Stack>
     </Paper>

@@ -10,12 +10,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import Stepper from "@/containers/excursion-builder/content/form/content/excursion-places/stepper/Stepper";
 import ControlButtons from "@/containers/excursion-builder/content/form/content/control-buttons/ControlButtons";
 import ExcursionPlaceCard from "@/containers/excursion-builder/content/form/content/excursion-places/excursion-place-card/ExcursionPlaceCard";
+import { useTranslation } from "next-i18next";
+import { useEffect, useRef } from "react";
+import { translateExcursionPlacesThunk } from "@/store/excursion-builder-slice/thunks";
 
 const ExcursionPlaces = () => {
+  const { i18n } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectItems);
+  const isFirstLanguageChange = useRef(true);
 
   const onRemove = (id: number) => {
     dispatch(removeItem(id));
@@ -24,6 +29,14 @@ const ExcursionPlaces = () => {
   const onSortEnd = (oldIndex: number, newIndex: number) => {
     dispatch(sortItems({ oldIndex, newIndex }));
   };
+
+  useEffect(() => {
+    if (!isFirstLanguageChange.current) {
+      dispatch(translateExcursionPlacesThunk({ language: i18n.language }));
+    } else {
+      isFirstLanguageChange.current = false;
+    }
+  }, [i18n.language]);
 
   return (
     <Stack

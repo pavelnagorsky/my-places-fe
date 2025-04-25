@@ -10,6 +10,8 @@ import placesService from "@/services/places-service/places.service";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
+import ConfirmPopup from "@/components/confirm-popup/ConfirmPopup";
+import usePopover from "@/hooks/usePopover";
 
 interface IDeletePlaceForm {
   place: ISelect | null;
@@ -24,6 +26,7 @@ const DeletePlaceSection = ({ id, hasReviews }: IDeletePlaceSectionProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const deleteConfirmPopover = usePopover("confirm-place-delete");
 
   const form = useForm<IDeletePlaceForm>({
     mode: "onChange",
@@ -101,12 +104,18 @@ const DeletePlaceSection = ({ id, hasReviews }: IDeletePlaceSectionProps) => {
             startIcon={
               loading ? <CircularProgress color={"inherit"} size={22} /> : null
             }
-            onClick={handleDelete}
+            onClick={deleteConfirmPopover.handleOpen}
             variant={"contained"}
             color={"error"}
           >
             Удалить
           </StyledButton>
+          <ConfirmPopup
+            popoverProps={deleteConfirmPopover}
+            actionText={"Удалить"}
+            title={"Вы уверены?"}
+            onSubmit={handleDelete}
+          />
         </Box>
       </Stack>
     </Paper>
