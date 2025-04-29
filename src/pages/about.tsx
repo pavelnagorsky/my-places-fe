@@ -2,18 +2,26 @@ import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
-import { Fragment, useMemo } from "react";
+import { Fragment } from "react";
 import { FAQPageJsonLd, NextSeo } from "next-seo";
 import { useTranslation } from "next-i18next";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import card1Image from "/public/images/about-us/card1.jpg";
 import card2Image from "/public/images/about-us/card2.jpg";
+import useFAQ from "@/containers/about-us/faq/logic/useFAQ";
 
 const AboutPageLazy = dynamic(() => import("../containers/about-us/AboutUs"));
 
 const About: NextPage = () => {
   const { t } = useTranslation("about");
   const { canonical, alternateLinks } = useAlternateLinks();
+  const faq = useFAQ();
+  const metaFAQ = faq.flatMap((section) =>
+    section.questions.map((question) => ({
+      questionName: question.title,
+      acceptedAnswerText: question.description,
+    }))
+  );
 
   return (
     <Fragment>
@@ -42,54 +50,7 @@ const About: NextPage = () => {
           ],
         }}
       />
-      <FAQPageJsonLd
-        mainEntity={[
-          {
-            questionName: t("faq.1.1.title"),
-            acceptedAnswerText: t("faq.1.1.description"),
-          },
-          {
-            questionName: t("faq.1.2.title"),
-            acceptedAnswerText: t("faq.1.2.description"),
-          },
-          {
-            questionName: t("faq.1.3.title"),
-            acceptedAnswerText: t("faq.1.3.description"),
-          },
-          {
-            questionName: t("faq.1.4.title"),
-            acceptedAnswerText: t("faq.1.4.description"),
-          },
-          {
-            questionName: t("faq.2.1.title"),
-            acceptedAnswerText: t("faq.2.1.description"),
-          },
-          {
-            questionName: t("faq.2.2.title"),
-            acceptedAnswerText: t("faq.2.2.description"),
-          },
-          {
-            questionName: t("faq.3.1.title"),
-            acceptedAnswerText: t("faq.3.1.description"),
-          },
-          {
-            questionName: t("faq.3.2.title"),
-            acceptedAnswerText: t("faq.3.2.description"),
-          },
-          {
-            questionName: t("faq.3.3.title"),
-            acceptedAnswerText: t("faq.3.3.description"),
-          },
-          {
-            questionName: t("faq.3.4.title"),
-            acceptedAnswerText: t("faq.3.4.description"),
-          },
-          {
-            questionName: t("faq.4.1.title"),
-            acceptedAnswerText: t("faq.4.1.description"),
-          },
-        ]}
-      />
+      <FAQPageJsonLd mainEntity={metaFAQ} />
       <AboutPageLazy />
     </Fragment>
   );

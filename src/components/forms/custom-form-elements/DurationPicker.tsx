@@ -4,11 +4,22 @@ import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { useMemo } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { formatDuration, intervalToDuration } from "date-fns";
+import { ISelect } from "@/shared/interfaces";
 
 interface IDurationPickerProps extends Omit<SelectElementProps, "options"> {}
 
-const generateTimeIntervals = (intervalMinutes: number, locale: any) => {
-  const opts = [];
+const generateTimeIntervals = (
+  intervalMinutes: number,
+  config: { locale: any; extraValues?: number[] }
+) => {
+  let opts: ISelect[] = [];
+  if (config.extraValues?.length) {
+    const extraOptions = config.extraValues.map((value) => ({
+      id: value,
+      label: formatDuration({ minutes: value }, { locale: config.locale }),
+    }));
+    opts = opts.concat(extraOptions);
+  }
   for (let hours = 0; hours < 24; hours++) {
     const isFirstHour = hours === 0;
     for (
@@ -22,7 +33,7 @@ const generateTimeIntervals = (intervalMinutes: number, locale: any) => {
       startTime.setHours(0, 0, 0, 0); // Set start time to today's date at 00:00
       const duration = intervalToDuration({ start: startTime, end: date });
       const formattedDuration = formatDuration(duration, {
-        locale,
+        locale: config.locale,
         format: ["hours", "minutes"],
         zero: true,
       });
@@ -38,7 +49,7 @@ const DurationPicker = ({ slotProps, sx, ...props }: IDurationPickerProps) => {
   const { i18n } = useTranslation();
   const locale = useDateFnsLocale();
   const options = useMemo(() => {
-    return generateTimeIntervals(15, locale);
+    return generateTimeIntervals(15, { locale, extraValues: [5] });
   }, [i18n.language]);
 
   return (

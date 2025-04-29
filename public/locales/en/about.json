@@ -60,6 +60,36 @@
         "title": "Rules for creating Reviews",
         "description": "The rules of writing any text are intuitive. It is forbidden to use abnormal language, insult or humiliate someone. Calls for violence and the overthrow of the state system are prohibited.\nThe length of Reviews is limited to 6000 characters (approximately two full pages A4 format), you can also attach no more than 10 photos.\nUsers can edit their own Reviews at any time."
       }
+    },
+    "5": {
+      "title": "Route Creation",
+      "1": {
+        "title": "Selecting Locations",
+        "description": "After you have reviewed the list of locations and decided on the interesting spots you would like to visit, all that remains is to build the route, upload it into the navigator, and hit the road! Our website will handle all of this for you.\n\nOn the \"Location Search\" page, you can select preferred locations by clicking the \"+\" button on the location card (in the list or on the map). Selected locations are placed into a virtual \"basket\" – a corresponding icon will appear, highlighting the number of selected locations. Clicking on this icon opens the list of selected locations, with an option for manual editing (deleting, rearranging). At the bottom, there is a \"Create Route\" button, which opens the route creation window when clicked."
+      },
+      "2": {
+        "title": "Instructions for Creating Routes",
+        "description": "In the route creation window, you need to fill out several fields:\n1.\tRoute name.\n2.\tStarting point (A) and destination (B). The \"my current location\" option is available.\n3.\tMode of transportation (by car / on foot).\n\nThe route is then automatically built as follows: A - selected locations in the initial order - B. The list of selected locations can be edited manually: add, delete, or rearrange. Details of the trip (time, distance) are automatically displayed in a separate window. There is a nearby \"Optimize\" button – clicking it rebuilds the route between the starting and ending points to the optimal one in terms of time and distance.\n\nAt the bottom of the page, the visual layout of the route is displayed on a map. Nearby are buttons for \"Google Navigator\" and \"Yandex Navigator\" – clicking these automatically uploads the created route to the corresponding navigator. For registered users, a \"Save Route\" button is available."
+      },
+      "3": {
+        "title": "Working with Routes",
+        "description": "Selecting locations and subsequently creating routes is available to everyone, without the need to register. However, registered users receive a bonus: all created routes are saved in their personal account, with the ability to edit/delete them later. A route is your personal trip, visible only to you, acting as a transitional link between the website and the navigator.\n\nIf you want to share an interesting trip (not just a location) with all project participants, an Excursion is created (essentially, an extended version of a Route), with more details in a separate section."
+      }
+    },
+    "6": {
+      "title": "Creating Excursions",
+      "1": {
+        "title": "What is an Excursion?",
+        "description": "An Excursion on our website is the compilation of several already-created locations into a single route, supplemented with a number of auxiliary fields.\nUnlike Routes (which are visible only to their authors and act as a transitional link between the website and the navigator), Excursions are visible to all users (in a separate Excursion search window) and represent a list of locations united by a certain theme."
+      },
+      "2": {
+        "title": "Instruction for Creating Excursions",
+        "description": "The general procedure is as follows:\n1.\tSelect locations.\n2.\tCreate an Excursion based on the selected list of locations.\n1.\tOn the \"Location Search\" page, you can select a location by clicking the \"+\" icon on the location image – either in the list or on the map. Selected locations are placed into a virtual \"basket\" – a corresponding icon appears in the bottom-right corner of the screen. Clicking this icon takes the user to the list of selected locations, with a \"Create Excursion\" button at the bottom. Click it, and you go to the Excursion creation page.\n2.\tIn the Excursion creation window, you need to fill in several fields: a) Title. This is a brief, creative name for the excursion (it is also recommended to briefly list the visited locations in the title). b) Short description. A brief description of the excursion's essence (what we will see, visit, etc.). c) Mode of transportation. Choose one of two options: by car / on foot. d) Type of Excursion. Again, there are two types: Overview (one settlement) / Regional (several different settlements). e) The route itself.\nThe route is formed automatically and can be edited manually: add/remove locations, rearrange their order. A side window shows route details (distance, travel time). Beneath it is the \"Optimize\" button – clicking it reorders the route to minimize the distance (and, correspondingly, travel time). The \"Optimize\" button becomes available when there are 4 or more locations.\nAt the bottom of the page, the visual layout of the Excursion route is displayed on a map.\nFor the route, there are two input fields:\n•\tTime to explore the location (mandatory) – choose from proposed options, in multiples of 15 minutes.\n•\tComments for the route point (optional). This is not the description of the location but an auxiliary comment for the route point. To the left, between route points, travel time (from one point to another) is displayed.\n\nAfter filling out all the fields and forming the route, click \"Save,\" after which the Excursion is sent for moderation. Upon approval, the Excursion becomes visible in the general list of Excursions. In case of rejection, the Excursion is marked as \"Rejected,\" and the reason is sent to the author. The user can view their created Excursions in the personal account section and can edit/delete them at any time."
+      },
+      "3": {
+        "title": "How to Use an Excursion?",
+        "description": "On the Excursion search page, you can set filters to find a suitable Excursion. Clicking on the Excursion card takes the user to the Excursion viewing window, where they can see the title, short description, route, and other details. The route itself can be exported to Yandex or Google Navigator (by clicking the corresponding button) and immediately set off.\n\t\nClicking on the arrow next to the route point takes the user to the corresponding location view. Just below is a button to view Notes for the location.\n\nThe Excursion text – a guide's story – is read from the Short Description of the location + the text of the corresponding Note (Notes).\n\nThe starting and ending points of the Excursion are the first and last points of the route, respectively. Where the user starts and at what time is entirely up to them."
+      }
     }
   }
 }

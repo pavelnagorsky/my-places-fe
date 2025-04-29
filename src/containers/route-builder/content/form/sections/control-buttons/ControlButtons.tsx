@@ -20,6 +20,7 @@ const ControlButtons = () => {
     useFormContext<IRouteBuilderForm>();
   const [isAddMode, setIsAddMode] = useState(false);
   const selectedPlaces = useAppSelector(selectItems);
+  const isPlacesLimitExceeded = selectedPlaces.length >= 25;
 
   const onClickAddLocation = () => {
     setIsAddMode(true);
@@ -84,6 +85,7 @@ const ControlButtons = () => {
         <>
           <Button
             onClick={onClickAddLocation}
+            disabled={isPlacesLimitExceeded}
             variant={"outlined"}
             size={"large"}
             sx={{ borderWidth: 2 }}

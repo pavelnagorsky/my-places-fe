@@ -22,7 +22,7 @@ const ExcursionPlaces = ({ items }: { items: IExcursionPlace[] }) => {
       <Stack direction={"row"} gap={{ xs: "1em", md: "2em" }} height={"100%"}>
         {!isMobile && <Stepper items={items} />}
         <Stack gap={2} width={"100%"}>
-          <Stack gap={"1em"} width={"100%"}>
+          <Stack gap={"1em"} width={"100%"} id={"cards-container"}>
             <AnimatePresence mode="popLayout">
               {items.map((place, index) => (
                 <motion.div
