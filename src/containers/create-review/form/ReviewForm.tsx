@@ -32,8 +32,10 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
     >
       <motion.div variants={animationVariants.defaultItemVariant}>
         <WrappedContainer>
-          <Breadcrumbs />
-          <Box pt="1.5em" pb={{ xs: "1.5em", md: "2em" }}>
+          <Box mb={2} display={{ xs: "none", md: "flex" }}>
+            <Breadcrumbs />
+          </Box>
+          <Box pb={{ xs: "1.5em", md: "2em" }}>
             <Typography
               variant={"h1"}
               // fontSize={{ xs: "25px", md: "32px" }}

@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form-mui";
-import { Fragment, SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import { Box, Stack, Typography } from "@mui/material";
@@ -60,8 +60,10 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
     >
       <WrappedContainer>
         <motion.div variants={animationVariants.defaultItemVariant}>
-          <Breadcrumbs />
-          <Box pt="1.5em" pb={{ xs: "1.5em", md: "2em" }}>
+          <Box mb={2} display={{ xs: "none", md: "flex" }}>
+            <Breadcrumbs />
+          </Box>
+          <Box pb={{ xs: "1.5em", md: "2em" }}>
             <Stack
               direction={{ md: "row" }}
               gap={{ xs: "1.5em", md: "1em" }}

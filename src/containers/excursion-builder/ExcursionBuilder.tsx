@@ -25,7 +25,7 @@ const ExcursionBuilder = () => {
       >
         <WrappedContainer>
           <FormProvider {...form}>
-            <Stack mb={2}>
+            <Stack mb={2} display={{ xs: "none", md: "flex" }}>
               <Breadcrumbs />
             </Stack>
             <Grid container spacing={4} mb={"4em"}>

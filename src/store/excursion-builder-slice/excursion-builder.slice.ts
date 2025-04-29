@@ -34,6 +34,7 @@ interface IExcursionBuilderState {
   directions: any | null;
   directionsLoading: boolean;
   editExcursionId: number | null;
+  editExcursionData: any | null;
 }
 
 const initialState: IExcursionBuilderState = {
@@ -44,6 +45,7 @@ const initialState: IExcursionBuilderState = {
   directions: null,
   directionsLoading: false,
   editExcursionId: null,
+  editExcursionData: null,
 };
 
 const excursionBuilderSlice = createSlice({
@@ -122,6 +124,7 @@ const excursionBuilderSlice = createSlice({
 
     builder.addCase(startExcursionEditingThunk.rejected, (state, action) => {
       state.editExcursionId = null;
+      state.editExcursionData = null;
     });
     builder.addCase(
       startExcursionEditingThunk.fulfilled,
@@ -130,6 +133,7 @@ const excursionBuilderSlice = createSlice({
         state.items = payload.items;
         state.distance = payload.distance;
         state.duration = payload.duration;
+        state.editExcursionData = payload;
       }
     );
 
@@ -185,6 +189,11 @@ export const selectExcursionDirectionsLoading = createSelector(
 export const selectIsEditingMode = createSelector(
   selectState,
   (s) => typeof s.editExcursionId === "number"
+);
+
+export const selectEditExcursionData = createSelector(
+  selectState,
+  (s) => s.editExcursionData
 );
 
 export const {

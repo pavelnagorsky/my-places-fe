@@ -10,7 +10,6 @@ import MapSection from "@/containers/route-builder/content/map-section/MapSectio
 import dynamic from "next/dynamic";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import { Stack } from "@mui/material";
-import Stepper from "@/containers/route-builder/content/form/sections/Stepper";
 
 const Form = dynamic(
   () => import("@/containers/route-builder/content/form/Form"),
@@ -33,7 +32,7 @@ const RouteBuilder = () => {
           <Grid container spacing={4} mb={"4em"}>
             <Grid size={12}>
               <motion.div variants={animationVariants.defaultItemVariant}>
-                <Stack mb={3}>
+                <Stack mb={2} display={{ xs: "none", md: "flex" }}>
                   <Breadcrumbs />
                 </Stack>
                 <RouteTitle />

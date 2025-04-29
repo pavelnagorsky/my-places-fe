@@ -14,11 +14,7 @@ import DragHandleIcon from "@mui/icons-material/DragHandle";
 import deleteIcon from "../../../../../../../../public/images/icons/basket.png";
 import Image from "next/image";
 import locationImage from "../../../../../../../../public/images/icons/location.png";
-import {
-  FormProvider,
-  TextFieldElement,
-  useFormContext,
-} from "react-hook-form-mui";
+import { FormProvider, TextFieldElement } from "react-hook-form-mui";
 import DurationPicker from "@/components/forms/custom-form-elements/DurationPicker";
 import { useTranslation } from "next-i18next";
 import usePlaceCardForm from "@/containers/excursion-builder/content/form/content/excursion-places/excursion-place-card/logic/usePlaceCardForm";
@@ -151,8 +147,8 @@ const ExcursionPlaceCard = ({
               placeholder={t("form.placeDescriptionPlaceholder")}
               rules={{
                 maxLength: {
-                  value: 400,
-                  message: t("errors.maxLength", { ns: "common", value: 400 }),
+                  value: 600,
+                  message: t("errors.maxLength", { ns: "common", value: 600 }),
                 },
               }}
             />
