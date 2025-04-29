@@ -1,11 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { RootState } from "@/store/store";
-import { ICreateRoute } from "@/services/routes-service/interfaces/create-route.interface";
-import { IUpdateRoute } from "@/services/routes-service/interfaces/update-route.interface";
-import routesService from "@/services/routes-service/routes.service";
 import searchService from "@/services/search-service/search.service";
-import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 import {
   IExcursionBuilderItem,
   setDistance,
@@ -16,6 +12,26 @@ import { ICreateExcursion } from "@/services/excursions-service/interfaces/creat
 import excursionsService from "@/services/excursions-service/excursions.service";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import { IUpdateExcursion } from "@/services/excursions-service/interfaces/update-excursion.interface";
+
+export const translateExcursionPlacesThunk = createAsyncThunk(
+  "excursion-builder/translate-places",
+  async (
+    payload: {
+      language: string;
+    },
+    thunkAPI
+  ) => {
+    const rootState = thunkAPI.getState() as RootState;
+    const placesIdsToTranslate = rootState.excursionBuilder.items.map(
+      (item) => item.id
+    );
+    const { data } = await searchService.searchByIds(
+      placesIdsToTranslate,
+      payload.language
+    );
+    return data;
+  }
+);
 
 export const startExcursionEditingThunk = createAsyncThunk(
   "excursion-builder/start-editing",
@@ -33,10 +49,6 @@ export const startExcursionEditingThunk = createAsyncThunk(
         payload.id,
         payload.language
       );
-      // const placesResponse = await searchService.searchByIds(
-      //   data.places.map((place) => place.id),
-      //   payload.language
-      // );
 
       const items = data.places.map(
         (place, index) =>
