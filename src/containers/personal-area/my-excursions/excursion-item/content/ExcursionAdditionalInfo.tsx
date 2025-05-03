@@ -32,30 +32,43 @@ const ExcursionAdditionalInfo = ({ item }: { item: IExcursionListItem }) => {
       >
         <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
-            {t("excursions.headings.distance")}: {formattedDistance}
+            <Box component={"span"} fontWeight={500}>
+              {t("excursions.headings.distance")}:
+            </Box>{" "}
+            {formattedDistance}
           </Typography>
         </Grid>
         <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
-            {t("excursions.headings.duration")}: {formattedDuration}
+            <Box component={"span"} fontWeight={500}>
+              {t("excursions.headings.duration")}:
+            </Box>{" "}
+            {formattedDuration}
           </Typography>
         </Grid>
         <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
-            {t("excursions.headings.excursionDuration")}:{" "}
+            <Box component={"span"} fontWeight={500}>
+              {t("excursions.headings.excursionDuration")}:
+            </Box>{" "}
             {formattedExcursionDuration}
           </Typography>
         </Grid>
         <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
-            {t("excursions.headings.travelMode")}:{" "}
+            <Box component={"span"} fontWeight={500}>
+              {t("excursions.headings.travelMode")}:
+            </Box>{" "}
             {travelModes.find((mode) => mode.id === item.travelMode)?.label ||
               "-"}
           </Typography>
         </Grid>
         <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
-            {t("excursions.headings.views")}: {item.viewsCount}
+            <Box component={"span"} fontWeight={500}>
+              {t("excursions.headings.views")}:
+            </Box>{" "}
+            {item.viewsCount}
           </Typography>
         </Grid>
       </Grid>

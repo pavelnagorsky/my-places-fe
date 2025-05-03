@@ -191,6 +191,10 @@ export const selectIsEditingMode = createSelector(
   (s) => typeof s.editExcursionId === "number"
 );
 
+export const selectExcursionId = createSelector(
+  selectState,
+  (s) => s.editExcursionId
+);
 export const selectEditExcursionData = createSelector(
   selectState,
   (s) => s.editExcursionData

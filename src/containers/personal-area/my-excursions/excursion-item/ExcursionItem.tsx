@@ -217,6 +217,9 @@ const ExcursionItem = ({ item, onDelete }: IExcursionItemProps) => {
           </IconButton>
         </Stack>
       </Stack>
+      <Collapse in={fullOpen}>
+        <ExcursionAdditionalInfo item={item} />
+      </Collapse>
     </Box>
   );
 

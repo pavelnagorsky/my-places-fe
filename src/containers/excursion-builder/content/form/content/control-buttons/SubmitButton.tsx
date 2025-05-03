@@ -1,6 +1,7 @@
 import { Button, CircularProgress } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
+  selectExcursionId,
   selectHasItems,
   selectIsEditingMode,
   selectItems,
@@ -12,7 +13,6 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
-import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import { saveExcursionThunk } from "@/store/excursion-builder-slice/thunks";
 import { ICreateExcursion } from "@/services/excursions-service/interfaces/create-excursion.interface";
 import { IUpdateExcursion } from "@/services/excursions-service/interfaces/update-excursion.interface";
@@ -25,6 +25,7 @@ const SubmitButton = () => {
   const hasItems = useAppSelector(selectHasItems);
   const isAuth = useAppSelector(selectIsAuth);
   const isEditMode = useAppSelector(selectIsEditingMode);
+  const excursionId = useAppSelector(selectExcursionId);
   const items = useAppSelector(selectItems);
   const router = useRouter();
   const isAdminMode = router.asPath.startsWith(
@@ -73,7 +74,11 @@ const SubmitButton = () => {
     );
     if (isEditMode) {
       if (isAdminMode) {
-        router.push(routerLinks.administrationExcursions);
+        if (excursionId) {
+          router.push(routerLinks.administrationExcursion(excursionId));
+        } else {
+          router.push(routerLinks.administrationExcursions);
+        }
       } else {
         router.push(routerLinks.personalAreaExcursions);
       }
