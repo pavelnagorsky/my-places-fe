@@ -39,7 +39,7 @@ const useEditMyExcursion = () => {
   const onGoBack = () =>
     router.replace(
       isAdminMode
-        ? routerLinks.administrationExcursions
+        ? routerLinks.administrationExcursion(+`${excursionId}`)
         : routerLinks.personalAreaExcursions
     );
 
