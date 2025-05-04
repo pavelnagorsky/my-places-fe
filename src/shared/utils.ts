@@ -1,9 +1,9 @@
 import { ILatLngCoordinate } from "@/components/map/Map";
 import { LanguageIdsEnum } from "@/shared/LanguageIdsEnum";
 import I18nLanguages from "@/shared/I18nLanguages";
-import { TFunction } from "next-i18next";
-import { formatDuration, intervalToDuration, isValid } from "date-fns";
 import i18nLanguages from "@/shared/I18nLanguages";
+import { formatDuration, intervalToDuration, isValid } from "date-fns";
+import striptags from "striptags";
 
 function isEmpty(obj: Object) {
   for (const prop in obj) {
@@ -165,6 +165,10 @@ const utils = {
 
     if (!minutes) return `0${hoursTranslation}`;
     return `${hoursString} ${minutesString}`;
+  },
+
+  htmlToText: (html: string) => {
+    return striptags(html).replace(/&nbsp;/g, " ");
   },
 };
 

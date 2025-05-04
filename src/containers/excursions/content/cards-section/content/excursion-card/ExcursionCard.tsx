@@ -7,62 +7,85 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import Image from "next/image";
 import { routerLinks } from "@/routing/routerLinks";
 import Link from "next/link";
-import likeImage from "/public/images/icons/heart.png";
-import locationImage from "/public/images/icons/location.png";
 import eyeImage from "/public/images/icons/eye.png";
-import AddToCart from "@/containers/search-page/content/cards-section/place-card/add-to-cart-panel/AddToCart";
-import { useAppSelector } from "@/store/hooks";
-import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice";
-import { primaryColor } from "@/styles/theme/lightTheme";
+import { IExcursionSearchItem } from "@/services/excursions-service/interfaces/excursion-search-item.interface";
+import useExcursionTypes from "@/containers/excursion-builder/content/form/logic/utils/useExcursionTypes";
+import useTravelModeOptions from "@/containers/route-builder/content/form/sections/travel-mode/useTravelModeOptions";
+import { useTranslation } from "next-i18next";
+import utils from "@/shared/utils";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-interface IPlaceCardProps {
-  place: ISearchPlace;
-}
+function ExcursionCard({ excursion }: { excursion: IExcursionSearchItem }) {
+  const { t } = useTranslation("excursion-management");
+  const types = useExcursionTypes();
+  const travelModes = useTravelModeOptions();
 
-function PlaceCard({ place }: IPlaceCardProps) {
-  const cardPlaceIds = useAppSelector(selectCartPlaceIds);
-  const isInCart = cardPlaceIds.includes(place.id);
+  const plainDescription = utils.htmlToText(excursion.description);
+
+  const travelMode = travelModes.find((tm) => tm.id === excursion.travelMode);
+  const type = types.find((type) => type.id === excursion.type);
 
   return (
     <Card
       sx={{
-        border: isInCart ? `2px solid ${primaryColor}` : "none",
         width: { xs: "340px", md: "400px", xl: "400px" },
-        height: { xs: "510px", md: "565px" },
+        height: { xs: "500px", md: "555px" },
         borderRadius: "10px",
         boxShadow: "0px 2px 22px 0px #00000012",
         position: "relative",
       }}
     >
-      <AddToCart placeId={place.id} />
+      <CardMedia
+        sx={{
+          position: "relative",
+          height: {
+            xs: 217,
+            md: 250,
+          },
+        }}
+      >
+        <Carousel
+          showThumbs={false}
+          showIndicators={false}
+          stopOnHover
+          showArrows
+          statusFormatter={(currentItem, total) => `${currentItem}/${total}`}
+          swipeable
+          swipeScrollTolerance={30}
+          preventMovementUntilSwipeScrollTolerance
+          emulateTouch
+          infiniteLoop
+        >
+          {excursion.images.map((image, i) => (
+            <Box
+              component={"img"}
+              sx={{
+                objectFit: "cover",
+                userSelect: "none",
+                height: {
+                  xs: 217,
+                  md: 250,
+                },
+              }}
+              height={"100%"}
+              sizes="(max-width: 900px) 330px, 374px"
+              src={image || "/"}
+              key={i}
+              alt={excursion.title}
+            />
+          ))}
+        </Carousel>
+      </CardMedia>
       <CardActionArea
         target={"_blank"}
         component={Link}
-        href={routerLinks.place(place.slug)}
+        href={routerLinks.excursion(excursion.slug)}
         sx={{ height: "100%" }}
       >
-        <CardMedia
-          sx={{
-            position: "relative",
-            height: {
-              xs: 217,
-              md: 250,
-            },
-          }}
-        >
-          <Image
-            style={{ objectFit: "cover" }}
-            fill
-            priority
-            sizes="(max-width: 900px) 330px, 374px"
-            src={place.image || "/"}
-            alt={place.title || "Place image"}
-          />
-        </CardMedia>
         <CardContent
           sx={{
             px: "1.6em",
@@ -90,49 +113,28 @@ function PlaceCard({ place }: IPlaceCardProps) {
                 WebkitLineClamp: 2,
               }}
             >
-              {place.title}
+              {excursion.title}
             </Typography>
-            <Stack
-              direction={"row"}
-              alignItems={"center"}
-              gap={"0.5em"}
-              mb="0.8em"
-            >
-              <Image
-                src={locationImage}
-                alt={"Location"}
-                height={24}
-                width={24}
-              />
-              <Typography
-                overflow={"hidden"}
-                textOverflow={"ellipsis"}
-                whiteSpace={"nowrap"}
-                variant="body2"
-                fontSize={{ xs: "14px", md: "16px" }}
-              >
-                {place.address}
-              </Typography>
-            </Stack>
             <Typography
-              variant="body1"
-              lineHeight={"135%"}
               fontSize={{ xs: "14px", md: "16px" }}
+              color={"secondary.main"}
+              lineHeight={"135%"}
               mt={{ xs: "0.8em", md: 0 }}
+              maxHeight={"140px"}
               textOverflow={"ellipsis"}
               overflow={"hidden"}
               sx={{
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 5,
+                WebkitLineClamp: 6,
               }}
             >
-              {place.description}
+              {plainDescription}...
             </Typography>
           </Box>
           <Typography
             mb="1.2em"
-            mt={{ xs: "1em", md: "1.2em" }}
+            mt={{ md: "0.5em" }}
             variant="body2"
             fontSize={{ xs: "13px", md: "15px" }}
             textAlign={"center"}
@@ -141,7 +143,10 @@ function PlaceCard({ place }: IPlaceCardProps) {
             overflow={"hidden"}
             whiteSpace={"nowrap"}
           >
-            {place.categories.map((c) => c.title).join(" | ")}
+            {travelMode?.label || ""} | {excursion.placesCount}{" "}
+            {excursion.placesCount > 4
+              ? t("search.placesPlural")
+              : t("search.places")}
           </Typography>
           <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
             <Stack
@@ -151,16 +156,18 @@ function PlaceCard({ place }: IPlaceCardProps) {
               overflow={"hidden"}
               gap={"0.5em"}
             >
-              <Box
-                component={"img"}
-                src={place.type.image as string}
-                alt={place.type.title}
-                sx={{
-                  objectFit: "cover",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
+              {!!type?.image && (
+                <Box
+                  component={"img"}
+                  src={type.image}
+                  alt={type?.label}
+                  sx={{
+                    objectFit: "cover",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+              )}
               <Typography
                 fontWeight={400}
                 variant="body1"
@@ -170,7 +177,7 @@ function PlaceCard({ place }: IPlaceCardProps) {
                 whiteSpace={"nowrap"}
                 sx={{ wordBreak: "break-word" }}
               >
-                {place.type.title}
+                {type?.label}
               </Typography>
             </Stack>
             <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
@@ -182,19 +189,8 @@ function PlaceCard({ place }: IPlaceCardProps) {
                 alignItems={"center"}
                 gap={"0.5em"}
               >
-                <Image src={likeImage} alt={"Likes"} height={20} width={22} />
-                {place.likesCount}
-              </Typography>
-              <Typography
-                fontWeight={300}
-                variant="body1"
-                fontSize={{ xs: "13px", md: "15px" }}
-                display={"flex"}
-                alignItems={"center"}
-                gap={"0.5em"}
-              >
                 <Image src={eyeImage} alt={"Views"} height={20} width={22} />
-                {place.viewsCount}
+                {excursion.viewsCount}
               </Typography>
             </Stack>
           </Stack>
@@ -204,4 +200,4 @@ function PlaceCard({ place }: IPlaceCardProps) {
   );
 }
 
-export default PlaceCard;
+export default ExcursionCard;

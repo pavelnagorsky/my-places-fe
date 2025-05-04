@@ -7,6 +7,7 @@ import {
   IAdminExcursionsRequest,
   IModerationExcursionsRequest,
   IMyExcursionsRequest,
+  ISearchExcursionsRequest,
 } from "@/services/excursions-service/interfaces/interfaces";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
@@ -15,6 +16,7 @@ import { IExcursionModerationItem } from "@/services/excursions-service/interfac
 import { IModeration } from "@/services/places-service/interfaces/moderation.interface";
 import { ICreateSlug } from "@/services/places-service/interfaces/create-slug.interface";
 import { IChangeExcursionStatus } from "@/services/excursions-service/interfaces/change-excursion-status.interface";
+import { IExcursionSearchItem } from "@/services/excursions-service/interfaces/excursion-search-item.interface";
 
 const excursionsService = {
   createExcursion: (payload: ICreateExcursion, language: string) => {
@@ -110,6 +112,21 @@ const excursionsService = {
   changeStatus: (id: number | string, dto: IChangeExcursionStatus) => {
     return axiosInstance.post(`/excursions/${id}/change-status`, dto);
   },
+
+  searchExcursions: (payload: ISearchExcursionsRequest, lang: string) => {
+    const langId = parseLanguageToId(lang);
+    return axiosInstance.post<IPaginationResponse<IExcursionSearchItem>>(
+      `/excursions/search`,
+      payload,
+      {
+        params: {
+          lang: langId,
+        },
+      }
+    );
+  },
+
+  SEARCH_EXCURSIONS_PER_PAGE: 12,
 };
 
 export default excursionsService;

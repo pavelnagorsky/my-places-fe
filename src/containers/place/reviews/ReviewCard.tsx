@@ -1,14 +1,6 @@
-import { IReview } from "@/services/reviews-service/interfaces/review.interface";
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, Stack, Typography } from "@mui/material";
 import { format } from "date-fns";
-import StyledReviewsContainer from "../../../components/UI/review-containers/StyledReviewsContainer";
+import StyledTextEditorContainer from "../../../components/UI/review-containers/StyledTextEditorContainer";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
 
@@ -19,15 +11,17 @@ interface IReviewCardProps {
 
 const ReviewCard = ({ review, onClick }: IReviewCardProps) => {
   const { t } = useTranslation("common");
+
   function createMarkup() {
     return { __html: review.description };
   }
+
   return (
     <Card
       sx={{
         height: "350px",
         borderRadius: "10px",
-        boxShadow: 'none',
+        boxShadow: "none",
         // boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 1px 0px rgba(0,0,0,0.12)",
         border: "0.5px solid #FF7900",
         position: "relative",
@@ -92,7 +86,7 @@ const ReviewCard = ({ review, onClick }: IReviewCardProps) => {
         </Typography>
       </Box>
       <Box height={"100%"}>
-        <StyledReviewsContainer
+        <StyledTextEditorContainer
           px={"1em"}
           dangerouslySetInnerHTML={createMarkup()}
         />

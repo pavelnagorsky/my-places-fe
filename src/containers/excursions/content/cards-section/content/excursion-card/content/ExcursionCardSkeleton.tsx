@@ -1,0 +1,70 @@
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Divider,
+} from "@mui/material";
+
+function ExcursionCardSkeleton() {
+  return (
+    <Card
+      // elevation={2}
+      sx={{
+        width: { xs: "340px", md: "400px", xl: "400px" },
+        height: { xs: "500px", md: "555px" },
+        borderRadius: "10px",
+        boxShadow: "0px 2px 22px 0px #00000012",
+        // boxShadow: "0px 4px 25px 0px rgba(0, 0, 0, 0.50)",
+        "& .MuiSkeleton-root": {
+          bgcolor: "#D9D9D9",
+        },
+      }}
+    >
+      <CardActionArea sx={{ height: "100%" }}>
+        <CardMedia
+          sx={{
+            height: {
+              xs: 217,
+              md: 250,
+            },
+          }}
+        >
+          <Skeleton variant={"rectangular"} height={"100%"} />
+        </CardMedia>
+        <CardContent
+          sx={{
+            height: "100%",
+            px: "1.6em",
+          }}
+        >
+          <Stack direction={"row"} justifyContent={"center"} mb={1}>
+            <Skeleton variant={"text"} height={32} width={178} />
+          </Stack>
+          <Skeleton height={20} sx={{ display: { xs: "none", md: "block" } }} />
+          <Skeleton height={20} />
+          <Skeleton height={20} />
+          <Skeleton height={20} />
+          <Skeleton height={20} />
+          <Skeleton height={20} />
+          <Skeleton height={20} width={"50%"} />
+          <Skeleton height={20} sx={{ mt: "0.8em" }} />
+          <Divider variant={"middle"} sx={{ mt: "1em", mb: "0.8em" }} />
+          <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
+            <Stack flexGrow={1} direction={"row"} gap={1}>
+              <Skeleton width={40} height={40} />
+              <Skeleton height={40} width={96} />
+            </Stack>
+            <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
+              <Skeleton width={70} height={40} />
+            </Stack>
+          </Stack>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
+}
+
+export default ExcursionCardSkeleton;
