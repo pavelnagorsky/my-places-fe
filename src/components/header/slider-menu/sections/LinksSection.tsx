@@ -9,6 +9,45 @@ import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import RouteIcon from "@mui/icons-material/Route";
 import SliderMenuLink from "../SliderMenuLink";
 import { useTranslation } from "next-i18next";
+import MapIcon from "@mui/icons-material/Map";
+
+const desktopLinksConfig = [
+  {
+    i18nKey: "links.contactUs",
+    icon: ForumOutlinedIcon,
+    href: routerLinks.contactUs,
+  },
+  { i18nKey: "links.about", icon: HomeIcon, href: routerLinks.aboutUs },
+];
+
+const mobileLinksConfig = [
+  {
+    i18nKey: "links.search",
+    icon: TravelExploreIcon,
+    href: routerLinks.search,
+  },
+  { i18nKey: "links.excursions", icon: MapIcon, href: routerLinks.excursions },
+  {
+    i18nKey: "links.createReviewMobile",
+    icon: CommentIcon,
+    href: routerLinks.createReview,
+  },
+  {
+    i18nKey: "links.createPlaceMobile",
+    icon: AddBoxIcon,
+    href: routerLinks.createPlace,
+  },
+  {
+    i18nKey: "links.createRouteMobile",
+    icon: RouteIcon,
+    href: routerLinks.createRoute,
+  },
+  {
+    i18nKey: "links.createExcursionMobile",
+    icon: RouteIcon,
+    href: routerLinks.createExcursion,
+  },
+];
 
 const LinksSection = ({
   onClose,
@@ -23,60 +62,31 @@ const LinksSection = ({
 
   const desktopLinks = (
     <Fragment>
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={t("links.contactUs")}
-        href={routerLinks.contactUs}
-        icon={<ForumOutlinedIcon fontSize={"small"} color={"secondary"} />}
-      />
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={t("links.about")}
-        href={routerLinks.aboutUs}
-        icon={<HomeIcon fontSize={"small"} color={"secondary"} />}
-      />
+      {desktopLinksConfig.map((item) => (
+        <SliderMenuLink
+          key={item.href}
+          pathname={pathname}
+          onClick={onClose}
+          text={t(item.i18nKey)}
+          href={item.href}
+          icon={<item.icon fontSize={"small"} color={"secondary"} />}
+        />
+      ))}
     </Fragment>
   );
 
   return isMobile ? (
     <Fragment>
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={t("links.search")}
-        href={routerLinks.search}
-        icon={<TravelExploreIcon fontSize={"small"} color={"secondary"} />}
-      />
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={t("links.createReviewMobile")}
-        href={routerLinks.createReview}
-        icon={<CommentIcon fontSize={"small"} color={"secondary"} />}
-      />
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={t("links.createPlaceMobile")}
-        href={routerLinks.createPlace}
-        icon={<AddBoxIcon fontSize={"small"} color={"secondary"} />}
-      />
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={t("links.createRouteMobile")}
-        href={routerLinks.createRoute}
-        icon={<RouteIcon fontSize={"small"} color={"secondary"} />}
-      />
-      <SliderMenuLink
-        pathname={pathname}
-        onClick={onClose}
-        text={t("links.createExcursionMobile")}
-        href={routerLinks.createExcursion}
-        icon={<RouteIcon fontSize={"small"} color={"secondary"} />}
-      />
+      {mobileLinksConfig.map((item) => (
+        <SliderMenuLink
+          key={item.href}
+          pathname={pathname}
+          onClick={onClose}
+          text={t(item.i18nKey)}
+          href={item.href}
+          icon={<item.icon fontSize={"small"} color={"secondary"} />}
+        />
+      ))}
       {desktopLinks}
     </Fragment>
   ) : (

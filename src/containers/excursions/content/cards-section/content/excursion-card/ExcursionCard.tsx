@@ -156,10 +156,10 @@ function ExcursionCard({ excursion }: { excursion: IExcursionSearchItem }) {
               overflow={"hidden"}
               gap={"0.5em"}
             >
-              {!!type?.image && (
+              {!!type?.imageDark && (
                 <Box
                   component={"img"}
-                  src={type.image}
+                  src={type.imageDark}
                   alt={type?.label}
                   sx={{
                     objectFit: "cover",

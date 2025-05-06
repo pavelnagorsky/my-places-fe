@@ -6,7 +6,7 @@ export const searchResultsGridSx: SxProps = {
     xs: "340px",
     // sm: "700px",
     md: "850px",
-    xl: "100%",
+    xl: "1296px",
   },
   flexWrap: "wrap",
   flexDirection: { xs: "column", sm: "row" },
@@ -21,7 +21,7 @@ const SearchResultsLoader = () => {
   const placeholdersArray = isMobile ? [1] : isLaptop ? [1, 2] : [1, 2, 3];
 
   return (
-    <Stack sx={searchResultsGridSx} my={"2em"}>
+    <Stack sx={searchResultsGridSx} my={"1em"}>
       {placeholdersArray.map((excursion, index) => (
         <ExcursionCardSkeleton key={index} />
       ))}

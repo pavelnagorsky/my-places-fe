@@ -6,7 +6,7 @@ export const searchResultsGridSx: SxProps = {
     xs: "340px",
     // sm: "700px",
     md: "850px",
-    xl: "100%",
+    xl: "1296px",
   },
   flexWrap: "wrap",
   flexDirection: { xs: "column", sm: "row" },

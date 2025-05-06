@@ -13,7 +13,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { HeaderLink } from "./header-link/HeaderLink";
 import CreateMenu from "./create-menu/CreateMenu";
 import SliderMenu from "@/components/header/slider-menu/SliderMenu";
-import { useHeaderMenu } from "@/components/header/slider-menu/useHeaderMenu";
+import usePopover from "@/hooks/usePopover";
 
 interface IHeaderProps {
   wideMode?: boolean;
@@ -21,7 +21,7 @@ interface IHeaderProps {
 
 const Header = ({ wideMode }: IHeaderProps) => {
   const { t } = useTranslation("common");
-  const menu = useHeaderMenu();
+  const menu = usePopover("header-menu");
   const router = useRouter();
   const isAuth = useAppSelector(selectIsAuth);
 
@@ -57,12 +57,15 @@ const Header = ({ wideMode }: IHeaderProps) => {
             <HeaderLink to={routerLinks.search} pathname={router.pathname}>
               {t("links.search")}
             </HeaderLink>
+            <HeaderLink to={routerLinks.excursions} pathname={router.pathname}>
+              {t("links.excursions")}
+            </HeaderLink>
             <HeaderLink to={routerLinks.aboutUs} pathname={router.pathname}>
               {t("links.about")}
             </HeaderLink>
           </Stack>
           <IconButton
-            onClick={menu.handleClick}
+            onClick={menu.handleOpen}
             sx={{
               p: isAuth ? "0.38em" : "0.5em",
               border: isAuth ? "1px solid #FF9D42" : "none",
@@ -83,7 +86,7 @@ const Header = ({ wideMode }: IHeaderProps) => {
           <SliderMenu
             pathname={router.pathname}
             open={menu.open}
-            anchorEl={menu.anchorEl}
+            anchorEl={menu.anchor}
             onClose={menu.handleClose}
             id={menu.id}
           />

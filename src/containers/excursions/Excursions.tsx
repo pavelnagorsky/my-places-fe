@@ -24,10 +24,20 @@ function Excursions() {
       <WrappedContainer
         wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
       >
-        <motion.div variants={animationVariants.defaultItemVariant}>
-          <Stack mb={2} display={{ xs: "none", md: "flex" }}>
-            <Breadcrumbs />
-          </Stack>
+        <Stack mb={2} display={{ xs: "none", md: "flex" }}>
+          <Breadcrumbs />
+        </Stack>
+      </WrappedContainer>
+      <Stack
+        position={"sticky"}
+        top={{ xs: "1em", md: "5em" }}
+        py={"1em"}
+        zIndex={100}
+        bgcolor={"white"}
+      >
+        <WrappedContainer
+          wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+        >
           <Stack
             direction={{ xs: "column", md: "row" }}
             justifyContent={"space-between"}
@@ -41,14 +51,19 @@ function Excursions() {
               <Filters onSubmit={onSubmit} />
             </FormProvider>
           </Stack>
-        </motion.div>
+        </WrappedContainer>
+      </Stack>
+      <WrappedContainer
+        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+      >
         <motion.div variants={animationVariants.defaultItemVariant}>
           <Stack
             direction={{ md: "row" }}
             alignItems={{ md: "center" }}
             justifyContent={{ md: "space-between" }}
             gap={"1em"}
-            my={{ xs: "1.5em", md: "2em" }}
+            mb={{ xs: "1.5em", md: "2em" }}
+            mt={{ xs: "0.5em", md: "1em" }}
           >
             <TotalResultsCount />
             <FormProvider {...form}>

@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import {
   selectNoItems,
   selectTotalItems,
+  selectSearchFiltersLoading,
 } from "@/store/excursions-slice/excursions.selectors";
 import { useAppSelector } from "@/store/hooks";
 
@@ -11,6 +12,7 @@ const TotalResultsCount = () => {
   // info about search request
   const noItems = useAppSelector(selectNoItems);
   const totalItems = useAppSelector(selectTotalItems);
+  const searchLoading = useAppSelector(selectSearchFiltersLoading);
 
   return (
     <Typography
@@ -20,7 +22,9 @@ const TotalResultsCount = () => {
     >
       {noItems
         ? t("search.noResults")
-        : t("search.excursionsFound", { value: totalItems ?? 0 })}
+        : t("search.excursionsFound", {
+            value: searchLoading ? "" : totalItems ?? 0,
+          })}
     </Typography>
   );
 };
