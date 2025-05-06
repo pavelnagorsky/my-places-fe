@@ -20,6 +20,7 @@ const Breadcrumbs = ({ customEnding }: { customEnding?: string }) => {
     ["privacy-policy"]: t("links.privacyPolicy"),
     ["terms-of-use"]: t("links.termsOfUse"),
     ["excursions"]: t("links.excursions"),
+    ["search"]: t("links.search"),
   };
 
   return (

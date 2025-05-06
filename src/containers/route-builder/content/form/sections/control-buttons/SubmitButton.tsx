@@ -63,9 +63,7 @@ const SubmitButton = () => {
         snackbarProps: {},
       })
     );
-    if (isEditMode) {
-      router.push(routerLinks.personalAreaRoutes);
-    }
+    router.push(routerLinks.personalAreaRoutes);
   };
 
   const onSubmit = () => {

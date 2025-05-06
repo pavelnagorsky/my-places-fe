@@ -19,8 +19,6 @@ import deleteIcon from "/public/images/icons/basket.png";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import { SortableKnob } from "react-easy-sort";
 import { routerLinks } from "@/routing/routerLinks";
-import arrowRightIcon from "../../../../public/images/icons/arrow-right.png";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 
 interface ICartItemProps {
   onRemove: (id: number) => void;
@@ -33,12 +31,22 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
   const isMobileSm = useMediaQuery(theme.breakpoints.down("sm"));
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  const handleClickPlace = () => {
+    window.open(routerLinks.place(place.slug));
+  };
+
+  const handleRemove = (e: any) => {
+    e.stopPropagation();
+    onRemove(place.id);
+  };
+
   const dragButton = (
     <Box>
       <SortableKnob>
         <IconButton
           size={"small"}
           color={"primary"}
+          onClick={(e) => e.stopPropagation()}
           sx={{
             bgcolor: `${primaryBackground} !important`,
             cursor: "grab",
@@ -56,7 +64,7 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
         size={"small"}
         color={"primary"}
         sx={isMobileSm ? { bgcolor: primaryBackground } : {}}
-        onClick={() => onRemove(place.id)}
+        onClick={handleRemove}
       >
         <Box
           component={"img"}
@@ -72,38 +80,11 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
     </Box>
   );
 
-  const openPlaceButton = isMobile ? (
-    <Box>
-      <Button
-        component={"a"}
-        href={routerLinks.place(place.slug)}
-        target={"_blank"}
-      >
-        <Box
-          height={"14px"}
-          component={"img"}
-          src={arrowRightIcon.src}
-          alt={"Подробнее"}
-        />
-      </Button>
-    </Box>
-  ) : (
-    <Box>
-      <IconButton
-        size={"small"}
-        component={"a"}
-        href={routerLinks.place(place.slug)}
-        target={"_blank"}
-        color={"primary"}
-      >
-        <VisibilityIcon />
-      </IconButton>
-    </Box>
-  );
-
   return (
     <Paper
+      onClick={handleClickPlace}
       sx={{
+        cursor: "pointer",
         boxShadow: "0px 2px 30px 0px #0000000D",
         borderRadius: "10px",
         position: "relative",
@@ -245,7 +226,6 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
                 />
                 {place.type.title}
               </Typography>
-              {isMobile && openPlaceButton}
             </Stack>
           </Stack>
         </Grid>
@@ -259,7 +239,6 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
             >
               {dragButton}
               {deleteButton}
-              {!isMobile && openPlaceButton}
             </Stack>
           </Grid>
         )}

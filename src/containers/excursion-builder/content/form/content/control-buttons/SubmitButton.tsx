@@ -72,16 +72,14 @@ const SubmitButton = () => {
         snackbarProps: {},
       })
     );
-    if (isEditMode) {
-      if (isAdminMode) {
-        if (excursionId) {
-          router.push(routerLinks.administrationExcursion(excursionId));
-        } else {
-          router.push(routerLinks.administrationExcursions);
-        }
+    if (isAdminMode) {
+      if (excursionId) {
+        router.push(routerLinks.administrationExcursion(excursionId));
       } else {
-        router.push(routerLinks.personalAreaExcursions);
+        router.push(routerLinks.administrationExcursions);
       }
+    } else {
+      router.push(routerLinks.personalAreaExcursions);
     }
   };
 

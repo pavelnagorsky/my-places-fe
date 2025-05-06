@@ -151,6 +151,16 @@ function PlaceCard({ place }: IPlaceCardProps) {
               overflow={"hidden"}
               gap={"0.5em"}
             >
+              <Box
+                component={"img"}
+                src={place.type.image as string}
+                alt={place.type.title}
+                sx={{
+                  objectFit: "cover",
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
               <Typography
                 fontWeight={400}
                 variant="body1"
@@ -162,16 +172,6 @@ function PlaceCard({ place }: IPlaceCardProps) {
               >
                 {place.type.title}
               </Typography>
-              <Box
-                component={"img"}
-                src={place.type.image as string}
-                alt={place.type.title}
-                sx={{
-                  objectFit: "cover",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
             </Stack>
             <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
               <Typography

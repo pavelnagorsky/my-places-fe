@@ -1,16 +1,14 @@
 import { useForm } from "react-hook-form-mui";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";
 import utils from "@/shared/utils";
-import {
-  IModerationExcursionsRequest,
-  ModerationExcursionsOrderByEnum,
-} from "@/services/excursions-service/interfaces/interfaces";
+import { IModerationExcursionsRequest } from "@/services/excursions-service/interfaces/interfaces";
 import excursionsService from "@/services/excursions-service/excursions.service";
 import { IModerationExcursionsFormContext } from "@/containers/moderation/excursions/excursions-list/logic/interfaces";
 import { IExcursionModerationItem } from "@/services/excursions-service/interfaces/excursion-moderation-item.interface";
+import { ModerationExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 
 const useModerationExcursions = () => {
   const { i18n } = useTranslation();

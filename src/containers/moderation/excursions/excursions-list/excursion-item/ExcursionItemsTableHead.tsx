@@ -3,11 +3,8 @@ import Grid from "@mui/material/Grid2";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
 import { OrderDirectionsEnum } from "@/services/interfaces";
 import { useTranslation } from "next-i18next";
-import { MyRoutesOrderByEnum } from "@/services/routes-service/interfaces/interfaces";
-import {
-  ModerationExcursionsOrderByEnum,
-  MyExcursionsOrderByEnum,
-} from "@/services/excursions-service/interfaces/interfaces";
+
+import { ModerationExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 
 interface ITableHeadProps {
   show: boolean;

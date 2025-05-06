@@ -7,6 +7,10 @@
     "edit": {
       "title": "Edit Excursion",
       "description": "The excursion builder allows you to create a set of tourist attractions in Belarus. It provides a visual route display, time and distance calculation, automatic optimization functionality, and export to a navigator."
+    },
+    "search": {
+      "title": "Self-Guided Tours in Belarus: Catalog of Routes, Attractions, Maps",
+      "description": "Discover Belarus independently! Complete catalog of walking and driving tours with detailed routes, attraction descriptions, and practical tips. Download ready-to-use GPS tracks and maps for your journey!"
     }
   },
   "form": {
@@ -50,5 +54,24 @@
     "description": "Description",
     "routeDetails": "Excursion program",
     "stayDuration": "Visit duration:"
+  },
+  "search": {
+    "title": "Excursions Catalog",
+    "places": "place",
+    "placesPlural": "places",
+    "excursionsFound": "{{value}} excursions found:",
+    "noResults": "Unfortunately, no results were found for your query.",
+    "filters": {
+      "title": "Filters",
+      "searchPlaceholder": "Search catalog",
+      "type": "Excursion type",
+      "travelMode": "Excursion category",
+      "orderBy": {
+        "title": "Sort by",
+        "1": "by creation date",
+        "2": "by rating",
+        "3": "by name"
+      }
+    }
   }
 }

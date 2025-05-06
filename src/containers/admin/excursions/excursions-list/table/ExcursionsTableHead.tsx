@@ -7,9 +7,9 @@ import {
   Tooltip,
 } from "@mui/material";
 import { primaryBackground } from "@/styles/theme/lightTheme";
-import { MyPlacesOrderByEnum } from "@/services/places-service/interfaces/interfaces";
 import { OrderDirectionsEnum } from "@/services/interfaces";
-import { MyExcursionsOrderByEnum } from "@/services/excursions-service/interfaces/interfaces";
+
+import { MyExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 
 const rows = [
   {

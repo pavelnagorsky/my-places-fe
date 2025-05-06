@@ -1,10 +1,11 @@
 import { memo } from "react";
 import { useTranslation } from "next-i18next";
 import { Box, Stack, Typography } from "@mui/material";
-import StyledReviewsContainer from "@/components/UI/review-containers/StyledReviewsContainer";
+import StyledTextEditorContainer from "@/components/UI/review-containers/StyledTextEditorContainer";
 
 const ExcursionDescription = ({ description }: { description: string }) => {
   const { t } = useTranslation("excursion-management");
+
   function createMarkup() {
     return { __html: description };
   }
@@ -19,7 +20,7 @@ const ExcursionDescription = ({ description }: { description: string }) => {
         {t("excursion.description")}
       </Typography>
       <Box height={"100%"}>
-        <StyledReviewsContainer
+        <StyledTextEditorContainer
           fontSize={{ xs: "16px", md: "18px" }}
           dangerouslySetInnerHTML={createMarkup()}
         />

@@ -14,6 +14,7 @@ import MapSection from "@/containers/search-page/content/map-section/MapSection"
 import CardsSection from "@/containers/search-page/content/cards-section/CardsSection";
 import TotalResultsCount from "@/containers/search-page/content/cards-section/TotalResultsCount";
 import SearchCartWidget from "@/components/search-cart/widgets/SearchCartWidget";
+import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 
 function SearchPage() {
   const { formContext, onSubmit } = usePlacesSearch();
@@ -26,6 +27,13 @@ function SearchPage() {
       initial="hidden"
       animate="show"
     >
+      <WrappedContainer
+        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+      >
+        <Stack mb={2} display={{ xs: "none", md: "flex" }}>
+          <Breadcrumbs />
+        </Stack>
+      </WrappedContainer>
       <SearchCartWidget />
       <ScrollToTopButton />
       {isMobile && (

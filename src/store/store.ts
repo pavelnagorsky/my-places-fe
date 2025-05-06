@@ -7,6 +7,7 @@ import searchCartCacheMiddleware from "@/store/search-cart-slice/middleware/sear
 import routeBuilderSlice from "@/store/route-builder-slice/route-builder.slice";
 import favouritesSlice from "@/store/personal-area/favourites-slice/favourites.slice";
 import excursionBuilderSlice from "@/store/excursion-builder-slice/excursion-builder.slice";
+import excursionsSlice from "@/store/excursions-slice/excursions.slice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     routeBuilder: routeBuilderSlice,
     excursionBuilder: excursionBuilderSlice,
     favourites: favouritesSlice,
+    excursions: excursionsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

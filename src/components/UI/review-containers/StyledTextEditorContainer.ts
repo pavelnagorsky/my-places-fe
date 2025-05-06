@@ -1,5 +1,6 @@
 import { Box, styled } from "@mui/material";
-const StyledReviewsContainer = styled(Box)(({ theme }) => ({
+
+const StyledTextEditorContainer = styled(Box)(({ theme }) => ({
   fontSize: "16px",
   overflow: "hidden",
   wordBreak: "break-word",
@@ -50,4 +51,4 @@ const StyledReviewsContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-export default StyledReviewsContainer;
+export default StyledTextEditorContainer;

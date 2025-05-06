@@ -3,15 +3,12 @@ import { useForm } from "react-hook-form-mui";
 import { IPaginationRequest } from "@/services/interfaces";
 import utils from "@/shared/utils";
 import usePagination from "@/hooks/usePagination";
-import placesService from "@/services/places-service/places.service";
 import { useTranslation } from "next-i18next";
 import { IAdminExcursionsFormContext } from "@/containers/admin/excursions/excursions-list/logic/interfaces";
-import {
-  IAdminExcursionsRequest,
-  MyExcursionsOrderByEnum,
-} from "@/services/excursions-service/interfaces/interfaces";
+import { IAdminExcursionsRequest } from "@/services/excursions-service/interfaces/interfaces";
 import excursionsService from "@/services/excursions-service/excursions.service";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
+import { MyExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 
 const useExcursions = () => {
   const { i18n } = useTranslation();

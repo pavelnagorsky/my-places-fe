@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form-mui";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
@@ -7,12 +7,10 @@ import useScrollPagination from "@/hooks/useScrollPagination";
 import { IPaginationRequest } from "@/services/interfaces";
 import utils from "@/shared/utils";
 import { IMyExcursionsFormContext } from "@/containers/personal-area/my-excursions/logic/interfaces";
-import {
-  IMyExcursionsRequest,
-  MyExcursionsOrderByEnum,
-} from "@/services/excursions-service/interfaces/interfaces";
+import { IMyExcursionsRequest } from "@/services/excursions-service/interfaces/interfaces";
 import excursionsService from "@/services/excursions-service/excursions.service";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
+import { MyExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 
 const useMyExcursions = () => {
   const { t, i18n } = useTranslation(["personal-area", "common"]);
