@@ -1,23 +1,15 @@
-import {
-  CSSProperties,
-  memo,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { memo, PropsWithChildren, useCallback, useRef, useState } from "react";
 import {
   YMap,
   YMapComponentsProvider,
-  YMapDefaultSchemeLayer,
   YMapDefaultFeaturesLayer,
+  YMapDefaultSchemeLayer,
 } from "ymap3-components";
-import { defaultMapStyle } from "@/components/map/map-styles/default";
 import { Box, Grow, SxProps } from "@mui/material";
-import mapConfig, { defaultBounds } from "@/components/map/config";
+import { defaultBounds } from "@/components/map/config";
 import { YMapDefaultModules } from "ymap3-components/dist/src/types";
 import { yandexMapStyles } from "@/components/map/map-styles/yandex-map-styles";
+import { Environment } from "@/shared/Environment";
 
 export interface ILatLngCoordinate {
   lat: number;
@@ -67,7 +59,7 @@ function Map({
     <Grow in={isLoaded}>
       <Box sx={containerStyle}>
         <YMapComponentsProvider
-          apiKey={"a799a216-4ad9-4bc2-985d-2b93aa9a5dc5"}
+          apiKey={Environment.yandexMapsKey}
           onLoad={onLoad}
           onError={(e) => {
             console.error("Failed to load yandex maps v3:", e);

@@ -4,6 +4,9 @@ export class Environment {
   static readonly googleMapsKey =
     process.env["NEXT_PUBLIC_GOOGLE_API_KEY"] ?? "";
 
+  static readonly yandexMapsKey =
+    process.env["NEXT_PUBLIC_YANDEX_API_KEY"] ?? "";
+
   static readonly backendBaseUrl =
     process.env["NEXT_PUBLIC_BACKEND_BASE_URL"] ?? "http://localhost:3000";
 
