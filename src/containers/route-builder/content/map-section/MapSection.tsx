@@ -17,6 +17,7 @@ import routeStartIcon from "/public/images/icons/route-start.png";
 import routeEndIcon from "/public/images/icons/route-end.png";
 import markerIcon from "/public/images/icons/marker-filled.png";
 import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
+import YandexMap from "@/components/map/YandexMap";
 
 const MapSection = () => {
   const { t, i18n } = useTranslation("route-management");
@@ -140,6 +141,13 @@ const MapSection = () => {
           </InfoWindow>
         )}
       </Map>
+      <YandexMap
+        containerStyle={{
+          height: { xs: "400px", md: "600px" },
+          transition: "height 0.5s ease-in",
+          "& canvas": { borderRadius: "15px" },
+        }}
+      />
     </Box>
   );
 };
