@@ -45,7 +45,9 @@ const Breadcrumbs = ({ customEnding }: { customEnding?: string }) => {
             if (customEnding)
               return (
                 <Typography key={i} color="primary.main">
-                  {customEnding}
+                  {customEnding.length > 60
+                    ? `${customEnding.slice(0, 60)}...`
+                    : customEnding}
                 </Typography>
               );
             return null;

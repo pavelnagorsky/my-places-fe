@@ -6,4 +6,5 @@ export const defaultSearchFilters: IExcursionsFilters = {
   orderBy: `${SearchExcursionsOrderByEnum.CREATED_AT}`,
   travelModes: [],
   types: [],
+  regions: [],
 };

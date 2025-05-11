@@ -11,7 +11,7 @@ const SearchFilter = ({ onSubmit }: { onSubmit: () => void }) => {
     debounce((value) => {
       onSubmit();
     }, 300),
-    [onSubmit]
+    []
   );
 
   return (

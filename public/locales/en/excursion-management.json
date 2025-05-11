@@ -63,6 +63,8 @@
     "noResults": "Unfortunately, no results were found for your query.",
     "filters": {
       "title": "Filters",
+      "regions": "Regions",
+      "regionsPlaceholder": "Select regions of Belarus",
       "searchPlaceholder": "Search catalog",
       "type": "Excursion type",
       "travelMode": "Excursion category",

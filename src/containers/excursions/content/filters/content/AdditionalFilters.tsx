@@ -9,6 +9,7 @@ import useExcursionTypes from "@/containers/excursion-builder/content/form/logic
 import useTravelModeOptions from "@/containers/route-builder/content/form/sections/travel-mode/useTravelModeOptions";
 import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
 import { StyledButton } from "@/components/UI/button/StyledButton";
+import RegionsFilter from "@/containers/excursions/content/filters/content/RegionsFilter";
 
 const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   const { t } = useTranslation(["excursion-management", "common"]);
@@ -54,7 +55,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
         anchorEl={popover.anchor}
         slotProps={{
           paper: {
-            sx: { borderRadius: "15px" },
+            sx: { borderRadius: "15px", width: { xs: "100%", sm: "400px" } },
           },
         }}
         anchorOrigin={{
@@ -80,6 +81,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
                 row
               />
             </Stack>
+            <RegionsFilter />
           </Stack>
           <Stack
             direction={"row"}

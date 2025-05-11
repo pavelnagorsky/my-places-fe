@@ -42,3 +42,5 @@ export const selectSearchFiltersLoading = createSelector(
   selectState,
   (s) => s.loading
 );
+
+export const selectRegions = createSelector(selectState, (s) => s.regions);

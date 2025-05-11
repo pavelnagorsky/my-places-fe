@@ -14,6 +14,7 @@ export const routerLinks = {
   excursion: (slug: string) => `/excursions/${slug}`,
   privacyPolicy: "/privacy-policy",
   termsOfUse: "/terms-of-use",
+  administrationRegions: "/administration/regions",
   administrationPlaceCategories: "/administration/place-categories",
   administrationPlaceTypes: "/administration/place-types",
   administrationUsers: "/administration/users",
