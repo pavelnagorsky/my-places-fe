@@ -2,6 +2,7 @@ import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursio
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { IExcursionPlace } from "@/services/excursions-service/interfaces/excursion-place.interface";
 import { ExcursionStatusesEnum } from "@/services/excursions-service/enums/excursion-statuses.enum";
+import { IRegion } from "@/services/regions-service/interfaces/region.interface";
 
 export interface IExcursion {
   id: number;
@@ -21,4 +22,5 @@ export interface IExcursion {
   authorName: string;
   moderationMessage: string | null;
   status: ExcursionStatusesEnum;
+  region: IRegion | null;
 }

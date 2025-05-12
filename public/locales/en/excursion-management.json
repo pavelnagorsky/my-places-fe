@@ -19,7 +19,8 @@
     "description": "Short description",
     "descriptionPlaceholder": "Enter excursion description",
     "placeDescriptionPlaceholder": "Share a brief description of the place within the excursion...",
-    "durationSelect": "Enter time for visiting the excursion:"
+    "durationSelect": "Enter time for visiting the excursion:",
+    "region": "Region"
   },
   "mapView": "Visual excursion planning",
   "details": {

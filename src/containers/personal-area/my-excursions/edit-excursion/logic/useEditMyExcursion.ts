@@ -29,6 +29,7 @@ const useEditMyExcursion = () => {
       description: "",
       travelMode: TravelModesEnum.DRIVING,
       type: `${ExcursionTypesEnum.Overview}`,
+      regionId: "" as any,
       updateTranslations: false,
     },
     mode: "onChange",
@@ -79,6 +80,7 @@ const useEditMyExcursion = () => {
         description: data.description + " ",
         type: `${data.type || ExcursionTypesEnum.Overview}`,
         travelMode: data.travelMode || TravelModesEnum.DRIVING,
+        regionId: data.region?.id || ("" as any),
       });
       setLoading(false);
     };

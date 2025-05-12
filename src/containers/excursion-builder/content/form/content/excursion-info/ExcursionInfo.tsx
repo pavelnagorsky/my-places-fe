@@ -1,8 +1,9 @@
 import { useTranslation } from "next-i18next";
 import Grid from "@mui/material/Grid2";
 import { FormLabel, Typography } from "@mui/material";
-import { TextFieldElement } from "react-hook-form-mui";
+import { SelectElement, TextFieldElement } from "react-hook-form-mui";
 import TextEditor from "@/components/forms/text-editor/TextEditor";
+import ExcursionRegion from "@/containers/excursion-builder/content/form/content/excursion-info/content/ExcursionRegion";
 
 const ExcursionInfo = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
@@ -25,6 +26,9 @@ const ExcursionInfo = () => {
             }),
           }}
         />
+      </Grid>
+      <Grid size={{ xs: 12, md: 6 }}>
+        <ExcursionRegion />
       </Grid>
       <Grid size={12}>
         <Typography fontWeight={500} fontSize={"22px"} mb={"0.5em"}>

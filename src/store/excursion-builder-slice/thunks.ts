@@ -12,6 +12,7 @@ import { ICreateExcursion } from "@/services/excursions-service/interfaces/creat
 import excursionsService from "@/services/excursions-service/excursions.service";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import { IUpdateExcursion } from "@/services/excursions-service/interfaces/update-excursion.interface";
+import regionsService from "@/services/regions-service/regions.service";
 
 export const translateExcursionPlacesThunk = createAsyncThunk(
   "excursion-builder/translate-places",
@@ -208,5 +209,13 @@ export const addExcursionItemsThunk = createAsyncThunk(
           excursionDescription: "",
         } as IExcursionBuilderItem)
     );
+  }
+);
+
+export const getRegionsThunk = createAsyncThunk(
+  "excursion-builder/get-regions",
+  async (payload: { language: string }, thunkAPI) => {
+    const { data } = await regionsService.getAll(payload.language);
+    return data;
   }
 );

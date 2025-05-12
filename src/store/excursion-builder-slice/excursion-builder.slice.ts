@@ -3,11 +3,13 @@ import { RootState } from "@/store/store";
 import {
   addExcursionItemsThunk,
   getExcursionDirectionsThunk,
+  getRegionsThunk,
   saveExcursionThunk,
   startExcursionEditingThunk,
   translateExcursionPlacesThunk,
 } from "@/store/excursion-builder-slice/thunks";
 import { ILatLngCoordinate } from "@/components/map/Map";
+import { IRegion } from "@/services/regions-service/interfaces/region.interface";
 
 export interface IExcursionBuilderItem {
   // Place id
@@ -35,6 +37,7 @@ interface IExcursionBuilderState {
   directionsLoading: boolean;
   editExcursionId: number | null;
   editExcursionData: any | null;
+  regions: IRegion[];
 }
 
 const initialState: IExcursionBuilderState = {
@@ -46,6 +49,7 @@ const initialState: IExcursionBuilderState = {
   directionsLoading: false,
   editExcursionId: null,
   editExcursionData: null,
+  regions: [],
 };
 
 const excursionBuilderSlice = createSlice({
@@ -151,6 +155,10 @@ const excursionBuilderSlice = createSlice({
         });
       }
     );
+
+    builder.addCase(getRegionsThunk.fulfilled, (state, action) => {
+      state.regions = action.payload;
+    });
   },
 });
 
@@ -195,10 +203,13 @@ export const selectExcursionId = createSelector(
   selectState,
   (s) => s.editExcursionId
 );
+
 export const selectEditExcursionData = createSelector(
   selectState,
   (s) => s.editExcursionData
 );
+
+export const selectRegions = createSelector(selectState, (s) => s.regions);
 
 export const {
   setItems,
