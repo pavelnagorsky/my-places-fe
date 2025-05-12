@@ -5,8 +5,7 @@ export interface ISearchPlacesRequest
   extends Omit<IPaginationRequest<SearchOrderByEnum>, "orderAsc"> {
   typesIds: number[];
   categoriesIds: number[];
-  title: string;
-  description: string;
+  search: string;
   radius: number;
   searchStartCoordinates: string | null;
   searchEndCoordinates: string | null;

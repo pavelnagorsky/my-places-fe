@@ -57,12 +57,11 @@ const usePlacesSearch = () => {
           radius: data.radius,
           categoriesIds: data.categories,
           typesIds: data.types,
-          title: data.title,
+          search: data.search,
           orderBy: +data.orderBy,
           pageSize: searchService.SEARCH_PLACES_PER_PAGE,
           page: requestedPage,
           language: i18n.language,
-          description: data.description,
         };
         if (fromStart) {
           dispatch(setFilters(data));

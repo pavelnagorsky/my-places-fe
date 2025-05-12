@@ -1,9 +1,9 @@
 import { useTranslation } from "next-i18next";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, IconButton, InputAdornment, Typography } from "@mui/material";
+import { Box, InputAdornment, Typography } from "@mui/material";
 import { TextFieldElement } from "react-hook-form-mui";
 
-const TitleFilter = () => {
+const TextFilter = () => {
   const { t } = useTranslation("search");
   return (
     <Box>
@@ -22,7 +22,7 @@ const TitleFilter = () => {
           width: "100%",
           mb: "1em",
         }}
-        name={"title"}
+        name={"search"}
         placeholder={t("filters.enterTitle")}
         slotProps={{
           input: {
@@ -38,4 +38,4 @@ const TitleFilter = () => {
   );
 };
 
-export default TitleFilter;
+export default TextFilter;

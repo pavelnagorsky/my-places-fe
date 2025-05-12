@@ -88,6 +88,10 @@ const ExcursionInfoSection = ({ item }: { item: IExcursion }) => {
           </Typography>
         </Stack>
         <Stack>
+          <Typography fontWeight={600}>Область:</Typography>
+          <Typography>{item.region?.title || "-"}</Typography>
+        </Stack>
+        <Stack>
           <Tooltip
             arrow
             enterTouchDelay={0}

@@ -21,10 +21,25 @@ const ExcursionRegion = () => {
         {t("form.region")}
       </Typography>
       <SelectElement
+        slotProps={{
+          select: {
+            displayEmpty: true,
+            renderValue: (value: unknown) => {
+              if (!value) {
+                return (
+                  <Typography color="textDisabled">Укажите область</Typography>
+                );
+              }
+              return <>{regions.find((r) => r.id === value)?.title}</>;
+            },
+          },
+        }}
+        placeholder={"ssss"}
         name={"regionId"}
         required
         fullWidth
-        options={regions.map((r) => ({ id: r.id, label: r.title }))}
+        options={regions}
+        labelKey={"title"}
         rules={{
           required: t("errors.required", {
             ns: "common",

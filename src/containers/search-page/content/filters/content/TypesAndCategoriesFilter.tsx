@@ -1,23 +1,13 @@
-import {
-  Box,
-  Divider,
-  Icon,
-  Stack,
-  SvgIcon,
-  SxProps,
-  Typography,
-} from "@mui/material";
-import { CheckboxButtonGroup, useFormContext } from "react-hook-form-mui";
+import { Box, Stack, SxProps, Typography } from "@mui/material";
+import { CheckboxButtonGroup } from "react-hook-form-mui";
 import { useTranslation } from "next-i18next";
-import { ISearchForm } from "@/containers/search-page/logic/interfaces";
 import { useAppSelector } from "@/store/hooks";
 import {
   selectPlaceCategoriesOptions,
   selectPlaceTypesOptions,
 } from "@/store/search-slice/search.slice";
 import filtersIcon from "../../../../../../public/images/icons/filters.svg";
-import TitleFilter from "@/containers/search-page/content/filters/content/TitleFilter";
-import DescriptionFilter from "@/containers/search-page/content/filters/content/DescriptionFilter";
+import TextFilter from "@/containers/search-page/content/filters/content/TextFilter";
 
 const checkboxesLabelSx: SxProps = {
   width: "49%",
@@ -49,8 +39,7 @@ const TypesAndCategoriesFilter = () => {
         <Box component={"img"} src={filtersIcon.src} sx={{}} />
       </Stack>
       <Stack>
-        <TitleFilter />
-        <DescriptionFilter />
+        <TextFilter />
         <Typography fontSize={"18px"} mb={"0.5em"}>
           {t("filters.types")}
         </Typography>

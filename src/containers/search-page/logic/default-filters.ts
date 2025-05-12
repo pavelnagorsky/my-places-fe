@@ -5,7 +5,7 @@ import {
 } from "@/containers/search-page/logic/interfaces";
 
 export const defaultSearchFilters: ISearchForm = {
-  title: "",
+  search: "",
   radius: 100,
   searchByMe: false,
   types: [],
@@ -16,5 +16,4 @@ export const defaultSearchFilters: ISearchForm = {
   locationEndCoordinates: null,
   mode: SearchModesEnum.ONE_LOCATION,
   orderBy: SearchOrderByStringEnum.CREATED_AT,
-  description: "",
 };
