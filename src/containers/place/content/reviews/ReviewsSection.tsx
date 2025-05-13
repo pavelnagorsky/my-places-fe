@@ -1,12 +1,12 @@
 import { Badge, IconButton, Stack, Typography } from "@mui/material";
-import ReviewCard from "@/containers/place/reviews/ReviewCard";
+import ReviewCard from "@/containers/place/content/reviews/ReviewCard";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import InfiniteScroll from "react-infinite-scroll-component";
-import useReviews from "@/containers/place/reviews/useReviews";
+import useReviews from "@/containers/place/content/reviews/useReviews";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
-import NoReviews from "@/containers/place/reviews/NoReviews";
+import NoReviews from "@/containers/place/content/reviews/NoReviews";
 import useDialog from "@/hooks/useDialog";
 import ReviewModal from "@/components/review-modal/ReviewModal";
 import { useRouter } from "next/router";

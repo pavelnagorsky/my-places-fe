@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
@@ -16,7 +9,7 @@ import { openAuth, selectIsAuth } from "@/store/user-slice/user.slice";
 import likesService from "@/services/likes-service/likes.service";
 import { format } from "date-fns";
 import usePopover from "@/hooks/usePopover";
-import ReportForm from "@/containers/place/report/ReportForm";
+import ReportForm from "@/containers/place/content/report/ReportForm";
 import placesService from "@/services/places-service/places.service";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";

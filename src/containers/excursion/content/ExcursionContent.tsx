@@ -1,7 +1,7 @@
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import Grid from "@mui/material/Grid2";
 import { Stack, Typography } from "@mui/material";
-import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
+import PlaceGallery from "@/containers/place/content/gallery/PlaceGallery";
 import ExcursionStatistics from "@/containers/excursion/content/ExcursionStatistics";
 import ExcursionDescription from "@/containers/excursion/content/ExcursionDescription";
 import ExcursionPlaces from "@/containers/excursion/content/excursion-places/ExcursionPlaces";

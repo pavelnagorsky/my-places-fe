@@ -4,14 +4,13 @@ import {
   CircularProgress,
   IconButton,
   InputAdornment,
-  Stack,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { FormProvider, TextFieldElement } from "react-hook-form-mui";
 import SendIcon from "@mui/icons-material/Send";
-import useComments from "@/containers/place/comments/useComments";
-import Comment from "@/containers/place/comments/Comment";
+import useComments from "@/containers/place/content/comments/useComments";
+import Comment from "@/containers/place/content/comments/Comment";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openAuth, selectUserId } from "@/store/user-slice/user.slice";
