@@ -3,10 +3,10 @@ import Grid from "@mui/material/Grid2";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import {
   Box,
-  Button,
   IconButton,
   Paper,
   Stack,
+  styled,
   Typography,
   useMediaQuery,
   useTheme,
@@ -112,25 +112,7 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
               {deleteButton}
             </Stack>
           )}
-          {isMobile && (
-            <Stack
-              position={"absolute"}
-              zIndex={1}
-              left={"0.5em"}
-              top={"0.5em"}
-              bgcolor={primaryBackground}
-              borderRadius={"50%"}
-              fontWeight={700}
-              fontSize={"20px"}
-              color={"primary.main"}
-              width={"42px"}
-              height={"42px"}
-              alignItems={"center"}
-              justifyContent={"center"}
-            >
-              {index + 1}
-            </Stack>
-          )}
+          {isMobile && <StyledTextCircle>{index + 1}</StyledTextCircle>}
           <MuiImage
             imageProps={{
               style: { objectFit: "cover" },
@@ -248,3 +230,19 @@ const CartItem = ({ place, onRemove, index }: ICartItemProps) => {
 };
 
 export default CartItem;
+
+export const StyledTextCircle = styled(Stack)(({ theme }) => ({
+  position: "absolute",
+  zIndex: 1,
+  left: "0.5em",
+  top: "0.5em",
+  backgroundColor: primaryBackground,
+  borderRadius: "50%",
+  fontWeight: 700,
+  fontSize: "20px",
+  color: theme.palette.primary.main,
+  width: "42px",
+  height: "42px",
+  alignItems: "center",
+  justifyContent: "center",
+}));

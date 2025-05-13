@@ -19,7 +19,8 @@
     "description": "Кароткае апісанне",
     "descriptionPlaceholder": "Увядзіце апісанне экскурсіі",
     "placeDescriptionPlaceholder": "Падзяліцеся кароткім апісаннем месца ў рамках экскурсіі...",
-    "durationSelect": "Увядзіце час на наведванне экскурсіі:"
+    "durationSelect": "Увядзіце час на наведванне экскурсіі:",
+    "region": "Вобласць"
   },
   "mapView": "Візуальнае пабудова экскурсіі",
   "details": {
@@ -53,7 +54,8 @@
   "excursion": {
     "description": "Апісанне",
     "routeDetails": "Праграма экскурсіі",
-    "stayDuration": "Час на наведванне:"
+    "stayDuration": "Час на наведванне:",
+    "author": "Аўтар"
   },
   "search": {
     "title": "Каталог экскурсій",
@@ -63,6 +65,8 @@
     "noResults": "На жаль, па вашаму запыту нічога не знойдзена.",
     "filters": {
       "title": "Фільтры",
+      "regions": "Вобласці",
+      "regionsPlaceholder": "Абярыце вобласці Беларусі",
       "searchPlaceholder": "Пошук па каталогу",
       "type": "Тып экскурсіі",
       "travelMode": "Катэгорыя экскурсіі",

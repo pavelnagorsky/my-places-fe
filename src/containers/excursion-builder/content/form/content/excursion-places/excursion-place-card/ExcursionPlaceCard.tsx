@@ -25,6 +25,7 @@ import {
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
 import { useAppDispatch } from "@/store/hooks";
 import { useCallback } from "react";
+import { StyledTextCircle } from "@/components/search-cart/content/CartItem";
 
 interface IExcursionPlaceCardProps {
   onRemove: (id: number) => void;
@@ -38,6 +39,7 @@ const ExcursionPlaceCard = ({
   index,
 }: IExcursionPlaceCardProps) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isMobileSm = useMediaQuery(theme.breakpoints.down("sm"));
   const { t } = useTranslation(["excursion-management", "common"]);
   const form = usePlaceCardForm({ place });
@@ -104,6 +106,13 @@ const ExcursionPlaceCard = ({
         }}
       >
         <Stack width={"100%"} gap={2}>
+          {isMobile && (
+            <StyledTextCircle
+              sx={{ position: "relative", top: 0, left: 0, mb: "-0.25em" }}
+            >
+              {index + 1}
+            </StyledTextCircle>
+          )}
           <Typography
             fontSize={"22px"}
             fontWeight={500}

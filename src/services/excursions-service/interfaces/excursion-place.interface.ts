@@ -3,6 +3,8 @@ import { IExcursionPlaceReview } from "@/services/excursions-service/interfaces/
 
 export interface IExcursionPlace {
   id: number;
+  excursionPlaceId: number;
+  isPrimary: boolean;
   slug: string;
   title: string;
   address: string;

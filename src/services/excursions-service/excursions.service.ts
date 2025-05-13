@@ -126,7 +126,14 @@ const excursionsService = {
     );
   },
 
-  SEARCH_EXCURSIONS_PER_PAGE: 12,
+  SEARCH_EXCURSIONS_PER_PAGE: 18,
+
+  setExcursionPrimaryPlace: (excursionId: number, excursionPlaceId: number) => {
+    return axiosInstance.put(
+      `/excursions/${excursionId}/places/${excursionPlaceId}/set-primary`,
+      {}
+    );
+  },
 };
 
 export default excursionsService;

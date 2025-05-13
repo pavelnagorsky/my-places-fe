@@ -45,6 +45,7 @@ const useExcursions = () => {
           search: data.search,
           types: data.types,
           travelModes: data.travelModes,
+          regionIds: data.regions.map((r) => r.id),
           orderBy: +data.orderBy,
           pageSize: excursionsService.SEARCH_EXCURSIONS_PER_PAGE,
           page: requestedPage,

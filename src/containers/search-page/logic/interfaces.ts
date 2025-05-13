@@ -3,7 +3,7 @@ import { IPlaceType } from "@/containers/search-page/content/filters/content/loc
 export interface ISearchForm {
   categories: number[];
   types: number[];
-  title: string;
+  search: string;
   radius: number;
   searchByMe: boolean;
   locationStart: IPlaceType | null;
@@ -12,7 +12,6 @@ export interface ISearchForm {
   locationEndCoordinates: string | null;
   mode: SearchModesEnum;
   orderBy: SearchOrderByStringEnum;
-  description: string;
 }
 
 export enum SearchModesEnum {

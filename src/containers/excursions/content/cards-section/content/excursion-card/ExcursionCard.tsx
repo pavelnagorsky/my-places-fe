@@ -62,21 +62,26 @@ function ExcursionCard({ excursion }: { excursion: IExcursionSearchItem }) {
         >
           {excursion.images.map((image, i) => (
             <Box
-              component={"img"}
+              key={i}
               sx={{
-                objectFit: "cover",
-                userSelect: "none",
+                position: "relative",
                 height: {
                   xs: 217,
                   md: 250,
                 },
+                "& img": {
+                  objectFit: "cover",
+                  userSelect: "none",
+                },
               }}
-              height={"100%"}
-              sizes="(max-width: 900px) 330px, 374px"
-              src={image || "/"}
-              key={i}
-              alt={excursion.title}
-            />
+            >
+              <Image
+                fill
+                sizes="(max-width: 900px) 330px, 374px"
+                src={image || "/"}
+                alt={excursion.title}
+              />
+            </Box>
           ))}
         </Carousel>
       </CardMedia>

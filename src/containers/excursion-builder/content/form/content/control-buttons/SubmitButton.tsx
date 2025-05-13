@@ -104,6 +104,7 @@ const SubmitButton = () => {
           excursionDuration: item.excursionDuration,
           description: item.excursionDescription,
         })),
+        regionId: data.regionId,
         shouldTranslate: data.updateTranslations,
         language: i18n.language,
       };

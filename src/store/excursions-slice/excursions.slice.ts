@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IExcursionsState } from "@/store/excursions-slice/excursions.interfaces";
 import { defaultSearchFilters } from "@/containers/excursions/logic/default-filters";
 import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
-import { getSearchResultsThunk } from "./excursions.thunks";
+import { getRegionsThunk, getSearchResultsThunk } from "./excursions.thunks";
 
 const initialState: IExcursionsState = {
   loading: false,
@@ -13,6 +13,7 @@ const initialState: IExcursionsState = {
   filters: defaultSearchFilters,
   isDataFetched: false,
   scrollPosition: 0,
+  regions: [],
 };
 
 export const excursionsSlice = createSlice({
@@ -51,6 +52,10 @@ export const excursionsSlice = createSlice({
       state.loading = false;
       state.noItems = state.items.length === 0;
       state.hasMore = false;
+    });
+
+    builder.addCase(getRegionsThunk.fulfilled, (state, action) => {
+      state.regions = action.payload;
     });
   },
 });

@@ -18,7 +18,6 @@ import RadiusFilter from "@/containers/search-page/content/filters/content/Radiu
 import TypesAndCategoriesFilter from "@/containers/search-page/content/filters/content/TypesAndCategoriesFilter";
 import { Button } from "@/components/UI/button/Button";
 import { primaryColor } from "@/styles/theme/lightTheme";
-import TitleFilter from "@/containers/search-page/content/filters/content/TitleFilter";
 import { defaultSearchFilters } from "@/containers/search-page/logic/default-filters";
 
 const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
@@ -31,8 +30,7 @@ const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
     const value =
       getValues("types").length +
       getValues("categories").length +
-      (getValues("title").length > 0 ? 1 : 0) +
-      (getValues("description").length > 0 ? 1 : 0) +
+      (getValues("search").length > 0 ? 1 : 0) +
       (getValues("locationStartCoordinates") ? 1 : 0) +
       (getValues("locationEndCoordinates") ? 1 : 0);
     return `${t("filters.filters")} ${value > 0 ? `(${value})` : ""}`;

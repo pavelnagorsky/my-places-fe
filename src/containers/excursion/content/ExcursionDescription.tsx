@@ -3,7 +3,13 @@ import { useTranslation } from "next-i18next";
 import { Box, Stack, Typography } from "@mui/material";
 import StyledTextEditorContainer from "@/components/UI/review-containers/StyledTextEditorContainer";
 
-const ExcursionDescription = ({ description }: { description: string }) => {
+const ExcursionDescription = ({
+  description,
+  author,
+}: {
+  description: string;
+  author: string;
+}) => {
   const { t } = useTranslation("excursion-management");
 
   function createMarkup() {
@@ -24,6 +30,9 @@ const ExcursionDescription = ({ description }: { description: string }) => {
           fontSize={{ xs: "16px", md: "18px" }}
           dangerouslySetInnerHTML={createMarkup()}
         />
+        <Typography fontWeight={500} fontSize={"16px"} mt={"1em"}>
+          {t("excursion.author")}: {author}
+        </Typography>
       </Box>
     </Stack>
   );

@@ -21,11 +21,12 @@ const searchService = {
 
   searchByIds: (payload: number[], language: string) => {
     const langId = parseLanguageToId(language);
+    const params = new URLSearchParams();
+
+    payload.forEach((id) => params.append("ids", id.toString()));
+    params.append("lang", langId.toString());
     return axiosInstance.get<ISearchPlace[]>(`/search/ids`, {
-      params: {
-        ids: payload,
-        lang: langId,
-      },
+      params,
     });
   },
 

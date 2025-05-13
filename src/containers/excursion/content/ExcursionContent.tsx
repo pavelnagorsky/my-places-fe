@@ -36,7 +36,10 @@ const ExcursionContent = ({ excursion }: { excursion: IExcursion }) => {
               createdAt={excursion.createdAt}
             />
           </Stack>
-          <ExcursionDescription description={excursion.description} />
+          <ExcursionDescription
+            description={excursion.description}
+            author={excursion.authorName}
+          />
           <ExcursionPlaces items={excursion.places} />
         </Stack>
       </Grid>

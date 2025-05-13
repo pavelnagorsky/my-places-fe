@@ -19,7 +19,8 @@
     "description": "Краткое описание",
     "descriptionPlaceholder": "Введите описание экскурсии",
     "placeDescriptionPlaceholder": "Поделитесь кратким описанием места в рамках экскурсии...",
-    "durationSelect": "Введите время на посещение экскурсии:"
+    "durationSelect": "Введите время на посещение экскурсии:",
+    "region": "Область"
   },
   "mapView": "Визуальное построение экскурсии",
   "details": {
@@ -53,7 +54,8 @@
   "excursion": {
     "description": "Описание",
     "routeDetails": "Программа экскурсии",
-    "stayDuration": "Время на посещение:"
+    "stayDuration": "Время на посещение:",
+    "author": "Автор"
   },
   "search": {
     "title": "Каталог экскурсий",
@@ -63,6 +65,8 @@
     "noResults": "К сожалению, по вашему запросу ничего не найдено.",
     "filters": {
       "title": "Фильтры",
+      "regions": "Области",
+      "regionsPlaceholder": "Выберите области Беларуси",
       "searchPlaceholder": "Поиск по каталогу",
       "type": "Тип экскурсии",
       "travelMode": "Категория экскурсии",

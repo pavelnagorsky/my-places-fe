@@ -19,7 +19,8 @@
     "description": "Short description",
     "descriptionPlaceholder": "Enter excursion description",
     "placeDescriptionPlaceholder": "Share a brief description of the place within the excursion...",
-    "durationSelect": "Enter time for visiting the excursion:"
+    "durationSelect": "Enter time for visiting the excursion:",
+    "region": "Region"
   },
   "mapView": "Visual excursion planning",
   "details": {
@@ -53,7 +54,8 @@
   "excursion": {
     "description": "Description",
     "routeDetails": "Excursion program",
-    "stayDuration": "Visit duration:"
+    "stayDuration": "Visit duration:",
+    "author": "Author"
   },
   "search": {
     "title": "Excursions Catalog",
@@ -63,6 +65,8 @@
     "noResults": "Unfortunately, no results were found for your query.",
     "filters": {
       "title": "Filters",
+      "regions": "Regions",
+      "regionsPlaceholder": "Select regions of Belarus",
       "searchPlaceholder": "Search catalog",
       "type": "Excursion type",
       "travelMode": "Excursion category",
