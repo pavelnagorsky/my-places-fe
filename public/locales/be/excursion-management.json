@@ -54,7 +54,8 @@
   "excursion": {
     "description": "Апісанне",
     "routeDetails": "Праграма экскурсіі",
-    "stayDuration": "Час на наведванне:"
+    "stayDuration": "Час на наведванне:",
+    "author": "Аўтар"
   },
   "search": {
     "title": "Каталог экскурсій",

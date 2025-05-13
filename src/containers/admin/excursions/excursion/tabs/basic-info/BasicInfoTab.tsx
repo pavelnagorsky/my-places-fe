@@ -4,6 +4,7 @@ import ExcursionInfoSection from "@/containers/admin/excursions/excursion/tabs/b
 import DeleteExcursionSection from "@/containers/admin/excursions/excursion/tabs/basic-info/sections/DeleteExcursionSection";
 import ExcursionSlugSection from "@/containers/admin/excursions/excursion/tabs/basic-info/sections/ExcursionSlugSection";
 import ExcursionStatusSection from "@/containers/admin/excursions/excursion/tabs/basic-info/sections/ExcursionStatusSection";
+import PrimaryPlaceSection from "@/containers/admin/excursions/excursion/tabs/basic-info/sections/PrimaryPlaceSection";
 
 interface IBasicInfoTabProps {
   excursion: IExcursion;
@@ -33,6 +34,9 @@ const BasicInfoTab = ({ excursion, fetchExcursion }: IBasicInfoTabProps) => {
               excursion={excursion}
               onReloadExcursion={fetchExcursion}
             />
+          </Grid>
+          <Grid size={{ xs: 12 }}>
+            <PrimaryPlaceSection excursion={excursion} />
           </Grid>
           <Grid size={{ xs: 12 }}>
             <DeleteExcursionSection id={excursion.id} />

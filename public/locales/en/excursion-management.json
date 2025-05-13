@@ -54,7 +54,8 @@
   "excursion": {
     "description": "Description",
     "routeDetails": "Excursion program",
-    "stayDuration": "Visit duration:"
+    "stayDuration": "Visit duration:",
+    "author": "Author"
   },
   "search": {
     "title": "Excursions Catalog",
