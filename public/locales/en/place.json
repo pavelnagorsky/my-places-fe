@@ -7,6 +7,10 @@
     "lat": "Latitude:",
     "lng": "Longitude:"
   },
+  "navigator": {
+    "google": "Google Navigator",
+    "yandex": "Yandex Navigator"
+  },
   "comments": {
     "title": "Comments",
     "authHelper": "Only authorized users can leave comments",

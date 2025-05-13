@@ -13,20 +13,19 @@ import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
 import Image from "next/image";
-import PlaceStatistics from "@/containers/place/PlaceStatistics";
-import Comments from "@/containers/place/comments/Comments";
-import ReviewsSection from "@/containers/place/reviews/ReviewsSection";
-import Map from "@/components/map/Map";
-import { Marker } from "@react-google-maps/api";
+import PlaceStatistics from "@/containers/place/content/PlaceStatistics";
+import Comments from "@/containers/place/content/comments/Comments";
+import ReviewsSection from "@/containers/place/content/reviews/ReviewsSection";
 import { Fragment } from "react";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
-import PlaceGallery from "@/containers/place/gallery/PlaceGallery";
+import PlaceGallery from "@/containers/place/content/gallery/PlaceGallery";
 import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
 import TextWithBrTags from "@/components/UI/text-with-br-tags/TextWithBrTags";
+import MapSection from "@/containers/place/content/MapSection";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -229,26 +228,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                   </Grid>
                 ))}
               </Grid>
-              <Box mb={"2em"}>
-                <Typography
-                  variant={"h2"}
-                  component={"h2"}
-                  fontSize={{ xs: "24px", md: "30px" }}
-                >
-                  {t("location")}
-                </Typography>
-                <Map
-                  containerStyle={{ height: isMobile ? "300px" : "400px" }}
-                  fitCoordinates={[place.coordinates]}
-                >
-                  <Marker position={place.coordinates} />
-                </Map>
-                <Typography pt={"0.5em"} color={"secondary.main"}>
-                  {t("coordinates.lat")} {+place.coordinates.lat.toFixed(8)}
-                  <Box component={"br"} display={{ sm: "none" }} />{" "}
-                  {t("coordinates.lng")} {+place.coordinates.lng.toFixed(8)}
-                </Typography>
-              </Box>
+              <MapSection place={place} />
               <Box display={{ xs: "none", lg: "block" }}>{comments}</Box>
             </motion.div>
           </Grid>

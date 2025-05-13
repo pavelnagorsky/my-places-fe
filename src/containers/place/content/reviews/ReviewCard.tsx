@@ -1,6 +1,6 @@
 import { Box, Button, Card, Stack, Typography } from "@mui/material";
 import { format } from "date-fns";
-import StyledTextEditorContainer from "../../../components/UI/review-containers/StyledTextEditorContainer";
+import StyledTextEditorContainer from "../../../../components/UI/review-containers/StyledTextEditorContainer";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
 

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form-mui";
-import { ICommentsFormContext } from "@/containers/place/comments/interfaces";
+import { ICommentsFormContext } from "@/containers/place/content/comments/interfaces";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IComment } from "@/services/comments-service/comment.interface";
 import commentsService from "@/services/comments-service/comments.service";
