@@ -6,7 +6,7 @@ import { IPaginationResponse } from "@/services/interfaces";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 import { IUpdateRoute } from "@/services/routes-service/interfaces/update-route.interface";
 
-const reviewsService = {
+const routesService = {
   createRoute: (payload: ICreateRoute) => {
     return axiosInstance.post<{ id: number }>(`/Routes`, payload);
   },
@@ -44,4 +44,4 @@ const reviewsService = {
   },
 };
 
-export default reviewsService;
+export default routesService;

@@ -31,7 +31,7 @@ const ExcursionPlaces = ({ items }: { items: IExcursionPlace[] }) => {
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   transition={{ duration: 0.6, type: "spring" }}
                 >
-                  <ExcursionPlaceCard place={place} />
+                  <ExcursionPlaceCard place={place} index={index} />
                 </motion.div>
               ))}
             </AnimatePresence>

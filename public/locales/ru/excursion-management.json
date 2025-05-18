@@ -59,8 +59,8 @@
   },
   "search": {
     "title": "Каталог экскурсий",
-    "places": "места",
-    "placesPlural": "мест",
+    "places": "локации",
+    "placesPlural": "локаций",
     "excursionsFound": "Найдено {{value}} экскурсий:",
     "noResults": "К сожалению, по вашему запросу ничего не найдено.",
     "filters": {

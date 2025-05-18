@@ -2,11 +2,24 @@ import { IExcursion } from "@/services/excursions-service/interfaces/excursion.i
 import Grid from "@mui/material/Grid2";
 import { Stack, Typography } from "@mui/material";
 import PlaceGallery from "@/containers/place/content/gallery/PlaceGallery";
-import ExcursionStatistics from "@/containers/excursion/content/ExcursionStatistics";
 import ExcursionDescription from "@/containers/excursion/content/ExcursionDescription";
-import ExcursionPlaces from "@/containers/excursion/content/excursion-places/ExcursionPlaces";
 import ExcursionDetails from "@/containers/excursion/content/ExcursionDetails";
-import ExcursionMapSection from "@/containers/excursion/content/map-section/ExcursionMapSection";
+import dynamic from "next/dynamic";
+
+const ExcursionMapSection = dynamic(
+  () =>
+    import("@/containers/excursion/content/map-section/ExcursionMapSection"),
+  { ssr: false }
+);
+const ExcursionPlaces = dynamic(
+  () =>
+    import("@/containers/excursion/content/excursion-places/ExcursionPlaces"),
+  { ssr: false }
+);
+const ExcursionStatistics = dynamic(
+  () => import("@/containers/excursion/content/ExcursionStatistics"),
+  { ssr: false }
+);
 
 const ExcursionContent = ({ excursion }: { excursion: IExcursion }) => {
   return (

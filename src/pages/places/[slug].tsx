@@ -3,20 +3,13 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 import placesService from "@/services/places-service/places.service";
-import { IPlace } from "@/services/places-service/interfaces/place.interface";
-import reviewsService from "@/services/reviews-service/reviews.service";
-import { IPaginationResponse } from "@/services/interfaces";
-import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { Fragment } from "react";
 import { NextSeo } from "next-seo";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import placePageJsonld from "@/shared/json-ld/place-page-jsonld";
 import JsonLd from "@/shared/json-ld/JsonLd";
-
-interface IPlacePageProps {
-  place: IPlace;
-  reviews: IPaginationResponse<ISearchReview>;
-}
+import { IPlacePageProps } from "@/containers/place/PlacePage";
+import reviewsService from "@/services/reviews-service/reviews.service";
 
 const PlacePageLazy = dynamic(() => import("@/containers/place/PlacePage"));
 
