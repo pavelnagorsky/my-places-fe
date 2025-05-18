@@ -1,31 +1,22 @@
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { IPlace } from "@/services/places-service/interfaces/place.interface";
-import {
-  Box,
-  Link,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
-import Image from "next/image";
-import PlaceStatistics from "@/containers/place/content/PlaceStatistics";
-import Comments from "@/containers/place/content/comments/Comments";
-import ReviewsSection from "@/containers/place/content/reviews/ReviewsSection";
 import { Fragment } from "react";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
-import PlaceGallery from "@/containers/place/content/gallery/PlaceGallery";
-import { IPaginationResponse } from "@/services/interfaces";
-import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
+import PlaceType from "./content/PlaceType";
 import TextWithBrTags from "@/components/UI/text-with-br-tags/TextWithBrTags";
-import MapSection from "@/containers/place/content/MapSection";
+import PlaceCategories from "@/containers/place/content/PlaceCategories";
+import PlaceGallery from "@/containers/place/content/gallery/PlaceGallery";
+import PlaceWebsite from "@/containers/place/content/PlaceWebsite";
+import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
+import { IPaginationResponse } from "@/services/interfaces";
+import ReviewsSection from "./content/reviews/ReviewsSection";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -35,16 +26,25 @@ const AddToCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/AddToCartWidget"),
   { ssr: false }
 );
+const PlaceStatistics = dynamic(
+  () => import("@/containers/place/content/PlaceStatistics"),
+  { ssr: false }
+);
+const PlaceComments = dynamic(
+  () => import("@/containers/place/content/comments/Comments"),
+  { ssr: false }
+);
+const MapSection = dynamic(() => import("./content/MapSection"), {
+  ssr: false,
+});
 
-interface IPlaceProps {
+export interface IPlacePageProps {
   place: IPlace;
   reviews: IPaginationResponse<ISearchReview>;
 }
 
-const PlacePage = ({ place, reviews }: IPlaceProps) => {
+const PlacePage = ({ place, reviews }: IPlacePageProps) => {
   const { t } = useTranslation("place");
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const comments = (
     <Fragment>
@@ -55,7 +55,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
       >
         {t("comments.title")}
       </Typography>
-      <Comments placeId={place.id} />
+      <PlaceComments placeId={place.id} />
     </Fragment>
   );
 
@@ -79,30 +79,7 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
               >
                 {place.title}
               </Typography>
-              <Stack
-                direction={"row"}
-                alignItems={"center"}
-                gap={"0.7em"}
-                mb={"1em"}
-              >
-                <Typography
-                  variant={"body2"}
-                  fontSize={{ xs: "20px", md: "25px" }}
-                >
-                  {place.type.title}
-                </Typography>
-                {place.type.image && (
-                  <MuiImage
-                    imageProps={{
-                      height: 30,
-                      width: 30,
-                      src: place.type.image,
-                      alt: place.type.title,
-                      priority: true,
-                    }}
-                  />
-                )}
-              </Stack>
+              <PlaceType type={place.type} />
               <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
                 <PlaceOutlinedIcon
                   sx={{ ml: "-0.1em", color: secondaryLightColor }}
@@ -147,87 +124,9 @@ const PlacePage = ({ place, reviews }: IPlaceProps) => {
                 >
                   <TextWithBrTags text={place.description} />
                 </Typography>
-                {place.website && (
-                  <Stack
-                    direction={"row"}
-                    mt={"0.7em"}
-                    alignItems={"center"}
-                    gap={"0.5em"}
-                  >
-                    <Typography
-                      variant="body1"
-                      fontSize={{ xs: "16px", md: "20px" }}
-                      sx={{ whiteSpace: "nowrap" }}
-                    >
-                      {t("website")}
-                    </Typography>
-                    <Link
-                      target={"_blank"}
-                      referrerPolicy={"no-referrer"}
-                      href={place.website}
-                      sx={{
-                        fontSize: "16px",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        maxWidth: "200px",
-                        whiteSpace: "nowrap",
-                        display: "inline-block",
-                      }}
-                      color={"#303030"}
-                    >
-                      {place.website}
-                    </Link>
-                  </Stack>
-                )}
+                {place.website && <PlaceWebsite website={place.website} />}
               </Box>
-              <Typography
-                variant={"h2"}
-                component={"h2"}
-                fontSize={{ xs: "24px", md: "30px" }}
-              >
-                {t("categories")}
-              </Typography>
-              <Grid container spacing={"2em"} mb={"2em"}>
-                {place.categories.map((c) => (
-                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={c.id}>
-                    <Stack
-                      direction={"row"}
-                      alignItems={"center"}
-                      gap={"0.5em"}
-                    >
-                      {c.image && (
-                        <Box
-                          bgcolor={"#FFE9D6"}
-                          borderRadius={"5px"}
-                          position={"relative"}
-                          p={"0.5em"}
-                          height={56}
-                          width={56}
-                          sx={{
-                            "& img": {
-                              objectFit: "cover",
-                            },
-                          }}
-                        >
-                          <Image
-                            src={c.image}
-                            alt={c.title}
-                            priority
-                            height={40}
-                            width={40}
-                          />
-                        </Box>
-                      )}
-                      <Typography
-                        variant={"body2"}
-                        fontSize={{ xs: "16px", md: "20px" }}
-                      >
-                        {c.title}
-                      </Typography>
-                    </Stack>
-                  </Grid>
-                ))}
-              </Grid>
+              <PlaceCategories categories={place.categories} />
               <MapSection place={place} />
               <Box display={{ xs: "none", lg: "block" }}>{comments}</Box>
             </motion.div>

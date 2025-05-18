@@ -6,11 +6,11 @@ import { IPaginationResponse } from "@/services/interfaces";
 import utils from "@/shared/utils";
 
 interface IUseReviewsProps {
-  defaultData: IPaginationResponse<ISearchReview>;
   placeSlug: string;
+  defaultData: IPaginationResponse<ISearchReview>;
 }
 
-const useReviews = ({ defaultData, placeSlug }: IUseReviewsProps) => {
+const useReviews = ({ placeSlug, defaultData }: IUseReviewsProps) => {
   const { i18n } = useTranslation();
   const [reviews, setReviews] = useState<ISearchReview[]>(
     defaultData.items || []

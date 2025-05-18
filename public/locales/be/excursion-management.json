@@ -59,8 +59,8 @@
   },
   "search": {
     "title": "Каталог экскурсій",
-    "places": "месца",
-    "placesPlural": "месцаў",
+    "places": "лакацыi",
+    "placesPlural": "лакацый",
     "excursionsFound": "Знойдзена {{value}} экскурсій:",
     "noResults": "На жаль, па вашаму запыту нічога не знойдзена.",
     "filters": {

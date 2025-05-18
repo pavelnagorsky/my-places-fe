@@ -1,4 +1,12 @@
-import { Box, Button, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Image from "next/image";
 import locationImage from "/public/images/icons/location.png";
 import { useTranslation } from "next-i18next";
@@ -6,16 +14,20 @@ import { IExcursionPlace } from "@/services/excursions-service/interfaces/excurs
 import TextWithBrTags from "@/components/UI/text-with-br-tags/TextWithBrTags";
 import utils from "@/shared/utils";
 import arrowRightIcon from "/public/images/icons/arrow-right.png";
-import NextLink from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
 import PlaceReviewsSection from "@/containers/excursion/content/excursion-places/excursion-place-card/content/PlaceReviewsSection";
+import { StyledTextCircle } from "@/components/search-cart/content/CartItem";
 
 interface IExcursionPlaceCardProps {
   place: IExcursionPlace;
+  index: number;
 }
 
-const ExcursionPlaceCard = ({ place }: IExcursionPlaceCardProps) => {
+const ExcursionPlaceCard = ({ place, index }: IExcursionPlaceCardProps) => {
   const { t } = useTranslation(["excursion-management", "common"]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const formattedStayDuration = utils.formatMinutes(place.excursionDuration, {
     hoursTranslation: t("hours", { ns: "common" }),
     minutesTranslation: t("minutes", { ns: "common" }),
@@ -32,6 +44,13 @@ const ExcursionPlaceCard = ({ place }: IExcursionPlaceCardProps) => {
       }}
     >
       <Stack width={"100%"} gap={2}>
+        {isMobile && (
+          <StyledTextCircle
+            sx={{ position: "relative", top: 0, left: 0, mb: "-0.25em" }}
+          >
+            {index + 1}
+          </StyledTextCircle>
+        )}
         <Typography
           fontSize={"22px"}
           fontWeight={500}

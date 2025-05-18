@@ -23,6 +23,7 @@ const useScrollPagination = <ItemType = any, OrderByType = number>({
   pageSize,
 }: IUsePaginationProps<ItemType, OrderByType>) => {
   const [items, setItems] = useState<ItemType[]>([]);
+  const [totalItems, setTotalItems] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [noItems, setNoItems] = useState(false);
   const [orderBy, setOrderBy] = useState<OrderByType>(defaultOrderBy);
@@ -62,6 +63,7 @@ const useScrollPagination = <ItemType = any, OrderByType = number>({
     })
       .then(({ data }) => {
         const updatedItems = fromStart ? data.items : items.concat(data.items);
+        setTotalItems(data.totalItems);
         setNoItems(updatedItems.length === 0);
         setHasMore(data.totalPages > data.page + 1);
         setItems(updatedItems);
@@ -82,6 +84,7 @@ const useScrollPagination = <ItemType = any, OrderByType = number>({
     orderDirection,
     toggleOrderDirection,
     fetch,
+    totalItems,
   };
 };
 

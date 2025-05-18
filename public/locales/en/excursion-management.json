@@ -59,8 +59,8 @@
   },
   "search": {
     "title": "Excursions Catalog",
-    "places": "place",
-    "placesPlural": "places",
+    "places": "locations",
+    "placesPlural": "locations",
     "excursionsFound": "{{value}} excursions found:",
     "noResults": "Unfortunately, no results were found for your query.",
     "filters": {
