@@ -7,7 +7,7 @@ import { NextSeo } from "next-seo";
 import { Fragment } from "react";
 
 const ResetPasswordLazy = dynamic(
-  () => import("@/containers/auth/ResetPassword"),
+  () => import("@/containers/auth/content/ResetPassword"),
   {
     ssr: false,
   }

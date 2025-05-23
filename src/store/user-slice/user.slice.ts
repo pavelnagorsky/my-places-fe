@@ -6,6 +6,7 @@ import {
   LoginErrorEnum,
 } from "@/services/auth-service/interfaces";
 import {
+  autoLoginThunk,
   getUserDataThunk,
   loginThunk,
   logoutThunk,
@@ -26,6 +27,7 @@ interface IUserState {
   userData: IUser | null;
   redirectHomeOnCancelLogin: boolean;
   wasManuallyLoggedIn: boolean;
+  canSuggestOAuthAutoLogin: boolean;
 }
 
 const initialState: IUserState = {
@@ -37,6 +39,7 @@ const initialState: IUserState = {
   userData: null,
   redirectHomeOnCancelLogin: false,
   wasManuallyLoggedIn: false,
+  canSuggestOAuthAutoLogin: false,
 };
 
 export const userSlice = createSlice({
@@ -112,12 +115,17 @@ export const userSlice = createSlice({
     });
     builder.addCase(getUserDataThunk.pending, (state, action) => {
       state.userData = null;
+      state.canSuggestOAuthAutoLogin = false;
     });
     builder.addCase(getUserDataThunk.fulfilled, (state, action) => {
       state.userData = action.payload;
     });
     builder.addCase(getUserDataThunk.rejected, (state, action) => {
       state.userData = null;
+      state.canSuggestOAuthAutoLogin = true;
+    });
+    builder.addCase(autoLoginThunk.rejected, (state, action) => {
+      state.canSuggestOAuthAutoLogin = true;
     });
   },
 });
@@ -166,6 +174,10 @@ export const selectUserRoles = createSelector(
 export const selectUserId = createSelector(
   selectUserData,
   (s) => s?.id || null
+);
+export const selectCanSuggestOAuthAutoLogin = createSelector(
+  selectUserState,
+  (s) => s.canSuggestOAuthAutoLogin
 );
 
 export const { changeAuthScreen, closeAuth, openAuth } = userSlice.actions;

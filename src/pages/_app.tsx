@@ -18,6 +18,7 @@ import { Environment } from "@/shared/Environment";
 import I18nLanguages from "@/shared/I18nLanguages";
 import createLightTheme from "@/styles/theme/lightTheme";
 import { useRouter } from "next/router";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -36,26 +37,28 @@ function App({
             dateAdapter={AdapterDateFns}
             adapterLocale={dateFnsLocale}
           >
-            <Head>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
+            <GoogleOAuthProvider clientId={Environment.googleClientId}>
+              <Head>
+                <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1.0"
+                />
+              </Head>
+              <DefaultSeo
+                openGraph={{
+                  type: "website",
+                  locale: I18nLanguages.ru,
+                  url: `https://${Environment.domain}/`,
+                  siteName: "Знай свой край",
+                  title: "Знай свой край",
+                }}
+                titleTemplate={"%s | Знай свой край"}
               />
-            </Head>
-            <DefaultSeo
-              openGraph={{
-                type: "website",
-                locale: I18nLanguages.ru,
-                url: `https://${Environment.domain}/`,
-                siteName: "Знай свой край",
-                title: "Знай свой край",
-              }}
-              titleTemplate={"%s | Знай свой край"}
-            />
-            <CssBaseline />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+              <CssBaseline />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </GoogleOAuthProvider>
           </LocalizationProvider>
         </ThemeProvider>
       </Provider>

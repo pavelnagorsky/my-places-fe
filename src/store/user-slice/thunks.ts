@@ -9,6 +9,7 @@ import authService from "@/services/auth-service/auth.service";
 import localStorageFields from "@/shared/localStorageFields";
 import { RootState } from "@/store/store";
 import userService from "@/services/user-service/user.service";
+import { googleLogout } from "@react-oauth/google";
 
 export const getUserDataThunk = createAsyncThunk(
   "user/get-user-data",
@@ -76,6 +77,7 @@ export const signupThunk = createAsyncThunk(
 );
 
 export const logoutThunk = createAsyncThunk("user/logout", async (thunkAPI) => {
+  googleLogout();
   authService
     .logout()
     .then(() => {})

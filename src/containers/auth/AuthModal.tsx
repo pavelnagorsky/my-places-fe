@@ -13,10 +13,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import TabPanel from "@/containers/auth/tabs/TabPannel";
-import Login from "@/containers/auth/tabs/Login";
+import TabPanel from "@/containers/auth/content/tabs/TabPannel";
+import Login from "@/containers/auth/content/tabs/Login";
 import CloseIcon from "@mui/icons-material/Close";
-import Signup from "@/containers/auth/tabs/Signup";
+import Signup from "@/containers/auth/content/tabs/Signup";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   ActiveAuthScreenEnum,
@@ -28,6 +28,7 @@ import {
 } from "@/store/user-slice/user.slice";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import GoogleOAuth from "@/containers/auth/content/oauth/google/GoogleOAuth";
 
 function a11yProps(index: number) {
   return {
@@ -164,6 +165,7 @@ const AuthModal = () => {
               <Signup />
             </TabPanel>
           </Box>
+          <GoogleOAuth />
         </DialogContent>
       </Dialog>
     </div>

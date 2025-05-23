@@ -30,7 +30,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
 import useDialog from "@/hooks/useDialog";
-import ForgotPassword from "@/containers/auth/tabs/ForgotPassword";
+import ForgotPassword from "@/containers/auth/content/tabs/ForgotPassword";
 
 const Login = () => {
   const dispatch = useAppDispatch();
