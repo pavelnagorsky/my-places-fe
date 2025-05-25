@@ -1,10 +1,21 @@
-import { Box, IconButton, Stack } from "@mui/material";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { Box, IconButton } from "@mui/material";
+import { useGoogleLogin } from "@react-oauth/google";
 import googleIcon from "/public/images/icons/google.png";
+import authService from "@/services/auth-service/auth.service";
+import { GoogleOauthTypesEnum } from "@/services/auth-service/enums/google-oauth-type.enum";
 
 const GoogleOAuth = () => {
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => console.log(codeResponse),
+    onSuccess: (codeResponse) => {
+      console.log(codeResponse);
+      authService
+        .googleOAuth({
+          type: GoogleOauthTypesEnum.OAUTH,
+          authCode: codeResponse.code,
+        })
+        .then(() => {})
+        .catch(() => {});
+    },
     flow: "auth-code",
   });
 

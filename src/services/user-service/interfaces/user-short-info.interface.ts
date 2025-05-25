@@ -1,4 +1,4 @@
-import { IRole } from "@/services/auth-service/interfaces";
+import { IRole } from "@/services/auth-service/interfaces/interfaces";
 
 export interface IUserShortInfo {
   id: number;

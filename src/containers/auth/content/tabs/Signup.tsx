@@ -7,7 +7,7 @@ import {
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
-import { ISignupRequest } from "@/services/auth-service/interfaces";
+import { ISignupRequest } from "@/services/auth-service/interfaces/interfaces";
 import {
   Box,
   CircularProgress,

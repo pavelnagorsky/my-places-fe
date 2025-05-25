@@ -3,8 +3,7 @@ import {
   ILoginError,
   ILoginRequest,
   ISignupRequest,
-  LoginErrorEnum,
-} from "@/services/auth-service/interfaces";
+} from "@/services/auth-service/interfaces/interfaces";
 import authService from "@/services/auth-service/auth.service";
 import localStorageFields from "@/shared/localStorageFields";
 import { RootState } from "@/store/store";

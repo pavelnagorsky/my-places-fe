@@ -9,7 +9,7 @@ import {
 import {
   ILoginRequest,
   LoginErrorEnum,
-} from "@/services/auth-service/interfaces";
+} from "@/services/auth-service/interfaces/interfaces";
 import {
   Box,
   CircularProgress,

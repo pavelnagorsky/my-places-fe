@@ -1,10 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import { IUser } from "@/services/user-service/interfaces/user.interface";
-import {
-  ILoginError,
-  LoginErrorEnum,
-} from "@/services/auth-service/interfaces";
+import { ILoginError } from "@/services/auth-service/interfaces/interfaces";
 import {
   autoLoginThunk,
   getUserDataThunk,

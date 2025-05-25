@@ -7,7 +7,7 @@ import { logoutThunk } from "@/store/user-slice/thunks";
 import SliderMenuLink from "@/components/header/slider-menu/SliderMenuLink";
 import BuildIcon from "@mui/icons-material/Build";
 import useRoleAccess from "@/hooks/useRoleAccess";
-import RolesEnum from "@/services/auth-service/roles.enum";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import { useTranslation } from "next-i18next";
 
 const UserSection = ({

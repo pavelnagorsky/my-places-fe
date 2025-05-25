@@ -1,4 +1,4 @@
-import RolesEnum from "@/services/auth-service/roles.enum";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
 
 const useRolesOptions = () => {
   const roles: { id: RolesEnum; label: string }[] = [
