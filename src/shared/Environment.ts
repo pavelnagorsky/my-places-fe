@@ -12,4 +12,9 @@ export class Environment {
 
   static readonly email =
     process.env["NEXT_PUBLIC_EMAIL"] ?? "support@my-places.by";
+
+  static readonly vkAppId = process.env["NEXT_PUBLIC_VK_APP_ID"] ?? "";
+
+  static readonly vkCodeChallenge =
+    process.env["NEXT_PUBLIC_VK_CODE_CHALLENGE"] ?? "";
 }

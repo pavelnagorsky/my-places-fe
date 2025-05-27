@@ -22,7 +22,7 @@ import { IFeedback } from "@/services/contact-service/interfaces/feedback.interf
 import FeedbackListHeader from "@/containers/admin/feedback-list/feedback-list/table/FeedbackListHeader";
 import FeedbackListTableHead from "@/containers/admin/feedback-list/feedback-list/table/FeedbackListTableHead";
 import useUserTypes from "@/containers/contact-us/form/user-types/useUserTypes";
-import TableLoader from "@/components/UI/helper/TableLoader";
+import TableLoader from "@/components/UI/loader/TableLoader";
 
 const FeedbackListTable = () => {
   const { i18n } = useTranslation();

@@ -28,7 +28,7 @@ import {
 } from "@/store/user-slice/user.slice";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import GoogleOAuth from "@/containers/auth/content/oauth/google/GoogleOAuth";
+import OAuthSection from "@/containers/auth/content/oauth/OAuthSection";
 
 function a11yProps(index: number) {
   return {
@@ -165,7 +165,7 @@ const AuthModal = () => {
               <Signup />
             </TabPanel>
           </Box>
-          <GoogleOAuth />
+          <OAuthSection />
         </DialogContent>
       </Dialog>
     </div>

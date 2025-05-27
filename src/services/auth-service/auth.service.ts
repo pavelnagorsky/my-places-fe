@@ -5,6 +5,7 @@ import {
 } from "@/services/auth-service/interfaces/interfaces";
 import axiosInstance from "@/services/axios.instance";
 import { IGoogleOAuth } from "@/services/auth-service/interfaces/google-oauth.interface";
+import { IVKOAuth } from "@/services/auth-service/interfaces/vk-oauth.interface";
 
 const authService = {
   login: (payload: ILoginRequest) => {
@@ -48,6 +49,10 @@ const authService = {
 
   googleOAuth: (payload: IGoogleOAuth) => {
     return axiosInstance.post<ITokenResponse>("/auth/google", payload);
+  },
+
+  vkOAuth: (payload: IVKOAuth) => {
+    return axiosInstance.post<ITokenResponse>("/auth/vk", payload);
   },
 };
 

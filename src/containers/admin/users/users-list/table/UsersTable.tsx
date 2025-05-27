@@ -19,7 +19,7 @@ import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import useRolesOptions from "@/hooks/useRolesOptions";
 import UsersHeader from "@/containers/admin/users/users-list/table/UsersHeader";
 import { FormProvider } from "react-hook-form-mui";
-import TableLoader from "@/components/UI/helper/TableLoader";
+import TableLoader from "@/components/UI/loader/TableLoader";
 
 const PlaceTypesTable = () => {
   const { i18n } = useTranslation();

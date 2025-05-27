@@ -19,7 +19,7 @@ import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { FormProvider } from "react-hook-form-mui";
 import { routerLinks } from "@/routing/routerLinks";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import TableLoader from "@/components/UI/helper/TableLoader";
+import TableLoader from "@/components/UI/loader/TableLoader";
 import { IExcursionListItem } from "@/services/excursions-service/interfaces/excursion-list-item.interface";
 import useExcursionStatuses from "@/containers/personal-area/my-excursions/logic/utils/useExcursionStatuses";
 import useExcursions from "@/containers/admin/excursions/excursions-list/logic/useExcursions";
