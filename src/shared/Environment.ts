@@ -17,4 +17,6 @@ export class Environment {
 
   static readonly vkCodeChallenge =
     process.env["NEXT_PUBLIC_VK_CODE_CHALLENGE"] ?? "";
+
+  static readonly yandexAppId = process.env["NEXT_PUBLIC_YANDEX_APP_ID"] ?? "";
 }

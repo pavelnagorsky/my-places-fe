@@ -1,32 +1,43 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import authService from "@/services/auth-service/auth.service";
+import { Environment } from "@/shared/Environment";
+import initiateOAuthLogin from "@/containers/auth/content/oauth/logic/utils";
 
 const useVkOAuth = () => {
-  const router = useRouter();
+  const state = encodeURIComponent(new Date().toISOString());
+  const params = new URLSearchParams({
+    response_type: "code",
+    client_id: Environment.vkAppId,
+    redirect_uri: window.location.origin + "/auth/oauth/callback",
+    scope: "email",
+    state,
+    code_challenge: Environment.vkCodeChallenge,
+    code_challenge_method: "S256",
+  });
+  const url = `https://id.vk.com/authorize?${params.toString()}`;
 
-  useEffect(() => {
-    const code = router.query.code as string;
-    if (!code) {
-      router.push("/");
-      return;
-    }
-    authService
-      .vkOAuth({
-        authCode: code,
-        deviceId: router.query.device_id as string,
-        state: router.query.state as string,
+  const handleVkLogin = () => {
+    initiateOAuthLogin(url)
+      .then((queryPrams) => {
+        console.log("success", queryPrams);
+        authService
+          .vkOAuth({
+            authCode: queryPrams.code,
+            deviceId: queryPrams.device_id,
+            state: queryPrams.state,
+          })
+          .then(({ data }) => {
+            // TODO: get user data
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       })
-      .then(({ data }) => {
-        // TODO: get user data
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        router.push("/");
+      .catch((error) => {
+        console.log("error", error);
       });
-  }, [router.query]);
+  };
+
+  return handleVkLogin;
 };
 
 export default useVkOAuth;

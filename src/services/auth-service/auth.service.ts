@@ -6,6 +6,7 @@ import {
 import axiosInstance from "@/services/axios.instance";
 import { IGoogleOAuth } from "@/services/auth-service/interfaces/google-oauth.interface";
 import { IVKOAuth } from "@/services/auth-service/interfaces/vk-oauth.interface";
+import { IYandexOAuth } from "@/services/auth-service/interfaces/yandex-oauth.interface";
 
 const authService = {
   login: (payload: ILoginRequest) => {
@@ -53,6 +54,10 @@ const authService = {
 
   vkOAuth: (payload: IVKOAuth) => {
     return axiosInstance.post<ITokenResponse>("/auth/vk", payload);
+  },
+
+  yandexOAuth: (payload: IYandexOAuth) => {
+    return axiosInstance.post<ITokenResponse>("/auth/yandex", payload);
   },
 };
 

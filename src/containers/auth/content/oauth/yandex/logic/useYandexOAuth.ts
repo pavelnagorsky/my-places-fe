@@ -1,32 +1,39 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { Environment } from "@/shared/Environment";
+import initiateOAuthLogin from "@/containers/auth/content/oauth/logic/utils";
 import authService from "@/services/auth-service/auth.service";
 
 const useYandexOAuth = () => {
-  const router = useRouter();
+  const state = encodeURIComponent(new Date().toISOString());
+  const params = new URLSearchParams({
+    response_type: "token",
+    client_id: Environment.yandexAppId,
+    redirect_uri: window.location.origin + "/auth/oauth/callback",
+    scope: "login:email login:info",
+    state,
+  });
+  const url = `https://oauth.yandex.ru/authorize?${params.toString()}`;
 
-  useEffect(() => {
-    const code = router.query.code as string;
-    if (!code) {
-      router.push("/");
-      return;
-    }
-    authService
-      .vkOAuth({
-        authCode: code,
-        deviceId: router.query.device_id as string,
-        state: router.query.state as string,
+  const handleYandexLogin = () => {
+    initiateOAuthLogin(url)
+      .then((queryPrams) => {
+        console.log("success", queryPrams);
+        authService
+          .yandexOAuth({
+            authCode: queryPrams.access_token,
+          })
+          .then(({ data }) => {
+            // TODO: get user data
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       })
-      .then(({ data }) => {
-        // TODO: get user data
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        router.push("/");
+      .catch((error) => {
+        console.log("error", error);
       });
-  }, [router.query]);
+  };
+
+  return handleYandexLogin;
 };
 
 export default useYandexOAuth;
