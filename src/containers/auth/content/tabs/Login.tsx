@@ -30,7 +30,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
 import useDialog from "@/hooks/useDialog";
-import ForgotPassword from "@/containers/auth/content/tabs/ForgotPassword";
+import ForgotPassword from "@/containers/auth/content/forgot-password/ForgotPassword";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +38,6 @@ const Login = () => {
   const error = useAppSelector(selectAuthError);
   const router = useRouter();
   const { t } = useTranslation("common");
-  const forgotPasswordDialog = useDialog();
 
   const loginRedirect = async (path: string) => {
     await router
@@ -189,25 +188,6 @@ const Login = () => {
           {t("auth.login.submit")}
         </Button>
       </FormContainer>
-      <Divider sx={{ borderColor: "#D5D3D0", my: "1em" }} />
-      <Stack justifyContent={"center"} mt="1.2em">
-        <Button
-          onClick={forgotPasswordDialog.handleOpen}
-          variant={"text"}
-          color={"secondary"}
-          sx={{
-            textTransform: "none",
-            color: "#DFDDDB",
-            cursor: "pointer",
-          }}
-        >
-          {t("auth.forgotPassword.title")}
-        </Button>
-        <ForgotPassword
-          open={forgotPasswordDialog.open}
-          onClose={forgotPasswordDialog.handleClose}
-        />
-      </Stack>
     </Box>
   );
 };

@@ -31,6 +31,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import OAuthSection from "@/containers/auth/content/oauth/OAuthSection";
 import BackdropLoader from "@/components/UI/loader/BackdropLoader";
+import ForgotPassword from "@/containers/auth/content/forgot-password/ForgotPassword";
 
 function a11yProps(index: number) {
   return {
@@ -172,7 +173,10 @@ const AuthModal = () => {
               <Signup />
             </TabPanel>
           </Box>
-          <OAuthSection />
+          <Stack gap={3}>
+            <OAuthSection />
+            {activeTab === ActiveAuthScreenEnum.LOGIN && <ForgotPassword />}
+          </Stack>
         </DialogContent>
       </Dialog>
     </div>

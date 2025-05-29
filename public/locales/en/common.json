@@ -64,6 +64,7 @@
   },
   "auth": {
     "oauth": {
+      "loginWith": "Or log in with",
       "feedback": {
         "error": "Authorization error via a third-party service"
       }
