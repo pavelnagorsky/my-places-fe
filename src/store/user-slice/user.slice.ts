@@ -7,6 +7,7 @@ import {
   getUserDataThunk,
   loginThunk,
   logoutThunk,
+  oauthLoginThunk,
   signupThunk,
 } from "@/store/user-slice/thunks";
 
@@ -17,6 +18,7 @@ export enum ActiveAuthScreenEnum {
 
 interface IUserState {
   loading: boolean;
+  oauthLoading: boolean;
   loginRedirect: string | null;
   error: false | ILoginError;
   open: boolean;
@@ -29,6 +31,7 @@ interface IUserState {
 
 const initialState: IUserState = {
   loading: false,
+  oauthLoading: false,
   loginRedirect: null,
   error: false,
   open: false,
@@ -92,6 +95,19 @@ export const userSlice = createSlice({
           message: "Error",
         };
       }
+    });
+    builder.addCase(oauthLoginThunk.pending, (state, action) => {
+      state.oauthLoading = true;
+    });
+    builder.addCase(oauthLoginThunk.fulfilled, (state, action) => {
+      state.oauthLoading = false;
+      state.open = false;
+      state.loginRedirect = null;
+      state.wasManuallyLoggedIn = true;
+    });
+    builder.addCase(oauthLoginThunk.rejected, (state, action) => {
+      state.oauthLoading = false;
+      state.loginRedirect = null;
     });
     builder.addCase(signupThunk.pending, (state, action) => {
       state.loading = true;
@@ -175,6 +191,10 @@ export const selectUserId = createSelector(
 export const selectCanSuggestOAuthAutoLogin = createSelector(
   selectUserState,
   (s) => s.canSuggestOAuthAutoLogin
+);
+export const selectOAuthLoading = createSelector(
+  selectUserState,
+  (s) => s.oauthLoading
 );
 
 export const { changeAuthScreen, closeAuth, openAuth } = userSlice.actions;

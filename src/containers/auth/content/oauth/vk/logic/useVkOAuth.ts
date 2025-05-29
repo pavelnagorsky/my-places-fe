@@ -1,8 +1,15 @@
 import authService from "@/services/auth-service/auth.service";
 import { Environment } from "@/shared/Environment";
 import initiateOAuthLogin from "@/containers/auth/content/oauth/logic/utils";
+import { useAppDispatch } from "@/store/hooks";
+import { useRouter } from "next/router";
+import { oauthLoginThunk } from "@/store/user-slice/thunks";
+import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
+import { useTranslation } from "next-i18next";
 
 const useVkOAuth = () => {
+  const { t } = useTranslation("common");
+  const dispatch = useAppDispatch();
   const state = encodeURIComponent(new Date().toISOString());
   const params = new URLSearchParams({
     response_type: "code",
@@ -14,23 +21,41 @@ const useVkOAuth = () => {
     code_challenge_method: "S256",
   });
   const url = `https://id.vk.com/authorize?${params.toString()}`;
+  const router = useRouter();
+
+  const loginRedirect = async (path: string) => {
+    await router
+      .push(path)
+      .then(() => {})
+      .catch(() => {});
+  };
 
   const handleVkLogin = () => {
     initiateOAuthLogin(url)
       .then((queryPrams) => {
-        console.log("success", queryPrams);
-        authService
-          .vkOAuth({
-            authCode: queryPrams.code,
-            deviceId: queryPrams.device_id,
-            state: queryPrams.state,
+        dispatch(
+          oauthLoginThunk({
+            apiCall: () =>
+              authService.vkOAuth({
+                authCode: queryPrams.code,
+                deviceId: queryPrams.device_id,
+                state: queryPrams.state,
+              }),
+            onRedirect: loginRedirect,
+            onError: () =>
+              dispatch(
+                showAlertThunk({
+                  alertProps: {
+                    title: t("feedback.error"),
+                    description: t("auth.oauth.feedback.error"),
+                    variant: "standard",
+                    severity: "error",
+                  },
+                  snackbarProps: {},
+                })
+              ),
           })
-          .then(({ data }) => {
-            // TODO: get user data
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+        );
       })
       .catch((error) => {
         console.log("error", error);

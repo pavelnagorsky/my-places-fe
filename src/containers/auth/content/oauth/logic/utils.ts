@@ -28,8 +28,7 @@ const initiateOAuthLogin = (url: string): Promise<Record<string, string>> => {
         if (popupCheckInterval) clearInterval(popupCheckInterval);
 
         // Simplified message handling - just look for code
-        const code =
-          event.data.payload?.code ?? event.data.payload?.access_token;
+        const code = event.data.payload?.code;
 
         if (code) {
           popup.close();

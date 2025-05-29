@@ -25,10 +25,12 @@ import {
   selectAuthActiveScreen,
   selectAuthCloseRedirect,
   selectAuthOpen,
+  selectOAuthLoading,
 } from "@/store/user-slice/user.slice";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import OAuthSection from "@/containers/auth/content/oauth/OAuthSection";
+import BackdropLoader from "@/components/UI/loader/BackdropLoader";
 
 function a11yProps(index: number) {
   return {
@@ -76,6 +78,7 @@ const AuthModal = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const open = useAppSelector(selectAuthOpen);
+  const oauthLoading = useAppSelector(selectOAuthLoading);
   const activeTab = useAppSelector(selectAuthActiveScreen);
   const redirectHomeOnClose = useAppSelector(selectAuthCloseRedirect);
   const dispatch = useAppDispatch();
@@ -119,6 +122,10 @@ const AuthModal = () => {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
+        <BackdropLoader
+          loading={oauthLoading}
+          sx={{ background: "RGBA(255, 255, 255, 0.7)" }}
+        />
         <Stack
           direction={"row"}
           mt={{ xs: "0.5em", sm: "1.5em" }}

@@ -3,12 +3,15 @@ import {
   ILoginError,
   ILoginRequest,
   ISignupRequest,
+  ITokenResponse,
+  LoginErrorEnum,
 } from "@/services/auth-service/interfaces/interfaces";
 import authService from "@/services/auth-service/auth.service";
 import localStorageFields from "@/shared/localStorageFields";
 import { RootState } from "@/store/store";
 import userService from "@/services/user-service/user.service";
 import { googleLogout } from "@react-oauth/google";
+import { AxiosResponse } from "axios";
 
 export const getUserDataThunk = createAsyncThunk(
   "user/get-user-data",
@@ -62,6 +65,38 @@ export const loginThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(
         (e?.response?.data as ILoginError) || null
       );
+    }
+  }
+);
+
+export const oauthLoginThunk = createAsyncThunk(
+  "user/oauth-login",
+  async (
+    payload: {
+      apiCall: () => Promise<AxiosResponse<ITokenResponse>>;
+      onRedirect: (path: string) => void;
+      onError?: (error: any) => void;
+    },
+    thunkAPI
+  ) => {
+    try {
+      const loginRedirect = (thunkAPI.getState() as RootState).user
+        .loginRedirect;
+
+      const { data } = await payload.apiCall();
+
+      // save token in storage
+      localStorage.setItem(localStorageFields.TOKEN, data.token);
+
+      thunkAPI.dispatch(getUserDataThunk());
+      if (loginRedirect) {
+        await payload.onRedirect(loginRedirect);
+      }
+
+      return data;
+    } catch (e: any) {
+      if (typeof payload.onError === "function") payload.onError(e);
+      return thunkAPI.rejectWithValue(null);
     }
   }
 );

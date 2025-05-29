@@ -93,6 +93,16 @@ const Login = () => {
       );
       return;
     }
+    if (error?.loginError === LoginErrorEnum.PASSWORD_NOT_SET) {
+      form.setError(
+        "password",
+        {
+          message: t("auth.login.passwordNotSet"),
+        },
+        { shouldFocus: true }
+      );
+      return;
+    }
     form.setError(
       "email",
       {

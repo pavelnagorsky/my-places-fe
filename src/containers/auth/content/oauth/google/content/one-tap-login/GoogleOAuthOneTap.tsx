@@ -6,7 +6,6 @@ const GoogleOAuthOneTap = () => {
   const canSuggestOAuthAutoLogin = useAppSelector(
     selectCanSuggestOAuthAutoLogin
   );
-  console.log("canSuggestOAuthAutoLogin", canSuggestOAuthAutoLogin);
 
   return canSuggestOAuthAutoLogin ? <GoogleOAuthOneTapContent /> : null;
 };
