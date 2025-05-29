@@ -3,9 +3,12 @@ import { GetServerSideProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 
-const ConfirmLazy = dynamic(() => import("@/containers/auth/ConfirmEmail"), {
-  ssr: false,
-});
+const ConfirmLazy = dynamic(
+  () => import("@/containers/auth/content/ConfirmEmail"),
+  {
+    ssr: false,
+  }
+);
 
 const ConfirmEmailPage: NextPage = () => {
   return <ConfirmLazy />;

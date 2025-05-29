@@ -14,6 +14,7 @@ import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { routerLinks } from "@/routing/routerLinks";
+import GoogleOAuthOneTap from "@/containers/auth/content/oauth/google/content/one-tap-login/GoogleOAuthOneTap";
 const SnackbarAlert = dynamic(
   () => import("@/components/UI/alert/SnackbarAlert"),
   {
@@ -83,6 +84,7 @@ export default function Layout({ children }: PropsWithChildren) {
 
   return (
     <Box height={"100vh"} display={"flex"} flexDirection={"column"}>
+      <GoogleOAuthOneTap />
       {pageLoading && (
         <LinearProgress
           sx={{ zIndex: 5000, position: "fixed", top: 0, width: "100vw" }}

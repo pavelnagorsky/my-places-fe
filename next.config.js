@@ -13,11 +13,6 @@ const nextConfig = {
       },
     ],
   },
-  env: {
-    GOOGLE_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-    EMAIL: process.env.NEXT_PUBLIC_EMAIL,
-    DOMAIN: process.env.NEXT_PUBLIC_DOMAIN,
-  },
   async redirects() {
     return redirectsList;
   },

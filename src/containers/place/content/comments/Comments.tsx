@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openAuth, selectUserId } from "@/store/user-slice/user.slice";
 import { AnimatePresence, motion } from "framer-motion";
 import useRoleAccess from "@/hooks/useRoleAccess";
-import RolesEnum from "@/services/auth-service/roles.enum";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import { useTranslation } from "next-i18next";
 
 const Comments = ({ placeId }: { placeId: number }) => {

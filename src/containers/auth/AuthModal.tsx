@@ -13,10 +13,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import TabPanel from "@/containers/auth/tabs/TabPannel";
-import Login from "@/containers/auth/tabs/Login";
+import TabPanel from "@/containers/auth/content/tabs/TabPannel";
+import Login from "@/containers/auth/content/tabs/Login";
 import CloseIcon from "@mui/icons-material/Close";
-import Signup from "@/containers/auth/tabs/Signup";
+import Signup from "@/containers/auth/content/tabs/Signup";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   ActiveAuthScreenEnum,
@@ -25,9 +25,13 @@ import {
   selectAuthActiveScreen,
   selectAuthCloseRedirect,
   selectAuthOpen,
+  selectOAuthLoading,
 } from "@/store/user-slice/user.slice";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import OAuthSection from "@/containers/auth/content/oauth/OAuthSection";
+import BackdropLoader from "@/components/UI/loader/BackdropLoader";
+import ForgotPassword from "@/containers/auth/content/forgot-password/ForgotPassword";
 
 function a11yProps(index: number) {
   return {
@@ -75,6 +79,7 @@ const AuthModal = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const open = useAppSelector(selectAuthOpen);
+  const oauthLoading = useAppSelector(selectOAuthLoading);
   const activeTab = useAppSelector(selectAuthActiveScreen);
   const redirectHomeOnClose = useAppSelector(selectAuthCloseRedirect);
   const dispatch = useAppDispatch();
@@ -118,6 +123,10 @@ const AuthModal = () => {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
+        <BackdropLoader
+          loading={oauthLoading}
+          sx={{ background: "RGBA(255, 255, 255, 0.7)" }}
+        />
         <Stack
           direction={"row"}
           mt={{ xs: "0.5em", sm: "1.5em" }}
@@ -164,6 +173,10 @@ const AuthModal = () => {
               <Signup />
             </TabPanel>
           </Box>
+          <Stack gap={3}>
+            <OAuthSection />
+            {activeTab === ActiveAuthScreenEnum.LOGIN && <ForgotPassword />}
+          </Stack>
         </DialogContent>
       </Dialog>
     </div>

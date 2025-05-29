@@ -40,7 +40,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
+const ForgotPasswordDialog = ({ open, onClose }: IForgotPasswordProps) => {
   const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
@@ -187,4 +187,4 @@ const ForgotPassword = ({ open, onClose }: IForgotPasswordProps) => {
   );
 };
 
-export default ForgotPassword;
+export default ForgotPasswordDialog;

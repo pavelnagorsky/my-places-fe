@@ -1,4 +1,4 @@
-import RolesEnum from "@/services/auth-service/roles.enum";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
 
 export interface IUsersFiltersForm {
   dateFrom?: Date | string | null;

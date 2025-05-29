@@ -6,7 +6,7 @@ import commentsService from "@/services/comments-service/comments.service";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import useRoleAccess from "@/hooks/useRoleAccess";
-import RolesEnum from "@/services/auth-service/roles.enum";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
 import { useTranslation } from "next-i18next";
 

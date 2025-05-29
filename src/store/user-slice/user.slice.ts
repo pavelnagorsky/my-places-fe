@@ -1,14 +1,13 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import { IUser } from "@/services/user-service/interfaces/user.interface";
+import { ILoginError } from "@/services/auth-service/interfaces/interfaces";
 import {
-  ILoginError,
-  LoginErrorEnum,
-} from "@/services/auth-service/interfaces";
-import {
+  autoLoginThunk,
   getUserDataThunk,
   loginThunk,
   logoutThunk,
+  oauthLoginThunk,
   signupThunk,
 } from "@/store/user-slice/thunks";
 
@@ -19,6 +18,7 @@ export enum ActiveAuthScreenEnum {
 
 interface IUserState {
   loading: boolean;
+  oauthLoading: boolean;
   loginRedirect: string | null;
   error: false | ILoginError;
   open: boolean;
@@ -26,10 +26,12 @@ interface IUserState {
   userData: IUser | null;
   redirectHomeOnCancelLogin: boolean;
   wasManuallyLoggedIn: boolean;
+  canSuggestOAuthAutoLogin: boolean;
 }
 
 const initialState: IUserState = {
   loading: false,
+  oauthLoading: false,
   loginRedirect: null,
   error: false,
   open: false,
@@ -37,6 +39,7 @@ const initialState: IUserState = {
   userData: null,
   redirectHomeOnCancelLogin: false,
   wasManuallyLoggedIn: false,
+  canSuggestOAuthAutoLogin: false,
 };
 
 export const userSlice = createSlice({
@@ -93,6 +96,19 @@ export const userSlice = createSlice({
         };
       }
     });
+    builder.addCase(oauthLoginThunk.pending, (state, action) => {
+      state.oauthLoading = true;
+    });
+    builder.addCase(oauthLoginThunk.fulfilled, (state, action) => {
+      state.oauthLoading = false;
+      state.open = false;
+      state.loginRedirect = null;
+      state.wasManuallyLoggedIn = true;
+    });
+    builder.addCase(oauthLoginThunk.rejected, (state, action) => {
+      state.oauthLoading = false;
+      state.loginRedirect = null;
+    });
     builder.addCase(signupThunk.pending, (state, action) => {
       state.loading = true;
       state.error = false;
@@ -112,12 +128,17 @@ export const userSlice = createSlice({
     });
     builder.addCase(getUserDataThunk.pending, (state, action) => {
       state.userData = null;
+      state.canSuggestOAuthAutoLogin = false;
     });
     builder.addCase(getUserDataThunk.fulfilled, (state, action) => {
       state.userData = action.payload;
     });
     builder.addCase(getUserDataThunk.rejected, (state, action) => {
       state.userData = null;
+      state.canSuggestOAuthAutoLogin = true;
+    });
+    builder.addCase(autoLoginThunk.rejected, (state, action) => {
+      state.canSuggestOAuthAutoLogin = true;
     });
   },
 });
@@ -166,6 +187,14 @@ export const selectUserRoles = createSelector(
 export const selectUserId = createSelector(
   selectUserData,
   (s) => s?.id || null
+);
+export const selectCanSuggestOAuthAutoLogin = createSelector(
+  selectUserState,
+  (s) => s.canSuggestOAuthAutoLogin
+);
+export const selectOAuthLoading = createSelector(
+  selectUserState,
+  (s) => s.oauthLoading
 );
 
 export const { changeAuthScreen, closeAuth, openAuth } = userSlice.actions;
