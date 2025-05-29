@@ -18,6 +18,7 @@ import { Environment } from "@/shared/Environment";
 import I18nLanguages from "@/shared/I18nLanguages";
 import createLightTheme from "@/styles/theme/lightTheme";
 import { useRouter } from "next/router";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -28,6 +29,7 @@ function App({
 }: AppProps & { emotionCache: EmotionCache }) {
   const dateFnsLocale = useDateFnsLocale();
   const { locale } = useRouter();
+
   return (
     <CacheProvider value={emotionCache}>
       <Provider store={store}>
@@ -51,6 +53,10 @@ function App({
                 title: "Знай свой край",
               }}
               titleTemplate={"%s | Знай свой край"}
+            />
+            <GoogleAnalytics
+              trackPageViews={{ ignoreHashChange: true }}
+              gaMeasurementId={Environment.GAMeasurementId}
             />
             <CssBaseline />
             <Layout>

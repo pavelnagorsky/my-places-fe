@@ -9,4 +9,7 @@ export class Environment {
 
   static readonly email =
     process.env["NEXT_PUBLIC_EMAIL"] ?? "support@my-places.by";
+
+  static readonly GAMeasurementId =
+    process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"] || "";
 }

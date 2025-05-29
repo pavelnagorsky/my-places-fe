@@ -2,7 +2,7 @@ import Dialog from "@mui/material/Dialog/Dialog";
 import DialogContent from "@mui/material/DialogContent/DialogContent";
 import Slide from "@mui/material/Slide/Slide";
 import { TransitionProps } from "@mui/material/transitions/transition";
-import { forwardRef, ReactElement, Ref, SyntheticEvent, useState } from "react";
+import { forwardRef, ReactElement, Ref, SyntheticEvent } from "react";
 import {
   Box,
   IconButton,
@@ -88,7 +88,7 @@ const AuthModal = () => {
   };
 
   const handleChangeTab = (
-    event: SyntheticEvent,
+    e: SyntheticEvent,
     newValue: ActiveAuthScreenEnum
   ) => {
     dispatch(changeAuthScreen(newValue));
