@@ -11,6 +11,7 @@ const useAnalytics = () => {
     payload: Record<string, any>
   ) => {
     if (typeof window === "undefined") return;
+    sendGTMEvent({ event: "cleanup", payload: null });
     sendGTMEvent({ event, payload, context: { userData } });
   };
 
