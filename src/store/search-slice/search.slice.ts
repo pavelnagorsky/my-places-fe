@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { ISearchForm } from "@/containers/search-page/logic/interfaces";
+import { ISearchForm } from "@/containers/places/logic/interfaces";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { ISelect } from "@/shared/interfaces";
 import {
@@ -11,7 +11,7 @@ import {
 } from "@/store/search-slice/thunks";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
-import { defaultSearchFilters } from "@/containers/search-page/logic/default-filters";
+import { defaultSearchFilters } from "@/containers/places/logic/default-filters";
 
 interface ISearchState {
   hasMore: boolean;

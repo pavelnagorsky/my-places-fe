@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { oauthLoginThunk } from "@/store/user-slice/thunks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
 
 const useVkOAuth = () => {
   const { t } = useTranslation("common");
@@ -22,6 +24,7 @@ const useVkOAuth = () => {
   });
   const url = `https://id.vk.com/authorize?${params.toString()}`;
   const router = useRouter();
+  const sendAnalytics = useAnalytics();
 
   const loginRedirect = async (path: string) => {
     await router
@@ -31,6 +34,9 @@ const useVkOAuth = () => {
   };
 
   const handleVkLogin = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "vk oauth",
+    });
     initiateOAuthLogin(url)
       .then((queryPrams) => {
         dispatch(

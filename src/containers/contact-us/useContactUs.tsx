@@ -7,11 +7,14 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
 import utils from "@/shared/utils";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const useContactUs = () => {
   const { t } = useTranslation(["contact-us", "common"]);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const sendAnalytics = useAnalytics();
 
   const form = useForm<IContactUsForm>({
     defaultValues: {
@@ -60,6 +63,9 @@ const useContactUs = () => {
   const onSubmit = () => {
     form.handleSubmit((data) => {
       if (loading) return;
+      sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+        title: "contacts us submit",
+      });
       setLoading(true);
       data.userType = +data.userType;
       data.phone = utils.sanitizePhoneNumber(data.phone);

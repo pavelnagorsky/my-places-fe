@@ -24,7 +24,7 @@ const mobileLinksConfig = [
   {
     i18nKey: "links.search",
     icon: TravelExploreIcon,
-    href: routerLinks.search,
+    href: routerLinks.places,
   },
   { i18nKey: "links.excursions", icon: MapIcon, href: routerLinks.excursions },
   {

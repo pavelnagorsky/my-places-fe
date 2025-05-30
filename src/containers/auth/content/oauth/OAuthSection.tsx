@@ -16,7 +16,7 @@ const OAuthSection = () => {
       >
         {t("auth.oauth.loginWith")}
       </Divider>
-      <Stack direction={"row"} gap={3} justifyContent={"center"}>
+      <Stack direction={"row"} gap={2} justifyContent={"center"}>
         <GoogleOAuth />
         <VkOAuth />
         <YandexOAuth />

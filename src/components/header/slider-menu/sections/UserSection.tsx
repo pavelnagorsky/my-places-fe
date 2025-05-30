@@ -9,6 +9,8 @@ import BuildIcon from "@mui/icons-material/Build";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const UserSection = ({
   onClose,
@@ -21,8 +23,10 @@ const UserSection = ({
 }) => {
   const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
+  const sendAnalytics = useAnalytics();
   const onLogout = () => {
     onClose();
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, { title: "logout" });
     dispatch(logoutThunk());
   };
   const isModerator = useRoleAccess([RolesEnum.MODERATOR, RolesEnum.ADMIN]);

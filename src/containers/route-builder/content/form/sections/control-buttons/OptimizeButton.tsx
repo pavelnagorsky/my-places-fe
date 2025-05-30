@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
 
 const OptimizeButton = () => {
   const dispatch = useAppDispatch();
@@ -23,8 +25,12 @@ const OptimizeButton = () => {
     getValues,
     formState: { isValid },
   } = useFormContext<IRouteBuilderForm>();
+  const sendAnalytics = useAnalytics();
 
   const onClickOptimize = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "route: optimize button",
+    });
     const coordinatesStartString = getValues("searchFrom.coordinates");
     const startLatLng = coordinatesStartString
       ? utils.stringToLatLng(coordinatesStartString)

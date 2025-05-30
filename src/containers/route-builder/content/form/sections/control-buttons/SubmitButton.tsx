@@ -13,6 +13,8 @@ import { useTranslation } from "next-i18next";
 import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
 import { saveRouteThunk } from "@/store/route-builder-slice/thunks";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const SubmitButton = () => {
   const { t } = useTranslation(["route-management", "common"]);
@@ -26,6 +28,7 @@ const SubmitButton = () => {
     handleSubmit,
     formState: { isValid },
   } = useFormContext<IRouteBuilderForm>();
+  const sendAnalytics = useAnalytics();
 
   const handleShowError = () => {
     dispatch(
@@ -75,6 +78,9 @@ const SubmitButton = () => {
     }
 
     handleSubmit((data) => {
+      sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+        title: "route: save click",
+      });
       dispatch(
         saveRouteThunk({
           route: {

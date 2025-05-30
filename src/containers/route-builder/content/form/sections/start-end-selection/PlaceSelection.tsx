@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { primaryBackground } from "@/styles/theme/lightTheme";
-import LocationAutocomplete from "@/containers/search-page/content/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
-import SearchByMe from "@/containers/search-page/content/filters/content/location-search/content/SearchByMe";
+import LocationAutocomplete from "@/containers/places/content/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
+import SearchByMe from "@/containers/places/content/filters/content/location-search/content/SearchByMe";
 import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import { useTranslation } from "next-i18next";

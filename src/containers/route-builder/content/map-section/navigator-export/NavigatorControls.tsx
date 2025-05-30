@@ -7,6 +7,8 @@ import { useAppSelector } from "@/store/hooks";
 import { selectItems } from "@/store/route-builder-slice/route-builder.slice";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const NavigatorControls = () => {
   const {
@@ -15,6 +17,7 @@ const NavigatorControls = () => {
   } = useFormContext<IRouteBuilderForm>();
   const { t } = useTranslation("route-management");
   const places = useAppSelector(selectItems);
+  const sendAnalytics = useAnalytics();
 
   const prepareData = () => {
     const travelMode = getValues("travelMode");
@@ -34,7 +37,9 @@ const NavigatorControls = () => {
   const onOpenGoogleNavigator = () => {
     const { waypoints, startLatLng, endLatLng, travelMode } = prepareData();
     if (!startLatLng || !endLatLng) return;
-
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "route: open Google Navigator",
+    });
     const waypointsString = waypoints
       .map((wp) => `${wp.lat},${wp.lng}`)
       .join("|");
@@ -51,7 +56,9 @@ const NavigatorControls = () => {
   const onOpenYandexNavigator = () => {
     const { waypoints, startLatLng, endLatLng, travelMode } = prepareData();
     if (!startLatLng || !endLatLng) return;
-
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "route: open Yandex Navigator",
+    });
     const waypointsString = waypoints
       .map((wp) => `${wp.lat},${wp.lng}`)
       .join("~");

@@ -10,6 +10,8 @@
     "results": "results"
   },
   "moreInfo": "Find out more",
+  "addedToCartMsg": "Location added to route constructor",
+  "removedFromCartMsg": "Location removed from route constructor",
   "filters": {
     "filters": "Filters",
     "map": "Map",

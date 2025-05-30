@@ -12,6 +12,8 @@ import TabPanel from "@/containers/about-us/faq/TabPanel";
 import { useTranslation } from "next-i18next";
 import regExp from "@/shared/regExp";
 import useFAQ from "@/containers/about-us/faq/logic/useFAQ";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 function a11yProps(index: number) {
   return {
@@ -29,9 +31,13 @@ const Faq = () => {
   const [value, setValue] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const sendAnalytics = useAnalytics();
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: `faq tab change to ${newValue} index`,
+    });
   };
 
   const data = useFAQ();

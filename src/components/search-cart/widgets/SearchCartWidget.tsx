@@ -18,6 +18,8 @@ import { restoreCartFromLocalStorageThunk } from "@/store/search-cart-slice/thun
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Image from "next/image";
 import { primaryBackground } from "@/styles/theme/lightTheme";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 interface ISearchCartWidgetProps {
   sx?: SxProps;
@@ -28,7 +30,9 @@ const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useAppDispatch();
   const cartItemsLength = useAppSelector(selectCartPlaceIdsLength);
+  const sendAnalytics = useAnalytics();
   const onClick = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, { title: "open cart" });
     dispatch(setCartOpen(true));
   };
 
@@ -56,7 +60,7 @@ const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
               boxShadow: "none",
             }}
             color="primary"
-            aria-label="Search cart"
+            aria-label="Index cart"
           >
             <Badge
               badgeContent={cartItemsLength}

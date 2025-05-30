@@ -3,6 +3,8 @@ import { format } from "date-fns";
 import StyledTextEditorContainer from "../../../../components/UI/review-containers/StyledTextEditorContainer";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 interface IReviewCardProps {
   review: ISearchReview;
@@ -11,6 +13,15 @@ interface IReviewCardProps {
 
 const ReviewCard = ({ review, onClick }: IReviewCardProps) => {
   const { t } = useTranslation("common");
+  const sendAnalytics = useAnalytics();
+
+  const onClickCard = () => {
+    onClick(review.id);
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "review card on place page",
+      review: review,
+    });
+  };
 
   function createMarkup() {
     return { __html: review.description };
@@ -41,7 +52,7 @@ const ReviewCard = ({ review, onClick }: IReviewCardProps) => {
         }}
       >
         <Button
-          onClick={() => onClick(review.id)}
+          onClick={onClickCard}
           sx={{
             fontSize: { xs: "18px", md: "20px" },
             py: "1em",

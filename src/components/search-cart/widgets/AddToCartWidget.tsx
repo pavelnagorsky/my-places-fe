@@ -7,6 +7,8 @@ import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice"
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const AddRoCartWidget = ({
   sx,
@@ -21,8 +23,13 @@ const AddRoCartWidget = ({
   const dispatch = useAppDispatch();
   const cartIds = useAppSelector(selectCartPlaceIds);
   const isAdded = cartIds.includes(placeId);
+  const sendAnalytics = useAnalytics();
 
   const onClickCart = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: `${isAdded ? "remove" : "add"} place in cart`,
+      placeId,
+    });
     dispatch(
       togglePlaceIdInCartThunk({
         placeId,
@@ -51,7 +58,7 @@ const AddRoCartWidget = ({
           bgcolor: primaryBackground,
           color: "primary.main",
         }}
-        aria-label="Search cart"
+        aria-label="Index cart"
       >
         {isAdded ? (
           <RemoveIcon fontSize={isMobile ? "small" : "medium"} />

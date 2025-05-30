@@ -1,6 +1,6 @@
 export const routerLinks = {
   home: "/",
-  search: "/search",
+  places: "/places",
   aboutUs: "/about",
   photos: "/photos",
   contactUs: "/contact-us",

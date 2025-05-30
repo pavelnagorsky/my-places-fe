@@ -17,6 +17,8 @@ import { saveExcursionThunk } from "@/store/excursion-builder-slice/thunks";
 import { ICreateExcursion } from "@/services/excursions-service/interfaces/create-excursion.interface";
 import { IUpdateExcursion } from "@/services/excursions-service/interfaces/update-excursion.interface";
 import { IEditExcursionForm } from "@/containers/personal-area/my-excursions/edit-excursion/logic/interfaces";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
 
 const SubmitButton = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
@@ -35,6 +37,7 @@ const SubmitButton = () => {
     handleSubmit,
     formState: { isValid },
   } = useFormContext<IEditExcursionForm>();
+  const sendAnalytics = useAnalytics();
 
   const handleShowError = () => {
     dispatch(
@@ -92,6 +95,9 @@ const SubmitButton = () => {
     }
 
     handleSubmit((data) => {
+      sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+        title: "excursion: save click",
+      });
       const payload: (ICreateExcursion | IUpdateExcursion) & {
         language: string;
       } = {

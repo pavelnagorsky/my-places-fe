@@ -35,7 +35,7 @@ const HomePage = () => {
             title={t("card1.title")}
             description={t("card1.description")}
             btnText={t("card1.link")}
-            linkTo={routerLinks.search}
+            linkTo={routerLinks.places}
             showImageMobile
             image={card1Image}
           />

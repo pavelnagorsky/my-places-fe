@@ -15,6 +15,9 @@ import utils from "@/shared/utils";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { routerLinks } from "@/routing/routerLinks";
 import GoogleOAuthOneTap from "@/containers/auth/content/oauth/google/content/one-tap-login/GoogleOAuthOneTap";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+
 const SnackbarAlert = dynamic(
   () => import("@/components/UI/alert/SnackbarAlert"),
   {
@@ -39,14 +42,16 @@ export default function Layout({ children }: PropsWithChildren) {
   const router = useRouter();
   const { i18n } = useTranslation();
   const [pageLoading, setPageLoading] = useState(false);
+  const sendAnalytics = useAnalytics();
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       setPageLoading(true);
     };
 
-    const handleRouteChangeComplete = () => {
+    const handleRouteChangeComplete = (url: string) => {
       setPageLoading(false);
+      sendAnalytics(AnalyticsEventsEnum.PageChange, { page: url });
     };
 
     router.events.on("routeChangeStart", handleRouteChange);

@@ -9,11 +9,14 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import icon from "/public/images/icons/google.png";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const GoogleOAuth = () => {
   const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const sendAnalytics = useAnalytics();
 
   const loginRedirect = async (path: string) => {
     await router
@@ -52,7 +55,15 @@ const GoogleOAuth = () => {
 
   return (
     <Box>
-      <IconButton onClick={login} sx={{ p: 0 }}>
+      <IconButton
+        onClick={() => {
+          sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+            title: "google oauth",
+          });
+          login();
+        }}
+        sx={{ p: 0 }}
+      >
         <Image
           src={icon}
           alt={"Google"}

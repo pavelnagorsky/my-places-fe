@@ -1,14 +1,18 @@
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Box, Fab, useScrollTrigger, Zoom } from "@mui/material";
 import { memo, useCallback } from "react";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const ScrollToTopButton = () => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 300,
   });
+  const sendAnalytics = useAnalytics();
 
   const scrollToTop = useCallback(() => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, { title: "scroll to top" });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 

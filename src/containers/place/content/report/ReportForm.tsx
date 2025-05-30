@@ -17,6 +17,8 @@ import reportsService from "@/services/reports-service/reports.service";
 import { useAppDispatch } from "@/store/hooks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 interface IReportFormProps {
   open: boolean;
@@ -38,6 +40,7 @@ const ReportForm = ({
   placeId,
 }: IReportFormProps) => {
   const { t } = useTranslation(["place", "common"]);
+  const sendAnalytics = useAnalytics();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const form = useForm<IReportFormContext>({
@@ -85,6 +88,10 @@ const ReportForm = ({
   const onSubmit: SubmitHandler<IReportFormContext> = (data) => {
     if (loading) return;
     setLoading(true);
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "place report form submit",
+      placeId: placeId,
+    });
     reportsService
       .createReport({
         placeId,

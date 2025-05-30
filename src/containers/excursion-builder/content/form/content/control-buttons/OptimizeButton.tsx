@@ -14,6 +14,8 @@ import {
   selectExcursionDirectionsLoading,
   selectItemsLength,
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const OptimizeButton = () => {
   const dispatch = useAppDispatch();
@@ -23,8 +25,12 @@ const OptimizeButton = () => {
   const placesCount = useAppSelector(selectItemsLength);
   const { t, i18n } = useTranslation("route-management");
   const { getValues, setValue } = useFormContext<IExcursionBuilderForm>();
+  const sendAnalytics = useAnalytics();
 
   const onClickOptimize = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "excursion: optimize button",
+    });
     dispatch(
       getExcursionDirectionsThunk({
         language: i18n.language,

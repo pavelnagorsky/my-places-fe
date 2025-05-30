@@ -9,6 +9,8 @@ import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
 
 const useComments = (placeId: number) => {
   const { t } = useTranslation(["place", "common"]);
@@ -22,6 +24,7 @@ const useComments = (placeId: number) => {
     RolesEnum.ADMIN,
     RolesEnum.MODERATOR,
   ]);
+  const sendAnalytics = useAnalytics();
 
   const form = useForm<ICommentsFormContext>({
     defaultValues: {
@@ -46,6 +49,10 @@ const useComments = (placeId: number) => {
     const request = hasModerationAccess
       ? commentsService.deleteCommentAdministration
       : commentsService.deleteComment;
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "delete place comment",
+      placeId,
+    });
     request(id)
       .then(() => {})
       .catch(() => {
@@ -72,6 +79,10 @@ const useComments = (placeId: number) => {
   };
 
   const onClickUpdateComment = (id: number) => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "edit place comment",
+      placeId,
+    });
     const commentText = comments.find((c) => c.id === id)?.text;
     if (commentText) {
       setEditCommentId(id);
@@ -99,6 +110,10 @@ const useComments = (placeId: number) => {
   const onUpdateComment = () => {
     form.handleSubmit((data) => {
       if (!editCommentId) return;
+      sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+        title: "update place comment",
+        placeId,
+      });
       setLoading(true);
       const request = hasModerationAccess
         ? commentsService.updateCommentAdministration
@@ -141,6 +156,10 @@ const useComments = (placeId: number) => {
   const onAddComment = () => {
     if (!canSendComment) return;
     if (!!editCommentId) return onUpdateComment();
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "create place comment",
+      placeId,
+    });
     setLoading(true);
     form.handleSubmit((data) => {
       commentsService

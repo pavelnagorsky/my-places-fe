@@ -1,4 +1,4 @@
-import { IPlaceType } from "@/containers/search-page/content/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
+import { IPlaceType } from "@/containers/places/content/filters/content/location-search/content/location-autocomplete/LocationAutocomplete";
 import ISelectPlace from "@/services/places-service/interfaces/select-place.interface";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 
