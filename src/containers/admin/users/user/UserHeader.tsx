@@ -29,7 +29,7 @@ import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/store/hooks";
 import { selectUserId } from "@/store/user-slice/user.slice";
-import RolesEnum from "@/services/auth-service/roles.enum";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import EmailSection from "@/containers/admin/users/user/sections/EmailSection";
 import { StyledButton } from "@/components/UI/button/StyledButton";
 

@@ -63,11 +63,18 @@
     "save": "Save"
   },
   "auth": {
+    "oauth": {
+      "loginWith": "Or log in with",
+      "feedback": {
+        "error": "Authorization error via a third-party service"
+      }
+    },
     "login": {
       "title": "Log in",
       "emailNotConfirmed": "Email address is not verified",
       "userBlockedUntil": "The user is blocked until",
       "invalidCredentials": "Invalid email address or password entered",
+      "passwordNotSet": "To login with a password, set it by clicking on \"Forgot password\"",
       "emailLabel": "Email",
       "emailPlaceholder": "Enter your email address...",
       "password": "Password",

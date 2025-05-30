@@ -1,4 +1,4 @@
-import RolesEnum from "@/services/auth-service/roles.enum";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
 
 export interface ILoginRequest {
   email: string;
@@ -32,4 +32,5 @@ export enum LoginErrorEnum {
   INVALID_DATA = "INVALID_DATA",
   EMAIL_NOT_CONFIRMED = "EMAIL_NOT_CONFIRMED",
   USER_BLOCKED = "USER_BLOCKED",
+  PASSWORD_NOT_SET = "PASSWORD_NOT_SET",
 }

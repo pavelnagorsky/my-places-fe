@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/store/hooks";
 import { selectUserRoles } from "@/store/user-slice/user.slice";
-import RolesEnum from "@/services/auth-service/roles.enum";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
 
 const useRoleAccess = (roles: RolesEnum[]) => {
   const userRoles = useAppSelector(selectUserRoles);

@@ -9,7 +9,7 @@ import {
 import {
   ILoginRequest,
   LoginErrorEnum,
-} from "@/services/auth-service/interfaces";
+} from "@/services/auth-service/interfaces/interfaces";
 import {
   Box,
   CircularProgress,
@@ -30,7 +30,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
 import useDialog from "@/hooks/useDialog";
-import ForgotPassword from "@/containers/auth/tabs/ForgotPassword";
+import ForgotPassword from "@/containers/auth/content/forgot-password/ForgotPassword";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +38,6 @@ const Login = () => {
   const error = useAppSelector(selectAuthError);
   const router = useRouter();
   const { t } = useTranslation("common");
-  const forgotPasswordDialog = useDialog();
 
   const loginRedirect = async (path: string) => {
     await router
@@ -88,6 +87,16 @@ const Login = () => {
               ? format(new Date(error.blockedUntil), "dd/MM/yyyy")
               : "∞"
           }`,
+        },
+        { shouldFocus: true }
+      );
+      return;
+    }
+    if (error?.loginError === LoginErrorEnum.PASSWORD_NOT_SET) {
+      form.setError(
+        "password",
+        {
+          message: t("auth.login.passwordNotSet"),
         },
         { shouldFocus: true }
       );
@@ -179,25 +188,6 @@ const Login = () => {
           {t("auth.login.submit")}
         </Button>
       </FormContainer>
-      <Divider sx={{ borderColor: "#D5D3D0", my: "1em" }} />
-      <Stack justifyContent={"center"} mt="1.2em">
-        <Button
-          onClick={forgotPasswordDialog.handleOpen}
-          variant={"text"}
-          color={"secondary"}
-          sx={{
-            textTransform: "none",
-            color: "#DFDDDB",
-            cursor: "pointer",
-          }}
-        >
-          {t("auth.forgotPassword.title")}
-        </Button>
-        <ForgotPassword
-          open={forgotPasswordDialog.open}
-          onClose={forgotPasswordDialog.handleClose}
-        />
-      </Stack>
     </Box>
   );
 };

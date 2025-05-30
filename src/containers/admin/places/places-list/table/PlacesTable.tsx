@@ -25,7 +25,7 @@ import { PlaceStatusesEnum } from "@/services/places-service/enums/place-statuse
 import { routerLinks } from "@/routing/routerLinks";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import usePlaceStatuses from "@/hooks/usePlaceStatuses";
-import TableLoader from "@/components/UI/helper/TableLoader";
+import TableLoader from "@/components/UI/loader/TableLoader";
 
 const PlacesTable = () => {
   const { i18n } = useTranslation();
