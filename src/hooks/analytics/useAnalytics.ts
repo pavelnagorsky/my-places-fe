@@ -1,4 +1,4 @@
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useAppSelector } from "@/store/hooks";
 import { selectUserData } from "@/store/user-slice/user.slice";

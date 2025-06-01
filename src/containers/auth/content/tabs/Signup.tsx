@@ -29,7 +29,7 @@ import {
 import { signupThunk } from "@/store/user-slice/thunks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 
 const Signup = () => {

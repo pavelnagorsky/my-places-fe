@@ -15,7 +15,7 @@ import {
   selectItemsLength,
 } from "@/store/excursion-builder-slice/excursion-builder.slice";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const OptimizeButton = () => {
   const dispatch = useAppDispatch();

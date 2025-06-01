@@ -18,7 +18,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 interface IReportFormProps {
   open: boolean;

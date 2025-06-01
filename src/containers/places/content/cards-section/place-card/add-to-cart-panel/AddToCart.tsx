@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice";
 import {
-  Box,
   IconButton,
   Stack,
   SxProps,
@@ -15,7 +14,7 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 
 import { togglePlaceIdInCartThunk } from "@/store/search-cart-slice/thunks/thunks";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 import { useTranslation } from "next-i18next";
 
 interface IAddToCartProps {

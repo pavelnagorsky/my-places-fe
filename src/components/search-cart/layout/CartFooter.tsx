@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import { useTranslation } from "next-i18next";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const CartFooter = () => {
   const { t } = useTranslation("route-management");

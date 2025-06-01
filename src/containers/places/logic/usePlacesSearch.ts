@@ -23,7 +23,7 @@ import {
   getSearchResultsThunk,
 } from "@/store/search-slice/thunks";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const usePlacesSearch = () => {
   const { i18n } = useTranslation();

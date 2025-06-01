@@ -10,7 +10,7 @@ import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
 import { useTranslation } from "next-i18next";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const useComments = (placeId: number) => {
   const { t } = useTranslation(["place", "common"]);

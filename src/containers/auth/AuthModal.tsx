@@ -33,7 +33,7 @@ import OAuthSection from "@/containers/auth/content/oauth/OAuthSection";
 import BackdropLoader from "@/components/UI/loader/BackdropLoader";
 import ForgotPassword from "@/containers/auth/content/forgot-password/ForgotPassword";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 function a11yProps(index: number) {
   return {

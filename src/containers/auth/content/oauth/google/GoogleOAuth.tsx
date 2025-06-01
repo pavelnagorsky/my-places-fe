@@ -10,7 +10,7 @@ import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import icon from "/public/images/icons/google.png";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const GoogleOAuth = () => {
   const { t } = useTranslation("common");

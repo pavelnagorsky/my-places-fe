@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/store/hooks";
 import { selectIsMapOpen, setMapOpen } from "@/store/search-slice/search.slice";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const FiltersContainerMobile = ({
   triggerSubmit,

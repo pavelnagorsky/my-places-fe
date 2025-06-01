@@ -7,7 +7,7 @@ import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces
 import { useTranslation } from "next-i18next";
 import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const NavigatorControls = () => {
   const { getValues } = useFormContext<IExcursionBuilderForm>();

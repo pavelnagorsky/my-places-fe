@@ -10,7 +10,7 @@ import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import { useTranslation } from "next-i18next";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const UserSection = ({
   onClose,

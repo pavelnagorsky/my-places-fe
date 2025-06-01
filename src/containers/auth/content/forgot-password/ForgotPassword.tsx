@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import useDialog from "@/hooks/useDialog";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const ForgotPassword = () => {
   const { t } = useTranslation("common");

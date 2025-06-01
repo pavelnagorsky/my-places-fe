@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 
 const OptimizeButton = () => {

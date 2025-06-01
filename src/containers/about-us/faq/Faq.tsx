@@ -13,7 +13,7 @@ import { useTranslation } from "next-i18next";
 import regExp from "@/shared/regExp";
 import useFAQ from "@/containers/about-us/faq/logic/useFAQ";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 function a11yProps(index: number) {
   return {

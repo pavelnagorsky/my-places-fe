@@ -8,7 +8,7 @@ import { useAppDispatch } from "@/store/hooks";
 import utils from "@/shared/utils";
 import { useTranslation } from "next-i18next";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const useContactUs = () => {
   const { t } = useTranslation(["contact-us", "common"]);

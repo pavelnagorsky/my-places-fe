@@ -19,7 +19,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Image from "next/image";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 interface ISearchCartWidgetProps {
   sx?: SxProps;

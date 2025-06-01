@@ -2,7 +2,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Box, Fab, useScrollTrigger, Zoom } from "@mui/material";
 import { memo, useCallback } from "react";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytics.enum";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const ScrollToTopButton = () => {
   const trigger = useScrollTrigger({
