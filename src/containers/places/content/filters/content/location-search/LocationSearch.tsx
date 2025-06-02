@@ -16,7 +16,7 @@ const LocationSearch = () => {
   const isSearchByMe = watch("searchByMe");
 
   return (
-    <Stack gap={"1em"}>
+    <Stack gap={"1em"} mb={1.5}>
       <LocationModeToggle />
       <Typography mb={"0.5em"}>
         {selectedMode === SearchModesEnum.ONE_LOCATION

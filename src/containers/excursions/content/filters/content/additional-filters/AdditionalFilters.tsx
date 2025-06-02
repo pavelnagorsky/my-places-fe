@@ -10,6 +10,8 @@ import useTravelModeOptions from "@/containers/route-builder/content/form/sectio
 import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
 import { StyledButton } from "@/components/UI/button/StyledButton";
 import RegionsFilter from "@/containers/excursions/content/filters/content/RegionsFilter";
+import PlaceTypesFilter from "@/containers/excursions/content/filters/content/PlaceTypesFilter";
+import AdditionalFiltersLayout from "@/containers/excursions/content/filters/content/additional-filters/layout/AdditionalFiltersLayout";
 
 const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   const { t } = useTranslation(["excursion-management", "common"]);
@@ -21,6 +23,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   const handleReset = () => {
     resetField("travelModes");
     resetField("types");
+    resetField("placeTypeIds");
   };
 
   const handleApply = () => {
@@ -48,23 +51,9 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   return (
     <Box>
       {toggle}
-      <Popover
-        open={popover.open}
-        onClose={popover.handleClose}
-        id={popover.id}
-        anchorEl={popover.anchor}
-        slotProps={{
-          paper: {
-            sx: { borderRadius: "15px", width: { xs: "100%", sm: "400px" } },
-          },
-        }}
-        anchorOrigin={{
-          horizontal: "left",
-          vertical: "bottom",
-        }}
-      >
+      <AdditionalFiltersLayout popoverProps={popover}>
         <Box p={2}>
-          <Stack width={"100%"} gap={2}>
+          <Stack width={"100%"} gap={2.5}>
             <Stack>
               <Typography fontWeight={500} fontSize={"20px"} gutterBottom>
                 {t("search.filters.type")}
@@ -82,14 +71,20 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
               />
             </Stack>
             <RegionsFilter />
+            <PlaceTypesFilter />
           </Stack>
           <Stack
+            position={"sticky"}
+            py={2}
+            bottom={0}
+            zIndex={1}
+            bgcolor={"white"}
             direction={"row"}
             gap={2}
             justifyContent="space-between"
             sx={{ width: "100%", marginTop: "20px" }}
           >
-            <Button variant="text" onClick={handleReset}>
+            <Button variant="text" size={"large"} onClick={handleReset}>
               {t("buttons.clear", { ns: "common" })}
             </Button>
             <Button variant="contained" onClick={handleApply}>
@@ -97,7 +92,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
             </Button>
           </Stack>
         </Box>
-      </Popover>
+      </AdditionalFiltersLayout>
     </Box>
   );
 };

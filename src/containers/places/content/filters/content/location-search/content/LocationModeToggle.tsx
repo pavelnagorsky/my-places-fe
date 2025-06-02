@@ -31,6 +31,7 @@ const LocationModeToggle = () => {
       alignItems={"center"}
       justifyContent={"space-between"}
       gap={"1em"}
+      mb={1.5}
       sx={{
         p: "0.375em",
         borderRadius: "40px",

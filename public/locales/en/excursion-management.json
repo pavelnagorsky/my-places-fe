@@ -70,6 +70,7 @@
       "searchPlaceholder": "Search catalog",
       "type": "Excursion type",
       "travelMode": "Excursion category",
+      "placeTypes": "Place types",
       "orderBy": {
         "title": "Sort by",
         "1": "by creation date",

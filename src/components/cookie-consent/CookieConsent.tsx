@@ -5,17 +5,36 @@ import { useEffect } from "react";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { routerLinks } from "@/routing/routerLinks";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
+import localStorageFields from "@/shared/localStorageFields";
+import { useRouter } from "next/router";
 
 const CookieConsent = () => {
   const { t } = useTranslation("common");
   const dialog = useDialog();
+  const router = useRouter();
 
   useEffect(() => {
-    dialog.handleOpen();
-  }, []);
+    if (!router.isReady) return;
+    const isPrivacyPolicyPage = router.asPath === routerLinks.privacyPolicy;
+    const isConfirmed =
+      localStorage.getItem(localStorageFields.COOKIE_CONFIRM) === "true";
+    if (isConfirmed || isPrivacyPolicyPage) return;
+    setTimeout(dialog.handleOpen, 500);
+  }, [router.isReady]);
+
+  const onConfirm = () => {
+    dialog.handleClose();
+    localStorage.setItem(localStorageFields.COOKIE_CONFIRM, "true");
+  };
 
   return (
-    <Drawer anchor={"bottom"} open={dialog.open} onClose={dialog.handleClose}>
+    <Drawer
+      transitionDuration={600}
+      anchor={"bottom"}
+      open={dialog.open}
+      hideBackdrop
+      onClose={dialog.handleClose}
+    >
       <WrappedContainer>
         <Stack
           direction={{ md: "row" }}
@@ -41,11 +60,13 @@ const CookieConsent = () => {
           </Typography>
           <Box>
             <Button
+              onClick={onConfirm}
               variant={"contained"}
               sx={{
-                minWidth: { md: "200px" },
+                minWidth: { xs: "150px", md: "200px" },
                 fontSize: "15px",
                 py: 1.3,
+                bgcolor: "primary.light",
               }}
             >
               {t("buttons.accept")}

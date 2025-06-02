@@ -31,39 +31,43 @@ const TypesAndCategoriesFilter = () => {
   const categories = useAppSelector(selectPlaceCategoriesOptions);
 
   return (
-    <Stack gap={"1em"}>
+    <Stack gap={"1.5em"}>
       <Stack direction={"row"} gap={"0.7em"} alignItems={"center"}>
         <Typography fontSize={"20px"} fontWeight={500}>
           {t("filters.filters")}
         </Typography>
         <Box component={"img"} src={filtersIcon.src} sx={{}} />
       </Stack>
-      <Stack>
+      <Stack gap={"1em"}>
         <TextFilter />
-        <Typography fontSize={"18px"} mb={"0.5em"}>
-          {t("filters.types")}
-        </Typography>
-        <CheckboxButtonGroup
-          labelProps={{
-            sx: checkboxesLabelSx,
-          }}
-          row
-          options={types}
-          name={"types"}
-        />
+        <div>
+          <Typography fontSize={"18px"} mb={"0.5em"}>
+            {t("filters.types")}
+          </Typography>
+          <CheckboxButtonGroup
+            labelProps={{
+              sx: checkboxesLabelSx,
+            }}
+            row
+            options={types}
+            name={"types"}
+          />
+        </div>
       </Stack>
       <Stack>
-        <Typography fontSize={"18px"} mb={"0.5em"}>
-          {t("filters.categories")}
-        </Typography>
-        <CheckboxButtonGroup
-          row
-          labelProps={{
-            sx: checkboxesLabelSx,
-          }}
-          options={categories}
-          name={"categories"}
-        />
+        <div>
+          <Typography fontSize={"18px"} mb={"0.5em"}>
+            {t("filters.categories")}
+          </Typography>
+          <CheckboxButtonGroup
+            row
+            labelProps={{
+              sx: checkboxesLabelSx,
+            }}
+            options={categories}
+            name={"categories"}
+          />
+        </div>
       </Stack>
     </Stack>
   );

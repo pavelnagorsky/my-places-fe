@@ -4,7 +4,7 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 import { Button } from "@/components/UI/button/Button";
 import MyStepper from "@/components/UI/stepper/MyStepper";
 import { useFormContext } from "react-hook-form-mui";
-import backgroundImage from "/public/images/create-review-page/background.jpg";
+// import backgroundImage from "/public/images/create-review-page/background.jpg";
 import PlaceSelect from "@/containers/create-review/form/place-select/PlaceSelect";
 import { IReviewFormContext } from "@/containers/create-review/form/interfaces";
 import { routerLinks } from "@/routing/routerLinks";
@@ -99,11 +99,12 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
       </motion.div>
       <motion.div variants={animationVariants.defaultItemVariant}>
         <Box
-          sx={{
-            backgroundImage: `url(${backgroundImage.src})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
+          bgcolor={primaryBackground}
+          // sx={{
+          //   backgroundImage: `url(${backgroundImage.src})`,
+          //   backgroundRepeat: "no-repeat",
+          //   backgroundSize: "cover",
+          // }}
           mb={"3em"}
         >
           <WrappedContainer bgColor={"transparent"}>

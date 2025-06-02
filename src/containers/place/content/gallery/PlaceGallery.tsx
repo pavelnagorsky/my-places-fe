@@ -5,10 +5,11 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface IGalleryProps {
-  images: { src: string; alt: string }[];
+  images: { src: string; alt: string; title?: string }[];
   mobileHeight?: number;
   desktopHeight?: number;
   laptopHeight?: number;
+  showStatus?: boolean;
 }
 
 const defaultImageHeight = 500;
@@ -71,12 +72,17 @@ const PlaceGallery = (props: IGalleryProps) => {
         swipeable
         emulateTouch
         swipeScrollTolerance={30}
-        showStatus={false}
+        showStatus={props.showStatus ?? false}
         className={"container"}
         infiniteLoop
         autoPlay
         interval={6000}
         preventMovementUntilSwipeScrollTolerance
+        statusFormatter={(currentItem, total) =>
+          `${
+            props.images[currentItem - 1]?.title || ""
+          } ${currentItem}/${total}`
+        }
       >
         {images}
       </Carousel>

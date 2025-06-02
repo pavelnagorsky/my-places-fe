@@ -45,7 +45,7 @@ const RadiusFilter = () => {
   };
 
   return (
-    <Box width={"100%"}>
+    <Box width={"100%"} mb={2}>
       <Typography fontSize={"20px"} fontWeight={500} mb={"0.5em"}>
         {selectedMode === SearchModesEnum.ONE_LOCATION
           ? t("filters.locationSearch.radiusLabel")

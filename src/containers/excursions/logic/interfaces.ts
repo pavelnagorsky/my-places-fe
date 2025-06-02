@@ -9,4 +9,5 @@ export interface IExcursionsFilters {
   travelModes: TravelModesEnum[];
   orderBy: `${SearchExcursionsOrderByEnum}`;
   regions: IRegion[];
+  placeTypeIds: number[];
 }
