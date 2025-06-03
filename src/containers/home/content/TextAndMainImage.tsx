@@ -62,7 +62,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
   const mainText = (
     <WrappedContainer>
       <Stack
-        gap={4}
+        gap={3}
         sx={{
           position: "absolute",
           bottom: { xs: "2em", md: "5em" },
@@ -76,6 +76,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
           sx={{
             zIndex: 2,
             fontWeight: 500,
+            lineHeight: "127%",
             fontSize: { xs: "26px", md: "50px" },
             color: "white",
             textTransform: { sm: "uppercase" },
@@ -110,6 +111,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
             sx={{
               zIndex: 2,
               color: "white",
+              lineHeight: "130%",
               width: {
                 xs: "100%",
                 sm: "80%",
