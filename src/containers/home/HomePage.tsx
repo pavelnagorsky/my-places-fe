@@ -1,10 +1,10 @@
 import { useTranslation } from "next-i18next";
 import TextAndMainImage from "@/containers/home/content/TextAndMainImage";
-import mainImageMd from "../../../public/images/home-page/main-image.jpg";
+import mainImage from "../../../public/images/home-page/main-image.jpg";
+import overlayImage from "../../../public/images/home-page/overlay-image.png";
 import TextAndImage from "@/components/text-and-image/TextAndImage";
 import card1Image from "../../../public/images/home-page/card1.jpg";
 import card2Image from "../../../public/images/home-page/card2.jpg";
-import BoxWithCircles from "@/components/UI/box-with-circles/BoxWithCircles";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { routerLinks } from "@/routing/routerLinks";
 import { motion } from "framer-motion";
@@ -18,14 +18,16 @@ const HomePage = () => {
       initial="hidden"
       animate="show"
     >
+      <motion.div variants={animationVariants.defaultItemVariant}>
+        <TextAndMainImage
+          title={t("mainSection.title")}
+          subTitle={t("mainSection.subTitle")}
+          description={t("mainSection.description")}
+          image={mainImage}
+          overlayImage={overlayImage}
+        />
+      </motion.div>
       <WrappedContainer>
-        <motion.div variants={animationVariants.defaultItemVariant}>
-          <TextAndMainImage
-            title={t("title")}
-            description={t("description")}
-            image={mainImageMd}
-          />
-        </motion.div>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <TextAndImage
             title={t("card1.title")}
@@ -49,9 +51,6 @@ const HomePage = () => {
             showImageMobile
             image={card2Image}
           />
-        </motion.div>
-        <motion.div variants={animationVariants.defaultItemVariant}>
-          <BoxWithCircles />
         </motion.div>
       </WrappedContainer>
     </motion.div>

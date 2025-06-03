@@ -5,10 +5,10 @@ import dynamic from "next/dynamic";
 import { Fragment } from "react";
 import { useTranslation } from "next-i18next";
 import { NextSeo } from "next-seo";
-import mainImageMd from "../../public/images/home-page/main-image-md.jpg";
+import mainImageMd from "../../public/images/home-page/main-image.jpg";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 
-const HomePageLazy = dynamic(() => import("../containers/home-page/HomePage"));
+const HomePageLazy = dynamic(() => import("../containers/home/HomePage"));
 
 const Index: NextPage = (props, context: NextPageContext) => {
   const { t } = useTranslation("home");
@@ -16,14 +16,14 @@ const Index: NextPage = (props, context: NextPageContext) => {
   return (
     <Fragment>
       <NextSeo
-        title={t("title")}
-        description={t("description")}
+        title={t("seo.title")}
+        description={t("seo.description")}
         canonical={canonical}
         languageAlternates={alternateLinks}
         openGraph={{
           url: canonical,
-          title: t("title"),
-          description: t("description"),
+          title: t("seo.title"),
+          description: t("seo.description"),
           images: [
             {
               url: mainImageMd.src,
