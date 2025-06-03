@@ -54,7 +54,7 @@ const AddToCart = ({ placeId, mapCardMode }: IAddToCartProps) => {
   return mapCardMode ? (
     <IconButton
       onClick={onClickCart}
-      size={"small"}
+      size={isMobile ? "medium" : "small"}
       sx={{
         ...actionButtonSx,
         position: "absolute",
@@ -98,7 +98,11 @@ const AddToCart = ({ placeId, mapCardMode }: IAddToCartProps) => {
       ) : (
         <div />
       )}
-      <IconButton onClick={onClickCart} sx={actionButtonSx}>
+      <IconButton
+        size={isMobile ? "large" : "medium"}
+        onClick={onClickCart}
+        sx={actionButtonSx}
+      >
         {isAdded ? <RemoveIcon /> : <AddIcon />}
       </IconButton>
     </Stack>

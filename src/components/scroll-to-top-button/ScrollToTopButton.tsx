@@ -23,7 +23,7 @@ const ScrollToTopButton = () => {
         sx={{
           position: "fixed",
           bottom: 32,
-          right: { xs: 18, md: 32, lg: 64 },
+          right: { xs: 20, md: 26, lg: 58 },
           zIndex: 100,
         }}
       >
@@ -34,7 +34,7 @@ const ScrollToTopButton = () => {
             boxShadow: "none",
           }}
           color="primary"
-          size="small"
+          size="medium"
           aria-label="scroll back to top"
         >
           <KeyboardArrowUpIcon />

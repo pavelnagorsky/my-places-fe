@@ -44,14 +44,14 @@ const AddRoCartWidget = ({
       role="presentation"
       sx={{
         position: "fixed",
-        bottom: { xs: 92, md: 112 },
-        right: { xs: 18, md: 32, lg: 64 },
+        bottom: { xs: 106, md: 112 },
+        right: { xs: 18, md: 24, lg: 56 },
         zIndex: 100,
         ...sx,
       }}
     >
       <Fab
-        size={"small"}
+        size={"medium"}
         onClick={onClickCart}
         sx={{
           boxShadow: "none",
