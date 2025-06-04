@@ -1,18 +1,13 @@
 import { Box, Stack, SxProps, Typography } from "@mui/material";
 import { CSSProperties, memo } from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
+import mainImage from "../../../../public/images/home-page/main-image.jpg";
+import overlayImage from "../../../../public/images/home-page/overlay-image.svg";
+import { useTranslation } from "next-i18next";
 
-interface ITextAndMainImageProps {
-  title: string;
-  subTitle?: string;
-  description?: string;
-  image: StaticImageData;
-  overlayImage?: StaticImageData;
-  textShadow?: boolean;
-}
-
-function TextAndMainImage(props: ITextAndMainImageProps) {
+function TextAndMainImage() {
+  const { t } = useTranslation("home");
   const imageContainerSx: SxProps = {
     width: "100%",
     height: "100%",
@@ -24,12 +19,12 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
   };
 
   // main picture
-  const mainImage = (
+  const mainImageContainer = (
     <Box sx={imageContainerSx}>
       <Image
         sizes="(max-width: 1980px) 100vw, 1980px"
-        src={props.image}
-        alt={props.title}
+        src={mainImage}
+        alt={t("mainSection.title")}
         fill
         priority
         style={imageStyle}
@@ -38,7 +33,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
   );
 
   // overlay picture
-  const overlayImage = !!props.overlayImage && (
+  const overlayImageContainer = (
     <Box
       position={"absolute"}
       top={0}
@@ -49,7 +44,7 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
     >
       <Image
         sizes="100vw"
-        src={props.overlayImage}
+        src={overlayImage}
         alt={"Маршруты"}
         fill
         priority
@@ -66,9 +61,6 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
         sx={{
           position: "absolute",
           bottom: { xs: "2em", md: "5em" },
-          textShadow: props.textShadow
-            ? "0px 4px 6px rgba(0, 0, 0, 0.25)"
-            : "none",
         }}
       >
         <Typography
@@ -88,8 +80,8 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
             },
           }}
         >
-          {props.title}{" "}
-          {!!props.subTitle && (
+          {t("mainSection.title")}{" "}
+          {
             <>
               <br />
               <span
@@ -99,30 +91,27 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
                   color: "#d5d4d4",
                 }}
               >
-                {props.subTitle}
+                {t("mainSection.subTitle")}
               </span>
             </>
-          )}
+          }
         </Typography>
-        {props.description ? (
-          <Typography
-            component={"h2"}
-            fontSize={{ xs: "16px", md: "18px" }}
-            sx={{
-              zIndex: 2,
-              color: "white",
-              lineHeight: "130%",
-              width: {
-                xs: "100%",
-                sm: "80%",
-                md: "65%",
-                lg: "50%",
-              },
-            }}
-          >
-            {props.description}
-          </Typography>
-        ) : null}
+        <Typography
+          fontSize={{ xs: "16px", md: "18px" }}
+          sx={{
+            zIndex: 2,
+            color: "white",
+            lineHeight: "130%",
+            width: {
+              xs: "100%",
+              sm: "80%",
+              md: "65%",
+              lg: "50%",
+            },
+          }}
+        >
+          {t("mainSection.description")}
+        </Typography>
       </Stack>
     </WrappedContainer>
   );
@@ -134,8 +123,8 @@ function TextAndMainImage(props: ITextAndMainImageProps) {
       position={"relative"}
       height={{ xs: "590px", md: "774px" }}
     >
-      {mainImage}
-      {overlayImage}
+      {mainImageContainer}
+      {overlayImageContainer}
       {mainText}
     </Box>
   );

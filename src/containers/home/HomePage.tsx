@@ -1,7 +1,5 @@
 import { useTranslation } from "next-i18next";
 import TextAndMainImage from "@/containers/home/content/TextAndMainImage";
-import mainImage from "../../../public/images/home-page/main-image.jpg";
-import overlayImage from "../../../public/images/home-page/overlay-image.svg";
 import TextAndImage from "@/components/text-and-image/TextAndImage";
 import card1Image from "../../../public/images/home-page/card1.jpg";
 import card2Image from "../../../public/images/home-page/card2.jpg";
@@ -9,6 +7,7 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { routerLinks } from "@/routing/routerLinks";
 import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
+import PlaceCreationSection from "@/containers/home/content/PlaceCreationSection";
 
 const HomePage = () => {
   const { t } = useTranslation("home");
@@ -19,13 +18,7 @@ const HomePage = () => {
       animate="show"
     >
       <motion.div variants={animationVariants.defaultItemVariant}>
-        <TextAndMainImage
-          title={t("mainSection.title")}
-          subTitle={t("mainSection.subTitle")}
-          description={t("mainSection.description")}
-          image={mainImage}
-          overlayImage={overlayImage}
-        />
+        <TextAndMainImage />
       </motion.div>
       <WrappedContainer>
         <motion.div variants={animationVariants.defaultItemVariant}>
@@ -53,6 +46,9 @@ const HomePage = () => {
           />
         </motion.div>
       </WrappedContainer>
+      <motion.div variants={animationVariants.defaultItemVariant}>
+        <PlaceCreationSection />
+      </motion.div>
     </motion.div>
   );
 };
