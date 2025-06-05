@@ -4,7 +4,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useAppDispatch } from "@/store/hooks";
 import { logoutThunk } from "@/store/user-slice/thunks";
-import SliderMenuLink from "@/components/header/slider-menu/SliderMenuLink";
+import SliderMenuLink from "@/components/header/slider-menu/sections/SliderMenuLink";
 import BuildIcon from "@mui/icons-material/Build";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/enums/roles.enum";

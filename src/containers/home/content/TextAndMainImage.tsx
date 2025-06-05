@@ -38,10 +38,17 @@ function TextAndMainImage() {
   const overlayImageContainer = (
     <Box
       position={"absolute"}
-      top={0}
+      top={{ xs: "10%", md: "8%", lg: "10%", xl: 0 }}
       right={0}
-      width={{ xs: "100%", lg: "1114px" }}
-      height={{ xs: "300px", sm: "360px", md: "480px", lg: "460px" }}
+      width={{ xs: "100%", sm: "80%", md: "820px", lg: "1000px", xl: "1253px" }}
+      height={{
+        xs: "300px",
+        sm: "330px",
+        md: "370px",
+        lg: "420px",
+        xl: "500px",
+      }}
+      // height={{ xs: "300px", sm: "360px", md: "480px", lg: "500px" }}
       zIndex={1}
     >
       <Image

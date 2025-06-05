@@ -1,26 +1,19 @@
-import {
-  Box,
-  IconButton,
-  Stack,
-  SxProps,
-  useScrollTrigger,
-} from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 import { Logo } from "../logo/Logo";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "next-i18next";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { useAppSelector } from "@/store/hooks";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
-import PersonIcon from "@mui/icons-material/Person";
 import { HeaderLink } from "./header-link/HeaderLink";
 import CreateMenu from "./create-menu/CreateMenu";
 import SliderMenu from "@/components/header/slider-menu/SliderMenu";
 import usePopover from "@/hooks/usePopover";
 import useHeaderStyles from "@/components/header/logic/useHeaderStyles";
+import MenuIcon from "../UI/custom-icons/MenuIcon";
+import ProfileIcon from "@/components/UI/custom-icons/ProfileIcon";
 
 interface IHeaderProps {
   wideMode?: boolean;
@@ -73,22 +66,14 @@ const Header = ({ wideMode }: IHeaderProps) => {
             ))}
           </Stack>
           <IconButton
+            className={"header-menu-toggle"}
+            size={isAuth ? "small" : "medium"}
             onClick={menu.handleOpen}
-            sx={{
-              p: isAuth ? "0.38em" : "0.5em",
-              border: isAuth ? "1px solid #FF9D42" : "none",
-              backgroundColor: isAuth ? "transparent" : "#FF9D42",
-              "&:hover": {
-                backgroundColor: isAuth ? "#FF9D4224" : "primary.main",
-              },
-            }}
           >
             {isAuth ? (
-              <PersonIcon sx={{ fontSize: "27.8px", fill: "#FF9D42" }} />
-            ) : menu.open ? (
-              <CloseIcon />
+              <ProfileIcon sx={{ fontSize: "39px" }} />
             ) : (
-              <MenuIcon />
+              <MenuIcon sx={{ fontSize: "33px" }} />
             )}
           </IconButton>
           <SliderMenu

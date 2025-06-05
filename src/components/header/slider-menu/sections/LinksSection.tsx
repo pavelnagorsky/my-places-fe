@@ -7,7 +7,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import HomeIcon from "@mui/icons-material/Home";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import RouteIcon from "@mui/icons-material/Route";
-import SliderMenuLink from "../SliderMenuLink";
+import SliderMenuLink from "./SliderMenuLink";
 import { useTranslation } from "next-i18next";
 import MapIcon from "@mui/icons-material/Map";
 

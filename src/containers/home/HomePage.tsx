@@ -7,7 +7,7 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { routerLinks } from "@/routing/routerLinks";
 import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
-import PlaceCreationSection from "@/containers/home/content/PlaceCreationSection";
+import PlaceCreationSection from "./content/PlaceCreationSection";
 
 const HomePage = () => {
   const { t } = useTranslation("home");

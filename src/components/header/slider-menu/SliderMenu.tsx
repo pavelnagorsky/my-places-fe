@@ -28,12 +28,19 @@ const SliderMenu = ({
       anchorEl={anchorEl}
       onClose={onClose}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
+        vertical: "center",
+        horizontal: "right",
       }}
       transformOrigin={{
-        vertical: -10,
-        horizontal: "center",
+        vertical: 10,
+        horizontal: "right",
+      }}
+      slotProps={{
+        paper: {
+          sx: {
+            borderRadius: "12px",
+          },
+        },
       }}
     >
       <Stack minWidth={"203px"} px={"1em"} py={"1.5em"}>

@@ -14,16 +14,36 @@ const useHeaderStyles = () => {
   const isHomePage = router.asPath === routerLinks.home;
 
   const isScrolled = useScrollTrigger({
-    threshold: 374, // Adjust based on image height
+    threshold: 274, // Adjust based on image height
+    disableHysteresis: true,
   });
 
   const homePageHeaderSx: SxProps = {
     bgcolor: isScrolled ? "white" : "transparent",
-    transition: `background-color .${isScrolled ? 3 : 1}s ease`,
+    transition: `background-color 0.5s ease, opacity 0.2s ease`,
     top: 0,
     zIndex: 1000,
     width: "100%",
     position: "sticky",
+    "& .header-menu-toggle": isScrolled
+      ? undefined
+      : {
+          color: "#181818",
+          borderColor: "transparent",
+          backgroundColor: "transparent",
+          "&:hover": {
+            color: "secondary.dark",
+            backgroundColor: "transparent",
+          },
+        },
+    "& .MuiLink-root, .MuiButton-root": isScrolled
+      ? undefined
+      : {
+          "&:hover": {
+            color: "secondary.dark",
+            backgroundColor: "transparent",
+          },
+        },
   };
 
   return isHomePage ? homePageHeaderSx : defaultHeaderSx;

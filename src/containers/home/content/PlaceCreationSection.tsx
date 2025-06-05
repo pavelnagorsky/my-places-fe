@@ -12,7 +12,7 @@ const PlaceCreationSection = () => {
   const textContainer = (
     <WrappedContainer bgColor={"black"}>
       <Stack
-        gap={3}
+        gap={"2.5em"}
         sx={{
           position: "absolute",
           top: "50%",
@@ -28,10 +28,9 @@ const PlaceCreationSection = () => {
         <Typography
           component="h2"
           sx={{
-            mb: 0.5,
             zIndex: 2,
             fontWeight: 500,
-            lineHeight: "127%",
+            lineHeight: "120%",
             fontSize: { xs: "26px", md: "42px" },
             color: "white",
           }}
@@ -41,17 +40,17 @@ const PlaceCreationSection = () => {
           {t("placeCreation.subTitle")}
         </Typography>
         <Typography
-          component={"h2"}
+          component={"p"}
           fontSize={{ xs: "16px", md: "18px" }}
           sx={{
             zIndex: 2,
             color: "white",
-            lineHeight: "130%",
+            lineHeight: "135%",
           }}
         >
           {t("placeCreation.description")}
         </Typography>
-        <Box mt={4}>
+        <Box mt={"1.25em"}>
           <Button
             component={NextLink}
             href={routerLinks.createPlace}
@@ -100,7 +99,7 @@ const PlaceCreationSection = () => {
       mx={"auto"}
       position={"relative"}
       height={{ xs: "753px", md: "674px" }}
-      bgcolor={"black"}
+      bgcolor={"#181818"}
     >
       {imageContainer}
       {textContainer}

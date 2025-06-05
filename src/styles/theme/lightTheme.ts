@@ -2,9 +2,7 @@ import { interFont } from "@/styles/fonts/fonts";
 import { createTheme } from "@mui/material";
 import { beBY, ruRU } from "@mui/material/locale";
 import I18nLanguages from "@/shared/I18nLanguages";
-import type {} from "@mui/x-date-pickers/themeAugmentation";
 import { renderDigitalClockTimeView } from "@mui/x-date-pickers";
-import utils from "@/shared/utils";
 
 export const primaryColor = "#FF7A00";
 export const primaryBackground = "#FFEFE2";
@@ -27,7 +25,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
           main: "#FD6B0C",
         },
         secondary: {
-          main: "#565656",
+          main: "#181818",
           contrastText: "#303030",
         },
         text: {
