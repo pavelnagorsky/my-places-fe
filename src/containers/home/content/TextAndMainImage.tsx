@@ -5,6 +5,8 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import mainImage from "../../../../public/images/home-page/main-image.jpg";
 import overlayImage from "../../../../public/images/home-page/overlay-image.svg";
 import { useTranslation } from "next-i18next";
+import animationVariants from "@/shared/animation-variants";
+import { motion } from "framer-motion";
 
 function TextAndMainImage() {
   const { t } = useTranslation("home");
@@ -119,13 +121,16 @@ function TextAndMainImage() {
   return (
     <Box
       maxWidth={"1980px"}
+      mt={"-114px"}
       mx={"auto"}
       position={"relative"}
       height={{ xs: "590px", md: "774px" }}
     >
       {mainImageContainer}
       {overlayImageContainer}
-      {mainText}
+      <motion.div variants={animationVariants.defaultItemVariant}>
+        {mainText}
+      </motion.div>
     </Box>
   );
 }

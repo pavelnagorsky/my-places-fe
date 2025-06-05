@@ -1,18 +1,14 @@
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Box, Fab, useScrollTrigger, Zoom } from "@mui/material";
 import { memo, useCallback } from "react";
-import useAnalytics from "@/hooks/analytics/useAnalytics";
-import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const ScrollToTopButton = () => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 300,
   });
-  const sendAnalytics = useAnalytics();
 
   const scrollToTop = useCallback(() => {
-    sendAnalytics(AnalyticsEventsEnum.CustomClick, { title: "scroll to top" });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
@@ -23,7 +19,7 @@ const ScrollToTopButton = () => {
         sx={{
           position: "fixed",
           bottom: 32,
-          right: { xs: 20, md: 26, lg: 58 },
+          right: { xs: 18, md: 32, lg: 64 },
           zIndex: 100,
         }}
       >
@@ -34,7 +30,7 @@ const ScrollToTopButton = () => {
             boxShadow: "none",
           }}
           color="primary"
-          size="medium"
+          size="small"
           aria-label="scroll back to top"
         >
           <KeyboardArrowUpIcon />

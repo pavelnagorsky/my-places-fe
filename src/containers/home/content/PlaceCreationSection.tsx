@@ -3,6 +3,8 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import placeCreationImage from "../../../../public/images/home-page/place-creation.png";
+import NextLink from "next/link";
+import { routerLinks } from "@/routing/routerLinks";
 
 const PlaceCreationSection = () => {
   const { t } = useTranslation("home");
@@ -13,27 +15,30 @@ const PlaceCreationSection = () => {
         gap={3}
         sx={{
           position: "absolute",
-          bottom: { xs: "2em", md: "5em" },
+          top: "50%",
+          transform: "translate(0, -50%)",
+          width: {
+            xs: "100%",
+            sm: "80%",
+            md: "50%",
+            lg: "30%",
+          },
         }}
       >
         <Typography
           component="h2"
           sx={{
+            mb: 0.5,
             zIndex: 2,
             fontWeight: 500,
             lineHeight: "127%",
             fontSize: { xs: "26px", md: "42px" },
             color: "white",
-            textTransform: { sm: "uppercase" },
-            width: {
-              xs: "100%",
-              md: "90%",
-              lg: "75%",
-              xl: "70%",
-            },
           }}
         >
           {t("placeCreation.title")}
+          <br />
+          {t("placeCreation.subTitle")}
         </Typography>
         <Typography
           component={"h2"}
@@ -42,21 +47,24 @@ const PlaceCreationSection = () => {
             zIndex: 2,
             color: "white",
             lineHeight: "130%",
-            width: {
-              xs: "100%",
-              sm: "80%",
-              md: "65%",
-              lg: "50%",
-            },
           }}
         >
           {t("placeCreation.description")}
         </Typography>
-        <Box>
+        <Box mt={4}>
           <Button
+            component={NextLink}
+            href={routerLinks.createPlace}
             size={"large"}
             variant={"contained"}
-            sx={{ bgcolor: "white", borderRadius: "25px", color: "#181818" }}
+            sx={{
+              bgcolor: "white",
+              borderRadius: "25px",
+              minWidth: "240px",
+              fontWeight: 600,
+              minHeight: "51px",
+              color: "#181818",
+            }}
           >
             {t("placeCreation.button")}
           </Button>

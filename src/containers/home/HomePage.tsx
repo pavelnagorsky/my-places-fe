@@ -17,9 +17,7 @@ const HomePage = () => {
       initial="hidden"
       animate="show"
     >
-      <motion.div variants={animationVariants.defaultItemVariant}>
-        <TextAndMainImage />
-      </motion.div>
+      <TextAndMainImage />
       <WrappedContainer>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <TextAndImage
