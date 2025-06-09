@@ -54,7 +54,7 @@ const Header = ({ wideMode }: IHeaderProps) => {
             sx={{ display: { xs: "none", md: "flex" }, columnGap: "0.5em" }}
           >
             <CreateMenu activePath={router.pathname} />
-            <HeaderLink to={routerLinks.search} pathname={router.pathname}>
+            <HeaderLink to={routerLinks.places} pathname={router.pathname}>
               {t("links.search")}
             </HeaderLink>
             <HeaderLink to={routerLinks.excursions} pathname={router.pathname}>

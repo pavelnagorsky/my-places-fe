@@ -133,6 +133,8 @@
   "loading": "Loading...",
   "hours": "h",
   "minutes": "min",
+  "cookieConsent": "Our website uses cookies. By continuing to use the \"Знай свой край\" website, you consent to the use of cookies and agree to our",
+  "cookieConsentPrivacyPolicy": "privacy policy",
   "filters": {
     "title": "Filters",
     "dateRange": "Select date range",

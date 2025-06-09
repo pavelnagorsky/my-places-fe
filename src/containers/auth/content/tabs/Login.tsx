@@ -10,13 +10,7 @@ import {
   ILoginRequest,
   LoginErrorEnum,
 } from "@/services/auth-service/interfaces/interfaces";
-import {
-  Box,
-  CircularProgress,
-  Divider,
-  FormLabel,
-  Stack,
-} from "@mui/material";
+import { Box, CircularProgress, FormLabel } from "@mui/material";
 import regExp from "@/shared/regExp";
 import { Button } from "@/components/UI/button/Button";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -29,8 +23,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { format } from "date-fns";
-import useDialog from "@/hooks/useDialog";
-import ForgotPassword from "@/containers/auth/content/forgot-password/ForgotPassword";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +32,7 @@ const Login = () => {
   const error = useAppSelector(selectAuthError);
   const router = useRouter();
   const { t } = useTranslation("common");
+  const sendAnalytics = useAnalytics();
 
   const loginRedirect = async (path: string) => {
     await router
@@ -58,6 +53,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<ILoginRequest> = (data) => {
     if (loading) return;
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, { title: "login submit" });
     dispatch(
       loginThunk({
         ...data,

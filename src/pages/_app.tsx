@@ -19,6 +19,7 @@ import I18nLanguages from "@/shared/I18nLanguages";
 import createLightTheme from "@/styles/theme/lightTheme";
 import { useRouter } from "next/router";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -29,6 +30,7 @@ function App({
 }: AppProps & { emotionCache: EmotionCache }) {
   const dateFnsLocale = useDateFnsLocale();
   const { locale } = useRouter();
+
   return (
     <CacheProvider value={emotionCache}>
       <Provider store={store}>
@@ -44,6 +46,7 @@ function App({
                   content="width=device-width, initial-scale=1.0"
                 />
               </Head>
+              <GoogleTagManager gtmId={Environment.GTMId} />
               <DefaultSeo
                 openGraph={{
                   type: "website",

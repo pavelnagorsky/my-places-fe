@@ -18,17 +18,19 @@ import { restoreCartFromLocalStorageThunk } from "@/store/search-cart-slice/thun
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Image from "next/image";
 import { primaryBackground } from "@/styles/theme/lightTheme";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 interface ISearchCartWidgetProps {
   sx?: SxProps;
 }
 
 const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useAppDispatch();
   const cartItemsLength = useAppSelector(selectCartPlaceIdsLength);
+  const sendAnalytics = useAnalytics();
   const onClick = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, { title: "open cart" });
     dispatch(setCartOpen(true));
   };
 
@@ -50,25 +52,25 @@ const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
           }}
         >
           <Fab
-            size={isMobile ? "medium" : "large"}
+            size={"large"}
             onClick={onClick}
             sx={{
               boxShadow: "none",
             }}
             color="primary"
-            aria-label="Search cart"
+            aria-label="Index cart"
           >
             <Badge
               badgeContent={cartItemsLength}
               sx={{
                 "& .MuiBadge-badge": {
-                  border: { md: "3px solid white" },
+                  border: "3px solid white",
                   borderRadius: "50%",
-                  fontSize: { md: "16px" },
-                  fontWeight: { md: 700 },
+                  fontSize: "16px",
+                  fontWeight: 700,
                   transform: "translate(60%, -60%)",
-                  minHeight: { md: "2em" },
-                  width: { md: "2em" },
+                  minHeight: "2em",
+                  width: "2em",
                   color: "primary.main",
                   backgroundColor: primaryBackground,
                 },
@@ -79,8 +81,8 @@ const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
                 src={routingIcon}
                 alt={"search cart"}
                 priority
-                height={isMobile ? 32 : 40}
-                width={isMobile ? 32 : 40}
+                height={40}
+                width={40}
               />
             </Badge>
           </Fab>

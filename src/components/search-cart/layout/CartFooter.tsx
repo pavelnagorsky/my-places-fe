@@ -8,19 +8,28 @@ import {
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const CartFooter = () => {
   const { t } = useTranslation("route-management");
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const sendAnalytics = useAnalytics();
 
   const onCreateRoute = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "create route from cart",
+    });
     dispatch(cartToRouteBuilderThunk()).then(() => {
       router.push(routerLinks.createRoute);
     });
   };
 
   const onCreateExcursion = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "create excursion from cart",
+    });
     dispatch(cartToExcursionBuilderThunk()).then(() => {
       router.push(routerLinks.createExcursion);
     });

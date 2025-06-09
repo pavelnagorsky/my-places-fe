@@ -15,6 +15,9 @@ import utils from "@/shared/utils";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { routerLinks } from "@/routing/routerLinks";
 import GoogleOAuthOneTap from "@/containers/auth/content/oauth/google/content/one-tap-login/GoogleOAuthOneTap";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+
 const SnackbarAlert = dynamic(
   () => import("@/components/UI/alert/SnackbarAlert"),
   {
@@ -24,6 +27,12 @@ const SnackbarAlert = dynamic(
 const AuthModal = dynamic(() => import("@/containers/auth/AuthModal"), {
   ssr: false,
 });
+const CookieConsent = dynamic(
+  () => import("@/components/cookie-consent/CookieConsent"),
+  {
+    ssr: false,
+  }
+);
 
 const wideDesignPathNames = [
   routerLinks.administrationBasePath,
@@ -39,14 +48,16 @@ export default function Layout({ children }: PropsWithChildren) {
   const router = useRouter();
   const { i18n } = useTranslation();
   const [pageLoading, setPageLoading] = useState(false);
+  const sendAnalytics = useAnalytics();
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       setPageLoading(true);
     };
 
-    const handleRouteChangeComplete = () => {
+    const handleRouteChangeComplete = (url: string) => {
       setPageLoading(false);
+      sendAnalytics(AnalyticsEventsEnum.PageChange, { page: url });
     };
 
     router.events.on("routeChangeStart", handleRouteChange);
@@ -90,6 +101,7 @@ export default function Layout({ children }: PropsWithChildren) {
           sx={{ zIndex: 5000, position: "fixed", top: 0, width: "100vw" }}
         />
       )}
+      <CookieConsent />
       <SnackbarAlert />
       <AuthModal />
       <Box flexGrow={1}>

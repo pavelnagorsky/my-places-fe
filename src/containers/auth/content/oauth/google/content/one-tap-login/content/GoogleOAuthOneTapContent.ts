@@ -6,11 +6,14 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { oauthLoginThunk } from "@/store/user-slice/thunks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
 
 const GoogleOAuthOneTapContent = () => {
   const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const sendAnalytics = useAnalytics();
 
   const loginRedirect = async (path: string) => {
     await router
@@ -21,6 +24,9 @@ const GoogleOAuthOneTapContent = () => {
 
   useGoogleOneTapLogin({
     onSuccess: (credentialResponse) => {
+      sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+        title: "google one-tap oauth success",
+      });
       dispatch(
         oauthLoginThunk({
           apiCall: () =>

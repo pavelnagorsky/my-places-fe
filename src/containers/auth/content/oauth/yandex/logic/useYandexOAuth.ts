@@ -6,6 +6,8 @@ import { oauthLoginThunk } from "@/store/user-slice/thunks";
 import { useRouter } from "next/router";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const useYandexOAuth = () => {
   const { t } = useTranslation("common");
@@ -20,6 +22,7 @@ const useYandexOAuth = () => {
   });
   const url = `https://oauth.yandex.ru/authorize?${params.toString()}`;
   const router = useRouter();
+  const sendAnalytics = useAnalytics();
 
   const loginRedirect = async (path: string) => {
     await router
@@ -29,6 +32,9 @@ const useYandexOAuth = () => {
   };
 
   const handleYandexLogin = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: "yandex oauth",
+    });
     initiateOAuthLogin(url)
       .then((queryPrams) => {
         dispatch(

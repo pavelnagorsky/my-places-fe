@@ -4,7 +4,7 @@ import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "../styles/utility/createEmotionCache";
 import websiteJsonld from "@/shared/json-ld/website-jsonld";
 
-const jsonLdData = JSON.stringify(websiteJsonld())
+const jsonLdData = JSON.stringify(websiteJsonld());
 
 const MyDocument = (props: any) => {
   return (

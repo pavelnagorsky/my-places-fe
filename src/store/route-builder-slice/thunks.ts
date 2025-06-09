@@ -109,7 +109,7 @@ export const getRouteDirectionsThunk = createAsyncThunk(
 
           return result;
         } else {
-          console.error(`error fetching directions ${result}`);
+          console.error(`error fetching directions`, result);
           return thunkAPI.rejectWithValue(null);
         }
       }

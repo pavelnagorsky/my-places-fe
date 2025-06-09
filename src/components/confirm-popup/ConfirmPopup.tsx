@@ -8,13 +8,15 @@ import {
 import { useTranslation } from "next-i18next";
 import { StyledButton } from "../UI/button/StyledButton";
 
+export interface IPopoverProps {
+  anchor: null | Element;
+  open: boolean;
+  id?: string;
+  handleClose: () => void;
+}
+
 interface IConfirmPopupProps {
-  popoverProps: {
-    anchor: null | Element;
-    open: boolean;
-    id?: string;
-    handleClose: () => void;
-  };
+  popoverProps: IPopoverProps;
   actionText: string;
   cancelText?: string;
   title: string;

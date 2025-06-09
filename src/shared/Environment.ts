@@ -19,4 +19,6 @@ export class Environment {
     process.env["NEXT_PUBLIC_VK_CODE_CHALLENGE"] ?? "";
 
   static readonly yandexAppId = process.env["NEXT_PUBLIC_YANDEX_APP_ID"] ?? "";
+
+  static readonly GTMId = process.env["NEXT_PUBLIC_GTM_ID"] ?? "";
 }

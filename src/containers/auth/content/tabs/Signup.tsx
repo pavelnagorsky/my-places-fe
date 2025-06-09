@@ -29,12 +29,15 @@ import {
 import { signupThunk } from "@/store/user-slice/thunks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
 
 const Signup = () => {
   const { t } = useTranslation("common");
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectAuthLoading);
   const error = useAppSelector(selectAuthError);
+  const sendAnalytics = useAnalytics();
 
   const form = useForm<ISignupRequest>({
     defaultValues: {
@@ -63,6 +66,7 @@ const Signup = () => {
 
   const onSubmit: SubmitHandler<ISignupRequest> = (data) => {
     if (loading) return;
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, { title: "signup submit" });
     data.email = data.email.trim();
     dispatch(
       signupThunk({ ...data, onSuccess: () => afterSignup(data.email) })

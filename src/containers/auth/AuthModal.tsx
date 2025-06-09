@@ -2,7 +2,7 @@ import Dialog from "@mui/material/Dialog/Dialog";
 import DialogContent from "@mui/material/DialogContent/DialogContent";
 import Slide from "@mui/material/Slide/Slide";
 import { TransitionProps } from "@mui/material/transitions/transition";
-import { forwardRef, ReactElement, Ref, SyntheticEvent, useState } from "react";
+import { forwardRef, ReactElement, Ref, SyntheticEvent } from "react";
 import {
   Box,
   IconButton,
@@ -32,6 +32,8 @@ import { useTranslation } from "next-i18next";
 import OAuthSection from "@/containers/auth/content/oauth/OAuthSection";
 import BackdropLoader from "@/components/UI/loader/BackdropLoader";
 import ForgotPassword from "@/containers/auth/content/forgot-password/ForgotPassword";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 function a11yProps(index: number) {
   return {
@@ -84,8 +86,12 @@ const AuthModal = () => {
   const redirectHomeOnClose = useAppSelector(selectAuthCloseRedirect);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const sendAnalytics = useAnalytics();
 
   const handleClose = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: `auth modal close`,
+    });
     if (redirectHomeOnClose) {
       router.push("/");
     }
@@ -93,9 +99,12 @@ const AuthModal = () => {
   };
 
   const handleChangeTab = (
-    event: SyntheticEvent,
+    e: SyntheticEvent,
     newValue: ActiveAuthScreenEnum
   ) => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: `auth tab change to ${newValue} index`,
+    });
     dispatch(changeAuthScreen(newValue));
   };
 

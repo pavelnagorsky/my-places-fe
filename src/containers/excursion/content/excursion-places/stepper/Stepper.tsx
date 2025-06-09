@@ -105,7 +105,7 @@ const Stepper = ({ items }: { items: IExcursionPlace[] }) => {
   return (
     <Stack alignItems={"center"} pt={{ xs: "125px" }}>
       {items.map((item, i) => {
-        const duration = items[i + 1]?.duration ?? 0;
+        const duration = items[i]?.duration ?? 0;
         const formattedDuration = duration
           ? utils.formatMinutes(duration, {
               hoursTranslation: t("hours"),

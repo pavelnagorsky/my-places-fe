@@ -36,8 +36,10 @@ const ExcursionContent = ({ excursion }: { excursion: IExcursion }) => {
           </Typography>
           <Stack>
             <PlaceGallery
+              showStatus
               images={excursion.images.map((image, i) => ({
                 src: image,
+                title: excursion.places[i]?.title || "",
                 alt: excursion.places[i]?.title || excursion.title,
               }))}
               mobileHeight={250}

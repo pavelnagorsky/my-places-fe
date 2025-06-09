@@ -13,7 +13,10 @@ import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
 import excursionsService from "@/services/excursions-service/excursions.service";
 import { ISearchExcursionsRequest } from "@/services/excursions-service/interfaces/interfaces";
 import { setFilters } from "@/store/excursions-slice/excursions.slice";
-import { getSearchResultsThunk } from "@/store/excursions-slice/excursions.thunks";
+import {
+  getPlaceTypesThunk,
+  getSearchResultsThunk,
+} from "@/store/excursions-slice/excursions.thunks";
 import { SearchExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 
 const useExcursions = () => {
@@ -46,6 +49,7 @@ const useExcursions = () => {
           types: data.types,
           travelModes: data.travelModes,
           regionIds: data.regions.map((r) => r.id),
+          placeTypeIds: data.placeTypeIds,
           orderBy: +data.orderBy,
           pageSize: excursionsService.SEARCH_EXCURSIONS_PER_PAGE,
           page: requestedPage,
@@ -67,6 +71,10 @@ const useExcursions = () => {
     isFirstFetchRef.current = false;
     onSubmit();
   }, [i18n.language, isDataFetched]);
+
+  useEffect(() => {
+    dispatch(getPlaceTypesThunk({ language: i18n.language }));
+  }, [i18n.language]);
 
   return {
     form,

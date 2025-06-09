@@ -7,4 +7,5 @@ export const defaultSearchFilters: IExcursionsFilters = {
   travelModes: [],
   types: [],
   regions: [],
+  placeTypeIds: [],
 };

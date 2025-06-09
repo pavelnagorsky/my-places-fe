@@ -1,4 +1,4 @@
-import { SearchOrderByStringEnum } from "@/containers/search-page/logic/interfaces";
+import { SearchOrderByStringEnum } from "@/containers/places/logic/interfaces";
 import { useTranslation } from "next-i18next";
 
 const useSearchOrderByOptions = () => {

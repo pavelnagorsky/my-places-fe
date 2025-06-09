@@ -7,6 +7,8 @@ import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice"
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { useTranslation } from "next-i18next";
+import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
 const AddRoCartWidget = ({
   sx,
@@ -21,8 +23,13 @@ const AddRoCartWidget = ({
   const dispatch = useAppDispatch();
   const cartIds = useAppSelector(selectCartPlaceIds);
   const isAdded = cartIds.includes(placeId);
+  const sendAnalytics = useAnalytics();
 
   const onClickCart = () => {
+    sendAnalytics(AnalyticsEventsEnum.CustomClick, {
+      title: `${isAdded ? "remove" : "add"} place in cart`,
+      placeId,
+    });
     dispatch(
       togglePlaceIdInCartThunk({
         placeId,
@@ -37,21 +44,21 @@ const AddRoCartWidget = ({
       role="presentation"
       sx={{
         position: "fixed",
-        bottom: { xs: 92, md: 112 },
-        right: { xs: 18, md: 32, lg: 64 },
+        bottom: { xs: 106, md: 112 },
+        right: { xs: 18, md: 24, lg: 56 },
         zIndex: 100,
         ...sx,
       }}
     >
       <Fab
-        size={"small"}
+        size={"medium"}
         onClick={onClickCart}
         sx={{
           boxShadow: "none",
           bgcolor: primaryBackground,
           color: "primary.main",
         }}
-        aria-label="Search cart"
+        aria-label="Index cart"
       >
         {isAdded ? (
           <RemoveIcon fontSize={isMobile ? "small" : "medium"} />
