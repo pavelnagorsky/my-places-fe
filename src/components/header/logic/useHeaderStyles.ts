@@ -20,7 +20,7 @@ const useHeaderStyles = () => {
 
   const homePageHeaderSx: SxProps = {
     bgcolor: isScrolled ? "white" : "transparent",
-    transition: `background-color 0.5s ease, opacity 0.2s ease`,
+    transition: `background-color 0.35s ease, opacity 0.1s ease`,
     top: 0,
     zIndex: 1000,
     width: "100%",

@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import TextAndMainImage from "@/containers/home/content/TextAndMainImage";
-import mainImageMd from "../../../public/images/home-page/main-image.jpg";
+import mainImageMd from "../../../public/images/home-page/main-section/main-image.jpg";
 import TextAndImage from "@/components/text-and-image/TextAndImage";
 import card1Image from "../../../public/images/home-page/card1.jpg";
 import card2Image from "../../../public/images/home-page/card2.jpg";

@@ -29,7 +29,7 @@ const CookieConsent = () => {
 
   return (
     <Drawer
-      transitionDuration={600}
+      transitionDuration={300}
       anchor={"bottom"}
       open={dialog.open}
       hideBackdrop

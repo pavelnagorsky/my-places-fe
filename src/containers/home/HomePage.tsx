@@ -8,6 +8,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import { motion } from "framer-motion";
 import animationVariants from "@/shared/animation-variants";
 import PlaceCreationSection from "./content/PlaceCreationSection";
+import PlacesSection from "@/containers/home/content/places-section/PlacesSection";
 
 const HomePage = () => {
   const { t } = useTranslation("home");
@@ -18,6 +19,7 @@ const HomePage = () => {
       animate="show"
     >
       <TextAndMainImage />
+      <PlacesSection />
       <WrappedContainer>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <TextAndImage

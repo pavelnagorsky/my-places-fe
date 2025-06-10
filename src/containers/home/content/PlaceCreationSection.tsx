@@ -2,7 +2,8 @@ import { useTranslation } from "next-i18next";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import placeCreationImage from "../../../../public/images/home-page/place-creation.png";
+import placeCreationImage from "../../../../public/images/home-page/place-creation/place-creation.png";
+import placeCreationXsImage from "../../../../public/images/home-page/place-creation/place-creation-xs.png";
 import NextLink from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
 
@@ -10,18 +11,19 @@ const PlaceCreationSection = () => {
   const { t } = useTranslation("home");
 
   const textContainer = (
-    <WrappedContainer bgColor={"black"}>
+    <WrappedContainer>
       <Stack
-        gap={"2.5em"}
+        gap={{ xs: "2em", sm: "2.5em" }}
         sx={{
           position: "absolute",
-          top: "50%",
-          transform: "translate(0, -50%)",
+          top: { xs: "5%", md: "50%" },
+          transform: { md: "translate(0, -50%)" },
           width: {
-            xs: "100%",
+            // xs: "100%",
             sm: "80%",
             md: "50%",
-            lg: "30%",
+            lg: "39%",
+            xl: "30%",
           },
         }}
       >
@@ -50,7 +52,7 @@ const PlaceCreationSection = () => {
         >
           {t("placeCreation.description")}
         </Typography>
-        <Box mt={"1.25em"}>
+        <Box mt={{ md: "1.25em" }}>
           <Button
             component={NextLink}
             href={routerLinks.createPlace}
@@ -75,26 +77,50 @@ const PlaceCreationSection = () => {
   const imageContainer = (
     <Box
       sx={{
-        position: "absolute", // Changed from relative to absolute
-        height: "100%",
-        width: { xs: "100%", sm: "682px" }, // Full width on mobile, half on sm+
-        right: 0, // Position on the right side
+        display: { xs: "none", md: "block" },
+        position: "absolute",
+        height: { md: "100%", lg: "100%" },
+        width: "682px",
+        right: { md: "-150px", lg: 0 },
         top: 0,
       }}
     >
       <Image
-        sizes="(max-width: 599px) 100vw, (min-width: 600px) 50vw, 990px"
+        sizes="(max-width: 876px) 100vw, 990px"
         src={placeCreationImage}
         alt={t("placeCreation.title")}
         fill
         priority
-        style={{ objectFit: "cover" }}
+        style={{ objectFit: "cover", objectPosition: "right center" }}
+      />
+    </Box>
+  );
+
+  const imageContainerXs = (
+    <Box
+      sx={{
+        display: { xs: "block", md: "none" },
+        position: "absolute",
+        height: { xs: "350px", sm: "410px" },
+        width: "100%",
+        bottom: 0,
+        right: 0,
+      }}
+    >
+      <Image
+        sizes="(max-width: 876px) 100vw, 990px"
+        src={placeCreationXsImage}
+        alt={t("placeCreation.title")}
+        fill
+        priority
+        style={{ objectFit: "cover", objectPosition: "right top" }}
       />
     </Box>
   );
 
   return (
     <Box
+      overflow={"hidden"}
       maxWidth={"1980px"}
       mx={"auto"}
       position={"relative"}
@@ -102,6 +128,7 @@ const PlaceCreationSection = () => {
       bgcolor={"#181818"}
     >
       {imageContainer}
+      {imageContainerXs}
       {textContainer}
     </Box>
   );
