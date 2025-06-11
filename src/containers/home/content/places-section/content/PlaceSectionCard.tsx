@@ -19,7 +19,12 @@ const PlaceSectionCard = ({ config }: { config: ICardConfig }) => {
       alignItems={"center"}
       gap={2}
       p={2}
-      sx={{ cursor: "pointer", textDecoration: "none" }}
+      sx={{
+        cursor: "pointer",
+        textDecoration: "none",
+        transition: "box-shadow .2s",
+        "&:hover": { boxShadow: 1 },
+      }}
       component={NextLink}
       href={routerLinks.places}
     >
@@ -31,7 +36,7 @@ const PlaceSectionCard = ({ config }: { config: ICardConfig }) => {
         width={54}
       />
       <Stack>
-        <Typography fontSize={"20px"} fontWeight={500} color={"#181818"}>
+        <Typography fontSize={"20px"} fontWeight={500} color={"secondary.dark"}>
           {config.filter.title}
         </Typography>
         <Typography fontSize={"18px"} fontWeight={500} color={"#A9A9A9"}>
@@ -83,8 +88,13 @@ const PlaceSectionCard = ({ config }: { config: ICardConfig }) => {
       borderRadius={"20px"}
       gap={1}
       p={2}
-      mb={"12px"}
-      sx={{ cursor: "pointer", textDecoration: "none" }}
+      mb={"6px"}
+      sx={{
+        cursor: "pointer",
+        textDecoration: "none",
+        transition: "box-shadow .2s",
+        "&:hover": { boxShadow: 1 },
+      }}
       component={NextLink}
       href={routerLinks.places}
     >
@@ -96,7 +106,12 @@ const PlaceSectionCard = ({ config }: { config: ICardConfig }) => {
         height={28}
         width={28}
       />
-      <Typography fontSize={"22px"} fontWeight={500} mb={1} color={"#181818"}>
+      <Typography
+        fontSize={"22px"}
+        fontWeight={500}
+        mb={1}
+        color={"secondary.dark"}
+      >
         {config.clickableSection.title}
       </Typography>
       <Stack>{imagesBlock}</Stack>
@@ -104,7 +119,7 @@ const PlaceSectionCard = ({ config }: { config: ICardConfig }) => {
   ) : null;
 
   return (
-    <Stack gap={2} width={"100%"} mb={"-12px"}>
+    <Stack gap={2} width={"100%"} minWidth={"288px"}>
       {filterBlock}
       {clickableSection || imagesBlock}
     </Stack>

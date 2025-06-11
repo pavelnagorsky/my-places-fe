@@ -23,7 +23,7 @@ const PlaceCreationSection = () => {
             sm: "80%",
             md: "50%",
             lg: "39%",
-            xl: "30%",
+            xl: "40%",
           },
         }}
       >
@@ -64,7 +64,7 @@ const PlaceCreationSection = () => {
               minWidth: "240px",
               fontWeight: 600,
               minHeight: "51px",
-              color: "#181818",
+              color: "secondary.dark",
             }}
           >
             {t("placeCreation.button")}
@@ -79,7 +79,7 @@ const PlaceCreationSection = () => {
       sx={{
         display: { xs: "none", md: "block" },
         position: "absolute",
-        height: { md: "100%", lg: "100%" },
+        height: "100%",
         width: "682px",
         right: { md: "-150px", lg: 0 },
         top: 0,
@@ -125,7 +125,7 @@ const PlaceCreationSection = () => {
       mx={"auto"}
       position={"relative"}
       height={{ xs: "753px", md: "674px" }}
-      bgcolor={"#181818"}
+      bgcolor={"secondary.dark"}
     >
       {imageContainer}
       {imageContainerXs}

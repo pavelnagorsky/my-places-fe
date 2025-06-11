@@ -14,7 +14,7 @@ const useHeaderStyles = () => {
   const isHomePage = router.asPath === routerLinks.home;
 
   const isScrolled = useScrollTrigger({
-    threshold: 274, // Adjust based on image height
+    threshold: 254, // Adjust based on image height
     disableHysteresis: true,
   });
 
@@ -28,7 +28,6 @@ const useHeaderStyles = () => {
     "& .header-menu-toggle": isScrolled
       ? undefined
       : {
-          color: "#181818",
           borderColor: "transparent",
           backgroundColor: "transparent",
           "&:hover": {

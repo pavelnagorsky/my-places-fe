@@ -29,7 +29,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
           contrastText: "#303030",
         },
         text: {
-          primary: "#303030",
+          primary: "#181818",
           secondary: "#565656",
         },
         divider: "rgba(0, 0, 0, 0.12)",
@@ -135,6 +135,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
             },
           },
         },
+        // @ts-ignore
         MuiDateTimePicker: {
           defaultProps: {
             timeSteps: { minutes: 60 },

@@ -19,33 +19,35 @@ const HomePage = () => {
       animate="show"
     >
       <TextAndMainImage />
-      <PlacesSection />
-      <WrappedContainer>
-        <motion.div variants={animationVariants.defaultItemVariant}>
-          <TextAndImage
-            title={t("card1.title")}
-            description={t("card1.description")}
-            btnText={t("card1.link")}
-            linkTo={routerLinks.places}
-            showImageMobile
-            image={card1Image}
-          />
-        </motion.div>
-        <motion.div variants={animationVariants.defaultItemVariant}>
-          <TextAndImage
-            sx={{
-              mb: "0 !important",
-            }}
-            reverse
-            title={t("card2.title")}
-            description={t("card2.description")}
-            btnText={t("card2.link")}
-            linkTo={routerLinks.createPlace}
-            showImageMobile
-            image={card2Image}
-          />
-        </motion.div>
-      </WrappedContainer>
+      <motion.div variants={animationVariants.defaultItemVariant}>
+        <PlacesSection />
+      </motion.div>
+      {/*<WrappedContainer>*/}
+      {/*  <motion.div variants={animationVariants.defaultItemVariant}>*/}
+      {/*    <TextAndImage*/}
+      {/*      title={t("card1.title")}*/}
+      {/*      description={t("card1.description")}*/}
+      {/*      btnText={t("card1.link")}*/}
+      {/*      linkTo={routerLinks.places}*/}
+      {/*      showImageMobile*/}
+      {/*      image={card1Image}*/}
+      {/*    />*/}
+      {/*  </motion.div>*/}
+      {/*  <motion.div variants={animationVariants.defaultItemVariant}>*/}
+      {/*    <TextAndImage*/}
+      {/*      sx={{*/}
+      {/*        mb: "0 !important",*/}
+      {/*      }}*/}
+      {/*      reverse*/}
+      {/*      title={t("card2.title")}*/}
+      {/*      description={t("card2.description")}*/}
+      {/*      btnText={t("card2.link")}*/}
+      {/*      linkTo={routerLinks.createPlace}*/}
+      {/*      showImageMobile*/}
+      {/*      image={card2Image}*/}
+      {/*    />*/}
+      {/*  </motion.div>*/}
+      {/*</WrappedContainer>*/}
       <motion.div variants={animationVariants.defaultItemVariant}>
         <PlaceCreationSection />
       </motion.div>
