@@ -1,7 +1,7 @@
 import { Divider, Stack } from "@mui/material";
-import GoogleOAuth from "@/containers/auth/content/oauth/google/GoogleOAuth";
-import VkOAuth from "@/containers/auth/content/oauth/vk/VkOAuth";
-import YandexOAuth from "@/containers/auth/content/oauth/yandex/YandexOAuth";
+import GoogleOAuth from "@/components/auth/content/oauth/google/GoogleOAuth";
+import VkOAuth from "@/components/auth/content/oauth/vk/VkOAuth";
+import YandexOAuth from "@/components/auth/content/oauth/yandex/YandexOAuth";
 import { useTranslation } from "next-i18next";
 
 const OAuthSection = () => {

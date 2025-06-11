@@ -1,5 +1,5 @@
 import { IconButton } from "@mui/material";
-import useVkOAuth from "@/containers/auth/content/oauth/vk/logic/useVkOAuth";
+import useVkOAuth from "@/components/auth/content/oauth/vk/logic/useVkOAuth";
 import icon from "/public/images/icons/vk.png";
 import Image from "next/image";
 

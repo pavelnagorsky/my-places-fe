@@ -13,7 +13,7 @@ import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/store/hooks";
 import { selectUserData } from "@/store/user-slice/user.slice";
 import { useEffect } from "react";
-import { IContactUsForm } from "@/containers/contact-us/interfaces";
+import { IContactUsForm } from "@/containers/contact-us/form/logic/interfaces";
 
 interface IFormProps {
   onSubmit: () => void;

@@ -55,7 +55,7 @@ const TermsOfUse = () => {
         <Stack
           gap={"1.5em"}
           mt={"1em"}
-          mb={"3em"}
+          mb={"2em"}
           sx={{
             ul: {
               mt: "0.5em",

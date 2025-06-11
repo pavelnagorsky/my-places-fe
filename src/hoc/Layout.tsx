@@ -14,7 +14,7 @@ import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
 import parseLanguageToId from "@/shared/parseLanguageToId";
 import { routerLinks } from "@/routing/routerLinks";
-import GoogleOAuthOneTap from "@/containers/auth/content/oauth/google/content/one-tap-login/GoogleOAuthOneTap";
+import GoogleOAuthOneTap from "@/components/auth/content/oauth/google/content/one-tap-login/GoogleOAuthOneTap";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 
@@ -24,7 +24,7 @@ const SnackbarAlert = dynamic(
     ssr: false,
   }
 );
-const AuthModal = dynamic(() => import("@/containers/auth/AuthModal"), {
+const AuthModal = dynamic(() => import("@/components/auth/AuthModal"), {
   ssr: false,
 });
 const CookieConsent = dynamic(

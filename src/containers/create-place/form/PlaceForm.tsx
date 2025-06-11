@@ -100,7 +100,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
             </Stack>
           </Box>
         </motion.div>
-        <Grid container spacing={"1em"} mb={"3em"}>
+        <Grid container spacing={"1em"} mb={"1em"}>
           <Grid size={{ xs: 12, md: 3, lg: 2 }}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Navigation

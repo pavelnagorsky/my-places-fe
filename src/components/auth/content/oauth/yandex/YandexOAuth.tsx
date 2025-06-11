@@ -1,5 +1,5 @@
 import { IconButton } from "@mui/material";
-import useYandexOAuth from "@/containers/auth/content/oauth/yandex/logic/useYandexOAuth";
+import useYandexOAuth from "@/components/auth/content/oauth/yandex/logic/useYandexOAuth";
 import icon from "/public/images/icons/yandex.png";
 import Image from "next/image";
 

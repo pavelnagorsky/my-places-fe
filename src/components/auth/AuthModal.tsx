@@ -13,10 +13,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import TabPanel from "@/containers/auth/content/tabs/TabPannel";
-import Login from "@/containers/auth/content/tabs/Login";
+import TabPanel from "@/components/auth/content/tabs/TabPannel";
+import Login from "@/components/auth/content/tabs/Login";
 import CloseIcon from "@mui/icons-material/Close";
-import Signup from "@/containers/auth/content/tabs/Signup";
+import Signup from "@/components/auth/content/tabs/Signup";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   ActiveAuthScreenEnum,
@@ -29,9 +29,9 @@ import {
 } from "@/store/user-slice/user.slice";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import OAuthSection from "@/containers/auth/content/oauth/OAuthSection";
+import OAuthSection from "@/components/auth/content/oauth/OAuthSection";
 import BackdropLoader from "@/components/UI/loader/BackdropLoader";
-import ForgotPassword from "@/containers/auth/content/forgot-password/ForgotPassword";
+import ForgotPassword from "@/components/auth/content/forgot-password/ForgotPassword";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 

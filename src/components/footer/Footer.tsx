@@ -81,7 +81,7 @@ const Footer = () => {
         direction={"row"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        mb={"2em"}
+        py={"2em"}
       >
         {linksSection}
         <Logo small />

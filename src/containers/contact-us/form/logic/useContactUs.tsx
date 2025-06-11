@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form-mui";
-import { IContactUsForm } from "@/containers/contact-us/interfaces";
+import { IContactUsForm } from "@/containers/contact-us/form/logic/interfaces";
 import { UserTypesEnum } from "@/services/contact-service/interfaces/interfaces";
 import { useState } from "react";
 import contactService from "@/services/contact-service/contact.service";

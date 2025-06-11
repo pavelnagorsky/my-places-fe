@@ -15,7 +15,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
         mode: "light",
         primary: {
           main: primaryColor,
-          light: "rgba(255, 122, 0, 0.5)",
+          light: "#FFB67A",
           contrastText: "#ffffff",
         },
         success: {

@@ -10,7 +10,7 @@ import Image from "next/image";
 import NextLink from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
 
-const PlaceSectionCard = ({ config }: { config: ICardConfig }) => {
+const PlacesSectionCard = ({ config }: { config: ICardConfig }) => {
   const filterBlock = config.filter ? (
     <Stack
       bgcolor={"#F3F3F3"}
@@ -126,4 +126,4 @@ const PlaceSectionCard = ({ config }: { config: ICardConfig }) => {
   );
 };
 
-export default PlaceSectionCard;
+export default PlacesSectionCard;

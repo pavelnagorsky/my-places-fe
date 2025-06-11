@@ -1,5 +1,5 @@
 import { Environment } from "@/shared/Environment";
-import initiateOAuthLogin from "@/containers/auth/content/oauth/logic/utils";
+import initiateOAuthLogin from "@/components/auth/content/oauth/logic/utils";
 import authService from "@/services/auth-service/auth.service";
 import { useAppDispatch } from "@/store/hooks";
 import { oauthLoginThunk } from "@/store/user-slice/thunks";

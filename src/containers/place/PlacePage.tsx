@@ -68,7 +68,7 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
         initial="hidden"
         animate="show"
       >
-        <Grid container spacing={{ md: "3em" }} mb={"5em"}>
+        <Grid container spacing={{ md: "3em" }} mb={"3em"}>
           <Grid size={{ xs: 12, lg: 8 }}>
             <motion.div variants={animationVariants.defaultItemVariant}>
               <Typography

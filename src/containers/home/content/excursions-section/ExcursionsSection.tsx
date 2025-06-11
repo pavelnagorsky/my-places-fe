@@ -1,24 +1,23 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import useCardsConfig from "@/containers/home/content/places-section/logic/useCardsConfig";
-import PlacesSectionCard from "@/containers/home/content/places-section/content/PlacesSectionCard";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import NextLink from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import useCardsConfig from "./logic/useCardsConfig";
+import ExcursionsSectionCard from "@/containers/home/content/excursions-section/content/ExcursionsSectionCard";
 
-const PlacesSection = () => {
+const ExcursionsSection = () => {
   const { t } = useTranslation("home");
   const config = useCardsConfig();
 
   return (
     <WrappedContainer>
       <Stack
-        gap={2}
+        gap={6}
         my={{ xs: "5em", md: "8.7em" }}
         sx={{
-          "& .react-multi-carousel-track": { alignItems: { sm: "end" } },
           "& .react-multi-carousel-item": {
             "&:first-of-type": {
               pl: "0",
@@ -31,11 +30,10 @@ const PlacesSection = () => {
         }}
       >
         <Stack
-          direction={{ md: "row" }}
-          alignItems={{ md: "center" }}
-          columnGap={6}
-          rowGap={"1.8em"}
-          mb={{ xs: 4, md: 6 }}
+          direction={{ sm: "row" }}
+          alignItems={{ sm: "center" }}
+          justifyContent={{ sm: "space-between" }}
+          gap={3.2}
         >
           <Typography
             component="h2"
@@ -46,30 +44,25 @@ const PlacesSection = () => {
               pb: 0,
             }}
           >
-            {t("places.title")}
+            {t("excursions.title")}
           </Typography>
-          <Stack gap={"1.6em"}>
-            <Typography fontSize={{ xs: "16px", md: "18px" }}>
-              {t("places.description")}
-            </Typography>
-            <Box>
-              <Button
-                component={NextLink}
-                href={routerLinks.places}
-                size={"large"}
-                color={"primary"}
-                variant={"contained"}
-                sx={{
-                  borderRadius: "25px",
-                  minWidth: "240px",
-                  fontWeight: 600,
-                  minHeight: "51px",
-                }}
-              >
-                {t("places.button")}
-              </Button>
-            </Box>
-          </Stack>
+          <Box>
+            <Button
+              component={NextLink}
+              href={routerLinks.excursions}
+              size={"large"}
+              color={"primary"}
+              variant={"contained"}
+              sx={{
+                borderRadius: "25px",
+                minWidth: "240px",
+                fontWeight: 600,
+                minHeight: "51px",
+              }}
+            >
+              {t("excursions.button")}
+            </Button>
+          </Box>
         </Stack>
         <Carousel
           responsive={responsive}
@@ -79,7 +72,7 @@ const PlacesSection = () => {
           partialVisbile
         >
           {config.map((card, i) => (
-            <PlacesSectionCard config={card} key={i} />
+            <ExcursionsSectionCard config={card} key={i} />
           ))}
         </Carousel>
       </Stack>
@@ -87,26 +80,26 @@ const PlacesSection = () => {
   );
 };
 
-export default PlacesSection;
+export default ExcursionsSection;
 
 const responsive = {
   xl: {
     breakpoint: { min: 1536, max: 10000 },
-    items: 4,
+    items: 3,
   },
   lg: {
     breakpoint: { min: 1200, max: 1536 },
     items: 3,
-    partialVisibilityGutter: 40,
   },
   md: {
     breakpoint: { min: 900, max: 1200 },
-    items: 3,
+    items: 2,
+    partialVisibilityGutter: 80,
   },
   sm: {
     breakpoint: { min: 600, max: 900 },
     items: 2,
-    // partialVisibilityGutter: 30,
+    partialVisibilityGutter: 40,
   },
   xs: {
     breakpoint: { min: 0, max: 600 },
