@@ -21,6 +21,7 @@ const StyledContainer = styled(Box)({
       height: "10px !important",
       width: "10px !important",
       opacity: "1 !important",
+      boxShadow: "none !important",
       backgroundColor: "rgba(255, 122, 0, 0.4) !important",
       "&.selected": {
         backgroundColor: "rgb(255, 122, 0) !important",

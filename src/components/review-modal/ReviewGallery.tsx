@@ -1,7 +1,7 @@
 import { Carousel } from "react-responsive-carousel";
 import { Box, styled } from "@mui/material";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useTranslation } from "next-i18next";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface IReviewGalleryProps {
   images: string[];
