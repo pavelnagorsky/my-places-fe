@@ -7,5 +7,5 @@ export interface ICreateExcursion {
   places: { id: number; description: string; excursionDuration: number }[];
   travelMode: TravelModesEnum;
   type: ExcursionTypesEnum;
-  regionId: number;
+  regionId: number | null;
 }

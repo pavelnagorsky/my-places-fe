@@ -19,7 +19,7 @@ const useExcursionBuilder = () => {
       description: "",
       travelMode: TravelModesEnum.DRIVING,
       type: `${ExcursionTypesEnum.Overview}`,
-      regionId: "" as any,
+      regionId: 0, // All,
     },
   });
 

@@ -20,7 +20,8 @@
     "descriptionPlaceholder": "Увядзіце апісанне экскурсіі",
     "placeDescriptionPlaceholder": "Падзяліцеся кароткім апісаннем месца ў рамках экскурсіі...",
     "durationSelect": "Увядзіце час на наведванне экскурсіі:",
-    "region": "Вобласць"
+    "region": "Вобласць",
+    "defaultRegion": "Уся Беларусь"
   },
   "mapView": "Візуальнае пабудова экскурсіі",
   "details": {

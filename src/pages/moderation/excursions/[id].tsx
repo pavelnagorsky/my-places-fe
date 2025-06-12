@@ -37,6 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
       ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
         "moderation",
         "excursion-management",
+        "place",
         "route-management",
         "common",
       ])),

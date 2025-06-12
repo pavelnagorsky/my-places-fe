@@ -78,8 +78,8 @@ export const getStaticProps: GetStaticProps<IPlacePageProps> = async ({
         place: placeRes.data,
         reviews: reviewsRes.data,
         ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
-          "place",
           "route-management",
+          "place",
           "common",
         ])),
         // Will be passed to the page component as props

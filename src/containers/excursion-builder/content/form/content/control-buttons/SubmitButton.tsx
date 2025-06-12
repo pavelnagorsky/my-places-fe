@@ -24,7 +24,6 @@ const SubmitButton = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectSubmitLoading);
-  const hasItems = useAppSelector(selectHasItems);
   const isAuth = useAppSelector(selectIsAuth);
   const isEditMode = useAppSelector(selectIsEditingMode);
   const excursionId = useAppSelector(selectExcursionId);
@@ -110,7 +109,7 @@ const SubmitButton = () => {
           excursionDuration: item.excursionDuration,
           description: item.excursionDescription,
         })),
-        regionId: data.regionId,
+        regionId: data.regionId || null,
         shouldTranslate: data.updateTranslations,
         language: i18n.language,
       };
@@ -126,7 +125,7 @@ const SubmitButton = () => {
 
   return (
     <Button
-      disabled={!isValid || !hasItems}
+      disabled={!isValid || items.length < 2}
       variant={"contained"}
       size={"large"}
       endIcon={loading && <CircularProgress color="inherit" size={22} />}
