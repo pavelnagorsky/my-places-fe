@@ -82,6 +82,7 @@ export const getStaticProps: GetStaticProps<IExcursionPageProps> = async ({
         excursion: data,
         ...(await serverSideTranslations(locale ?? I18nLanguages.ru, [
           "excursion-management",
+          "place",
           "route-management",
           "common",
         ])),

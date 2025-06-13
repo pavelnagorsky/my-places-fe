@@ -1,10 +1,10 @@
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import Grid from "@mui/material/Grid2";
 import { Stack, Typography } from "@mui/material";
-import PlaceGallery from "@/containers/place/content/gallery/PlaceGallery";
 import ExcursionDescription from "@/containers/excursion/content/ExcursionDescription";
 import ExcursionDetails from "@/containers/excursion/content/ExcursionDetails";
 import dynamic from "next/dynamic";
+import ExcursionGallery from "@/containers/excursion/content/gallery/ExcursionGallery";
 
 const ExcursionMapSection = dynamic(
   () =>
@@ -35,17 +35,7 @@ const ExcursionContent = ({ excursion }: { excursion: IExcursion }) => {
             {excursion.title}
           </Typography>
           <Stack>
-            <PlaceGallery
-              showStatus
-              images={excursion.images.map((image, i) => ({
-                src: image,
-                title: excursion.places[i]?.title || "",
-                alt: excursion.places[i]?.title || excursion.title,
-              }))}
-              mobileHeight={250}
-              laptopHeight={380}
-              desktopHeight={480}
-            />
+            <ExcursionGallery excursion={excursion} />
             <ExcursionStatistics
               views={excursion.viewsCount}
               createdAt={excursion.createdAt}
