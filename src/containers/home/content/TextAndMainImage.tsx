@@ -115,7 +115,7 @@ function TextAndMainImage() {
               xs: "100%",
               sm: "80%",
               md: "65%",
-              lg: "50%",
+              lg: "52%",
             },
           }}
         >

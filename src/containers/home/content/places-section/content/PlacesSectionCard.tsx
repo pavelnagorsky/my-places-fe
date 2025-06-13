@@ -26,7 +26,7 @@ const PlacesSectionCard = ({ config }: { config: ICardConfig }) => {
         "&:hover": { boxShadow: 1 },
       }}
       component={NextLink}
-      href={routerLinks.places}
+      href={config.filter.filterValue}
     >
       <Image
         src={config.filter.image}
@@ -35,7 +35,7 @@ const PlacesSectionCard = ({ config }: { config: ICardConfig }) => {
         height={54}
         width={54}
       />
-      <Stack>
+      <Stack gap={"2px"}>
         <Typography fontSize={"20px"} fontWeight={500} color={"secondary.dark"}>
           {config.filter.title}
         </Typography>
@@ -96,7 +96,7 @@ const PlacesSectionCard = ({ config }: { config: ICardConfig }) => {
         "&:hover": { boxShadow: 1 },
       }}
       component={NextLink}
-      href={routerLinks.places}
+      href={config.clickableSection.filterValue}
     >
       <Image
         src={config.clickableSection.icon}

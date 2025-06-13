@@ -10,6 +10,8 @@ import image7 from "/public/images/home-page/places/card-7.jpg";
 import icon1 from "/public/images/home-page/places/church-type.png";
 import icon2 from "/public/images/home-page/places/park-type.png";
 import ratingIcon from "/public/images/home-page/places/rating.png";
+import { routerLinks } from "@/routing/routerLinks";
+import { SearchPlacesOrderByEnum } from "@/services/places-service/interfaces/interfaces";
 
 const useCardsConfig = () => {
   const { t } = useTranslation("home");
@@ -21,7 +23,7 @@ const useCardsConfig = () => {
         title: "Храм",
         placesCount: 940,
         image: icon1,
-        filterValue: "type=1",
+        filterValue: `${routerLinks.places}?type=1`,
       },
     },
     {
@@ -31,17 +33,17 @@ const useCardsConfig = () => {
       clickableSection: {
         title: "Узнавайте больше",
         icon: ratingIcon,
-        filterValue: "orderBy=rating",
+        filterValue: `${routerLinks.places}?orderBy=${SearchPlacesOrderByEnum.RATING}`,
       },
       images: [image3, image4, image5, image6],
     },
     {
       images: [image7],
       filter: {
-        title: "Парковая зона",
-        placesCount: 275,
+        title: "Музей",
+        placesCount: 211,
         image: icon2,
-        filterValue: "type=2",
+        filterValue: `${routerLinks.places}?type=2`,
       },
     },
   ];

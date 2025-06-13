@@ -4,6 +4,6 @@ export interface ICardConfig {
   image: StaticImageData;
   title: string;
   description: string;
-  chips?: string[];
+  chips?: { title: string; filterValue: string }[];
   filterValue: string;
 }

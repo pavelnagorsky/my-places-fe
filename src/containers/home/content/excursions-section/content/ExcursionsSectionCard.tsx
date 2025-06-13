@@ -1,4 +1,5 @@
 import {
+  Box,
   Chip,
   IconButton,
   Stack,
@@ -12,6 +13,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import { ICardConfig } from "@/containers/home/content/excursions-section/logic/interfaces";
 import ArrowRightIcon from "@/components/UI/custom-icons/ArrowRightIcon";
 import { primaryBackground } from "@/styles/theme/lightTheme";
+import Link from "next/link";
 
 const ExcursionsSectionCard = ({ config }: { config: ICardConfig }) => {
   const theme = useTheme();
@@ -23,6 +25,7 @@ const ExcursionsSectionCard = ({ config }: { config: ICardConfig }) => {
       position={"relative"}
       height={{ xs: "438px", md: "650px" }}
       overflow={"hidden"}
+      alignItems={"center"}
     >
       <Image
         src={config.image}
@@ -30,24 +33,30 @@ const ExcursionsSectionCard = ({ config }: { config: ICardConfig }) => {
         fill
         style={{ objectFit: "cover" }}
       />
-      {!!config.chips && (
-        <Stack
-          direction={"row"}
-          position={"absolute"}
-          zIndex={1}
-          top={{ xs: "16px", md: "25px" }}
-          left={{ xs: "16px", md: "25px" }}
-          right={{ xs: "75px", md: "95px" }}
-          flexWrap={"wrap"}
-          gap={1}
-        >
-          {config.chips.map((chip, i) => (
+      <Stack
+        width={"100%"}
+        top={0}
+        position={"absolute"}
+        zIndex={1}
+        p={{ xs: "16px", md: "25px" }}
+        direction={"row"}
+        justifyContent={"space-between"}
+        // alignItems={"center"}
+      >
+        <Stack direction={"row"} flexWrap={"wrap"} gap={1}>
+          {(config.chips ?? []).map((chip, i) => (
             <div key={i}>
               <Chip
+                clickable
                 key={i}
-                label={chip}
+                label={chip.title}
+                component={Link}
+                href={chip.filterValue}
                 sx={{
                   bgcolor: primaryBackground,
+                  "&:hover": {
+                    bgcolor: "white",
+                  },
                   color: "primary.main",
                   fontSize: { xs: "13px", md: "17px" },
                   fontWeight: 500,
@@ -56,28 +65,26 @@ const ExcursionsSectionCard = ({ config }: { config: ICardConfig }) => {
             </div>
           ))}
         </Stack>
-      )}
-      <IconButton
-        color={"primary"}
-        sx={{
-          position: "absolute",
-          top: { xs: "16px", md: "25px" },
-          right: { xs: "16px", md: "25px" },
-          zIndex: 1,
-          color: "white",
-          backgroundColor: "primary.main",
-          width: { xs: "51px", md: "76px" },
-          height: { xs: "34px", md: "auto" },
-          borderRadius: "100px",
-          "&:hover": {
-            backgroundColor: "primary.dark",
-          },
-        }}
-        component={NextLink}
-        href={routerLinks.excursions}
-      >
-        <ArrowRightIcon fontSize={isMobile ? "medium" : "large"} />
-      </IconButton>
+        <Box>
+          <IconButton
+            color={"primary"}
+            sx={{
+              color: "white",
+              backgroundColor: "primary.main",
+              width: { xs: "51px", md: "76px" },
+              height: { xs: "34px", md: "auto" },
+              borderRadius: "100px",
+              "&:hover": {
+                backgroundColor: "primary.dark",
+              },
+            }}
+            component={NextLink}
+            href={routerLinks.excursions}
+          >
+            <ArrowRightIcon fontSize={isMobile ? "medium" : "large"} />
+          </IconButton>
+        </Box>
+      </Stack>
       <Stack
         position={"absolute"}
         zIndex={1}

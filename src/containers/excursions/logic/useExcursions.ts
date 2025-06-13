@@ -18,6 +18,8 @@ import {
   getSearchResultsThunk,
 } from "@/store/excursions-slice/excursions.thunks";
 import { SearchExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
+import { useRouter } from "next/router";
+import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 
 const useExcursions = () => {
   const { i18n } = useTranslation();
@@ -27,16 +29,50 @@ const useExcursions = () => {
   const isFirstFetchRef = useRef(true);
   const currentItemsLength = useAppSelector(selectCurrentItemsLength);
   const loading = useAppSelector(selectSearchFiltersLoading);
+  const router = useRouter();
 
   const form = useForm<IExcursionsFilters>({
     mode: "onChange",
     defaultValues: initialFilters,
   });
 
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    // Create a clean filters object that automatically excludes undefined values
+    const queryFilters: Partial<IExcursionsFilters> = Object.entries(
+      router.query
+    ).reduce((acc, [key, value]) => {
+      if (value === undefined || value === "") return acc;
+
+      switch (key) {
+        case "orderBy":
+          return { ...acc, orderBy: value as any };
+        case "types":
+          return { ...acc, types: (value as string).split(",").map(Number) };
+        case "placeTypeIds":
+          return {
+            ...acc,
+            placeTypeIds: (value as string).split(",").map(Number),
+          };
+        case "travelModes":
+          return { ...acc, travelModes: (value as string).split(",") as any };
+        default:
+          return acc;
+      }
+    }, {} as Partial<IExcursionsFilters>);
+
+    if (Object.keys(queryFilters).length > 0) {
+      form.reset({
+        ...form.getValues(),
+        ...queryFilters,
+      });
+    }
+  }, [router.isReady]);
+
   const onSubmit = useCallback(
     (fromStart = true) => {
       form.handleSubmit((data) => {
-        if (loading) return;
         // calculate page for pagination
         const requestedPage = fromStart
           ? 0

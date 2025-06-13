@@ -44,7 +44,7 @@ export interface IModerationPlacesRequest
   search?: string;
 }
 
-export enum SearchOrderByEnum {
+export enum SearchPlacesOrderByEnum {
   CREATED_AT,
   RATING,
   TITLE,
