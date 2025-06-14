@@ -1,6 +1,13 @@
 import { useTranslation } from "next-i18next";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Image from "next/image";
 import placeCreationImage from "../../../../public/images/home-page/place-creation/place-creation.png";
 import placeCreationXsImage from "../../../../public/images/home-page/place-creation/place-creation-xs.png";
@@ -9,6 +16,8 @@ import { routerLinks } from "@/routing/routerLinks";
 
 const PlaceCreationSection = () => {
   const { t } = useTranslation("home");
+  const theme = useTheme();
+  const isXlPlus = useMediaQuery(theme.breakpoints.up(1676));
 
   const textContainer = (
     <WrappedContainer>
@@ -23,7 +32,7 @@ const PlaceCreationSection = () => {
             sm: "80%",
             md: "50%",
             lg: "39%",
-            xl: "40%",
+            xl: isXlPlus ? "25%" : "30%",
           },
         }}
       >
