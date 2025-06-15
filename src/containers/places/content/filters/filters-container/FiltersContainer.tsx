@@ -1,4 +1,4 @@
-import { CircularProgress, Stack, styled } from "@mui/material";
+import { CircularProgress, Stack } from "@mui/material";
 import RadiusFilter from "@/containers/places/content/filters/content/RadiusFilter";
 import TypesAndCategoriesFilter from "@/containers/places/content/filters/content/TypesAndCategoriesFilter";
 import LocationSearch from "@/containers/places/content/filters/content/location-search/LocationSearch";
@@ -11,7 +11,7 @@ import { useAppSelector } from "@/store/hooks";
 import { selectSearchFiltersLoading } from "@/store/search-slice/search.slice";
 import { defaultSearchFilters } from "@/containers/places/logic/default-filters";
 
-const FiltersContainer = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
+const FiltersContainer = () => {
   const { t } = useTranslation("common");
   const { reset } = useFormContext<ISearchForm>();
   const loading = useAppSelector(selectSearchFiltersLoading);
@@ -50,7 +50,6 @@ const FiltersContainer = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
           fullWidth
           variant={"contained"}
           type={"submit"}
-          onClick={triggerSubmit}
           endIcon={loading && <CircularProgress color={"inherit"} size={20} />}
         >
           {t("buttons.apply")}

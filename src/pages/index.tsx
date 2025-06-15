@@ -1,4 +1,4 @@
-import { GetStaticProps, Metadata, NextPage, NextPageContext } from "next";
+import { GetStaticProps, NextPage, NextPageContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 import dynamic from "next/dynamic";
@@ -16,7 +16,7 @@ const Index: NextPage = (props, context: NextPageContext) => {
   return (
     <Fragment>
       <NextSeo
-        title={t("seo.title")}
+        title={t("seo.title", { year: new Date().getFullYear() })}
         description={t("seo.description")}
         canonical={canonical}
         languageAlternates={alternateLinks}
@@ -27,9 +27,7 @@ const Index: NextPage = (props, context: NextPageContext) => {
           images: [
             {
               url: mainImageMd.src,
-              width: mainImageMd.width,
-              height: mainImageMd.height,
-              alt: "Достопримечательности Беларуси",
+              alt: t("seo.title", { year: new Date().getFullYear() }),
             },
           ],
         }}

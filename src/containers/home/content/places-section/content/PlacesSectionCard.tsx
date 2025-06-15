@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import NextLink from "next/link";
-import { routerLinks } from "@/routing/routerLinks";
 
 const PlacesSectionCard = ({ config }: { config: ICardConfig }) => {
   const filterBlock = config.filter ? (
@@ -69,7 +68,7 @@ const PlacesSectionCard = ({ config }: { config: ICardConfig }) => {
                 display: "block",
                 borderRadius: "20px",
               }}
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes={"(max-width: 640px) 100vw, (max-width: 768px) 40vw, 30vw"}
               alt={`place-image-${i}`}
               loading="lazy"
               quality={85}

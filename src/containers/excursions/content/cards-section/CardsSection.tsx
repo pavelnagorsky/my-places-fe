@@ -31,7 +31,10 @@ const CardsSection = ({
           margin: "0 -1em",
         }}
         dataLength={items.length}
-        next={() => onSubmit(false)}
+        next={() => {
+          if (!items.length) return;
+          onSubmit(false);
+        }}
         hasMore={hasMore}
         loader={<SearchResultsLoader />}
       >

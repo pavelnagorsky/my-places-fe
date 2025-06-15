@@ -18,7 +18,7 @@ const PlacesSection = () => {
         gap={2}
         my={{ xs: "5em", md: "8.7em" }}
         sx={{
-          "& .react-multi-carousel-track": { alignItems: { sm: "end" } },
+          "& .react-multi-carousel-track": { alignItems: "end" },
           "& .react-multi-carousel-item": {
             "&:first-of-type": {
               pl: "0",

@@ -9,7 +9,7 @@ import { ISearchPlace } from "@/services/search-service/interfaces/search-place.
 import { ISearchPlaceOption } from "@/services/search-service/interfaces/search-place-option.interface";
 
 const searchService = {
-  SEARCH_PLACES_PER_PAGE: 12,
+  SEARCH_PLACES_PER_PAGE: 18,
 
   search: (language: string, payload: ISearchPlacesRequest) => {
     const langId = parseLanguageToId(language);

@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import { Button, Divider, Typography } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useAppDispatch } from "@/store/hooks";
 import { openAuth } from "@/store/user-slice/user.slice";
 import { useTranslation } from "next-i18next";
+import LoginIcon from "@/components/UI/custom-icons/LoginIcon";
+import SignupIcon from "@/components/UI/custom-icons/SignupIcon";
 
 const LoginSection = ({ onClose }: { onClose: () => void }) => {
   const { t } = useTranslation("common");
@@ -38,7 +38,7 @@ const LoginSection = ({ onClose }: { onClose: () => void }) => {
         }}
         onClick={login}
       >
-        <LoginIcon fontSize={"small"} color={"secondary"} />
+        <LoginIcon color={"secondary"} />
         <Typography>{t("links.login")}</Typography>
       </Button>
       <Button
@@ -53,7 +53,7 @@ const LoginSection = ({ onClose }: { onClose: () => void }) => {
         }}
         onClick={signup}
       >
-        <PersonAddAlt1Icon fontSize={"small"} color={"secondary"} />
+        <SignupIcon color={"secondary"} />
         <Typography>{t("links.signup")}</Typography>
       </Button>
     </Fragment>

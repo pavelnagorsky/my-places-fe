@@ -8,7 +8,7 @@ import image5 from "/public/images/home-page/places/card-5.jpg";
 import image6 from "/public/images/home-page/places/card-6.jpg";
 import image7 from "/public/images/home-page/places/card-7.jpg";
 import icon1 from "/public/images/home-page/places/church-type.png";
-import icon2 from "/public/images/home-page/places/park-type.png";
+import icon2 from "/public/images/home-page/places/museum-type.png";
 import ratingIcon from "/public/images/home-page/places/rating.png";
 import { routerLinks } from "@/routing/routerLinks";
 import { SearchPlacesOrderByEnum } from "@/services/places-service/interfaces/interfaces";
@@ -20,10 +20,10 @@ const useCardsConfig = () => {
     {
       images: [image1],
       filter: {
-        title: "Храм",
+        title: t("places.church"),
         placesCount: 940,
         image: icon1,
-        filterValue: `${routerLinks.places}?type=1`,
+        filterValue: `${routerLinks.places}?types=6`,
       },
     },
     {
@@ -31,7 +31,7 @@ const useCardsConfig = () => {
     },
     {
       clickableSection: {
-        title: "Узнавайте больше",
+        title: t("places.learnMore"),
         icon: ratingIcon,
         filterValue: `${routerLinks.places}?orderBy=${SearchPlacesOrderByEnum.RATING}`,
       },
@@ -40,10 +40,10 @@ const useCardsConfig = () => {
     {
       images: [image7],
       filter: {
-        title: "Музей",
+        title: t("places.museum"),
         placesCount: 211,
         image: icon2,
-        filterValue: `${routerLinks.places}?type=2`,
+        filterValue: `${routerLinks.places}?types=2`,
       },
     },
   ];

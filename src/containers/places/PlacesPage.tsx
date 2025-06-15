@@ -1,7 +1,7 @@
 import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
-import { FormProvider } from "react-hook-form-mui";
+import { FormContainer, FormProvider } from "react-hook-form-mui";
 import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
@@ -54,18 +54,18 @@ function PlacesPage() {
         wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
       >
         <motion.div variants={animationVariants.defaultItemVariant}>
-          <FormProvider {...formContext}>
+          <FormContainer formContext={formContext} onSuccess={() => onSubmit()}>
             <Grid container spacing={3} mt={{ xs: 0, lg: "2em" }}>
               {!isMobile && (
                 <Grid size={{ xs: 0, lg: 5, xl: 4.5 }}>
-                  <FiltersContainer triggerSubmit={onSubmit} />
+                  <FiltersContainer />
                 </Grid>
               )}
               <Grid size={{ xs: 12, lg: 7, xl: 7.5 }}>
                 <MapSection />
               </Grid>
             </Grid>
-          </FormProvider>
+          </FormContainer>
         </motion.div>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <Stack

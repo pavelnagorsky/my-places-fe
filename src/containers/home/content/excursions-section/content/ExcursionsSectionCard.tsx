@@ -9,11 +9,11 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import NextLink from "next/link";
+import Link from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
 import { ICardConfig } from "@/containers/home/content/excursions-section/logic/interfaces";
 import ArrowRightIcon from "@/components/UI/custom-icons/ArrowRightIcon";
 import { primaryBackground } from "@/styles/theme/lightTheme";
-import Link from "next/link";
 
 const ExcursionsSectionCard = ({ config }: { config: ICardConfig }) => {
   const theme = useTheme();
@@ -31,6 +31,7 @@ const ExcursionsSectionCard = ({ config }: { config: ICardConfig }) => {
         src={config.image}
         alt={config.title}
         fill
+        sizes={"(max-width: 640px) 100vw, (max-width: 768px) 50vw, 40vw"}
         style={{ objectFit: "cover" }}
       />
       <Stack

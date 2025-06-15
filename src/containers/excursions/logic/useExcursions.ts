@@ -6,7 +6,6 @@ import {
   selectCurrentItemsLength,
   selectIsDataFetched,
   selectSearchFilters,
-  selectSearchFiltersLoading,
 } from "@/store/excursions-slice/excursions.selectors";
 import utils from "@/shared/utils";
 import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
@@ -19,7 +18,6 @@ import {
 } from "@/store/excursions-slice/excursions.thunks";
 import { SearchExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 import { useRouter } from "next/router";
-import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 
 const useExcursions = () => {
   const { i18n } = useTranslation();
@@ -28,7 +26,6 @@ const useExcursions = () => {
   const isDataFetched = useAppSelector(selectIsDataFetched);
   const isFirstFetchRef = useRef(true);
   const currentItemsLength = useAppSelector(selectCurrentItemsLength);
-  const loading = useAppSelector(selectSearchFiltersLoading);
   const router = useRouter();
 
   const form = useForm<IExcursionsFilters>({
@@ -99,14 +96,20 @@ const useExcursions = () => {
         );
       })();
     },
-    [i18n.language, dispatch, currentItemsLength, loading]
+    [i18n.language, dispatch, currentItemsLength]
   );
 
   useEffect(() => {
-    if (isDataFetched && isFirstFetchRef.current) return;
+    if (!router.isReady) return;
+    if (
+      isDataFetched &&
+      isFirstFetchRef.current &&
+      Object.keys(router.query).length === 0
+    )
+      return;
     isFirstFetchRef.current = false;
     onSubmit();
-  }, [i18n.language, isDataFetched]);
+  }, [i18n.language, router.isReady]);
 
   useEffect(() => {
     dispatch(getPlaceTypesThunk({ language: i18n.language }));

@@ -14,39 +14,36 @@ const useCardsConfig = () => {
   const config: ICardConfig[] = [
     {
       image: image1,
-      title: "Дворцы, музеи и замки Беларуси",
-      description:
-        "Каждый из этих объектов расскажет вам свою уникальную историю, оставляя при этом незабываемые впечатления.",
+      title: t("excursions.card1.title"),
+      description: t("excursions.card1.description"),
       filterValue: `${routerLinks.excursions}?placeTypeIds=${[1, 2, 3].join(
         ","
       )}`,
       chips: [
         {
-          title: "Обзорная",
+          title: t("excursions.card1.filters.overview"),
           filterValue: `${routerLinks.excursions}?types=${ExcursionTypesEnum.Overview}`,
         },
         {
-          title: "На машине",
+          title: t("excursions.card1.filters.driving"),
           filterValue: `${routerLinks.excursions}?travelModes=${TravelModesEnum.DRIVING}`,
         },
         {
-          title: "Популярные маршруты",
+          title: t("excursions.card1.filters.popular"),
           filterValue: `${routerLinks.excursions}?orderBy=${SearchExcursionsOrderByEnum.RATING}`,
         },
       ],
     },
     {
       image: image2,
-      title: "Восхитительные объекты природы",
-      description:
-        "Беларусь славится своими живописными природными ландшафтами, лесными просторами и разнообразием экосистем.",
+      title: t("excursions.card2.title"),
+      description: t("excursions.card2.description"),
       filterValue: `${routerLinks.excursions}?placeTypeIds=1`,
     },
     {
       image: image3,
-      title: "Храмы и церковные сооружения",
-      description:
-        "Храмы Беларуси — это не только духовное обогащение, но и отличная возможность прикоснуться к богатой культуре.",
+      title: t("excursions.card3.title"),
+      description: t("excursions.card3.description"),
       filterValue: `${routerLinks.excursions}?placeTypeIds=1`,
     },
   ];

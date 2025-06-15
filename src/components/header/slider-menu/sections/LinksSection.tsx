@@ -4,20 +4,20 @@ import { routerLinks } from "@/routing/routerLinks";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import CommentIcon from "@mui/icons-material/Comment";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import HomeIcon from "@mui/icons-material/Home";
-import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import RouteIcon from "@mui/icons-material/Route";
 import SliderMenuLink from "./SliderMenuLink";
 import { useTranslation } from "next-i18next";
 import MapIcon from "@mui/icons-material/Map";
+import MessagesIcon from "@/components/UI/custom-icons/MessagesIcon";
+import InfoIcon from "@/components/UI/custom-icons/InfoIcon";
 
 const desktopLinksConfig = [
   {
     i18nKey: "links.contactUs",
-    icon: ForumOutlinedIcon,
+    icon: MessagesIcon,
     href: routerLinks.contactUs,
   },
-  { i18nKey: "links.about", icon: HomeIcon, href: routerLinks.aboutUs },
+  { i18nKey: "links.about", icon: InfoIcon, href: routerLinks.aboutUs },
 ];
 
 const mobileLinksConfig = [
@@ -69,7 +69,7 @@ const LinksSection = ({
           onClick={onClose}
           text={t(item.i18nKey)}
           href={item.href}
-          icon={<item.icon fontSize={"small"} color={"secondary"} />}
+          icon={<item.icon color={"secondary"} />}
         />
       ))}
     </Fragment>
@@ -84,7 +84,7 @@ const LinksSection = ({
           onClick={onClose}
           text={t(item.i18nKey)}
           href={item.href}
-          icon={<item.icon fontSize={"small"} color={"secondary"} />}
+          icon={<item.icon color={"secondary"} />}
         />
       ))}
       {desktopLinks}
