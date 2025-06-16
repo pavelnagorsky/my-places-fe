@@ -68,7 +68,6 @@ const AdditionalFiltersLayout = ({
         paper: {
           sx: {
             borderRadius: "15px",
-            maxHeight: "500px",
             width: { xs: "100%", sm: "550px" },
           },
         },
@@ -78,7 +77,7 @@ const AdditionalFiltersLayout = ({
         vertical: "bottom",
       }}
     >
-      {children}
+      <Stack sx={{ overflowY: "auto", maxHeight: "500px" }}>{children}</Stack>
     </Popover>
   );
 };

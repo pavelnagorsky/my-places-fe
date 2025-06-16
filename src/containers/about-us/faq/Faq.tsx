@@ -36,7 +36,7 @@ const Faq = () => {
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
-      title: `faq tab change to ${newValue} index`,
+      title: `faq tab changed to ${newValue + 1}`,
     });
   };
 

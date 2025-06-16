@@ -28,7 +28,7 @@ const AddRoCartWidget = ({
   const onClickCart = () => {
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: `${isAdded ? "remove" : "add"} place in cart`,
-      placeId,
+      entityId: `${placeId}`,
     });
     dispatch(
       togglePlaceIdInCartThunk({

@@ -51,7 +51,7 @@ const useComments = (placeId: number) => {
       : commentsService.deleteComment;
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: "delete place comment",
-      placeId,
+      entityId: `${placeId}`,
     });
     request(id)
       .then(() => {})
@@ -81,7 +81,7 @@ const useComments = (placeId: number) => {
   const onClickUpdateComment = (id: number) => {
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: "edit place comment",
-      placeId,
+      entityId: `${placeId}`,
     });
     const commentText = comments.find((c) => c.id === id)?.text;
     if (commentText) {
@@ -112,7 +112,7 @@ const useComments = (placeId: number) => {
       if (!editCommentId) return;
       sendAnalytics(AnalyticsEventsEnum.CustomClick, {
         title: "update place comment",
-        placeId,
+        entityId: `${placeId}`,
       });
       setLoading(true);
       const request = hasModerationAccess
@@ -158,7 +158,7 @@ const useComments = (placeId: number) => {
     if (!!editCommentId) return onUpdateComment();
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: "create place comment",
-      placeId,
+      entityId: `${placeId}`,
     });
     setLoading(true);
     form.handleSubmit((data) => {

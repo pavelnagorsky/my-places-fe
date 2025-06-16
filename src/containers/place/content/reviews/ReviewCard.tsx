@@ -19,7 +19,8 @@ const ReviewCard = ({ review, onClick }: IReviewCardProps) => {
     onClick(review.id);
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: "review card on place page",
-      review: review,
+      entity: review.title,
+      entityId: `${review.id}`,
     });
   };
 

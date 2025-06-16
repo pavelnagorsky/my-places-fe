@@ -90,7 +90,7 @@ const ReportForm = ({
     setLoading(true);
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: "place report form submit",
-      placeId: placeId,
+      entityId: `${placeId}`,
     });
     reportsService
       .createReport({

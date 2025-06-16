@@ -16,7 +16,7 @@ const useCardsConfig = () => {
       image: image1,
       title: t("excursions.card1.title"),
       description: t("excursions.card1.description"),
-      filterValue: `${routerLinks.excursions}?placeTypeIds=${[1, 2, 3].join(
+      filterValue: `${routerLinks.excursions}?placeTypeIds=${[2, 3, 4].join(
         ","
       )}`,
       chips: [
@@ -44,7 +44,7 @@ const useCardsConfig = () => {
       image: image3,
       title: t("excursions.card3.title"),
       description: t("excursions.card3.description"),
-      filterValue: `${routerLinks.excursions}?placeTypeIds=1`,
+      filterValue: `${routerLinks.excursions}?placeTypeIds=6`,
     },
   ];
 

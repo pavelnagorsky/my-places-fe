@@ -80,7 +80,7 @@ const ExcursionsSectionCard = ({ config }: { config: ICardConfig }) => {
               },
             }}
             component={NextLink}
-            href={routerLinks.excursions}
+            href={config.filterValue}
           >
             <ArrowRightIcon fontSize={isMobile ? "medium" : "large"} />
           </IconButton>

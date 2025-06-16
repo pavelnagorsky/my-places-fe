@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next";
-import { Box, Button, Popover, Stack, Typography } from "@mui/material";
+import { Badge, Box, Button, Popover, Stack, Typography } from "@mui/material";
 import usePopover from "@/hooks/usePopover";
 import TuneIcon from "@mui/icons-material/Tune";
 import CloseIcon from "@mui/icons-material/Close";
@@ -12,6 +12,8 @@ import { StyledButton } from "@/components/UI/button/StyledButton";
 import RegionsFilter from "@/containers/excursions/content/filters/content/RegionsFilter";
 import PlaceTypesFilter from "@/containers/excursions/content/filters/content/PlaceTypesFilter";
 import AdditionalFiltersLayout from "@/containers/excursions/content/filters/content/additional-filters/layout/AdditionalFiltersLayout";
+import { useAppSelector } from "@/store/hooks";
+import { selectSearchFilters } from "@/store/excursions-slice/excursions.selectors";
 
 const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   const { t } = useTranslation(["excursion-management", "common"]);
@@ -19,11 +21,24 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   const types = useExcursionTypes();
   const travelModes = useTravelModeOptions();
   const { resetField } = useFormContext<IExcursionsFilters>();
+  const appliedFilters = useAppSelector(selectSearchFilters);
+
+  const countFilters = () => {
+    let count = 0;
+    if (!appliedFilters) return count;
+    count += appliedFilters.travelModes.length;
+    count += appliedFilters.types.length;
+    count += appliedFilters.placeTypeIds.length;
+    count += appliedFilters.regions.length;
+    return count;
+  };
+  const filtersCount = countFilters();
 
   const handleReset = () => {
-    resetField("travelModes");
-    resetField("types");
-    resetField("placeTypeIds");
+    resetField("travelModes", { defaultValue: [] });
+    resetField("types", { defaultValue: [] });
+    resetField("placeTypeIds", { defaultValue: [] });
+    resetField("regions", { defaultValue: [] });
   };
 
   const handleApply = () => {
@@ -36,7 +51,11 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
       size={"large"}
       onClick={popover.handleOpen}
       variant={"contained"}
-      startIcon={popover.open ? <CloseIcon /> : <TuneIcon />}
+      startIcon={
+        <Badge sx={{}} badgeContent={filtersCount}>
+          {popover.open ? <CloseIcon /> : <TuneIcon />}
+        </Badge>
+      }
       sx={{
         fontSize: "16px",
         borderRadius: "12px",

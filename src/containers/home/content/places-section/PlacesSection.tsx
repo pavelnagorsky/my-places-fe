@@ -7,10 +7,15 @@ import NextLink from "next/link";
 import { routerLinks } from "@/routing/routerLinks";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { IPlacesCountByTypes } from "@/services/search-service/interfaces/places-count-by-types.interface";
 
-const PlacesSection = () => {
+const PlacesSection = ({
+  placesCount,
+}: {
+  placesCount: IPlacesCountByTypes;
+}) => {
   const { t } = useTranslation("home");
-  const config = useCardsConfig();
+  const config = useCardsConfig({ placesCount });
 
   return (
     <WrappedContainer>
