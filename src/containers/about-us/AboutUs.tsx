@@ -12,7 +12,7 @@ const AboutUs = () => {
   const { t } = useTranslation("about");
 
   return (
-    <Stack mb={"6em"}>
+    <Stack mb={"2em"}>
       <motion.div
         variants={animationVariants.defaultContainerVariant}
         initial="hidden"

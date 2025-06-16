@@ -1,15 +1,58 @@
 {
-  "title": "Tourist attractions of Belarus",
-  "description": "Welcome, dear guest! Our website is a universal guide to Belarus. We invite you to immerse yourself in the unique history of our country. Are you ready to travel? Then let's go!",
-  "card1": {
-    "title": "Explore the sights",
-    "description": "The site contains an expanded search bar, as well as a search filter. You can find a specific place or select only the region of Belarus and you will get a map with all objects in this region. In addition, you will have the ability to set a radius around a given region or point",
-    "link": "Start your search"
+  "seo": {
+    "title": "Belarus Attractions {{year}}: Interactive Map, Routes & Tours",
+    "description": "Want to discover the real Belarus? Our site is a living map of unique places, curated tours, and the ability to add your own finds. Explore castles, nature, and hidden gems—use ready-made routes or create your own. Ready to travel? Let’s go!"
   },
-  "card2": {
-    "title": "Share a Place",
-    "description": "If you have visited some unusual place in Belarus, be sure to share it! Our website provides the opportunity to create a Note in which you can convey your feeling from the visit and attach photos. Do not forget to indicate on the map exactly where this attraction is located so that others can share in your delight",
-    "link": "Share"
+  "mainSection": {
+    "title": "Belarus Attractions: An Immersive Journey",
+    "subTitle": "into History and Culture",
+    "description": "Welcome to our platform, your ultimate self-guided travel companion for exploring Belarus."
   },
-  "bottomText": "The uniqueness of the project lies in the fact that the users themselves participate in its information content. Anyone can share the history and beauty of places dear to their hearts"
+  "places": {
+    "title": "Intuitive Search, Advanced Filters, and Up-to-Date Information",
+    "description": "Search by specific place names or regions of Belarus. Set a radius around a chosen area or point on the map.",
+    "button": "Start Exploring",
+    "church": "Church",
+    "museum": "Museum",
+    "places": "places",
+    "learnMore": "Discover More"
+  },
+  "excursions": {
+    "title": "Unique Tours of Belarus",
+    "button": "Browse Catalog",
+    "card1": {
+      "filters": {
+        "overview": "Sightseeing",
+        "driving": "By Car",
+        "popular": "Popular Routes"
+      },
+      "title": "Palaces, Museums, and Castles of Belarus",
+      "description": "Each of these landmarks tells its own unique story, leaving you with unforgettable impressions."
+    },
+    "card2": {
+      "title": "Breathtaking Natural Landscapes",
+      "description": "Belarus is renowned for its picturesque scenery, vast forests, and diverse ecosystems."
+    },
+    "card3": {
+      "title": "Churches and Sacred Sites",
+      "description": "Belarusian churches offer not only spiritual enrichment but also a chance to connect with the country’s rich cultural heritage."
+    }
+  },
+  "concept": {
+    "title": "[  Our Concept  ]",
+    "text1": "What makes this project unique",
+    "text2": "is that",
+    "text3": "users themselves",
+    "text4": "contribute",
+    "text5": "to its content. Anyone can share",
+    "text6": "the history and beauty",
+    "text7": "of their cherished places.",
+    "footer": "Let’s build it together!"
+  },
+  "placeCreation": {
+    "title": "Share Knowledge:",
+    "subTitle": "highlight places around you!",
+    "description": "Know a hidden gem in Belarus? Share it by creating a note on our site! Add photos, describe your experience, and pin it on the map.",
+    "button": "Share a Place"
+  }
 }

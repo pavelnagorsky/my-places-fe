@@ -105,7 +105,7 @@ const ReviewForm = ({ loading }: IReviewFormProps) => {
           //   backgroundRepeat: "no-repeat",
           //   backgroundSize: "cover",
           // }}
-          mb={"3em"}
+          mb={"1em"}
         >
           <WrappedContainer bgColor={"transparent"}>
             <Box py={{ xs: "1.5em", md: "2em" }} maxWidth={734}>

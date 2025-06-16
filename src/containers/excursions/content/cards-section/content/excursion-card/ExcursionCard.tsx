@@ -76,6 +76,7 @@ function ExcursionCard({ excursion }: { excursion: IExcursionSearchItem }) {
               }}
             >
               <Image
+                priority={i === 0}
                 fill
                 sizes="(max-width: 900px) 330px, 374px"
                 src={image || "/"}

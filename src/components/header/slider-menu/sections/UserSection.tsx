@@ -4,7 +4,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useAppDispatch } from "@/store/hooks";
 import { logoutThunk } from "@/store/user-slice/thunks";
-import SliderMenuLink from "@/components/header/slider-menu/SliderMenuLink";
+import SliderMenuLink from "@/components/header/slider-menu/sections/SliderMenuLink";
 import BuildIcon from "@mui/icons-material/Build";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/enums/roles.enum";
@@ -66,7 +66,7 @@ const UserSection = ({
         onClick={onClose}
         text={t("links.personalArea")}
         href={routerLinks.personalAreaPlaces}
-        icon={<AccountCircleIcon fontSize={"small"} color={"secondary"} />}
+        icon={<AccountCircleIcon color={"secondary"} />}
       />
       {isModerator && (
         <SliderMenuLink
@@ -74,7 +74,7 @@ const UserSection = ({
           onClick={onClose}
           text={t("links.moderation")}
           href={routerLinks.moderationPlaces}
-          icon={<BuildIcon fontSize={"small"} color={"secondary"} />}
+          icon={<BuildIcon color={"secondary"} />}
         />
       )}
       {isAdmin && (
@@ -83,9 +83,7 @@ const UserSection = ({
           onClick={onClose}
           text={t("links.administration")}
           href={routerLinks.administrationUsers}
-          icon={
-            <AdminPanelSettingsIcon fontSize={"small"} color={"secondary"} />
-          }
+          icon={<AdminPanelSettingsIcon color={"secondary"} />}
         />
       )}
       <Divider

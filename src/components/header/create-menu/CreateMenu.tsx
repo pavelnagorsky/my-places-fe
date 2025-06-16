@@ -72,7 +72,7 @@ const CreateMenu = ({ activePath }: { activePath: string }) => {
         sx={{
           zIndex: 1,
         }}
-        placement="auto-end"
+        placement="bottom-start"
         open={menu.createMenuOpen}
         anchorEl={menu.createMenuAnchorRef.current}
         role={undefined}
@@ -87,7 +87,7 @@ const CreateMenu = ({ activePath }: { activePath: string }) => {
                 placement === "bottom" ? "center top" : "center bottom",
             }}
           >
-            <Paper>
+            <Paper sx={{ borderRadius: "12px" }}>
               <ClickAwayListener onClickAway={menu.handleCloseCreateMenu}>
                 <MenuList id="create-menu" autoFocusItem>
                   {options.map((option) => (

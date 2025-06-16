@@ -1,7 +1,7 @@
-import LanguageIcon from "@mui/icons-material/Language";
 import { MenuItem, Select, SelectChangeEvent, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import useLanguages from "@/hooks/useLanguages";
+import GlobeIcon from "@/components/UI/custom-icons/GlobeIcon";
 
 interface ILanguageSectionProps {
   onClose: () => void;
@@ -29,7 +29,7 @@ const LanguageSection = ({ onClose }: ILanguageSectionProps) => {
       alignItems={"center"}
       p={"6px 8px"}
     >
-      <LanguageIcon color={"primary"} />
+      <GlobeIcon color={"primary"} />
       <Select
         sx={{
           "& svg": {

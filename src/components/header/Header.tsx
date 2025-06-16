@@ -1,7 +1,5 @@
 import { Box, IconButton, Stack } from "@mui/material";
 import { Logo } from "../logo/Logo";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "next-i18next";
 import { memo } from "react";
 import { routerLinks } from "@/routing/routerLinks";
@@ -9,33 +7,36 @@ import { useRouter } from "next/router";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { useAppSelector } from "@/store/hooks";
 import { selectIsAuth } from "@/store/user-slice/user.slice";
-import PersonIcon from "@mui/icons-material/Person";
 import { HeaderLink } from "./header-link/HeaderLink";
 import CreateMenu from "./create-menu/CreateMenu";
 import SliderMenu from "@/components/header/slider-menu/SliderMenu";
 import usePopover from "@/hooks/usePopover";
+import useHeaderStyles from "@/components/header/logic/useHeaderStyles";
+import MenuIcon from "../UI/custom-icons/MenuIcon";
+import ProfileIcon from "@/components/UI/custom-icons/ProfileIcon";
 
 interface IHeaderProps {
   wideMode?: boolean;
 }
+
+const links = [
+  { path: routerLinks.places, i18nKey: "links.search" },
+  { path: routerLinks.excursions, i18nKey: "links.excursions" },
+  { path: routerLinks.aboutUs, i18nKey: "links.about" },
+];
 
 const Header = ({ wideMode }: IHeaderProps) => {
   const { t } = useTranslation("common");
   const menu = usePopover("header-menu");
   const router = useRouter();
   const isAuth = useAppSelector(selectIsAuth);
+  const containerSx = useHeaderStyles();
 
   return (
-    <Box
-      sx={{
-        background: "white",
-        top: 0,
-        zIndex: 1000,
-        position: "sticky",
-      }}
-    >
+    <Box sx={containerSx}>
       <WrappedContainer
         wrapperSx={wideMode ? { px: { xs: "1.5em", md: "3em" } } : undefined}
+        bgColor={"transparent"}
       >
         <Stack
           justifyContent={"space-between"}
@@ -54,33 +55,25 @@ const Header = ({ wideMode }: IHeaderProps) => {
             sx={{ display: { xs: "none", md: "flex" }, columnGap: "0.5em" }}
           >
             <CreateMenu activePath={router.pathname} />
-            <HeaderLink to={routerLinks.places} pathname={router.pathname}>
-              {t("links.search")}
-            </HeaderLink>
-            <HeaderLink to={routerLinks.excursions} pathname={router.pathname}>
-              {t("links.excursions")}
-            </HeaderLink>
-            <HeaderLink to={routerLinks.aboutUs} pathname={router.pathname}>
-              {t("links.about")}
-            </HeaderLink>
+            {links.map((link) => (
+              <HeaderLink
+                key={link.path}
+                to={link.path}
+                pathname={router.pathname}
+              >
+                {t(link.i18nKey)}
+              </HeaderLink>
+            ))}
           </Stack>
           <IconButton
+            className={"header-menu-toggle"}
+            size={isAuth ? "small" : "medium"}
             onClick={menu.handleOpen}
-            sx={{
-              p: isAuth ? "0.38em" : "0.5em",
-              border: isAuth ? "1px solid #FF9D42" : "none",
-              backgroundColor: isAuth ? "transparent" : "#FF9D42",
-              "&:hover": {
-                backgroundColor: isAuth ? "#FF9D4224" : "primary.main",
-              },
-            }}
           >
             {isAuth ? (
-              <PersonIcon sx={{ fontSize: "27.8px", fill: "#FF9D42" }} />
-            ) : menu.open ? (
-              <CloseIcon />
+              <ProfileIcon sx={{ fontSize: "39px" }} />
             ) : (
-              <MenuIcon />
+              <MenuIcon sx={{ fontSize: "33px" }} />
             )}
           </IconButton>
           <SliderMenu

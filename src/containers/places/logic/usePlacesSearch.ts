@@ -12,7 +12,6 @@ import {
   selectCurrentItemsLength,
   selectIsDataFetched,
   selectSearchFilters,
-  selectSearchFiltersLoading,
   setFilters,
 } from "@/store/search-slice/search.slice";
 import utils from "@/shared/utils";
@@ -24,6 +23,7 @@ import {
 } from "@/store/search-slice/thunks";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+import { useRouter } from "next/router";
 
 const usePlacesSearch = () => {
   const { i18n } = useTranslation();
@@ -32,18 +32,44 @@ const usePlacesSearch = () => {
   const isDataFetched = useAppSelector(selectIsDataFetched);
   const isFirstFetchRef = useRef(true);
   const currentItemsLength = useAppSelector(selectCurrentItemsLength);
-  const loading = useAppSelector(selectSearchFiltersLoading);
   const sendAnalytics = useAnalytics();
+  const router = useRouter();
 
   const formContext = useForm<ISearchForm>({
     mode: "onChange",
     defaultValues: initialFilters,
   });
 
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    // Create a clean filters object that automatically excludes undefined values
+    const queryFilters: Partial<ISearchForm> = Object.entries(
+      router.query
+    ).reduce((acc, [key, value]) => {
+      if (value === undefined || value === "") return acc;
+
+      switch (key) {
+        case "orderBy":
+          return { ...acc, orderBy: value as any };
+        case "types":
+          return { ...acc, types: (value as string).split(",").map(Number) };
+        default:
+          return acc;
+      }
+    }, {} as Partial<ISearchForm>);
+
+    if (Object.keys(queryFilters).length > 0) {
+      formContext.reset({
+        ...formContext.getValues(),
+        ...queryFilters,
+      });
+    }
+  }, [router.isReady]);
+
   const onSubmit = useCallback(
     (fromStart = true) => {
       formContext.handleSubmit((data) => {
-        if (loading) return;
         if (fromStart) {
           sendAnalytics(AnalyticsEventsEnum.CustomClick, {
             title: "search places filters submit",
@@ -79,14 +105,20 @@ const usePlacesSearch = () => {
         dispatch(getSearchResultsThunk(payload));
       })();
     },
-    [i18n.language, dispatch, currentItemsLength, loading]
+    [i18n.language, dispatch, currentItemsLength]
   );
 
   useEffect(() => {
-    if (isDataFetched && isFirstFetchRef.current) return;
+    if (!router.isReady) return;
+    if (
+      isDataFetched &&
+      isFirstFetchRef.current &&
+      Object.keys(router.query).length === 0
+    )
+      return;
     isFirstFetchRef.current = false;
     onSubmit();
-  }, [i18n.language, isDataFetched]);
+  }, [i18n.language, router.isReady]);
 
   useEffect(() => {
     dispatch(getPlaceTypesThunk({ language: i18n.language }));

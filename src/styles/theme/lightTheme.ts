@@ -2,9 +2,7 @@ import { interFont } from "@/styles/fonts/fonts";
 import { createTheme } from "@mui/material";
 import { beBY, ruRU } from "@mui/material/locale";
 import I18nLanguages from "@/shared/I18nLanguages";
-import type {} from "@mui/x-date-pickers/themeAugmentation";
 import { renderDigitalClockTimeView } from "@mui/x-date-pickers";
-import utils from "@/shared/utils";
 
 export const primaryColor = "#FF7A00";
 export const primaryBackground = "#FFEFE2";
@@ -17,7 +15,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
         mode: "light",
         primary: {
           main: primaryColor,
-          light: "rgba(255, 122, 0, 0.5)",
+          light: "#FFB67A",
           contrastText: "#ffffff",
         },
         success: {
@@ -27,11 +25,11 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
           main: "#FD6B0C",
         },
         secondary: {
-          main: "#565656",
+          main: "#181818",
           contrastText: "#303030",
         },
         text: {
-          primary: "#303030",
+          primary: "#181818",
           secondary: "#565656",
         },
         divider: "rgba(0, 0, 0, 0.12)",
@@ -137,6 +135,7 @@ const createLightTheme = (locale: keyof typeof I18nLanguages) => {
             },
           },
         },
+        // @ts-ignore
         MuiDateTimePicker: {
           defaultProps: {
             timeSteps: { minutes: 60 },

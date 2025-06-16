@@ -46,7 +46,7 @@ const SearchCartWidget = ({ sx }: ISearchCartWidgetProps) => {
           sx={{
             position: "fixed",
             bottom: 102,
-            right: { xs: 18, md: 22, lg: 54 },
+            right: { xs: 14, md: 22, lg: 54 },
             zIndex: 100,
             ...sx,
           }}

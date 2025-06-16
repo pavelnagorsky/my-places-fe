@@ -5,7 +5,7 @@ import Form from "@/containers/contact-us/form/Form";
 import animationVariants from "@/shared/animation-variants";
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { motion } from "framer-motion";
-import useContactUs from "@/containers/contact-us/useContactUs";
+import useContactUs from "@/containers/contact-us/form/logic/useContactUs";
 import { FormProvider } from "react-hook-form-mui";
 import { useTranslation } from "next-i18next";
 
@@ -21,7 +21,7 @@ const ContactUs = () => {
         animate="show"
       >
         <motion.div variants={animationVariants.defaultItemVariant}>
-          <Grid container spacing={"4em"} mb="1em">
+          <Grid container spacing={"4em"}>
             <Grid size={{ xs: 12, md: 7 }}>
               <Typography
                 variant={"h1"}

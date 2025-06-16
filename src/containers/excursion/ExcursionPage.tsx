@@ -17,7 +17,7 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
         <Stack mb={2} display={{ xs: "none", md: "flex" }}>
           <Breadcrumbs customEnding={excursion.title} />
         </Stack>
-        <Box mb={8}>
+        <Box mb={6}>
           <ExcursionContent excursion={excursion} />
         </Box>
       </motion.div>

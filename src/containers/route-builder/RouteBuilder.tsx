@@ -29,7 +29,7 @@ const RouteBuilder = () => {
     >
       <WrappedContainer>
         <FormProvider {...form}>
-          <Grid container spacing={4} mb={"4em"}>
+          <Grid container spacing={4} mb={"2em"}>
             <Grid size={12}>
               <motion.div variants={animationVariants.defaultItemVariant}>
                 <Stack mb={2} display={{ xs: "none", md: "flex" }}>

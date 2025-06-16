@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
           type: "spring",
         }}
       >
-        <Stack gap={"1.5em"} mt={"1em"} mb={"3em"}>
+        <Stack gap={"1.5em"} mt={"1em"} mb={"2em"}>
           <Box>
             <Typography variant={"h1"} component={"h1"}>
               {t("title")}

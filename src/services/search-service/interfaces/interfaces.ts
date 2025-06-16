@@ -1,8 +1,8 @@
 import { IPaginationRequest } from "@/services/interfaces";
-import { SearchOrderByEnum } from "@/services/places-service/interfaces/interfaces";
+import { SearchPlacesOrderByEnum } from "@/services/places-service/interfaces/interfaces";
 
 export interface ISearchPlacesRequest
-  extends Omit<IPaginationRequest<SearchOrderByEnum>, "orderAsc"> {
+  extends Omit<IPaginationRequest<SearchPlacesOrderByEnum>, "orderAsc"> {
   typesIds: number[];
   categoriesIds: number[];
   search: string;
@@ -12,7 +12,7 @@ export interface ISearchPlacesRequest
 }
 
 export interface ISearchPlacesOptionsRequest
-  extends Omit<IPaginationRequest<SearchOrderByEnum>, "orderAsc"> {
+  extends Omit<IPaginationRequest<SearchPlacesOrderByEnum>, "orderAsc"> {
   search: string;
   excludeIds?: number[];
 }

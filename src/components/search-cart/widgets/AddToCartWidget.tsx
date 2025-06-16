@@ -28,7 +28,7 @@ const AddRoCartWidget = ({
   const onClickCart = () => {
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: `${isAdded ? "remove" : "add"} place in cart`,
-      placeId,
+      entityId: `${placeId}`,
     });
     dispatch(
       togglePlaceIdInCartThunk({
@@ -61,9 +61,9 @@ const AddRoCartWidget = ({
         aria-label="Index cart"
       >
         {isAdded ? (
-          <RemoveIcon fontSize={isMobile ? "small" : "medium"} />
+          <RemoveIcon fontSize={"medium"} />
         ) : (
-          <AddIcon fontSize={isMobile ? "small" : "medium"} />
+          <AddIcon fontSize={"medium"} />
         )}
       </Fab>
     </Box>

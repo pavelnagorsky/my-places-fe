@@ -28,7 +28,7 @@ const ExcursionBuilder = () => {
             <Stack mb={2} display={{ xs: "none", md: "flex" }}>
               <Breadcrumbs />
             </Stack>
-            <Grid container spacing={4} mb={"4em"}>
+            <Grid container spacing={4} mb={"2em"}>
               <Grid size={{ xs: 12, lg: 9 }}>
                 <motion.div variants={animationVariants.defaultItemVariant}>
                   <Typography variant={"h1"} mb={3}>

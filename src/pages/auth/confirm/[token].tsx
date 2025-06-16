@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import I18nLanguages from "@/shared/I18nLanguages";
 
 const ConfirmLazy = dynamic(
-  () => import("@/containers/auth/content/ConfirmEmail"),
+  () => import("@/components/auth/content/ConfirmEmail"),
   {
     ssr: false,
   }

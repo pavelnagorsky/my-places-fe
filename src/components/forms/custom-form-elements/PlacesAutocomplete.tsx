@@ -3,7 +3,7 @@ import { AutocompleteElement, useFormContext } from "react-hook-form-mui";
 import { ChangeEvent, memo, useEffect, useMemo, useState } from "react";
 import { debounce } from "@mui/material";
 import searchService from "@/services/search-service/search.service";
-import { SearchOrderByEnum } from "@/services/places-service/interfaces/interfaces";
+import { SearchPlacesOrderByEnum } from "@/services/places-service/interfaces/interfaces";
 import { ISearchPlaceOption } from "@/services/search-service/interfaces/search-place-option.interface";
 
 interface IPlacesAutocompleteProps {
@@ -13,11 +13,11 @@ interface IPlacesAutocompleteProps {
   required?: boolean;
   excludeIds?: number[];
   pageSize?: number;
-  orderBy?: SearchOrderByEnum;
+  orderBy?: SearchPlacesOrderByEnum;
 }
 
 const defaultPageSize = 20;
-const defaultOrderBy = SearchOrderByEnum.TITLE;
+const defaultOrderBy = SearchPlacesOrderByEnum.TITLE;
 
 const PlaceAutocomplete = ({
   fieldName,

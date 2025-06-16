@@ -7,9 +7,10 @@ import axiosInstance from "@/services/axios.instance";
 import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
 import { ISearchPlaceOption } from "@/services/search-service/interfaces/search-place-option.interface";
+import { IPlacesCountByTypes } from "@/services/search-service/interfaces/places-count-by-types.interface";
 
 const searchService = {
-  SEARCH_PLACES_PER_PAGE: 12,
+  SEARCH_PLACES_PER_PAGE: 18,
 
   search: (language: string, payload: ISearchPlacesRequest) => {
     const langId = parseLanguageToId(language);
@@ -39,6 +40,10 @@ const searchService = {
       `/search/options?lang=${langId}`,
       payload
     );
+  },
+
+  getPlacesCountByTypes: () => {
+    return axiosInstance.get<IPlacesCountByTypes>("/search/places-count");
   },
 };
 
