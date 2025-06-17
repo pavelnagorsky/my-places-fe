@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { Fragment } from "react";
 import { useTranslation } from "next-i18next";
 import { NextSeo } from "next-seo";
-import mainImageMd from "../../public/images/home-page/main-section/main-image.jpg";
+import image from "../../public/images/home-page/places/card-1.jpg";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import searchService from "@/services/search-service/search.service";
 import { IPlacesCountByTypes } from "@/services/search-service/interfaces/places-count-by-types.interface";
@@ -32,8 +32,10 @@ const Index: NextPage<{ placesCount: IPlacesCountByTypes }> = (
           description: t("seo.description"),
           images: [
             {
-              url: mainImageMd.src,
-              alt: t("seo.title", { year: new Date().getFullYear() }),
+              url: image.src,
+              height: image.height,
+              width: image.width,
+              alt: t("seo.title"),
             },
           ],
         }}
