@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { Fragment } from "react";
 import { useTranslation } from "next-i18next";
 import { NextSeo } from "next-seo";
-import image from "../../public/images/home-page/places/card-1.jpg";
+import image from "../../public/images/home-page/places/card-1.png";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import searchService from "@/services/search-service/search.service";
 import { IPlacesCountByTypes } from "@/services/search-service/interfaces/places-count-by-types.interface";
