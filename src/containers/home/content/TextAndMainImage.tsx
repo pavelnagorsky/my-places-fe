@@ -131,7 +131,7 @@ function TextAndMainImage() {
       mt={"-114px"}
       mx={"auto"}
       position={"relative"}
-      height={{ xs: "590px", md: "774px" }}
+      height={{ xs: "695px", md: "774px" }}
     >
       {mainImageContainer}
       {overlayImageContainer}

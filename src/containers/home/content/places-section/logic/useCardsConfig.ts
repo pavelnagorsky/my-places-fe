@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { ICardConfig } from "@/containers/home/content/places-section/logic/interfaces";
-import image1 from "/public/images/home-page/places/card-1.jpg";
+import image1 from "/public/images/home-page/places/card-1.png";
 import image2 from "/public/images/home-page/places/card-2.jpg";
 import image3 from "/public/images/home-page/places/card-3.jpg";
 import image4 from "/public/images/home-page/places/card-4.jpg";

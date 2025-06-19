@@ -1,6 +1,7 @@
 import { SxProps, useScrollTrigger } from "@mui/material";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
+import useIsBrowser from "@/hooks/useIsBrowser";
 
 const defaultHeaderSx: SxProps = {
   background: "white",
@@ -12,11 +13,13 @@ const defaultHeaderSx: SxProps = {
 const useHeaderStyles = () => {
   const router = useRouter();
   const isHomePage = router.asPath === routerLinks.home;
+  const isBrowser = useIsBrowser();
 
-  const isScrolled = useScrollTrigger({
+  const _isScrolled = useScrollTrigger({
     threshold: 254, // Adjust based on image height
     disableHysteresis: true,
   });
+  const isScrolled = isBrowser ? _isScrolled : false;
 
   const homePageHeaderSx: SxProps = {
     bgcolor: isScrolled ? "white" : "transparent",
