@@ -39,12 +39,12 @@ const Header = ({ wideMode }: IHeaderProps) => {
         bgColor={"transparent"}
       >
         <Stack
+          className={"header-container"}
           justifyContent={"space-between"}
           direction={"row"}
           mx={{ xs: "-1.5em", md: 0 }}
           px={{ xs: "1em", md: 0 }}
           py={{ xs: "0.5em", md: "1em" }}
-          my={{ xs: "0.5em", md: "1em" }}
           alignItems={"center"}
         >
           <Box>

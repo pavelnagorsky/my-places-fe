@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Drawer,
-  Stack,
-  Typography,
-  useScrollTrigger,
-} from "@mui/material";
+import { Box, Button, Drawer, Stack, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import useDialog from "@/hooks/useDialog";
 import { useEffect } from "react";
@@ -14,16 +7,14 @@ import { routerLinks } from "@/routing/routerLinks";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
 import localStorageFields from "@/shared/localStorageFields";
 import { useRouter } from "next/router";
+import useScrollTreshhold from "@/hooks/useScrollTreshhold";
 
 const CookieConsent = () => {
   const { t } = useTranslation("common");
   const dialog = useDialog();
   const router = useRouter();
 
-  const isScrolled = useScrollTrigger({
-    threshold: 40, // Adjust based on image height
-    disableHysteresis: true,
-  });
+  const isScrolled = useScrollTreshhold(30);
 
   useEffect(() => {
     if (!router.isReady || !isScrolled) return;

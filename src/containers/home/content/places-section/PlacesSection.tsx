@@ -96,16 +96,16 @@ export default PlacesSection;
 
 const responsive = {
   xl: {
-    breakpoint: { min: 1536, max: 10000 },
+    breakpoint: { min: 1450, max: 10000 },
     items: 4,
   },
   lg: {
-    breakpoint: { min: 1200, max: 1536 },
+    breakpoint: { min: 1350, max: 1450 },
     items: 3,
-    partialVisibilityGutter: 40,
+    partialVisibilityGutter: 50,
   },
   md: {
-    breakpoint: { min: 900, max: 1200 },
+    breakpoint: { min: 900, max: 1350 },
     items: 3,
   },
   sm: {

@@ -1,34 +1,43 @@
-import { SxProps, useScrollTrigger } from "@mui/material";
+import { SxProps } from "@mui/material";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
-import useIsBrowser from "@/hooks/useIsBrowser";
-
-const defaultHeaderSx: SxProps = {
-  background: "white",
-  top: 0,
-  zIndex: 1000,
-  position: "sticky",
-};
+import useScrollThreshold from "@/hooks/useScrollTreshhold";
 
 const useHeaderStyles = () => {
   const router = useRouter();
   const isHomePage = router.asPath === routerLinks.home;
-  const isBrowser = useIsBrowser();
+  const isScrolledDefault = useScrollThreshold(94);
+  const isScrolledHomePage = useScrollThreshold(234);
 
-  const _isScrolled = useScrollTrigger({
-    threshold: 254, // Adjust based on image height
-    disableHysteresis: true,
-  });
-  const isScrolled = isBrowser ? _isScrolled : false;
+  const defaultHeaderSx: SxProps = {
+    background: "white",
+    top: 0,
+    zIndex: 1000,
+    position: "sticky",
+    "& .header-container": {
+      transition: "padding 0.1s ease-in-out",
+      py: {
+        xs: isScrolledDefault ? "0.5em" : "1em",
+        md: isScrolledDefault ? "1em" : "2em",
+      },
+    },
+  };
 
   const homePageHeaderSx: SxProps = {
-    bgcolor: isScrolled ? "white" : "transparent",
+    bgcolor: isScrolledHomePage ? "white" : "transparent",
     transition: `background-color 0.35s ease, opacity 0.1s ease`,
     top: 0,
     zIndex: 1001,
     width: "100%",
     position: "sticky",
-    "& .header-menu-toggle": isScrolled
+    "& .header-container": {
+      transition: "padding 0.1s ease-in-out",
+      py: {
+        xs: isScrolledHomePage ? "0.5em" : "1em",
+        md: isScrolledHomePage ? "1em" : "2em",
+      },
+    },
+    "& .header-menu-toggle": isScrolledHomePage
       ? undefined
       : {
           borderColor: "transparent",
@@ -38,7 +47,7 @@ const useHeaderStyles = () => {
             backgroundColor: "transparent",
           },
         },
-    "& .MuiLink-root, .MuiButton-root": isScrolled
+    "& .MuiLink-root, .MuiButton-root": isScrolledHomePage
       ? undefined
       : {
           "&:hover": {
