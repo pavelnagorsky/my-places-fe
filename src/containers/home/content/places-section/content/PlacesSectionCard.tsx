@@ -87,7 +87,8 @@ const PlacesSectionCard = ({ config }: { config: ICardConfig }) => {
       borderRadius={"20px"}
       gap={1}
       p={2}
-      mb={"6px"}
+      pb={{ xs: 1, md: 2, xl: 2 }}
+      mb={{ xs: "6px" }}
       sx={{
         cursor: "pointer",
         textDecoration: "none",

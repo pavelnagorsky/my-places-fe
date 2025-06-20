@@ -3,6 +3,7 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import {
   Box,
   Button,
+  darken,
   Stack,
   Typography,
   useMediaQuery,
@@ -69,6 +70,9 @@ const PlaceCreationSection = () => {
             variant={"contained"}
             sx={{
               bgcolor: "white",
+              "&:hover": {
+                bgcolor: darken("#FFFFFF", 0.2),
+              },
               borderRadius: "25px",
               minWidth: "240px",
               fontWeight: 600,
