@@ -32,12 +32,24 @@ const Header = ({ wideMode }: IHeaderProps) => {
   const isAuth = useAppSelector(selectIsAuth);
   const containerSx = useHeaderStyles();
 
+  const getWrapperSx = () => {
+    const isCatalogPage = [routerLinks.places, routerLinks.excursions].includes(
+      router.asPath
+    );
+    if (isCatalogPage) {
+      return {
+        px: { xs: "1.5em", md: "3em", lg: "2em", xl: "7.5em" },
+      };
+    }
+    if (wideMode) {
+      return { px: { xs: "1.5em", md: "3em" } };
+    }
+    return undefined;
+  };
+
   return (
     <Box sx={containerSx}>
-      <WrappedContainer
-        wrapperSx={wideMode ? { px: { xs: "1.5em", md: "3em" } } : undefined}
-        bgColor={"transparent"}
-      >
+      <WrappedContainer wrapperSx={getWrapperSx()} bgColor={"transparent"}>
         <Stack
           className={"header-container"}
           justifyContent={"space-between"}

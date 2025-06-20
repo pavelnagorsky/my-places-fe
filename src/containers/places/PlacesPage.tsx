@@ -28,7 +28,7 @@ function PlacesPage() {
       animate="show"
     >
       <WrappedContainer
-        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "2em", xl: "7.5em" } }}
       >
         <Stack mb={2} display={{ xs: "none", md: "flex" }}>
           <Breadcrumbs />
@@ -40,7 +40,9 @@ function PlacesPage() {
         <motion.div variants={animationVariants.defaultItemVariant}>
           <Box bgcolor={primaryBackground}>
             <WrappedContainer
-              wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+              wrapperSx={{
+                px: { xs: "1.5em", md: "3em", lg: "2em", xl: "7.5em" },
+              }}
               bgColor={primaryBackground}
             >
               <FormProvider {...formContext}>
@@ -51,7 +53,7 @@ function PlacesPage() {
         </motion.div>
       )}
       <WrappedContainer
-        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "2em", xl: "7.5em" } }}
       >
         <motion.div variants={animationVariants.defaultItemVariant}>
           <FormContainer formContext={formContext} onSuccess={() => onSubmit()}>

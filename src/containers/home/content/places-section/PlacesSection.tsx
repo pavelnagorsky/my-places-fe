@@ -104,14 +104,18 @@ const responsive = {
     items: 3,
     partialVisibilityGutter: 50,
   },
+  mdPlus: {
+    breakpoint: { min: 1100, max: 1350 },
+    items: 3,
+    partialVisibilityGutter: 30,
+  },
   md: {
-    breakpoint: { min: 900, max: 1350 },
+    breakpoint: { min: 900, max: 1100 },
     items: 3,
   },
   sm: {
     breakpoint: { min: 600, max: 900 },
     items: 2,
-    // partialVisibilityGutter: 30,
   },
   xs: {
     breakpoint: { min: 0, max: 600 },

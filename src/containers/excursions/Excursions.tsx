@@ -22,7 +22,7 @@ function Excursions() {
       animate="show"
     >
       <WrappedContainer
-        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "2em", xl: "7.5em" } }}
       >
         <Stack mb={2} display={{ xs: "none", md: "flex" }}>
           <Breadcrumbs />
@@ -36,7 +36,7 @@ function Excursions() {
         bgcolor={"white"}
       >
         <WrappedContainer
-          wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+          wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "2em", xl: "7.5em" } }}
         >
           <Stack
             direction={{ xs: "column", md: "row" }}
@@ -54,7 +54,7 @@ function Excursions() {
         </WrappedContainer>
       </Stack>
       <WrappedContainer
-        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "7.5em" } }}
+        wrapperSx={{ px: { xs: "1.5em", md: "3em", lg: "2em", xl: "7.5em" } }}
       >
         <motion.div variants={animationVariants.defaultItemVariant}>
           <Stack
