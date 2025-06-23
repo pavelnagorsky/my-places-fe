@@ -28,6 +28,8 @@ const PlaceCreationSection = () => {
           position: "absolute",
           top: { xs: "5%", md: "50%" },
           transform: { md: "translate(0, -50%)" },
+          left: { xs: 0, md: "unset" },
+          px: { xs: "1.5em", md: 0 },
           width: {
             // xs: "100%",
             sm: "80%",
