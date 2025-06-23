@@ -70,6 +70,8 @@ function TextAndMainImage() {
         sx={{
           position: "absolute",
           bottom: { xs: "2em", md: "5em" },
+          left: { xs: 0, md: "unset" },
+          px: { xs: "1.5em", md: 0 },
         }}
       >
         <Typography
