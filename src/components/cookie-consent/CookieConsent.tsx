@@ -7,14 +7,15 @@ import { routerLinks } from "@/routing/routerLinks";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
 import localStorageFields from "@/shared/localStorageFields";
 import { useRouter } from "next/router";
-import useScrollTreshhold from "@/hooks/useScrollTreshhold";
+import dynamic from "next/dynamic";
+import useScrollThreshold from "@/hooks/useScrollThreshold";
 
 const CookieConsent = () => {
   const { t } = useTranslation("common");
   const dialog = useDialog();
   const router = useRouter();
 
-  const isScrolled = useScrollTreshhold(30);
+  const isScrolled = useScrollThreshold(30);
 
   useEffect(() => {
     if (!router.isReady || !isScrolled) return;
