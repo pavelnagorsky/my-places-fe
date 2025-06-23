@@ -1,7 +1,8 @@
 import { SxProps } from "@mui/material";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
-import useScrollThreshold from "@/hooks/useScrollTreshhold";
+import dynamic from "next/dynamic";
+import useScrollThreshold from "@/hooks/useScrollThreshold";
 
 const useHeaderStyles = () => {
   const router = useRouter();

@@ -103,6 +103,7 @@ const PlaceCreationSection = () => {
         src={placeCreationImage}
         alt={t("placeCreation.title")}
         fill
+        priority
         style={{ objectFit: "cover", objectPosition: "right center" }}
       />
     </Box>

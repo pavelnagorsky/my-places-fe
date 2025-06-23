@@ -8,10 +8,10 @@ import { useTranslation } from "next-i18next";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 
 const ExcursionsPageLazy = dynamic(
-  () => import("../containers/excursions/Excursions")
+  () => import("../../containers/excursions/Excursions")
 );
 
-const Excursions: NextPage = () => {
+const Index: NextPage = () => {
   const { t } = useTranslation("excursion-management");
   const { canonical, alternateLinks } = useAlternateLinks();
   return (
@@ -44,4 +44,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default Excursions;
+export default Index;
