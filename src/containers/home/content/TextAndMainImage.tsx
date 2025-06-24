@@ -68,6 +68,7 @@ function TextAndMainImage() {
       <Stack
         gap={3}
         sx={{
+          maxWidth: "100%",
           position: "absolute",
           bottom: { xs: "2em", md: "5em" },
           left: { xs: 0, md: "unset" },

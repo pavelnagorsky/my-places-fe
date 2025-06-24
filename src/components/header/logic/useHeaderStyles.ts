@@ -1,7 +1,6 @@
 import { SxProps } from "@mui/material";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
-import dynamic from "next/dynamic";
 import useScrollThreshold from "@/hooks/useScrollThreshold";
 
 const useHeaderStyles = () => {
@@ -9,6 +8,8 @@ const useHeaderStyles = () => {
   const isHomePage = router.asPath === routerLinks.home;
   const isScrolledDefault = useScrollThreshold(94);
   const isScrolledHomePage = useScrollThreshold(234);
+  console.log("isHomePage", isHomePage, router.asPath);
+  console.log("isScrolledHomePage", isScrolledHomePage);
 
   const defaultHeaderSx: SxProps = {
     background: "white",

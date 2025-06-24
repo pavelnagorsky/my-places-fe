@@ -13,25 +13,20 @@ const useScrollThreshold = (threshold: number, hysteresis = 30) => {
   }, []);
 
   useEffect(() => {
+    const current = scrollY.get();
+    console.log("current", current, "threshold", threshold);
+    setIsScrolled(current > threshold);
+  }, [scrollY, threshold]);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
     if (!isMounted) return;
 
-    const current = scrollY.get();
-    setIsScrolled(current > threshold);
-  }, [isMounted, scrollY, threshold]);
-
-  useMotionValueEvent(
-    scrollY,
-    "change",
-    debounce((latest) => {
-      if (!isMounted) return;
-
-      if (!isScrolled && latest > threshold + hysteresis) {
-        setIsScrolled(true);
-      } else if (isScrolled && latest < threshold - hysteresis) {
-        setIsScrolled(false);
-      }
-    }, 50)
-  );
+    if (!isScrolled && latest > threshold + hysteresis) {
+      setIsScrolled(true);
+    } else if (isScrolled && latest < threshold - hysteresis) {
+      setIsScrolled(false);
+    }
+  });
 
   return isScrolled;
 };
