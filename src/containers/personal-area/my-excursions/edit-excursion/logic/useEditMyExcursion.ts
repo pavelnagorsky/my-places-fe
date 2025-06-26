@@ -11,6 +11,7 @@ import { IEditExcursionForm } from "@/containers/personal-area/my-excursions/edi
 import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
 import { startExcursionEditingThunk } from "@/store/excursion-builder-slice/thunks";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const useEditMyExcursion = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
@@ -18,7 +19,8 @@ const useEditMyExcursion = () => {
   const router = useRouter();
   const excursionId = router.query["id"] as string | undefined;
   const [loading, setLoading] = useState(true);
-  const isAdminMode = router.asPath.startsWith(
+  const pathWithoutQuery = useRouterPathWithoutQuery();
+  const isAdminMode = pathWithoutQuery.startsWith(
     routerLinks.administrationExcursions
   );
 

@@ -14,6 +14,7 @@ import usePopover from "@/hooks/usePopover";
 import useHeaderStyles from "@/components/header/logic/useHeaderStyles";
 import MenuIcon from "../UI/custom-icons/MenuIcon";
 import ProfileIcon from "@/components/UI/custom-icons/ProfileIcon";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 interface IHeaderProps {
   wideMode?: boolean;
@@ -28,13 +29,13 @@ const links = [
 const Header = ({ wideMode }: IHeaderProps) => {
   const { t } = useTranslation("common");
   const menu = usePopover("header-menu");
-  const router = useRouter();
+  const pathWithoutQuery = useRouterPathWithoutQuery();
   const isAuth = useAppSelector(selectIsAuth);
   const containerSx = useHeaderStyles();
 
   const getWrapperSx = () => {
     const isCatalogPage = [routerLinks.places, routerLinks.excursions].includes(
-      router.asPath
+      pathWithoutQuery
     );
     if (isCatalogPage) {
       return {
@@ -66,12 +67,12 @@ const Header = ({ wideMode }: IHeaderProps) => {
             direction={"row"}
             sx={{ display: { xs: "none", md: "flex" }, columnGap: "0.5em" }}
           >
-            <CreateMenu activePath={router.pathname} />
+            <CreateMenu activePath={pathWithoutQuery} />
             {links.map((link) => (
               <HeaderLink
                 key={link.path}
                 to={link.path}
-                pathname={router.pathname}
+                pathname={pathWithoutQuery}
               >
                 {t(link.i18nKey)}
               </HeaderLink>
@@ -89,7 +90,7 @@ const Header = ({ wideMode }: IHeaderProps) => {
             )}
           </IconButton>
           <SliderMenu
-            pathname={router.pathname}
+            pathname={pathWithoutQuery}
             open={menu.open}
             anchorEl={menu.anchor}
             onClose={menu.handleClose}

@@ -16,6 +16,7 @@ import { useTranslation } from "next-i18next";
 import { IReview } from "@/services/reviews-service/interfaces/review.interface";
 import { IPaginationResponse } from "@/services/interfaces";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 interface IReviewsSectionProps {
   reviews: IPaginationResponse<ISearchReview>;
@@ -34,6 +35,7 @@ const ReviewsSection = ({
   const [review, setReview] = useState<IReview | null>(null);
   const dialog = useDialog();
   const router = useRouter();
+  const pathWithoutQuery = useRouterPathWithoutQuery();
 
   const handleLoadReview = (reviewId: number) => {
     dialog.handleOpen();
@@ -56,7 +58,7 @@ const ReviewsSection = ({
   }, [router.query]);
 
   const onClickOpenReview = (reviewId: number) => {
-    router.replace(router.asPath + `?review=${reviewId}`, undefined, {
+    router.replace(pathWithoutQuery + `?review=${reviewId}`, undefined, {
       shallow: true,
     });
     handleLoadReview(reviewId);
