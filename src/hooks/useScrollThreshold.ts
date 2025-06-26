@@ -14,7 +14,6 @@ const useScrollThreshold = (threshold: number, hysteresis = 30) => {
 
   useEffect(() => {
     const current = scrollY.get();
-    console.log("current", current, "threshold", threshold);
     setIsScrolled(current > threshold);
   }, [scrollY, threshold]);
 

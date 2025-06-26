@@ -9,17 +9,19 @@ import localStorageFields from "@/shared/localStorageFields";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import useScrollThreshold from "@/hooks/useScrollThreshold";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const CookieConsent = () => {
   const { t } = useTranslation("common");
   const dialog = useDialog();
   const router = useRouter();
+  const pathWithoutQuery = useRouterPathWithoutQuery();
 
   const isScrolled = useScrollThreshold(30);
 
   useEffect(() => {
     if (!router.isReady || !isScrolled) return;
-    const isPrivacyPolicyPage = router.asPath === routerLinks.privacyPolicy;
+    const isPrivacyPolicyPage = pathWithoutQuery === routerLinks.privacyPolicy;
     const isConfirmed =
       localStorage.getItem(localStorageFields.COOKIE_CONFIRM) === "true";
     if (isConfirmed || isPrivacyPolicyPage) return;

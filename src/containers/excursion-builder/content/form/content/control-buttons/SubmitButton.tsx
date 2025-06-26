@@ -19,6 +19,7 @@ import { IUpdateExcursion } from "@/services/excursions-service/interfaces/updat
 import { IEditExcursionForm } from "@/containers/personal-area/my-excursions/edit-excursion/logic/interfaces";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const SubmitButton = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
@@ -29,7 +30,8 @@ const SubmitButton = () => {
   const excursionId = useAppSelector(selectExcursionId);
   const items = useAppSelector(selectItems);
   const router = useRouter();
-  const isAdminMode = router.asPath.startsWith(
+  const pathWithoutQuery = useRouterPathWithoutQuery();
+  const isAdminMode = pathWithoutQuery.startsWith(
     routerLinks.administrationExcursions
   );
   const {

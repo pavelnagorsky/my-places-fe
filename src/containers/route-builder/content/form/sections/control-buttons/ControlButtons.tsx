@@ -11,16 +11,17 @@ import PlacesAutocomplete from "@/components/forms/custom-form-elements/PlacesAu
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import { addRouteItemsThunk } from "@/store/route-builder-slice/thunks";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const ControlButtons = () => {
   const { t, i18n } = useTranslation(["route-management", "common"]);
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const { trigger, getValues, setValue, setFocus } =
     useFormContext<IRouteBuilderForm>();
   const [isAddMode, setIsAddMode] = useState(false);
   const selectedPlaces = useAppSelector(selectItems);
   const isPlacesLimitExceeded = selectedPlaces.length >= 25;
+  const pathWithoutQuery = useRouterPathWithoutQuery();
 
   const onClickAddLocation = () => {
     setIsAddMode(true);
@@ -49,7 +50,10 @@ const ControlButtons = () => {
   };
 
   useEffect(() => {
-    if (!selectedPlaces.length && router.asPath === routerLinks.createRoute) {
+    if (
+      !selectedPlaces.length &&
+      pathWithoutQuery === routerLinks.createRoute
+    ) {
       setIsAddMode(true);
     }
   }, []);

@@ -11,12 +11,14 @@ import { useRouter } from "next/router";
 import useAdminMenu from "@/containers/admin/layout/useAdminMenu";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
 import { Fragment } from "react";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const AdminSideBar = () => {
-  const router = useRouter();
+  const pathWithoutQuery = useRouterPathWithoutQuery();
   const adminLinks = useAdminMenu();
+  const router = useRouter();
 
-  const customPathname = router.asPath
+  const customPathname = pathWithoutQuery
     .split("/")
     .filter((p, i) => {
       return i <= 2;

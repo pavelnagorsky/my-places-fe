@@ -11,12 +11,14 @@ import { useRouter } from "next/router";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
 import { Fragment } from "react";
 import usePersonalAreaMenu from "@/containers/personal-area/layout/usePersonalAreaMenu";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const PersonalAreaSideBar = () => {
-  const router = useRouter();
   const userLinks = usePersonalAreaMenu();
+  const pathWithoutQuery = useRouterPathWithoutQuery();
+  const router = useRouter();
 
-  const customPathname = router.asPath
+  const customPathname = pathWithoutQuery
     .split("/")
     .filter((p, i) => {
       return i <= 2;

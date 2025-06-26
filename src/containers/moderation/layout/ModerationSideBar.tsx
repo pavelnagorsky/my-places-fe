@@ -11,12 +11,14 @@ import { useRouter } from "next/router";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
 import { Fragment } from "react";
 import useModerationMenu from "@/containers/moderation/layout/useModerationMenu";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const ModerationSideBar = () => {
-  const router = useRouter();
+  const pathWithoutQuery = useRouterPathWithoutQuery();
   const userLinks = useModerationMenu();
+  const router = useRouter();
 
-  const customPathname = router.asPath
+  const customPathname = pathWithoutQuery
     .split("/")
     .filter((p, i) => {
       return i <= 2;

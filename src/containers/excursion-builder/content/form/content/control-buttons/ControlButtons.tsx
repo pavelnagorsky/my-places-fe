@@ -11,16 +11,17 @@ import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/fo
 import { selectItems } from "@/store/excursion-builder-slice/excursion-builder.slice";
 import { addExcursionItemsThunk } from "@/store/excursion-builder-slice/thunks";
 import SubmitButton from "@/containers/excursion-builder/content/form/content/control-buttons/SubmitButton";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const ControlButtons = () => {
   const { t, i18n } = useTranslation(["route-management", "common"]);
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const { trigger, getValues, setValue, setFocus, control } =
     useFormContext<IExcursionBuilderForm>();
   const [isAddMode, setIsAddMode] = useState(false);
   const selectedPlaces = useAppSelector(selectItems);
   const isPlacesLimitExceeded = selectedPlaces.length >= 27;
+  const pathWithoutQuery = useRouterPathWithoutQuery();
 
   const onClickAddLocation = () => {
     setIsAddMode(true);
@@ -51,7 +52,7 @@ const ControlButtons = () => {
   useEffect(() => {
     if (
       !selectedPlaces.length &&
-      router.asPath === routerLinks.createExcursion
+      pathWithoutQuery === routerLinks.createExcursion
     ) {
       setIsAddMode(true);
     }

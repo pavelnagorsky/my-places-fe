@@ -1,21 +1,20 @@
 import { SxProps } from "@mui/material";
-import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import useScrollThreshold from "@/hooks/useScrollThreshold";
+import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
 const useHeaderStyles = () => {
-  const router = useRouter();
-  const isHomePage = router.asPath === routerLinks.home;
+  const pathWithoutQuery = useRouterPathWithoutQuery();
+  const isHomePage = pathWithoutQuery === routerLinks.home;
   const isScrolledDefault = useScrollThreshold(94);
   const isScrolledHomePage = useScrollThreshold(234);
-  console.log("isHomePage", isHomePage, router.asPath);
-  console.log("isScrolledHomePage", isScrolledHomePage);
 
   const defaultHeaderSx: SxProps = {
     background: "white",
     top: 0,
     zIndex: 1000,
     position: "sticky",
+    mb: 1,
     "& .header-container": {
       transition: "padding 0.1s ease-in-out",
       py: {
@@ -26,7 +25,7 @@ const useHeaderStyles = () => {
   };
 
   const homePageHeaderSx: SxProps = {
-    bgcolor: isScrolledHomePage ? "white" : "transparent",
+    background: isScrolledHomePage ? "white" : "transparent",
     transition: `background-color 0.35s ease, opacity 0.1s ease`,
     top: 0,
     zIndex: 1001,
