@@ -8,8 +8,6 @@ const useHeaderStyles = () => {
   const isHomePage = router.asPath === routerLinks.home;
   const isScrolledDefault = useScrollThreshold(94);
   const isScrolledHomePage = useScrollThreshold(234);
-  console.log("isHomePage", isHomePage, router.asPath);
-  console.log("isScrolledHomePage", isScrolledHomePage);
 
   const defaultHeaderSx: SxProps = {
     background: "white",
@@ -26,7 +24,7 @@ const useHeaderStyles = () => {
   };
 
   const homePageHeaderSx: SxProps = {
-    bgcolor: isScrolledHomePage ? "white" : "transparent",
+    background: isScrolledHomePage ? "white" : "transparent",
     transition: `background-color 0.35s ease, opacity 0.1s ease`,
     top: 0,
     zIndex: 1001,
