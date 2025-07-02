@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form-mui";
-import { ICommentsFormContext } from "@/containers/place/content/comments/interfaces";
+import { ICommentsFormContext } from "@/containers/place/content/comments/logic/interfaces";
 import { ChangeEvent, useEffect, useState } from "react";
-import { IComment } from "@/services/comments-service/comment.interface";
-import commentsService from "@/services/comments-service/comments.service";
+import { IComment } from "@/services/place-comments-service/interfaces/comment.interface";
+import placeCommentsService from "@/services/place-comments-service/place-comments.service";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import useRoleAccess from "@/hooks/useRoleAccess";
@@ -11,9 +11,17 @@ import { selectIsAuth } from "@/store/user-slice/user.slice";
 import { useTranslation } from "next-i18next";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
+import excursionCommentsService from "@/services/excursion-comments-service/excursion-comments.service";
 
-const useComments = (placeId: number) => {
-  const { t } = useTranslation(["place", "common"]);
+const useComments = ({
+  entityId,
+  entityType,
+}: {
+  entityId: number;
+  entityType: StatisticEntitiesEnum;
+}) => {
+  const { t } = useTranslation("common");
   const [canSendComment, setCanSendComment] = useState(false);
   const [editCommentId, setEditCommentId] = useState<number | null>(null);
   const [comments, setComments] = useState<IComment[]>([]);
@@ -25,6 +33,10 @@ const useComments = (placeId: number) => {
     RolesEnum.MODERATOR,
   ]);
   const sendAnalytics = useAnalytics();
+  const service =
+    entityType === StatisticEntitiesEnum.Excursion
+      ? excursionCommentsService
+      : placeCommentsService;
 
   const form = useForm<ICommentsFormContext>({
     defaultValues: {
@@ -46,23 +58,20 @@ const useComments = (placeId: number) => {
 
   const onDeleteComment = (id: number) => {
     setComments(comments.filter((c) => c.id !== id));
-    const request = hasModerationAccess
-      ? commentsService.deleteCommentAdministration
-      : commentsService.deleteComment;
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
-      title: "delete place comment",
-      entityId: `${placeId}`,
+      title: `delete entity type ${entityId} comment`,
+      entityId: `${entityId}`,
     });
-    request(id)
+    service
+      .deleteComment(id)
       .then(() => {})
       .catch(() => {
         dispatch(
           showAlertThunk({
             alertProps: {
-              title: t("feedback.error", { ns: "common" }),
+              title: t("feedback.error"),
               description: `${t("comments.feedback.deleteError")} ${t(
-                "errors.description",
-                { ns: "common" }
+                "errors.description"
               )}`,
               variant: "standard",
               severity: "error",
@@ -80,8 +89,8 @@ const useComments = (placeId: number) => {
 
   const onClickUpdateComment = (id: number) => {
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
-      title: "edit place comment",
-      entityId: `${placeId}`,
+      title: `edit entity type ${entityId} comment`,
+      entityId: `${entityId}`,
     });
     const commentText = comments.find((c) => c.id === id)?.text;
     if (commentText) {
@@ -97,28 +106,26 @@ const useComments = (placeId: number) => {
       setEditCommentId(null);
       form.reset();
     }
-    commentsService
-      .getPlaceComments(placeId)
+    service
+      .getComments(entityId)
       .then(({ data }) => {
         setComments(data);
       })
       .catch(() => {
         setComments([]);
       });
-  }, [placeId, isAuth]);
+  }, [entityId, entityType, isAuth]);
 
   const onUpdateComment = () => {
     form.handleSubmit((data) => {
       if (!editCommentId) return;
       sendAnalytics(AnalyticsEventsEnum.CustomClick, {
-        title: "update place comment",
-        entityId: `${placeId}`,
+        title: `update entity type ${entityId} comment`,
+        entityId: `${entityId}`,
       });
       setLoading(true);
-      const request = hasModerationAccess
-        ? commentsService.updateCommentAdministration
-        : commentsService.updateComment;
-      request({ commentId: editCommentId, text: data.comment })
+      service
+        .updateComment({ commentId: editCommentId, text: data.comment })
         .then(({ data }) => {
           setEditCommentId(null);
           setLoading(false);
@@ -138,10 +145,9 @@ const useComments = (placeId: number) => {
           dispatch(
             showAlertThunk({
               alertProps: {
-                title: t("feedback.error", { ns: "common" }),
+                title: t("feedback.error"),
                 description: `${t("comments.feedback.updateError")} ${t(
-                  "errors.description",
-                  { ns: "common" }
+                  "errors.description"
                 )}`,
                 variant: "standard",
                 severity: "error",
@@ -157,13 +163,17 @@ const useComments = (placeId: number) => {
     if (!canSendComment) return;
     if (!!editCommentId) return onUpdateComment();
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
-      title: "create place comment",
-      entityId: `${placeId}`,
+      title: `create entity type ${entityId} comment`,
+      entityId: `${entityId}`,
     });
     setLoading(true);
     form.handleSubmit((data) => {
-      commentsService
-        .addComment({ placeId, text: data.comment })
+      service
+        .addComment({
+          placeId: entityId,
+          excursionId: entityId,
+          text: data.comment,
+        })
         .then(({ data }) => {
           setLoading(false);
           form.reset();
@@ -175,10 +185,9 @@ const useComments = (placeId: number) => {
           dispatch(
             showAlertThunk({
               alertProps: {
-                title: t("feedback.error", { ns: "common" }),
+                title: t("feedback.error"),
                 description: `${t("comments.feedback.createError")} ${t(
-                  "errors.description",
-                  { ns: "common" }
+                  "errors.description"
                 )}`,
                 variant: "standard",
                 severity: "error",

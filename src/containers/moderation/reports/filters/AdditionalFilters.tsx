@@ -24,6 +24,7 @@ import useCrmStatuses from "@/hooks/useCrmStatuses";
 import { IReportsFormContext } from "@/containers/moderation/reports/logic/interfaces";
 import useDialog from "@/hooks/useDialog";
 import FilterTransition from "@/components/UI/transitions/FilterTransition";
+import useStatisticEntityTypes from "@/containers/moderation/reports/logic/utils/useStatisticEntityTypes";
 
 interface IFilterProps {
   onSubmit: () => void;
@@ -36,15 +37,17 @@ const AdditionalFilters = ({ onSubmit }: IFilterProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { statuses } = useCrmStatuses();
+  const entityTypes = useStatisticEntityTypes();
   const dialog = useDialog();
 
   const watchEndDate = watch("dateTo");
 
   const filtersCount = useMemo(() => {
     const statusesCount = getValues("statuses")?.length || 0;
+    const entityTypesCount = getValues("entityTypes")?.length || 0;
     const dateFromCount = getValues("dateFrom") !== null ? 1 : 0;
     const dateEndCount = getValues("dateTo") !== null ? 1 : 0;
-    return statusesCount + dateEndCount + dateFromCount;
+    return statusesCount + dateEndCount + dateFromCount + entityTypesCount;
   }, [dialog.open]);
 
   const onApply = () => {
@@ -56,6 +59,7 @@ const AdditionalFilters = ({ onSubmit }: IFilterProps) => {
     resetField("statuses");
     resetField("dateFrom");
     resetField("dateTo");
+    resetField("entityTypes");
   };
 
   return (
@@ -115,6 +119,23 @@ const AdditionalFilters = ({ onSubmit }: IFilterProps) => {
                 label: s.label,
               }))}
               name={"statuses"}
+              row
+            />
+          </Box>
+          <Divider sx={{ my: "1.5em" }} />
+          <CustomLabel sx={{ fontSize: "18px" }}>
+            {t("reports.filters.byEntityType")}
+          </CustomLabel>
+          <Box
+            sx={{ "& label": { color: "secondary.main", width: "50%", mx: 0 } }}
+            display={"flex"}
+          >
+            <CheckboxButtonGroup
+              options={entityTypes.map((et) => ({
+                id: `${et.id}`,
+                label: et.label,
+              }))}
+              name={"entityTypes"}
               row
             />
           </Box>

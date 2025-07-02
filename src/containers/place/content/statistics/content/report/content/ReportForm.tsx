@@ -2,6 +2,8 @@ import {
   Box,
   Button,
   CircularProgress,
+  FormGroup,
+  FormLabel,
   Popover,
   Stack,
   Typography,
@@ -19,13 +21,13 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
+import { IPopoverProps } from "@/components/confirm-popup/ConfirmPopup";
 
 interface IReportFormProps {
-  open: boolean;
-  onClose: () => void;
-  anchorEl: Element | null;
-  id?: string;
-  placeId: number;
+  popoverProps: IPopoverProps;
+  entityType: StatisticEntitiesEnum;
+  entityId: number;
 }
 
 interface IReportFormContext {
@@ -33,13 +35,11 @@ interface IReportFormContext {
 }
 
 const ReportForm = ({
-  open,
-  anchorEl,
-  onClose,
-  id,
-  placeId,
+  popoverProps,
+  entityId,
+  entityType,
 }: IReportFormProps) => {
-  const { t } = useTranslation(["place", "common"]);
+  const { t } = useTranslation("common");
   const sendAnalytics = useAnalytics();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
@@ -50,7 +50,7 @@ const ReportForm = ({
   });
 
   const handleClose = () => {
-    onClose();
+    popoverProps.handleClose();
     form.reset();
   };
 
@@ -58,10 +58,9 @@ const ReportForm = ({
     dispatch(
       showAlertThunk({
         alertProps: {
-          title: t("feedback.error", { ns: "common" }),
+          title: t("feedback.error"),
           description: `${t("report.feedback.error")} ${t(
-            "errors.description",
-            { ns: "common" }
+            "errors.description"
           )}`,
           variant: "standard",
           severity: "error",
@@ -75,7 +74,7 @@ const ReportForm = ({
     dispatch(
       showAlertThunk({
         alertProps: {
-          title: t("feedback.success", { ns: "common" }),
+          title: t("feedback.success"),
           description: t("report.feedback.success"),
           variant: "standard",
           severity: "success",
@@ -89,12 +88,13 @@ const ReportForm = ({
     if (loading) return;
     setLoading(true);
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
-      title: "place report form submit",
-      entityId: `${placeId}`,
+      title: `report form submit, entity type = ${entityType}`,
+      entityId: `${entityId}`,
     });
     reportsService
       .createReport({
-        placeId,
+        entityId,
+        entityType,
         text: data.text,
       })
       .then(() => {
@@ -110,9 +110,9 @@ const ReportForm = ({
 
   return (
     <Popover
-      id={id}
-      open={open}
-      anchorEl={anchorEl}
+      id={popoverProps.id}
+      open={popoverProps.open}
+      anchorEl={popoverProps.anchor}
       onClose={handleClose}
       PaperProps={{
         sx: {
@@ -122,26 +122,30 @@ const ReportForm = ({
       }}
     >
       <FormContainer formContext={form} onSuccess={onSubmit}>
-        <Box>
+        <Box minWidth={"300px"}>
           <Typography fontWeight={600} fontSize={"20px"} mb={"0.5em"}>
             {t("report.subtitle")}
           </Typography>
-          <Typography variant={"body2"} mb={"0.5em"}>
-            {t("report.description")}
-          </Typography>
-          <TextFieldElement
-            placeholder={"Описание"}
-            name={"text"}
-            maxRows={4}
-            multiline
-            rules={{
-              required: t("errors.required", { ns: "common" }),
-              maxLength: {
-                value: 500,
-                message: t("errors.maxLength", { ns: "common", value: 500 }),
-              },
-            }}
-          />
+          <FormGroup>
+            <FormLabel htmlFor={"description"} sx={{ pb: 1 }}>
+              {t("report.description")}
+            </FormLabel>
+            <TextFieldElement
+              id={"description"}
+              placeholder={t("report.description")}
+              name={"text"}
+              fullWidth
+              rows={4}
+              multiline
+              rules={{
+                required: t("errors.required"),
+                maxLength: {
+                  value: 500,
+                  message: t("errors.maxLength", { value: 500 }),
+                },
+              }}
+            />
+          </FormGroup>
           <Stack
             mt={"1em"}
             direction={"row"}
@@ -150,13 +154,13 @@ const ReportForm = ({
             justifyContent={"space-between"}
           >
             <Button variant={"text"} onClick={handleClose}>
-              {t("buttons.cancel", { ns: "common" })}
+              {t("buttons.cancel")}
             </Button>
             <Button variant={"contained"} type={"submit"}>
               {loading ? (
                 <CircularProgress color={"inherit"} size={25} />
               ) : (
-                t("buttons.send", { ns: "common" })
+                t("buttons.send")
               )}
             </Button>
           </Stack>

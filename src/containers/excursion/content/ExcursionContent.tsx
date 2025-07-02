@@ -36,10 +36,7 @@ const ExcursionContent = ({ excursion }: { excursion: IExcursion }) => {
           </Typography>
           <Stack>
             <ExcursionGallery excursion={excursion} />
-            <ExcursionStatistics
-              views={excursion.viewsCount}
-              createdAt={excursion.createdAt}
-            />
+            <ExcursionStatistics excursion={excursion} />
           </Stack>
           <ExcursionDescription
             description={excursion.description}

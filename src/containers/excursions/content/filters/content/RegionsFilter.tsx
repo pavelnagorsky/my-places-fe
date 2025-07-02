@@ -22,7 +22,7 @@ const RegionsFilter = () => {
       </Typography>
       <AutocompleteElement
         textFieldProps={{
-          placeholder: "Выберите области Беларуси",
+          placeholder: t("search.filters.regionsPlaceholder"),
         }}
         name={"regions"}
         options={regions.map((r) => ({ id: r.id, label: r.title }))}

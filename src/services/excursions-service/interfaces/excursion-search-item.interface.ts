@@ -14,4 +14,5 @@ export interface IExcursionSearchItem {
   type: ExcursionTypesEnum;
   travelMode: TravelModesEnum;
   viewsCount: number;
+  likesCount: number;
 }

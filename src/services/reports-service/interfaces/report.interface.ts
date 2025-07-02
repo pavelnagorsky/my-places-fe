@@ -1,4 +1,5 @@
 import { CrmStatusesEnum } from "@/services/interfaces";
+import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
 
 export interface IReport {
   id: number;
@@ -9,7 +10,9 @@ export interface IReport {
 
   status: CrmStatusesEnum;
 
-  placeId: number;
+  entityType: StatisticEntitiesEnum;
 
-  placeSlug: string;
+  entityId: number;
+
+  entitySlug: string | null;
 }

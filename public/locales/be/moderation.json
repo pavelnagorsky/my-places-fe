@@ -67,25 +67,29 @@
     }
   },
   "reports": {
-    "title": "Скаргі на месцы",
+    "title": "Скаргі",
     "notFound": "Скаргі не знойдзены",
     "headings": {
       "report": "Скарга",
-      "place": "Месца",
-      "status": "Статус",
+      "slug": "Аб'ект",
+      "entityType": "Тып",
+      "status": "Спасылка",
       "createdAt": "Дата стварэння"
     },
     "menu": {
       "reportRejection": "Адхіленне скаргі",
       "placeRejection": "Адхіленне месца",
+      "excursionRejection": "Адхіленне экскурсіі",
       "rejectReport": "Адхіліць скаргу",
       "rejectPlace": "Адхіліць месца",
+      "rejectExcursion": "Адхіліць экскурсію",
       "reason": "Прычына",
-      "viewPlace": "Прагляд месца"
+      "view": "Прагляд"
     },
     "filters": {
       "report": "Скарга",
       "byStatus": "Па статусу",
+      "byEntityType": "Па тыпу",
       "byCreatedAt": "Па даце стварэння"
     }
   },
@@ -102,8 +106,12 @@
     },
     "report": {
       "rejectPlace": {
-        "success": "",
-        "error": ""
+        "success": "Месца было пасьпяхова адхілена, скарга апрацавана",
+        "error": "Памылка пры адхіленьні месца."
+      },
+      "rejectExcursion": {
+        "success": "Экскурсія была пасьпяхова адхілена, скарга апрацавана",
+        "error": "Памылка пры адхіленьні экскурсіі."
       },
       "rejectReport": {
         "success": "Скарга была паспяхова адхіленая мадэрацыяй",

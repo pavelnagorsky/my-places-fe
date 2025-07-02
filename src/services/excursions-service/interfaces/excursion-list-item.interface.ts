@@ -16,6 +16,8 @@ export interface IExcursionListItem {
   type: ExcursionTypesEnum;
   travelMode: TravelModesEnum;
   viewsCount: number;
+  commentsCount: number;
+  likesCount: number;
   status: ExcursionStatusesEnum;
   moderationMessage: string | null;
   authorName: string;

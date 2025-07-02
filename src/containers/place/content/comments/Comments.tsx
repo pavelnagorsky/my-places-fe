@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { FormProvider, TextFieldElement } from "react-hook-form-mui";
 import SendIcon from "@mui/icons-material/Send";
-import useComments from "@/containers/place/content/comments/useComments";
-import Comment from "@/containers/place/content/comments/Comment";
+import useComments from "@/containers/place/content/comments/logic/useComments";
+import Comment from "@/containers/place/content/comments/content/Comment";
 import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openAuth, selectUserId } from "@/store/user-slice/user.slice";
@@ -18,10 +18,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import useRoleAccess from "@/hooks/useRoleAccess";
 import RolesEnum from "@/services/auth-service/enums/roles.enum";
 import { useTranslation } from "next-i18next";
+import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
 
-const Comments = ({ placeId }: { placeId: number }) => {
-  const { t } = useTranslation(["place", "common"]);
-  const commentsData = useComments(placeId);
+const Comments = ({
+  entityId,
+  entityType,
+}: {
+  entityId: number;
+  entityType: StatisticEntitiesEnum;
+}) => {
+  const { t } = useTranslation("common");
+  const commentsData = useComments({ entityId, entityType });
   const dateFnsLocale = useDateFnsLocale();
   const userId = useAppSelector(selectUserId);
   const dispatch = useAppDispatch();

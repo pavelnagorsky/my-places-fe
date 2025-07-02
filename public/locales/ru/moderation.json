@@ -67,25 +67,29 @@
     }
   },
   "reports": {
-    "title": "Жалобы на места",
+    "title": "Жалобы",
     "notFound": "Жалобы не найдены",
     "headings": {
       "report": "Жалоба",
-      "place": "Место",
+      "slug": "Ссылка",
+      "entityType": "Тип",
       "status": "Статус",
       "createdAt": "Дата создания"
     },
     "menu": {
       "reportRejection": "Отклонение жалобы",
       "placeRejection": "Отклонение места",
+      "excursionRejection": "Отклонение экскурсии",
       "rejectReport": "Отклонить жалобу",
       "rejectPlace": "Отклонить место",
+      "rejectExcursion": "Отклонить экскурсию",
       "reason": "Причина",
-      "viewPlace": "Просмотр места"
+      "view": "Просмотр"
     },
     "filters": {
       "report": "Жалоба",
       "byStatus": "По статусу",
+      "byEntityType": "По типу",
       "byCreatedAt": "По дате создания"
     }
   },
@@ -107,8 +111,12 @@
     },
     "report": {
       "rejectPlace": {
-        "success": "",
-        "error": ""
+        "success": "Место было успешно отклонено, жалоба обработана",
+        "error": "Ошибка при отклонении места."
+      },
+      "rejectExcursion": {
+        "success": "Экскурсия была успешно отклонена, жалоба обработана",
+        "error": "Ошибка при отклонении экскурсии."
       },
       "rejectReport": {
         "success": "Жалоба была успешно отклонена модерацией",

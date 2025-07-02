@@ -67,25 +67,29 @@
     }
   },
   "reports": {
-    "title": "Complaints about places",
+    "title": "Complaints",
     "notFound": "Complaints were not found",
     "headings": {
       "report": "Complaint",
-      "place": "Place",
+      "slug": "link",
+      "entityType": "Type",
       "status": "Status",
       "createdAt": "Creation date"
     },
     "menu": {
       "reportRejection": "Rejection of the complaint",
       "placeRejection": "Rejection of the place",
+      "excursionRejection": "Excursion rejection",
       "rejectReport": "Reject the complaint",
       "rejectPlace": "Reject the place",
+      "rejectExcursion": "Decline the excursion",
       "reason": "Reason",
-      "viewPlace": "View the place"
+      "view": "View"
     },
     "filters": {
       "report": "Complaint",
       "byStatus": "By status",
+      "byEntityType": "By type",
       "byCreatedAt": "By creation date"
     }
   },
@@ -102,8 +106,12 @@
     },
     "report": {
       "rejectPlace": {
-        "success": "",
-        "error": ""
+        "success": "The place was successfully rejected, the complaint has been processed",
+        "error": "Error while rejecting the place."
+      },
+      "rejectExcursion": {
+        "success": "The excursion was successfully rejected, the complaint has been processed",
+        "error": "Error while rejecting the excursion."
       },
       "rejectReport": {
         "success": "The complaint was successfully rejected by moderation",

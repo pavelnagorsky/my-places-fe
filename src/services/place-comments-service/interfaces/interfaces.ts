@@ -1,4 +1,4 @@
-export interface ICreateCommentPayload {
+export interface ICreatePlaceCommentPayload {
   text: string;
   placeId: number;
 }

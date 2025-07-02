@@ -11,29 +11,8 @@
     "google": "Google Navigator",
     "yandex": "Yandex Navigator"
   },
-  "comments": {
-    "title": "Comments",
-    "authHelper": "Only authorized users can leave comments",
-    "authLink": "Login",
-    "placeholder": "Write a comment...",
-    "totalComments": "Total comments:",
-    "feedback": {
-      "deleteError": "Error while deleting the comment.",
-      "createError": "Error while creating the comment.",
-      "updateError": "Error while updating the comment."
-    }
-  },
   "likesHelper": "Only authorized users can like",
   "likesAuthLink": "Login",
-  "report": {
-    "title": "Make a complaint",
-    "subtitle": "Send a complaint",
-    "description": "Describe the problem",
-    "feedback": {
-      "success": "Your complaint has been sent and will be reviewed by moderators",
-      "error": "Error while sending the complaint."
-    }
-  },
   "favourites": {
     "tooltip": "Save to Favorites",
     "feedback": {
