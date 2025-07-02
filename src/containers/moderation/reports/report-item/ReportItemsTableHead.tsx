@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import SortingButton from "@/components/UI/sorting-button/SortingButton";
-import { ReportsOrderByEnum } from "@/services/reports-service/interfaces/interfaces";
 import { OrderDirectionsEnum } from "@/services/interfaces";
 import { useTranslation } from "next-i18next";
+import { ReportsOrderByEnum } from "@/services/reports-service/enums";
 
 interface ITableHeadProps {
   show: boolean;
@@ -38,34 +38,46 @@ const ReportItemsTableHead = ({
           "& p": { fontWeight: 700, fontSize: "12px", color: "secondary.main" },
         }}
       >
-        <Grid size={{ xs: 4 }}>
+        <Grid size={{ xs: 3 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === ReportsOrderByEnum.TEXT}
+            isActive={orderBy === ReportsOrderByEnum.Text}
             onChangeDirection={onChangeOrderDirection}
-            onChangeOrderBy={() => onChangeOrderBy(ReportsOrderByEnum.TEXT)}
+            onChangeOrderBy={() => onChangeOrderBy(ReportsOrderByEnum.Text)}
           >
             <Typography>{t("reports.headings.report")}</Typography>
+          </SortingButton>
+        </Grid>
+        <Grid size={{ xs: 1 }}>
+          <SortingButton
+            orderDirection={orderDirection}
+            isActive={orderBy === ReportsOrderByEnum.EntityType}
+            onChangeDirection={onChangeOrderDirection}
+            onChangeOrderBy={() =>
+              onChangeOrderBy(ReportsOrderByEnum.EntityType)
+            }
+          >
+            <Typography>{t("reports.headings.entityType")}</Typography>
           </SortingButton>
         </Grid>
         <Grid size={{ xs: 3 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === ReportsOrderByEnum.PLACE_SLUG}
+            isActive={orderBy === ReportsOrderByEnum.EntitySlug}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(ReportsOrderByEnum.PLACE_SLUG)
+              onChangeOrderBy(ReportsOrderByEnum.EntitySlug)
             }
           >
-            <Typography>{t("reports.headings.place")}</Typography>
+            <Typography>{t("reports.headings.slug")}</Typography>
           </SortingButton>
         </Grid>
         <Grid size={{ xs: 2 }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === ReportsOrderByEnum.STATUS}
+            isActive={orderBy === ReportsOrderByEnum.Status}
             onChangeDirection={onChangeOrderDirection}
-            onChangeOrderBy={() => onChangeOrderBy(ReportsOrderByEnum.STATUS)}
+            onChangeOrderBy={() => onChangeOrderBy(ReportsOrderByEnum.Status)}
           >
             <Typography>{t("reports.headings.status")}</Typography>
           </SortingButton>
@@ -73,10 +85,10 @@ const ReportItemsTableHead = ({
         <Grid size={{ xs: "auto" }}>
           <SortingButton
             orderDirection={orderDirection}
-            isActive={orderBy === ReportsOrderByEnum.CREATED_AT}
+            isActive={orderBy === ReportsOrderByEnum.CreatedAt}
             onChangeDirection={onChangeOrderDirection}
             onChangeOrderBy={() =>
-              onChangeOrderBy(ReportsOrderByEnum.CREATED_AT)
+              onChangeOrderBy(ReportsOrderByEnum.CreatedAt)
             }
           >
             <Typography>{t("reports.headings.createdAt")}</Typography>

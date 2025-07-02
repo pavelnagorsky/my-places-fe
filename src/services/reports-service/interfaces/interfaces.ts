@@ -1,15 +1,13 @@
 import { CrmStatusesEnum, IPaginationRequest } from "@/services/interfaces";
+import {
+  ReportsOrderByEnum,
+  StatisticEntitiesEnum,
+} from "@/services/reports-service/enums";
 
 export interface ICreateReport {
-  placeId: number;
+  entityId: number;
+  entityType: StatisticEntitiesEnum;
   text: string;
-}
-
-export enum ReportsOrderByEnum {
-  TEXT,
-  PLACE_SLUG,
-  CREATED_AT,
-  STATUS,
 }
 
 export interface IGetReportsRequest
@@ -18,4 +16,5 @@ export interface IGetReportsRequest
   dateTo?: string | null;
   search?: string;
   statuses?: CrmStatusesEnum[];
+  entityTypes?: StatisticEntitiesEnum[];
 }

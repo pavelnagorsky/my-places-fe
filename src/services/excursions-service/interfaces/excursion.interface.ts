@@ -18,6 +18,7 @@ export interface IExcursion {
   type: ExcursionTypesEnum;
   travelMode: TravelModesEnum;
   viewsCount: number;
+  likesCount: number;
   images: string[];
   authorName: string;
   moderationMessage: string | null;

@@ -13,38 +13,32 @@ import {
 import { routerLinks } from "@/routing/routerLinks";
 import { FormProvider, TextFieldElement } from "react-hook-form-mui";
 import { StyledButton } from "@/components/UI/button/StyledButton";
-import usePlaceRejection from "@/containers/moderation/reports/report-item/menu/usePlaceRejection";
-import useReportRejection from "@/containers/moderation/reports/report-item/menu/useReportRejection";
+import usePlaceRejection from "@/containers/moderation/reports/report-item/menu/logic/usePlaceRejection";
+import useReportRejection from "@/containers/moderation/reports/report-item/menu/logic/useReportRejection";
 import { CrmStatusesEnum } from "@/services/interfaces";
+import { IPopoverProps } from "@/components/confirm-popup/ConfirmPopup";
+import { IReport } from "@/services/reports-service/interfaces/report.interface";
+import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
+import useExcursionRejection from "@/containers/moderation/reports/report-item/menu/logic/useExcursionRejection";
 
 interface IReportMenuProps {
-  anchorEl: null | Element;
-  open: boolean;
-  handleClose: () => void;
-  id: number;
-  placeSlug: string;
-  placeId: number;
-  status: CrmStatusesEnum;
+  popoverProps: IPopoverProps;
+  report: IReport;
   onChangeStatus: (status: CrmStatusesEnum) => void;
 }
 
 const ReportMenu = ({
-  anchorEl,
-  handleClose,
-  open,
-  id,
-  status,
-  placeId,
-  placeSlug,
+  popoverProps,
+  report,
   onChangeStatus,
 }: IReportMenuProps) => {
   const { t } = useTranslation(["moderation", "common"]);
   const popover = usePopover("menu-action");
   const [action, setAction] = useState<
-    "decline-place" | "decline-report" | null
+    "decline-place" | "decline-excursion" | "decline-report" | null
   >(null);
 
-  const showActions = status === CrmStatusesEnum.PENDING;
+  const showActions = report.status === CrmStatusesEnum.PENDING;
 
   const onClosePopover = () => {
     popover.handleClose();
@@ -53,19 +47,27 @@ const ReportMenu = ({
 
   const onCloseAll = () => {
     onClosePopover();
-    handleClose();
+    popoverProps.handleClose();
   };
 
   const placeDecline = usePlaceRejection({
-    placeId: placeId,
-    reportId: id,
+    placeId: report.entityId,
+    reportId: report.id,
+    onSuccess: () => {
+      onCloseAll();
+      onChangeStatus(CrmStatusesEnum.DONE);
+    },
+  });
+  const excursionDecline = useExcursionRejection({
+    excursionId: report.entityId,
+    reportId: report.id,
     onSuccess: () => {
       onCloseAll();
       onChangeStatus(CrmStatusesEnum.DONE);
     },
   });
   const reportDecline = useReportRejection({
-    id,
+    id: report.id,
     onSuccess: () => {
       onCloseAll();
       onChangeStatus(CrmStatusesEnum.DECLINED);
@@ -74,6 +76,11 @@ const ReportMenu = ({
 
   const onClickDeclinePlace = (e: MouseEvent) => {
     setAction("decline-place");
+    popover.handleOpen(e);
+  };
+
+  const onClickDeclineExcursion = (e: MouseEvent) => {
+    setAction("decline-excursion");
     popover.handleOpen(e);
   };
 
@@ -114,12 +121,18 @@ const ReportMenu = ({
     </Stack>
   );
 
-  const declinePlaceContent = (
-    <Stack gap={"1em"}>
+  const declineEntityContent = (
+    <Stack gap={"1em"} minWidth={"300px"}>
       <Typography fontWeight={500} fontSize={"22px"}>
-        {t("reports.menu.placeRejection")}
+        {action === "decline-place"
+          ? t("reports.menu.placeRejection")
+          : t("reports.menu.excursionRejection")}
       </Typography>
-      <FormProvider {...placeDecline.form}>
+      <FormProvider
+        {...(action === "decline-place"
+          ? placeDecline.form
+          : excursionDecline.form)}
+      >
         <TextFieldElement
           fullWidth
           name={"feedback"}
@@ -127,7 +140,7 @@ const ReportMenu = ({
           placeholder={t("reports.menu.reason")}
           required
           multiline
-          minRows={1}
+          minRows={2}
           parseError={() => t("errors.required", { ns: "common" })}
         />
         <Stack gap={"1em"} mt={"1em"} direction={"row"}>
@@ -141,11 +154,16 @@ const ReportMenu = ({
           </StyledButton>
           <StyledButton
             startIcon={
-              placeDecline.loading ? (
+              (action === "decline-place" ? placeDecline : excursionDecline)
+                .loading ? (
                 <CircularProgress size={20} color={"inherit"} />
               ) : null
             }
-            onClick={placeDecline.onSubmit}
+            onClick={
+              action === "decline-place"
+                ? placeDecline.onSubmit
+                : excursionDecline.onSubmit
+            }
             variant={"contained"}
             size="large"
             sx={{ fontSize: "16px" }}
@@ -172,33 +190,45 @@ const ReportMenu = ({
             },
           }}
         >
-          {action === "decline-place"
-            ? declinePlaceContent
-            : declineReportContent}
+          {action === "decline-report"
+            ? declineReportContent
+            : declineEntityContent}
         </Popover>
       )}
       <Menu
-        id="report-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
+        id={popoverProps.id}
+        anchorEl={popoverProps.anchor}
+        open={popoverProps.open}
+        onClose={popoverProps.handleClose}
         MenuListProps={{
           "aria-labelledby": "report-menu",
         }}
       >
-        <MenuItem
-          onClick={handleClose}
-          component={"a"}
-          href={routerLinks.place(placeSlug)}
-          target={"_blank"}
-        >
-          {t("reports.menu.viewPlace")}
-        </MenuItem>
-        {showActions && (
+        {!!report.entitySlug && (
+          <MenuItem
+            onClick={popoverProps.handleClose}
+            component={"a"}
+            href={
+              report.entityType === StatisticEntitiesEnum.Place
+                ? routerLinks.place(report.entitySlug)
+                : routerLinks.excursion(report.entitySlug)
+            }
+            target={"_blank"}
+          >
+            {t("reports.menu.view")}
+          </MenuItem>
+        )}
+        {showActions && report.entityType === StatisticEntitiesEnum.Place && (
           <MenuItem onClick={onClickDeclinePlace}>
             {t("reports.menu.rejectPlace")}
           </MenuItem>
         )}
+        {showActions &&
+          report.entityType === StatisticEntitiesEnum.Excursion && (
+            <MenuItem onClick={onClickDeclineExcursion}>
+              {t("reports.menu.rejectExcursion")}
+            </MenuItem>
+          )}
         {showActions && (
           <MenuItem onClick={onClickDeclineReport}>
             {t("reports.menu.rejectReport")}

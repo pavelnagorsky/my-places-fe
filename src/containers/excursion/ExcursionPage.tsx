@@ -2,11 +2,20 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import animationVariants from "@/shared/animation-variants";
 import { motion } from "framer-motion";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { IExcursion } from "@/services/excursions-service/interfaces/excursion.interface";
 import ExcursionContent from "@/containers/excursion/content/ExcursionContent";
+import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
+import dynamic from "next/dynamic";
+import { useTranslation } from "next-i18next";
+
+const Comments = dynamic(
+  () => import("@/containers/place/content/comments/Comments"),
+  { ssr: false }
+);
 
 const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
+  const { t } = useTranslation("common");
   return (
     <WrappedContainer>
       <motion.div
@@ -19,6 +28,19 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
         </Stack>
         <Box mb={6}>
           <ExcursionContent excursion={excursion} />
+          <Box mt={6} maxWidth={"md"}>
+            <Typography
+              variant={"h2"}
+              component={"h2"}
+              fontSize={{ xs: "24px", md: "30px" }}
+            >
+              {t("comments.title")}
+            </Typography>
+            <Comments
+              entityId={excursion.id}
+              entityType={StatisticEntitiesEnum.Excursion}
+            />
+          </Box>
         </Box>
       </motion.div>
     </WrappedContainer>

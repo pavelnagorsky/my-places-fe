@@ -1,15 +1,13 @@
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form-mui";
 import { IReport } from "@/services/reports-service/interfaces/report.interface";
-import {
-  IGetReportsRequest,
-  ReportsOrderByEnum,
-} from "@/services/reports-service/interfaces/interfaces";
+import { IGetReportsRequest } from "@/services/reports-service/interfaces/interfaces";
 import { IReportsFormContext } from "@/containers/moderation/reports/logic/interfaces";
 import useScrollPagination from "@/hooks/useScrollPagination";
 import reportsService from "@/services/reports-service/reports.service";
 import { IPaginationRequest } from "@/services/interfaces";
 import utils from "@/shared/utils";
+import { ReportsOrderByEnum } from "@/services/reports-service/enums";
 
 const useReports = () => {
   const formContext = useForm<IReportsFormContext>({
@@ -18,6 +16,7 @@ const useReports = () => {
       statuses: [],
       dateTo: null,
       dateFrom: null,
+      entityTypes: [],
     },
   });
 
@@ -31,6 +30,7 @@ const useReports = () => {
           ? utils.parseFilterDate(data.dateFrom, true)
           : null,
         dateTo: data.dateTo ? utils.parseFilterDate(data.dateTo, false) : null,
+        entityTypes: data.entityTypes.map((et) => +et),
         ...pagination,
       };
       return reportsService.getReports(payload);
@@ -39,7 +39,7 @@ const useReports = () => {
   );
 
   const paginator = useScrollPagination<IReport, ReportsOrderByEnum>({
-    defaultOrderBy: ReportsOrderByEnum.CREATED_AT,
+    defaultOrderBy: ReportsOrderByEnum.CreatedAt,
     pageSize: reportsService.REPORTS_ITEMS_PER_PAGE,
     apiCall: apiCall,
   });

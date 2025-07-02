@@ -1,4 +1,4 @@
-import { IComment } from "@/services/comments-service/comment.interface";
+import { IComment } from "@/services/place-comments-service/interfaces/comment.interface";
 import {
   Avatar,
   Box,
@@ -34,7 +34,7 @@ const Comment = ({
   const { t } = useTranslation("common");
   const isMyComment = !!userId && userId === comment.authorId;
   const canManage = isMyComment || isModerator;
-  const bgColor = index % 2 == 0 ? "#FFF6EE" : "#FFEEDE";
+  const bgColor = index % 2 == 0 ? "#fdfbf7" : "#fdf8f4";
   return (
     <Paper
       elevation={1}

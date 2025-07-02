@@ -178,5 +178,30 @@
   "travelModes": {
     "driving": "Driving",
     "walking": "Walking"
+  },
+  "report": {
+    "title": "Make a complaint",
+    "subtitle": "Send a complaint",
+    "description": "Describe the problem",
+    "feedback": {
+      "success": "Your complaint has been sent and will be reviewed by moderators",
+      "error": "Error while sending the complaint."
+    }
+  },
+  "entityTypes": {
+    "place": "Place",
+    "excursion": "Excursion"
+  },
+  "comments": {
+    "title": "Comments",
+    "authHelper": "Only authorized users can leave comments",
+    "authLink": "Login",
+    "placeholder": "Write a comment...",
+    "totalComments": "Total comments:",
+    "feedback": {
+      "deleteError": "Error while deleting the comment.",
+      "createError": "Error while creating the comment.",
+      "updateError": "Error while updating the comment."
+    }
   }
 }

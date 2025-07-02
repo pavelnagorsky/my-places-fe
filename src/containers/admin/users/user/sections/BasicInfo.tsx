@@ -6,6 +6,15 @@ import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 
 const BasicInfo = ({ user }: { user: IUserShortInfo }) => {
   const locale = useDateFnsLocale();
+
+  const getUserRegistrationSource = () => {
+    if (user.googleUserId) return "Google OAuth";
+    if (user.yandexUserId) return "Yandex OAuth";
+    if (user.vkUserId) return "VK OAuth";
+    return "Классический";
+  };
+  const registrationSource = getUserRegistrationSource();
+
   return (
     <Paper
       sx={{
@@ -42,6 +51,10 @@ const BasicInfo = ({ user }: { user: IUserShortInfo }) => {
         <Stack>
           <Typography fontWeight={600}>Почта:</Typography>
           <Typography>{user.email}</Typography>
+        </Stack>
+        <Stack>
+          <Typography fontWeight={600}>Метод регистрации:</Typography>
+          <Typography>{registrationSource}</Typography>
         </Stack>
         <Stack>
           <Typography fontWeight={600}>Имя:</Typography>

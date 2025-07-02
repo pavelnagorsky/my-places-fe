@@ -21,4 +21,11 @@ export class Environment {
   static readonly yandexAppId = process.env["NEXT_PUBLIC_YANDEX_APP_ID"] ?? "";
 
   static readonly GTMId = process.env["NEXT_PUBLIC_GTM_ID"] ?? "";
+
+  static readonly instagram =
+    process.env["NEXT_PUBLIC_INSTAGRAM"] ??
+    "https://www.instagram.com/myplaces.by";
+
+  static readonly telegram =
+    process.env["NEXT_PUBLIC_TELEGRAM"] ?? "https://t.me/myplacesby";
 }

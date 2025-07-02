@@ -3,7 +3,6 @@ import {
   Box,
   IconButton,
   Link,
-  Select,
   Stack,
   Typography,
   useMediaQuery,
@@ -15,11 +14,13 @@ import useDateFnsLocale from "@/hooks/useDateFnsLocale";
 import { format } from "date-fns";
 import useCrmStatuses from "@/hooks/useCrmStatuses";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
-import { routerLinks } from "@/routing/routerLinks";
 import ReportMenu from "@/containers/moderation/reports/report-item/menu/Menu";
 import usePopover from "@/hooks/usePopover";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
+import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
+import { routerLinks } from "@/routing/routerLinks";
+import useStatisticEntityTypes from "@/containers/moderation/reports/logic/utils/useStatisticEntityTypes";
 
 interface IReportItemProps {
   report: IReport;
@@ -33,42 +34,53 @@ const ReportItem = ({ report }: IReportItemProps) => {
   const { parseStatusColor, statuses } = useCrmStatuses();
   const [status, setStatus] = useState(report.status);
   const menu = usePopover("report-menu");
+  const entityTypes = useStatisticEntityTypes();
 
   const Menu = (
     <ReportMenu
       onChangeStatus={(newStatus) => setStatus(newStatus)}
-      status={status}
-      anchorEl={menu.anchor}
-      open={menu.open}
-      handleClose={menu.handleClose}
-      id={report.id}
-      placeId={report.placeId}
-      placeSlug={report.placeSlug}
+      report={{ ...report, status }}
+      popoverProps={menu}
     />
   );
 
-  const placeSlugBox = (
+  const entitySlugBox = (
     <Stack gap={"0.2em"}>
-      <Typography
-        component={Link}
-        variant={"body1"}
-        color={"secondary.main"}
-        href={routerLinks.place(report.placeSlug)}
-        target={"_blank"}
-        sx={{
-          textDecoration: "underline #565656",
-          wordBreak: "break-word",
-          width: "fit-content",
-        }}
-      >
-        {report.placeSlug}
-      </Typography>
+      {!!report.entitySlug && (
+        <Typography
+          component={Link}
+          variant={"body1"}
+          color={"secondary.main"}
+          href={
+            report.entityType === StatisticEntitiesEnum.Place
+              ? routerLinks.place(report.entitySlug)
+              : routerLinks.excursion(report.entitySlug)
+          }
+          target={"_blank"}
+          sx={{
+            textDecoration: "underline #565656",
+            wordBreak: "break-word",
+            width: "fit-content",
+          }}
+        >
+          {report.entitySlug}
+        </Typography>
+      )}
     </Stack>
   );
 
   const textBox = (
     <Stack gap={"0.2em"}>
       <Typography variant={"body1"}>{report.text}</Typography>
+    </Stack>
+  );
+
+  const entityTypeBox = (
+    <Stack gap={"0.2em"}>
+      <Typography variant={"body1"}>
+        {entityTypes.find((type) => type?.id === report.entityType)?.label ||
+          "-"}
+      </Typography>
     </Stack>
   );
 
@@ -115,8 +127,12 @@ const ReportItem = ({ report }: IReportItemProps) => {
             {textBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
-            <CustomLabel>{t("reports.headings.place")}</CustomLabel>
-            {placeSlugBox}
+            <CustomLabel>{t("reports.headings.entityType")}</CustomLabel>
+            {entityTypeBox}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
+            <CustomLabel>{t("reports.headings.slug")}</CustomLabel>
+            {entitySlugBox}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }} gap={"0.5em"}>
             <CustomLabel>{t("reports.headings.status")}</CustomLabel>
@@ -153,8 +169,9 @@ const ReportItem = ({ report }: IReportItemProps) => {
       }}
     >
       <Grid container spacing={"1em"} alignItems={"center"}>
-        <Grid size={{ xs: 4 }}>{textBox}</Grid>
-        <Grid size={{ xs: 3 }}>{placeSlugBox}</Grid>
+        <Grid size={{ xs: 3 }}>{textBox}</Grid>
+        <Grid size={{ xs: 1 }}>{entityTypeBox}</Grid>
+        <Grid size={{ xs: 3 }}>{entitySlugBox}</Grid>
         <Grid size={{ xs: 2 }}>{statusBox}</Grid>
         <Grid size={{ xs: 2 }}>{createdAtInfoBox}</Grid>
         <Grid size={{ xs: 1 }}>

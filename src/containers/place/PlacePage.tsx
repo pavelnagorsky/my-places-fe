@@ -17,6 +17,7 @@ import PlaceWebsite from "@/containers/place/content/PlaceWebsite";
 import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces";
 import { IPaginationResponse } from "@/services/interfaces";
 import ReviewsSection from "./content/reviews/ReviewsSection";
+import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -27,7 +28,7 @@ const AddToCartWidget = dynamic(
   { ssr: false }
 );
 const PlaceStatistics = dynamic(
-  () => import("@/containers/place/content/PlaceStatistics"),
+  () => import("@/containers/place/content/statistics/PlaceStatistics"),
   { ssr: false }
 );
 const PlaceComments = dynamic(
@@ -55,7 +56,10 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
       >
         {t("comments.title")}
       </Typography>
-      <PlaceComments placeId={place.id} />
+      <PlaceComments
+        entityId={place.id}
+        entityType={StatisticEntitiesEnum.Place}
+      />
     </Fragment>
   );
 
