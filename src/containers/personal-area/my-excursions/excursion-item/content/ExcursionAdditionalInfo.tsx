@@ -66,6 +66,14 @@ const ExcursionAdditionalInfo = ({ item }: { item: IExcursionListItem }) => {
         <Grid size={{ xs: "auto" }}>
           <Typography variant={"body1"}>
             <Box component={"span"} fontWeight={500}>
+              {t("excursions.headings.likes")}:
+            </Box>{" "}
+            {item.likesCount}
+          </Typography>
+        </Grid>
+        <Grid size={{ xs: "auto" }}>
+          <Typography variant={"body1"}>
+            <Box component={"span"} fontWeight={500}>
               {t("excursions.headings.views")}:
             </Box>{" "}
             {item.viewsCount}
