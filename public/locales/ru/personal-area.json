@@ -115,7 +115,8 @@
       "travelMode": "Передвижение",
       "status": "Статус",
       "type": "Тип",
-      "views": "Просмотры"
+      "views": "Просмотры",
+      "likes": "Лайки"
     },
     "feedback": {
       "delete": {
