@@ -18,6 +18,7 @@ import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import likeImage from "../../../../../../../public/images/icons/heart.png";
 
 function ExcursionCard({ excursion }: { excursion: IExcursionSearchItem }) {
   const { t } = useTranslation("excursion-management");
@@ -187,6 +188,17 @@ function ExcursionCard({ excursion }: { excursion: IExcursionSearchItem }) {
               </Typography>
             </Stack>
             <Stack direction={"row"} alignItems={"center"} gap={"1em"}>
+              <Typography
+                fontWeight={300}
+                variant="body1"
+                fontSize={{ xs: "13px", md: "15px" }}
+                display={"flex"}
+                alignItems={"center"}
+                gap={"0.5em"}
+              >
+                <Image src={likeImage} alt={"Likes"} height={20} width={22} />
+                {excursion.likesCount}
+              </Typography>
               <Typography
                 fontWeight={300}
                 variant="body1"

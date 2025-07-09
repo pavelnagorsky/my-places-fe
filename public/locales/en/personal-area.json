@@ -114,7 +114,8 @@
       "travelMode": "Transportation",
       "status": "Status",
       "type": "Type",
-      "views": "Views"
+      "views": "Views",
+      "likes": "Likes"
     },
     "feedback": {
       "delete": {

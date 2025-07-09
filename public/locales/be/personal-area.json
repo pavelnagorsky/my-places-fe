@@ -114,7 +114,8 @@
       "travelMode": "Перамяшчэнне",
       "status": "Статус",
       "type": "Тып",
-      "views": "Прагляды"
+      "views": "Прагляды",
+      "likes": "Лайкі"
     },
     "feedback": {
       "delete": {

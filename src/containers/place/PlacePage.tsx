@@ -55,7 +55,7 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
         component={"h2"}
         fontSize={{ xs: "24px", md: "30px" }}
       >
-        {t("comments.title")}
+        {t("comments.title", { ns: "common" })}
       </Typography>
       <PlaceComments
         entityId={place.id}
