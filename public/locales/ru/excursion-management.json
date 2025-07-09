@@ -21,7 +21,11 @@
     "placeDescriptionPlaceholder": "Поделитесь кратким описанием места в рамках экскурсии...",
     "durationSelect": "Введите время на посещение экскурсии:",
     "region": "Область",
-    "defaultRegion": "Вся Беларусь"
+    "defaultRegion": "Вся Беларусь",
+    "excursionCity": "Город",
+    "excursionCityPlaceholder": "Выберите город обзорной экскурсии",
+    "addNewCity": "Добавить новый город",
+    "cityTitle": "Название города"
   },
   "mapView": "Визуальное построение экскурсии",
   "details": {
@@ -67,7 +71,9 @@
     "filters": {
       "title": "Фильтры",
       "regions": "Области",
+      "cities": "Города",
       "regionsPlaceholder": "Выберите области Беларуси",
+      "citiesPlaceholder": "Выберите города Беларуси",
       "searchPlaceholder": "Поиск по каталогу",
       "type": "Тип экскурсии",
       "travelMode": "Категория экскурсии",

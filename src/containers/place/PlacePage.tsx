@@ -18,6 +18,7 @@ import { ISearchReview } from "@/services/reviews-service/interfaces/interfaces"
 import { IPaginationResponse } from "@/services/interfaces";
 import ReviewsSection from "./content/reviews/ReviewsSection";
 import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
+import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -72,6 +73,9 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
         initial="hidden"
         animate="show"
       >
+        <Stack mb={2} display={{ xs: "none", md: "flex" }}>
+          <Breadcrumbs customEnding={place.title} />
+        </Stack>
         <Grid container spacing={{ md: "3em" }} mb={"3em"}>
           <Grid size={{ xs: 12, lg: 8 }}>
             <motion.div variants={animationVariants.defaultItemVariant}>

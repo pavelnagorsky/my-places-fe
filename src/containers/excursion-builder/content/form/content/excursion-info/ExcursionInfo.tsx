@@ -1,12 +1,20 @@
 import { useTranslation } from "next-i18next";
 import Grid from "@mui/material/Grid2";
-import { FormLabel, Typography } from "@mui/material";
-import { SelectElement, TextFieldElement } from "react-hook-form-mui";
+import { Typography } from "@mui/material";
+import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import TextEditor from "@/components/forms/text-editor/TextEditor";
 import ExcursionRegion from "@/containers/excursion-builder/content/form/content/excursion-info/content/ExcursionRegion";
+import ExcursionCitySelect from "@/containers/moderation/excursions/excursion-moderation/content/excursion-city-select/ExcursionCitySelect";
+import useRoleAccess from "@/hooks/useRoleAccess";
+import RolesEnum from "@/services/auth-service/enums/roles.enum";
+import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
+import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
 
 const ExcursionInfo = () => {
   const { t, i18n } = useTranslation(["excursion-management", "common"]);
+  const isAdmin = useRoleAccess([RolesEnum.MODERATOR, RolesEnum.ADMIN]);
+  const { watch } = useFormContext<IExcursionBuilderForm>();
+  const type = watch("type");
 
   return (
     <Grid container spacing={3}>
@@ -30,6 +38,19 @@ const ExcursionInfo = () => {
       <Grid size={{ xs: 12, md: 6 }}>
         <ExcursionRegion />
       </Grid>
+      {isAdmin && +type === ExcursionTypesEnum.Overview && (
+        <Grid size={{ xs: 12, md: 6 }}>
+          <ExcursionCitySelect
+            fieldName={"city"}
+            sx={{
+              "& .excursion-city-label": {
+                fontWeight: 500,
+                fontSize: "22px !important",
+              },
+            }}
+          />
+        </Grid>
+      )}
       <Grid size={12}>
         <Typography fontWeight={500} fontSize={"22px"} mb={"0.5em"}>
           {t("form.description")}

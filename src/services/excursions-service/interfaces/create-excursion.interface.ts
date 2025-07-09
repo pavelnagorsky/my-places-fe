@@ -8,4 +8,5 @@ export interface ICreateExcursion {
   travelMode: TravelModesEnum;
   type: ExcursionTypesEnum;
   regionId: number | null;
+  cityId: number | null;
 }

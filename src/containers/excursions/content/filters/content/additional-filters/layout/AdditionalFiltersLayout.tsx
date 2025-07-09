@@ -77,7 +77,7 @@ const AdditionalFiltersLayout = ({
         vertical: "bottom",
       }}
     >
-      <Stack sx={{ overflowY: "auto", maxHeight: "500px" }}>{children}</Stack>
+      <Stack sx={{ overflowY: "auto", maxHeight: "620px" }}>{children}</Stack>
     </Popover>
   );
 };

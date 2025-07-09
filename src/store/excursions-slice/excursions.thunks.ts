@@ -3,6 +3,7 @@ import { ISearchExcursionsRequest } from "@/services/excursions-service/interfac
 import excursionsService from "@/services/excursions-service/excursions.service";
 import regionsService from "@/services/regions-service/regions.service";
 import placeTypesService from "@/services/place-types-service/place-types.service";
+import citiesService from "@/services/cities-service/cities.service";
 
 export const getSearchResultsThunk = createAsyncThunk(
   "excursions/get-items",
@@ -22,6 +23,14 @@ export const getRegionsThunk = createAsyncThunk(
   "excursions/get-regions",
   async (payload: { language: string }, thunkAPI) => {
     const { data } = await regionsService.getAll(payload.language);
+    return data;
+  }
+);
+
+export const getCitiesThunk = createAsyncThunk(
+  "excursions/get-cities",
+  async (payload: { language: string }, thunkAPI) => {
+    const { data } = await citiesService.getAll(payload.language);
     return data;
   }
 );

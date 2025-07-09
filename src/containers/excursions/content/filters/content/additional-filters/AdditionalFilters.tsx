@@ -9,11 +9,12 @@ import useExcursionTypes from "@/containers/excursion-builder/content/form/logic
 import useTravelModeOptions from "@/containers/route-builder/content/form/sections/travel-mode/useTravelModeOptions";
 import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
 import { StyledButton } from "@/components/UI/button/StyledButton";
-import RegionsFilter from "@/containers/excursions/content/filters/content/RegionsFilter";
-import PlaceTypesFilter from "@/containers/excursions/content/filters/content/PlaceTypesFilter";
+import RegionsFilter from "@/containers/excursions/content/filters/content/additional-filters/content/RegionsFilter";
+import PlaceTypesFilter from "@/containers/excursions/content/filters/content/additional-filters/content/PlaceTypesFilter";
 import AdditionalFiltersLayout from "@/containers/excursions/content/filters/content/additional-filters/layout/AdditionalFiltersLayout";
 import { useAppSelector } from "@/store/hooks";
 import { selectSearchFilters } from "@/store/excursions-slice/excursions.selectors";
+import CitiesFilter from "@/containers/excursions/content/filters/content/additional-filters/content/CitiesFilter";
 
 const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
   const { t } = useTranslation(["excursion-management", "common"]);
@@ -30,6 +31,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
     count += appliedFilters.types.length;
     count += appliedFilters.placeTypeIds.length;
     count += appliedFilters.regions.length;
+    count += appliedFilters.cities.length;
     return count;
   };
   const filtersCount = countFilters();
@@ -39,6 +41,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
     resetField("types", { defaultValue: [] });
     resetField("placeTypeIds", { defaultValue: [] });
     resetField("regions", { defaultValue: [] });
+    resetField("cities", { defaultValue: [] });
   };
 
   const handleApply = () => {
@@ -90,6 +93,7 @@ const AdditionalFilters = ({ onSubmit }: { onSubmit: () => void }) => {
               />
             </Stack>
             <RegionsFilter />
+            <CitiesFilter />
             <PlaceTypesFilter />
           </Stack>
           <Stack

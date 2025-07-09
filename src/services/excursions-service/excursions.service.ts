@@ -17,6 +17,7 @@ import { IModeration } from "@/services/places-service/interfaces/moderation.int
 import { ICreateSlug } from "@/services/places-service/interfaces/create-slug.interface";
 import { IChangeExcursionStatus } from "@/services/excursions-service/interfaces/change-excursion-status.interface";
 import { IExcursionSearchItem } from "@/services/excursions-service/interfaces/excursion-search-item.interface";
+import { IExcursionModeration } from "@/services/excursions-service/interfaces/moderation.interface";
 
 const excursionsService = {
   createExcursion: (payload: ICreateExcursion, language: string) => {
@@ -59,7 +60,7 @@ const excursionsService = {
 
   getExcursionBySlug: (slug: string, lang: string) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.get<IExcursion>(`/Excursions/Slug/${slug}`, {
+    return axiosInstance.get<IExcursion>(`/Excursions/Slugs/${slug}`, {
       params: {
         lang: langId,
       },
@@ -87,7 +88,7 @@ const excursionsService = {
 
   MODERATION_EXCURSIONS_ITEMS_PER_PAGE: 15,
 
-  moderateExcursion: (id: number, dto: IModeration) => {
+  moderateExcursion: (id: number, dto: IExcursionModeration) => {
     return axiosInstance.post(`/excursions/${id}/moderation`, dto);
   },
 

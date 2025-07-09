@@ -67,7 +67,9 @@
     "filters": {
       "title": "Filters",
       "regions": "Regions",
+      "cities": "Cities",
       "regionsPlaceholder": "Select regions of Belarus",
+      "citiesPlaceholder": "Select cities of Belarus",
       "searchPlaceholder": "Search catalog",
       "type": "Excursion type",
       "travelMode": "Excursion category",

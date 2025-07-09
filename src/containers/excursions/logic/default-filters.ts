@@ -8,4 +8,5 @@ export const defaultSearchFilters: IExcursionsFilters = {
   types: [],
   regions: [],
   placeTypeIds: [],
+  cities: [],
 };

@@ -112,6 +112,7 @@ const SubmitButton = () => {
           description: item.excursionDescription,
         })),
         regionId: data.regionId || null,
+        cityId: data.city?.id || null,
         shouldTranslate: data.updateTranslations,
         language: i18n.language,
       };

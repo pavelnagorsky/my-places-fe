@@ -3,6 +3,7 @@ import { IExcursionsState } from "@/store/excursions-slice/excursions.interfaces
 import { defaultSearchFilters } from "@/containers/excursions/logic/default-filters";
 import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
 import {
+  getCitiesThunk,
   getPlaceTypesThunk,
   getRegionsThunk,
   getSearchResultsThunk,
@@ -18,6 +19,7 @@ const initialState: IExcursionsState = {
   isDataFetched: false,
   scrollPosition: 0,
   regions: [],
+  cities: [],
   placeTypes: [],
 };
 
@@ -61,6 +63,10 @@ export const excursionsSlice = createSlice({
 
     builder.addCase(getRegionsThunk.fulfilled, (state, action) => {
       state.regions = action.payload;
+    });
+
+    builder.addCase(getCitiesThunk.fulfilled, (state, action) => {
+      state.cities = action.payload;
     });
 
     builder.addCase(getPlaceTypesThunk.fulfilled, (state, action) => {

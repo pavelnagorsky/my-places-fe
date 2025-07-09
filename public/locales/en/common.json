@@ -22,7 +22,8 @@
     "excursionBuilder": "Excursions",
     "createExcursion": "Create an Excursion",
     "createExcursionMobile": "Create an Excursion",
-    "excursions": "Excursions"
+    "excursions": "Excursions",
+    "places": "Places"
   },
   "footer": {
     "title": "We are contactable!"
@@ -60,7 +61,8 @@
     "update": "Update",
     "yes": "Yes",
     "no": "No",
-    "save": "Save"
+    "save": "Save",
+    "add": "Add"
   },
   "auth": {
     "oauth": {

@@ -82,6 +82,7 @@ const useExcursions = () => {
           types: data.types,
           travelModes: data.travelModes,
           regionIds: data.regions.map((r) => r.id),
+          cityIds: data.cities.map((c) => c.id),
           placeTypeIds: data.placeTypeIds,
           orderBy: +data.orderBy,
           pageSize: excursionsService.SEARCH_EXCURSIONS_PER_PAGE,
@@ -110,10 +111,6 @@ const useExcursions = () => {
     isFirstFetchRef.current = false;
     onSubmit();
   }, [i18n.language, router.isReady]);
-
-  useEffect(() => {
-    dispatch(getPlaceTypesThunk({ language: i18n.language }));
-  }, [i18n.language]);
 
   return {
     form,

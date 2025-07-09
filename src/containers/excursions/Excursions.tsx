@@ -7,7 +7,7 @@ import useExcursions from "@/containers/excursions/logic/useExcursions";
 import Filters from "@/containers/excursions/content/filters/Filters";
 import TotalResultsCount from "./content/TotalResultsCount";
 import CardsSection from "./content/cards-section/CardsSection";
-import OrderBySelector from "./content/filters/content/order-by-selector/OrderBySelector";
+import OrderBySelector from "@/containers/excursions/content/order-by-selector/OrderBySelector";
 import { useTranslation } from "next-i18next";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 
