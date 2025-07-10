@@ -1,4 +1,11 @@
-import { Box, Stack, SxProps, Typography } from "@mui/material";
+import {
+  Box,
+  Stack,
+  SxProps,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { CheckboxButtonGroup } from "react-hook-form-mui";
 import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/store/hooks";
@@ -29,6 +36,8 @@ const TypesAndCategoriesFilter = () => {
   const { t } = useTranslation(["search", "common"]);
   const types = useAppSelector(selectPlaceTypesOptions);
   const categories = useAppSelector(selectPlaceCategoriesOptions);
+  const theme = useTheme();
+  const isLaptop = useMediaQuery(theme.breakpoints.down("lg"));
 
   return (
     <Stack gap={"1.5em"}>
@@ -39,7 +48,7 @@ const TypesAndCategoriesFilter = () => {
         <Box component={"img"} src={filtersIcon.src} sx={{}} />
       </Stack>
       <Stack gap={"1em"}>
-        <TextFilter />
+        {!isLaptop && <TextFilter sx={{ mb: "1em" }} />}
         <div>
           <Typography fontSize={"18px"} mb={"0.5em"}>
             {t("filters.types")}

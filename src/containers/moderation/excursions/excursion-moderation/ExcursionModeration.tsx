@@ -19,8 +19,10 @@ import { Button } from "@/components/UI/button/Button";
 import { routerLinks } from "@/routing/routerLinks";
 import ReviewPhotos from "@/containers/create-review/form/ReviewPhotos";
 import ReviewText from "@/containers/create-review/form/ReviewText";
-import useExcursionModeration from "@/containers/moderation/excursions/excursion-moderation/useExcursionModeration";
+import useExcursionModeration from "@/containers/moderation/excursions/excursion-moderation/logic/useExcursionModeration";
 import ExcursionContent from "@/containers/excursion/content/ExcursionContent";
+import ExcursionCitySelect from "@/containers/moderation/excursions/excursion-moderation/content/excursion-city-select/ExcursionCitySelect";
+import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
 
 const ExcursionModeration = () => {
   const { t } = useTranslation([
@@ -82,7 +84,15 @@ const ExcursionModeration = () => {
               </Box>
             </Stack>
           </Box>
-          <ModerationForm mode={"excursion"} id={logic.excursionId as number} />
+          <ModerationForm
+            mode={"excursion"}
+            id={logic.excursionId as number}
+            excursionCitySelect={
+              logic.excursion?.type === ExcursionTypesEnum.Overview && (
+                <ExcursionCitySelect fieldName={"excursionCity"} />
+              )
+            }
+          />
         </motion.div>
         <motion.div variants={animationVariants.defaultItemVariant}>
           {!!logic.excursion && (

@@ -33,6 +33,7 @@ const useEditMyExcursion = () => {
       type: `${ExcursionTypesEnum.Overview}`,
       regionId: 0, // All
       updateTranslations: false,
+      city: null as any,
     },
     mode: "onChange",
     shouldFocusError: true,
@@ -83,6 +84,9 @@ const useEditMyExcursion = () => {
         type: `${data.type || ExcursionTypesEnum.Overview}`,
         travelMode: data.travelMode || TravelModesEnum.DRIVING,
         regionId: data.region?.id || 0,
+        city: data.city
+          ? { id: data.city.id, label: data.city.title }
+          : (null as any),
       });
       setLoading(false);
     };

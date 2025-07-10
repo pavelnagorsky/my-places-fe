@@ -2,6 +2,7 @@ import { IExcursionSearchItem } from "@/services/excursions-service/interfaces/e
 import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
 import { IRegion } from "@/services/regions-service/interfaces/region.interface";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
+import { ICity } from "@/services/cities-service/interfaces/city.interface";
 
 export interface IExcursionsState {
   hasMore: boolean;
@@ -13,6 +14,7 @@ export interface IExcursionsState {
   scrollPosition: number;
   loading: boolean;
   regions: IRegion[];
+  cities: ICity[];
   // filters options
   placeTypes: IPlaceType[];
 }

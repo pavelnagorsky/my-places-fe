@@ -28,7 +28,7 @@ const placesService = {
 
   getPlaceBySlug: (slug: string, lang: string) => {
     const langId = parseLanguageToId(lang);
-    return axiosInstance.get<IPlace>(`/places/slug/${slug}?lang=${langId}`);
+    return axiosInstance.get<IPlace>(`/places/slugs/${slug}?lang=${langId}`);
   },
 
   getPlacesSelect: (

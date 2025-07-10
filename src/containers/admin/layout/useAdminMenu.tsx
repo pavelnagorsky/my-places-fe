@@ -7,6 +7,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import PlaceIcon from "@mui/icons-material/Place";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import MapIcon from "@mui/icons-material/Map";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
 
 const useAdminMenu = () => {
   return [
@@ -44,6 +45,11 @@ const useAdminMenu = () => {
       title: "Области",
       href: routerLinks.administrationRegions,
       icon: <MapIcon />,
+    },
+    {
+      title: "Города",
+      href: routerLinks.administrationCities,
+      icon: <LocationCityIcon />,
     },
   ] as { title: string; href: string; icon: ReactElement }[];
 };

@@ -89,7 +89,11 @@ const ExcursionInfoSection = ({ item }: { item: IExcursion }) => {
         </Stack>
         <Stack>
           <Typography fontWeight={600}>Область:</Typography>
-          <Typography>{item.region?.title || "-"}</Typography>
+          <Typography>{item.region?.title || "Вся Беларусь"}</Typography>
+        </Stack>
+        <Stack>
+          <Typography fontWeight={600}>Город:</Typography>
+          <Typography>{item.city?.title || "-"}</Typography>
         </Stack>
         <Stack>
           <Tooltip
@@ -186,6 +190,10 @@ const ExcursionInfoSection = ({ item }: { item: IExcursion }) => {
           <Typography>
             {format(new Date(item.updatedAt), "dd MMM yyyy", { locale })}
           </Typography>
+        </Stack>
+        <Stack>
+          <Typography fontWeight={600}>Количество лайков:</Typography>
+          <Typography>{item.likesCount}</Typography>
         </Stack>
         <Stack>
           <Typography fontWeight={600}>Количество просмотров:</Typography>

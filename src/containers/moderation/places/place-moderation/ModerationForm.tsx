@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { StyledButton } from "@/components/UI/button/StyledButton";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import placesService from "@/services/places-service/places.service";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useAppDispatch } from "@/store/hooks";
@@ -17,17 +17,21 @@ import { routerLinks } from "@/routing/routerLinks";
 import reviewsService from "@/services/reviews-service/reviews.service";
 import { useTranslation } from "next-i18next";
 import excursionsService from "@/services/excursions-service/excursions.service";
+import { ISelect } from "@/shared/interfaces";
 
-interface IModerationFormContext {
-  feedback?: string;
+export interface IModerationFormContext {
+  feedback: string;
+  excursionCity: ISelect | null;
 }
 
 const ModerationForm = ({
   id,
   mode,
+  excursionCitySelect,
 }: {
   id: number;
   mode: "place" | "review" | "excursion";
+  excursionCitySelect?: ReactNode;
 }) => {
   const { t } = useTranslation(["moderation", "common"]);
   const dispatch = useAppDispatch();
@@ -36,6 +40,7 @@ const ModerationForm = ({
   const form = useForm<IModerationFormContext>({
     defaultValues: {
       feedback: "",
+      excursionCity: null,
     },
   });
 
@@ -95,6 +100,7 @@ const ModerationForm = ({
       apiCall(id, {
         accept: action === "accept",
         feedback: data.feedback,
+        cityId: data.excursionCity?.id,
       })
         .then(() => {
           setLoading(false);
@@ -118,52 +124,59 @@ const ModerationForm = ({
 
   return (
     <FormProvider {...form}>
-      <Stack
-        direction={{ sm: "row" }}
-        gap={"2em"}
-        alignItems={{ xs: "unset", sm: "center" }}
-        mb={"2em"}
-        maxWidth={"md"}
-      >
-        <Box flexGrow={1}>
-          <Typography
-            variant={"body1"}
-            mb={"0.5em"}
-            fontSize={{ xs: "14px", md: "20px" }}
-          >
-            {t("form.feedback")}
-          </Typography>
-          <TextFieldElement
-            fullWidth
-            name={"feedback"}
-            id={"feedback"}
-            placeholder={t("form.feedbackPlaceholder")}
-            multiline
-            minRows={1}
-            parseError={() => t("errors.required", { ns: "common" })}
-          />
-          <FormHelperText>{t("form.feedbackHelper")}</FormHelperText>
-        </Box>
-        <Stack>
-          <Stack gap={"1em"} direction={"row"}>
-            <StyledButton
-              onClick={() => onSubmit("reject")}
-              variant={"contained"}
-              color={"error"}
-              sx={{ fontSize: "16px" }}
-              size="large"
-            >
-              {t("buttons.reject", { ns: "common" })}
-            </StyledButton>
-            <StyledButton
-              onClick={() => onSubmit("accept")}
-              variant={"contained"}
-              size="large"
-              sx={{ fontSize: "16px" }}
-              color={"success"}
-            >
-              {t("buttons.accept", { ns: "common" })}
-            </StyledButton>
+      <Stack mb={"2em"} gap={"1em"}>
+        <Stack
+          direction={{ sm: "row" }}
+          gap={"2em"}
+          alignItems={{
+            xs: "unset",
+            sm: !!excursionCitySelect ? "end" : "center",
+          }}
+          maxWidth={"md"}
+        >
+          <Stack gap={"1em"} flexGrow={1}>
+            <Box>
+              <Typography
+                variant={"body1"}
+                mb={"0.5em"}
+                fontSize={{ xs: "14px", md: "20px" }}
+              >
+                {t("form.feedback")}
+              </Typography>
+              <TextFieldElement
+                fullWidth
+                name={"feedback"}
+                id={"feedback"}
+                placeholder={t("form.feedbackPlaceholder")}
+                multiline
+                minRows={1}
+                parseError={() => t("errors.required", { ns: "common" })}
+              />
+              <FormHelperText>{t("form.feedbackHelper")}</FormHelperText>
+            </Box>
+            {excursionCitySelect || null}
+          </Stack>
+          <Stack>
+            <Stack gap={"1em"} direction={"row"}>
+              <StyledButton
+                onClick={() => onSubmit("reject")}
+                variant={"contained"}
+                color={"error"}
+                sx={{ fontSize: "16px" }}
+                size="large"
+              >
+                {t("buttons.reject", { ns: "common" })}
+              </StyledButton>
+              <StyledButton
+                onClick={() => onSubmit("accept")}
+                variant={"contained"}
+                size="large"
+                sx={{ fontSize: "16px" }}
+                color={"success"}
+              >
+                {t("buttons.accept", { ns: "common" })}
+              </StyledButton>
+            </Stack>
           </Stack>
         </Stack>
       </Stack>

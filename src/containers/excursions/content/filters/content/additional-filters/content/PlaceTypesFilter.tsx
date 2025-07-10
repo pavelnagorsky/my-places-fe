@@ -1,12 +1,19 @@
 import { Box, Stack, SxProps, Typography } from "@mui/material";
 import { CheckboxButtonGroup } from "react-hook-form-mui";
 import { useTranslation } from "next-i18next";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { selectPlaceTypes } from "@/store/excursions-slice/excursions.selectors";
+import { useEffect } from "react";
+import { getPlaceTypesThunk } from "@/store/excursions-slice/excursions.thunks";
 
 const PlaceTypesFilter = () => {
-  const { t } = useTranslation("excursion-management");
+  const { t, i18n } = useTranslation("excursion-management");
   const types = useAppSelector(selectPlaceTypes);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getPlaceTypesThunk({ language: i18n.language }));
+  }, [i18n.language]);
 
   return (
     <Stack>

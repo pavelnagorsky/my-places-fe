@@ -37,10 +37,7 @@ const Slug: NextPage<IExcursionPageProps> = ({ excursion }) => {
           url: canonical,
           title: excursion.title,
           description: seoDescription,
-          images: excursion.images.map((img, index) => ({
-            url: img,
-            alt: excursion.places[index]?.title || excursion.title,
-          })),
+          images: [{ url: excursion.images[0] || "", alt: excursion.title }],
         }}
       />
       <JsonLd data={jsonLdData} />

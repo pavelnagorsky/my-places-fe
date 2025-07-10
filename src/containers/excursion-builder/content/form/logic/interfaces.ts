@@ -1,6 +1,7 @@
 import ISelectPlace from "@/services/places-service/interfaces/select-place.interface";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { ExcursionTypesEnum } from "@/services/excursions-service/enums/excursion-types.enum";
+import { ISelect } from "@/shared/interfaces";
 
 export interface IExcursionBuilderForm {
   title: string;
@@ -9,4 +10,5 @@ export interface IExcursionBuilderForm {
   travelMode: TravelModesEnum;
   type: `${ExcursionTypesEnum}`;
   regionId: number;
+  city: ISelect | null;
 }

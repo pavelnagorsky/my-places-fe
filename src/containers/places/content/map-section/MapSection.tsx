@@ -127,7 +127,7 @@ const MapSection = () => {
             }}
             onCloseClick={() => setSelectedPlace(null)}
           >
-            <PlaceCardMap place={selectedPlace} />
+            <PlaceCardMap place={selectedPlace} showCartButton />
           </InfoWindow>
         )}
         <MarkerClusterer

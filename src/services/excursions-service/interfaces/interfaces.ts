@@ -33,5 +33,6 @@ export interface ISearchExcursionsRequest
   types: ExcursionTypesEnum[];
   travelModes: TravelModesEnum[];
   regionIds: number[];
+  cityIds: number[];
   placeTypeIds: number[];
 }

@@ -15,6 +15,7 @@ export const routerLinks = {
   privacyPolicy: "/privacy-policy",
   termsOfUse: "/terms-of-use",
   administrationRegions: "/administration/regions",
+  administrationCities: "/administration/cities",
   administrationPlaceCategories: "/administration/place-categories",
   administrationPlaceTypes: "/administration/place-types",
   administrationUsers: "/administration/users",

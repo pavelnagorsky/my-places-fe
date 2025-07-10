@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next";
 import { Box, InputAdornment } from "@mui/material";
 import { SelectElement } from "react-hook-form-mui";
 import { primaryBackground } from "@/styles/theme/lightTheme";
-import useSearchOrderByOptions from "@/containers/excursions/content/filters/content/order-by-selector/logic/useSearchOrderByOptions";
+import useSearchOrderByOptions from "@/containers/excursions/content/order-by-selector/logic/useSearchOrderByOptions";
 
 const OrderBySelector = ({ onSubmit }: { onSubmit: () => void }) => {
   const { t } = useTranslation("excursion-management");

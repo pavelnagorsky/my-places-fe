@@ -8,5 +8,5 @@ module.exports = {
   },
   localePath: path.resolve("./public/locales"),
   localeStructure: "{{lng}}/{{ns}}",
-  reloadOnPrerender: process.env.NODE_ENV === "development",
+  reloadOnPrerender: true,
 };

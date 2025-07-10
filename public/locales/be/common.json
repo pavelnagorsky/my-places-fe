@@ -22,7 +22,8 @@
     "excursionBuilder": "Экскурсіi",
     "createExcursion": "Складанне экскурсіі",
     "createExcursionMobile": "Стварыць экскурсію",
-    "excursions": "Экскурсіі"
+    "excursions": "Экскурсіі",
+    "places": "Месца"
   },
   "footer": {
     "title": "Мы на сувязі з вамі!"
@@ -60,7 +61,8 @@
     "update": "Абнавіць",
     "yes": "Так",
     "no": "Не",
-    "save": "Захаваць"
+    "save": "Захаваць",
+    "add": "Дадаць"
   },
   "auth": {
     "oauth": {

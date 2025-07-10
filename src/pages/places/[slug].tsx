@@ -27,7 +27,7 @@ const Slug: NextPage<IPlacePageProps> = ({ place, reviews }) => {
           url: canonical,
           title: place.title,
           description: place.description,
-          images: place.images.map((img) => ({ url: img, alt: place.title })),
+          images: [{ url: place.images[0] || "", alt: place.title }],
         }}
       />
       <JsonLd data={jsonLdData} />

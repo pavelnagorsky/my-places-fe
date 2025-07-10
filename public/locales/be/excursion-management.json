@@ -67,7 +67,9 @@
     "filters": {
       "title": "Фільтры",
       "regions": "Вобласці",
+      "cities": "Гарады",
       "regionsPlaceholder": "Абярыце вобласці Беларусі",
+      "citiesPlaceholder": "Выберыце Гарады Беларусі",
       "searchPlaceholder": "Пошук па каталогу",
       "type": "Тып экскурсіі",
       "travelMode": "Катэгорыя экскурсіі",
