@@ -88,7 +88,11 @@ export const getStaticProps: GetStaticProps<IExcursionPageProps> = async ({
       revalidate: 60,
     };
   } catch (e: any) {
-    console.log("excursion page loading error:", e.response?.data);
+    console.log(
+      "excursion page loading error:",
+      params?.slug,
+      e.response?.data
+    );
     return {
       notFound: true,
     };

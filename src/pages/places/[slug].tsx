@@ -87,7 +87,7 @@ export const getStaticProps: GetStaticProps<IPlacePageProps> = async ({
       revalidate: 60,
     };
   } catch (e: any) {
-    console.log("place page loading error:", e.response?.data);
+    console.log("place page loading error:", params?.slug, e.response?.data);
     return {
       notFound: true,
     };
