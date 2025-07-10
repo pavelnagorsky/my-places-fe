@@ -8,7 +8,13 @@ import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import AddToCart from "@/containers/places/content/cards-section/place-card/add-to-cart-panel/AddToCart";
 
-const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
+const PlaceCardMap = ({
+  place,
+  showCartButton,
+}: {
+  place: ISearchPlace;
+  showCartButton?: boolean;
+}) => {
   const { t } = useTranslation("search");
 
   const actionButton = (
@@ -37,7 +43,7 @@ const PlaceCardMap = ({ place }: { place: ISearchPlace }) => {
       }}
     >
       <Grid size={{ xs: 0, md: 6 }}>
-        <AddToCart placeId={place.id} mapCardMode />
+        {showCartButton && <AddToCart placeId={place.id} mapCardMode />}
         <MuiImage
           imageProps={{
             style: { objectFit: "cover" },

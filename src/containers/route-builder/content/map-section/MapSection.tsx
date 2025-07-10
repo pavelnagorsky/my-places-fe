@@ -17,6 +17,8 @@ import routeStartIcon from "/public/images/icons/route-start.png";
 import routeEndIcon from "/public/images/icons/route-end.png";
 import markerIcon from "/public/images/icons/marker-filled.png";
 import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
+import PlaceCardMap from "@/containers/places/content/cards-section/place-card/PlaceCardMap";
+import { primaryColor } from "@/styles/theme/lightTheme";
 
 const MapSection = () => {
   const { t, i18n } = useTranslation("route-management");
@@ -74,72 +76,94 @@ const MapSection = () => {
         </Typography>
         <NavigatorControls />
       </Stack>
-      <Map
-        containerStyle={{
-          height: isMobile ? "400px" : "600px",
-          transition: "height 0.5s ease-in",
-          borderRadius: "15px",
+      <Box
+        sx={{
+          "& .gm-style-iw-d": { overflow: "auto !important" },
+          "& .gm-style-iw-c": {
+            padding: 0,
+            borderRadius: "15px",
+            border: "unset",
+          },
+          "& .gm-style-iw-chr": {
+            height: 0,
+            "& button": {
+              "& span": {
+                m: "10px 10px 0 0 !important",
+              },
+              bgcolor: "white !important",
+              width: "auto !important",
+              height: "24px !important",
+            },
+          },
         }}
       >
-        {directions && (
-          <DirectionsRenderer
-            directions={directions}
-            options={{ suppressMarkers: true }}
-          />
-        )}
-        {startLatLng && (
-          <Marker
-            position={startLatLng}
-            label={{ color: "white", fontWeight: "700", text: `*` }}
-            title={t("locationSelection.start")}
-            icon={{
-              url: routeStartIcon.src,
-              scaledSize: { width: 50, height: 50 } as any,
-            }}
-          />
-        )}
-        {endLatLng && (
-          <Marker
-            position={endLatLng}
-            label={{ color: "white", fontWeight: "700", text: `*` }}
-            title={t("locationSelection.end")}
-            icon={{
-              url: routeEndIcon.src,
-              scaledSize: { width: 50, height: 50 } as any,
-            }}
-          />
-        )}
-        {places.map((place, index) => (
-          <Marker
-            key={place.id}
-            position={place.coordinates}
-            label={{ color: "white", fontWeight: "700", text: `${index + 1}` }}
-            title={place.title}
-            onClick={() => setSelectedPlace(place)}
-            icon={{
-              url: markerIcon.src,
-              labelOrigin: { y: 18, x: 15 } as any,
-              scaledSize: { width: 30, height: 40 } as any,
-            }}
-          />
-        ))}
-        {selectedPlace && (
-          <InfoWindow
-            position={selectedPlace.coordinates}
-            onCloseClick={() => setSelectedPlace(null)}
-          >
-            <div>
-              <h2>
-                #
-                {places.findIndex((place) => place.id === selectedPlace?.id) +
-                  1}{" "}
-                - {selectedPlace.title}
-              </h2>
-              <p>{selectedPlace.address}</p>
-            </div>
-          </InfoWindow>
-        )}
-      </Map>
+        <Map
+          containerStyle={{
+            height: isMobile ? "400px" : "600px",
+            transition: "height 0.5s ease-in",
+            borderRadius: "15px",
+          }}
+        >
+          {directions && (
+            <DirectionsRenderer
+              directions={directions}
+              options={{ suppressMarkers: true }}
+            />
+          )}
+          {startLatLng && (
+            <Marker
+              position={startLatLng}
+              label={{ color: "white", fontWeight: "700", text: `*` }}
+              title={t("locationSelection.start")}
+              icon={{
+                url: routeStartIcon.src,
+                scaledSize: { width: 50, height: 50 } as any,
+              }}
+            />
+          )}
+          {endLatLng && (
+            <Marker
+              position={endLatLng}
+              label={{ color: "white", fontWeight: "700", text: `*` }}
+              title={t("locationSelection.end")}
+              icon={{
+                url: routeEndIcon.src,
+                scaledSize: { width: 50, height: 50 } as any,
+              }}
+            />
+          )}
+          {places.map((place, index) => (
+            <Marker
+              key={place.id}
+              position={place.coordinates}
+              label={{
+                color: "white",
+                fontWeight: "700",
+                text: `${index + 1}`,
+              }}
+              title={place.title}
+              onClick={() => setSelectedPlace(place)}
+              icon={{
+                url: markerIcon.src,
+                labelOrigin: { y: 18, x: 15 } as any,
+                scaledSize: { width: 30, height: 40 } as any,
+              }}
+            />
+          ))}
+          {selectedPlace && (
+            <InfoWindow
+              position={selectedPlace.coordinates}
+              options={{
+                ariaLabel: "Selected Place",
+                pixelOffset: new window.google.maps.Size(0, -30),
+              }}
+              onCloseClick={() => setSelectedPlace(null)}
+            >
+              <PlaceCardMap place={selectedPlace} />
+            </InfoWindow>
+          )}
+        </Map>
+      </Box>
     </Box>
   );
 };

@@ -30,7 +30,6 @@ const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
     const value =
       getValues("types").length +
       getValues("categories").length +
-      (getValues("search").length > 0 ? 1 : 0) +
       (getValues("locationStartCoordinates") ? 1 : 0) +
       (getValues("locationEndCoordinates") ? 1 : 0);
     return `${t("filters.filters")} ${value > 0 ? `(${value})` : ""}`;
@@ -42,7 +41,7 @@ const FiltersPopup = ({ triggerSubmit }: { triggerSubmit: () => void }) => {
   };
 
   const onClear = () => {
-    reset(defaultSearchFilters);
+    reset({ ...defaultSearchFilters, search: getValues("search") });
   };
 
   const content = (
