@@ -140,12 +140,14 @@ export const getPlacesNearRouteThunk = createAsyncThunk(
       .decodePath(route.overview_polyline)
       .map((latLng) => ({ lat: latLng.lat(), lng: latLng.lng() }));
 
+    if (coordinates.length < 2) return thunkAPI.rejectWithValue(null);
+
     const res = await searchService.searchNearRoute(payload.language, {
       radius: 30,
       coordinates,
       excludeIds: places.map((p) => p.id),
       page: 0,
-      pageSize: 1000,
+      pageSize: 5000,
     });
     return res;
   }

@@ -176,7 +176,7 @@ const MapSection = () => {
                     onClick={() => setSelectedPlace(place)}
                     icon={{
                       url: place.type.image || (place.type.image2 as string),
-                      scaledSize: { width: 30, height: 30 } as any,
+                      scaledSize: { width: 27, height: 27 } as any,
                     }}
                     zIndex={1}
                     clusterer={clusterer}
