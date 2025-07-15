@@ -3,6 +3,7 @@ import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import {
   addRouteItemsThunk,
+  getPlacesNearRouteThunk,
   getRouteDirectionsThunk,
   saveRouteThunk,
   startRouteEditingThunk,
@@ -21,6 +22,7 @@ interface IRouteBuilderState {
   directions: any | null;
   directionsLoading: boolean;
   editRouteId: number | null;
+  placesNearRoute: ISearchPlace[];
 }
 
 const initialState: IRouteBuilderState = {
@@ -31,6 +33,7 @@ const initialState: IRouteBuilderState = {
   directions: null,
   directionsLoading: false,
   editRouteId: null,
+  placesNearRoute: [],
 };
 
 const routeBuilderSlice = createSlice({
@@ -95,6 +98,10 @@ const routeBuilderSlice = createSlice({
       state.distance = payload.distance;
       state.duration = payload.duration;
     });
+
+    builder.addCase(getPlacesNearRouteThunk.fulfilled, (state, { payload }) => {
+      state.placesNearRoute = payload.data.items;
+    });
   },
 });
 
@@ -131,6 +138,11 @@ export const selectRouteDirectionsLoading = createSelector(
 export const selectIsEditingMode = createSelector(
   selectState,
   (s) => typeof s.editRouteId === "number"
+);
+
+export const selectPlacesNearRoute = createSelector(
+  selectState,
+  (s) => s.placesNearRoute
 );
 
 export const {

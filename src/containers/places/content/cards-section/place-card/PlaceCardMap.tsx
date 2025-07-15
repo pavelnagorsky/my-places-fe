@@ -7,13 +7,16 @@ import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import AddToCart from "@/containers/places/content/cards-section/place-card/add-to-cart-panel/AddToCart";
+import AddToRoute from "@/containers/places/content/cards-section/place-card/AddToRoute";
 
 const PlaceCardMap = ({
   place,
   showCartButton,
+  showRouteButton,
 }: {
   place: ISearchPlace;
   showCartButton?: boolean;
+  showRouteButton?: boolean;
 }) => {
   const { t } = useTranslation("search");
 
@@ -43,7 +46,8 @@ const PlaceCardMap = ({
       }}
     >
       <Grid size={{ xs: 0, md: 6 }}>
-        {showCartButton && <AddToCart placeId={place.id} mapCardMode />}
+        {!!showCartButton && <AddToCart placeId={place.id} mapCardMode />}
+        {!!showRouteButton && <AddToRoute placeId={place.id} />}
         <MuiImage
           imageProps={{
             style: { objectFit: "cover" },
