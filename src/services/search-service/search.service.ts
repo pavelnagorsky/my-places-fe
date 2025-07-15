@@ -1,4 +1,5 @@
 import {
+  ISearchPlacesNearRouteRequest,
   ISearchPlacesOptionsRequest,
   ISearchPlacesRequest,
 } from "@/services/search-service/interfaces/interfaces";
@@ -16,6 +17,17 @@ const searchService = {
     const langId = parseLanguageToId(language);
     return axiosInstance.post<IPaginationResponse<ISearchPlace>>(
       `/search?lang=${langId}`,
+      payload
+    );
+  },
+
+  searchNearRoute: (
+    language: string,
+    payload: ISearchPlacesNearRouteRequest
+  ) => {
+    const langId = parseLanguageToId(language);
+    return axiosInstance.post<IPaginationResponse<ISearchPlace>>(
+      `/search/route?lang=${langId}`,
       payload
     );
   },

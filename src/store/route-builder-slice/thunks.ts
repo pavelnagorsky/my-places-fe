@@ -89,6 +89,12 @@ export const getRouteDirectionsThunk = createAsyncThunk(
       },
       (result, status) => {
         if (status === window.google.maps.DirectionsStatus.OK && !!result) {
+          thunkAPI.dispatch(
+            getPlacesNearRouteThunk({
+              language: payload.language,
+              directions: result,
+            })
+          );
           const route = result.routes[0];
           const orderedWaypoints = route.waypoint_order.map((index) => ({
             ...places[index],
@@ -114,6 +120,34 @@ export const getRouteDirectionsThunk = createAsyncThunk(
         }
       }
     );
+  }
+);
+
+export const getPlacesNearRouteThunk = createAsyncThunk(
+  "route-builder/get-places-near-route",
+  async (
+    payload: {
+      language: string;
+      directions: google.maps.DirectionsResult;
+    },
+    thunkAPI
+  ) => {
+    const rootState = thunkAPI.getState() as RootState;
+    const places = rootState.routeBuilder.items;
+    const route = payload.directions.routes[0];
+
+    const coordinates = google.maps.geometry.encoding
+      .decodePath(route.overview_polyline)
+      .map((latLng) => ({ lat: latLng.lat(), lng: latLng.lng() }));
+
+    const res = await searchService.searchNearRoute(payload.language, {
+      radius: 30,
+      coordinates,
+      excludeIds: places.map((p) => p.id),
+      page: 0,
+      pageSize: 1000,
+    });
+    return res;
   }
 );
 
