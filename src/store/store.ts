@@ -8,6 +8,7 @@ import routeBuilderSlice from "@/store/route-builder-slice/route-builder.slice";
 import favouritesSlice from "@/store/personal-area/favourites-slice/favourites.slice";
 import excursionBuilderSlice from "@/store/excursion-builder-slice/excursion-builder.slice";
 import excursionsSlice from "@/store/excursions-slice/excursions.slice";
+import ttsPlayerSlice from "@/store/tts-player-slice/tts-player.slice";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     excursionBuilder: excursionBuilderSlice,
     favourites: favouritesSlice,
     excursions: excursionsSlice,
+    ttsPlayer: ttsPlayerSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

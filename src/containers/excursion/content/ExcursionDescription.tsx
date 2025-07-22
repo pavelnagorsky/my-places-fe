@@ -2,6 +2,7 @@ import { memo } from "react";
 import { useTranslation } from "next-i18next";
 import { Box, Stack, Typography } from "@mui/material";
 import StyledTextEditorContainer from "@/components/UI/review-containers/StyledTextEditorContainer";
+import AudioGuideButton from "@/components/tts-player/content/AudioGuideButton";
 
 const ExcursionDescription = ({
   description,
@@ -18,13 +19,16 @@ const ExcursionDescription = ({
 
   return (
     <Stack>
-      <Typography
-        variant={"h2"}
-        pb={"0.5em"}
-        fontSize={{ xs: "24px", md: "30px" }}
-      >
-        {t("excursion.description")}
-      </Typography>
+      <Stack direction={"row"} alignItems={"center"} gap={4} mb={"1em"}>
+        <Typography
+          variant={"h2"}
+          pb={"0"}
+          fontSize={{ xs: "24px", md: "30px" }}
+        >
+          {t("excursion.description")}
+        </Typography>
+        <AudioGuideButton text={description} />
+      </Stack>
       <Box height={"100%"}>
         <StyledTextEditorContainer
           fontSize={{ xs: "16px", md: "18px" }}

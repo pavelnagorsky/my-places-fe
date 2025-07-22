@@ -64,6 +64,9 @@
     "save": "Save",
     "add": "Add"
   },
+  "audioGuide": {
+    "button": "Audio Guide"
+  },
   "auth": {
     "oauth": {
       "loginWith": "Or log in with",

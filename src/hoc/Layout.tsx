@@ -33,6 +33,9 @@ const CookieConsent = dynamic(
     ssr: false,
   }
 );
+const TTSPlayer = dynamic(() => import("@/components/tts-player/TTSPlayer"), {
+  ssr: false,
+});
 
 const wideDesignPathNames = [
   routerLinks.administrationBasePath,
@@ -103,6 +106,7 @@ export default function Layout({ children }: PropsWithChildren) {
       )}
       <CookieConsent />
       <SnackbarAlert />
+      <TTSPlayer />
       <AuthModal />
       <Box flexGrow={1}>
         <Header wideMode={wideDesign} />

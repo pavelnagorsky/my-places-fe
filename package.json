@@ -38,6 +38,7 @@
     "next-seo": "^6.5.0",
     "next-sitemap": "^4.2.3",
     "react": "18.2.0",
+    "react-audio-play": "^1.0.4",
     "react-dom": "18.2.0",
     "react-easy-sort": "^1.5.1",
     "react-geocode": "^0.2.3",
