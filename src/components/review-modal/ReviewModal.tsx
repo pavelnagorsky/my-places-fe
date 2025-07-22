@@ -16,6 +16,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import ReviewGallery from "@/components/review-modal/ReviewGallery";
 import StyledReviewModalContainer from "@/components/UI/review-containers/StyledReviewModalContainer";
 import { Fragment } from "react";
+import AudioGuideButton from "@/components/tts-player/content/AudioGuideButton";
 
 interface IReviewModalProps {
   readonly review: IReview | null;
@@ -147,6 +148,13 @@ const ReviewModal = ({ open, onClose, review }: IReviewModalProps) => {
           >
             {!isMobile && heading}
             {!hasPhotos && gallerySection}
+            <AudioGuideButton
+              text={review.description}
+              sx={{
+                mb: "1em",
+                mt: { xs: hasPhotos ? 0 : "2em", md: hasPhotos ? 1 : 0 },
+              }}
+            />
             <StyledReviewModalContainer
               sx={{
                 p: 0,

@@ -19,6 +19,7 @@ import { IPaginationResponse } from "@/services/interfaces";
 import ReviewsSection from "./content/reviews/ReviewsSection";
 import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
+import AudioGuideButton from "@/components/tts-player/content/AudioGuideButton";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -117,14 +118,17 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
                   placeId={place.id}
                 />
               </Box>
-              <Typography
-                variant={"h2"}
-                component={"h2"}
-                pb={"0.5em"}
-                fontSize={{ xs: "24px", md: "30px" }}
-              >
-                {t("description")}
-              </Typography>
+              <Stack direction={"row"} alignItems={"center"} gap={4} mb={"1em"}>
+                <Typography
+                  variant={"h2"}
+                  component={"h2"}
+                  fontSize={{ xs: "24px", md: "30px" }}
+                  pb={0}
+                >
+                  {t("description")}
+                </Typography>
+                <AudioGuideButton text={place.description} />
+              </Stack>
               <Box mb={"2em"}>
                 <Typography
                   variant="body2"
