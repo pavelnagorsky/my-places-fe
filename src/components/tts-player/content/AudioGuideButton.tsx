@@ -13,6 +13,7 @@ import {
 } from "@/store/tts-player-slice/tts-player.thunks";
 import { setTTSPlayerOpen } from "@/store/tts-player-slice/tts-player.slice";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
+import I18nLanguages from "@/shared/I18nLanguages";
 
 interface IAudioGuideButtonProps {
   text: string;
@@ -20,7 +21,7 @@ interface IAudioGuideButtonProps {
 }
 
 const AudioGuideButton = ({ text, sx }: IAudioGuideButtonProps) => {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const audioUrl = useAppSelector(selectTTSPlayerAudioUrl);
   const isLoading = useAppSelector(selectTTSPlayerLoading);
   const storedText = useAppSelector(selectTTSPlayerText);
@@ -42,7 +43,14 @@ const AudioGuideButton = ({ text, sx }: IAudioGuideButtonProps) => {
       );
     };
     dispatch(
-      loadTTSAudioThunk({ data: { text }, onSuccess: handlePlay, onError })
+      loadTTSAudioThunk({
+        data: {
+          text,
+          voice: i18n.language === I18nLanguages.ru ? "filipp" : "john",
+        },
+        onSuccess: handlePlay,
+        onError,
+      })
     );
   };
 
@@ -61,6 +69,8 @@ const AudioGuideButton = ({ text, sx }: IAudioGuideButtonProps) => {
       handleLoadAudio();
     }
   };
+
+  if (i18n.language === I18nLanguages.be) return null;
 
   return (
     <Button
