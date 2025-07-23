@@ -40,6 +40,17 @@ const CookieConsent = () => {
       disableScrollLock
       open={dialog.open}
       hideBackdrop
+      slotProps={{
+        paper: {
+          style: { pointerEvents: "auto" }, // Re-enables clicks inside drawer
+        },
+      }}
+      ModalProps={{
+        disableEnforceFocus: true, // Allows focusing elements outside drawer
+        disableAutoFocus: true, // Prevents stealing focus
+        hideBackdrop: true, // Removes the dimmed overlay
+        style: { pointerEvents: "none" }, // Makes the modal layer ignore clicks
+      }}
       onClose={dialog.handleClose}
     >
       <WrappedContainer>
