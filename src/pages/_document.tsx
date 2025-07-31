@@ -3,6 +3,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "../styles/utility/createEmotionCache";
 import websiteJsonld from "@/shared/json-ld/website-jsonld";
+import GlobalGoogleAds from "@/components/ads/GlobalGoogleAds";
 
 const jsonLdData = JSON.stringify(websiteJsonld());
 
@@ -48,6 +49,7 @@ const MyDocument = (props: any) => {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLdData }}
         />
+        <GlobalGoogleAds />
         {props.emotionStyleTags}
       </Head>
       <body>
