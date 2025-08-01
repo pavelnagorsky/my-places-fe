@@ -1,6 +1,6 @@
 import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { IPlace } from "@/services/places-service/interfaces/place.interface";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { secondaryLightColor } from "@/styles/theme/lightTheme";
@@ -20,6 +20,10 @@ import ReviewsSection from "./content/reviews/ReviewsSection";
 import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import AudioGuideButton from "@/components/tts-player/content/AudioGuideButton";
+import YandexAd, {
+  YandexAdBlockIdsEnum,
+  YandexAdTypesEnum,
+} from "@/components/ads/yandex/YandexAd";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -48,6 +52,8 @@ export interface IPlacePageProps {
 
 const PlacePage = ({ place, reviews }: IPlacePageProps) => {
   const { t } = useTranslation("place");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   const comments = (
     <Fragment>
@@ -140,6 +146,13 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
               </Box>
               <PlaceCategories categories={place.categories} />
               <MapSection place={place} />
+              {!isMobile && (
+                <YandexAd
+                  blockId={YandexAdBlockIdsEnum.DefaultFeed}
+                  type={YandexAdTypesEnum.FEED}
+                  my={"1em"}
+                />
+              )}
               <Box display={{ xs: "none", lg: "block" }}>{comments}</Box>
             </motion.div>
           </Grid>
@@ -150,6 +163,13 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
                 placeId={place.id}
                 reviews={reviews}
               />
+              {isMobile && (
+                <YandexAd
+                  blockId={YandexAdBlockIdsEnum.DefaultFeed}
+                  type={YandexAdTypesEnum.FEED}
+                  my={"1em"}
+                />
+              )}
               <Box display={{ lg: "none" }}>{comments}</Box>
             </motion.div>
           </Grid>
