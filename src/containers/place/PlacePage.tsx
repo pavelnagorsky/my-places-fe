@@ -146,13 +146,6 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
               </Box>
               <PlaceCategories categories={place.categories} />
               <MapSection place={place} />
-              {!isMobile && (
-                <YandexAd
-                  blockId={YandexAdBlockIdsEnum.DefaultFeed}
-                  type={YandexAdTypesEnum.FEED}
-                  my={"1em"}
-                />
-              )}
               <Box display={{ xs: "none", lg: "block" }}>{comments}</Box>
             </motion.div>
           </Grid>
@@ -163,15 +156,22 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
                 placeId={place.id}
                 reviews={reviews}
               />
-              {isMobile && (
+              {!isMobile && (
                 <YandexAd
-                  blockId={YandexAdBlockIdsEnum.DefaultFeed}
-                  type={YandexAdTypesEnum.FEED}
+                  blockId={YandexAdBlockIdsEnum.DefaultBanner}
+                  type={YandexAdTypesEnum.BANNER}
                   my={"1em"}
                 />
               )}
               <Box display={{ lg: "none" }}>{comments}</Box>
             </motion.div>
+          </Grid>
+          <Grid size={12}>
+            <YandexAd
+              blockId={YandexAdBlockIdsEnum.DefaultFeed}
+              type={YandexAdTypesEnum.FEED}
+              my={"1em"}
+            />
           </Grid>
         </Grid>
       </motion.div>

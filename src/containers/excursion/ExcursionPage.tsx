@@ -32,11 +32,6 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
         </Stack>
         <Box mb={6}>
           <ExcursionContent excursion={excursion} />
-          <YandexAd
-            blockId={YandexAdBlockIdsEnum.DefaultFeed}
-            type={YandexAdTypesEnum.FEED}
-            my={"1em"}
-          />
           <Box mt={6} maxWidth={"md"}>
             <Typography
               variant={"h2"}
@@ -50,6 +45,11 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
               entityType={StatisticEntitiesEnum.Excursion}
             />
           </Box>
+          <YandexAd
+            blockId={YandexAdBlockIdsEnum.DefaultFeed}
+            type={YandexAdTypesEnum.FEED}
+            my={"2em"}
+          />
         </Box>
       </motion.div>
     </WrappedContainer>
