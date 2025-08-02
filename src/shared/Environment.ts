@@ -28,4 +28,8 @@ export class Environment {
 
   static readonly telegram =
     process.env["NEXT_PUBLIC_TELEGRAM"] ?? "https://t.me/myplacesby";
+
+  static readonly googleAdsKey = process.env[
+    "NEXT_PUBLIC_GOOGLE_ADS_KEY"
+  ] as string;
 }

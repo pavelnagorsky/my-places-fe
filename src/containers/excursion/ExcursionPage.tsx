@@ -8,6 +8,10 @@ import ExcursionContent from "@/containers/excursion/content/ExcursionContent";
 import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
+import YandexAd, {
+  YandexAdBlockIdsEnum,
+  YandexAdTypesEnum,
+} from "@/components/ads/yandex/YandexAd";
 
 const Comments = dynamic(
   () => import("@/containers/place/content/comments/Comments"),
@@ -28,6 +32,11 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
         </Stack>
         <Box mb={6}>
           <ExcursionContent excursion={excursion} />
+          <YandexAd
+            blockId={YandexAdBlockIdsEnum.DefaultFeed}
+            type={YandexAdTypesEnum.FEED}
+            my={"1em"}
+          />
           <Box mt={6} maxWidth={"md"}>
             <Typography
               variant={"h2"}

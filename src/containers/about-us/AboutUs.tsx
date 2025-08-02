@@ -5,7 +5,7 @@ import WrappedContainer from "@/hoc/wrappers/WrappedContainer";
 import { useTranslation } from "next-i18next";
 import card1Image from "/public/images/about-us/card1.jpg";
 import card2Image from "/public/images/about-us/card2.jpg";
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Faq from "@/containers/about-us/faq/Faq";
 
 const AboutUs = () => {
