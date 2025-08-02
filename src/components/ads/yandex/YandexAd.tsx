@@ -37,7 +37,7 @@ const YandexAd = ({ blockId, type, ...props }: IYandexAdProps) => {
     }
   }, [blockId, containerId, type]);
 
-  return <Box {...props} id={containerId} />;
+  return <Box style={{ overflow: "auto" }} {...props} id={containerId} />;
 };
 
 export default YandexAd;
