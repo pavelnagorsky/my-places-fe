@@ -8,10 +8,8 @@ import ExcursionContent from "@/containers/excursion/content/ExcursionContent";
 import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
-import YandexAd, {
-  YandexAdBlockIdsEnum,
-  YandexAdTypesEnum,
-} from "@/components/ads/yandex/YandexAd";
+import GoogleAdsUnit from "@/components/ads/GoogleAdsUnit";
+import adsConstants from "@/components/ads/constants";
 
 const Comments = dynamic(
   () => import("@/containers/place/content/comments/Comments"),
@@ -45,10 +43,10 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
               entityType={StatisticEntitiesEnum.Excursion}
             />
           </Box>
-          <YandexAd
-            blockId={YandexAdBlockIdsEnum.DefaultFeed}
-            type={YandexAdTypesEnum.FEED}
-            my={"2em"}
+          <GoogleAdsUnit
+            slotId={adsConstants.googleMultiplexAdSlotId}
+            mt={6}
+            mb={4}
           />
         </Box>
       </motion.div>

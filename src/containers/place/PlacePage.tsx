@@ -20,10 +20,8 @@ import ReviewsSection from "./content/reviews/ReviewsSection";
 import { StatisticEntitiesEnum } from "@/services/reports-service/enums";
 import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import AudioGuideButton from "@/components/tts-player/content/AudioGuideButton";
-import YandexAd, {
-  YandexAdBlockIdsEnum,
-  YandexAdTypesEnum,
-} from "@/components/ads/yandex/YandexAd";
+import adsConstants from "@/components/ads/constants";
+import GoogleAdsUnit from "@/components/ads/GoogleAdsUnit";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -157,20 +155,18 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
                 reviews={reviews}
               />
               {!isMobile && (
-                <YandexAd
-                  blockId={YandexAdBlockIdsEnum.DefaultBanner}
-                  type={YandexAdTypesEnum.BANNER}
-                  my={"1em"}
+                <GoogleAdsUnit
+                  slotId={adsConstants.googleMediaBannerAdSlotId}
+                  my={2}
                 />
               )}
               <Box display={{ lg: "none" }}>{comments}</Box>
             </motion.div>
           </Grid>
           <Grid size={12}>
-            <YandexAd
-              blockId={YandexAdBlockIdsEnum.DefaultFeed}
-              type={YandexAdTypesEnum.FEED}
-              my={"1em"}
+            <GoogleAdsUnit
+              slotId={adsConstants.googleMultiplexAdSlotId}
+              my={4}
             />
           </Grid>
         </Grid>
