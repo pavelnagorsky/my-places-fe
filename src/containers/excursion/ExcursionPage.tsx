@@ -30,7 +30,7 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
         </Stack>
         <Box mb={6}>
           <ExcursionContent excursion={excursion} />
-          <Box mt={6} maxWidth={"md"}>
+          <Box my={6} maxWidth={"md"}>
             <Typography
               variant={"h2"}
               component={"h2"}
@@ -43,11 +43,7 @@ const ExcursionPage = ({ excursion }: { excursion: IExcursion }) => {
               entityType={StatisticEntitiesEnum.Excursion}
             />
           </Box>
-          <GoogleAdsUnit
-            slotId={adsConstants.googleMultiplexAdSlotId}
-            mt={6}
-            mb={4}
-          />
+          <GoogleAdsUnit slotId={adsConstants.googleMultiplexAdSlotId} my={4} />
         </Box>
       </motion.div>
     </WrappedContainer>
