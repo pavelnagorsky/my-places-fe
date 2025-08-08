@@ -157,7 +157,8 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
               {!isMobile && (
                 <GoogleAdsUnit
                   slotId={adsConstants.googleMediaBannerAdSlotId}
-                  my={2}
+                  mb={2}
+                  mt={4}
                 />
               )}
               <Box display={{ lg: "none" }}>{comments}</Box>

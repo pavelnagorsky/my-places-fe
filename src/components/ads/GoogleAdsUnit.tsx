@@ -10,7 +10,7 @@ const GoogleAdsUnit = ({
     <Box
       {...otherBoxProps}
       sx={{
-        overflow: "auto",
+        overflow: "hidden", // Hide scrollbars by default
         scrollbarWidth: "thin",
         ...sx,
       }}
