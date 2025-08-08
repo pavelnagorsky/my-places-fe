@@ -21,7 +21,6 @@ import { useRouter } from "next/router";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { GoogleAdSense } from "next-google-adsense";
-import YandexAdsScript from "@/components/ads/yandex/YandexAdsScript";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -50,7 +49,6 @@ function App({
               </Head>
               <GoogleTagManager gtmId={Environment.GTMId} />
               <GoogleAdSense publisherId={Environment.googleAdsKey} />
-              <YandexAdsScript />
               <DefaultSeo
                 openGraph={{
                   type: "website",
