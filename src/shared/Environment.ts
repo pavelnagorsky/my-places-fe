@@ -4,6 +4,9 @@ export class Environment {
   static readonly googleMapsKey =
     process.env["NEXT_PUBLIC_GOOGLE_API_KEY"] ?? "";
 
+  static readonly googleGeocodeKey =
+    process.env["NEXT_PUBLIC_GOOGLE_GEOCODE_API_KEY"] ?? "";
+
   static readonly googleClientId =
     process.env["NEXT_PUBLIC_GOOGLE_CLIENT_ID"] ?? "";
 
