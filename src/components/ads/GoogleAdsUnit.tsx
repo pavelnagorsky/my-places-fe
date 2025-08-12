@@ -6,6 +6,7 @@ const GoogleAdsUnit = ({
   ...boxProps
 }: BoxProps & { slotId: string }) => {
   const { sx, ...otherBoxProps } = boxProps;
+  return null;
   return (
     <Box
       {...otherBoxProps}

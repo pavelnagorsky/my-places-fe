@@ -48,6 +48,7 @@ const Tab4 = ({ readonly }: IPlaceTabProps) => {
           clearErrors(["lat", "lng"]);
         })
         .catch((err) => {
+          console.log("fetch error", err);
           setValue("lat", null as any);
           setValue("lng", null as any);
           trigger(["lat", "lng"]);
