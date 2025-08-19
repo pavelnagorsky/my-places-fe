@@ -7,6 +7,7 @@
     "lat": "Latitude:",
     "lng": "Longitude:"
   },
+  "showMap": "Show map",
   "navigator": {
     "google": "Google Navigator",
     "yandex": "Yandex Navigator"

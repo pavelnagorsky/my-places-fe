@@ -135,6 +135,9 @@ const MapSection = () => {
           onLoad={(clusterer) => {
             clustererRef.current = clusterer;
           }}
+          options={{
+            imagePath: "/images/icons/cluster-icons/m",
+          }}
         >
           {(clusterer) =>
             mapResults.map((place, i) => {

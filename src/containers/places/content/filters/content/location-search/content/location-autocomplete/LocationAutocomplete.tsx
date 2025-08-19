@@ -135,6 +135,7 @@ function LocationAutocomplete({
               const coordinates = utils.latLngToString(latLng as any);
               setValue(fieldNameCoordinates, coordinates);
             } catch (e) {
+              console.error("Failed to fetch coordinates by place id");
               setValue(fieldNameCoordinates, null);
             }
           }
