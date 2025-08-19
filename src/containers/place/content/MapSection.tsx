@@ -28,7 +28,7 @@ const MapSection = ({ place }: { place: IPlace }) => {
         direction={{ sm: "row" }}
         justifyContent={{ sm: "space-between" }}
         alignItems={{ sm: "center" }}
-        mb={3}
+        mb={2}
         gap={2}
         sx={{ cursor: isMapVisible ? "default" : "pointer" }}
         onClick={() => setIsMapVisible(true)}
@@ -43,6 +43,7 @@ const MapSection = ({ place }: { place: IPlace }) => {
         </Typography>
         {!isMapVisible && (
           <Button
+            size={"large"}
             variant={"contained"}
             color={"primary"}
             endIcon={<ArrowDropDownIcon />}

@@ -165,7 +165,13 @@ const MapSection = () => {
               zIndex={2}
             />
           ))}
-          <MarkerClusterer maxZoom={14} clusterClass={"cluster-div"}>
+          <MarkerClusterer
+            maxZoom={14}
+            clusterClass={"cluster-div"}
+            options={{
+              imagePath: "/images/icons/cluster-icons/m",
+            }}
+          >
             {(clusterer) =>
               placesNearRoute.map((place, i) => {
                 return (
