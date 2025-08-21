@@ -22,6 +22,7 @@ import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import AudioGuideButton from "@/components/tts-player/content/AudioGuideButton";
 import adsConstants from "@/components/ads/constants";
 import GoogleAdsUnit from "@/components/ads/GoogleAdsUnit";
+import PlaceAttachments from "@/containers/place/content/PlaceAttachments";
 
 const SearchCartWidget = dynamic(
   () => import("@/components/search-cart/widgets/SearchCartWidget"),
@@ -142,6 +143,7 @@ const PlacePage = ({ place, reviews }: IPlacePageProps) => {
                 </Typography>
                 {place.website && <PlaceWebsite website={place.website} />}
               </Box>
+              <PlaceAttachments files={place.files} />
               <PlaceCategories categories={place.categories} />
               <MapSection place={place} />
               <Box display={{ xs: "none", lg: "block" }}>{comments}</Box>

@@ -62,7 +62,8 @@
     "yes": "Yes",
     "no": "No",
     "save": "Save",
-    "add": "Add"
+    "add": "Add",
+    "download": "Download"
   },
   "audioGuide": {
     "button": "Audio Guide"

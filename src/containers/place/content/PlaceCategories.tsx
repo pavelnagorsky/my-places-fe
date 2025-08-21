@@ -7,6 +7,7 @@ import { IPlaceCategory } from "@/services/place-categories-service/place-catego
 const PlaceCategories = ({ categories }: { categories: IPlaceCategory[] }) => {
   const { t } = useTranslation("place");
 
+  if (!categories.length) return null;
   return (
     <>
       <Typography

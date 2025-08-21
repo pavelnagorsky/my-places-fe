@@ -30,7 +30,9 @@
       "placeType": "Абярыце тып месца",
       "placeTypePlaceholder": "Абярыце тып месца...",
       "placeCategories": "Катэгорыі",
-      "placeCategoriesDescription": "Абярыце катэгорыі, да якіх адносіцца месца"
+      "placeCategoriesDescription": "Абярыце катэгорыі, да якіх адносіцца месца",
+      "attachments": "Далучаныя файлы",
+      "attachmentsDescription": "Загрузіце да {{limit}} файлаў (меню, дадатковыя паслугі, дапаможная інфармацыя)"
     },
     "3": {
       "title": "Фатаграфіі",

@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid2";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
 import Tab1 from "@/containers/create-place/form/tabs/Tab1";
-import Tab2 from "@/containers/create-place/form/tabs/Tab2";
+import Tab2 from "@/containers/create-place/form/tabs/tab-2/Tab2";
 import Tab3 from "@/containers/create-place/form/tabs/Tab3";
 import Tab4 from "@/containers/create-place/form/tabs/Tab4";
 import useCreatePlaceMeta from "@/containers/create-place/form/useCreatePlaceMeta";

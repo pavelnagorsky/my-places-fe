@@ -1,6 +1,7 @@
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { IPlaceCategory } from "@/services/place-categories-service/place-category.interface";
 import { ILatLngCoordinate } from "@/components/map/Map";
+import { IFileUploadResponse } from "@/services/place-files-service/interfaces";
 
 export interface IPlace {
   id: number;
@@ -13,6 +14,7 @@ export interface IPlace {
   viewsCount: number;
   categories: IPlaceCategory[];
   images: string[];
+  files: IFileUploadResponse[];
   coordinates: ILatLngCoordinate;
   website: string;
   advertisement: boolean;

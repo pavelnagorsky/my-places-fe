@@ -81,7 +81,7 @@ const SingleImageUploader = ({
                 height: "0px",
                 width: "0px",
               }}
-              accept="image/*"
+              accept="file/*"
               type="file"
               onChange={(event) => {
                 if (!event.target?.files || event.target?.files?.length === 0)

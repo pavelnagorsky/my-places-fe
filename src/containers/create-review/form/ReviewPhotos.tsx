@@ -1,7 +1,7 @@
 import MyStepper from "@/components/UI/stepper/MyStepper";
 import { Box, SxProps, Typography } from "@mui/material";
 import { memo } from "react";
-import ImageUploader from "@/components/forms/image-uploader/ImageUploader";
+import ImageUploader from "@/components/forms/file-uploader/FileUploader";
 import { useTranslation } from "next-i18next";
 
 const ReviewPhotos = ({
@@ -29,6 +29,7 @@ const ReviewPhotos = ({
       </Typography>
       <Box my={"2em"}>
         <ImageUploader
+          accept={"image/*"}
           readonly={readonly}
           maxLimit={5}
           fieldName={"images"}
