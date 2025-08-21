@@ -8,4 +8,5 @@ export interface ICreatePlace {
   address: string;
   isCommercial: boolean;
   website?: string;
+  fileIds: number[];
 }

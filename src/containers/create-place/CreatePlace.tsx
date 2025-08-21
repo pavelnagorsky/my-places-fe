@@ -15,29 +15,14 @@ import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import ProtectedAuth from "@/hoc/ProtectedAuth";
+import usePlaceForm from "@/containers/create-place/logic/usePlaceForm";
 
 const CreatePlace = () => {
   const router = useRouter();
   const { t, i18n } = useTranslation(["place-management", "common"]);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const form = useForm<IPlaceFormContext>({
-    defaultValues: {
-      images: [],
-      title: "",
-      description: "",
-      website: "",
-      address: "",
-      lat: "",
-      lng: "",
-      placeTypeId: "" as any,
-      categoriesIds: [],
-      isCommercial: false,
-    },
-    mode: "onChange",
-    shouldFocusError: true,
-    shouldUseNativeValidation: false,
-  });
+  const form = usePlaceForm();
 
   const handleShowError = () => {
     dispatch(
@@ -91,6 +76,7 @@ const CreatePlace = () => {
       coordinates: `${data.lat};${data.lng}`,
       imagesIds: data.images.map((image) => image.id),
       isCommercial: data.isCommercial,
+      fileIds: data.attachments.map((attachment) => attachment.id),
     };
 
     placesService

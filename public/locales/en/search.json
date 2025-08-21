@@ -5,6 +5,7 @@
   },
   "placesFound": "Places found",
   "noResults": "Unfortunately, your search returned no results.",
+  "commercialPlace": "Commercial place",
   "pagination": {
     "of": "of",
     "results": "results"

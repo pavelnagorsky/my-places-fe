@@ -8,6 +8,7 @@ import { routerLinks } from "@/routing/routerLinks";
 import { hideAlert, showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import placesService from "@/services/places-service/places.service";
 import { IUpdatePlace } from "@/services/places-service/interfaces/update-place.interface";
+import usePlaceForm from "@/containers/create-place/logic/usePlaceForm";
 
 const useEditPlace = () => {
   const { i18n } = useTranslation();
@@ -17,19 +18,7 @@ const useEditPlace = () => {
   const [loading, setLoading] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  const form = useForm<IEditPlaceContext>({
-    defaultValues: {
-      images: [],
-      title: "",
-      description: "",
-      categoriesIds: [],
-      isCommercial: false,
-      updateTranslations: false,
-    },
-    mode: "onChange",
-    shouldFocusError: true,
-    shouldUseNativeValidation: false,
-  });
+  const form = usePlaceForm();
 
   const onGoBack = () => router.back();
 
@@ -71,6 +60,7 @@ const useEditPlace = () => {
           categoriesIds: data.categoriesIds,
           placeTypeId: data.typeId,
           images: data.images,
+          attachments: data.files,
           website: data.website || undefined,
         });
         setLoading(false);
@@ -126,6 +116,7 @@ const useEditPlace = () => {
       imagesIds: data.images.map((image) => image.id),
       isCommercial: data.isCommercial,
       shouldTranslate: data.updateTranslations,
+      fileIds: data.attachments.map((attachment) => attachment.id),
     };
 
     placesService

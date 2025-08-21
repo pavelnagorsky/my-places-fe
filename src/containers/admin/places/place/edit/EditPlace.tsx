@@ -17,7 +17,7 @@ import ButtonWithTooltip from "@/components/UI/button/ButtonWithTooltip";
 import Navigation from "@/containers/create-place/form/Navigation";
 import TabPanel from "@/containers/create-place/form/tabs/TabPannel";
 import Tab1 from "@/containers/create-place/form/tabs/Tab1";
-import Tab2 from "@/containers/create-place/form/tabs/Tab2";
+import Tab2 from "@/containers/create-place/form/tabs/tab-2/Tab2";
 import Tab3 from "@/containers/create-place/form/tabs/Tab3";
 import Tab4 from "@/containers/create-place/form/tabs/Tab4";
 import useEditPlace from "@/containers/admin/places/place/edit/useEditPlace";

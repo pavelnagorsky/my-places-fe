@@ -3,6 +3,7 @@
   "website": "Веб-сайт:",
   "categories": "Категории",
   "location": "Местоположение",
+  "attachments": "Вложения",
   "coordinates": {
     "lat": "Широта:",
     "lng": "Долгота:"

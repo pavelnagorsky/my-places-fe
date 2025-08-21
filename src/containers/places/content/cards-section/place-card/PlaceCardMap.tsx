@@ -80,7 +80,9 @@ const PlaceCardMap = ({
           fontSize={"14px"}
           mb={"1em"}
         >
-          {place.categories.map((c) => c.title).join(" | ")}
+          {place.type.commercial
+            ? t("commercialPlace")
+            : place.categories.map((c) => c.title).join(" | ")}
         </Typography>
         <Typography
           fontWeight={500}

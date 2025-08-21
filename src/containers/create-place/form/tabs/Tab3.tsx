@@ -1,6 +1,6 @@
 import { Fragment, memo } from "react";
 import { Box, Typography } from "@mui/material";
-import ImageUploader from "@/components/forms/image-uploader/ImageUploader";
+import ImageUploader from "@/components/forms/file-uploader/FileUploader";
 import { IPlaceTabProps } from "@/containers/create-place/form/interfaces";
 import { useTranslation } from "next-i18next";
 
@@ -25,6 +25,7 @@ const Tab3 = ({
       </Typography>
       <Box mt={"2em"} mb={"3em"}>
         <ImageUploader
+          accept={"image/*"}
           canDeleteByAPI={canDeleteByAPI}
           readonly={readonly}
           required

@@ -3,6 +3,7 @@
   "website": "Website:",
   "categories": "Categories",
   "location": "Location",
+  "attachments": "Attachments",
   "coordinates": {
     "lat": "Latitude:",
     "lng": "Longitude:"

@@ -30,7 +30,9 @@
       "placeType": "Select the Place Type",
       "placeTypePlaceholder": "Select the Place Type...",
       "placeCategories": "Categories",
-      "placeCategoriesDescription": "Select the categories to which the place belongs to"
+      "placeCategoriesDescription": "Select the categories to which the place belongs to",
+      "attachments": "Attachments",
+      "attachmentsDescription": "Upload up to {{limit}} files (menus, additional services, supplementary information)"
     },
     "3": {
       "title": "Photos",

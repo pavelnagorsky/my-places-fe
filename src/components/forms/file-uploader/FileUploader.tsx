@@ -16,28 +16,36 @@ import { primaryBackground } from "@/styles/theme/lightTheme";
 import fileService from "@/services/file-service/file.service";
 import dynamic from "next/dynamic";
 import { AxiosResponse } from "axios";
-import ImagePreview from "@/components/forms/image-uploader/ImagePreview";
+import FilePreview from "@/components/forms/file-uploader/content/FilePreview";
 import { useTranslation } from "next-i18next";
 
 const SortableList = dynamic(() => import("react-easy-sort"), { ssr: false });
 
-interface IImageUploaderProps {
+interface IFileUploaderProps {
   fieldName: string;
   required?: boolean;
   maxLimit?: number;
   readonly?: boolean;
+  accept?: string;
   canDeleteByAPI?: boolean;
+  customUploadApi?: (file: File) => any;
+  customDeleteApi?: (id: number) => any;
 }
 
-const ImageUploader = ({
+const FileUploader = ({
   fieldName,
   maxLimit,
   required,
   readonly,
+  accept,
   canDeleteByAPI,
-}: IImageUploaderProps) => {
+  customDeleteApi,
+  customUploadApi,
+}: IFileUploaderProps) => {
   const { t } = useTranslation("common");
   const [loading, setLoading] = useState(false);
+  const uploadApi = customUploadApi || fileService.uploadImage;
+  const deleteApi = customDeleteApi || fileService.deleteImage;
   const { control, formState } =
     useFormContext<{ [T in typeof fieldName]: IImage[] }>();
   const { fields, move, append, remove } = useFieldArray({
@@ -66,7 +74,7 @@ const ImageUploader = ({
     const promises: Promise<AxiosResponse<IImage, any>>[] = [];
     for (let i = 0; i <= event.target.files.length; i++) {
       if (!event.target.files[i]) break;
-      promises.push(fileService.uploadImage(event.target.files[i]));
+      promises.push(uploadApi(event.target.files[i]));
     }
     setLoading(true);
     Promise.all(promises)
@@ -79,7 +87,7 @@ const ImageUploader = ({
 
   const handleDelete = (index: number) => {
     if (canDeleteByAPI && fields[index]?.id) {
-      fileService.deleteImage(fields[index].id).catch(() => {});
+      deleteApi(fields[index].id).catch(() => {});
     }
     remove(index);
   };
@@ -115,7 +123,7 @@ const ImageUploader = ({
               disabled={loading || readonly}
               id={"file-input"}
               type={"file"}
-              accept={"image/*"}
+              accept={accept}
               multiple
             />
             {loading ? (
@@ -147,9 +155,9 @@ const ImageUploader = ({
                 cursor: "grab",
               }}
             >
-              <ImagePreview
+              <FilePreview
                 readonly={readonly}
-                image={item}
+                file={item}
                 onDelete={() => handleDelete(index)}
               />
             </Box>
@@ -165,4 +173,4 @@ const ImageUploader = ({
   );
 };
 
-export default memo(ImageUploader);
+export default memo(FileUploader);

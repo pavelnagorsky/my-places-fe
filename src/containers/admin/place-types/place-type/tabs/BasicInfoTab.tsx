@@ -7,7 +7,7 @@ import { Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { IPlaceCategoryFormContext } from "@/containers/admin/place-categories/place-category/interfaces";
 import useLanguages from "@/hooks/useLanguages";
-import SingleImageUploader from "@/components/forms/image-uploader/SingleImageUploader";
+import SingleImageUploader from "@/components/forms/file-uploader/SingleImageUploader";
 
 const BasicInfoTab = () => {
   const methods = useFormContext<IPlaceCategoryFormContext>();
@@ -51,7 +51,7 @@ const BasicInfoTab = () => {
           </Typography>
           <SingleImageUploader
             notRequired
-            fieldName="image"
+            fieldName="file"
             placeholder="Иконка"
             onDelete={(fieldName) => setValue("image", null)}
           />

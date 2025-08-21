@@ -1,5 +1,6 @@
 import { ILatLngCoordinate } from "@/components/map/Map";
 import { IImage } from "@/services/file-service/image.interface";
+import { IFileUploadResponse } from "@/services/place-files-service/interfaces";
 
 export interface IEditPlace {
   id: number;
@@ -17,6 +18,8 @@ export interface IEditPlace {
   categoriesIds: number[];
 
   images: IImage[];
+
+  files: IFileUploadResponse[];
 
   coordinates: ILatLngCoordinate;
 

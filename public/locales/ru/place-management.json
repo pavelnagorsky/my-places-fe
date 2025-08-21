@@ -30,7 +30,9 @@
       "placeType": "Выберите тип места",
       "placeTypePlaceholder": "Выберите тип места...",
       "placeCategories": "Категории",
-      "placeCategoriesDescription": "Выберите категории, к которым относится место"
+      "placeCategoriesDescription": "Выберите категории, к которым относится место",
+      "attachments": "Вложения",
+      "attachmentsDescription": "Загрузите до {{limit}} файлов (меню, дополнительные услуги, вспомогательная информация)"
     },
     "3": {
       "title": "Фотографии",

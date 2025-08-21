@@ -18,6 +18,7 @@ import AddToCart from "@/containers/places/content/cards-section/place-card/add-
 import { useAppSelector } from "@/store/hooks";
 import { selectCartPlaceIds } from "@/store/search-cart-slice/search-cart.slice";
 import { primaryColor } from "@/styles/theme/lightTheme";
+import { useTranslation } from "next-i18next";
 
 interface IPlaceCardProps {
   place: ISearchPlace;
@@ -26,6 +27,7 @@ interface IPlaceCardProps {
 function PlaceCard({ place }: IPlaceCardProps) {
   const cardPlaceIds = useAppSelector(selectCartPlaceIds);
   const isInCart = cardPlaceIds.includes(place.id);
+  const { t } = useTranslation("search");
 
   return (
     <Card
@@ -141,7 +143,9 @@ function PlaceCard({ place }: IPlaceCardProps) {
             overflow={"hidden"}
             whiteSpace={"nowrap"}
           >
-            {place.categories.map((c) => c.title).join(" | ")}
+            {place.type.commercial
+              ? t("commercialPlace")
+              : place.categories.map((c) => c.title).join(" | ")}
           </Typography>
           <Stack direction={"row"} alignItems={"center"} gap={"0.5em"}>
             <Stack
