@@ -40,7 +40,7 @@ const BasicInfoTab = () => {
           </Typography>
           <SingleImageUploader
             notRequired
-            fieldName="file"
+            fieldName="image"
             placeholder="Иконка"
             onDelete={(fieldName) => setValue("image", null)}
           />
