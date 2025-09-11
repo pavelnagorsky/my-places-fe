@@ -42,7 +42,8 @@
     "imagesLimit": "The maximum number of images is exceeded",
     "invalid": "An invalid value is entered",
     "phone": "An incorrect phone number is entered",
-    "noWhiteSpaces": "This field shouldn't include whitespaces"
+    "noWhiteSpaces": "This field shouldn't include whitespaces",
+    "attachmentsLimit": "The maximum number of files has been exceeded"
   },
   "buttons": {
     "send": "Send",

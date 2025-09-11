@@ -44,7 +44,9 @@ interface IPlaceFormProps {
 
 const PlaceForm = ({ loading }: IPlaceFormProps) => {
   const { t } = useTranslation(["place-management", "common"]);
-  const { formState } = useFormContext<IPlaceFormContext>();
+  const {
+    formState: { isValid },
+  } = useFormContext<IPlaceFormContext>();
   const createPlaceMeta = useCreatePlaceMeta();
 
   const [activeTab, setActiveTab] = useState(0);
@@ -88,7 +90,7 @@ const PlaceForm = ({ loading }: IPlaceFormProps) => {
                   tooltipText={t("errors.allFieldsRequired", { ns: "common" })}
                   variant={"contained"}
                   type={"submit"}
-                  disabled={!formState.isValid}
+                  disabled={!isValid}
                   sx={{
                     fontWeight: 700,
                     py: "1em",

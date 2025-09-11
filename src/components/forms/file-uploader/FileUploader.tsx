@@ -57,7 +57,7 @@ const FileUploader = ({
       maxLength: maxLimit
         ? {
             value: maxLimit,
-            message: t("errors.imagesLimit"),
+            message: t("errors.attachmentsLimit"),
           }
         : undefined,
     },

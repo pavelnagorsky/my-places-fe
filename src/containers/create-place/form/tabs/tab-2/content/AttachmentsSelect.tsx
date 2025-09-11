@@ -31,10 +31,9 @@ const AttachmentsSelect = ({
       </Typography>
       <Box mt={"2em"} mb={"3em"}>
         <FileUploader
-          accept={".pdf,.doc,.docx,.txt,.rtf,.odt"}
+          accept={"*"}
           canDeleteByAPI={canDeleteByAPI}
           readonly={readonly}
-          required
           maxLimit={5}
           fieldName={"attachments"}
           customUploadApi={placeFilesService.upload}
