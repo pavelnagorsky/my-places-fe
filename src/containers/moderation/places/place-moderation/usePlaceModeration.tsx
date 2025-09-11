@@ -69,6 +69,7 @@ const usePlaceModeration = () => {
           categoriesIds: data.categoriesIds,
           placeTypeId: data.typeId,
           images: data.images,
+          attachments: data.files,
           website: data.website || undefined,
         });
         setLoading(false);

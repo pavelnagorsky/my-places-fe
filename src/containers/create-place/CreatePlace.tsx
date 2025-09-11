@@ -96,7 +96,11 @@ const CreatePlace = () => {
   return (
     <ProtectedAuth mode={"redirectAfter"}>
       <FormProvider {...form}>
-        <FormContainer formContext={form} onSuccess={onSubmit}>
+        <FormContainer
+          onError={(errors) => console.log(errors)}
+          formContext={form}
+          onSuccess={onSubmit}
+        >
           <PlaceForm loading={loading} />
         </FormContainer>
       </FormProvider>
