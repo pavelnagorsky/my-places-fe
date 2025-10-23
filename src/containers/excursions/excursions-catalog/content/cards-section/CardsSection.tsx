@@ -10,8 +10,8 @@ import {
 import SearchResultsLoader, {
   searchResultsGridSx,
 } from "./content/loader/SearchResultsLoader";
-import ExcursionCard from "@/containers/excursions/content/cards-section/content/excursion-card/ExcursionCard";
-import ScrollPositionTracker from "@/containers/excursions/content/cards-section/content/ScrollPositionTracker";
+import ExcursionCard from "@/containers/excursions/excursions-catalog/content/cards-section/content/excursion-card/ExcursionCard";
+import ScrollPositionTracker from "@/containers/excursions/excursions-catalog/content/cards-section/content/ScrollPositionTracker";
 
 const CardsSection = ({
   onSubmit,

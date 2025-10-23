@@ -12,4 +12,5 @@ export interface IExcursionsFilters {
   regions: IRegion[];
   cities: ICity[];
   placeTypeIds: number[];
+  isPrimary: boolean;
 }

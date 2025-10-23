@@ -8,14 +8,11 @@ import {
   selectSearchFilters,
 } from "@/store/excursions-slice/excursions.selectors";
 import utils from "@/shared/utils";
-import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
+import { IExcursionsFilters } from "@/containers/excursions/excursions-catalog/logic/interfaces";
 import excursionsService from "@/services/excursions-service/excursions.service";
 import { ISearchExcursionsRequest } from "@/services/excursions-service/interfaces/interfaces";
 import { setFilters } from "@/store/excursions-slice/excursions.slice";
-import {
-  getPlaceTypesThunk,
-  getSearchResultsThunk,
-} from "@/store/excursions-slice/excursions.thunks";
+import { getSearchResultsThunk } from "@/store/excursions-slice/excursions.thunks";
 import { SearchExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 import { useRouter } from "next/router";
 
@@ -77,6 +74,14 @@ const useExcursions = () => {
               currentItemsLength,
               excursionsService.SEARCH_EXCURSIONS_PER_PAGE
             );
+        const getSortOrderASC = () => {
+          if (
+            +data.orderBy === SearchExcursionsOrderByEnum.TITLE ||
+            data.isPrimary
+          )
+            return true;
+          return false;
+        };
         const payload: ISearchExcursionsRequest = {
           search: data.search,
           types: data.types,
@@ -84,10 +89,11 @@ const useExcursions = () => {
           regionIds: data.regions.map((r) => r.id),
           cityIds: data.cities.map((c) => c.id),
           placeTypeIds: data.placeTypeIds,
+          isPrimary: data.isPrimary,
           orderBy: +data.orderBy,
           pageSize: excursionsService.SEARCH_EXCURSIONS_PER_PAGE,
           page: requestedPage,
-          orderAsc: +data.orderBy === SearchExcursionsOrderByEnum.TITLE,
+          orderAsc: getSortOrderASC(),
         };
         if (fromStart) {
           dispatch(setFilters(data));

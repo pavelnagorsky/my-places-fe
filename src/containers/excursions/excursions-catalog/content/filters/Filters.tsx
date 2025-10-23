@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
-import SearchFilter from "@/containers/excursions/content/filters/content/SearchFilter";
-import AdditionalFilters from "@/containers/excursions/content/filters/content/additional-filters/AdditionalFilters";
+import SearchFilter from "@/containers/excursions/excursions-catalog/content/filters/content/SearchFilter";
+import AdditionalFilters from "@/containers/excursions/excursions-catalog/content/filters/content/additional-filters/AdditionalFilters";
 
 const Filters = ({ onSubmit }: { onSubmit: () => void }) => {
   return (

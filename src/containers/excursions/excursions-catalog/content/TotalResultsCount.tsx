@@ -2,8 +2,8 @@ import { Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import {
   selectNoItems,
-  selectTotalItems,
   selectSearchFiltersLoading,
+  selectTotalItems,
 } from "@/store/excursions-slice/excursions.selectors";
 import { useAppSelector } from "@/store/hooks";
 
@@ -15,11 +15,7 @@ const TotalResultsCount = () => {
   const searchLoading = useAppSelector(selectSearchFiltersLoading);
 
   return (
-    <Typography
-      fontSize={{ xs: "18px", md: "20px" }}
-      fontWeight={700}
-      component={"h1"}
-    >
+    <Typography fontSize={{ xs: "18px", md: "20px" }} fontWeight={700}>
       {noItems
         ? t("search.noResults")
         : t("search.excursionsFound", {

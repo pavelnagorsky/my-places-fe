@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IExcursionsState } from "@/store/excursions-slice/excursions.interfaces";
-import { defaultSearchFilters } from "@/containers/excursions/logic/default-filters";
-import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
+import { defaultSearchFilters } from "@/containers/excursions/excursions-catalog/logic/default-filters";
+import { IExcursionsFilters } from "@/containers/excursions/excursions-catalog/logic/interfaces";
 import {
   getCitiesThunk,
   getPlaceTypesThunk,

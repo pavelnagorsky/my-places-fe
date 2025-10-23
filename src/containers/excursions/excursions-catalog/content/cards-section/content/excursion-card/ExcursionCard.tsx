@@ -18,7 +18,7 @@ import { useTranslation } from "next-i18next";
 import utils from "@/shared/utils";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import likeImage from "../../../../../../../public/images/icons/heart.png";
+import likeImage from "../../../../../../../../public/images/icons/heart.png";
 
 function ExcursionCard({ excursion }: { excursion: IExcursionSearchItem }) {
   const { t } = useTranslation("excursion-management");
