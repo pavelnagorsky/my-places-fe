@@ -1,7 +1,11 @@
 import { useTranslation } from "next-i18next";
 import Grid from "@mui/material/Grid2";
 import { Typography } from "@mui/material";
-import { TextFieldElement, useFormContext } from "react-hook-form-mui";
+import {
+  SwitchElement,
+  TextFieldElement,
+  useFormContext,
+} from "react-hook-form-mui";
 import TextEditor from "@/components/forms/text-editor/TextEditor";
 import ExcursionRegion from "@/containers/excursion-builder/content/form/content/excursion-info/content/ExcursionRegion";
 import ExcursionCitySelect from "@/containers/moderation/excursions/excursion-moderation/content/excursion-city-select/ExcursionCitySelect";
@@ -51,6 +55,9 @@ const ExcursionInfo = () => {
           />
         </Grid>
       )}
+      <Grid size={{ xs: 12 }}>
+        <SwitchElement name={"isPrimary"} label={t("form.isPrimary")} />
+      </Grid>
       <Grid size={12}>
         <Typography fontWeight={500} fontSize={"22px"} mb={"0.5em"}>
           {t("form.description")}

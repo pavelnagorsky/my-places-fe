@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Collapse,
-  IconButton,
   Stack,
   Typography,
   useMediaQuery,
@@ -12,9 +11,9 @@ import Map from "@/components/map/Map";
 import { Marker } from "@react-google-maps/api";
 import { useTranslation } from "next-i18next";
 import { IPlace } from "@/services/places-service/interfaces/place.interface";
-import NearMeIcon from "@mui/icons-material/NearMe";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import NavigationControls from "@/containers/place/content/map-section/content/NavigationControls";
 
 const MapSection = ({ place }: { place: IPlace }) => {
   const { t } = useTranslation("place");
@@ -63,28 +62,7 @@ const MapSection = ({ place }: { place: IPlace }) => {
         </Map>
       </Collapse>
 
-      <Stack direction={"row"} alignItems={"center"} gap={"1em"} pt={"1em"}>
-        <Button
-          component={"a"}
-          target={"_blank"}
-          href={`https://www.google.com/maps?q=${place.coordinates.lat},${place.coordinates.lng}`}
-          startIcon={<NearMeIcon color={"primary"} />}
-          variant={"outlined"}
-          color={"secondary"}
-        >
-          {t("navigator.google")}
-        </Button>
-        <Button
-          component={"a"}
-          target={"_blank"}
-          href={`https://yandex.com/maps/?pt=${place.coordinates.lng},${place.coordinates.lat}&z=16`}
-          variant={"outlined"}
-          startIcon={<NearMeIcon color={"primary"} />}
-          color={"secondary"}
-        >
-          {t("navigator.yandex")}
-        </Button>
-      </Stack>
+      <NavigationControls coordinates={place.coordinates} />
     </Box>
   );
 };

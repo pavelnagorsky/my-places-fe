@@ -26,4 +26,5 @@ export interface IExcursion {
   status: ExcursionStatusesEnum;
   region: IRegion | null;
   city: ICity | null;
+  isPrimary: boolean;
 }

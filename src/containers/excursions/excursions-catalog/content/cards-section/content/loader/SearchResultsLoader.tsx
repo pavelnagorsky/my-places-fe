@@ -1,5 +1,5 @@
 import { Stack, SxProps, useMediaQuery, useTheme } from "@mui/material";
-import ExcursionCardSkeleton from "@/containers/excursions/content/cards-section/content/excursion-card/content/ExcursionCardSkeleton";
+import ExcursionCardSkeleton from "@/containers/excursions/excursions-catalog/content/cards-section/content/excursion-card/content/ExcursionCardSkeleton";
 
 export const searchResultsGridSx: SxProps = {
   width: {

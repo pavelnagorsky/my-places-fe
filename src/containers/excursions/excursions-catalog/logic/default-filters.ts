@@ -1,4 +1,4 @@
-import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
+import { IExcursionsFilters } from "@/containers/excursions/excursions-catalog/logic/interfaces";
 import { SearchExcursionsOrderByEnum } from "@/services/excursions-service/enums/enums";
 
 export const defaultSearchFilters: IExcursionsFilters = {
@@ -9,4 +9,5 @@ export const defaultSearchFilters: IExcursionsFilters = {
   regions: [],
   placeTypeIds: [],
   cities: [],
+  isPrimary: false,
 };
