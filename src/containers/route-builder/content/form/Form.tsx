@@ -4,7 +4,6 @@ import CartItem from "@/components/search-cart/content/CartItem";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   removeItem,
-  selectItems,
   sortItems,
 } from "@/store/route-builder-slice/route-builder.slice";
 import StartEndSelection from "@/containers/route-builder/content/form/sections/start-end-selection/StartEndSelection";
@@ -12,6 +11,7 @@ import Stepper from "@/containers/route-builder/content/form/sections/Stepper";
 import ControlButtons from "@/containers/route-builder/content/form/sections/control-buttons/ControlButtons";
 import { AnimatePresence, motion, Reorder } from "framer-motion";
 import PlaceSelection from "@/containers/route-builder/content/form/sections/start-end-selection/PlaceSelection";
+import { selectItems } from "@/store/route-builder-slice/route-builder.selectors";
 
 const Form = () => {
   const theme = useTheme();

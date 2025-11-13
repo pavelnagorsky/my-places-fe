@@ -22,7 +22,7 @@ const Circle = ({ index }: { index: number }) => (
   </Stack>
 );
 
-const DashedLine = ({ sx, time }: { sx?: SxProps; time?: string }) => (
+export const DashedLine = ({ sx, time }: { sx?: SxProps; time?: string }) => (
   <Box
     sx={{
       width: 2,

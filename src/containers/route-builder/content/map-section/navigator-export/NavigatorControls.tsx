@@ -4,11 +4,11 @@ import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import utils from "@/shared/utils";
 import { useAppSelector } from "@/store/hooks";
-import { selectItems } from "@/store/route-builder-slice/route-builder.slice";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+import { selectItems } from "@/store/route-builder-slice/route-builder.selectors";
 
 const NavigatorControls = () => {
   const {
