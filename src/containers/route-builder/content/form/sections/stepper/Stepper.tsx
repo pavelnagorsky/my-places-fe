@@ -1,47 +1,16 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Stack, SxProps, Typography } from "@mui/material";
-import { Fragment, PropsWithChildren } from "react";
-import { primaryBackground } from "@/styles/theme/lightTheme";
+import { Stack } from "@mui/material";
+import { Fragment } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import utils from "@/shared/utils";
-import { DashedLine } from "@/containers/excursion-builder/content/form/content/excursion-places/stepper/Stepper";
 import { useTranslation } from "next-i18next";
 import {
   selectItems,
-  selectRouteDirections,
   selectRouteLastLeg,
 } from "@/store/route-builder-slice/route-builder.selectors";
-
-const PrimaryCircle = ({ children }: PropsWithChildren) => (
-  <Stack
-    alignItems={"center"}
-    justifyContent={"center"}
-    color={"white"}
-    bgcolor={"primary.main"}
-    borderRadius={"50%"}
-    width={"40px"}
-    height={"40px"}
-    minHeight={"40px"}
-  >
-    {children}
-  </Stack>
-);
-
-const Circle = ({ index }: { index: number }) => (
-  <Stack
-    alignItems={"center"}
-    justifyContent={"center"}
-    color={"primary.main"}
-    bgcolor={primaryBackground}
-    fontWeight={"700"}
-    borderRadius={"50%"}
-    width={"40px"}
-    height={"40px"}
-    minHeight={"40px"}
-  >
-    {index + 1}
-  </Stack>
-);
+import StepperDashedLine from "@/containers/excursion-builder/content/form/content/excursion-places/stepper/content/StepperDashedLine";
+import StepperCircle from "@/containers/excursion-builder/content/form/content/excursion-places/stepper/content/StepperCircle";
+import StepperIconCircle from "@/containers/route-builder/content/form/sections/stepper/content/StepperIconCircle";
 
 const Stepper = () => {
   const { t } = useTranslation();
@@ -64,11 +33,11 @@ const Stepper = () => {
 
   return (
     <Stack alignItems={"center"} py={{ xs: "80px" }}>
-      <PrimaryCircle>
+      <StepperIconCircle>
         <HomeIcon />
-      </PrimaryCircle>
+      </StepperIconCircle>
       {items.length > 0 && (
-        <DashedLine
+        <StepperDashedLine
           sx={{ height: { sm: "140px" } }}
           time={formattedFirstPlaceDuration}
         />
@@ -84,16 +53,16 @@ const Stepper = () => {
         return (
           <Fragment key={item.id}>
             <Stack direction={"row"} alignItems={"center"}>
-              <Circle index={i} />
+              <StepperCircle index={i} />
             </Stack>
             {i !== items.length - 1 && (
-              <DashedLine
+              <StepperDashedLine
                 sx={{ height: { xs: "190px", sm: "170px" } }}
                 time={formattedDuration}
               />
             )}
             {i === items.length - 1 && !!formattedLastLegDuration && (
-              <DashedLine
+              <StepperDashedLine
                 sx={{ height: "100px" }}
                 time={formattedLastLegDuration}
               />
