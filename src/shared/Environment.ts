@@ -35,4 +35,9 @@ export class Environment {
   static readonly googleAdsKey = process.env[
     "NEXT_PUBLIC_GOOGLE_ADS_KEY"
   ] as string;
+
+  static get donationCards() {
+    const envString = process.env["NEXT_PUBLIC_DONATION_CARDS"] || "";
+    return envString.split(";");
+  }
 }
