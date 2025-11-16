@@ -11,10 +11,16 @@ import {
 import StepperDashedLine from "@/containers/excursion-builder/content/form/content/excursion-places/stepper/content/StepperDashedLine";
 import StepperCircle from "@/containers/excursion-builder/content/form/content/excursion-places/stepper/content/StepperCircle";
 import StepperIconCircle from "@/containers/route-builder/content/form/sections/stepper/content/StepperIconCircle";
+import { useFormContext } from "react-hook-form-mui";
+import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const Stepper = () => {
   const { t } = useTranslation();
   const items = useAppSelector(selectItems);
+  const { watch } = useFormContext<IRouteBuilderForm>();
+  const endCoordinates = watch("searchTo.coordinates");
+  const hasEndCoordinates = !!endCoordinates;
   const firstPlaceDuration = items[0]?.duration ?? null;
   const formattedFirstPlaceDuration = firstPlaceDuration
     ? utils.formatMinutes(firstPlaceDuration, {
@@ -61,12 +67,19 @@ const Stepper = () => {
                 time={formattedDuration}
               />
             )}
-            {i === items.length - 1 && !!formattedLastLegDuration && (
-              <StepperDashedLine
-                sx={{ height: "100px" }}
-                time={formattedLastLegDuration}
-              />
-            )}
+            {i === items.length - 1 &&
+              hasEndCoordinates &&
+              !!formattedLastLegDuration && (
+                <>
+                  <StepperDashedLine
+                    sx={{ height: "100px" }}
+                    time={formattedLastLegDuration}
+                  />
+                  <StepperIconCircle>
+                    <LocationOnIcon />
+                  </StepperIconCircle>
+                </>
+              )}
           </Fragment>
         );
       })}
