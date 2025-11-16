@@ -1,6 +1,6 @@
 import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Map from "@/components/map/Map";
-import { memo, useEffect, useState } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import {
   DirectionsRenderer,
   InfoWindow,
@@ -8,11 +8,6 @@ import {
   MarkerClusterer,
 } from "@react-google-maps/api";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-  selectItems,
-  selectPlacesNearRoute,
-  selectRouteDirections,
-} from "@/store/route-builder-slice/route-builder.slice";
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
@@ -22,8 +17,14 @@ import NavigatorControls from "@/containers/route-builder/content/map-section/na
 import routeStartIcon from "/public/images/icons/route-start.png";
 import routeEndIcon from "/public/images/icons/route-end.png";
 import markerIcon from "/public/images/icons/marker-filled.png";
-import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
+import { getRouteDirectionsThunk } from "@/store/route-builder-slice/route-builder.thunks";
 import PlaceCardMap from "@/containers/places/content/cards-section/place-card/PlaceCardMap";
+import { primaryColor } from "@/styles/theme/lightTheme";
+import {
+  selectItems,
+  selectPlacesNearRoute,
+  selectRouteDirections,
+} from "@/store/route-builder-slice/route-builder.selectors";
 
 const MapSection = () => {
   const { t, i18n } = useTranslation("route-management");

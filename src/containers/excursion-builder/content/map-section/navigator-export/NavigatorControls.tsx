@@ -2,12 +2,12 @@ import { Button, Stack } from "@mui/material";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import { useFormContext } from "react-hook-form-mui";
 import { useAppSelector } from "@/store/hooks";
-import { selectItems } from "@/store/route-builder-slice/route-builder.slice";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
 import { useTranslation } from "next-i18next";
 import { IExcursionBuilderForm } from "@/containers/excursion-builder/content/form/logic/interfaces";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+import { selectItems } from "@/store/route-builder-slice/route-builder.selectors";
 
 const NavigatorControls = () => {
   const { getValues } = useFormContext<IExcursionBuilderForm>();

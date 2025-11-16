@@ -1,10 +1,5 @@
 import { Button, CircularProgress } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-  selectHasItems,
-  selectIsEditingMode,
-  selectSubmitLoading,
-} from "@/store/route-builder-slice/route-builder.slice";
 import { openAuth, selectIsAuth } from "@/store/user-slice/user.slice";
 import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
@@ -12,9 +7,14 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { useTranslation } from "next-i18next";
 import { routerLinks } from "@/routing/routerLinks";
 import { useRouter } from "next/router";
-import { saveRouteThunk } from "@/store/route-builder-slice/thunks";
+import { saveRouteThunk } from "@/store/route-builder-slice/route-builder.thunks";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
+import {
+  selectHasItems,
+  selectIsEditingMode,
+  selectSubmitLoading,
+} from "@/store/route-builder-slice/route-builder.selectors";
 
 const SubmitButton = () => {
   const { t } = useTranslation(["route-management", "common"]);

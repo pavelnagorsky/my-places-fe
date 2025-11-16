@@ -9,7 +9,7 @@ import { resetState } from "@/store/route-builder-slice/route-builder.slice";
 import googlePlacesAutocompleteService from "@/services/google-places-service/google-places.service";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
-import { startRouteEditingThunk } from "@/store/route-builder-slice/thunks";
+import { startRouteEditingThunk } from "@/store/route-builder-slice/route-builder.thunks";
 
 const useEditMyRoute = () => {
   const { t, i18n } = useTranslation(["route-management", "common"]);
