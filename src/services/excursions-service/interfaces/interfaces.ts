@@ -35,4 +35,5 @@ export interface ISearchExcursionsRequest
   regionIds: number[];
   cityIds: number[];
   placeTypeIds: number[];
+  isPrimary: boolean;
 }

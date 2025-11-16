@@ -7,7 +7,7 @@ import { IFavourite } from "@/services/places-service/interfaces/favourite.inter
 import placesService from "@/services/places-service/places.service";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { IMyFavouritesRequest } from "@/services/places-service/interfaces/interfaces";
-import { addRouteItemsThunk } from "@/store/route-builder-slice/thunks";
+import { addRouteItemsThunk } from "@/store/route-builder-slice/route-builder.thunks";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
 import {

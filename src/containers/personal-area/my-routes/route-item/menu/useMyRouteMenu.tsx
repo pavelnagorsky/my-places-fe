@@ -33,9 +33,13 @@ const useMyRouteMenu = ({ route, onDelete }: IUseMyRouteMenuProps) => {
     const travelMode = route.travelMode ?? TravelModesEnum.DRIVING;
     const waypoints = route.places.map((place) => place.coordinates);
     const startLatLng = route.coordinatesStart;
-    const endLatLng = route.coordinatesEnd;
+    const selectedEndLatLng = route.coordinatesEnd;
+    const adjustedWaypoints = !!selectedEndLatLng
+      ? waypoints
+      : waypoints.slice(0, -1);
+    const endLatLng = selectedEndLatLng || waypoints[waypoints.length - 1];
 
-    return { waypoints, startLatLng, endLatLng, travelMode };
+    return { waypoints: adjustedWaypoints, startLatLng, endLatLng, travelMode };
   };
 
   const handleOpenGoogleNavigator = () => {
@@ -67,9 +71,9 @@ const useMyRouteMenu = ({ route, onDelete }: IUseMyRouteMenuProps) => {
 
     const url = `https://yandex.ru/maps/?rtext=${startLatLng.lat},${
       startLatLng.lng
-    }~${waypointsString}~${endLatLng.lat},${endLatLng.lng}&rtt=${
-      travelMode === TravelModesEnum.DRIVING ? "auto" : "pd"
-    }`;
+    }${waypoints.length > 0 ? "~" : ""}${waypointsString}~${endLatLng.lat},${
+      endLatLng.lng
+    }&rtt=${travelMode === TravelModesEnum.DRIVING ? "auto" : "pd"}`;
 
     window.open(url, "_blank");
   };

@@ -9,9 +9,10 @@ import { useEffect } from "react";
 
 interface IPlaceSelectionProps {
   isRouteStart: boolean;
+  required?: boolean;
 }
 
-const PlaceSelection = ({ isRouteStart }: IPlaceSelectionProps) => {
+const PlaceSelection = ({ isRouteStart, required }: IPlaceSelectionProps) => {
   const { t } = useTranslation(["route-management", "common"]);
   const baseFieldName = isRouteStart ? "searchFrom" : "searchTo";
   const {
@@ -55,11 +56,12 @@ const PlaceSelection = ({ isRouteStart }: IPlaceSelectionProps) => {
             : t("locationSelection.endPlaceholder"),
         }}
         disabled={isSearchByMe}
-        required={!isSearchByMe}
+        required={required ? !isSearchByMe : false}
         rules={{
-          required: isSearchByMe
-            ? undefined
-            : t("errors.required", { ns: "common" }),
+          required:
+            isSearchByMe || !required
+              ? undefined
+              : t("errors.required", { ns: "common" }),
         }}
         fieldName={`${baseFieldName}.location`}
         fieldNameCoordinates={`${baseFieldName}.coordinates`}

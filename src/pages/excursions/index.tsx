@@ -8,7 +8,8 @@ import { useTranslation } from "next-i18next";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 
 const ExcursionsPageLazy = dynamic(
-  () => import("../../containers/excursions/Excursions")
+  () =>
+    import("../../containers/excursions/excursions-catalog/ExcursionsCatalog")
 );
 
 const Index: NextPage = () => {

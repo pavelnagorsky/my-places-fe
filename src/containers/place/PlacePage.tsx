@@ -40,7 +40,7 @@ const PlaceComments = dynamic(
   () => import("@/containers/place/content/comments/Comments"),
   { ssr: false }
 );
-const MapSection = dynamic(() => import("./content/MapSection"), {
+const MapSection = dynamic(() => import("./content/map-section/MapSection"), {
   ssr: false,
 });
 

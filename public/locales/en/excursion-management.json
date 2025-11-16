@@ -11,10 +11,15 @@
     "search": {
       "title": "Self-Guided Tours in Belarus: Catalog of Routes, Attractions, Maps",
       "description": "Discover Belarus independently! Complete catalog of walking and driving tours with detailed routes, attraction descriptions, and practical tips. Download ready-to-use GPS tracks and maps for your journey!"
+    },
+    "mustSee": {
+      "title": "What to See in Belarus First: Top Tours & Must-See Attractions",
+      "description": "Essential Belarus tours for first-time visitors. Discover must-see attractions, historical sites and best routes for tourists in Belarus."
     }
   },
   "form": {
     "title": "Title",
+    "isPrimary": "Recommended for \"Belarus must-see sights\"",
     "titlePlaceholder": "Enter excursion title",
     "description": "Short description",
     "descriptionPlaceholder": "Enter excursion description",
@@ -66,6 +71,7 @@
     "noResults": "Unfortunately, no results were found for your query.",
     "filters": {
       "title": "Filters",
+      "isPrimary": "Top attractions to visit first",
       "regions": "Regions",
       "cities": "Cities",
       "regionsPlaceholder": "Select regions of Belarus",

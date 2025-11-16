@@ -21,6 +21,7 @@ const useExcursionBuilder = () => {
       type: `${ExcursionTypesEnum.Overview}`,
       regionId: 0, // All,
       city: null,
+      isPrimary: false,
     },
   });
 
