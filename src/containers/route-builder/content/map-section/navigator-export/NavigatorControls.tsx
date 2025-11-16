@@ -27,16 +27,20 @@ const NavigatorControls = () => {
       ? utils.stringToLatLng(coordinatesStartString)
       : null;
     const coordinatesEndString = getValues("searchTo.coordinates");
-    const endLatLng = coordinatesEndString
+    const selectedEndLatLng = coordinatesEndString
       ? utils.stringToLatLng(coordinatesEndString)
       : null;
+    const adjustedWaypoints = !!selectedEndLatLng
+      ? waypoints
+      : waypoints.slice(0, -1);
+    const endLatLng = selectedEndLatLng || waypoints[waypoints.length - 1];
 
-    return { waypoints, startLatLng, endLatLng, travelMode };
+    return { waypoints: adjustedWaypoints, startLatLng, endLatLng, travelMode };
   };
 
   const onOpenGoogleNavigator = () => {
     const { waypoints, startLatLng, endLatLng, travelMode } = prepareData();
-    if (!startLatLng || !endLatLng) return;
+    if (!startLatLng) return;
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: "route: open Google Navigator",
     });
@@ -55,7 +59,7 @@ const NavigatorControls = () => {
 
   const onOpenYandexNavigator = () => {
     const { waypoints, startLatLng, endLatLng, travelMode } = prepareData();
-    if (!startLatLng || !endLatLng) return;
+    if (!startLatLng) return;
     sendAnalytics(AnalyticsEventsEnum.CustomClick, {
       title: "route: open Yandex Navigator",
     });
@@ -65,9 +69,9 @@ const NavigatorControls = () => {
 
     const url = `https://yandex.ru/maps/?rtext=${startLatLng.lat},${
       startLatLng.lng
-    }~${waypointsString}~${endLatLng.lat},${endLatLng.lng}&rtt=${
-      travelMode === TravelModesEnum.DRIVING ? "auto" : "pd"
-    }`;
+    }${waypoints.length > 0 ? "~" : ""}${waypointsString}~${endLatLng.lat},${
+      endLatLng.lng
+    }&rtt=${travelMode === TravelModesEnum.DRIVING ? "auto" : "pd"}`;
 
     window.open(url, "_blank");
   };

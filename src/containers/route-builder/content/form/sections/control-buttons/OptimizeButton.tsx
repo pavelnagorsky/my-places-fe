@@ -39,7 +39,7 @@ const OptimizeButton = () => {
     const endLatLng = coordinatesEndString
       ? utils.stringToLatLng(coordinatesEndString)
       : null;
-    if (!startLatLng || !endLatLng) return;
+    if (!startLatLng) return;
     dispatch(
       getRouteDirectionsThunk({
         language: i18n.language,

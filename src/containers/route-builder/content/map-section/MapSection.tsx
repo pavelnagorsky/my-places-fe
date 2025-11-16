@@ -1,6 +1,6 @@
 import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Map from "@/components/map/Map";
-import { useState, useEffect, useRef, memo } from "react";
+import { memo, useEffect, useState } from "react";
 import {
   DirectionsRenderer,
   InfoWindow,
@@ -24,7 +24,6 @@ import routeEndIcon from "/public/images/icons/route-end.png";
 import markerIcon from "/public/images/icons/marker-filled.png";
 import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
 import PlaceCardMap from "@/containers/places/content/cards-section/place-card/PlaceCardMap";
-import { primaryColor } from "@/styles/theme/lightTheme";
 
 const MapSection = () => {
   const { t, i18n } = useTranslation("route-management");
@@ -55,7 +54,7 @@ const MapSection = () => {
 
   const placesDependency = routePlaces.map((p) => p.id).join(",");
   useEffect(() => {
-    if (!startLatLng || !endLatLng) return;
+    if (!startLatLng || !routePlaces.length) return;
     dispatch(
       getRouteDirectionsThunk({
         language: i18n.language,
