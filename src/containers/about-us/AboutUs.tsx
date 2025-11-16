@@ -7,7 +7,7 @@ import card1Image from "/public/images/about-us/card1.jpg";
 import card2Image from "/public/images/about-us/card2.jpg";
 import { Stack, Typography } from "@mui/material";
 import Faq from "@/containers/about-us/content/faq/Faq";
-import Donation from "@/containers/about-us/content/Donation";
+import Donation from "@/containers/about-us/content/donation/Donation";
 
 const AboutUs = () => {
   const { t } = useTranslation("about");
