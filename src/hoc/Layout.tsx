@@ -36,6 +36,12 @@ const CookieConsent = dynamic(
 const TTSPlayer = dynamic(() => import("@/components/tts-player/TTSPlayer"), {
   ssr: false,
 });
+const CelebrationPopup = dynamic(
+  () => import("@/components/celebration-popup/CelebrationPopup"),
+  {
+    ssr: false,
+  }
+);
 
 const wideDesignPathNames = [
   routerLinks.administrationBasePath,
@@ -108,6 +114,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <SnackbarAlert />
       <TTSPlayer />
       <AuthModal />
+      <CelebrationPopup />
       <Box flexGrow={1}>
         <Header wideMode={wideDesign} />
         <main>{children}</main>
