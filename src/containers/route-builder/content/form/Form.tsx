@@ -1,17 +1,17 @@
-import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import SortableList, { SortableItem } from "react-easy-sort";
 import CartItem from "@/components/search-cart/content/CartItem";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   removeItem,
-  selectItems,
   sortItems,
 } from "@/store/route-builder-slice/route-builder.slice";
 import StartEndSelection from "@/containers/route-builder/content/form/sections/start-end-selection/StartEndSelection";
-import Stepper from "@/containers/route-builder/content/form/sections/Stepper";
+import Stepper from "@/containers/route-builder/content/form/sections/stepper/Stepper";
 import ControlButtons from "@/containers/route-builder/content/form/sections/control-buttons/ControlButtons";
-import { AnimatePresence, motion, Reorder } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import PlaceSelection from "@/containers/route-builder/content/form/sections/start-end-selection/PlaceSelection";
+import { selectItems } from "@/store/route-builder-slice/route-builder.selectors";
 
 const Form = () => {
   const theme = useTheme();
@@ -45,7 +45,7 @@ const Form = () => {
             className={"drag-container"}
           >
             <Stack gap={"1em"} width={"100%"}>
-              {isMobile && <PlaceSelection isRouteStart={true} />}
+              {isMobile && <PlaceSelection isRouteStart={true} required />}
               <AnimatePresence mode="popLayout">
                 {items.map((item, index) => (
                   <motion.div

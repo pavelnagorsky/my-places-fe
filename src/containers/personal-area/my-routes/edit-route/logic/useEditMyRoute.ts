@@ -2,8 +2,7 @@ import { useTranslation } from "next-i18next";
 import { useAppDispatch } from "@/store/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form-mui";
-import { IEditReviewFormContext } from "@/containers/personal-area/my-reviews/edit-my-review/interfaces";
+import { useForm } from "react-hook-form-mui";
 import { routerLinks } from "@/routing/routerLinks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import { IEditRouteForm } from "@/containers/personal-area/my-routes/edit-route/logic/interfaces";
@@ -11,7 +10,7 @@ import { resetState } from "@/store/route-builder-slice/route-builder.slice";
 import googlePlacesAutocompleteService from "@/services/google-places-service/google-places.service";
 import { IRoute } from "@/services/routes-service/interfaces/route.interface";
 import { TravelModesEnum } from "@/services/routes-service/interfaces/interfaces";
-import { startRouteEditingThunk } from "@/store/route-builder-slice/thunks";
+import { startRouteEditingThunk } from "@/store/route-builder-slice/route-builder.thunks";
 
 const useEditMyRoute = () => {
   const { t, i18n } = useTranslation(["route-management", "common"]);
@@ -78,11 +77,12 @@ const useEditMyRoute = () => {
             data.coordinatesStart,
             i18n.language
           );
-        const endLocationTitleResponse =
-          await googlePlacesAutocompleteService.getLocationTitle(
-            data.coordinatesEnd,
-            i18n.language
-          );
+        const endLocationTitleResponse = !!data.coordinatesEnd
+          ? await googlePlacesAutocompleteService.getLocationTitle(
+              data.coordinatesEnd,
+              i18n.language
+            )
+          : null;
 
         // reset form state
         form.reset({
@@ -97,11 +97,13 @@ const useEditMyRoute = () => {
             },
           },
           searchTo: {
-            coordinates: `${data.coordinatesEnd.lat};${data.coordinatesEnd.lng}`,
+            coordinates: data.coordinatesEnd
+              ? `${data.coordinatesEnd.lat};${data.coordinatesEnd.lng}`
+              : null,
             isSearchByMe: false,
             location: {
               description:
-                endLocationTitleResponse.data.results[0]?.formatted_address ||
+                endLocationTitleResponse?.data.results[0]?.formatted_address ||
                 "",
             },
           },

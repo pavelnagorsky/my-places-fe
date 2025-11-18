@@ -34,6 +34,7 @@ const useEditMyExcursion = () => {
       regionId: 0, // All
       updateTranslations: false,
       city: null as any,
+      isPrimary: false,
     },
     mode: "onChange",
     shouldFocusError: true,
@@ -84,6 +85,7 @@ const useEditMyExcursion = () => {
         type: `${data.type || ExcursionTypesEnum.Overview}`,
         travelMode: data.travelMode || TravelModesEnum.DRIVING,
         regionId: data.region?.id || 0,
+        isPrimary: data.isPrimary,
         city: data.city
           ? { id: data.city.id, label: data.city.title }
           : (null as any),

@@ -5,13 +5,13 @@ import AddIcon from "@mui/icons-material/Add";
 import { useFormContext } from "react-hook-form-mui";
 import { IRouteBuilderForm } from "@/containers/route-builder/content/form/logic/interfaces";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { selectItems } from "@/store/route-builder-slice/route-builder.slice";
 import { useTranslation } from "next-i18next";
 import PlacesAutocomplete from "@/components/forms/custom-form-elements/PlacesAutocomplete";
 import { useRouter } from "next/router";
 import { routerLinks } from "@/routing/routerLinks";
-import { addRouteItemsThunk } from "@/store/route-builder-slice/thunks";
+import { addRouteItemsThunk } from "@/store/route-builder-slice/route-builder.thunks";
 import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
+import { selectItems } from "@/store/route-builder-slice/route-builder.selectors";
 
 const ControlButtons = () => {
   const { t, i18n } = useTranslation(["route-management", "common"]);

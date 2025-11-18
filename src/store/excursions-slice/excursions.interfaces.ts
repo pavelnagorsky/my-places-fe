@@ -1,5 +1,5 @@
 import { IExcursionSearchItem } from "@/services/excursions-service/interfaces/excursion-search-item.interface";
-import { IExcursionsFilters } from "@/containers/excursions/logic/interfaces";
+import { IExcursionsFilters } from "@/containers/excursions/excursions-catalog/logic/interfaces";
 import { IRegion } from "@/services/regions-service/interfaces/region.interface";
 import { IPlaceType } from "@/services/place-types-service/place-type.interface";
 import { ICity } from "@/services/cities-service/interfaces/city.interface";

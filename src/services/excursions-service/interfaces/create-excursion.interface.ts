@@ -9,4 +9,5 @@ export interface ICreateExcursion {
   type: ExcursionTypesEnum;
   regionId: number | null;
   cityId: number | null;
+  isPrimary: boolean;
 }

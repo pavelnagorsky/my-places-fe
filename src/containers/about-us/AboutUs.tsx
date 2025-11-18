@@ -6,7 +6,8 @@ import { useTranslation } from "next-i18next";
 import card1Image from "/public/images/about-us/card1.jpg";
 import card2Image from "/public/images/about-us/card2.jpg";
 import { Stack, Typography } from "@mui/material";
-import Faq from "@/containers/about-us/faq/Faq";
+import Faq from "@/containers/about-us/content/faq/Faq";
+import Donation from "@/containers/about-us/content/donation/Donation";
 
 const AboutUs = () => {
   const { t } = useTranslation("about");
@@ -75,6 +76,11 @@ const AboutUs = () => {
               </Stack>
             </WrappedContainer>
           </Stack>
+        </motion.div>
+        <motion.div variants={animationVariants.defaultItemVariant}>
+          <WrappedContainer wrapperSx={{ my: { xs: 4, md: 8 } }}>
+            <Donation />
+          </WrappedContainer>
         </motion.div>
         <motion.div variants={animationVariants.defaultItemVariant}>
           <WrappedContainer>

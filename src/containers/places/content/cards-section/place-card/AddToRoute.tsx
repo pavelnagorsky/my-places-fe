@@ -1,7 +1,7 @@
 import { useAppDispatch } from "@/store/hooks";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton, useMediaQuery, useTheme } from "@mui/material";
-import { addRouteItemsThunk } from "@/store/route-builder-slice/thunks";
+import { addRouteItemsThunk } from "@/store/route-builder-slice/route-builder.thunks";
 import { useTranslation } from "next-i18next";
 import { primaryBackground } from "@/styles/theme/lightTheme";
 

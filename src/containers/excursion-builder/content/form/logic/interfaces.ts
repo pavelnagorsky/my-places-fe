@@ -11,4 +11,5 @@ export interface IExcursionBuilderForm {
   type: `${ExcursionTypesEnum}`;
   regionId: number;
   city: ISelect | null;
+  isPrimary: boolean;
 }
