@@ -6,7 +6,7 @@ const StartEndSelection = () => {
   return (
     <Grid container spacing={2}>
       <Grid size={{ xs: 12, md: 6 }}>
-        <PlaceSelection isRouteStart={true} />
+        <PlaceSelection isRouteStart={true} required />
       </Grid>
       <Grid size={{ xs: 12, md: 6 }}>
         <PlaceSelection isRouteStart={false} />

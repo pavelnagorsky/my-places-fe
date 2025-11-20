@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form-mui";
 import {
   IBlockUserForm,
   IModeratorForm,
-} from "@/containers/admin/users/user/interfaces";
+} from "@/containers/admin/users/user/logic/interfaces";
 import utils from "@/shared/utils";
 import { useAppDispatch } from "@/store/hooks";
 import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";

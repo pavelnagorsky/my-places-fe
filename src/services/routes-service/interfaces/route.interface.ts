@@ -9,7 +9,7 @@ export interface IRoute {
   coordinatesStart: ILatLngCoordinate;
 
   // Route end coordinates {lat;lng}
-  coordinatesEnd: ILatLngCoordinate;
+  coordinatesEnd: ILatLngCoordinate | null;
 
   title: string;
 

@@ -116,7 +116,7 @@ const Footer = () => {
         <Logo small />
         {footerText}
       </Stack>
-      <Divider variant={"middle"} sx={{ borderColor: "disabled" }} />
+      <Divider variant={"middle"} sx={{ borderColor: "divider" }} />
       {linksSection}
       <Stack
         display={{ xs: "flex", md: "none" }}

@@ -7,7 +7,6 @@ import { showAlertThunk } from "@/store/alerts-slice/alerts.slice";
 import {
   CircularProgress,
   IconButton,
-  Paper,
   Popover,
   Stack,
   SxProps,
@@ -64,12 +63,7 @@ const EmailSection = ({ user, sx }: { user: IUserShortInfo; sx?: SxProps }) => {
 
   return (
     <Fragment>
-      <StyledButton
-        variant={"contained"}
-        size={"large"}
-        sx={sx}
-        onClick={popover.handleOpen}
-      >
+      <StyledButton variant={"contained"} sx={sx} onClick={popover.handleOpen}>
         Отправить email
       </StyledButton>
       <Popover

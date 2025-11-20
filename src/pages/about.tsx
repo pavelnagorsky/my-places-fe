@@ -8,7 +8,7 @@ import { useTranslation } from "next-i18next";
 import useAlternateLinks from "@/hooks/useAlternateLinks";
 import card1Image from "/public/images/about-us/card1.jpg";
 import card2Image from "/public/images/about-us/card2.jpg";
-import useFAQ from "@/containers/about-us/faq/logic/useFAQ";
+import useFAQ from "@/containers/about-us/content/faq/logic/useFAQ";
 import { Environment } from "@/shared/Environment";
 
 const AboutPageLazy = dynamic(() => import("../containers/about-us/AboutUs"));

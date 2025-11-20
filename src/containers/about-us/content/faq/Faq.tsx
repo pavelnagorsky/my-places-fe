@@ -8,10 +8,10 @@ import {
   useTheme,
 } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
-import TabPanel from "@/containers/about-us/faq/TabPanel";
+import TabPanel from "@/containers/about-us/content/faq/content/TabPanel";
 import { useTranslation } from "next-i18next";
 import regExp from "@/shared/regExp";
-import useFAQ from "@/containers/about-us/faq/logic/useFAQ";
+import useFAQ from "@/containers/about-us/content/faq/logic/useFAQ";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 

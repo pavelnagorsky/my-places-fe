@@ -1,38 +1,21 @@
-import useUser from "@/containers/admin/users/user/useUser";
-import {
-  Backdrop,
-  Box,
-  CircularProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import useUser from "@/containers/admin/users/user/logic/useUser";
 import Grid from "@mui/material/Grid2";
-import BasicInfo from "@/containers/admin/users/user/sections/BasicInfo";
+import BasicInfo from "@/containers/admin/users/user/content/sections/BasicInfo";
 import AdminLayout from "@/containers/admin/layout/AdminLayout";
-import ModeratorForm from "@/containers/admin/users/user/sections/ModeratorForm";
+import ModeratorForm from "@/containers/admin/users/user/content/sections/ModeratorForm";
 import { FormProvider } from "react-hook-form-mui";
-import UserHeader from "@/containers/admin/users/user/UserHeader";
+import UserHeader from "@/containers/admin/users/user/content/header/UserHeader";
+import BackdropLoader from "@/components/UI/loader/BackdropLoader";
 
 const User = () => {
   const logic = useUser();
 
-  const loader = (
-    <Backdrop sx={{ zIndex: 1000 }} open={!logic.user}>
-      <Stack
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        gap={"0.5em"}
-        height={"400px"}
-      >
-        <CircularProgress size={30} />
-        <Typography fontSize={"18px"} color={"secondary.main"} fontWeight={600}>
-          Загрузка...
-        </Typography>
-      </Stack>
-    </Backdrop>
-  );
-
+  if (!logic.user)
+    return (
+      <AdminLayout>
+        <BackdropLoader loading />
+      </AdminLayout>
+    );
   return (
     <AdminLayout>
       <UserHeader
@@ -42,10 +25,9 @@ const User = () => {
         handleBlock={logic.handleBlockUser}
         handleUnblock={logic.handleUnblockUser}
       />
-      {loader}
       <Grid container spacing={"2em"} p={"1em"}>
         <Grid size={{ xs: 12, md: 6 }}>
-          {logic.user && <BasicInfo user={logic.user} />}
+          <BasicInfo user={logic.user} />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
           <FormProvider {...logic.moderatorForm}>

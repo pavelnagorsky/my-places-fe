@@ -64,7 +64,7 @@ export const getRouteDirectionsThunk = createAsyncThunk(
     payload: {
       language: string;
       startLatLng: ILatLngCoordinate;
-      endLatLng: ILatLngCoordinate;
+      endLatLng: ILatLngCoordinate | null;
       optimizeWaypoints?: boolean;
       travelMode: TravelModesEnum;
     },
@@ -81,7 +81,8 @@ export const getRouteDirectionsThunk = createAsyncThunk(
     return directionsService.route(
       {
         origin: payload.startLatLng,
-        destination: payload.endLatLng,
+        destination:
+          payload.endLatLng || waypoints[waypoints.length - 1].location,
         waypoints: waypoints,
         optimizeWaypoints: payload.optimizeWaypoints,
         language: payload.language,

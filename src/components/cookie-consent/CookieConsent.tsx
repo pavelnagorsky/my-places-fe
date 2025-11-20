@@ -23,14 +23,14 @@ const CookieConsent = () => {
     if (!router.isReady || !isScrolled) return;
     const isPrivacyPolicyPage = pathWithoutQuery === routerLinks.privacyPolicy;
     const isConfirmed =
-      localStorage.getItem(localStorageFields.COOKIE_CONFIRM) === "true";
-    if (isConfirmed || isPrivacyPolicyPage) return;
+      localStorage.getItem(localStorageFields.cookieConfirm) === "true";
+    // if (isConfirmed || isPrivacyPolicyPage) return;
     setTimeout(dialog.handleOpen, 500);
   }, [router.isReady, isScrolled]);
 
   const onConfirm = () => {
     dialog.handleClose();
-    localStorage.setItem(localStorageFields.COOKIE_CONFIRM, "true");
+    localStorage.setItem(localStorageFields.cookieConfirm, "true");
   };
 
   return (

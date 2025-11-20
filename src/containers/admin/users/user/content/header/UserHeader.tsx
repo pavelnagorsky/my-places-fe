@@ -24,17 +24,20 @@ import {
 } from "react-hook-form-mui";
 // @ts-ignore
 import { DatePickerElement } from "react-hook-form-mui/date-pickers";
-import { IBlockUserForm } from "@/containers/admin/users/user/interfaces";
+import { IBlockUserForm } from "@/containers/admin/users/user/logic/interfaces";
 import { CustomLabel } from "@/components/forms/custom-form-elements/CustomLabel";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/store/hooks";
 import { selectUserId } from "@/store/user-slice/user.slice";
 import RolesEnum from "@/services/auth-service/enums/roles.enum";
-import EmailSection from "@/containers/admin/users/user/sections/EmailSection";
+import EmailSection from "@/containers/admin/users/user/content/header/content/EmailSection";
 import { StyledButton } from "@/components/UI/button/StyledButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ConfirmPopup from "@/components/confirm-popup/ConfirmPopup";
+import useUserDeletion from "@/containers/admin/users/user/logic/useUserDeletion";
 
 interface IUserHeaderProps {
-  user: IUserShortInfo | null;
+  user: IUserShortInfo;
   loading: boolean;
   handleBlock: (callback: () => void) => void;
   handleUnblock: () => void;
@@ -54,7 +57,10 @@ const UserHeader = ({
   const canBlock =
     +query.id !== myUserId &&
     !((user?.roles || []).findIndex((r) => r.name === RolesEnum.ADMIN) > -1);
+  const canDelete = canBlock;
+  const { handleDeleteUser, deleteLoading } = useUserDeletion();
 
+  const confirmDeletePopup = usePopover("confirm-delete");
   const blockPopover = usePopover("block-form");
   const onClosePopover = () => {
     blockPopover.handleClose();
@@ -263,6 +269,27 @@ const UserHeader = ({
             </Fragment>
           )}
         </Box>
+        {canDelete && (
+          <StyledButton
+            sx={{
+              fontWeight: 600,
+              py: "0.6em",
+            }}
+            variant="contained"
+            color="error"
+            onClick={confirmDeletePopup.handleOpen}
+            loading={deleteLoading}
+            startIcon={<DeleteIcon />}
+          >
+            Удалить
+          </StyledButton>
+        )}
+        <ConfirmPopup
+          popoverProps={confirmDeletePopup}
+          actionText={"Удалить"}
+          title={`Вы уверены, что хотите удалить пользователя ${user?.firstName}?`}
+          onSubmit={() => handleDeleteUser(user.id)}
+        />
       </Stack>
     </Stack>
   );

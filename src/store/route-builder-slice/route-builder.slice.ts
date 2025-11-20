@@ -1,29 +1,15 @@
-import { ISearchPlace } from "@/services/search-service/interfaces/search-place.interface";
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@/store/store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   addRouteItemsThunk,
   getPlacesNearRouteThunk,
   getRouteDirectionsThunk,
   saveRouteThunk,
   startRouteEditingThunk,
-} from "@/store/route-builder-slice/thunks";
-
-interface IRouteBuilderItem extends ISearchPlace {
-  duration: number; // Minutes
-  distance: number; // Km
-}
-
-interface IRouteBuilderState {
-  items: IRouteBuilderItem[];
-  distance: number; // km
-  duration: number; // minutes
-  submitLoading: boolean;
-  directions: any | null;
-  directionsLoading: boolean;
-  editRouteId: number | null;
-  placesNearRoute: ISearchPlace[];
-}
+} from "@/store/route-builder-slice/route-builder.thunks";
+import {
+  IRouteBuilderItem,
+  IRouteBuilderState,
+} from "@/store/route-builder-slice/route-builder.interfaces";
 
 const initialState: IRouteBuilderState = {
   items: [],
@@ -104,46 +90,6 @@ const routeBuilderSlice = createSlice({
     });
   },
 });
-
-const selectState = (state: RootState) => state.routeBuilder;
-
-export const selectItems = createSelector(selectState, (s) => s.items);
-
-export const selectHasItems = createSelector(selectItems, (s) => s.length > 0);
-
-export const selectDuration = createSelector(selectState, (s) => s.duration);
-
-export const selectDistance = createSelector(selectState, (s) => s.distance);
-
-export const selectSubmitLoading = createSelector(
-  selectState,
-  (s) => s.submitLoading
-);
-
-export const selectRouteDirections = createSelector(
-  selectState,
-  (s) => s.directions
-);
-
-export const selectHasRouteDirections = createSelector(
-  selectRouteDirections,
-  (s) => Boolean(s)
-);
-
-export const selectRouteDirectionsLoading = createSelector(
-  selectState,
-  (s) => s.directionsLoading
-);
-
-export const selectIsEditingMode = createSelector(
-  selectState,
-  (s) => typeof s.editRouteId === "number"
-);
-
-export const selectPlacesNearRoute = createSelector(
-  selectState,
-  (s) => s.placesNearRoute
-);
 
 export const {
   setItems,

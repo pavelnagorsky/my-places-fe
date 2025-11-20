@@ -1,4 +1,3 @@
-import { selectRouteDirectionsLoading } from "@/store/route-builder-slice/route-builder.slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useTranslation } from "next-i18next";
 import { useFormContext } from "react-hook-form-mui";
@@ -11,9 +10,10 @@ import {
   useTheme,
 } from "@mui/material";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
-import { getRouteDirectionsThunk } from "@/store/route-builder-slice/thunks";
+import { getRouteDirectionsThunk } from "@/store/route-builder-slice/route-builder.thunks";
 import { AnalyticsEventsEnum } from "@/hooks/analytics/analytic-events.enum";
 import useAnalytics from "@/hooks/analytics/useAnalytics";
+import { selectRouteDirectionsLoading } from "@/store/route-builder-slice/route-builder.selectors";
 
 const OptimizeButton = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ const OptimizeButton = () => {
     const endLatLng = coordinatesEndString
       ? utils.stringToLatLng(coordinatesEndString)
       : null;
-    if (!startLatLng || !endLatLng) return;
+    if (!startLatLng) return;
     dispatch(
       getRouteDirectionsThunk({
         language: i18n.language,

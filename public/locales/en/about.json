@@ -3,6 +3,11 @@
   "description1": "When planning a tourist route sometimes you have to spend a long time collecting data from various sources to compile a list of objects that are worth seeing. And after visiting, there is a desire to share the accumulated impressions. Our website is a universal guide to the country, which is filled out by the users themselves. Our task is to popularize domestic tourism and acquaint people with the beauties of Belarus!",
   "description2": "The site is based on two concepts: a Place and a Review. A Place - is directly a tourist object. A Review - author’s mini-tour of this Place. Registered users have access to the Personal Account, which displays all created places, reviews and their current status with the ability to view and edit. The site supports three languages: Belarusian, Russian, and English. After entering the text in the selected language, all information is automatically translated into other languages of the site.",
   "info": "We invite to take an active part in the content of the project both professional guides and experts of the cultural and historical heritage of Belarus, and just indifferent people who love their country. Let’s do it together!",
+  "donation": {
+    "title": "Support our cause",
+    "description": "Since 2024, \"Знай свой край\" has been helping thousands of people rediscover Belarus. We believe that exploring one's homeland should be accessible to everyone. Your contribution is not just financial support—it's participation in creating the largest free platform for travelers in Belarus. Together we can achieve more!",
+    "copyFeedback": "Card number copied!"
+  },
   "faq": {
     "title": "FAQ",
     "1": {

@@ -1,14 +1,14 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { useAppSelector } from "@/store/hooks";
-import {
-  selectDistance,
-  selectDuration,
-} from "@/store/route-builder-slice/route-builder.slice";
 import { TFunction, useTranslation } from "next-i18next";
 import OptimizeButton from "@/containers/route-builder/content/form/sections/control-buttons/OptimizeButton";
 import utils from "@/shared/utils";
 import { RadioButtonGroup, SwitchElement } from "react-hook-form-mui";
 import TravelMode from "@/containers/route-builder/content/form/sections/travel-mode/TravelMode";
+import {
+  selectDistance,
+  selectDuration,
+} from "@/store/route-builder-slice/route-builder.selectors";
 
 const Details = () => {
   const { t, i18n } = useTranslation(["route-management", "common"]);

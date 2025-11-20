@@ -20,7 +20,7 @@ export const getUserDataThunk = createAsyncThunk(
       const { data } = await userService.getUserData();
       return data;
     } catch (e) {
-      localStorage.removeItem(localStorageFields.TOKEN);
+      localStorage.removeItem(localStorageFields.token);
       return thunkAPI.rejectWithValue(null);
     }
   }
@@ -29,7 +29,7 @@ export const getUserDataThunk = createAsyncThunk(
 export const autoLoginThunk = createAsyncThunk(
   "auth/auto-login",
   (arg, thunkAPI) => {
-    const lcToken = localStorage.getItem(localStorageFields.TOKEN);
+    const lcToken = localStorage.getItem(localStorageFields.token);
     if (lcToken) {
       thunkAPI.dispatch(getUserDataThunk());
       return thunkAPI.fulfillWithValue(lcToken);
@@ -52,7 +52,7 @@ export const loginThunk = createAsyncThunk(
         .loginRedirect;
 
       // save token in storage
-      localStorage.setItem(localStorageFields.TOKEN, data.token);
+      localStorage.setItem(localStorageFields.token, data.token);
 
       thunkAPI.dispatch(getUserDataThunk());
       if (loginRedirect) {
@@ -86,7 +86,7 @@ export const oauthLoginThunk = createAsyncThunk(
       const { data } = await payload.apiCall();
 
       // save token in storage
-      localStorage.setItem(localStorageFields.TOKEN, data.token);
+      localStorage.setItem(localStorageFields.token, data.token);
 
       thunkAPI.dispatch(getUserDataThunk());
       if (loginRedirect) {
@@ -119,6 +119,6 @@ export const logoutThunk = createAsyncThunk("user/logout", async (thunkAPI) => {
       console.log("logout error", e);
     });
   // clear token
-  localStorage.removeItem(localStorageFields.TOKEN);
+  localStorage.removeItem(localStorageFields.token);
   return;
 });

@@ -8,7 +8,6 @@ import { IModerator } from "@/services/user-service/interfaces/moderator.interfa
 import { ISaveModerator } from "@/services/user-service/interfaces/save-moderator.interface";
 import { IBlockUser } from "@/services/user-service/interfaces/block-user.interface";
 import { IEmail } from "@/services/user-service/interfaces/email.interface";
-import { ISelect } from "@/shared/interfaces";
 import { IUserSelect } from "@/services/user-service/interfaces/user-select.interface";
 
 const userService = {
@@ -57,6 +56,10 @@ const userService = {
 
   sendEmail: (payload: IEmail) => {
     return axiosInstance.post("/users/email", payload);
+  },
+
+  deleteUser: (id: number | string) => {
+    return axiosInstance.delete(`/users/${id}`);
   },
 };
 

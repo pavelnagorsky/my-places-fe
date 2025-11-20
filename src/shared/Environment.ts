@@ -1,3 +1,5 @@
+import { ICardData } from "@/containers/about-us/content/donation/logic/interfaces";
+
 export class Environment {
   static readonly domain = process.env["NEXT_PUBLIC_DOMAIN"] ?? "my-places.by";
 
@@ -35,4 +37,14 @@ export class Environment {
   static readonly googleAdsKey = process.env[
     "NEXT_PUBLIC_GOOGLE_ADS_KEY"
   ] as string;
+
+  static get donationCards(): ICardData[] {
+    const envJson = process.env["NEXT_PUBLIC_DONATION_CARDS"] || "";
+    try {
+      const cardArray = JSON.parse(envJson);
+      return cardArray;
+    } catch (e) {
+      return [];
+    }
+  }
 }

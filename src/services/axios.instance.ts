@@ -9,7 +9,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use((req) => {
   if (typeof window === "undefined") return req;
-  const token = localStorage.getItem(localStorageFields.TOKEN);
+  const token = localStorage.getItem(localStorageFields.token);
   req.headers.Authorization = token
     ? `Bearer ${token}`
     : req.headers.Authorization;
@@ -44,13 +44,13 @@ instance.interceptors.response.use(
             originalRequest.headers["Authorization"] = "Bearer " + data.token;
           }
           if (typeof window !== "undefined") {
-            localStorage.setItem(localStorageFields.TOKEN, data.token);
+            localStorage.setItem(localStorageFields.token, data.token);
           }
           return instance(originalRequest);
         })
         .catch(() => {
           if (typeof window !== "undefined") {
-            localStorage.removeItem(localStorageFields.TOKEN);
+            localStorage.removeItem(localStorageFields.token);
           }
           return Promise.reject(error);
         });
