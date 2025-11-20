@@ -7,7 +7,6 @@ import { routerLinks } from "@/routing/routerLinks";
 import NextMuiLink from "@/components/next-mui-link/NextMuiLink";
 import localStorageFields from "@/shared/localStorageFields";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import useScrollThreshold from "@/hooks/useScrollThreshold";
 import useRouterPathWithoutQuery from "@/hooks/useRouterPathWithoutQuery";
 
@@ -24,7 +23,7 @@ const CookieConsent = () => {
     const isPrivacyPolicyPage = pathWithoutQuery === routerLinks.privacyPolicy;
     const isConfirmed =
       localStorage.getItem(localStorageFields.cookieConfirm) === "true";
-    // if (isConfirmed || isPrivacyPolicyPage) return;
+    if (isConfirmed || isPrivacyPolicyPage) return;
     setTimeout(dialog.handleOpen, 500);
   }, [router.isReady, isScrolled]);
 
