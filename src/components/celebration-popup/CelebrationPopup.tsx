@@ -1,19 +1,54 @@
 import { useTranslation } from "next-i18next";
-import { Box, Button, Dialog, Divider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  Divider,
+  Grow,
+  IconButton,
+  Slide,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import celebrationImage from "/public/images/celebration/celebration.png";
 import celebrationBackgroundImage from "/public/images/celebration/celebration-background.png";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { forwardRef, ReactElement, Ref, useEffect, useState } from "react";
 import { routerLinks } from "@/routing/routerLinks";
+import localStorageFields from "@/shared/localStorageFields";
+import { TransitionProps } from "@mui/material/transitions/transition";
+
+const Transition = forwardRef(function Transition(
+  props: TransitionProps & {
+    children: ReactElement<any, any>;
+  },
+  ref: Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const CelebrationPopup = () => {
   const { t } = useTranslation("common");
   const router = useRouter();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const popupDate = "11-18-2028";
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const hasViewed = !!localStorage.getItem(
+      localStorageFields.newsPopup(popupDate)
+    );
+    if (!hasViewed) setOpen(true);
+  }, []);
 
   const onClose = () => {
+    localStorage.setItem(localStorageFields.newsPopup(popupDate), "true");
     setOpen(false);
   };
 
@@ -26,16 +61,34 @@ const CelebrationPopup = () => {
     <Dialog
       open={open}
       onClose={onClose}
+      fullScreen={isMobile}
+      slots={{
+        transition: Transition,
+      }}
       slotProps={{
         paper: {
           sx: {
-            borderRadius: "24px",
+            borderRadius: isMobile ? 0 : "24px",
             p: "1.9em",
-            background: celebrationBackgroundImage.src,
+            backgroundImage: `url(${celebrationBackgroundImage.src})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
           },
         },
       }}
     >
+      <IconButton
+        onClick={onClose}
+        color={"secondary"}
+        sx={{
+          position: { xs: "fixed", sm: "absolute" },
+          zIndex: 1,
+          top: "0.5em",
+          right: "0.5em",
+        }}
+      >
+        <CloseIcon fontSize={"large"} />
+      </IconButton>
       <Stack alignItems={"center"} gap={4}>
         <Stack>
           <MuiImage

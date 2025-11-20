@@ -13,7 +13,7 @@ interface IProtectedRouteProps extends PropsWithChildren {
 
 function ProtectedAuth({ children, redirectPath, mode }: IProtectedRouteProps) {
   const localStorage = useSSRLocalStorage();
-  const lcToken = localStorage.getItem(localStorageFields.TOKEN);
+  const lcToken = localStorage.getItem(localStorageFields.token);
   const router = useRouter();
   const isAuth = useAppSelector(selectIsAuth);
   const dispatch = useAppDispatch();

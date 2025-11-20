@@ -43,7 +43,7 @@ export const cartToRouteBuilderThunk = createAsyncThunk(
 export const restoreCartFromLocalStorageThunk = createAsyncThunk(
   "search-cart/restore-from-cache",
   async (arg, thunkAPI) => {
-    const data = localStorage.getItem(localStorageFields.SEARCH_CART);
+    const data = localStorage.getItem(localStorageFields.searchCart);
     if (!data) return thunkAPI.rejectWithValue(null);
 
     const parsed: number[] = JSON.parse(data);
@@ -60,7 +60,7 @@ export const saveCartToLocalStorageThunk = createAsyncThunk(
     const rootState = thunkAPI.getState() as RootState;
     const cartPlaceIds = rootState.searchCart.ids;
     localStorage.setItem(
-      localStorageFields.SEARCH_CART,
+      localStorageFields.searchCart,
       JSON.stringify(cartPlaceIds)
     );
     return null;

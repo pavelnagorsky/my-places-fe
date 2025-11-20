@@ -6,7 +6,7 @@ import { useTranslation } from "next-i18next";
 
 const formatCardNumber = (cardNumber: string) => {
   // Keep only digit symbols
-  const digitsOnly = cardNumber.replace(/\D/g, "");
+  const digitsOnly = (cardNumber || "").replace(/\D/g, "");
 
   // Divide in groups by 4 digits
   return digitsOnly.replace(/(\d{4})(?=\d)/g, "$1 ");
