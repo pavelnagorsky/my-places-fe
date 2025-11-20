@@ -1,10 +1,9 @@
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import {
   Box,
   Button,
   Dialog,
   Divider,
-  Grow,
   IconButton,
   Slide,
   Stack,
@@ -17,7 +16,13 @@ import { MuiImage } from "@/components/UI/mui-image/MuiImage";
 import celebrationImage from "/public/images/celebration/celebration.png";
 import celebrationBackgroundImage from "/public/images/celebration/celebration-background.png";
 import { useRouter } from "next/router";
-import { forwardRef, ReactElement, Ref, useEffect, useState } from "react";
+import React, {
+  forwardRef,
+  ReactElement,
+  Ref,
+  useEffect,
+  useState,
+} from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import localStorageFields from "@/shared/localStorageFields";
 import { TransitionProps } from "@mui/material/transitions/transition";
@@ -69,7 +74,7 @@ const CelebrationPopup = () => {
         paper: {
           sx: {
             borderRadius: isMobile ? 0 : "24px",
-            p: "1.9em",
+            // p: "1.9em",
             backgroundImage: `url(${celebrationBackgroundImage.src})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
@@ -89,14 +94,14 @@ const CelebrationPopup = () => {
       >
         <CloseIcon fontSize={"large"} />
       </IconButton>
-      <Stack alignItems={"center"} gap={4}>
+      <Stack alignItems={"center"} gap={4} p={"1.9em"} pb={0}>
         <Stack>
           <MuiImage
             imageProps={{
               src: celebrationImage,
               width: 210,
               height: 203,
-              alt: "celebration",
+              alt: t("celebrationPopup.altText"),
             }}
             boxProps={{
               sx: {
@@ -114,10 +119,10 @@ const CelebrationPopup = () => {
             color={"primary"}
             textTransform={"uppercase"}
           >
-            Дорогие друзья!
+            {t("celebrationPopup.title")}
           </Typography>
           <Typography fontWeight={600} fontSize={"38px"}>
-            У нас праздник!
+            {t("celebrationPopup.subtitle")}
           </Typography>
           <Typography
             fontWeight={500}
@@ -128,21 +133,31 @@ const CelebrationPopup = () => {
               },
             }}
           >
-            Для нашего сообщества наступил знаковый момент:{" "}
-            <Box component={"span"}>тысячный участник</Box> пополнил наши ряды,
-            а статистика просмотров достигла цифры в{" "}
-            <Box component={"span"}>500 000</Box>.
+            <Trans
+              i18nKey="celebrationPopup.message"
+              components={{
+                1: <Box component="span" />,
+              }}
+            />
           </Typography>
           <Divider sx={{ mx: "20%", borderColor: "primary.main", my: "1em" }} />
           <Typography fontWeight={500} fontSize={"18px"}>
-            Ждём ваши находки — новые Места, яркие Заметки и уникальные
-            Экскурсии. Делитесь эмоциями!
+            {t("celebrationPopup.callToAction1")}
           </Typography>
           <Typography fontWeight={500} fontSize={"18px"}>
-            Также мы будем благодарны за материальную поддержку в развитии
-            проекта.
+            {t("celebrationPopup.callToAction2")}
           </Typography>
         </Stack>
+      </Stack>
+      <Stack
+        py={"1.9em"}
+        width={"100%"}
+        position={"sticky"}
+        zIndex={1}
+        bgcolor={"background.paper"}
+        bottom={0}
+        alignItems={"center"}
+      >
         <Box>
           <Button
             onClick={onClickDonation}
@@ -150,7 +165,7 @@ const CelebrationPopup = () => {
             variant={"contained"}
             sx={{ borderRadius: "100px", fontWeight: 600 }}
           >
-            Поддержать проект
+            {t("celebrationPopup.supportButton")}
           </Button>
         </Box>
       </Stack>

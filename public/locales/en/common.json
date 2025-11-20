@@ -210,5 +210,14 @@
       "createError": "Error while creating the comment.",
       "updateError": "Error while updating the comment."
     }
+  },
+  "celebrationPopup": {
+    "title": "Dear friends!",
+    "subtitle": "We're celebrating!",
+    "message": "A significant moment has arrived for our community: the <1>thousandth member</1> has joined our ranks, and view statistics have reached <1>500,000</1>.",
+    "callToAction1": "We're waiting for your discoveries - new Places, bright Notes, and unique Tours. Share your emotions!",
+    "callToAction2": "We would also appreciate material support for the project's development.",
+    "supportButton": "Support the project",
+    "altText": "celebration"
   }
 }
