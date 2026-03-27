@@ -9,6 +9,7 @@ interface ISliderMenuLinkProps {
   icon: ReactElement;
   onClick: () => void;
   sx?: SxProps;
+  target?: "_blank" | string;
 }
 
 const SliderMenuLink = ({
@@ -18,6 +19,7 @@ const SliderMenuLink = ({
   pathname,
   onClick,
   sx,
+  target,
 }: ISliderMenuLinkProps) => {
   return (
     <Stack
@@ -49,6 +51,7 @@ const SliderMenuLink = ({
           width={"100%"}
           href={href}
           className={pathname === href ? "active" : ""}
+          target={target}
         >
           {icon}
           <Typography>{text}</Typography>
