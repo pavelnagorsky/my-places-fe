@@ -61,7 +61,11 @@ const MapSection = ({ place }: { place: IPlace }) => {
           <Marker position={place.coordinates} />
         </Map>
       </Collapse>
-
+      <Typography color={"secondary.light"} fontSize={"14px"}>
+        {t("coordinates.lat")} {place.coordinates.lat};{" "}
+        <Box component={"br"} sx={{ display: { sm: "none" } }} />{" "}
+        {t("coordinates.lng")} {place.coordinates.lng}.
+      </Typography>
       <NavigationControls coordinates={place.coordinates} />
     </Box>
   );
