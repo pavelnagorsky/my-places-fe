@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { Fragment } from "react";
 import { routerLinks } from "@/routing/routerLinks";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
@@ -10,6 +10,7 @@ import { useTranslation } from "next-i18next";
 import MapIcon from "@mui/icons-material/Map";
 import MessagesIcon from "@/components/UI/custom-icons/MessagesIcon";
 import InfoIcon from "@/components/UI/custom-icons/InfoIcon";
+import CottageIcon from "@mui/icons-material/Cottage";
 
 const desktopLinksConfig = [
   {
@@ -18,6 +19,12 @@ const desktopLinksConfig = [
     href: routerLinks.contactUs,
   },
   { i18nKey: "links.about", icon: InfoIcon, href: routerLinks.aboutUs },
+  {
+    i18nKey: "links.accommodation",
+    icon: CottageIcon,
+    href: "https://kutochak.by",
+    target: "_blank",
+  },
 ];
 
 const mobileLinksConfig = [
@@ -69,6 +76,7 @@ const LinksSection = ({
           onClick={onClose}
           text={t(item.i18nKey)}
           href={item.href}
+          target={item.target}
           icon={<item.icon color={"secondary"} />}
         />
       ))}
